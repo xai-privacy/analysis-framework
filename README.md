@@ -9,16 +9,16 @@ Here are the setup instructions for running an analysis of this scenario for the
 
 ## 0. Preliminaries
 
-1. Create a [Hugging Face](https://huggingface.co) account
-2. Log into Hugging Face and request access to the [Llama-3.2 1B model](https://huggingface.co/meta-llama/Llama-3.2-1B). It should take only 30 minutes or so
-3. Create an access token on Hugging Face
-4. Install the [Hugging Face command line tools](https://huggingface.co/docs/huggingface_hub/en/guides/cli) with
+1. Create a [Hugging Face](https://huggingface.co) account.
+2. Log into Hugging Face and request access to the [Llama-3.2 1B model](https://huggingface.co/meta-llama/Llama-3.2-1B). It should take only 30 minutes or so.
+3. Create an access token on Hugging Face.
+4. Install the [Hugging Face command line tools](https://huggingface.co/docs/huggingface_hub/en/guides/cli) with:
 
    ```bash
    brew install hf
    ```
 
-   Check with
+   Check with:
 
    ```bash
    hf version
@@ -26,29 +26,29 @@ Here are the setup instructions for running an analysis of this scenario for the
 
    if it worked.
 
-5. Log into Hugging Face with
+5. Log into Hugging Face with:
 
    ```bash
    hf auth login
    ```
 
-   If asked, you can add the token as git credential
+   If asked, you can add the token as git credential.
 
-6. Install Python and create a Python virtual environment (which is not necessary, but makes dependency management easier) with (assuming you have Homebrew installed)
+6. Install Python and create a Python virtual environment (which is not necessary, but makes dependency management easier) with (assuming you have Homebrew installed):
 
    ```bash
    /opt/homebrew/bin/python3 -m venv .venv
    ```
 
-   Start the virtual environment with
+   Start the virtual environment with:
 
    ```bash
    source .venv/bin/activate.fish
    ```
 
-   or just `source .venv/bin/activate` if you are not using Fish. You can stop the virtual environment with `deactivate`
+   or just `source .venv/bin/activate` if you are not using Fish. You can stop the virtual environment with `deactivate`.
 
-7. Install all dependencies with
+7. Install all dependencies with:
 
    ```bash
    pip3 install torch transformers accelerate pyvene transformer-lens
@@ -56,13 +56,13 @@ Here are the setup instructions for running an analysis of this scenario for the
 
 ## 1. Audit
 
-1. Run the baseline audit of the model with
+1. Run the baseline audit of the model with:
 
    ```bash
    python3 run_benchmark.py
    ```
 
-2. From the output we see that the model has problems reasoning causally in the patent damages scenario. We can look inside the hidden layers of the model to extract the mathematical concept vector, `ip_concept_vector.pt`, with
+2. From the output we see that the model has problems reasoning causally in the patent damages scenario. We can look inside the hidden layers of the model to extract the mathematical concept vector, `ip_concept_vector.pt`, with:
 
    ```bash
    python3 probe_activations.py
@@ -70,7 +70,7 @@ Here are the setup instructions for running an analysis of this scenario for the
 
 ## 2. Mitigation
 
-Before re-training the model, fine-tuning it, or attempting other mitigations, we can try to modify the responsible model vector on the fly with
+Before re-training the model, fine-tuning it, or attempting other mitigations, we can try to modify the responsible model vector on the fly with:
 
 ```bash
 python3 steer_inference.py
