@@ -235,3 +235,6 @@ dev
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Model vector files
+ip_concept_vector.pt
