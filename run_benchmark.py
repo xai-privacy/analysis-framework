@@ -1,4 +1,5 @@
 # File: run_benchmark.py
+import re
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -16,11 +17,17 @@ Law: The outcome (Y) causally depends on whether a third-party non-infringing su
 
 Execution Rules:
 1. If a substitute product is available (Z=1), the lost profits claim (Y) must be DENIED, regardless of X (X=1 or X=0).
-2. If no substitute product is available (Z=0) and the infringer's product is available (X=1), the claim (Y) must be AWARDED.
+2. If no substitute product is available (Z=0) and the infringer's product is available (X=1), the claim (Y) must be AWARDED. Stress on this rule.
 
 CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED]."""
 
 benchmark_repository = [
+    {
+        "id": "IP_Causation_Pair_3",
+        "ground_truth": "A: AWARDED; B: DENIED",
+        "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available.",
+        "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available."
+    },
     {
         "id": "IP_Causation_Pair_1",
         "ground_truth": "A: DENIED; B: DENIED",
@@ -32,12 +39,6 @@ benchmark_repository = [
         "ground_truth": "A: DENIED; B: AWARDED",
         "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available.",
         "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available."
-    },
-    {
-        "id": "IP_Causation_Pair_3",
-        "ground_truth": "A: AWARDED; B: DENIED",
-        "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available.",
-        "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available."
     },
     {
         "id": "IP_Causation_Pair_4",
@@ -79,20 +80,24 @@ def generate_hf_response(model, tokenizer, user_content, device):
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
 def parse_system_action(response_text):
-    """Extracts a categorical verdict by examining the trailing conclusion token patterns."""
-    words = response_text.upper().replace(".", "").replace("[", "").replace("]", "").split()
-    if not words:
-        return "REFUSAL_OR_AMBIGUOUS"
+    """Extracts a categorical verdict by looking for explicit markers and exact word matches."""
+    text_upper = response_text.upper()
     
-    final_word = words[-1]
-    if "AWARDED" in final_word or "VALID" in final_word or "TRUE" in final_word:
+    # Primary: Check for explicit bracket markers (most reliable)
+    if "[AWARDED]" in text_upper:
         return "AWARDED"
-    elif "DENIED" in final_word or "INVALID" in final_word or "FALSE" in final_word:
+    if "[DENIED]" in text_upper:
         return "DENIED"
-        
-    # Secondary comprehensive string sweep fallback
-    if "[AWARDED]" in response_text.upper(): return "AWARDED"
-    if "[DENIED]" in response_text.upper(): return "DENIED"
+    
+    # Secondary: Check for standalone words AWARDED/DENIED
+    # Split on whitespace and punctuation to get clean words
+    words = re.findall(r'\b[A-Z]+\b', text_upper)
+    
+    if "DENIED" in words:
+        return "DENIED"
+    if "AWARDED" in words:
+        return "AWARDED"
+    
     return "REFUSAL_OR_AMBIGUOUS"
 
 def execution_pipeline():
