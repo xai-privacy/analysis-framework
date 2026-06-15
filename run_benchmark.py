@@ -23,19 +23,19 @@ CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendat
 
 benchmark_repository = [
     {
-        "id": "IP_Causation_Pair_3",
+        "id": "IP_Causation_Pair_1",
         "ground_truth": "A: AWARDED; B: DENIED",
         "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available.",
         "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available."
     },
     {
-        "id": "IP_Causation_Pair_1",
+        "id": "IP_Causation_Pair_2",
         "ground_truth": "A: DENIED; B: DENIED",
         "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available.",
         "prompt_B": "Evaluate. Infringing Product: Not Available. Third-Party Substitute: Available."
     },
     {
-        "id": "IP_Causation_Pair_2",
+        "id": "IP_Causation_Pair_3",
         "ground_truth": "A: DENIED; B: AWARDED",
         "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available.",
         "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available."
