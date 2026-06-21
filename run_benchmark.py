@@ -2,24 +2,9 @@
 import re
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from prompts import SYSTEM_PROMPT
 
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-
-# System Prompt ensuring pristine execution of the legal causal graph structure
-SYSTEM_PROMPT = """You are helping to evaluate a patentee's damages claims for lost profit under US patent law.
-You must analyze inputs strictly using the following structural causal graph:
-Nodes: 
-  - X (Infringing Product): 1 if Available in Market, 0 if Absent.
-  - Z (Third-Party Non-Infringing Substitute Product): 1 if Available, 0 if Absent.
-  - Y (Outcome - Lost Profits Claim Validity): AWARDED or DENIED.
-
-Law: The outcome (Y) causally depends on whether a third-party non-infringing substitute product (Z) is available. But-for causation requires the absence of substitute products (Z=0). If a substitute product is available (Z=1), consumers would be diverted to the substitute product instead of the patentee's product, invalidating the patentee's claim.
-
-Execution Rules:
-1. If a substitute product is available (Z=1), the lost profits claim (Y) must be DENIED, regardless of X (X=1 or X=0).
-2. If no substitute product is available (Z=0) and the infringer's product is available (X=1), the claim (Y) must be AWARDED. Stress on this rule.
-
-CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED]."""
 
 benchmark_repository = [
     {
@@ -73,32 +58,22 @@ def generate_hf_response(model, tokenizer, user_content, device):
     with torch.no_grad():
         output_tokens = model.generate(
             **inputs, 
-            max_new_tokens=120, 
+            max_new_tokens=300, 
             do_sample=False, 
             pad_token_id=tokenizer.eos_token_id
         )
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
-def parse_system_action(response_text):
-    """Extracts a categorical verdict by looking for explicit markers and exact word matches."""
+def extract_decision(response_text):
+    """Extract the final decision (AWARDED or DENIED) from the response."""
     text_upper = response_text.upper()
     
-    # Primary: Check for explicit bracket markers (most reliable)
-    if "[AWARDED]" in text_upper:
-        return "AWARDED"
-    if "[DENIED]" in text_upper:
-        return "DENIED"
+    # Look for the last occurrence of AWARDED or DENIED as standalone words
+    words = re.findall(r'\b(?:AWARDED|DENIED)\b', text_upper)
+    if words:
+        return words[-1]  # Return the last occurrence
     
-    # Secondary: Check for standalone words AWARDED/DENIED
-    # Split on whitespace and punctuation to get clean words
-    words = re.findall(r'\b[A-Z]+\b', text_upper)
-    
-    if "DENIED" in words:
-        return "DENIED"
-    if "AWARDED" in words:
-        return "AWARDED"
-    
-    return "REFUSAL_OR_AMBIGUOUS"
+    return "UNKNOWN"
 
 def execution_pipeline():
     print("Starting benchmarking the model via Hugging Face ...\n")
@@ -126,7 +101,7 @@ def execution_pipeline():
         print(f"\n[Prompt A]: {test_case['prompt_A']}")
         response_A = generate_hf_response(model, tokenizer, test_case["prompt_A"], device)
         print(f"[Full Response A]:\n{response_A}")
-        decision_A = parse_system_action(response_A)
+        decision_A = extract_decision(response_A)
         print(f"--> Extracted Decision A: {decision_A} (Expected: {expected_A})")
         
         print("-" * 50)
@@ -135,7 +110,7 @@ def execution_pipeline():
         print(f"[Prompt B]: {test_case['prompt_B']}")
         response_B = generate_hf_response(model, tokenizer, test_case["prompt_B"], device)
         print(f"[Full Response B]:\n{response_B}")
-        decision_B = parse_system_action(response_B)
+        decision_B = extract_decision(response_B)
         print(f"--> Extracted Decision B: {decision_B} (Expected: {expected_B})")
         
         print("-" * 50)
