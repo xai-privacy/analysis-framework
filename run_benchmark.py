@@ -4,7 +4,10 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from prompts import SYSTEM_PROMPT
 
+### Activate one model at a time to avoid stressing local resources.
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
+# MODEL_ID="Qwen/Qwen3.5-4B"
+# MODEL_ID="microsoft/Phi-4-mini-instruct"
 
 benchmark_repository = [
     {
