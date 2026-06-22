@@ -3,7 +3,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-TARGET_LAYER = 8  # 8 is the Middle layer for Llama 3.2 1B; adapt for other models
+TARGET_LAYER = None  # Derived at runtime in main() as the model's middle layer
 
 # System Prompt ensuring pristine execution of the legal causal graph structure
 SYSTEM_PROMPT = """You are helping to evaluate a patentee's damages claims for lost profit under US patent law.
@@ -63,7 +63,13 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, torch_dtype=torch.float16).to(device)
-    
+
+    # Derive the middle layer at runtime so this adapts to any model depth.
+    # evaluate_with_steering() reads TARGET_LAYER as a module global, so reassign it here.
+    global TARGET_LAYER
+    TARGET_LAYER = len(model.model.layers) // 2
+    print(f"Model has {len(model.model.layers)} layers; injecting steering at middle layer {TARGET_LAYER}.")
+
     try:
         concept_vector = torch.load("ip_concept_vector.pt").to(device).to(torch.float16)
     except FileNotFoundError:

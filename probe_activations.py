@@ -3,7 +3,6 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-TARGET_LAYER = 8  # 8 is the Middle layer for Llama 3.2 1B; adapt for other models
 
 # System Prompt ensuring pristine execution of the legal causal graph structure
 SYSTEM_PROMPT = """You are helping to evaluate a patentee's damages claims for lost profit under US patent law.
@@ -52,7 +51,11 @@ def main():
     
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, torch_dtype=torch.float16).to(device)
-    
+
+    # Derive the middle layer at runtime so this adapts to any model depth.
+    TARGET_LAYER = len(model.model.layers) // 2
+    print(f"Model has {len(model.model.layers)} layers; extracting concept vector at middle layer {TARGET_LAYER}.")
+
     # Replace with prompt pairs from benchmark_repository.py to test for those
     user_present = "Evaluate. Infringing Product: Available. Third-Party Substitute: Available."
     user_absent  = "Evaluate. Infringing Product: Available. Third-Party Substitute: Absent."
