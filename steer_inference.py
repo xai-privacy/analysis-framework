@@ -2,24 +2,15 @@
 import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from prompts import SYSTEM_PROMPT
 
 TARGET_LAYER = None  # Derived at runtime in main() as the model's middle layer
 
-# System Prompt ensuring pristine execution of the legal causal graph structure
-SYSTEM_PROMPT = """You are helping to evaluate a patentee's damages claims for lost profit under US patent law.
-You must analyze inputs strictly using the following structural causal graph:
-Nodes: 
-  - X (Infringing Product): 1 if Available in Market, 0 if Absent.
-  - Z (Third-Party Non-Infringing Substitute Product): 1 if Available, 0 if Absent.
-  - Y (Outcome - Lost Profits Claim Validity): AWARDED or DENIED.
-
-Law: The outcome (Y) causally depends on whether a third-party non-infringing substitute product (Z) is available. But-for causation requires the absence of substitute products (Z=0). If a substitute product is available (Z=1), consumers would be diverted to the substitute product instead of the patentee's product, invalidating the patentee's claim.
-
-Execution Rules:
-1. If a substitute product is available (Z=1), the lost profits claim (Y) must be DENIED, regardless of X (X=1 or X=0).
-2. If no substitute product is available (Z=0) and the infringer's product is available (X=1), the claim (Y) must be AWARDED.
-
-CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED]."""
+def get_verdict_ids(tokenizer):
+    """Return force_words_ids constraining generation to AWARDED or DENIED."""
+    candidates = ["AWARDED", "DENIED", " AWARDED", " DENIED"]
+    token_ids = [tokenizer.encode(w, add_special_tokens=False) for w in candidates if tokenizer.encode(w, add_special_tokens=False)]
+    return token_ids
 
 def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device, alpha=0.0):
     messages = [
@@ -48,10 +39,11 @@ def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device,
         
     with torch.no_grad():
         output_tokens = model.generate(
-            **inputs, 
-            max_new_tokens=120, 
-            do_sample=False, 
-            pad_token_id=tokenizer.eos_token_id
+            **inputs,
+            max_new_tokens=5,
+            do_sample=False,
+            pad_token_id=tokenizer.eos_token_id,
+            force_words_ids=get_verdict_ids(tokenizer),
         )
         
     if hook_handle is not None:
