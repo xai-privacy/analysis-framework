@@ -5,9 +5,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from prompts import SYSTEM_PROMPT
 
 ### Pass the model with --model. Activate one model at a time to avoid stressing
-### local resources. Example values:
+### local resources. Dense text decoder models only -- MoE or multimodal models
+### (e.g. Qwen3.5) are not supported. Example values:
 ###   meta-llama/Llama-3.2-1B-Instruct  (default)
-###   Qwen/Qwen3.5-4B
+###   Qwen/Qwen3-4B
 ###   microsoft/Phi-4-mini-instruct
 
 benchmark_repository = [
@@ -102,8 +103,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         default="meta-llama/Llama-3.2-1B-Instruct",
-        help="HF model id. Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
-             "Qwen/Qwen3.5-4B, microsoft/Phi-4-mini-instruct",
+        help="HF model id (dense text decoder models only; not MoE/multimodal). "
+             "Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
+             "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct",
     )
     args = parser.parse_args()
     execution_pipeline(args.model)

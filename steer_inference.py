@@ -65,6 +65,12 @@ def main(model_id):
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
 
+    if not (hasattr(model, "model") and hasattr(model.model, "layers")):
+        raise SystemExit(
+            f"{model_id} does not expose model.model.layers; this pipeline supports "
+            "dense text decoder models only (not MoE/multimodal)."
+        )
+
     # Derive the middle layer at runtime so this adapts to any model depth.
     # evaluate_with_steering() reads TARGET_LAYER as a module global, so reassign it here.
     global TARGET_LAYER
@@ -113,8 +119,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         default="meta-llama/Llama-3.2-1B-Instruct",
-        help="HF model id. Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
-             "Qwen/Qwen3.5-4B, microsoft/Phi-4-mini-instruct. "
+        help="HF model id (dense text decoder models only; not MoE/multimodal). "
+             "Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
+             "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct. "
              "Must match the --model used for probe_activations.py.",
     )
     args = parser.parse_args()
