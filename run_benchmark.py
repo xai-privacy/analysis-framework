@@ -1,12 +1,14 @@
 # File: run_benchmark.py
+import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from prompts import SYSTEM_PROMPT
 
-### Activate one model at a time to avoid stressing local resources.
-MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-# MODEL_ID="Qwen/Qwen3.5-4B"
-# MODEL_ID="microsoft/Phi-4-mini-instruct"
+### Pass the model with --model. Activate one model at a time to avoid stressing
+### local resources. Example values:
+###   meta-llama/Llama-3.2-1B-Instruct  (default)
+###   Qwen/Qwen3.5-4B
+###   microsoft/Phi-4-mini-instruct
 
 benchmark_repository = [
     {
@@ -66,13 +68,14 @@ def generate_hf_response(model, tokenizer, user_content, device):
         )
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
-def execution_pipeline():
+def execution_pipeline(model_id):
     print("Starting benchmarking the model via Hugging Face ...\n")
+    print(f"Model: {model_id}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"Target Compute Device: {device.upper()}")
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, torch_dtype=torch.float16).to(device)
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
 
     for test_case in benchmark_repository:
         print("\n" + "="*70)
@@ -95,4 +98,12 @@ def execution_pipeline():
         print("-" * 50)
 
 if __name__ == "__main__":
-    execution_pipeline()
+    parser = argparse.ArgumentParser(description="Run the IP causal-reasoning benchmark against an HF model.")
+    parser.add_argument(
+        "--model",
+        default="meta-llama/Llama-3.2-1B-Instruct",
+        help="HF model id. Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
+             "Qwen/Qwen3.5-4B, microsoft/Phi-4-mini-instruct",
+    )
+    args = parser.parse_args()
+    execution_pipeline(args.model)
