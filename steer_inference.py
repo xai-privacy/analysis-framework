@@ -1,25 +1,16 @@
 # File: steer_inference.py
+import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from prompts import SYSTEM_PROMPT
 
-MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-TARGET_LAYER = 8  # 8 is the Middle layer for Llama 3.2 1B; adapt for other models
+TARGET_LAYER = None  # Derived at runtime in main() as the model's middle layer
 
-# System Prompt ensuring pristine execution of the legal causal graph structure
-SYSTEM_PROMPT = """You are helping to evaluate a patentee's damages claims for lost profit under US patent law.
-You must analyze inputs strictly using the following structural causal graph:
-Nodes: 
-  - X (Infringing Product): 1 if Available in Market, 0 if Absent.
-  - Z (Third-Party Non-Infringing Substitute Product): 1 if Available, 0 if Absent.
-  - Y (Outcome - Lost Profits Claim Validity): AWARDED or DENIED.
-
-Law: The outcome (Y) causally depends on whether a third-party non-infringing substitute product (Z) is available. But-for causation requires the absence of substitute products (Z=0). If a substitute product is available (Z=1), consumers would be diverted to the substitute product instead of the patentee's product, invalidating the patentee's claim.
-
-Execution Rules:
-1. If a substitute product is available (Z=1), the lost profits claim (Y) must be DENIED, regardless of X (X=1 or X=0).
-2. If no substitute product is available (Z=0) and the infringer's product is available (X=1), the claim (Y) must be AWARDED.
-
-CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED]."""
+def get_verdict_ids(tokenizer):
+    """Return force_words_ids constraining generation to AWARDED or DENIED."""
+    candidates = ["AWARDED", "DENIED", " AWARDED", " DENIED"]
+    token_ids = [tokenizer.encode(w, add_special_tokens=False) for w in candidates if tokenizer.encode(w, add_special_tokens=False)]
+    return token_ids
 
 def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device, alpha=0.0):
     messages = [
@@ -48,10 +39,11 @@ def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device,
         
     with torch.no_grad():
         output_tokens = model.generate(
-            **inputs, 
-            max_new_tokens=120, 
-            do_sample=False, 
-            pad_token_id=tokenizer.eos_token_id
+            **inputs,
+            max_new_tokens=5,
+            do_sample=False,
+            pad_token_id=tokenizer.eos_token_id,
+            force_words_ids=get_verdict_ids(tokenizer),
         )
         
     if hook_handle is not None:
@@ -59,11 +51,26 @@ def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device,
         
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
-def main():
+def main(model_id):
+    print(f"Model: {model_id}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, torch_dtype=torch.float16).to(device)
-    
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
+
+    if not (hasattr(model, "model") and hasattr(model.model, "layers")):
+        raise SystemExit(
+            f"{model_id} does not expose model.model.layers; this pipeline supports "
+            "dense text decoder models only (not MoE/multimodal)."
+        )
+
+    # Derive the middle layer at runtime so this adapts to any model depth.
+    # evaluate_with_steering() reads TARGET_LAYER as a module global, so reassign it here.
+    global TARGET_LAYER
+    TARGET_LAYER = len(model.model.layers) // 2
+    print(f"Model has {len(model.model.layers)} layers; injecting steering at middle layer {TARGET_LAYER}.")
+    print("NOTE: probe and steer must be run with the same --model. They share "
+          "ip_concept_vector.pt, and a model/layer mismatch silently produces meaningless results.")
+
     try:
         concept_vector = torch.load("ip_concept_vector.pt").to(device).to(torch.float16)
     except FileNotFoundError:
@@ -100,4 +107,14 @@ def main():
     print("-" * 50)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Inject a concept vector at a model's middle layer.")
+    parser.add_argument(
+        "--model",
+        default="meta-llama/Llama-3.2-1B-Instruct",
+        help="HF model id (dense text decoder models only; not MoE/multimodal). "
+             "Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
+             "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct. "
+             "Must match the --model used for probe_activations.py.",
+    )
+    args = parser.parse_args()
+    main(args.model)
