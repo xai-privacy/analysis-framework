@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LegalRuleML xmlns="http://docs.oasis-open.org/legalruleml/ns/v1.0/"
+             xmlns:ruleml="http://ruleml.org/spec/v1.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://docs.oasis-open.org/legalruleml/ns/v1.0/ legalruleml-core-spec-v1.0.xsd">
+
+  <!--
+    LegalRuleML representation of but-for causation rules for
+    patent lost-profits damages under US patent law.
+
+    Structural Causal Graph:
+      X = Infringing Product (1 = Available, 0 = Absent)
+      Z = Third-Party Non-Infringing Substitute Product (1 = Available, 0 = Absent)
+      Y = Lost Profits Claim Validity (AWARDED or DENIED)
+  -->
+
+  <lrml:References>
+    <lrml:Reference refersTo="but-for-causation">
+      <lrml:RefURI href="https://www.law.cornell.edu/wex/but-for_causation"/>
+    </lrml:Reference>
+  </lrml:References>
+
+  <lrml:LegalSources>
+    <lrml:LegalSource key="ls-patent-act" sameAs="but-for-causation"/>
+  </lrml:LegalSources>
+
+  <lrml:Context>
+    <lrml:applies refersTo="rule-z1-denied"/>
+    <lrml:applies refersTo="rule-z0-x1-awarded"/>
+    <lrml:applies refersTo="rule-z0-x0-denied"/>
+  </lrml:Context>
+
+  <ruleml:Rulebase key="rb-but-for-causation">
+
+    <!-- ============================================ -->
+    <!-- Rule 1: Z=1 → DENIED (regardless of X)       -->
+    <!-- A substitute product breaks the but-for chain -->
+    <!-- ============================================ -->
+    <lrml:LegalRule key="rule-z1-denied" type="lrml:Prescriptive">
+      <lrml:hasLegalSource refersTo="ls-patent-act"/>
+      <lrml:hasTemplate>
+        <ruleml:Rule key="tmpl-z1-denied" closure="ruleml:universal">
+          <ruleml:if>
+            <ruleml:Atom>
+              <ruleml:Rel iri="http://example.org/patent/substituteAvailable"/>
+              <ruleml:Var type="ruleml:integer">Z</ruleml:Var>
+              <ruleml:Ind type="ruleml:integer">1</ruleml:Ind>
+            </ruleml:Atom>
+          </ruleml:if>
+          <ruleml:then>
+            <ruleml:Atom>
+              <ruleml:Rel iri="http://example.org/patent/claimDecision"/>
+              <ruleml:Var>Y</ruleml:Var>
+              <ruleml:Ind type="ruleml:string">DENIED</ruleml:Ind>
+            </ruleml:Atom>
+          </ruleml:then>
+        </ruleml:Rule>
+      </lrml:hasTemplate>
+      <lrml:hasStrength>
+        <lrml:Defeater iri="http://example.org/patent/noDefeater"/>
+      </lrml:hasStrength>
+    </lrml:LegalRule>
+
+    <!-- ============================================ -->
+    <!-- Rule 2: Z=0 AND X=1 → AWARDED                -->
+    <!-- No substitute + infringer present = but-for  -->
+    <!-- ============================================ -->
+    <lrml:LegalRule key="rule-z0-x1-awarded" type="lrml:Prescriptive">
+      <lrml:hasLegalSource refersTo="ls-patent-act"/>
+      <lrml:hasTemplate>
+        <ruleml:Rule key="tmpl-z0-x1-awarded" closure="ruleml:universal">
+          <ruleml:if>
+            <ruleml:And>
+              <ruleml:Atom>
+                <ruleml:Rel iri="http://example.org/patent/substituteAvailable"/>
+                <ruleml:Var type="ruleml:integer">Z</ruleml:Var>
+                <ruleml:Ind type="ruleml:integer">0</ruleml:Ind>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="http://example.org/patent/infringingProductAvailable"/>
+                <ruleml:Var type="ruleml:integer">X</ruleml:Var>
+                <ruleml:Ind type="ruleml:integer">1</ruleml:Ind>
+              </ruleml:Atom>
+            </ruleml:And>
+          </ruleml:if>
+          <ruleml:then>
+            <ruleml:Atom>
+              <ruleml:Rel iri="http://example.org/patent/claimDecision"/>
+              <ruleml:Var>Y</ruleml:Var>
+              <ruleml:Ind type="ruleml:string">AWARDED</ruleml:Ind>
+            </ruleml:Atom>
+          </ruleml:then>
+        </ruleml:Rule>
+      </lrml:hasTemplate>
+      <lrml:hasStrength>
+        <lrml:Defeater iri="http://example.org/patent/noDefeater"/>
+      </lrml:hasStrength>
+    </lrml:LegalRule>
+
+    <!-- ============================================ -->
+    <!-- Rule 3: Z=0 AND X=0 → DENIED                 -->
+    <!-- No substitute, no infringer = no lost sales  -->
+    <!-- ============================================ -->
+    <lrml:LegalRule key="rule-z0-x0-denied" type="lrml:Prescriptive">
+      <lrml:hasLegalSource refersTo="ls-patent-act"/>
+      <lrml:hasTemplate>
+        <ruleml:Rule key="tmpl-z0-x0-denied" closure="ruleml:universal">
+          <ruleml:if>
+            <ruleml:And>
+              <ruleml:Atom>
+                <ruleml:Rel iri="http://example.org/patent/substituteAvailable"/>
+                <ruleml:Var type="ruleml:integer">Z</ruleml:Var>
+                <ruleml:Ind type="ruleml:integer">0</ruleml:Ind>
+              </ruleml:Atom>
+              <ruleml:Atom>
+                <ruleml:Rel iri="http://example.org/patent/infringingProductAvailable"/>
+                <ruleml:Var type="ruleml:integer">X</ruleml:Var>
+                <ruleml:Ind type="ruleml:integer">0</ruleml:Ind>
+              </ruleml:Atom>
+            </ruleml:And>
+          </ruleml:if>
+          <ruleml:then>
+            <ruleml:Atom>
+              <ruleml:Rel iri="http://example.org/patent/claimDecision"/>
+              <ruleml:Var>Y</ruleml:Var>
+              <ruleml:Ind type="ruleml:string">DENIED</ruleml:Ind>
+            </ruleml:Atom>
+          </ruleml:then>
+        </ruleml:Rule>
+      </lrml:hasTemplate>
+      <lrml:hasStrength>
+        <lrml:Defeater iri="http://example.org/patent/noDefeater"/>
+      </lrml:hasStrength>
+    </lrml:LegalRule>
+
+  </ruleml:Rulebase>
+</LegalRuleML>

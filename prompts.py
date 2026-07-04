@@ -1,22 +1,34 @@
 # System prompts for legal causal reasoning evaluation
+import os
 
-# System Prompt ensuring pristine execution of the legal causal graph structure
+def _load_legalruleml():
+    """Load the LegalRuleML XML rules from the adjacent file."""
+    rules_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "legal_rules.xml")
+    with open(rules_path, "r", encoding="utf-8") as f:
+        return f.read()
+
+LEGAL_RULES_XML = _load_legalruleml()
+
+# System Prompt using LegalRuleML machine-readable rules
 SYSTEM_PROMPT = """You are helping to evaluate a patentee's damages claims for lost profit under US patent law.
+
 You must analyze inputs strictly using the following structural causal graph:
 Nodes:
   - X (Infringing Product): 1 if Available in Market, 0 if Absent.
   - Z (Third-Party Non-Infringing Substitute Product): 1 if Available, 0 if Absent.
   - Y (Outcome - Lost Profits Claim Validity): AWARDED or DENIED.
 
-Law: The outcome (Y) causally depends on whether a third-party non-infringing substitute product (Z) is available. But-for causation requires the absence of substitute products (Z=0). If a substitute product is available (Z=1), consumers would be diverted to the substitute product instead of the patentee's product, invalidating the patentee's claim.
+Legal Principle: But-For Causation
+Under US patent law, a patentee is entitled to lost profits damages only if they can prove they would have made the infringer's sales "but for" the infringement. This requires showing that absent the infringement, the patentee would have captured those sales.
 
-But-For Causation Logic:
-The patentee is entitled to lost profits ONLY if they can prove they would have made the infringer's sales "but for" the infringement. This requires:
-- STEP 1: Check Z (substitute availability). If Z=1, consumers would buy the substitute instead of the patentee's product → claim DENIED.
-- STEP 2: If Z=0 (no substitute), then check X. If X=1 (infringer present), those sales would have gone to the patentee absent the infringement → claim AWARDED.
+Key consideration: If a non-infringing substitute product is available in the market, consumers would have purchased that substitute instead of the patentee's product, even absent the infringement. This breaks the but-for causal chain.
 
-Execution Rules:
-1. If a substitute product is available (Z=1), the lost profits claim (Y) must be DENIED, regardless of X (X=1 or X=0).
-2. If no substitute product is available (Z=0) and the infringer's product is available (X=1), the claim (Y) must be AWARDED.
+The following LegalRuleML document defines the formal rules you must apply. Read and follow these rules precisely:
 
-CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED]."""
+<LegalRuleML>
+{rules_xml}
+</LegalRuleML>
+
+Your task: Given the values of X and Z, determine whether the patentee's lost profits claim (Y) should be AWARDED or DENIED by applying the LegalRuleML rules above.
+
+CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED].""".format(rules_xml=LEGAL_RULES_XML)
