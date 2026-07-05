@@ -4,12 +4,20 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from prompts import get_system_prompt
 
-### Pass the model with --model. Activate one model at a time to avoid stressing
-### local resources. Dense text decoder models only -- MoE or multimodal models
-### (e.g. Qwen3.5) are not supported. Example values:
-###   meta-llama/Llama-3.2-1B-Instruct  (default)
-###   Qwen/Qwen3-4B
-###   microsoft/Phi-4-mini-instruct
+### Usage:
+###   python3 run_benchmark.py [--model <hf-model-id>] [--dsl <odrl|legalruleml>]
+###
+### --model : Hugging Face model id. Dense text decoder models only --
+###           MoE or multimodal models (e.g. Qwen3.5) are not supported.
+###           Examples:
+###             meta-llama/Llama-3.2-1B-Instruct  (default)
+###             Qwen/Qwen3-4B
+###             microsoft/Phi-4-mini-instruct
+###
+### --dsl   : Domain-specific language for the formal rules embedded in the
+###           system prompt. Choices:
+###             odrl         (default) — ODRL policy from odrl_rules.json
+###             legalruleml            — LegalRuleML XML from legal_rules.xml
 
 benchmark_repository = [
     {
