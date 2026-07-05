@@ -2,7 +2,7 @@
 import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from prompts import SYSTEM_PROMPT
+from prompts import get_system_prompt
 
 ### Pass the model with --model. Activate one model at a time to avoid stressing
 ### local resources. Dense text decoder models only -- MoE or multimodal models
@@ -50,10 +50,10 @@ benchmark_repository = [
     }
 ]
 
-def generate_hf_response(model, tokenizer, user_content, device):
+def generate_hf_response(model, tokenizer, user_content, device, system_prompt):
     """Generates a text completion natively using the proper chat template sequence."""
     messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_content}
     ]
     formatted = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
@@ -69,11 +69,14 @@ def generate_hf_response(model, tokenizer, user_content, device):
         )
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
-def execution_pipeline(model_id):
+def execution_pipeline(model_id, dsl):
     print("Starting benchmarking the model via Hugging Face ...\n")
     print(f"Model: {model_id}")
+    print(f"DSL: {dsl}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"Target Compute Device: {device.upper()}")
+
+    system_prompt = get_system_prompt(dsl)
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
@@ -86,14 +89,14 @@ def execution_pipeline(model_id):
 
         # 1. Execute Prompt A
         print(f"\n[Prompt A]: {test_case['prompt_A']}")
-        response_A = generate_hf_response(model, tokenizer, test_case["prompt_A"], device)
+        response_A = generate_hf_response(model, tokenizer, test_case["prompt_A"], device, system_prompt)
         print(f"[Full Response A]:\n{response_A}")
 
         print("-" * 50)
 
         # 2. Execute Prompt B
         print(f"[Prompt B]: {test_case['prompt_B']}")
-        response_B = generate_hf_response(model, tokenizer, test_case["prompt_B"], device)
+        response_B = generate_hf_response(model, tokenizer, test_case["prompt_B"], device, system_prompt)
         print(f"[Full Response B]:\n{response_B}")
 
         print("-" * 50)
@@ -107,5 +110,12 @@ if __name__ == "__main__":
              "Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
              "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct",
     )
+    parser.add_argument(
+        "--dsl",
+        default="odrl",
+        choices=["odrl", "legalruleml"],
+        help="Domain-specific language for the formal rules passed to the model. "
+             "Choices: odrl (default) or legalruleml.",
+    )
     args = parser.parse_args()
-    execution_pipeline(args.model)
+    execution_pipeline(args.model, args.dsl)

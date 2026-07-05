@@ -1,0 +1,65 @@
+{
+  "@context": "http://www.w3.org/ns/odrl.jsonld",
+  "uid": "http://example.org/patent/lost-profits-policy",
+  "type": "Policy",
+  "profile": "http://example.org/patent/lost-profits-profile",
+  "title": "But-For Causation Rules for Patent Lost-Profits Damages (ODRL)",
+  "description": "ODRL representation of but-for causation rules for patent lost-profits damages under US patent law. Structural Causal Graph: X = Infringing Product (1 = Available, 0 = Absent), Z = Third-Party Non-Infringing Substitute Product (1 = Available, 0 = Absent), Y = Lost Profits Claim Validity (AWARDED or DENIED).",
+
+  "permission": [
+    {
+      "uid": "http://example.org/patent/rule-z0-x1-awarded",
+      "action": "http://example.org/patent/claimLostProfits",
+      "comment": "Rule 2: Z=0 AND X=1 → AWARDED. No substitute + infringer present = but-for causation established.",
+      "constraint": [
+        {
+          "leftOperand": "http://example.org/patent/substituteAvailable",
+          "operator": "eq",
+          "rightOperand": 0,
+          "comment": "Z = 0 (no non-infringing substitute available)"
+        },
+        {
+          "leftOperand": "http://example.org/patent/infringingProductAvailable",
+          "operator": "eq",
+          "rightOperand": 1,
+          "comment": "X = 1 (infringing product available in market)"
+        }
+      ]
+    }
+  ],
+
+  "prohibition": [
+    {
+      "uid": "http://example.org/patent/rule-z1-denied",
+      "action": "http://example.org/patent/claimLostProfits",
+      "comment": "Rule 1: Z=1 → DENIED. A non-infringing substitute product breaks the but-for causal chain regardless of X.",
+      "constraint": [
+        {
+          "leftOperand": "http://example.org/patent/substituteAvailable",
+          "operator": "eq",
+          "rightOperand": 1,
+          "comment": "Z = 1 (non-infringing substitute available)"
+        }
+      ]
+    },
+    {
+      "uid": "http://example.org/patent/rule-z0-x0-denied",
+      "action": "http://example.org/patent/claimLostProfits",
+      "comment": "Rule 3: Z=0 AND X=0 → DENIED. No substitute and no infringer means no lost sales to recover.",
+      "constraint": [
+        {
+          "leftOperand": "http://example.org/patent/substituteAvailable",
+          "operator": "eq",
+          "rightOperand": 0,
+          "comment": "Z = 0 (no non-infringing substitute available)"
+        },
+        {
+          "leftOperand": "http://example.org/patent/infringingProductAvailable",
+          "operator": "eq",
+          "rightOperand": 0,
+          "comment": "X = 0 (infringing product absent from market)"
+        }
+      ]
+    }
+  ]
+}
