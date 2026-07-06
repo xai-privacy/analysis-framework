@@ -33,14 +33,7 @@ from the correct legal rule, the correct facts, and the correct application of d
 issue is not merely whether two events are associated, but whether changing one factor would actually
 change the outcome.
 
-Therefore, the central claim of this paper is:
-
-       Major AI models are useful and increasingly capable in legal and causal reasoning tasks, but
-       these are not solved problems. Legal reasoning is somewhere in the middle: models are
-       strong assistants but weak autonomous legal reasoners. Causal reasoning is less mature:
-
-       models are often good at association but still unreliable at intervention and counterfactual
-       reasoning. Legal-causal reasoning remains an early-stage research frontier.
+Major AI models are useful and increasingly capable in legal and causal reasoning tasks, but these are not solved problems. Legal reasoning is somewhere in the middle: models are strong assistants but weak autonomous legal reasoners. Causal reasoning is less mature: models are often good at association but still unreliable at intervention and counterfactual reasoning. Legal-causal reasoning remains an early-stage research frontier.
 
 ## 2. Definitions and Background
 
@@ -218,10 +211,6 @@ The main legal reasoning failure modes are:
 These failures show why models are best understood as legal assistants rather than autonomous legal
 decision-makers.
 
-A useful phrase is:
-
-       Current models are strong legal drafting and analysis aids, but weak autonomous legal
-       reasoners.
 
 ## 4. Causal Reasoning: The Deeper Unsolved Problem
 
@@ -232,10 +221,7 @@ The most important distinction in causal reasoning is the difference between ass
 An association means two things occur together. Causation means changing one thing would change the
 other.
 
-For example:
-
-  Association: People carrying umbrellas are often seen when streets are wet.
-  Causation: Carrying umbrellas does not cause wet streets; rain causes both.
+For example: Association: People carrying umbrellas are often seen when streets are wet. Causation: Carrying umbrellas does not cause wet streets; rain causes both.
 
 LLMs are very good at learning associations because they are trained on statistical patterns in text. But
 causal reasoning requires more than association. It requires a model of how variables affect one another.
@@ -244,20 +230,13 @@ This is where current AI models remain weak.
 
 ### 4.2 Intervention and counterfactual reasoning
 
-Intervention asks:
+Intervention asks: What happens if I change X?
 
-  What happens if I change X?
-
-Counterfactual reasoning asks:
-
-  What would have happened if X had been different?
+Counterfactual reasoning asks: What would have happened if X had been different?
 
 These are central to law, science, medicine, policy, and compliance.
 
-For example, in a hiring discrimination case, a causal question might be:
-
-  Would the applicant have been rejected if their protected attribute had been
-  different?
+For example, in a hiring discrimination case, a causal question might be: Would the applicant have been rejected if their protected attribute had been different?
 
 This is not just a classification question. It requires reasoning about an alternative world where one fact
 changes and other relevant conditions remain fixed.
@@ -271,9 +250,7 @@ calculation.
 Causal reasoning is hard for LLMs because their core training objective is not causal inference. They learn to
 predict text, not to compute interventions over structural causal models.
 
-A model may know the sentence:
-
-  Smoking causes cancer.
+A model may know the sentence: Smoking causes cancer.
 
 But that does not mean it can correctly reason through a novel causal graph with confounding, mediation,
 and counterfactual conditions.
@@ -393,9 +370,7 @@ The results were:
   Observed behavior = correctly predicted AWARDED for X=1, Z=0 and DENIED for Z=1
 
 The 0.5B model failed in an informative way. It did not produce random errors. Instead, it collapsed to a
-simple policy:
-
-  Always answer DENIED.
+simple policy: Always answer DENIED.
 
 This policy works for all cases where Z=1 , because the presence of a substitute product means the claim
 should be denied. But it fails whenever X=1 and Z=0 , because those cases require AWARDED .
@@ -426,11 +401,7 @@ requiring strict formal consistency.
 
 Legal-causal reasoning is especially unresolved because it combines all of these difficulties.
 
-The best answer is:
-
-       We are somewhere in between. Major AI models are far beyond the beginning for legal
-       assistance and simple reasoning, but they are still far from robust legal-causal
-       understanding.
+The best answer is: We are somewhere in between. Major AI models are far beyond the beginning for legal assistance and simple reasoning, but they are still far from robust legal-causal understanding.
 
 ## 10. A Maturity Model
 
@@ -506,10 +477,7 @@ combine:
 In such a system, the LLM would read and structure the facts. The solver would apply the rule. The verifier
 would check consistency. The human expert would review the result.
 
-For example:
-
-  Legal text → LLM extracts X and Z → solver applies causal rule → explanation
-  generated → verifier checks consistency
+For example: Legal text → LLM extracts X and Z → solver applies causal rule → explanatio generated → verifier checks consistency
 
 This approach reduces the risk that the LLM will produce a plausible but causally wrong answer.
 
@@ -587,11 +555,7 @@ interventions, counterfactuals, and formal causal inference.
 Legal-causal reasoning is the critical open problem. Many legal outcomes depend on causal facts. A model
 that cannot reliably track those facts may produce correct-looking but legally invalid conclusions.
 
-The central lesson is:
-
-       The next stage of AI progress should not be measured only by whether models sound more
-       intelligent. It should be measured by whether their answers are grounded, consistent,
-       causally valid, legally faithful, and verifiable.
+The central lesson is: The next stage of AI progress should not be measured only by whether models sound more intelligent. It should be measured by whether their answers are grounded, consistent, causally valid, legally faithful, and verifiable.
 
 For that reason, the most promising path is not simply larger models. It is the combination of LLMs with
 structured legal representations, causal graphs, rule-based solvers, retrieval, formal verification, and expert
