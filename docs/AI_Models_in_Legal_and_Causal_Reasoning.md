@@ -90,9 +90,7 @@ incorrect or hallucinated authority.
 Causal reasoning asks whether one thing actually causes another, not merely whether the two are
 associated.
 
-A useful framework is Pearl’s ladder of causation:
-
-            Type of
+A useful framework is Pearl’s ladder of causation:  Type of
   Level                           Question                               Example
             reasoning
 
@@ -138,14 +136,13 @@ This is why they are not equivalent to theorem provers or symbolic solvers.
 
 The word “understand” is difficult. In practical terms, a model would demonstrate meaningful
 understanding of legal causality if it could:
-
-     1. Identify the legally relevant causal variables.
-     2. Distinguish causal facts from irrelevant or merely correlated facts.
-     3. Apply the legal rule consistently.
-     4. Change its answer when a causal fact changes.
-     5. Keep its answer stable when irrelevant facts change.
-     6. Explain the reasoning using the correct legal doctrine.
-     7. Maintain this behavior under paraphrase, distribution shift, and novel scenarios.
+ 1. Identify the legally relevant causal variables.
+ 2. Distinguish causal facts from irrelevant or merely correlated facts.
+ 3. Apply the legal rule consistently.
+ 4. Change its answer when a causal fact changes.
+ 5. Keep its answer stable when irrelevant facts change.
+ 6. Explain the reasoning using the correct legal doctrine.
+ 7. Maintain this behavior under paraphrase, distribution shift, and novel scenarios.
 
 Most current models do not satisfy all these requirements reliably. They may pass clean examples but fail
 under stress tests. Therefore, it is safer to say that current models show partial causal competence, not
@@ -198,15 +195,15 @@ reliable legal reasoning.
 
 The main legal reasoning failure modes are:
 
-  1. Hallucinated legal authority
-  2. Incorrect citation or misquotation
-  3. Confusion between jurisdictions
-  4. Misinterpretation of statutory language
-  5. Failure to identify controlling facts
-  6. Overconfident legal conclusions
-  7. Inconsistent answers under prompt variation
-  8. Correct conclusion with invalid reasoning
-  9. Weak handling of novel or edge-case fact patterns
+ 1. Hallucinated legal authority
+ 2. Incorrect citation or misquotation
+ 3. Confusion between jurisdictions
+ 4. Misinterpretation of statutory language
+ 5. Failure to identify controlling facts
+ 6. Overconfident legal conclusions
+ 7. Inconsistent answers under prompt variation
+ 8. Correct conclusion with invalid reasoning
+ 9. Weak handling of novel or edge-case fact patterns
 
 These failures show why models are best understood as legal assistants rather than autonomous legal
 decision-makers.
@@ -467,12 +464,12 @@ The most promising direction is hybrid AI architecture.
 A reliable legal-causal AI system should not depend only on an LLM’s internal reasoning. Instead, it should
 combine:
 
-  1. LLMs for natural language understanding
-  2. Retrieval systems for grounding in legal sources
-  3. Structured representations such as DAGs or SCMs
-  4. Rule-based solvers for deterministic legal logic
-  5. Formal verification for checking reasoning
-  6. Human expert review for high-stakes decisions
+1. LLMs for natural language understanding
+2. Retrieval systems for grounding in legal sources
+3. Structured representations such as DAGs or SCMs
+4. Rule-based solvers for deterministic legal logic
+5. Formal verification for checking reasoning
+6. Human expert review for high-stakes decisions
 
 In such a system, the LLM would read and structure the facts. The solver would apply the rule. The verifier
 would check consistency. The human expert would review the result.
