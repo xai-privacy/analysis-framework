@@ -68,13 +68,16 @@ Here are the setup instructions for running an analysis of this scenario for the
    # Use a specific model (default: meta-llama/Llama-3.2-1B-Instruct)
    python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct
 
-   # Use LegalRuleML rules instead of the default ODRL
+   # Use LegalRuleML rules instead of the default plain English
    python3 run_benchmark.py --dsl legalruleml
 
    # Use De Jure structured rules
    python3 run_benchmark.py --dsl de_jure
 
-   # Combine both
+   # Use ODRL policy rules
+   python3 run_benchmark.py --dsl odrl
+
+   # Combine model and DSL
    python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --dsl legalruleml
    ```
 
@@ -84,7 +87,8 @@ Here are the setup instructions for running an analysis of this scenario for the
    - `microsoft/Phi-4-mini-instruct`
 
    **`--dsl`** selects the formal rule language embedded in the system prompt:
-   - `odrl` (default) -- loads rules from `odrl_rules.json`
+   - `plain` (default) -- plain English rules (no external file)
+   - `odrl` -- loads rules from `odrl_rules.json`
    - `legalruleml` -- loads rules from `legal_rules.xml`
    - `de_jure` -- loads rules from `de_jure_rules.json`
 
