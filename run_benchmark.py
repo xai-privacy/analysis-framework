@@ -5,7 +5,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from prompts import get_system_prompt
 
 ### Usage:
-###   python3 run_benchmark.py [--model <hf-model-id>] [--dsl <odrl|legalruleml>]
+###   python3 run_benchmark.py [--model <hf-model-id>] [--dsl <odrl|legalruleml|de_jure>]
 ###
 ### --model : Hugging Face model id. Dense text decoder models only --
 ###           MoE or multimodal models (e.g. Qwen3.5) are not supported.
@@ -16,8 +16,9 @@ from prompts import get_system_prompt
 ###
 ### --dsl   : Domain-specific language for the formal rules embedded in the
 ###           system prompt. Choices:
-###             odrl         (default) — ODRL policy from odrl_rules.json
-###             legalruleml            — LegalRuleML XML from legal_rules.xml
+###             odrl         (default) -- ODRL policy from odrl_rules.json
+###             legalruleml            -- LegalRuleML XML from legal_rules.xml
+###             de_jure                -- De Jure structured rules from de_jure_rules.json
 
 benchmark_repository = [
     {
@@ -121,9 +122,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dsl",
         default="odrl",
-        choices=["odrl", "legalruleml"],
+        choices=["odrl", "legalruleml", "de_jure"],
         help="Domain-specific language for the formal rules passed to the model. "
-             "Choices: odrl (default) or legalruleml.",
+             "Choices: odrl (default), legalruleml, or de_jure.",
     )
     args = parser.parse_args()
     execution_pipeline(args.model, args.dsl)

@@ -71,6 +71,9 @@ Here are the setup instructions for running an analysis of this scenario for the
    # Use LegalRuleML rules instead of the default ODRL
    python3 run_benchmark.py --dsl legalruleml
 
+   # Use De Jure structured rules
+   python3 run_benchmark.py --dsl de_jure
+
    # Combine both
    python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --dsl legalruleml
    ```
@@ -81,8 +84,9 @@ Here are the setup instructions for running an analysis of this scenario for the
    - `microsoft/Phi-4-mini-instruct`
 
    **`--dsl`** selects the formal rule language embedded in the system prompt:
-   - `odrl` (default) — loads rules from `odrl_rules.json`
-   - `legalruleml` — loads rules from `legal_rules.xml`
+   - `odrl` (default) -- loads rules from `odrl_rules.json`
+   - `legalruleml` -- loads rules from `legal_rules.xml`
+   - `de_jure` -- loads rules from `de_jure_rules.json`
 
 2. From the output we see that the model has problems reasoning causally in the patent damages scenario. We can look inside the hidden layers of the model to extract the mathematical concept vector, `ip_concept_vector.pt`, with:
 

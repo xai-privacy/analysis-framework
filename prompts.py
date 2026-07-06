@@ -31,16 +31,23 @@ _DSL_SECTIONS = {
 <LegalRuleML>
 {rules}
 </LegalRuleML>""",
+    "de_jure": """The following De Jure structured rule extraction defines the formal rules you must apply. Read and follow these rules precisely:
+
+<DeJure>
+{rules}
+</DeJure>""",
 }
 
 _DSL_NAMES = {
     "odrl": "ODRL",
     "legalruleml": "LegalRuleML",
+    "de_jure": "De Jure",
 }
 
 _DSL_FILES = {
     "odrl": "odrl_rules.json",
     "legalruleml": "legal_rules.xml",
+    "de_jure": "de_jure_rules.json",
 }
 
 
@@ -52,7 +59,7 @@ def _load_rules(dsl):
 
 
 def get_system_prompt(dsl="odrl"):
-    """Return the system prompt for the specified DSL ('odrl' or 'legalruleml')."""
+    """Return the system prompt for the specified DSL ('odrl', 'legalruleml', or 'de_jure')."""
     dsl = dsl.lower()
     if dsl not in _DSL_SECTIONS:
         raise ValueError(f"Unsupported DSL: {dsl}. Choose from: {', '.join(_DSL_SECTIONS.keys())}")

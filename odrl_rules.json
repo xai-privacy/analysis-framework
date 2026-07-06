@@ -10,7 +10,7 @@
     {
       "uid": "http://example.org/patent/rule-z0-x1-awarded",
       "action": "http://example.org/patent/claimLostProfits",
-      "comment": "Rule 2: Z=0 AND X=1 → AWARDED. No substitute + infringer present = but-for causation established.",
+      "comment": "Rule 2: Z=0 AND X=1 -> AWARDED. No substitute + infringer present = but-for causation established.",
       "constraint": [
         {
           "leftOperand": "http://example.org/patent/substituteAvailable",
@@ -32,7 +32,7 @@
     {
       "uid": "http://example.org/patent/rule-z1-denied",
       "action": "http://example.org/patent/claimLostProfits",
-      "comment": "Rule 1: Z=1 → DENIED. A non-infringing substitute product breaks the but-for causal chain regardless of X.",
+      "comment": "Rule 1: Z=1 -> DENIED. A non-infringing substitute product breaks the but-for causal chain regardless of X.",
       "constraint": [
         {
           "leftOperand": "http://example.org/patent/substituteAvailable",
@@ -45,7 +45,7 @@
     {
       "uid": "http://example.org/patent/rule-z0-x0-denied",
       "action": "http://example.org/patent/claimLostProfits",
-      "comment": "Rule 3: Z=0 AND X=0 → DENIED. No substitute and no infringer means no lost sales to recover.",
+      "comment": "Rule 3: Z=0 AND X=0 -> DENIED. No substitute and no infringer means no lost sales to recover.",
       "constraint": [
         {
           "leftOperand": "http://example.org/patent/substituteAvailable",
