@@ -53,32 +53,31 @@ guaranteed logical consistency.
 
 Legal reasoning is not one skill. It is a bundle of different tasks, including:
 
-     1. Legal text classification
-        Example: determining whether a clause is an arbitration clause.
+  1. Legal text classification
+     Example: determining whether a clause is an arbitration clause.
+  2. Issue spotting
+     Example: identifying which legal issues arise from a fact pattern.
 
-     2. Issue spotting
-        Example: identifying which legal issues arise from a fact pattern.
+  3. Rule recall
+     Example: recalling the elements of negligence or contract formation.
 
-     3. Rule recall
-        Example: recalling the elements of negligence or contract formation.
+  4. Rule interpretation
+     Example: determining what a statute means in context.
 
-     4. Rule interpretation
-        Example: determining what a statute means in context.
+  5. Rule application
+     Example: applying a legal standard to a new factual scenario.
 
-     5. Rule application
-       Example: applying a legal standard to a new factual scenario.
+  6. Analogical reasoning
+     Example: comparing a current case to prior cases.
 
-     6. Analogical reasoning
-        Example: comparing a current case to prior cases.
+  7. Legal drafting and summarization
+     Example: summarizing a brief or drafting a memo.
 
-     7. Legal drafting and summarization
-        Example: summarizing a brief or drafting a memo.
+  8. Legal outcome prediction
+     Example: predicting whether a claim will succeed.
 
-     8. Legal outcome prediction
-        Example: predicting whether a claim will succeed.
-
-     9. Legal-causal reasoning
-        Example: determining whether a legally relevant fact caused the legal outcome.
+  9. Legal-causal reasoning
+     Example: determining whether a legally relevant fact caused the legal outcome.
 
 The distinction is important because models can be good at some legal tasks and weak at others. A model
 may summarize legal text well but still fail to apply a statute correctly to a novel fact pattern. It may recall a
