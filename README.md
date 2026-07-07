@@ -62,6 +62,36 @@ Here are the setup instructions for running an analysis of this scenario for the
    python3 run_benchmark.py
    ```
 
+   You can select a different model with `--model` and a different rule DSL with `--dsl`:
+
+   ```bash
+   # Use a specific model (default: meta-llama/Llama-3.2-1B-Instruct)
+   python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct
+
+   # Use LegalRuleML rules instead of the default plain English
+   python3 run_benchmark.py --dsl legalruleml
+
+   # Use De Jure structured rules
+   python3 run_benchmark.py --dsl de_jure
+
+   # Use ODRL policy rules
+   python3 run_benchmark.py --dsl odrl
+
+   # Combine model and DSL
+   python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --dsl legalruleml
+   ```
+
+   **`--model`** accepts any Hugging Face model id for a dense text decoder model (not MoE/multimodal). Examples:
+   - `meta-llama/Llama-3.2-1B-Instruct` (default)
+   - `Qwen/Qwen3-4B`
+   - `microsoft/Phi-4-mini-instruct`
+
+   **`--dsl`** selects the formal rule language embedded in the system prompt:
+   - `plain` (default) -- plain English rules (no external file)
+   - `odrl` -- loads rules from `odrl_rules.json`
+   - `legalruleml` -- loads rules from `legal_rules.xml`
+   - `de_jure` -- loads rules from `de_jure_rules.json`
+
 2. From the output we see that the model has problems reasoning causally in the patent damages scenario. We can look inside the hidden layers of the model to extract the mathematical concept vector, `ip_concept_vector.pt`, with:
 
    ```bash
