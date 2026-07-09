@@ -1,0 +1,10 @@
+{
+  "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+  "torch_dtype": "float16",
+  "trust_remote_code": false,
+  "seed": 0,
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 1024
+  }
+}

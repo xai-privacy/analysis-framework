@@ -1,8 +1,27 @@
 # File: run_benchmark.py
 import argparse
+import json
+import os
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from prompts import get_system_prompt
+
+_MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
+
+
+def _load_model_config(model_id):
+    """Load model-specific config from model_configs/<sanitized_model_id>.json.
+    Returns a dict with keys: torch_dtype, trust_remote_code, seed, generation.
+    Falls back to the Llama config if no model-specific config file exists."""
+    sanitized = model_id.replace("/", "_")
+    config_path = os.path.join(_MODEL_CONFIGS_DIR, f"{sanitized}.json")
+    if os.path.isfile(config_path):
+        with open(config_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    # Fall back to Llama config as default
+    fallback_path = os.path.join(_MODEL_CONFIGS_DIR, "meta-llama_Llama-3.2-1B-Instruct.json")
+    with open(fallback_path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 ### Usage:
 ###   python3 run_benchmark.py [--model <hf-model-id>] [--dsl <plain|odrl|legalruleml|de_jure>]
@@ -60,7 +79,7 @@ benchmark_repository = [
     }
 ]
 
-def generate_hf_response(model, tokenizer, user_content, device, system_prompt):
+def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
     """Generates a text completion natively using the proper chat template sequence."""
     messages = [
         {"role": "system", "content": system_prompt},
@@ -72,10 +91,9 @@ def generate_hf_response(model, tokenizer, user_content, device, system_prompt):
     
     with torch.no_grad():
         output_tokens = model.generate(
-            **inputs, 
-            max_new_tokens=1024, 
-            do_sample=False, 
-            pad_token_id=tokenizer.eos_token_id
+            **inputs,
+            pad_token_id=tokenizer.eos_token_id,
+            **gen_config
         )
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
@@ -86,10 +104,25 @@ def execution_pipeline(model_id, dsl):
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"Target Compute Device: {device.upper()}")
 
+    model_cfg = _load_model_config(model_id)
+    print(f"Model config: {model_cfg}")
+
     system_prompt = get_system_prompt(dsl)
 
+    torch.manual_seed(model_cfg.get("seed", 0))
+
+    dtype_str = model_cfg.get("torch_dtype", "float16")
+    torch_dtype = torch.float16 if dtype_str == "float16" else torch.bfloat16 if dtype_str == "bfloat16" else "auto"
+    trust_remote_code = model_cfg.get("trust_remote_code", False)
+
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        torch_dtype=torch_dtype,
+        trust_remote_code=trust_remote_code,
+    ).to(device)
+
+    gen_config = model_cfg.get("generation", {})
 
     for test_case in benchmark_repository:
         print("\n" + "="*70)
@@ -99,14 +132,14 @@ def execution_pipeline(model_id, dsl):
 
         # 1. Execute Prompt A
         print(f"\n[Prompt A]: {test_case['prompt_A']}")
-        response_A = generate_hf_response(model, tokenizer, test_case["prompt_A"], device, system_prompt)
+        response_A = generate_hf_response(model, tokenizer, test_case["prompt_A"], device, system_prompt, gen_config)
         print(f"[Full Response A]:\n{response_A}")
 
         print("-" * 50)
 
         # 2. Execute Prompt B
         print(f"[Prompt B]: {test_case['prompt_B']}")
-        response_B = generate_hf_response(model, tokenizer, test_case["prompt_B"], device, system_prompt)
+        response_B = generate_hf_response(model, tokenizer, test_case["prompt_B"], device, system_prompt, gen_config)
         print(f"[Full Response B]:\n{response_B}")
 
         print("-" * 50)

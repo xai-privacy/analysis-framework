@@ -1,0 +1,11 @@
+{
+  "model_id": "microsoft/Phi-4-mini-instruct",
+  "torch_dtype": "auto",
+  "trust_remote_code": false,
+  "seed": 0,
+  "generation": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "max_new_tokens": 1024
+  }
+}
