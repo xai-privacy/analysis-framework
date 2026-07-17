@@ -70,8 +70,8 @@ def _load_rules(dsl):
         return f.read()
 
 
-def get_system_prompt(dsl="odrl"):
-    """Return the system prompt for the specified DSL ('odrl', 'legalruleml', 'de_jure', or 'plain')."""
+def get_system_prompt(dsl="plain"):
+    """Return the system prompt for the specified DSL ('plain', 'odrl', 'legalruleml', or 'de_jure')."""
     dsl = dsl.lower()
     if dsl not in _DSL_SECTIONS:
         raise ValueError(f"Unsupported DSL: {dsl}. Choose from: {', '.join(_DSL_SECTIONS.keys())}")
@@ -80,5 +80,5 @@ def get_system_prompt(dsl="odrl"):
     return _BASE_PROMPT.format(dsl_section=dsl_section, dsl_name=_DSL_NAMES[dsl])
 
 
-# Backwards-compatible default (ODRL) for modules that import SYSTEM_PROMPT directly
-SYSTEM_PROMPT = get_system_prompt("odrl")
+# Backwards-compatible default (plain English) for modules that import SYSTEM_PROMPT directly
+SYSTEM_PROMPT = get_system_prompt("plain")

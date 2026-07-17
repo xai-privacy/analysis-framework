@@ -30,7 +30,7 @@ def _load_model_config(model_id):
 ###           MoE or multimodal models (e.g. Qwen3.5) are not supported.
 ###           Examples:
 ###             meta-llama/Llama-3.2-1B-Instruct  (default)
-###             Qwen/Qwen3-4B
+###             Qwen/Qwen3.5-4B
 ###             microsoft/Phi-4-mini-instruct
 ###
 ### --dsl   : Domain-specific language for the formal rules embedded in the

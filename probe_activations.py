@@ -2,9 +2,9 @@
 import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from prompts import SYSTEM_PROMPT
+from prompts import get_system_prompt
 
-def extract_layer_activation(model, tokenizer, user_content, layer_idx):
+def extract_layer_activation(model, tokenizer, user_content, layer_idx, system_prompt):
     activation_storage = {}
     
     def hook_fn(module, input, output):
@@ -17,7 +17,7 @@ def extract_layer_activation(model, tokenizer, user_content, layer_idx):
     
     # Format the prompt using the proper chat structure
     messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_content}
     ]
     formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
@@ -29,9 +29,10 @@ def extract_layer_activation(model, tokenizer, user_content, layer_idx):
     hook_handle.remove()
     return activation_storage['features']
 
-def main(model_id):
+def main(model_id, dsl):
     print("Loading model for contextual activation tracking...")
     print(f"Model: {model_id}")
+    print(f"DSL: {dsl}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -49,13 +50,15 @@ def main(model_id):
     print("NOTE: probe and steer must be run with the same --model. They share "
           "ip_concept_vector.pt, and a model/layer mismatch silently produces meaningless results.")
 
+    system_prompt = get_system_prompt(dsl)
+
     # Replace with prompt pairs from benchmark_repository.py to test for those
     user_present = "Evaluate. Infringing Product: Available. Third-Party Substitute: Available."
     user_absent  = "Evaluate. Infringing Product: Available. Third-Party Substitute: Absent."
     
     print("Extracting representations...")
-    act_present = extract_layer_activation(model, tokenizer, user_present, TARGET_LAYER)
-    act_absent  = extract_layer_activation(model, tokenizer, user_absent, TARGET_LAYER)
+    act_present = extract_layer_activation(model, tokenizer, user_present, TARGET_LAYER, system_prompt)
+    act_absent  = extract_layer_activation(model, tokenizer, user_absent, TARGET_LAYER, system_prompt)
     
     concept_vector = act_present - act_absent
     torch.save(concept_vector, "ip_concept_vector.pt")
@@ -71,5 +74,12 @@ if __name__ == "__main__":
              "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct. "
              "Must match the --model used for steer_inference.py.",
     )
+    parser.add_argument(
+        "--dsl",
+        default="plain",
+        choices=["plain", "odrl", "legalruleml", "de_jure"],
+        help="Domain-specific language for the formal rules passed to the model. "
+             "Choices: plain (default), odrl, legalruleml, or de_jure.",
+    )
     args = parser.parse_args()
-    main(args.model)
+    main(args.model, args.dsl)

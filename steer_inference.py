@@ -2,7 +2,7 @@
 import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from prompts import SYSTEM_PROMPT
+from prompts import get_system_prompt
 
 TARGET_LAYER = None  # Derived at runtime in main() as the model's middle layer
 
@@ -12,9 +12,9 @@ def get_verdict_ids(tokenizer):
     token_ids = [tokenizer.encode(w, add_special_tokens=False) for w in candidates if tokenizer.encode(w, add_special_tokens=False)]
     return token_ids
 
-def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device, alpha=0.0):
+def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device, system_prompt, alpha=0.0):
     messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_query}
     ]
     formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
@@ -40,10 +40,13 @@ def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device,
     with torch.no_grad():
         output_tokens = model.generate(
             **inputs,
-            max_new_tokens=5,
+            max_new_tokens=100,
             do_sample=False,
+            num_beams=4,
             pad_token_id=tokenizer.eos_token_id,
             force_words_ids=get_verdict_ids(tokenizer),
+            custom_generate='transformers-community/constrained-beam-search',
+            trust_remote_code=True,
         )
         
     if hook_handle is not None:
@@ -51,8 +54,9 @@ def evaluate_with_steering(model, tokenizer, user_query, concept_vector, device,
         
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
-def main(model_id):
+def main(model_id, dsl):
     print(f"Model: {model_id}")
+    print(f"DSL: {dsl}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16).to(device)
@@ -71,6 +75,8 @@ def main(model_id):
     print("NOTE: probe and steer must be run with the same --model. They share "
           "ip_concept_vector.pt, and a model/layer mismatch silently produces meaningless results.")
 
+    system_prompt = get_system_prompt(dsl)
+
     try:
         concept_vector = torch.load("ip_concept_vector.pt").to(device).to(torch.float16)
     except FileNotFoundError:
@@ -86,7 +92,7 @@ def main(model_id):
     print("\n================== PHASE 1: UN-STEERED BASELINE ==================")
     for name, query in prompts.items():
         print(f"\n[{name}]:")
-        response = evaluate_with_steering(model, tokenizer, query, concept_vector, device, alpha=0.0)
+        response = evaluate_with_steering(model, tokenizer, query, concept_vector, device, system_prompt, alpha=0.0)
         print(response)
         print("-" * 50)
         
@@ -94,7 +100,7 @@ def main(model_id):
     
     # Prompt A does not require correction, so we run it with alpha = 0.0
     print(f"\n[Prompt A - Unsteered Baseline (α = 0.0)]:")
-    response_A = evaluate_with_steering(model, tokenizer, prompts["Prompt A (Z=1, Should be DENIED)"], concept_vector, device, alpha=0.0)
+    response_A = evaluate_with_steering(model, tokenizer, prompts["Prompt A (Z=1, Should be DENIED)"], concept_vector, device, system_prompt, alpha=0.0)
     print(response_A)
     print("-" * 50)
     
@@ -102,7 +108,7 @@ def main(model_id):
     alpha_value = -3.8
     print(f"[Prompt B - Steered Intervention (α = {alpha_value})]:")
     print(f"> Applying negative steering to force model to prioritize Z=0 behavior...")
-    response_B = evaluate_with_steering(model, tokenizer, prompts["Prompt B (Z=0, Should be AWARDED)"], concept_vector, device, alpha=alpha_value)
+    response_B = evaluate_with_steering(model, tokenizer, prompts["Prompt B (Z=0, Should be AWARDED)"], concept_vector, device, system_prompt, alpha=alpha_value)
     print(response_B)
     print("-" * 50)
 
@@ -116,5 +122,12 @@ if __name__ == "__main__":
              "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct. "
              "Must match the --model used for probe_activations.py.",
     )
+    parser.add_argument(
+        "--dsl",
+        default="plain",
+        choices=["plain", "odrl", "legalruleml", "de_jure"],
+        help="Domain-specific language for the formal rules passed to the model. "
+             "Choices: plain (default), odrl, legalruleml, or de_jure.",
+    )
     args = parser.parse_args()
-    main(args.model)
+    main(args.model, args.dsl)
