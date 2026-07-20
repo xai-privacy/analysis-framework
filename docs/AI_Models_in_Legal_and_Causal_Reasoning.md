@@ -1,561 +1,233 @@
 # How Well Do Major AI Models Perform on Legal and Causal Reasoning Tasks?
 
-## Abstract
+## Introduction
 
-Major AI models have made substantial progress on legal and reasoning-oriented tasks. They can
-summarize legal documents, draft legal-style arguments, answer many benchmark questions, and often
-produce fluent explanations that appear logically structured. However, this progress should not be mistaken
-for a complete solution to legal reasoning, causal reasoning, or formal logic. The current state is best
-described as partial competence with important blind spots. Models are no longer at the beginning: they
-can perform many useful tasks, especially when the problem is narrow, well-scaffolded, and similar to
-patterns seen during training. But they are also far from fully reliable reasoners. Their weaknesses become
-visible when tasks require consistency under prompt variation, correct application of novel rules, rigorous
-counterfactual reasoning, grounding in legal authority, or faithful causal explanation. Legal reasoning is
-further along than causal reasoning, but neither is solved. The most difficult and important open problem is
-the intersection of the two: legal-causal reasoning, where a model must not only produce the correct legal
-answer but also follow the correct causal structure behind the legal rule.
+Major AI models have made clear progress on legal and reasoning-oriented tasks. They can summarize legal documents, draft legal-style arguments, identify issues, answer many benchmark questions, and produce explanations that look logically structured. However, strong language ability should not be confused with reliable legal or causal reasoning. In high-stakes domains such as law, it is not enough for a model to give a plausible answer. The model must apply the correct rule to the correct facts, avoid hallucinated authority, remain consistent when wording changes, and correctly handle causal changes in the scenario.
 
-## 1. Introduction
+The central question is whether current AI models truly understand legal causality and logic, or whether they mostly recognize patterns from training data and produce fluent answers. The answer is mixed: models are no longer at the beginning, because they are already useful for many legal-support tasks, but the problems of legal reasoning, causal reasoning, and legal-causal reasoning are not solved.
 
-The question “How do major AI models perform in legal and causal reasoning tasks?” cannot be answered
-with a simple yes or no. The answer depends on what we mean by legal reasoning, what we mean by
-causal reasoning, and what standard we use for saying a problem is “resolved.”
 
-Modern large language models can produce answers that look very impressive. They can write legal
-memos, summarize cases, explain statutes, identify issues, and produce arguments in familiar legal formats
-such as IRAC: Issue, Rule, Application, Conclusion. They can also talk fluently about causality and produce
-explanations involving words such as “because,” “therefore,” “caused,” and “would have happened.” But
-producing reasoning-like language is not the same as reasoning reliably.
+## How Well Do Major AI Models Perform on Legal and Causal Reasoning Tasks?
 
-This distinction matters because legal and causal reasoning are high-stakes forms of reasoning. In law, the
-validity of an answer depends not only on the final conclusion but also on whether the conclusion follows
-from the correct legal rule, the correct facts, and the correct application of doctrine. In causal reasoning, the
-issue is not merely whether two events are associated, but whether changing one factor would actually
-change the outcome.
+Major AI models perform well on many surface-level and structured legal tasks. They are useful for summarization, drafting, classification, issue spotting, legal document review, and first-pass legal analysis. They can often follow explicit rules in clean prompts, especially when the problem is short, well-scaffolded, and similar to patterns they have seen before. Larger models and reasoning-tuned models usually perform better than smaller models.
 
-Major AI models are useful and increasingly capable in legal and causal reasoning tasks, but these are not solved problems. Legal reasoning is somewhere in the middle: models are strong assistants but weak autonomous legal reasoners. Causal reasoning is less mature: models are often good at association but still unreliable at intervention and counterfactual reasoning. Legal-causal reasoning remains an early-stage research frontier.
+However, major AI models are still not reliable autonomous legal or causal reasoners. They can hallucinate legal authority, misstate statutes, apply the wrong rule, produce inconsistent answers under prompt variation, and reach the right answer for the wrong reason. Their weakness becomes more serious when the task requires counterfactual reasoning, intervention reasoning, novel rule application, or strict logical consistency.
 
-## 2. Definitions and Background
+Causal reasoning is less mature than general legal reasoning. Models are often good at recognizing associations, but they are weaker when asked what would happen if one causal variable changed while other facts stayed fixed. This is a major issue for legal AI because many legal outcomes depend on causality, such as whether a breach caused damages, whether discrimination caused an adverse decision, whether a privacy violation caused harm, or whether a substitute product defeats a patent lost-profits claim.
 
-### 2.1 What counts as a “major AI model”?
+A small experiment illustrates the problem. In a legal-causal benchmark about patent lost-profits damages, Qwen2.5-0.5B-Instruct failed with a causal violation score of 0.67 because it always predicted DENIED. This was shortcut behavior: the model produced a legally safe-looking answer but did not apply the full causal rule. Qwen2.5-1.5B-Instruct passed the clean six-pair benchmark with a causal violation score of 0.00, correctly predicting AWARDED when X=1 and Z=0, and DENIED when Z=1. This result suggests that stronger instruction-tuned models may handle clean legal-causal rules better, but it should be interpreted cautiously because the benchmark is small and controlled. Passing six clean pairs does not prove general legal-causal reasoning.
 
-In this discussion, “major AI models” refers to large language models and instruction-tuned models that are
-widely used for general reasoning, professional assistance, and domain-specific tasks. Examples include
-frontier commercial systems such as GPT-4-class models, Claude models, Gemini models, and open-source
-or open-weight models such as Llama, Qwen, Mistral, Phi, and DeepSeek variants.
+Therefore, the best answer is: we are somewhere in between. AI models are already useful legal assistants, but they are not dependable legal decision-makers. Legal reasoning is in a middle stage: useful but not fully reliable. Causal reasoning and legal-causal reasoning are earlier and more difficult. The next step is not only bigger models, but better evaluation and more verifiable systems, including counterfactual tests, perturbation tests, retrieval grounding, symbolic solvers, formal verification, and human expert oversight.
 
-These models are trained primarily to predict and generate text. They learn patterns from massive corpora
-and are then instruction-tuned to follow user requests. This gives them broad linguistic and reasoning-like
-capability, but it does not automatically give them formal legal reasoning, causal world models, or
-guaranteed logical consistency.
 
-### 2.2 What is legal reasoning?
+## Related Work and Existing Research
 
-Legal reasoning is not one skill. It is a bundle of different tasks, including:
+Several studies have investigated how well LLMs support legal reasoning, statutory interpretation, tax-law reasoning, formal logic translation, and contamination-aware evaluation. These works show that LLMs can perform many useful legal-language tasks, but they also reveal important limitations: models may hallucinate, memorize benchmark examples, fail under rule or fact changes, and struggle with formal reasoning. The following papers provide the research foundation for understanding whether major AI models are true legal-causal reasoners or mainly powerful language processors that need solver-backed verification.
 
-  1. Legal text classification
-     Example: determining whether a clause is an arbitration clause.
-  2. Issue spotting
-     Example: identifying which legal issues arise from a fact pattern.
+### 1. Legal Reasoning Benchmarks
 
-  3. Rule recall
-     Example: recalling the elements of negligence or contract formation.
+#### Guha et al. (2023): LegalBench 
 
-  4. Rule interpretation
-     Example: determining what a statute means in context.
+Guha et al. introduced LegalBench, a large benchmark for evaluating legal reasoning in LLMs. LegalBench includes many different legal task types, such as rule recall, rule application, legal interpretation, issue spotting, and rhetorical understanding. LegalBench showed that LLMs can perform many legal reasoning tasks, but performance varies significantly depending on the types of reasoning required. Models may do well on some legal tasks but struggle on others, especially tasks requiring careful legal interpretation or rule application.
 
-  5. Rule application
-     Example: applying a legal standard to a new factual scenario.
+#### Chalkidis et al. (2022): LexGLUE
 
-  6. Analogical reasoning
-     Example: comparing a current case to prior cases.
+Chalkidis et al. introduced LexGLUE, a benchmark for legal language understanding in English. It evaluates models on several legal NLP tasks. LexGLUE helped standardize legal NLP evaluation and showed that transformer models can perform well on legal classification and understanding tasks. However, these tasks are mostly language-understanding tasks rather than full formal legal reasoning tasks.
 
-  7. Legal drafting and summarization
-     Example: summarizing a brief or drafting a memo.
+#### Shi et al. (2026): PLawBench
 
-  8. Legal outcome prediction
-     Example: predicting whether a claim will succeed.
+Shi et al. introduced PLawBench, a rubric-based benchmark for evaluating LLMs in real-world legal practice. The benchmark focuses on practical legal performance, showing that legal AI evaluation must consider real-world use cases and not only abstract benchmark tasks.
 
-  9. Legal-causal reasoning
-     Example: determining whether a legally relevant fact caused the legal outcome.
+Using an LLM-based evaluator aligned with human expert judgments, they evaluate 10 state-ofthe-art LLMs. Experimental results show that none achieves strong performance on PLAWBENCH, revealing substantial limitations in the fine-grained legal reasoning capabilities of current LLMs and highlighting important directions for future evaluation and development of legal LLMs.
 
-The distinction is important because models can be good at some legal tasks and weak at others. A model
-may summarize legal text well but still fail to apply a statute correctly to a novel fact pattern. It may recall a
-rule but fail to identify which fact triggers that rule. It may produce a correct answer but justify it with
-incorrect or hallucinated authority.
+### 2. Legal Domain Models
 
-### 2.3 What is causal reasoning?
+#### Chalkidis et al. (2020): LEGAL-BERT
 
-Causal reasoning asks whether one thing actually causes another, not merely whether the two are
-associated.
+Chalkidis et al. developed LEGAL-BERT, a BERT-style language model trained or adapted for legal text. The work investigated whether domain-specific legal pretraining improves performance on legal NLP tasks. It showed that legal-domain pretraining helps models better handle legal language compared with general-purpose models. Legal language has specialized vocabulary, structure, and style, so models trained on legal corpora can perform better on legal classification and understanding tasks.
 
-A useful framework is Pearl’s ladder of causation:  Type of
-  Level                           Question                               Example
-            reasoning
 
-  Level
-            Association           What is observed?                      Are X and Y correlated?
+### 3. Tax-Law Reasoning
 
-  Level                                                                  What happens to Y if we force X to
-            Intervention          What happens if we do X?
-  2                                                                      change?
+#### Holzenberger et al. (2020): SARA
 
-  Level                           What would have happened               Would Y have occurred if X had not
-            Counterfactual
-  3                               otherwise?                             happened?
+Holzenberger et al. introduced SARA, the StAtutory Reasoning Assessment dataset. SARA focuses on U.S. tax-law reasoning. It includes natural-language statutes, natural-language case descriptions, formal Prolog representations, queries, and answers. SARA showed that tax law is a useful testbed for formal legal reasoning because tax statutes are structured and rule-based. The dataset allows researchers to compare natural-language reasoning with formal logic-based reasoning.
 
-Large language models are generally strongest at Level 1 association. They are trained on text and
-therefore learn statistical relationships between concepts. For example, they know that “rain” and “wet
-roads” are related, or that “discrimination” and “protected class” are related in legal contexts.
+#### Nay et al. (2024): LLMs as Tax Attorneys
 
-They become less reliable at Level 2 and Level 3. Intervention and counterfactual reasoning require more
-than recognizing patterns. The model must reason about what would change if a variable were actively
-changed, while holding other factors fixed. That is much closer to formal causal reasoning than ordinary
-text prediction.
+Nay et al. studied whether LLMs can perform tax-law reasoning tasks, treating LLMs like tax-law assistants or “tax attorneys.” The work reported strong LLM performance on some tax-law reasoning tasks, with results approaching high accuracy in some settings. This suggested that LLMs may have emerging capabilities in legal reasoning.
 
-### 2.4 What is logic?
+#### Hu et al. (2025): Test-Time Scaling LLMs for Legal Reasoning
 
-Logic is formal rule-following. In a logical system, a conclusion follows from premises according to valid
-rules of inference.
+Hu et al. evaluated newer reasoning-oriented LLMs, including OpenAI o-series models and DeepSeek-R1-style models, on legal reasoning tasks in both Chinese and English. Their evaluation included tax-law reasoning on SARA. It showed that "reasoning-optimized models" often perform better than ordinary instruction-following models. In the uploaded paper’s summary of prior results, DeepSeek-R1 performs strongly on SARA entailment and numerical reasoning.
 
-For example:
+Together, these tax-law studies show that tax law is a useful domain for evaluating legal reasoning because it combines statutes, facts, and numerical computation. They also show that high performance on tax-law benchmarks should be interpreted carefully because models may rely on familiar patterns rather than true rule application.
 
-  Premise 1: If Z = 1, then Y = DENIED.
-  Premise 2: Z = 1.
-  Conclusion: Y = DENIED.
+### 4. Hallucination and Reliability
 
-A fully reliable logical reasoner should produce the same conclusion every time the same premises are
-given. It should not be distracted by irrelevant wording, stylistic changes, or facts that do not affect the rule.
+#### Dahl et al. (2024): Large Legal Fictions
 
-LLMs can often imitate logical reasoning and solve many short reasoning problems, but they remain brittle
-under longer chains, adversarial phrasing, hidden assumptions, or tasks requiring strict global consistency.
-This is why they are not equivalent to theorem provers or symbolic solvers.
+Dahl et al. studied hallucinations in legal LLM outputs. They investigated how often LLMs generate legal statements, citations, or claims that are unsupported or false. It found that LLMs can hallucinate legal content, including incorrect or nonexistent legal authorities. This is dangerous because legal users may trust confident but false outputs.
 
-### 2.5 What does it mean for a model to “understand” causality or law?
+#### Magesh et al. (2025): Reliability of AI Legal Research Tools
 
-The word “understand” is difficult. In practical terms, a model would demonstrate meaningful
-understanding of legal causality if it could:
- 1. Identify the legally relevant causal variables.
- 2. Distinguish causal facts from irrelevant or merely correlated facts.
- 3. Apply the legal rule consistently.
- 4. Change its answer when a causal fact changes.
- 5. Keep its answer stable when irrelevant facts change.
- 6. Explain the reasoning using the correct legal doctrine.
- 7. Maintain this behavior under paraphrase, distribution shift, and novel scenarios.
+Magesh et al. evaluated the reliability of leading AI legal research tools and whether they are truly hallucination-free. They found that even specialized legal AI tools can produce unreliable or hallucinated outputs. Legal AI systems may sound authoritative while still making factual or legal errors.
 
-Most current models do not satisfy all these requirements reliably. They may pass clean examples but fail
-under stress tests. Therefore, it is safer to say that current models show partial causal competence, not
-robust causal understanding.
+### 5. Symbolic and Neuro-Symbolic Legal Reasoning
 
-## 3. Legal Reasoning: Strong Surface Capability, Weak Autonomy
+#### Buchanan and Headrick (1970): Early AI and Legal Reasoning
 
-### 3.1 What models do well in legal tasks
+Buchanan and Headrick discussed early possibilities for using artificial intelligence in legal reasoning. They helped establish the idea that legal reasoning can be modeled computationally, especially when legal rules can be made explicit.
 
-Major AI models are already useful in many legal workflows. They can summarize long documents, extract
-important facts, draft legal-style text, organize arguments, and answer many structured legal questions.
-They can also follow common legal formats such as IRAC and produce professional-sounding explanations.
+#### Sergot et al. (1986): British Nationality Act as a Logic Program
 
-For example, if given a contract, a model may be able to identify termination clauses, summarize
-obligations, and flag potentially relevant provisions. If given a case, it may summarize the holding and
-identify key facts. If asked a general legal question, it may provide a plausible overview of the legal doctrine.
+Sergot et al. represented the British Nationality Act as a logic program. They showed that legal statutes can sometimes be encoded as formal logic rules and executed computationally.
 
-These are valuable capabilities. They can improve productivity in legal research, compliance review, contract
-analysis, and first-pass issue spotting.
+#### Schild (1990): Open-Textured Law and Logic Programming
 
-However, these tasks mostly involve text processing plus pattern recognition. They do not necessarily
-prove that the model can reason like a lawyer.
+Schild studied how logic programming can handle legal reasoning, including the difficulty of open-textured legal terms. Their finding is that logic programming is useful for formal legal rules, but real legal language often includes ambiguous or open-textured concepts that are hard to formalize.
 
-### 3.2 Why legal benchmark success can be misleading
+#### Jurayj et al. (2025): Language Models and Logic Programs for Trustworthy Tax Reasoning
 
-Some legal benchmarks show strong performance by frontier models. However, a high score on a
-benchmark does not mean legal reasoning is solved.
+Jurayj et al. developed a Prolog-based framework for tax-law reasoning. Their system uses LLMs to generate formal logic programs and uses Prolog to reason over them. Their results demonstrated the effectiveness of applying semantic parsing methods to statutory reasoning, and showed promising economic feasibility of neuro-symbolic architectures for increasing access to reliable tax assistance.
 
-There are several reasons.
+#### Lorenzo et al. (2025): Translating Tax Law to Code with LLMs
 
-First, many legal benchmarks test the final answer, not the reasoning process. A model may get the answer
-right because the problem resembles something in training data, because the answer is statistically
-common, or because it recognizes surface cues.
+Lorenzo et al. studied the translation of tax law into executable code using LLMs. They found that LLMs can assist with converting legal rules into code, but translating complex legal text into executable programs remains challenging.
 
-Second, many legal benchmark questions are shorter and cleaner than real legal problems. Real legal work
-involves ambiguous facts, incomplete records, conflicting authorities, jurisdictional differences, and
-strategic interpretation.
+#### Sadowski and Chudziak (2025): SOLAR / Multi-Agent Verifiable Legal Reasoning
 
-Third, legal reasoning often depends on the quality of the reasoning chain. A model can reach the correct
-conclusion through invalid reasoning. In law, that is a serious problem because the explanation is often part
-of the legal product.
+Sadowski and Chudziak developed an agentic legal reasoning framework that constructs formal knowledge representations and uses external solvers, such as SAT or SMT solvers, to compute answers. Their system achieved strong results on numerical tax reasoning using a relaxed metric, but the evaluation was limited mainly to the numerical task and did not report full entailment results.
 
-Fourth, models may hallucinate legal authority. They can cite non-existent cases, misstate statutes, or
-confidently assert rules that are not applicable. This makes them risky as autonomous legal agents.
+#### Kordjamshidi et al. (2026): Contamination-aware Evaluation and Neuro-Symbolic Robustness in Tax Law
 
-Therefore, legal benchmark success should be interpreted as evidence of useful capability, not as proof of
-reliable legal reasoning.
+This research studies whether LLMs truly reason over tax law or mainly perform better as translators into formal logic. It compares direct LLM question answering with neuro-symbolic systems where LLMs translate cases into Prolog and a solver performs reasoning. The paper also tests data contamination and introduces SARA+, a perturbed benchmark with changed rules, changed cases, and paraphrases. Its main finding is that direct LLM performance can be inflated by contamination and becomes unstable under rule/case changes, while Prolog-based systems are more robust. The paper supports the view that LLMs are useful, but high-stakes legal reasoning should be solver-backed and verifiable.
 
-### 3.3 Legal reasoning failure modes
+This paper is especially important for the question of legal-causal reasoning because it shows that high LLM performance on legal benchmarks may not be enough; models must also be tested under contamination controls, changed rules, changed facts, and solver-checkable reasoning.
 
-The main legal reasoning failure modes are:
+### 6. Logic Translation and Solver-Augmented LLMs
 
- 1. Hallucinated legal authority
- 2. Incorrect citation or misquotation
- 3. Confusion between jurisdictions
- 4. Misinterpretation of statutory language
- 5. Failure to identify controlling facts
- 6. Overconfident legal conclusions
- 7. Inconsistent answers under prompt variation
- 8. Correct conclusion with invalid reasoning
- 9. Weak handling of novel or edge-case fact patterns
+#### Yang et al. (2024): Natural Language to First-Order Logic
 
-These failures show why models are best understood as legal assistants rather than autonomous legal
-decision-makers.
+Yang et al. studied how LLMs can translate natural language into first-order logic. Their work showed that LLMs can help convert language into formal logical representations, but the translation process remains difficult and requires careful validation.
 
+#### Putra et al. (2026): NL2Logic
 
-## 4. Causal Reasoning: The Deeper Unsolved Problem
+Putra et al. studied AST-guided translation from natural language into first-order logic. Their finding was that structured guidance can help LLMs produce better formal logic, but robust translation from natural language into formal representations remains challenging.
 
-### 4.1 Association is not causation
+#### Pan et al. (2023): Logic-LM
 
-The most important distinction in causal reasoning is the difference between association and causation.
+Pan et al. introduced Logic-LM, a framework that empowers LLMs with symbolic solvers for logical reasoning. They found that LLMs can be improved by delegating formal reasoning to symbolic solvers. The LLM can help translate or prepare the problem, while the solver performs faithful logical inference.
 
-An association means two things occur together. Causation means changing one thing would change the
-other.
+#### Jiang et al. (2024): LeanReasoner
 
-For example: Association: People carrying umbrellas are often seen when streets are wet. Causation: Carrying umbrellas does not cause wet streets; rain causes both.
+Jiang et al. studied how theorem provers such as Lean can support complex logical reasoning for LLMs. Their finding is that formal theorem provers can improve reasoning reliability because they verify whether logical steps are valid.
 
-LLMs are very good at learning associations because they are trained on statistical patterns in text. But
-causal reasoning requires more than association. It requires a model of how variables affect one another.
+#### Feng et al. (2026): VeriCoT
 
-This is where current AI models remain weak.
+Feng et al. introduced a neuro-symbolic method for validating chain-of-thought reasoning using logical consistency checks. They showed that logical consistency checks can help verify whether generated reasoning is valid.
 
-### 4.2 Intervention and counterfactual reasoning
+### 7. Contamination Detection
 
-Intervention asks: What happens if I change X?
+#### Golchin and Surdeanu (2025): Data Contamination Quiz
 
-Counterfactual reasoning asks: What would have happened if X had been different?
+Golchin and Surdeanu developed a method to detect and estimate data contamination in LLMs using quiz-style tests. Their method can detect whether models may have memorized benchmark examples by asking them to identify original examples among perturbed versions.
 
-These are central to law, science, medicine, policy, and compliance.
+### 8. Broader Legal Reasoning Frameworks
 
-For example, in a hiring discrimination case, a causal question might be: Would the applicant have been rejected if their protected attribute had been different?
+#### Nguyen et al. (2025): LLMs for Legal Reasoning
 
-This is not just a classification question. It requires reasoning about an alternative world where one fact
-changes and other relevant conditions remain fixed.
+Nguyen et al. provided a broader framework and future perspective on LLMs for legal reasoning. Legal reasoning includes multiple reasoning types, such as case-based reasoning, abductive reasoning, and deductive reasoning. LLMs can help with some of these tasks but are not fully reliable across all forms of legal reasoning.
 
-LLMs often struggle here because they do not naturally maintain a formal causal graph. They may answer
-based on the most familiar textual pattern rather than performing the intervention or counterfactual
-calculation.
+#### Mochales and Moens (2011): Argumentation Mining
 
-### 4.3 Why causal reasoning is hard for LLMs
+Mochales and Moens studied how to extract legal arguments and argumentative structures from text. They showed that legal reasoning often involves arguments, supporting claims, objections, and evidence. Computational systems can identify some of this structure, but legal argumentation remains complex.
 
-Causal reasoning is hard for LLMs because their core training objective is not causal inference. They learn to
-predict text, not to compute interventions over structural causal models.
+#### Collenette et al. (2023): Explainable AI for Legal Case Reasoning
 
-A model may know the sentence: Smoking causes cancer.
+Collenette et al. studied explainable AI tools for legal reasoning about cases, including work related to the European Court of Human Rights. They argued that Legal AI systems need explanations, not just answers. Users need to know why a model reached a legal conclusion.
 
-But that does not mean it can correctly reason through a novel causal graph with confounding, mediation,
-and counterfactual conditions.
+#### Zou et al. (2024): Tax Law Entailment as Analogical Reasoning
 
-For causal reasoning, the model must often:
+Zou et al. reframed tax-law entailment as an analogical reasoning problem. Instead of directly applying statutes, the model compares a new case to previous cases. The paper notes that, analogical reasoning can be useful but this approach is less competitive than more recent LLM-based methods for SARA-style statutory reasoning.
 
-- Identify variables
-- Determine causal direction
-- Separate cause from correlation
-- Ignore irrelevant variables
-- Handle confounders
-- Evaluate interventions
-- Compare actual and counterfactual worlds
-- Maintain consistency across scenarios
+#### Savelka (2023): Semantic Annotation of Legal Texts
 
-These are not guaranteed by next-token prediction.
+Savelka evaluated GPT-style models for zero-shot semantic annotation of legal texts. The main finding is that LLMs can annotate legal text and extract useful structure, showing that they can help convert legal language into more structured forms.
 
-## 5. Logic and Formal Reasoning: Capable but Brittle
+## Conclusion
 
-Major AI models can solve many logic-like problems, especially short ones. They can follow simple
-syllogisms, solve basic math problems, and produce step-by-step explanations. Reasoning-tuned models
-improve this further by spending more computation on intermediate steps.
+Major AI models have become powerful legal and reasoning assistants, but the evidence does not support treating them as fully reliable legal, causal, or logical reasoners. Across the reviewed work, the same pattern appears: LLMs can perform well on many legal-language tasks, such as summarization, drafting, classification, issue spotting, and answering structured benchmark questions, but their reliability drops when tasks require grounded authority, exact rule application, numerical reasoning, consistency under prompt variation, or reasoning over changed facts and rules.
 
-But logic remains brittle. Models can lose track of assumptions, contradict earlier statements, accept invalid
-steps, or fail when a problem is adversarially phrased.
+Legal reasoning is therefore partially mature. Models are already useful as assistants in legal research, compliance review, document analysis, and first-pass reasoning. However, hallucination studies and legal benchmark evaluations show that they can still misstate law, invent citations, confuse legal rules, and produce correct-looking answers with weak or invalid reasoning. This means benchmark success should be interpreted as evidence of useful capability, not proof of dependable legal reasoning.
 
-The difference between an LLM and a formal solver is important.
+Causal reasoning is less mature than general legal reasoning. Major models can discuss cause and effect fluently and often recognize common associations, but they remain weaker at intervention, counterfactual reasoning, confounding, and formal causal inference. This matters because legal reasoning often depends on causality: whether an action caused harm, whether discrimination caused an adverse decision, whether a breach caused damages, or whether a substitute product changes a patent damages outcome.
 
-An LLM predicts a likely answer from text. A solver computes the answer from rules.
+Legal-causal reasoning is the most important open problem. A model must not only produce the correct legal conclusion; it must reach that conclusion by tracking the correct causal variables and applying the correct legal rule. The Qwen legal-causal experiment illustrates this distinction: the smaller Qwen2.5-0.5B model failed by collapsing to an “always DENIED” shortcut, while Qwen2.5-1.5B passed the clean paired benchmark. This suggests that stronger models can improve on controlled legal-causal tasks, but passing small clean examples does not prove robust causal understanding.
 
-For example:
+The tax-law neuro-symbolic paper strengthens this conclusion. It shows that direct LLM performance on legal benchmarks can be inflated by data contamination and can become unstable when statutes or case facts are changed. In contrast, Prolog-based neuro-symbolic systems are more robust, especially for numerical tax reasoning, because they separate language understanding from formal rule execution. In this setup, the LLM is most useful as a translator from natural language into structured facts, while the symbolic solver performs the actual reasoning.
 
-  def lost_profit_solver(X, Z):
-      if Z == 1:
-          return "DENIED"
-      if X == 1 and Z == 0:
-          return "AWARDED"
-      return "DENIED"
+The central lesson is that the next stage of progress should not be measured only by whether models sound more intelligent or achieve high benchmark accuracy. It should be measured by whether their answers are grounded, consistent, causally valid, legally faithful, contamination-aware, and verifiable under changed rules, changed facts, paraphrases, and counterfactual scenarios.
 
-This solver does not guess. If the input is X=1, Z=0 , it deterministically returns AWARDED . If the input is
-Z=1 , it returns DENIED .
+For that reason, the most promising path is not simply larger models. Larger and reasoning-tuned models help, but high-stakes legal AI needs hybrid systems that combine LLMs with retrieval grounding, structured legal representations, causal graphs, rule-based solvers, formal verification, contamination-aware evaluation, and expert oversight.
 
-An LLM may produce the same answer, but it may also be distracted by wording, prior associations, or
-default tendencies. This is why solver-assisted architectures are promising for legal-causal reasoning.
+In short, major AI models are useful, impressive, and improving, but legal and causal reasoning are not solved. We are somewhere in between: legal AI is already valuable as an assistant, but robust legal-causal reasoning remains an open research frontier. The hardest work ahead is building systems that do not merely produce plausible legal answers, but produce answers that are grounded, causally correct, legally valid, and verifiable.
 
-## 6. The Intersection: Legal-Causal Reasoning
 
-The most important research frontier is not legal reasoning alone or causal reasoning alone. It is their
-intersection.
+## Bibliography
 
-Legal-causal reasoning occurs when a legal outcome depends on a causal relationship.
+- Kordjamshidi, P., Aslan, S., Seshadri, M., Barrett, L., & Santus, E. (2026). *Reasoners or Translators? Contamination-aware Evaluation and Neuro-Symbolic Robustness on Tax Law*. Proceedings of the First Workshop on Structured Understanding, Retrieval, and Generation in the LLM Era (SURGeLLM 2026), 344–360.
 
-Examples include:
+- Holzenberger, N., Blair-Stanek, A., & Van Durme, B. (2020). *A Dataset for Statutory Reasoning in Tax Law Entailment and Question Answering*. Natural Legal Language Processing Workshop. https://arxiv.org/abs/2005.05257
 
-  Tort law: Did the defendant’s act cause the plaintiff’s injury?
-  Employment discrimination: Would the adverse decision have occurred but for a
-  protected attribute?
-  Privacy law: Was the use of sensitive data necessary to provide the service?
-  Patent damages: Would the patentee have made the sales but for the infringement?
-  Contract damages: Did the breach cause the claimed loss?
+- Guha, N., Nyarko, J., Ho, D. E., Ré, C., Chilton, A., Narayana, A., Chohlas-Wood, A., Peters, B., Waldon, B., Rockmore, D. N., Zambrano, D., Talisman, D., Hoque, E., Surani, F., Fagan, F., Sarfaty, G., Dickinson, G. M., Porat, H., Hegland, J., Wu, J., et al. (2023). *LegalBench: A Collaboratively Built Benchmark for Measuring Legal Reasoning in Large Language Models*. Advances in Neural Information Processing Systems. https://arxiv.org/abs/2308.11462
 
-These are not merely language tasks. They require identifying legally relevant causal variables and applying
-a rule consistently.
+- Chalkidis, I., Fergadiotis, M., Malakasiotis, P., Aletras, N., & Androutsopoulos, I. (2020). *LEGAL-BERT: The Muppets Straight Out of Law School*. Findings of the Association for Computational Linguistics: EMNLP 2020, 2898–2904. https://aclanthology.org/2020.findings-emnlp.261/
 
-A model that produces a fluent explanation but fails to track the causal variable is not reliable.
+- Chalkidis, I., Jana, A., Hartung, D., Bommarito, M., Androutsopoulos, I., Katz, D., & Aletras, N. (2022). *LexGLUE: A Benchmark Dataset for Legal Language Understanding in English*. Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics, 4310–4330. https://aclanthology.org/2022.acl-long.297/
 
-## 7. Example: Patent Lost-Profits Causality
+- Nay, J. J., Karamardian, D., Lawsky, S. B., Tao, W., Bhat, M., Jain, R., Lee, A. T., Choi, J. H., & Kasai, J. (2024). *Large Language Models as Tax Attorneys: A Case Study in Legal Capabilities Emergence*. Philosophical Transactions of the Royal Society A, 382(2270), 20230159. https://arxiv.org/abs/2306.07075
 
-Consider a simple legal-causal rule from patent lost-profits damages.
+- Hu, Y., Yu, Y., Gan, L., Wei, B., Kuang, K., & Wu, F. (2025). *Evaluating Test-Time Scaling LLMs for Legal Reasoning: OpenAI o1, DeepSeek-R1, and Beyond*. Findings of the Association for Computational Linguistics: EMNLP 2025, 13759–13781. https://aclanthology.org/2025.findings-emnlp.742/
 
-Let:
+- Dahl, M., Magesh, V., Suzgun, M., & Ho, D. E. (2024). *Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models*. Journal of Legal Analysis, 16(1), 64–93. https://arxiv.org/abs/2401.01301
 
-  X = infringing product is available
-  Z = third-party non-infringing substitute is available
-  Y = outcome: AWARDED or DENIED
+- Magesh, V., Surani, F., Dahl, M., Suzgun, M., Manning, C. D., & Ho, D. E. (2025). *Hallucination-Free? Assessing the Reliability of Leading AI Legal Research Tools*. Journal of Empirical Legal Studies, 22. https://arxiv.org/abs/2405.20362
 
-The rule is:
+- Buchanan, B. G., & Headrick, T. E. (1970). *Some Speculation About Artificial Intelligence and Legal Reasoning*. Stanford Law Review, 23(1), 40–62. https://digitalcommons.law.buffalo.edu/journal_articles/867/
 
-  If Z = 1, the lost-profits claim is DENIED.
-  If X = 1 and Z = 0, the lost-profits claim is AWARDED.
+- Sergot, M. J., Sadri, F., Kowalski, R. A., Kriwaczek, F., Hammond, P., & Cory, H. T. (1986). *The British Nationality Act as a Logic Program*. Communications of the ACM, 29(5), 370–386. https://doi.org/10.1145/5689.5920
 
-Now compare two cases:
+- Schild, U. J. (1990). *Open-Textured Law, Expert Systems and Logic Programming*. PhD thesis, University of London. https://dblp.org/pid/94/4980.html
 
-  Case A:
-  X = 1
-  Z = 0
-  Correct outcome: AWARDED
+- Sartor, G. (2005). *Legal Reasoning: A Cognitive Approach to the Law*. Springer. https://link.springer.com/book/10.1007/1-4020-3505-5
 
-  Case B:
-  X = 1
-  Z = 1
-  Correct outcome: DENIED
+- Mochales, R., & Moens, M.-F. (2011). *Argumentation Mining*. Artificial Intelligence and Law, 19(1), 1–22. https://doi.org/10.1007/s10506-010-9104-x
 
-Only one fact changed: the substitute product became available. A causally aligned model should change its
-answer from AWARDED to DENIED .
+- Collenette, J., Atkinson, K., & Bench-Capon, T. (2023). *Explainable AI Tools for Legal Reasoning About Cases: A Study on the European Court of Human Rights*. Artificial Intelligence, 317, 103861. https://doi.org/10.1016/j.artint.2023.103861
 
-This is a simple example of a counterfactual legal benchmark. The question is not only whether the model
-can answer one prompt correctly. The question is whether it changes its answer correctly when the causal
-fact changes.
+- Zou, X., Zhang, M., Weir, N., Van Durme, B., & Holzenberger, N. (2024). *Reframing Tax Law Entailment as Analogical Reasoning*. arXiv preprint. https://arxiv.org/abs/2401.06715
 
-## 8. Empirical Illustration: Qwen Model Results
+- Yang, Y., Xiong, S., Payani, A., Shareghi, E., & Fekri, F. (2024). *Harnessing the Power of Large Language Models for Natural Language to First-Order Logic Translation*. Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics, 6942–6959. https://aclanthology.org/2024.acl-long.375/
 
-A small experiment using the analysis_framework benchmark shows why this distinction matters.
+- Putra, R. R., Basuki, R. S. P., Cheng, Y., & Gao, P. (2026). *NL2Logic: AST-Guided Translation of Natural Language into First-Order Logic with Large Language Models*. Findings of the European Chapter of the Association for Computational Linguistics. https://arxiv.org/abs/2602.13237
 
-The benchmark tested six paired scenarios using the patent lost-profits rule above.
+- Savelka, J. (2023). *Unlocking Practical Applications in Legal Domain: Evaluation of GPT for Zero-Shot Semantic Annotation of Legal Texts*. Proceedings of the International Conference on Artificial Intelligence and Law. https://arxiv.org/abs/2305.04417
 
-The results were:
+- Pan, L., Albalak, A., Wang, X., & Wang, W. Y. (2023). *Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning*. Findings of the Association for Computational Linguistics: EMNLP 2023, 3806–3824. 	
 
-  Qwen2.5-0.5B-Instruct:
-  Causal violation score = 0.67
-  Verdict = FAIL
-  Observed behavior = always predicted DENIED
+- Jiang, D., Fonseca, M., & Cohen, S. B. (2024). *LeanReasoner: Boosting Complex Logical Reasoning with Lean*. Proceedings of NAACL-HLT 2024, 7497–7510. https://aclanthology.org/2024.naacl-long.416/
 
-  Qwen2.5-1.5B-Instruct:
-  Causal violation score = 0.00
-  Verdict = PASS
-  Observed behavior = correctly predicted AWARDED for X=1, Z=0 and DENIED for Z=1
+- Jurayj, W., Holzenberger, N., & Van Durme, B. (2025). *Language Models and Logic Programs for Trustworthy Tax Reasoning*. AAAI Conference on Artificial Intelligence. https://ojs.aaai.org/index.php/AAAI/article/view/41212
 
-The 0.5B model failed in an informative way. It did not produce random errors. Instead, it collapsed to a
-simple policy: Always answer DENIED.
+- Lorenzo, G., Pietromatera, A., & Holzenberger, N. (2025). *Translating Tax Law to Code with LLMs: A Benchmark and Evaluation Framework*. Natural Legal Language Processing Workshop 2025, 31–47. https://aclanthology.org/2025.nllp-1.4/
 
-This policy works for all cases where Z=1 , because the presence of a substitute product means the claim
-should be denied. But it fails whenever X=1 and Z=0 , because those cases require AWARDED .
+- Sadowski, A., & Chudziak, J. A. (2025). *On Verifiable Legal Reasoning: A Multi-Agent Framework with Formalized Knowledge Representations*. arXiv preprint. https://arxiv.org/abs/2509.00710
 
-This is shortcut behavior. The model learned or followed a safe-looking legal default, but it did not apply the
-full causal rule.
+- Feng, Y., Weir, N., Bostrom, K., Bayless, S., Cassel, D., Chaudhary, S., Kiesl-Reiter, B., & Rangwala, H. (2026). *VeriCoT: Neuro-Symbolic Chain-of-Thought Validation via Logical Consistency Checks*. International Conference on Learning Representations. https://arxiv.org/abs/2511.04662
 
-The 1.5B model performed better. It correctly changed its answer depending on the causal variable. This
-suggests that modest increases in model capacity and instruction-following ability can improve
-performance on clean legal-causal reasoning tasks.
+- Golchin, S., & Surdeanu, M. (2025). *Data Contamination Quiz: A Tool to Detect and Estimate Contamination in Large Language Models*. Transactions of the Association for Computational Linguistics, 13, 809–830. https://aclanthology.org/2025.tacl-1.37/
 
-However, the conclusion must be cautious. Passing six clean benchmark pairs does not prove general causal
-understanding. It shows that the model can follow an explicitly provided causal rule in a controlled setting.
-More difficult tests are needed.
+- Nguyen, H. T., Fungwacharakorn, W., Zin, M. M., Goebel, R., Toni, F., Stathis, K., & Satoh, K. (2025). *LLMs for Legal Reasoning: A Unified Framework and Future Perspectives*. Computer Law & Security Review, 58, 106165. https://www.sciencedirect.com/science/article/pii/S2212473X25000380
 
-## 9. Are These Problems Resolved?
-
-The answer is no.
-
-Legal reasoning is not resolved because models still fail on grounding, authority, consistency, subtle
-doctrine, and reasoning-chain validity.
-
-Causal reasoning is not resolved because models still struggle with intervention, counterfactuals,
-confounding, and novel causal structures.
-
-Logic is not resolved because models remain brittle under long chains, adversarial examples, and tasks
-requiring strict formal consistency.
-
-Legal-causal reasoning is especially unresolved because it combines all of these difficulties.
-
-The best answer is: We are somewhere in between. Major AI models are far beyond the beginning for legal assistance and simple reasoning, but they are still far from robust legal-causal understanding.
-
-## 10. A Maturity Model
-
-The current state can be organized into levels.
-
-Level 1: Pattern matching
-
-Models are strong here.
-
-Examples:
-
-- Summarizing documents
-- Recognizing common legal phrases
-- Producing standard legal explanations
-- Answering familiar questions
-
-Level 2: Structured reasoning with scaffolding
-
-Models are often useful here.
-
-Examples:
-
-- Applying an explicitly provided rule
-- Following a structured prompt
-- Producing a controlled JSON answer
-- Answering simple counterfactual pairs
-
-Level 3: Robust causal and legal reasoning
-
-Models are not reliably here yet.
-
-Examples:
-
-- Handling novel statutes
-- Maintaining consistency under paraphrase
-
-- Ignoring irrelevant distractors
-- Performing intervention reasoning
-- Performing counterfactual reasoning
-- Producing legally valid reasoning chains
-- Explaining decisions without hallucinated authority
-
-This maturity model explains why models can look strong in some settings and weak in others.
-
-## 11. Why Scaling Alone Is Not Enough
-
-Larger models often perform better than smaller models. The Qwen example supports this: the 1.5B model
-passed a task that the 0.5B model failed.
-
-But scaling alone is unlikely to fully solve legal-causal reasoning.
-
-The reason is structural. LLMs are trained primarily on text prediction. They do not automatically maintain
-formal causal graphs, legal rule engines, or proof systems. Larger models may approximate these
-behaviors better, but approximation is not the same as reliability.
-
-For high-stakes legal or compliance use cases, we need more than plausible answers. We need verifiable
-reasoning.
-
-## 12. The Likely Path Forward: Hybrid Systems
-
-The most promising direction is hybrid AI architecture.
-
-A reliable legal-causal AI system should not depend only on an LLM’s internal reasoning. Instead, it should
-combine:
-
-1. LLMs for natural language understanding
-2. Retrieval systems for grounding in legal sources
-3. Structured representations such as DAGs or SCMs
-4. Rule-based solvers for deterministic legal logic
-5. Formal verification for checking reasoning
-6. Human expert review for high-stakes decisions
-
-In such a system, the LLM would read and structure the facts. The solver would apply the rule. The verifier
-would check consistency. The human expert would review the result.
-
-For example: Legal text → LLM extracts X and Z → solver applies causal rule → explanatio generated → verifier checks consistency
-
-This approach reduces the risk that the LLM will produce a plausible but causally wrong answer.
-
-## 13. Research Implications
-
-The key research implication is that future evaluation should move beyond ordinary answer accuracy.
-
-Current benchmarks often ask:
-
-  Did the model give the right answer?
-
-A stronger legal-causal benchmark asks:
-
-  Did the model give the right answer for the right causal reason?
-
-This requires counterfactual testing.
-
-For every scenario, we can create a paired scenario where only one causal variable changes. Then we test
-whether the model’s answer changes correctly.
-
-A good benchmark should also include:
-
-- Paraphrases
-- Distractors
-- Ambiguous facts
-- Negation
-- Long fact patterns
-- Multiple jurisdictions
-- Irrelevant variables
-- Solver-generated ground truth
-
-This would expose whether a model is truly tracking the legal causal structure or merely responding to
-surface patterns.
-
-## 14. Practical Answer to the Original Question
-
-So how do major AI models do in legal and causal reasoning tasks?
-
-They do well on many surface and structured tasks. They are useful for summarization, drafting,
-classification, issue spotting, and first-pass legal analysis. They can often follow explicit rules in clean
-prompts. Larger and reasoning-tuned models are increasingly capable.
-
-But they are not reliable autonomous reasoners. They remain vulnerable to hallucination, inconsistency,
-prompt sensitivity, shallow reasoning, and shortcut behavior. They struggle most when the task requires
-true intervention or counterfactual reasoning.
-
-Are these resolved problems?
-
-No.
-
-Are we just at the beginning?
-
-Not exactly. For general legal AI assistance, we are beyond the beginning. The tools are already useful. For
-causal reasoning and legal-causal reasoning, however, we are still early.
-
-Are we somewhere in between?
-
-Yes. That is the most accurate answer.
-
-The field is in a middle stage for legal reasoning and an early-to-middle stage for causal reasoning. The
-frontier is moving from fluent answer generation toward verifiable reasoning systems.
-
-## 15. Conclusion
-
-Major AI models have become impressive legal and reasoning assistants, but they do not yet reliably
-understand causality, logic, or legal rule structure in the strong sense required for high-stakes decision-
-making.
-
-Legal reasoning is partially mature: models can summarize, draft, classify, and answer many structured
-questions. But they still fail on grounding, subtle doctrine, consistency, and valid reasoning chains.
-
-Causal reasoning is less mature: models can discuss cause and effect, but they remain weak at
-interventions, counterfactuals, and formal causal inference.
-
-Legal-causal reasoning is the critical open problem. Many legal outcomes depend on causal facts. A model
-that cannot reliably track those facts may produce correct-looking but legally invalid conclusions.
-
-The central lesson is: The next stage of AI progress should not be measured only by whether models sound more intelligent. It should be measured by whether their answers are grounded, consistent, causally valid, legally faithful, and verifiable.
-
-For that reason, the most promising path is not simply larger models. It is the combination of LLMs with
-structured legal representations, causal graphs, rule-based solvers, retrieval, formal verification, and expert
-oversight.
-
-In short: major AI models are useful, impressive, and improving — but legal and causal reasoning are not
-solved. We are somewhere in between, and the hardest work is still ahead.
+- Shi, Y., Liu, H., Hu, Y., Song, G., Xu, X., Ma, Y., Tang, T., Zhang, L., Chen, Q., Feng, D., Lv, W., Wu, W., Yang, K., Yang, S., Wang, W., Shi, R., Qiu, Y., Qi, Y., Zhang, J., Sui, X., et al. (2026). *PLawBench: A Rubric-Based Benchmark for Evaluating LLMs in Real-World Legal Practice*. arXiv preprint. https://arxiv.org/abs/2601.16669
