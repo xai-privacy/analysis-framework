@@ -264,3 +264,6 @@ They are weaker at:
 
 So the conclusion is: LLMs are not yet reliable standalone legal reasoners. They can sometimes reason directly, especially on simpler entailment tasks, but they are less reliable for numerical tax reasoning, changed rules, changed case facts, and contamination-free evaluation. The paper argues that LLMs are more robust when used as part of neuro-symbolic systems, where they translate legal language into formal logic and symbolic solvers perform the actual reasoning. For high-stakes legal AI, the most reliable path is not LLM-only reasoning, but solver-backed, verifiable, and human-reviewable systems.
 
+## Bibliography
+
+- Kordjamshidi, P., Aslan, S., Seshadri, M., Barrett, L., & Santus, E. (2026). *Reasoners or Translators? Contamination-aware Evaluation and Neuro-Symbolic Robustness on Tax Law*. Proceedings of the First Workshop on Structured Understanding, Retrieval, and Generation in the LLM Era (SURGeLLM 2026), 344–360. https://arxiv.org/abs/2605.16052
