@@ -157,8 +157,6 @@ Savelka evaluated GPT-style models for zero-shot semantic annotation of legal te
 
 ## Conclusion
 
-## Conclusion
-
 Major AI models have become powerful legal and reasoning assistants, but the evidence does not support treating them as fully reliable legal, causal, or logical reasoners. Across the reviewed work, the same pattern appears: LLMs can perform well on many legal-language tasks, such as summarization, drafting, classification, issue spotting, and answering structured benchmark questions, but their reliability drops when tasks require grounded authority, exact rule application, numerical reasoning, consistency under prompt variation, or reasoning over changed facts and rules [Guha et al., 2023; Chalkidis et al., 2022; Shi et al., 2026].
 
 Legal reasoning is therefore partially mature. Models are already useful as assistants in legal research, compliance review, document analysis, and first-pass reasoning. However, hallucination studies and legal benchmark evaluations show that they can still misstate law, invent citations, confuse legal rules, and produce correct-looking answers with weak or invalid reasoning [Dahl et al., 2024; Magesh et al., 2025]. This means benchmark success should be interpreted as evidence of useful capability, not proof of dependable legal reasoning.
