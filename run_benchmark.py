@@ -2,9 +2,32 @@
 import argparse
 import json
 import os
+import sys
+
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+
 from prompts import get_system_prompt
+from structured_outputs import DecisionOutput, parse_and_reason
+
+try:
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+except Exception as exc:  # pragma: no cover - optional dependency path
+    torch = None
+    AutoModelForCausalLM = None
+    AutoTokenizer = None
+    _IMPORT_ERROR = exc
+else:
+    _IMPORT_ERROR = None
+
+try:
+    from transformers import LogitsProcessorList
+except Exception:
+    LogitsProcessorList = None
+
+try:
+    from transformers import RegexLogitsProcessor
+except Exception:
+    RegexLogitsProcessor = None
 
 _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
 
@@ -79,6 +102,20 @@ benchmark_repository = [
     }
 ]
 
+def _build_predicate_constraint(tokenizer):
+    """Return a logits processor that constrains output to a JSON object with predicate fields."""
+    if RegexLogitsProcessor is None or LogitsProcessorList is None:
+        return None
+    pattern = (
+        r'\{\s*"infringing_product_available"\s*:\s*(true|false)\s*,'
+        r'\s*"substitute_product_available"\s*:\s*(true|false)\s*\}'
+    )
+    try:
+        return RegexLogitsProcessor(regex=pattern, tokenizer=tokenizer)
+    except TypeError:
+        return None
+
+
 def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
     """Generates a text completion natively using the proper chat template sequence."""
     messages = [
@@ -88,16 +125,53 @@ def generate_hf_response(model, tokenizer, user_content, device, system_prompt, 
     formatted = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     inputs = tokenizer(formatted, return_tensors="pt").to(device)
     prompt_len = inputs["input_ids"].shape[1]
-    
-    with torch.no_grad():
-        output_tokens = model.generate(
-            **inputs,
-            pad_token_id=tokenizer.eos_token_id,
-            **gen_config
-        )
+
+    logits_processor = None
+    try:
+        logits_processor = _build_predicate_constraint(tokenizer)
+    except Exception:
+        logits_processor = None
+
+    generation_kwargs = dict(gen_config)
+    if logits_processor is not None and LogitsProcessorList is not None:
+        generation_kwargs["logits_processor"] = LogitsProcessorList([logits_processor])
+
+    try:
+        with torch.no_grad():
+            output_tokens = model.generate(
+                **inputs,
+                pad_token_id=tokenizer.eos_token_id,
+                **generation_kwargs
+            )
+    except Exception as exc:
+        print(f"[Generation Error]: {exc}", file=sys.stderr)
+        return json.dumps({"error": "generation_failed", "reason": str(exc)})
+
     return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
 
+
+def run_structured_decision(model, tokenizer, user_content, device, system_prompt, gen_config):
+    """Generate a model response and convert it into a structured decision via the DSL layer."""
+    try:
+        raw_response = generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config)
+    except Exception as exc:
+        print(f"[Prompt Execution Error]: {exc}", file=sys.stderr)
+        raw_response = json.dumps({"error": "generation_failed", "reason": str(exc)})
+
+    try:
+        decision = parse_and_reason(raw_response)
+    except Exception as exc:
+        print(f"[Structured Decision Error]: {exc}", file=sys.stderr)
+        decision = DecisionOutput(decision="DENIED", explanation=f"Parsing failed: {exc}")
+    return decision, raw_response
+
 def execution_pipeline(model_id, dsl):
+    if torch is None or AutoTokenizer is None or AutoModelForCausalLM is None:
+        print("Missing runtime dependencies for Hugging Face benchmarking.", file=sys.stderr)
+        print(f"Import error: {_IMPORT_ERROR}", file=sys.stderr)
+        print("Install torch and transformers in the active Python environment, then rerun the benchmark.", file=sys.stderr)
+        return
+
     print("Starting benchmarking the model via Hugging Face ...\n")
     print(f"Model: {model_id}")
     print(f"DSL: {dsl}")
@@ -115,14 +189,41 @@ def execution_pipeline(model_id, dsl):
     torch_dtype = torch.float16 if dtype_str == "float16" else torch.bfloat16 if dtype_str == "bfloat16" else "auto"
     trust_remote_code = model_cfg.get("trust_remote_code", False)
 
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        torch_dtype=torch_dtype,
-        trust_remote_code=trust_remote_code,
-    ).to(device)
+    gen_config = dict(model_cfg.get("generation", {}))
+    gen_config.setdefault("max_new_tokens", 64)
 
-    gen_config = model_cfg.get("generation", {})
+    temperature = gen_config.get("temperature", 0.0)
+    if temperature is None:
+        temperature = 0.0
+    try:
+        temperature = float(temperature)
+    except (TypeError, ValueError):
+        temperature = 0.0
+
+    if temperature > 0:
+        gen_config["do_sample"] = True
+    else:
+        gen_config["do_sample"] = False
+
+    gen_config["temperature"] = temperature
+
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_id)
+        model_kwargs = {"trust_remote_code": trust_remote_code}
+        if torch_dtype != "auto":
+            model_kwargs["dtype"] = torch_dtype
+        else:
+            model_kwargs["torch_dtype"] = torch_dtype
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            **model_kwargs,
+        ).to(device)
+    except Exception as exc:
+        print("\nUnable to load model from Hugging Face.", file=sys.stderr)
+        print(f"Model: {model_id}", file=sys.stderr)
+        print(f"Reason: {exc}", file=sys.stderr)
+        print("Please authenticate with Hugging Face for gated models or pass a public model id.", file=sys.stderr)
+        return
 
     for test_case in benchmark_repository:
         print("\n" + "="*70)
@@ -132,15 +233,31 @@ def execution_pipeline(model_id, dsl):
 
         # 1. Execute Prompt A
         print(f"\n[Prompt A]: {test_case['prompt_A']}")
-        response_A = generate_hf_response(model, tokenizer, test_case["prompt_A"], device, system_prompt, gen_config)
-        print(f"[Full Response A]:\n{response_A}")
+        try:
+            decision_A, response_A = run_structured_decision(model, tokenizer, test_case["prompt_A"], device, system_prompt, gen_config)
+        except Exception as exc:
+            print(f"[Prompt A failed]: {exc}", file=sys.stderr)
+            decision_A = DecisionOutput(decision="DENIED", explanation=f"Prompt execution failed: {exc}")
+            response_A = json.dumps({"error": "prompt_failed", "reason": str(exc)})
+        print(f"[Final Output (DSL Runtime) A]: {decision_A.model_dump()}")
+        print("[Model Output A]:")
+        print(response_A)
+        sys.stdout.flush()
 
         print("-" * 50)
 
         # 2. Execute Prompt B
         print(f"[Prompt B]: {test_case['prompt_B']}")
-        response_B = generate_hf_response(model, tokenizer, test_case["prompt_B"], device, system_prompt, gen_config)
-        print(f"[Full Response B]:\n{response_B}")
+        try:
+            decision_B, response_B = run_structured_decision(model, tokenizer, test_case["prompt_B"], device, system_prompt, gen_config)
+        except Exception as exc:
+            print(f"[Prompt B failed]: {exc}", file=sys.stderr)
+            decision_B = DecisionOutput(decision="DENIED", explanation=f"Prompt execution failed: {exc}")
+            response_B = json.dumps({"error": "prompt_failed", "reason": str(exc)})
+        print(f"[Final Output (DSL Runtime) B]: {decision_B.model_dump()}")
+        print("[Model Output B]:")
+        print(response_B)
+        sys.stdout.flush()
 
         print("-" * 50)
 
@@ -161,4 +278,8 @@ if __name__ == "__main__":
              "Choices: plain (default), odrl, legalruleml, or de_jure.",
     )
     args = parser.parse_args()
-    execution_pipeline(args.model, args.dsl)
+    try:
+        execution_pipeline(args.model, args.dsl)
+    except Exception as exc:
+        print(f"Benchmark failed: {exc}", file=sys.stderr)
+        sys.exit(1)

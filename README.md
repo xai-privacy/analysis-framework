@@ -5,6 +5,18 @@ The scripts and other artifacts in this repo are for probing a generative AI mod
 1. There needs to be an infringing product; without it there can be no damages
 2. There must not be a non-infringing substitute product; if such exists, consumers would use that product instead of the patentee's product
 
+## New workflow: structured predicates + rule application
+
+The repository now uses a two-stage workflow instead of asking the model to reason directly over the full text using the DSL as a system prompt.
+
+1. The model is prompted to emit structured predicate JSON describing the scenario, for example:
+   - `infringing_product_available: true|false`
+   - `substitute_product_available: true|false`
+2. The repo parses that output with Pydantic into a validated schema in `structured_outputs.py`.
+3. A small DSL-style rule layer in the same module applies the legal logic and returns a final `AWARDED` or `DENIED` decision.
+
+In other words, the model now acts primarily as a structured extractor, while the repository handles deterministic rule application. This makes the pipeline easier to audit and more compatible with later work on richer formal DSLs.
+
 Here are the setup instructions for running an analysis of this scenario for the Llama 3.2 1B (1 Billion parameters) model. All instructions are for macOS (and the Fish shell).
 
 ## 0. Preliminaries
@@ -51,7 +63,7 @@ Here are the setup instructions for running an analysis of this scenario for the
 7. Install all dependencies with:
 
    ```bash
-   pip3 install torch transformers accelerate pyvene transformer-lens
+   pip3 install torch transformers accelerate pyvene transformer-lens pydantic
    ```
 
 ## 1. Audit

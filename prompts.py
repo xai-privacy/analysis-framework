@@ -18,7 +18,18 @@ Key consideration: If a non-infringing substitute product is available in the ma
 
 Your task: Given the values of X and Z, determine whether the patentee's lost profits claim (Y) should be AWARDED or DENIED by applying the {dsl_name} rules above.
 
-CRITICAL INSTRUCTION: Please explain your reasoning and provide your recommendation for the outcome with exactly ONE WORD from these two choices: [AWARDED] or [DENIED]."""
+CRITICAL INSTRUCTION: First output exactly one JSON object with exactly two boolean fields: infringing_product_available and substitute_product_available. The repository will parse this first JSON object and then apply the {dsl_name} DSL rules to produce the final decision.
+
+FORMAT REQUIREMENT: Your first output must be a single JSON object and nothing else, using this exact structure:
+{{"infringing_product_available": true, "substitute_product_available": false}}
+
+Do not include any explanation, markdown, or surrounding text before or after this first JSON object.
+
+After that, on a new line, output a second JSON object with fields decision and explanation.
+
+Example second line:
+{{"decision": "AWARDED", "explanation": "..."}}
+"""
 
 _DSL_SECTIONS = {
     "odrl": """The following ODRL (Open Digital Rights Language) policy defines the formal rules you must apply. Read and follow these rules precisely:
