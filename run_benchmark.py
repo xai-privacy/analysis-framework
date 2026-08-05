@@ -3,6 +3,7 @@ import argparse
 import json
 import os
 import sys
+from pathlib import Path
 
 import torch
 
@@ -30,6 +31,7 @@ except Exception:
     RegexLogitsProcessor = None
 
 _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
+_XGRAMMAR_RULES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "xgrammar_rules")
 
 
 def _load_model_config(model_id):
@@ -102,17 +104,39 @@ benchmark_repository = [
     }
 ]
 
+def _build_predicate_grammar():
+    """Load the baked-in XGrammar grammar for predicate JSON output."""
+    grammar_path = os.path.join(_XGRAMMAR_RULES_DIR, "predicate_json.gbnf")
+    if not os.path.isfile(grammar_path):
+        return None
+    with open(grammar_path, "r", encoding="utf-8") as handle:
+        return handle.read()
+
+
 def _build_predicate_constraint(tokenizer):
     """Return a logits processor that constrains output to a JSON object with predicate fields."""
-    if RegexLogitsProcessor is None or LogitsProcessorList is None:
-        return None
-    pattern = (
-        r'\{\s*"infringing_product_available"\s*:\s*(true|false)\s*,'
-        r'\s*"substitute_product_available"\s*:\s*(true|false)\s*\}'
-    )
+    grammar = _build_predicate_grammar()
+    if grammar is None:
+        if RegexLogitsProcessor is None or LogitsProcessorList is None:
+            return None
+        pattern = (
+            r'\{\s*"infringing_product_available"\s*:\s*(true|false)\s*,'
+            r'\s*"substitute_product_available"\s*:\s*(true|false)\s*\}'
+        )
+        try:
+            return RegexLogitsProcessor(regex=pattern, tokenizer=tokenizer)
+        except TypeError:
+            return None
+
     try:
-        return RegexLogitsProcessor(regex=pattern, tokenizer=tokenizer)
-    except TypeError:
+        from xgrammar import Grammar, LogitsProcessor as XGrammarLogitsProcessor
+    except Exception:
+        return None
+
+    try:
+        compiled_grammar = Grammar.from_ebnf(grammar)
+        return XGrammarLogitsProcessor(grammar=compiled_grammar, tokenizer=tokenizer)
+    except Exception:
         return None
 
 
