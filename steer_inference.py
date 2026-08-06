@@ -99,14 +99,14 @@ def main(model_id, dsl):
     print("\n================== PHASE 2: STEERED INTERVENTION ==================")
     
     # Prompt A does not require correction, so we run it with alpha = 0.0
-    print(f"\n[Prompt A - Unsteered Baseline (α = 0.0)]:")
+    print(f"\n[Prompt A - Unsteered Baseline (alpha = 0.0)]:")
     response_A = evaluate_with_steering(model, tokenizer, prompts["Prompt A (Z=1, Should be DENIED)"], concept_vector, device, system_prompt, alpha=0.0)
     print(response_A)
     print("-" * 50)
     
     # Prompt B is broken, so we apply negative steering to suppress Z presence paths and flip it to AWARDED
     alpha_value = -3.8
-    print(f"[Prompt B - Steered Intervention (α = {alpha_value})]:")
+    print(f"[Prompt B - Steered Intervention (alpha = {alpha_value})]:")
     print(f"> Applying negative steering to force model to prioritize Z=0 behavior...")
     response_B = evaluate_with_steering(model, tokenizer, prompts["Prompt B (Z=0, Should be AWARDED)"], concept_vector, device, system_prompt, alpha=alpha_value)
     print(response_B)

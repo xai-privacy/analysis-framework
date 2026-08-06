@@ -1,19 +1,29 @@
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 from typing import Literal
 
-from pydantic import BaseModel, Field
+
+@dataclass
+class PredicateOutput:
+    infringing_product_available: bool
+    substitute_product_available: bool
+
+    def to_dict(self) -> dict:
+        return {
+            "infringing_product_available": self.infringing_product_available,
+            "substitute_product_available": self.substitute_product_available,
+        }
 
 
-class PredicateOutput(BaseModel):
-    infringing_product_available: bool = Field(..., description="Whether the infringing product is available")
-    substitute_product_available: bool = Field(..., description="Whether a non-infringing substitute is available")
-
-
-class DecisionOutput(BaseModel):
+@dataclass
+class DecisionOutput:
     decision: Literal["AWARDED", "DENIED"]
-    explanation: str = Field(min_length=1)
+    explanation: str
+
+    def to_dict(self) -> dict:
+        return {"decision": self.decision, "explanation": self.explanation}
 
 
 def _strip_code_fences(text: str) -> str:
@@ -79,7 +89,10 @@ def parse_predicate_response(raw_response: str) -> PredicateOutput:
         if isinstance(payload, dict):
             normalized = _normalize_predicates(payload)
             if {"infringing_product_available", "substitute_product_available"}.issubset(normalized.keys()):
-                return PredicateOutput.model_validate(normalized)
+                return PredicateOutput(
+                    infringing_product_available=bool(normalized["infringing_product_available"]),
+                    substitute_product_available=bool(normalized["substitute_product_available"]),
+                )
 
     raise ValueError("Response JSON does not contain the required predicate fields")
 

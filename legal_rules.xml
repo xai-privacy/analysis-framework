@@ -33,7 +33,7 @@
   <ruleml:Rulebase key="rb-but-for-causation">
 
     <!-- ============================================ -->
-    <!-- Rule 1: Z=1 → DENIED (regardless of X)       -->
+    <!-- Rule 1: Z=1 -> DENIED (regardless of X)       -->
     <!-- A substitute product breaks the but-for chain -->
     <!-- ============================================ -->
     <lrml:LegalRule key="rule-z1-denied" type="lrml:Prescriptive">
@@ -62,7 +62,7 @@
     </lrml:LegalRule>
 
     <!-- ============================================ -->
-    <!-- Rule 2: Z=0 AND X=1 → AWARDED                -->
+    <!-- Rule 2: Z=0 AND X=1 -> AWARDED                -->
     <!-- No substitute + infringer present = but-for  -->
     <!-- ============================================ -->
     <lrml:LegalRule key="rule-z0-x1-awarded" type="lrml:Prescriptive">
@@ -98,7 +98,7 @@
     </lrml:LegalRule>
 
     <!-- ============================================ -->
-    <!-- Rule 3: Z=0 AND X=0 → DENIED                 -->
+    <!-- Rule 3: Z=0 AND X=0 -> DENIED                 -->
     <!-- No substitute, no infringer = no lost sales  -->
     <!-- ============================================ -->
     <lrml:LegalRule key="rule-z0-x0-denied" type="lrml:Prescriptive">
