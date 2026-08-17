@@ -238,3 +238,6 @@ yarn-error.log*
 
 # Model vector files
 ip_concept_vector.pt
+
+# LEET-Arg harness run outputs
+results/
