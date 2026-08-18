@@ -12,17 +12,23 @@ not listed under "Changes applied" below.
 | Upstream file | `LEET_Arg_Questions.json` |
 | Upstream commit | `599ef7a80a32422f5d5f3bd718df12e6c4042bf7` <!-- TODO: confirm this is the commit you actually pulled from; this was HEAD on 2026-08-17 --> |
 | Cleaned on | <!-- TODO: date you ran the script --> |
-| Produced by | `tools/clean_leet_arg.py` (this repo) |
+| Produced by | `tools/clean_leet_arg.py` (this repo), **plus one manual edit**, see below |
 | Verified by | `tools/validate_leet_arg.py` (this repo) |
 | Source paper | Park and Park, "When correct is not enough," https://doi.org/10.1016/j.knosys.2026.116625 |
+| sha256 of `leet_arg_clean_v1.json` | `c3607b34ba5dc669b2e10283af9bfc00ef05fec32c350e683e20d165ab3dd77d` |
 
-Reproduce with:
+The script alone does **not** reproduce the shipped file. Running
 
 ```bash
 python tools/clean_leet_arg.py \
   --input  data/leet_arg/LEET_Arg_Questions.json \
   --output data/leet_arg/leet_arg_clean_v1.json
 ```
+
+yields sha256 `ac209e84d2c92ddcee589c5a42576448c0470eba5d3af01fd49b361e1543a88a`. The shipped file is
+that output plus the manual `2022_31` fix described under "Changes applied", which was applied by
+hand downstream of the script. Anyone regenerating from scratch has to re-apply that edit or the
+result will not match the hash above. Folding it into the script is a `_v2` task.
 
 ## Contents
 
@@ -45,8 +51,10 @@ Notes for anyone consuming the file:
 
 ## Changes applied
 
-Only `statements` was modified. `original_question`, `original_rationale`, `answer`, and all
-metadata fields are byte-identical to upstream.
+`statements` was modified throughout. `original_question` was modified for exactly one record,
+`2022_31`, described below. `original_rationale`, `answer`, and all metadata fields
+(`id`, `year`, `problem_idx`, `objective`, `domain`, `category`) are byte-identical to upstream for
+all 97 records, verified field by field against `LEET_Arg_Questions.json`.
 
 **Segmentation rule.** Statements are split on the *next expected label only*. After `(a)` the
 only thing that can begin the next statement is `(b)`; after `①` only `②`. This is what prevents
@@ -66,6 +74,22 @@ Upstream had `statements: null` for this record and the text sits in an unusual 
 `MANUAL_2025_05_STATEMENTS` in the cleaning script rather than derived, so any change to this
 record has to be made in the script, not in the JSON.
 
+**Choice-marker scheme normalised in `original_question` (1 record):** `2022_31`
+
+The `<choices>` block of `2022_31` used plain `1.` through `5.` where every other record in the
+corpus uses circled numerals. The five markers were replaced with `①` through `⑤`; the diff against
+upstream is exactly those five substitutions and nothing else. This is the only edit anywhere in the
+corpus to a field other than `statements`.
+
+Two things to know about this one:
+
+- It was applied **by hand, not by `tools/clean_leet_arg.py`**. The script has no rule for it, so a
+  clean re-run reverts the record to plain numbering. See "Provenance" for the two hashes.
+- It is easy to find this change misattributed to `2025_05` in the issue thread that produced the
+  file. That attribution is wrong; `2025_05` was untouched by this fix, and its own change is the
+  manual reconstruction described above. Verified by diffing the pre- and post-fix files: `2022_31`
+  is the only record that differs between them.
+
 **Cosmetic label spacing normalised (7 records):**
 `2021_13, 2022_08, 2023_29, 2024_06, 2024_22, 2024_29, 2025_23`
 
@@ -81,9 +105,11 @@ inside its statements, which looks like a parse failure and is not one.
 ## Known limitations
 
 The linter compares each record against the dominant formatting convention, so it cannot flag a
-record that deviates from that convention without a reference. `2022_31` is the known example: it
-uses plain numbering where the rest of the corpus uses circled Unicode characters, and no
-rule-based check catches it. Anomalies of that kind still need a human read.
+record that deviates from that convention without a reference. `2022_31` was the known example: it
+used plain numbering where the rest of the corpus uses circled Unicode characters, and no
+rule-based check caught it. It was found by a human read and fixed by hand in the shipped file, but
+the underlying gap is unchanged, so anomalies of that kind still need a human read. The fix also
+lives only in the JSON, not in the cleaning script.
 
 The script asserts a total of 315 statement units at the end of the run and warns if the count
 differs. That check catches gross breakage but will not catch a statement that was split at the
