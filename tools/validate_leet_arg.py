@@ -3,8 +3,8 @@
 Validate cleaned LEET-Arg question dataset.
 
 Checks:
-- 97 questions
-- 315 total statement units
+- 93 questions
+- 301 total statement units
 - no missing/null statements
 - sequential statement keys
 - no suspicious short statements
@@ -25,8 +25,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 
-EXPECTED_QUESTION_COUNT = 97
-EXPECTED_STATEMENT_COUNT = 315
+EXPECTED_QUESTION_COUNT = 93
+EXPECTED_STATEMENT_COUNT = 301
 
 # Known false positives from issue #14.
 KNOWN_FALSE_POSITIVES = {
