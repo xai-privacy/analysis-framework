@@ -70,9 +70,16 @@ under `<choices>` rather than `<statements>`, so the script falls back to readin
 **Manually reconstructed (1 record):** `2025_05`
 
 Upstream had `statements: null` for this record and the text sits in an unusual position, before
-`<question>` rather than after `<statements>`. The three statements are hardcoded in
+`<question>` rather than after `<statements>`. Because of that, it wasn't worth extending the
+segmentation rule for a single record, so Mohammed Karim reconstructed the three statements by
+hand when `tools/clean_leet_arg.py` was first written. They're hardcoded in
 `MANUAL_2025_05_STATEMENTS` in the cleaning script rather than derived, so any change to this
 record has to be made in the script, not in the JSON.
+
+`original_question` for `2025_05` itself is untouched, byte-identical upstream text (the only
+other-field edit anywhere in the corpus is the `2022_31` fix below). On 2026-08-21 this text was
+used to fix `benchmarks/LEET_Arg_Questions_cleaned.json`'s copy of the same record, which had
+picked up duplicated statement text from whatever source that separate file was assembled from.
 
 **Choice-marker scheme normalised in `original_question` (1 record):** `2022_31`
 
