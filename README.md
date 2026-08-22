@@ -63,6 +63,8 @@ This benchmark uses text-only models. If Transformers reports `Could not import 
 pip uninstall -y torchvision
 ```
 
+If you want to clean up models in your disk since we are testing one model at a time, use the hf CLI. For listing all saved models in the cache, use `hf cache list` and `hf rm <model>` to remove any of them.
+
 ### Downloading models from Hugging Face
 
 The default model is `meta-llama/Llama-3.2-1B-Instruct`. It is gated, so first visit the [model page](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct), accept its license, and wait for access to be approved. Then download it into a local directory:
