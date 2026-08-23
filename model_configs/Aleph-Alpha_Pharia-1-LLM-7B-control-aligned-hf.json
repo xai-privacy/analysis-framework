@@ -1,0 +1,11 @@
+{
+  "model_id": "Aleph-Alpha/Pharia-1-LLM-7B-control-aligned-hf",
+  "torch_dtype": "bfloat16",
+  "trust_remote_code": true,
+  "seed": 0,
+  "generation": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "max_new_tokens": 1024
+  }
+}
