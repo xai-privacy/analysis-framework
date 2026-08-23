@@ -1,93 +1,64 @@
-# Analysis Framework
+# LEET-Arg Documentation
 
-The scripts and other artifacts in this repo are for probing a generative AI model for causal reasoning in legal contexts. For the time being, this is just a small proof-of concept for one scenario, which is a patentee claiming lost profit damages. In this scenario there are two causal considerations a model must make:
+This repository currently focuses on evaluating model responses to the LEET-Arg
+benchmark dataset. The cleaned dataset contains 93 questions and 301
+statement-level tasks from 2021 through 2025.
 
-1. There needs to be an infringing product; without it there can be no damages
-2. There must not be a non-infringing substitute product; if such exists, consumers would use that product instead of the patentee's product
+## Setup
 
-Here are the setup instructions for running an analysis of this scenario for the Llama 3.2 1B (1 Billion parameters) model. All instructions are for macOS (and the Fish shell).
-
-## 0. Preliminaries
-
-1. Create a [Hugging Face](https://huggingface.co) account.
-2. Log into Hugging Face and request access to the [Llama-3.2 1B model](https://huggingface.co/meta-llama/Llama-3.2-1B). It should take only 30 minutes or so.
-3. Create an access token on Hugging Face.
-4. Install the [Hugging Face command line tools](https://huggingface.co/docs/huggingface_hub/en/guides/cli) with:
-
-   ```bash
-   brew install hf
-   ```
-
-   Check with:
-
-   ```bash
-   hf version
-   ```
-
-   if it worked.
-
-5. Log into Hugging Face with:
-
-   ```bash
-   hf auth login
-   ```
-
-   If asked, you can add the token as git credential.
-
-6. Install Python and create a Python virtual environment (which is not necessary, but makes dependency management easier) with (assuming you have Homebrew installed):
-
-   ```bash
-   /opt/homebrew/bin/python3 -m venv .venv
-   ```
-
-   Start the virtual environment with:
-
-   ```bash
-   source .venv/bin/activate.fish
-   ```
-
-   or just `source .venv/bin/activate` if you are not using Fish. You can stop the virtual environment with `deactivate`.
-
-7. Install all dependencies with:
-
-   ```bash
-   pip3 install torch transformers accelerate pyvene transformer-lens
-   ```
-
-## 1. Audit
-
-1. Run the baseline audit of the model with:
-
-   ```bash
-   python3 run_benchmark.py
-   ```
-
-2. From the output we see that the model has problems reasoning causally in the patent damages scenario. We can look inside the hidden layers of the model to extract the mathematical concept vector, `ip_concept_vector.pt`, with:
-
-   ```bash
-   python3 probe_activations.py
-   ```
-
-## 2. Mitigation
-
-Before re-training the model, fine-tuning it, or attempting other mitigations, we can try to modify the responsible model vector on the fly with:
+Create and activate a Python virtual environment:
 
 ```bash
-python3 steer_inference.py
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-However, from the output we see that does not work. The model is still not reasoning correctly.
+Install the runtime dependencies:
 
-I can essentially see the following options for fixing a model:
+```bash
+pip install torch transformers accelerate pyvene transformer-lens pydantic
+```
 
-1. Re-training
-2. Guardrails
-3. Integrating a solver into the model architecture
+Install the Hugging Face command-line tools and authenticate:
 
-## 3. Post-intervention Verification
+```bash
+pip install -U huggingface_hub
+hf auth login
+```
 
-We can rerun the audit under 1. to verify that any permanent verification was successful.
+## Run The Benchmark
 
-## 4. Limitations
+Run all questions with the default model:
 
-One limitation I ran into is that the model refused to respond to prompts in employment scenarios, e.g., age discrimination. There are built-in safeguards that, when triggered, make the model refuse to respond to prompts. So, either we would need to find enough scenarios that a model can answer or remove the safeguards (but this latter approach is a whole research project on its own, and we may also inadvertently change the model behavior invalidating our findings as those are no longer for the unchanged model).
+```bash
+python run_benchmark.py
+```
+
+Choose a Hugging Face model and optionally restrict the run to one year:
+
+```bash
+python run_benchmark.py \
+  --model Qwen/Qwen2.5-0.5B-Instruct \
+  --year 2023
+```
+
+Use `--overwrite` to replace an existing result file. Otherwise, responses are
+appended to the model's JSON file in `slm_results/`.
+
+## Evaluate Results
+
+Evaluate saved model responses with:
+
+```bash
+python slm_results/evaluate_results.py
+```
+
+The evaluator creates `slm_results/main_results.csv`, reporting correct,
+incorrect, unparseable, and total responses for every model result file.
+
+## Validate The Dataset
+
+```bash
+python tools/validate_leet_arg.py \
+  --input benchmarks/LEET_Arg_Questions_cleaned.json
+```

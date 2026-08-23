@@ -1,25 +1,19 @@
 # Analysis Framework
 
-This repository evaluates whether language models can follow explicit legal and causal rules. It contains two related workflows:
-
-1. A runnable synthetic patent lost-profits benchmark using structured predicate extraction and deterministic rule application.
-2. The LEET-Arg benchmark dataset, which contains statement-level legal reasoning questions, expert rationales, model responses, and evaluator scores.
+This repository evaluates the LEET-Arg benchmark dataset, which contains
+statement-level legal reasoning questions, expert rationales, model responses,
+and evaluator scores.
 
 ## Repository Contents
 
 - `run_benchmark.py`: Runs the LEET-Arg questions against a Hugging Face causal language model and stores parsed responses in `slm_results/`.
-- `structured_outputs.py`: Parses predicate JSON and applies the deterministic `AWARDED`/`DENIED` rule.
 - `prompts.py`: Defines the English reasoning prompt used by the benchmark.
-- `probe_activations.py`: Extracts a model activation vector for the legacy patent benchmark.
-- `steer_inference.py`: Tests inference-time activation steering for that benchmark.
 - `model_configs/`: Per-model inference settings.
 - `benchmarks/LEET_Arg_Questions_cleaned.json`: The current cleaned LEET-Arg question set: 93 questions and 301 statement units.
 - `benchmarks/LEET_Arg_Model_Responses.json`: Responses and LLM-as-a-Judge evaluations for seven models across the LEET-Arg questions.
 - `tools/clean_leet_arg.py`: Rebuilds statements for known segmentation issues in a source dataset.
 - `tools/validate_leet_arg.py`: Validates statement structure, source consistency, punctuation, and suspicious content.
 - `docs/`: Research notes and evaluation reports.
-
-The LEET-Arg JSON files are currently dataset and analysis artifacts; `run_benchmark.py` runs the separate six-case legacy benchmark and does not execute the LEET-Arg response-generation workflow.
 
 ## Setup
 
@@ -138,19 +132,11 @@ python tools/clean_leet_arg.py \
   --output benchmarks/LEET_Arg_Questions_cleaned.json
 ```
 
-## Activation Probing and Steering
-
-The legacy patent benchmark also includes experimental activation analysis:
-
-```bash
-python probe_activations.py
-python steer_inference.py
-```
-
-These scripts use the same model and DSL options as the benchmark and are exploratory research tools, not a general-purpose training or deployment pipeline.
-
 ## Limitations
 
-The patent benchmark is small and synthetic, so passing it does not establish general legal or causal reasoning. The LEET-Arg files contain model-generated answers and evaluator judgments, which should be treated as benchmark data rather than verified legal advice. Model availability, hardware, Hugging Face permissions, and model-specific settings can affect reproducibility.
+The LEET-Arg files contain model-generated answers and evaluator judgments,
+which should be treated as benchmark data rather than verified legal advice.
+Model availability, hardware, Hugging Face permissions, and model-specific
+settings can affect reproducibility.
 
-See `docs/` for research context, model evaluations, and formal reasoning notes.
+See `docs/` for LEET-Arg research context and evaluation notes.
