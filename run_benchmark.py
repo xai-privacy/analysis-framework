@@ -46,8 +46,7 @@ def _load_model_config(model_id):
 def parse_model_response(response):
     """Extract the answer marker and retain the remaining response as rationale."""
     answer_match = re.search(
-        r"\bAnswer\s*-\s*\{?\s*([0-9]+|[A-Ea-e]|[①②③④⑤])"
-        r"(?=\s*(?:\}|[.:;,)]|$))\s*\}?\s*[.:]?\s*",
+        r"\bAnswer\s*-\s*\{?\s*(?!choice\b)([0-9]+\b|[A-Ea-e]\b|[①②③④⑤])",
         response,
         re.IGNORECASE,
     )

@@ -1,4 +1,4 @@
 model,correct_responses,incorrect_responses,unparseable_responses,total_questions
-LiquidAI_LFM2.5-1.2B-Thinking,1,5,87,93
-Qwen_Qwen2.5-0.5B-Instruct,4,17,72,93
-meta-llama_Llama-3.2-1B-Instruct,17,44,32,93
+LiquidAI_LFM2.5-1.2B-Thinking,6,10,77,93
+Qwen_Qwen2.5-0.5B-Instruct,14,29,50,93
+meta-llama_Llama-3.2-1B-Instruct,23,62,8,93
