@@ -2,13 +2,13 @@
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
 import torch
 
 from prompts import get_system_prompt
-from structured_outputs import DecisionOutput, parse_and_reason
 
 try:
     from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -20,18 +20,13 @@ except Exception as exc:  # pragma: no cover - optional dependency path
 else:
     _IMPORT_ERROR = None
 
-try:
-    from transformers import LogitsProcessorList
-except Exception:
-    LogitsProcessorList = None
-
-try:
-    from transformers import RegexLogitsProcessor
-except Exception:
-    RegexLogitsProcessor = None
-
 _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
-_XGRAMMAR_RULES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "xgrammar_rules")
+_QUESTIONS_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "benchmarks",
+    "LEET_Arg_Questions_cleaned.json",
+)
+_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slm_results")
 
 
 def _load_model_config(model_id):
@@ -48,96 +43,19 @@ def _load_model_config(model_id):
     with open(fallback_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-### Usage:
-###   python3 run_benchmark.py [--model <hf-model-id>] [--dsl <plain|odrl|legalruleml|de_jure>]
-###
-### --model : Hugging Face model id. Dense text decoder models only --
-###           MoE or multimodal models (e.g. Qwen3.5) are not supported.
-###           Examples:
-###             meta-llama/Llama-3.2-1B-Instruct  (default)
-###             Qwen/Qwen3.5-4B
-###             microsoft/Phi-4-mini-instruct
-###
-### --dsl   : Domain-specific language for the formal rules embedded in the
-###           system prompt. Choices:
-###             plain        (default) -- plain English rules (no external file)
-###             odrl                   -- ODRL policy from odrl_rules.json
-###             legalruleml            -- LegalRuleML XML from legal_rules.xml
-###             de_jure                -- De Jure structured rules from de_jure_rules.json
+def parse_model_response(response):
+    """Extract the answer marker and retain the remaining response as rationale."""
+    answer_match = re.search(
+        r"\bAnswer\s*-\s*\{?\s*([0-9]+|[A-Ea-e]|[①②③④⑤])"
+        r"(?=\s*(?:\}|[.:;,)]|$))\s*\}?\s*[.:]?\s*",
+        response,
+        re.IGNORECASE,
+    )
+    if answer_match is None:
+        return {"model_answer": None, "model_rationale": response.strip()}
 
-benchmark_repository = [
-    {
-        "id": "IP_Causation_Pair_1",
-        "ground_truth": "A: AWARDED; B: DENIED",
-        "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available.",
-        "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available."
-    },
-    {
-        "id": "IP_Causation_Pair_2",
-        "ground_truth": "A: DENIED; B: DENIED",
-        "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available.",
-        "prompt_B": "Evaluate. Infringing Product: Not Available. Third-Party Substitute: Available."
-    },
-    {
-        "id": "IP_Causation_Pair_3",
-        "ground_truth": "A: DENIED; B: AWARDED",
-        "prompt_A": "Evaluate. Infringing Product: Available. Third-Party Substitute: Available.",
-        "prompt_B": "Evaluate. Infringing Product: Available. Third-Party Substitute: Not Available."
-    },
-    {
-        "id": "IP_Causation_Pair_4",
-        "ground_truth": "A: DENIED; B: DENIED",
-        "prompt_A": "Evaluate. X=1, Z=1.",
-        "prompt_B": "Evaluate. X=0, Z=1."
-    },
-    {
-        "id": "IP_Causation_Pair_5",
-        "ground_truth": "A: DENIED; B: AWARDED",
-        "prompt_A": "Evaluate. X=1, Z=1.",
-        "prompt_B": "Evaluate. X=1, Z=0."
-    },
-    {
-        "id": "IP_Causation_Pair_6",
-        "ground_truth": "A: AWARDED; B: DENIED",
-        "prompt_A": "Evaluate. X=1, Z=0.",
-        "prompt_B": "Evaluate. X=1, Z=1."
-    }
-]
-
-def _build_predicate_grammar():
-    """Load the baked-in XGrammar grammar for predicate JSON output."""
-    grammar_path = os.path.join(_XGRAMMAR_RULES_DIR, "predicate_json.gbnf")
-    if not os.path.isfile(grammar_path):
-        return None
-    with open(grammar_path, "r", encoding="utf-8") as handle:
-        return handle.read()
-
-
-def _build_predicate_constraint(tokenizer):
-    """Return a logits processor that constrains output to a JSON object with predicate fields."""
-    grammar = _build_predicate_grammar()
-    if grammar is None:
-        if RegexLogitsProcessor is None or LogitsProcessorList is None:
-            return None
-        pattern = (
-            r'\{\s*"infringing_product_available"\s*:\s*(true|false)\s*,'
-            r'\s*"substitute_product_available"\s*:\s*(true|false)\s*\}'
-        )
-        try:
-            return RegexLogitsProcessor(regex=pattern, tokenizer=tokenizer)
-        except TypeError:
-            return None
-
-    try:
-        from xgrammar import Grammar, LogitsProcessor as XGrammarLogitsProcessor
-    except Exception:
-        return None
-
-    try:
-        compiled_grammar = Grammar.from_ebnf(grammar)
-        return XGrammarLogitsProcessor(grammar=compiled_grammar, tokenizer=tokenizer)
-    except Exception:
-        return None
+    rationale = (response[:answer_match.start()] + response[answer_match.end():]).strip()
+    return {"model_answer": answer_match.group(1).strip(), "model_rationale": rationale}
 
 
 def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
@@ -150,15 +68,7 @@ def generate_hf_response(model, tokenizer, user_content, device, system_prompt, 
     inputs = tokenizer(formatted, return_tensors="pt").to(device)
     prompt_len = inputs["input_ids"].shape[1]
 
-    logits_processor = None
-    try:
-        logits_processor = _build_predicate_constraint(tokenizer)
-    except Exception:
-        logits_processor = None
-
     generation_kwargs = dict(gen_config)
-    if logits_processor is not None and LogitsProcessorList is not None:
-        generation_kwargs["logits_processor"] = LogitsProcessorList([logits_processor])
 
     try:
         with torch.no_grad():
@@ -171,25 +81,45 @@ def generate_hf_response(model, tokenizer, user_content, device, system_prompt, 
         print(f"[Generation Error]: {exc}", file=sys.stderr)
         return json.dumps({"error": "generation_failed", "reason": str(exc)})
 
-    return tokenizer.decode(output_tokens[0][prompt_len:], skip_special_tokens=True, clean_up_tokenization_spaces=False).strip()
+    return tokenizer.decode(
+        output_tokens[0][prompt_len:],
+        skip_special_tokens=True,
+        clean_up_tokenization_spaces=False,
+    ).strip()
 
 
-def run_structured_decision(model, tokenizer, user_content, device, system_prompt, gen_config):
-    """Generate a model response and convert it into a structured decision via the DSL layer."""
-    try:
-        raw_response = generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config)
-    except Exception as exc:
-        print(f"[Prompt Execution Error]: {exc}", file=sys.stderr)
-        raw_response = json.dumps({"error": "generation_failed", "reason": str(exc)})
+def _result_path(model_id):
+    signature = re.sub(r"[^A-Za-z0-9_.-]+", "_", model_id).strip("_")
+    return os.path.join(_RESULTS_DIR, f"{signature}.json")
 
-    try:
-        decision = parse_and_reason(raw_response)
-    except Exception as exc:
-        print(f"[Structured Decision Error]: {exc}", file=sys.stderr)
-        decision = DecisionOutput(decision="DENIED", explanation=f"Parsing failed: {exc}")
-    return decision, raw_response
 
-def execution_pipeline(model_id, dsl):
+def _load_questions(year=None):
+    with open(_QUESTIONS_PATH, "r", encoding="utf-8") as handle:
+        questions = json.load(handle)
+    if year is None:
+        return questions
+    year_prefix = f"{year}_"
+    return [question for question in questions if str(question.get("id", "")).startswith(year_prefix)]
+
+
+def _load_existing_results(result_path, overwrite):
+    if overwrite or not os.path.isfile(result_path):
+        return []
+    with open(result_path, "r", encoding="utf-8") as handle:
+        results = json.load(handle)
+    if not isinstance(results, list):
+        raise ValueError(f"Expected a JSON array in {result_path}")
+    return results
+
+
+def _save_result(result_path, results):
+    os.makedirs(_RESULTS_DIR, exist_ok=True)
+    with open(result_path, "w", encoding="utf-8") as handle:
+        json.dump(results, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+
+
+def execution_pipeline(model_id, year=None, overwrite=False):
     if torch is None or AutoTokenizer is None or AutoModelForCausalLM is None:
         print("Missing runtime dependencies for Hugging Face benchmarking.", file=sys.stderr)
         print(f"Import error: {_IMPORT_ERROR}", file=sys.stderr)
@@ -198,14 +128,14 @@ def execution_pipeline(model_id, dsl):
 
     print("Starting benchmarking the model via Hugging Face ...\n")
     print(f"Model: {model_id}")
-    print(f"DSL: {dsl}")
+    print(f"Year: {year if year is not None else 'all'}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
     print(f"Target Compute Device: {device.upper()}")
 
     model_cfg = _load_model_config(model_id)
     print(f"Model config: {model_cfg}")
 
-    system_prompt = get_system_prompt(dsl)
+    system_prompt = get_system_prompt()
 
     torch.manual_seed(model_cfg.get("seed", 0))
 
@@ -249,44 +179,37 @@ def execution_pipeline(model_id, dsl):
         print("Please authenticate with Hugging Face for gated models or pass a public model id.", file=sys.stderr)
         return
 
-    for test_case in benchmark_repository:
-        print("\n" + "="*70)
-        print(f"ID: {test_case['id']}")
-        print(f"Target Ground Truth: {test_case['ground_truth']}")
-        print("="*70)
+    questions = _load_questions(year)
+    result_path = _result_path(model_id)
+    results = _load_existing_results(result_path, overwrite)
 
-        # 1. Execute Prompt A
-        print(f"\n[Prompt A]: {test_case['prompt_A']}")
+    print(f"Questions selected: {len(questions)}")
+    print(f"Results file: {result_path}")
+    for question in questions:
+        print(f"\n[{question['id']}]")
         try:
-            decision_A, response_A = run_structured_decision(model, tokenizer, test_case["prompt_A"], device, system_prompt, gen_config)
+            response = generate_hf_response(
+                model,
+                tokenizer,
+                question["original_question"],
+                device,
+                system_prompt,
+                gen_config,
+            )
         except Exception as exc:
-            print(f"[Prompt A failed]: {exc}", file=sys.stderr)
-            decision_A = DecisionOutput(decision="DENIED", explanation=f"Prompt execution failed: {exc}")
-            response_A = json.dumps({"error": "prompt_failed", "reason": str(exc)})
-        print(f"[Final Output (DSL Runtime) A]: {decision_A.to_dict()}")
-        print("[Model Output A]:")
-        print(response_A)
+            print(f"[Question failed]: {exc}", file=sys.stderr)
+            response = f"Generation failed: {exc}"
+
+        parsed = parse_model_response(response)
+        result = dict(question)
+        result.update(parsed)
+        results.append(result)
+        _save_result(result_path, results)
+        print(f"Model answer: {parsed['model_answer']}")
         sys.stdout.flush()
-
-        print("-" * 50)
-
-        # 2. Execute Prompt B
-        print(f"[Prompt B]: {test_case['prompt_B']}")
-        try:
-            decision_B, response_B = run_structured_decision(model, tokenizer, test_case["prompt_B"], device, system_prompt, gen_config)
-        except Exception as exc:
-            print(f"[Prompt B failed]: {exc}", file=sys.stderr)
-            decision_B = DecisionOutput(decision="DENIED", explanation=f"Prompt execution failed: {exc}")
-            response_B = json.dumps({"error": "prompt_failed", "reason": str(exc)})
-        print(f"[Final Output (DSL Runtime) B]: {decision_B.to_dict()}")
-        print("[Model Output B]:")
-        print(response_B)
-        sys.stdout.flush()
-
-        print("-" * 50)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the IP causal-reasoning benchmark against an HF model.")
+    parser = argparse.ArgumentParser(description="Run the LEET-Arg benchmark against an HF model.")
     parser.add_argument(
         "--model",
         default="meta-llama/Llama-3.2-1B-Instruct",
@@ -294,16 +217,15 @@ if __name__ == "__main__":
              "Examples: meta-llama/Llama-3.2-1B-Instruct (default), "
              "Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct",
     )
+    parser.add_argument("--year", help="Run only questions whose id starts with YEAR_.")
     parser.add_argument(
-        "--dsl",
-        default="plain",
-        choices=["plain", "odrl", "legalruleml", "de_jure"],
-        help="Domain-specific language for the formal rules passed to the model. "
-             "Choices: plain (default), odrl, legalruleml, or de_jure.",
+        "--overwrite",
+        action="store_true",
+        help="Clear the model result file before writing responses.",
     )
     args = parser.parse_args()
     try:
-        execution_pipeline(args.model, args.dsl)
+        execution_pipeline(args.model, args.year, args.overwrite)
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)
         sys.exit(1)

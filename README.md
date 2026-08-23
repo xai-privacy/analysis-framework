@@ -7,9 +7,9 @@ This repository evaluates whether language models can follow explicit legal and 
 
 ## Repository Contents
 
-- `run_benchmark.py`: Runs the six-case patent causation benchmark against a Hugging Face causal language model.
+- `run_benchmark.py`: Runs the LEET-Arg questions against a Hugging Face causal language model and stores parsed responses in `slm_results/`.
 - `structured_outputs.py`: Parses predicate JSON and applies the deterministic `AWARDED`/`DENIED` rule.
-- `prompts.py`: Builds prompts for the plain-English, ODRL, LegalRuleML, and De Jure rule formats.
+- `prompts.py`: Defines the English reasoning prompt used by the benchmark.
 - `probe_activations.py`: Extracts a model activation vector for the legacy patent benchmark.
 - `steer_inference.py`: Tests inference-time activation steering for that benchmark.
 - `model_configs/`: Per-model inference settings.
@@ -55,6 +55,16 @@ When prompted, paste a Hugging Face access token with permission to read models.
 
 The repository supports Linux and macOS. Use the activation command appropriate for your shell, for example `source .venv/bin/activate.fish` for Fish.
 
+#### Troubleshooting Hugging Face imports
+
+This benchmark uses text-only models. If Transformers reports `Could not import module 'LlamaConfig'` and the traceback ends with `torchvision::nms`, remove the unused incompatible vision package from the active environment:
+
+```bash
+pip uninstall -y torchvision
+```
+
+If you want to clean up models in your disk since we are testing one model at a time, use the hf CLI. For listing all saved models in the cache, use `hf cache list` and `hf rm <model>` to remove any of them.
+
 ### Downloading models from Hugging Face
 
 The default model is `meta-llama/Llama-3.2-1B-Instruct`. It is gated, so first visit the [model page](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct), accept its license, and wait for access to be approved. Then download it into a local directory:
@@ -85,36 +95,27 @@ python run_benchmark.py --model models/Llama-3.2-1B-Instruct
 
 For local directories, the model configuration lookup falls back to the default Llama settings unless a matching entry exists in `model_configs/`. Copy and adapt an existing file there if the model requires different dtype, trust, seed, or generation settings. Model downloads can be several gigabytes, so ensure sufficient disk space and use a GPU or other supported accelerator when available.
 
-## Legacy Patent Benchmark
+## LEET-Arg Benchmark
 
-Run the default six paired cases with Llama 3.2 1B Instruct:
+Run all questions with Llama 3.2 1B Instruct:
 
 ```bash
 python run_benchmark.py
 ```
 
-Select a different dense Hugging Face text-decoder model or rule representation:
+Run only questions whose IDs start with `2021_`:
 
 ```bash
-python run_benchmark.py --model microsoft/Phi-4-mini-instruct
-python run_benchmark.py --dsl odrl
-python run_benchmark.py --dsl legalruleml
-python run_benchmark.py --dsl de_jure
+python run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --year 2021
 ```
 
-Available DSL values are `plain`, `odrl`, `legalruleml`, and `de_jure`. The external rule files are `odrl_rules.json`, `legal_rules.xml`, and `de_jure_rules.json`. Model-specific generation settings are loaded from `model_configs/`; an unknown model falls back to the Llama configuration.
+Results are written to `slm_results/<model-signature>.json`. Existing results are retained and new responses are appended by default. Use `--overwrite` to clear that model's result file before running:
 
-The model must first emit JSON containing:
-
-```json
-{"infringing_product_available": true, "substitute_product_available": false}
+```bash
+python run_benchmark.py --model microsoft/Phi-4-mini-instruct --year 2021 --overwrite
 ```
 
-The repository then applies these rules:
-
-- A substitute product means the claim is `DENIED`.
-- With no substitute and an infringing product, the claim is `AWARDED`.
-- Without an infringing product, the claim is `DENIED`.
+Each stored record retains the source question and includes `model_answer` and `model_rationale`, parsed from the model's `Answer-<choice>.` response. The output terminal will not display the rationale for readibility purposes, storing it directly in the file.
 
 ## LEET-Arg Dataset
 
