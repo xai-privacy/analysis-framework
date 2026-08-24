@@ -1,0 +1,11 @@
+{
+  "model_id": "LiquidAI/LFM2.5-1.2B-Thinking",
+  "torch_dtype": "bfloat16",
+  "trust_remote_code": true,
+  "seed": 0,
+  "generation": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "max_new_tokens": 4096
+  }
+}

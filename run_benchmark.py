@@ -45,15 +45,26 @@ def _load_model_config(model_id):
 
 def parse_model_response(response):
     """Extract the answer marker and retain the remaining response as rationale."""
+    search_text = response
+    offset = 0
+    if "<think>" in response.lower():
+        close_idx = response.lower().find("</think>")
+        if close_idx == -1:
+            # Reasoning never finished, so there is no reliable final answer.
+            return {"model_answer": None, "model_rationale": response.strip()}
+        offset = close_idx + len("</think>")
+        search_text = response[offset:]
+
     answer_match = re.search(
         r"\bAnswer\s*-\s*\{?\s*(?!choice\b)([0-9]+\b|[A-Ea-e]\b|[①②③④⑤])",
-        response,
+        search_text,
         re.IGNORECASE,
     )
     if answer_match is None:
         return {"model_answer": None, "model_rationale": response.strip()}
 
-    rationale = (response[:answer_match.start()] + response[answer_match.end():]).strip()
+    start, end = offset + answer_match.start(), offset + answer_match.end()
+    rationale = (response[:start] + response[end:]).strip()
     return {"model_answer": answer_match.group(1).strip(), "model_rationale": rationale}
 
 
