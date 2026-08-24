@@ -21,15 +21,19 @@ _CIRCLED_TO_NUMBER = {symbol: str(number) for number, symbol in enumerate("â‘ â‘
 
 
 def normalize_answer(value: Any) -> Optional[str]:
-    """Return a valid answer number, or None when the value is unparseable."""
+    """Return a valid answer number, or None when the value is unparseable.
+
+    Letters such as "a"/"b"/"c" are not accepted here: in this dataset they
+    always label sub-statements referenced inside a question, never a
+    selectable choice, so a model answering with a bare letter has picked
+    the wrong vocabulary rather than given an equivalent answer.
+    """
     if value is None:
         return None
 
     answer = str(value).strip()
     if answer in _CIRCLED_TO_NUMBER:
         return _CIRCLED_TO_NUMBER[answer]
-    if len(answer) == 1 and answer.lower() in "abcde":
-        return str(ord(answer.lower()) - ord("a") + 1)
     if answer in {"1", "2", "3", "4", "5"}:
         return answer
     return None
