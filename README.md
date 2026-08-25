@@ -91,22 +91,34 @@ For local directories, the model configuration lookup falls back to the default 
 
 ## LEET-Arg Benchmark
 
+### Test setup
+
+For each benchmark question, the model receives only:
+
+1. The base system prompt defined in `prompts.py`.
+2. The individual LEET-Arg question from
+  `benchmarks/LEET_Arg_Questions_cleaned.json`.
+
+The model is not given the dataset answer, the expert rationale, other model
+responses, or demonstrations from other questions. The generated response is
+parsed for its answer and saved with the question in `slm_results/`.
+
 Run all questions with Llama 3.2 1B Instruct:
 
 ```bash
-python run_benchmark.py
+python3 run_benchmark.py
 ```
 
 Run only questions whose IDs start with `2021_`:
 
 ```bash
-python run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --year 2021
+python3 run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --year 2021
 ```
 
 Results are written to `slm_results/<model-signature>.json`. Existing results are retained and new responses are appended by default. Use `--overwrite` to clear that model's result file before running:
 
 ```bash
-python run_benchmark.py --model microsoft/Phi-4-mini-instruct --year 2021 --overwrite
+python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --year 2021 --overwrite
 ```
 
 Each stored record retains the source question and includes `model_answer` and `model_rationale`, parsed from the model's `Answer-<choice>.` response. The output terminal will not display the rationale for readibility purposes, storing it directly in the file.
@@ -130,6 +142,12 @@ The validator checks sequential statement keys, missing statements, suspiciously
 python tools/clean_leet_arg.py \
   --input path/to/LEET_Arg_Questions.json \
   --output benchmarks/LEET_Arg_Questions_cleaned.json
+```
+
+Evaluate saved model responses and create the comparison CSV:
+
+```bash
+python3 slm_results/evaluate_results.py
 ```
 
 ## Limitations
