@@ -3,6 +3,7 @@
   "torch_dtype": "bfloat16",
   "trust_remote_code": true,
   "seed": 0,
+  "reasoning": null,
   "generation": {
     "do_sample": false,
     "temperature": 0.0,

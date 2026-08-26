@@ -40,6 +40,13 @@ def _load_model_config(model_id):
             return json.load(f)
     # Fall back to Llama config as default
     fallback_path = os.path.join(_MODEL_CONFIGS_DIR, "meta-llama_Llama-3.2-1B-Instruct.json")
+    print(
+        f"[Config warning] No config found at {config_path} -- falling back to "
+        "meta-llama/Llama-3.2-1B-Instruct's settings (non-thinking, "
+        "do_sample=False, max_new_tokens=1024). Add a model_configs/"
+        f"{sanitized}.json with this model's actual recommended settings.",
+        file=sys.stderr,
+    )
     with open(fallback_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -66,6 +73,31 @@ def parse_model_response(response):
     start, end = offset + answer_match.start(), offset + answer_match.end()
     rationale = (response[:start] + response[end:]).strip()
     return {"model_answer": answer_match.group(1).strip(), "model_rationale": rationale}
+
+
+_LEADING_TAG_PATTERN = re.compile(r"^\s*(<[A-Za-z_]+>|\[[A-Za-z_]+\])")
+
+
+def detect_undeclared_reasoning_tag(response, declared_open_tag=None):
+    """Flag a paired open/close tag opening the response that isn't the model's
+    declared reasoning tag. Returns the tag string if flagged, else None.
+
+    Unpaired tags (e.g. this dataset's own <statements>/<choices> markers, which
+    never appear with a matching close form anywhere in the questions) are not
+    flagged -- only a real open+close pair at the start of generation looks like
+    reasoning-block syntax the parser should know about.
+    """
+    match = _LEADING_TAG_PATTERN.match(response)
+    if not match:
+        return None
+    opener = match.group(1)
+    name = opener[1:-1]
+    closer = f"</{name}>" if opener.startswith("<") else f"[/{name}]"
+    if closer not in response:
+        return None
+    if declared_open_tag and opener.lower() == declared_open_tag.lower():
+        return None
+    return opener
 
 
 def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
@@ -211,6 +243,18 @@ def execution_pipeline(model_id, year=None, overwrite=False):
             response = f"Generation failed: {exc}"
 
         parsed = parse_model_response(response)
+
+        declared_open_tag = (model_cfg.get("reasoning") or {}).get("open_tag")
+        flagged_tag = detect_undeclared_reasoning_tag(response, declared_open_tag)
+        if flagged_tag:
+            print(
+                f"[Reasoning-tag warning] {question['id']}: response opens with "
+                f"{flagged_tag!r}, which isn't this model's declared reasoning tag "
+                f"({declared_open_tag!r}). Check whether the config's \"reasoning\" "
+                "field needs to be added or corrected.",
+                file=sys.stderr,
+            )
+
         result = dict(question)
         result.update(parsed)
         results.append(result)

@@ -3,6 +3,7 @@
   "torch_dtype": "auto",
   "trust_remote_code": false,
   "seed": 0,
+  "reasoning": null,
   "generation": {
     "do_sample": false,
     "temperature": 0.0,
