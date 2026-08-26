@@ -118,6 +118,7 @@ def build_manifest(
     cli_args,
     revision=None,
     tokenizer=None,
+    compat_shims=None,
 ):
     """Assemble the manifest dict. Pure aside from git/HF/filesystem probing."""
     chat_template = getattr(tokenizer, "chat_template", None) if tokenizer else None
@@ -149,6 +150,9 @@ def build_manifest(
         "code": _git_state(),
         "environment": {
             "packages": _package_versions(),
+            # A shim changes what the model actually executes, so it belongs in
+            # the reproducibility record alongside the library versions.
+            "compat_shims": list(compat_shims or []),
             **_device_info(torch_module, device),
         },
         "cli": cli_args,

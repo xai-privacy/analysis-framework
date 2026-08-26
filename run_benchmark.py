@@ -10,6 +10,7 @@ from pathlib import Path
 
 import torch
 
+import compat
 import run_manifest
 from prompts import get_system_prompt
 
@@ -315,6 +316,10 @@ def _execute_run(model_id, year, overwrite, limit, ids, max_new_tokens,
     model_cfg = _load_model_config(model_id)
     print(f"Model config: {model_cfg}")
 
+    applied_shims = compat.apply_compat_shims()
+    if applied_shims:
+        print(f"Compatibility shims applied: {', '.join(applied_shims)}")
+
     system_prompt = get_system_prompt()
 
     torch.manual_seed(model_cfg.get("seed", 0))
@@ -393,6 +398,7 @@ def _execute_run(model_id, year, overwrite, limit, ids, max_new_tokens,
         cli_args=cli_args,
         revision=revision,
         tokenizer=tokenizer,
+        compat_shims=applied_shims,
     )
     manifest_path = run_manifest.write_manifest(run_id, manifest)
 
