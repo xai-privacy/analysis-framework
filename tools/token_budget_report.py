@@ -34,7 +34,22 @@ def _percentile(sorted_values, fraction):
     return sorted_values[index]
 
 
+def _latest_per_id(records):
+    """Keep the last record for each id.
+
+    Reruns append rather than replace, so a question rerun at a higher cap
+    leaves its truncated original in the file. Counting both would keep the
+    truncation rate permanently above zero and block a recommendation forever.
+    evaluate_results.py already scores last-record-wins; match it.
+    """
+    by_id = {}
+    for record in records:
+        by_id[record.get("id")] = record
+    return list(by_id.values())
+
+
 def summarize(records):
+    records = _latest_per_id(records)
     reasons = Counter()
     null_by_reason = Counter()
     eos_lengths = []
@@ -96,7 +111,7 @@ def recommend(summary, margin=1.25, granularity=64):
 def truncated_ids(records):
     return [
         record.get("id")
-        for record in records
+        for record in _latest_per_id(records)
         if record.get("stop_reason") == "length" and record.get("id")
     ]
 
