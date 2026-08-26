@@ -217,7 +217,7 @@ def _format(signature, summary, cap, why, records):
     if summary["degenerate"]:
         lines.append(
             f"  looping responses  {summary['degenerate']} of {reasons['length']} truncated "
-            "(tail repeats verbatim; more tokens will not help)"
+            "(repetitive output; more tokens will not help)"
         )
     nulls = summary["null_by_reason"]
     if sum(nulls.values()):

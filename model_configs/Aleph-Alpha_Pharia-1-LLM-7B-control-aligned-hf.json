@@ -7,6 +7,6 @@
   "generation": {
     "do_sample": false,
     "temperature": 0.0,
-    "max_new_tokens": 1024
+    "max_new_tokens": 960
   }
 }
