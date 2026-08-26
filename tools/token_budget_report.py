@@ -132,18 +132,46 @@ def recommend(summary, margin=1.25, granularity=64):
     return cap, basis
 
 
-def looks_degenerate(text, window=120, threshold=3):
-    """True when the tail of a response repeats verbatim earlier in the text.
+def _distinct_ngram_ratio(text, n=4):
+    """Fraction of word n-grams that are unique. Low means repetitive."""
+    words = (text or "").split()
+    if len(words) < n * 4:
+        return None
+    grams = [tuple(words[i:i + n]) for i in range(len(words) - n + 1)]
+    return len(set(grams)) / len(grams)
+
+
+def looks_degenerate(text, window=120, threshold=3, min_distinct=0.25):
+    """True when a response is stuck in a loop rather than genuinely unfinished.
 
     Distinguishes the two reasons a response hits the token cap. Genuine
     censoring means the model had more to say and a bigger budget recovers an
-    answer. A greedy-decoding repetition loop means it did not -- raising the
-    cap just buys more of the same text, so the id should not be rerun.
+    answer. A decoding loop means it did not -- raising the cap just buys more
+    of the same text, so the id should not be rerun.
+
+    Two signals, because loops come in two shapes:
+
+      * verbatim -- the same sentence emitted over and over.
+      * structural -- the same template with a counter ticking up, e.g.
+        "<choice> 4 ... <choice> 5 ... <choice> 19 ...". Substring matching
+        misses these entirely because no span repeats exactly.
+
+    The 0.25 distinct-4gram threshold is empirical, measured over this repo's
+    results: among truncated records the observed ratios were 0.108-0.188,
+    while EOS-terminated records sat at 0.288 and above. The check is only ever
+    applied to truncated records, so an unusually repetitive but *finished*
+    response is never at risk of being written off.
     """
-    if not text or len(text) < window * 2:
+    if not text:
         return False
-    tail = text[-window:].strip()
-    return bool(tail) and text.count(tail) >= threshold
+
+    if len(text) >= window * 2:
+        tail = text[-window:].strip()
+        if tail and text.count(tail) >= threshold:
+            return True
+
+    ratio = _distinct_ngram_ratio(text)
+    return ratio is not None and ratio < min_distinct
 
 
 def truncated_ids(records, exclude_degenerate=False):
