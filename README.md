@@ -228,4 +228,44 @@ which should be treated as benchmark data rather than verified legal advice.
 Model availability, hardware, Hugging Face permissions, and model-specific
 settings can affect reproducibility.
 
+### Answer format is scored strictly
+
+`parse_model_response` requires the literal `Answer-<choice>` marker the system
+prompt asks for, and `normalize_answer` accepts only `1`-`5` or `①`-`⑤`. A model
+that reasons well but reports its choice differently is scored as unparseable.
+This is a deliberate choice — it measures instruction-following alongside
+reasoning — but it means an unparseable count is not by itself evidence of poor
+reasoning, and the two should be reported separately.
+
+Two cases in the current results:
+
+**Pharia-1-7B** opens 61 of 93 responses with a bare digit (`5 (a), (b), (c).`)
+rather than `Answer-5`, giving it 65/93 unparseable. Accepting a leading bare
+digit would move it from 6/93 (6.5%) to 18/93 (19.4%) — still below the
+25.8% majority-class baseline (the most common gold answer, 24/93). So the
+strict parser understates Pharia by roughly 13 points without changing the
+conclusion.
+
+**LFM2.5-1.2B-Thinking** answers with a bare letter (`a`, `b`) on a substantial
+fraction of questions. Letters are rejected on purpose: in this dataset they
+label sub-statements inside a question, never a selectable choice, so a letter
+answer has picked the wrong vocabulary rather than given an equivalent answer.
+
+### Option coverage varies sharply by model
+
+Across 93 questions, Llama-3.2-1B answered `①` 60 times and Phi-4-mini answered
+`②` 46 times; neither ever chose `④`. Gold answers are distributed
+1:24 2:24 3:19 4:12 5:14, so a model that cannot reach options 4 and 5 is
+locked out of 28% of the benchmark before reasoning is considered. Pharia does
+spread across all five, so this is a per-model property rather than an artifact
+of the prompt or choice ordering.
+
+### Prompts are not byte-stable across days
+
+Llama-3.2's chat template interpolates the current date (`Today Date: 26 Aug
+2026`). Greedy decoding is therefore reproducible within a day but not across
+days for that model family. Run manifests record the chat-template hash, but
+not the rendered prompt, so this is worth pinning with `date_string=` before
+publishing numbers.
+
 See `docs/` for LEET-Arg research context and evaluation notes.
