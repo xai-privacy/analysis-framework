@@ -123,6 +123,77 @@ python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --year 2021 --ove
 
 Each stored record retains the source question and includes `model_answer` and `model_rationale`, parsed from the model's `Answer-<choice>.` response. The output terminal will not display the rationale for readibility purposes, storing it directly in the file.
 
+### Running a subset
+
+`--year` filters by ID prefix; the smallest year is 2021 with 15 questions. For
+smaller or more targeted runs:
+
+```bash
+# 10 questions, sampled round-robin across years rather than all from one year
+python3 run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --limit 10
+
+# specific questions
+python3 run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --ids 2021_02,2024_05
+
+# continue an interrupted run without appending duplicate records
+python3 run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --resume
+```
+
+Score a subset with `--present-only`, or every unrun question is counted as an
+unparseable response:
+
+```bash
+python3 slm_results/evaluate_results.py --present-only
+```
+
+### Choosing `max_new_tokens`
+
+`--max-new-tokens` overrides the model config for one run, and each record
+stores `completion_tokens` plus a `stop_reason` of `eos`, `length`, `stop`, or
+`error`. `tools/token_budget_report.py` turns that into a per-model
+recommendation:
+
+```bash
+python3 tools/token_budget_report.py
+```
+
+Because every config decodes greedily (`do_sample: false`), a response generated
+at cap N is a prefix of the same response at cap M > N, and generation stops at
+EOS regardless of the cap. So a generous budget costs no extra time for
+responses that would have finished anyway: run once at a generous cap, then read
+the recommendation. Responses that stopped on `length` are right-censored, so the
+report refuses to recommend a cap while any remain and instead names the ids to
+rerun at a higher budget.
+
+This matters most for thinking models. `parse_model_response` returns
+`model_answer: None` whenever `<think>` has no closing `</think>`, so every
+truncated response is a guaranteed unparseable — a token-budget problem that
+looks like a reasoning failure in the scores.
+
+### Run manifests
+
+Every invocation writes `runs/<utc-timestamp>_<model-signature>/` containing:
+
+- `manifest.json` — resolved Hugging Face revision SHA, chat-template hash,
+  merged generation config, system prompt hash, dataset hash and the exact
+  question IDs run, git commit and dirty flag, library versions, GPU and compute
+  capability, and aggregate token/throughput totals.
+- `console.log` — stdout and stderr, which is where the config warning and
+  reasoning-tag warnings go.
+
+Each result record carries the matching `run_id`, so any row traces back to the
+run that produced it. This matters because `--resume` and `--overwrite` let one
+result file accumulate records from several sessions at different token budgets.
+
+Pin a model version with `--revision <sha>`; the resolved SHA is recorded either
+way.
+
+### Running on Colab
+
+`notebooks/colab_ssh_bench.ipynb` opens an SSH tunnel into a Colab VM so the
+benchmark can be driven from a local terminal. Use an **L4** runtime — three of
+the four model configs request bfloat16, and T4 is `sm_75` with no bf16 support.
+
 ## LEET-Arg Dataset
 
 The cleaned question file contains 93 questions from 2021-2025 and 301 statement-level tasks. The response file contains entries for the same question IDs and includes these models:
