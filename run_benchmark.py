@@ -143,6 +143,10 @@ def generate_hf_response_verbose(model, tokenizer, user_content, device, system_
     # Llama-3.2 collapses the response to a bare "Answer-N" with no rationale --
     # the models look tersely uncooperative rather than misconfigured.
     inputs = tokenizer(formatted, return_tensors="pt", add_special_tokens=False).to(device)
+    # Some tokenizers (Pharia's among them) emit token_type_ids, which causal LM
+    # forwards reject outright: "The following `model_kwargs` are not used by
+    # the model". It carries no meaning for a decoder-only model, so drop it.
+    inputs.pop("token_type_ids", None)
     prompt_len = int(inputs["input_ids"].shape[1])
 
     generation_kwargs = dict(gen_config)
