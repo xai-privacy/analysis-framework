@@ -250,12 +250,33 @@ class Tee:
         self._handle.flush()
         return len(data)
 
+    def writelines(self, lines):
+        for line in lines:
+            self.write(line)
+
     def flush(self):
         self._stream.flush()
         self._handle.flush()
 
+    def close(self):
+        """Flush only. Interpreter shutdown and logging both call close() on
+        whatever sys.stdout happens to be; actually closing the real stdout
+        here would break the process on the way out."""
+        self.flush()
+
     def isatty(self):
         return self._stream.isatty()
+
+    def fileno(self):
+        return self._stream.fileno()
+
+    @property
+    def encoding(self):
+        return getattr(self._stream, "encoding", "utf-8")
+
+    @property
+    def errors(self):
+        return getattr(self._stream, "errors", None)
 
 
 def open_console_log(run_id):
