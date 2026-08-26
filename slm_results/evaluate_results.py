@@ -44,13 +44,17 @@ def load_json(path: Path) -> Any:
         return json.load(handle)
 
 
-def evaluate_model(result_path: Path, answer_key: Dict[str, str]) -> Dict[str, Any]:
+def evaluate_model(
+    result_path: Path, answer_key: Dict[str, str], present_only: bool = False
+) -> Dict[str, Any]:
     records = load_json(result_path)
     if not isinstance(records, list):
         raise ValueError(f"Expected a JSON array in {result_path}")
 
     # Keep the last record if a benchmark was resumed and an ID appears twice.
     answers_by_id = {record.get("id"): record.get("model_answer") for record in records}
+    if present_only:
+        answer_key = {qid: ans for qid, ans in answer_key.items() if qid in answers_by_id}
     correct = 0
     unparseable = 0
 
@@ -75,6 +79,12 @@ def main() -> None:
     parser.add_argument("--questions", type=Path, default=DEFAULT_QUESTIONS)
     parser.add_argument("--results-dir", type=Path, default=DEFAULT_RESULTS_DIR)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--present-only",
+        action="store_true",
+        help="Score only the ids each model actually answered. Use for subset runs, "
+             "which otherwise report every unrun question as unparseable.",
+    )
     args = parser.parse_args()
 
     questions = load_json(args.questions)
@@ -85,7 +95,7 @@ def main() -> None:
         raise ValueError("The dataset contains an invalid answer key")
 
     result_paths = sorted(args.results_dir.glob("*.json"))
-    summaries = [evaluate_model(path, answer_key) for path in result_paths]
+    summaries = [evaluate_model(path, answer_key, args.present_only) for path in result_paths]
     with args.output.open("w", encoding="utf-8") as handle:
         writer = csv.DictWriter(
             handle,

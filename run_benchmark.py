@@ -4,10 +4,13 @@ import json
 import os
 import re
 import sys
+import time
+from collections import OrderedDict
 from pathlib import Path
 
 import torch
 
+import run_manifest
 from prompts import get_system_prompt
 
 try:
@@ -100,34 +103,108 @@ def detect_undeclared_reasoning_tag(response, declared_open_tag=None):
     return opener
 
 
-def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
-    """Generates a text completion natively using the proper chat template sequence."""
+def _eos_token_ids(model, tokenizer):
+    """Every token id that legitimately terminates generation.
+
+    Both sources are needed: chat models such as Llama-3.2 declare a list on
+    generation_config, and the token that actually fires (<|eot_id|>) is not the
+    tokenizer's eos_token_id. Checking only the tokenizer mislabels almost every
+    response as an unrecognised stop.
+    """
+    ids = set()
+    sources = (
+        getattr(tokenizer, "eos_token_id", None),
+        getattr(getattr(model, "generation_config", None), "eos_token_id", None),
+    )
+    for source in sources:
+        if source is None:
+            continue
+        if isinstance(source, (list, tuple, set)):
+            ids.update(int(i) for i in source if i is not None)
+        else:
+            ids.add(int(source))
+    return ids
+
+
+def generate_hf_response_verbose(model, tokenizer, user_content, device, system_prompt, gen_config):
+    """Same generation as generate_hf_response, plus per-call telemetry.
+
+    Returns a dict of text, prompt_tokens, completion_tokens, stop_reason,
+    gen_seconds and max_new_tokens. return_dict_in_generate only changes the
+    return container, never the tokens that get sampled.
+    """
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_content}
     ]
     formatted = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     inputs = tokenizer(formatted, return_tensors="pt").to(device)
-    prompt_len = inputs["input_ids"].shape[1]
+    prompt_len = int(inputs["input_ids"].shape[1])
 
     generation_kwargs = dict(gen_config)
+    max_new_tokens = generation_kwargs.get("max_new_tokens")
+    generation_kwargs["return_dict_in_generate"] = True
+
+    if device == "cuda":
+        torch.cuda.synchronize()
+    started = time.perf_counter()
 
     try:
         with torch.no_grad():
-            output_tokens = model.generate(
+            outputs = model.generate(
                 **inputs,
                 pad_token_id=tokenizer.eos_token_id,
                 **generation_kwargs
             )
     except Exception as exc:
         print(f"[Generation Error]: {exc}", file=sys.stderr)
-        return json.dumps({"error": "generation_failed", "reason": str(exc)})
+        return {
+            "text": json.dumps({"error": "generation_failed", "reason": str(exc)}),
+            "prompt_tokens": prompt_len,
+            "completion_tokens": 0,
+            "stop_reason": "error",
+            "gen_seconds": round(time.perf_counter() - started, 3),
+            "max_new_tokens": max_new_tokens,
+        }
 
-    return tokenizer.decode(
-        output_tokens[0][prompt_len:],
+    if device == "cuda":
+        torch.cuda.synchronize()
+    gen_seconds = time.perf_counter() - started
+
+    sequences = getattr(outputs, "sequences", outputs)
+    generated = sequences[0][prompt_len:]
+    completion_tokens = int(generated.shape[0])
+
+    # Order matters: generate() appends EOS and then stops, so a response ending
+    # on EOS at exactly the cap satisfies both tests. Check the token first.
+    if completion_tokens and int(generated[-1]) in _eos_token_ids(model, tokenizer):
+        stop_reason = "eos"
+    elif max_new_tokens is not None and completion_tokens >= int(max_new_tokens):
+        stop_reason = "length"
+    else:
+        stop_reason = "stop"
+
+    text = tokenizer.decode(
+        generated,
         skip_special_tokens=True,
         clean_up_tokenization_spaces=False,
     ).strip()
+
+    return {
+        "text": text,
+        "prompt_tokens": prompt_len,
+        "completion_tokens": completion_tokens,
+        "stop_reason": stop_reason,
+        "gen_seconds": round(gen_seconds, 3),
+        "max_new_tokens": max_new_tokens,
+    }
+
+
+def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
+    """Generates a text completion natively using the proper chat template sequence."""
+    return generate_hf_response_verbose(
+        model, tokenizer, user_content, device, system_prompt, gen_config
+    )["text"]
 
 
 def _result_path(model_id):
@@ -142,6 +219,45 @@ def _load_questions(year=None):
         return questions
     year_prefix = f"{year}_"
     return [question for question in questions if str(question.get("id", "")).startswith(year_prefix)]
+
+
+def _select_questions(questions, limit=None, ids=None):
+    """Subset the question list.
+
+    --ids is an explicit ordered list; --limit takes a round-robin sample across
+    year buckets so a small subset spans the dataset instead of being all 2021.
+    """
+    if ids:
+        wanted = [qid.strip() for qid in ids.split(",") if qid.strip()]
+        by_id = {question["id"]: question for question in questions}
+        missing = [qid for qid in wanted if qid not in by_id]
+        if missing:
+            raise ValueError(f"Unknown question ids: {', '.join(missing)}")
+        return [by_id[qid] for qid in wanted]
+
+    if limit is None or limit >= len(questions):
+        return questions
+
+    buckets = OrderedDict()
+    for question in questions:
+        year = str(question.get("year") or str(question["id"]).split("_")[0])
+        buckets.setdefault(year, []).append(question)
+
+    chosen = set()
+    depth = 0
+    while len(chosen) < limit:
+        progressed = False
+        for bucket in buckets.values():
+            if depth < len(bucket):
+                chosen.add(bucket[depth]["id"])
+                progressed = True
+                if len(chosen) == limit:
+                    break
+        if not progressed:
+            break
+        depth += 1
+
+    return [question for question in questions if question["id"] in chosen]
 
 
 def _load_existing_results(result_path, overwrite):
@@ -161,14 +277,28 @@ def _save_result(result_path, results):
         handle.write("\n")
 
 
-def execution_pipeline(model_id, year=None, overwrite=False):
+def execution_pipeline(model_id, year=None, overwrite=False, limit=None, ids=None,
+                       max_new_tokens=None, resume=False, revision=None, cli_args=None):
     if torch is None or AutoTokenizer is None or AutoModelForCausalLM is None:
         print("Missing runtime dependencies for Hugging Face benchmarking.", file=sys.stderr)
         print(f"Import error: {_IMPORT_ERROR}", file=sys.stderr)
         print("Install torch and transformers in the active Python environment, then rerun the benchmark.", file=sys.stderr)
         return
 
+    run_id = run_manifest.new_run_id(model_id)
+    _, restore_console = run_manifest.open_console_log(run_id)
+    try:
+        _execute_run(model_id, year, overwrite, limit, ids, max_new_tokens,
+                     resume, revision, cli_args, run_id)
+    finally:
+        restore_console()
+
+
+def _execute_run(model_id, year, overwrite, limit, ids, max_new_tokens,
+                 resume, revision, cli_args, run_id):
+    """The run itself. Split out so console teeing wraps every exit path."""
     print("Starting benchmarking the model via Hugging Face ...\n")
+    print(f"Run id: {run_id}")
     print(f"Model: {model_id}")
     print(f"Year: {year if year is not None else 'all'}")
     device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
@@ -188,6 +318,13 @@ def execution_pipeline(model_id, year=None, overwrite=False):
     gen_config = dict(model_cfg.get("generation", {}))
     gen_config.setdefault("max_new_tokens", 64)
 
+    if max_new_tokens is not None:
+        print(
+            f"[Override] max_new_tokens={max_new_tokens} "
+            f"(config said {gen_config['max_new_tokens']})"
+        )
+        gen_config["max_new_tokens"] = int(max_new_tokens)
+
     temperature = gen_config.get("temperature", 0.0)
     if temperature is None:
         temperature = 0.0
@@ -204,8 +341,9 @@ def execution_pipeline(model_id, year=None, overwrite=False):
     gen_config["temperature"] = temperature
 
     try:
-        tokenizer = AutoTokenizer.from_pretrained(model_id)
-        model_kwargs = {"trust_remote_code": trust_remote_code}
+        load_kwargs = {"revision": revision} if revision else {}
+        tokenizer = AutoTokenizer.from_pretrained(model_id, **load_kwargs)
+        model_kwargs = {"trust_remote_code": trust_remote_code, **load_kwargs}
         if torch_dtype != "auto":
             model_kwargs["dtype"] = torch_dtype
         else:
@@ -221,46 +359,99 @@ def execution_pipeline(model_id, year=None, overwrite=False):
         print("Please authenticate with Hugging Face for gated models or pass a public model id.", file=sys.stderr)
         return
 
-    questions = _load_questions(year)
+    if ids and year:
+        print("[Note] --ids given; ignoring --year.", file=sys.stderr)
+    questions = _select_questions(_load_questions(None if ids else year), limit=limit, ids=ids)
+
     result_path = _result_path(model_id)
     results = _load_existing_results(result_path, overwrite)
 
+    if resume:
+        done_ids = {record.get("id") for record in results}
+        before = len(questions)
+        questions = [question for question in questions if question["id"] not in done_ids]
+        print(f"[Resume] skipping {before - len(questions)} of {before} ids already in {result_path}")
+
+    manifest = run_manifest.build_manifest(
+        run_id=run_id,
+        model_id=model_id,
+        model_cfg=model_cfg,
+        gen_config=gen_config,
+        system_prompt=system_prompt,
+        questions=questions,
+        device=device,
+        torch_module=torch,
+        questions_path=_QUESTIONS_PATH,
+        cli_args=cli_args,
+        revision=revision,
+        tokenizer=tokenizer,
+    )
+    manifest_path = run_manifest.write_manifest(run_id, manifest)
+
     print(f"Questions selected: {len(questions)}")
     print(f"Results file: {result_path}")
-    for question in questions:
-        print(f"\n[{question['id']}]")
-        try:
-            response = generate_hf_response(
-                model,
-                tokenizer,
-                question["original_question"],
-                device,
-                system_prompt,
-                gen_config,
-            )
-        except Exception as exc:
-            print(f"[Question failed]: {exc}", file=sys.stderr)
-            response = f"Generation failed: {exc}"
+    print(f"Run manifest: {manifest_path}")
 
-        parsed = parse_model_response(response)
+    results_for_run = []
+    try:
+        for question in questions:
+            print(f"\n[{question['id']}]")
+            try:
+                telemetry = generate_hf_response_verbose(
+                    model,
+                    tokenizer,
+                    question["original_question"],
+                    device,
+                    system_prompt,
+                    gen_config,
+                )
+            except Exception as exc:
+                print(f"[Question failed]: {exc}", file=sys.stderr)
+                telemetry = {
+                    "text": f"Generation failed: {exc}",
+                    "prompt_tokens": None,
+                    "completion_tokens": None,
+                    "stop_reason": "error",
+                    "gen_seconds": None,
+                    "max_new_tokens": gen_config.get("max_new_tokens"),
+                }
+            response = telemetry["text"]
 
-        declared_open_tag = (model_cfg.get("reasoning") or {}).get("open_tag")
-        flagged_tag = detect_undeclared_reasoning_tag(response, declared_open_tag)
-        if flagged_tag:
+            parsed = parse_model_response(response)
+
+            declared_open_tag = (model_cfg.get("reasoning") or {}).get("open_tag")
+            flagged_tag = detect_undeclared_reasoning_tag(response, declared_open_tag)
+            if flagged_tag:
+                print(
+                    f"[Reasoning-tag warning] {question['id']}: response opens with "
+                    f"{flagged_tag!r}, which isn't this model's declared reasoning tag "
+                    f"({declared_open_tag!r}). Check whether the config's \"reasoning\" "
+                    "field needs to be added or corrected.",
+                    file=sys.stderr,
+                )
+
+            result = dict(question)
+            result.update(parsed)
+            result["raw_response"] = response
+            result["run_id"] = run_id
+            for key in ("prompt_tokens", "completion_tokens", "stop_reason",
+                        "gen_seconds", "max_new_tokens"):
+                result[key] = telemetry[key]
+
+            results.append(result)
+            results_for_run.append(result)
+            _save_result(result_path, results)
             print(
-                f"[Reasoning-tag warning] {question['id']}: response opens with "
-                f"{flagged_tag!r}, which isn't this model's declared reasoning tag "
-                f"({declared_open_tag!r}). Check whether the config's \"reasoning\" "
-                "field needs to be added or corrected.",
-                file=sys.stderr,
+                f"Model answer: {parsed['model_answer']}  "
+                f"[{telemetry['completion_tokens']} tok / {telemetry['stop_reason']} / "
+                f"{telemetry['gen_seconds']}s]"
             )
-
-        result = dict(question)
-        result.update(parsed)
-        results.append(result)
-        _save_result(result_path, results)
-        print(f"Model answer: {parsed['model_answer']}")
-        sys.stdout.flush()
+            sys.stdout.flush()
+    finally:
+        # Runs get killed by Colab timeouts; a manifest for the questions that
+        # did finish is more useful than none.
+        run_manifest.finalize(run_id, manifest, results_for_run)
+        run_manifest.append_index(manifest)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the LEET-Arg benchmark against an HF model.")
@@ -277,9 +468,44 @@ if __name__ == "__main__":
         action="store_true",
         help="Clear the model result file before writing responses.",
     )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        help="Run only N questions, sampled round-robin across years.",
+    )
+    parser.add_argument(
+        "--ids",
+        help="Comma-separated question ids, e.g. 2021_02,2024_05. Overrides --year and --limit.",
+    )
+    parser.add_argument(
+        "--max-new-tokens",
+        type=int,
+        dest="max_new_tokens",
+        help="Override the model config's generation.max_new_tokens for this run.",
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Skip ids already present in the result file instead of appending duplicates.",
+    )
+    parser.add_argument(
+        "--revision",
+        help="Pin the HF model revision (branch, tag, or commit SHA). "
+             "Recorded in the run manifest either way.",
+    )
     args = parser.parse_args()
     try:
-        execution_pipeline(args.model, args.year, args.overwrite)
+        execution_pipeline(
+            args.model,
+            args.year,
+            args.overwrite,
+            limit=args.limit,
+            ids=args.ids,
+            max_new_tokens=args.max_new_tokens,
+            resume=args.resume,
+            revision=args.revision,
+            cli_args=vars(args),
+        )
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)
         sys.exit(1)
