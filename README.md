@@ -246,19 +246,31 @@ digit would move it from 6/93 (6.5%) to 18/93 (19.4%) — still below the
 strict parser understates Pharia by roughly 13 points without changing the
 conclusion.
 
-**LFM2.5-1.2B-Thinking** answers with a bare letter (`a`, `b`) on a substantial
-fraction of questions. Letters are rejected on purpose: in this dataset they
-label sub-statements inside a question, never a selectable choice, so a letter
-answer has picked the wrong vocabulary rather than given an equivalent answer.
+**LFM2.5-1.2B-Thinking** answers with a bare letter (`a`, `b`, `c`, `e`) on 51 of
+93 questions, which is 55% and the bulk of its 57 unparseable. Letters are
+rejected on purpose: in this dataset they label sub-statements inside a
+question, never a selectable choice, so a letter answer has picked the wrong
+vocabulary rather than given an equivalent answer. Notably none of the 57 are
+truncations — at an 8192-token budget the model finished every single response.
 
 ### Option coverage varies sharply by model
 
-Across 93 questions, Llama-3.2-1B answered `①` 60 times and Phi-4-mini answered
-`②` 46 times; neither ever chose `④`. Gold answers are distributed
-1:24 2:24 3:19 4:12 5:14, so a model that cannot reach options 4 and 5 is
-locked out of 28% of the benchmark before reasoning is considered. Pharia does
-spread across all five, so this is a per-model property rather than an artifact
-of the prompt or choice ordering.
+Gold answers are distributed 1:24 2:24 3:19 4:12 5:14, but no model comes close
+to matching that spread. Counting only parseable answers:
+
+| model | 1 | 2 | 3 | 4 | 5 | letters | none |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Llama-3.2-1B | 60 | 4 | 8 | 0 | 6 | 10 | 5 |
+| Phi-4-mini | 28 | 46 | 17 | 0 | 0 | 0 | 2 |
+| Pharia-1-7B | 2 | 1 | 21 | 1 | 3 | 0 | 65 |
+| LFM2.5-Thinking | 13 | 12 | 5 | 6 | 0 | 51 | 6 |
+
+Llama collapses onto option 1 (65% of all questions) and Phi onto option 2.
+Neither ever selects option 4, and Phi never selects 4 or 5 — together 28% of
+the gold answers. The models pile onto different options, so this is a
+per-model bias rather than an artifact of the prompt or choice ordering, but
+the practical effect is the same: accuracy is bounded well below what the
+rationales might suggest.
 
 ### Prompts are not byte-stable across days
 
