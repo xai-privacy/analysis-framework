@@ -6,9 +6,16 @@ Answers one question: what max_new_tokens does each model actually need?
 Records that stopped on "length" are right-censored -- all we learn from them is
 that the model wanted at least the cap, never how much more. Percentiles are
 therefore computed over EOS-terminated records only, and a recommended cap is
-emitted only when the truncation rate is zero. When it isn't, the honest answer
-is "raise the cap and rerun the truncated ids", not a percentile of the subset
-that happened to finish.
+withheld while any recoverable truncation remains. The honest answer there is
+"raise the cap and rerun those ids", not a percentile of the subset that
+happened to finish.
+
+Not every truncation is recoverable, though. A greedy-decoding repetition loop
+also hits the cap, and no budget ends it -- looks_degenerate() separates the two
+by checking whether the tail of a response repeats verbatim earlier in the same
+text. Loops are excluded from the rerun list and do not block a recommendation,
+because what they need is a repetition penalty or a stopping criterion, not more
+tokens.
 
 The null-answer split matters for thinking models specifically: parse_model_response
 returns model_answer=None whenever <think> has no closing </think>, so for those
@@ -57,6 +64,7 @@ def summarize(records):
     seconds = 0.0
     tokens_timed = 0
     untelemetered = 0
+    degenerate = 0
 
     for record in records:
         reason = record.get("stop_reason")
@@ -73,9 +81,13 @@ def summarize(records):
             null_by_reason[reason] += 1
         if reason == "eos":
             eos_lengths.append(int(record["completion_tokens"]))
+        elif reason == "length" and looks_degenerate(record.get("raw_response")):
+            degenerate += 1
 
     eos_lengths.sort()
     scored = sum(reasons.values())
+    # Only non-degenerate truncations are recoverable by raising the cap.
+    recoverable = reasons["length"] - degenerate
     return {
         "n": len(records),
         "untelemetered": untelemetered,
@@ -83,6 +95,8 @@ def summarize(records):
         "reasons": reasons,
         "null_by_reason": null_by_reason,
         "caps": sorted(caps),
+        "degenerate": degenerate,
+        "recoverable_truncations": recoverable,
         "trunc_rate": (reasons["length"] / scored) if scored else None,
         "p50": _percentile(eos_lengths, 0.50),
         "p90": _percentile(eos_lengths, 0.90),
@@ -97,22 +111,59 @@ def recommend(summary, margin=1.25, granularity=64):
     """Return (cap, explanation). cap is None when the data can't support one."""
     if summary["max"] is None:
         return None, "no EOS-terminated records to measure"
-    if summary["trunc_rate"]:
+    if summary["recoverable_truncations"]:
         largest = max(summary["caps"]) if summary["caps"] else None
         return None, (
-            f"CENSORED: {summary['trunc_rate']:.0%} truncated at cap {largest}. "
-            f"Rerun the truncated ids at >= {2 * largest if largest else '?'} "
+            f"CENSORED: {summary['recoverable_truncations']} truncated at cap {largest}. "
+            f"Rerun those ids at >= {2 * largest if largest else '?'} "
             "before trusting any recommendation."
         )
+
     cap = int(math.ceil(summary["max"] * margin / granularity) * granularity)
-    return cap, f"max EOS length {summary['max']} x {margin} margin, rounded up to {granularity}"
+    basis = f"max EOS length {summary['max']} x {margin} margin, rounded up to {granularity}"
+    if summary["degenerate"]:
+        # Degenerate runs never terminate, so they cannot inform a budget. The
+        # cap is sound for the responses that do finish; the loops need a
+        # repetition penalty or a stopping criterion, not more tokens.
+        basis += (
+            f"; {summary['degenerate']} looping response(s) excluded "
+            "(raising the cap will not help them)"
+        )
+    return cap, basis
 
 
-def truncated_ids(records):
+def looks_degenerate(text, window=120, threshold=3):
+    """True when the tail of a response repeats verbatim earlier in the text.
+
+    Distinguishes the two reasons a response hits the token cap. Genuine
+    censoring means the model had more to say and a bigger budget recovers an
+    answer. A greedy-decoding repetition loop means it did not -- raising the
+    cap just buys more of the same text, so the id should not be rerun.
+    """
+    if not text or len(text) < window * 2:
+        return False
+    tail = text[-window:].strip()
+    return bool(tail) and text.count(tail) >= threshold
+
+
+def truncated_ids(records, exclude_degenerate=False):
+    out = []
+    for record in _latest_per_id(records):
+        if record.get("stop_reason") != "length" or not record.get("id"):
+            continue
+        if exclude_degenerate and looks_degenerate(record.get("raw_response")):
+            continue
+        out.append(record["id"])
+    return out
+
+
+def degenerate_ids(records):
     return [
-        record.get("id")
+        record["id"]
         for record in _latest_per_id(records)
-        if record.get("stop_reason") == "length" and record.get("id")
+        if record.get("stop_reason") == "length"
+        and record.get("id")
+        and looks_degenerate(record.get("raw_response"))
     ]
 
 
@@ -135,6 +186,11 @@ def _format(signature, summary, cap, why, records):
     if summary["trunc_rate"] is not None:
         caps = ", ".join(str(c) for c in summary["caps"]) or "unknown"
         lines.append(f"  truncation rate    {summary['trunc_rate']:.1%}   (cap {caps})")
+    if summary["degenerate"]:
+        lines.append(
+            f"  looping responses  {summary['degenerate']} of {reasons['length']} truncated "
+            "(tail repeats verbatim; more tokens will not help)"
+        )
     nulls = summary["null_by_reason"]
     if sum(nulls.values()):
         detail = "  ".join(
@@ -153,7 +209,7 @@ def _format(signature, summary, cap, why, records):
     if cap is not None:
         lines.append(f"                     ({why})")
     else:
-        ids = truncated_ids(records)
+        ids = truncated_ids(records, exclude_degenerate=True)
         if ids:
             preview = ",".join(ids[:8]) + ("..." if len(ids) > 8 else "")
             lines.append(f"                     --ids {preview}")
@@ -186,7 +242,8 @@ def main():
             "null_by_stop_reason": dict(summary["null_by_reason"]),
             "recommended_max_new_tokens": cap,
             "recommendation_basis": why,
-            "truncated_ids": truncated_ids(records),
+            "truncated_ids": truncated_ids(records, exclude_degenerate=True),
+            "degenerate_ids": degenerate_ids(records),
         }
         blocks.append(_format(signature, summary, cap, why, records))
 
