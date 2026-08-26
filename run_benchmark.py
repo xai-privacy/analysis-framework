@@ -138,7 +138,11 @@ def generate_hf_response_verbose(model, tokenizer, user_content, device, system_
         {"role": "user", "content": user_content}
     ]
     formatted = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = tokenizer(formatted, return_tensors="pt").to(device)
+    # add_special_tokens=False because the chat template already emitted BOS.
+    # Re-tokenizing without this prepends a second <|begin_of_text|>, which for
+    # Llama-3.2 collapses the response to a bare "Answer-N" with no rationale --
+    # the models look tersely uncooperative rather than misconfigured.
+    inputs = tokenizer(formatted, return_tensors="pt", add_special_tokens=False).to(device)
     prompt_len = int(inputs["input_ids"].shape[1])
 
     generation_kwargs = dict(gen_config)
