@@ -1,4 +1,3 @@
-# File: run_benchmark.py
 import argparse
 import json
 import os
@@ -20,6 +19,13 @@ except Exception as exc:  # pragma: no cover - optional dependency path
 else:
     _IMPORT_ERROR = None
 
+try:
+    from huggingface_hub import hf_hub_download
+    from huggingface_hub.utils import EntryNotFoundError
+except Exception:  # pragma: no cover - optional dependency path
+    hf_hub_download = None
+    EntryNotFoundError = Exception
+
 _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
@@ -27,21 +33,182 @@ _QUESTIONS_PATH = os.path.join(
     "LEET_Arg_Questions_cleaned.json",
 )
 _RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slm_results")
+_FALLBACK_CONFIG_NAME = "meta-llama_Llama-3.2-1B-Instruct.json"
+
+
+def _fetch_config_from_hf(model_id):
+    """Attempt to build a model config from the HF Hub's config.json /
+    generation_config.json. Decoding is forced to greedy (temperature=0,
+    do_sample=False) regardless of what the repo specifies. Also inspects
+    the model's chat template -- checking both tokenizer_config.json's
+    embedded "chat_template" field and a standalone chat_template.jinja
+    file, since repos use either convention -- for a <think>...</think>
+    pattern, and if found, populates a "reasoning" block so
+    detect_undeclared_reasoning_tag() doesn't flag it as unexpected. Returns
+    None on any failure (missing files, network error, huggingface_hub
+    unavailable) so the caller can fall back."""
+    if hf_hub_download is None:
+        print(
+            "[Config warning] huggingface_hub is not available; cannot auto-fetch config.",
+            file=sys.stderr,
+        )
+        return None
+
+    cfg = {
+        "model_id": model_id,
+        "torch_dtype": "float16",
+        "trust_remote_code": False,
+        "seed": 0,
+        "generation": {"do_sample": False, "temperature": 0.0, "max_new_tokens": 1024},
+    }
+
+    fetched_anything = False
+
+    try:
+        path = hf_hub_download(model_id, "config.json")
+        with open(path, "r", encoding="utf-8") as f:
+            model_cfg = json.load(f)
+        fetched_anything = True
+
+        dtype = model_cfg.get("torch_dtype")
+        if dtype in ("float16", "bfloat16"):
+            cfg["torch_dtype"] = dtype
+        elif dtype is not None:
+            cfg["torch_dtype"] = "auto"
+
+        if "auto_map" in model_cfg:
+            cfg["trust_remote_code"] = True
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(f"[Config warning] Failed to fetch config.json for {model_id}: {exc}", file=sys.stderr)
+        return None
+
+    try:
+        path = hf_hub_download(model_id, "generation_config.json")
+        with open(path, "r", encoding="utf-8") as f:
+            gen_cfg = json.load(f)
+        fetched_anything = True
+
+        # Only length controls are taken from the repo; sampling behavior
+        # is forced below regardless of what this file specifies.
+        if "max_new_tokens" in gen_cfg:
+            cfg["generation"]["max_new_tokens"] = gen_cfg["max_new_tokens"]
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(
+            f"[Config warning] Failed to fetch generation_config.json for {model_id}: {exc}",
+            file=sys.stderr,
+        )
+        return None
+
+    # Forced, non-negotiable: greedy decoding for auto-fetched configs.
+    cfg["generation"]["do_sample"] = False
+    cfg["generation"]["temperature"] = 0.0
+
+    # Heuristic: if the model's chat template references <think>...</think>,
+    # it's likely a "thinking" model that wraps reasoning in that tag. This
+    # only *adds* a reasoning block when detected; absence of a match means
+    # no "reasoning" key is set, same as before.
+    #
+    # The template can live in either of two places depending on the repo:
+    #   - embedded in tokenizer_config.json's "chat_template" field, or
+    #   - a standalone chat_template.jinja file (e.g. LiquidAI/LFM2.5-*),
+    #     which newer `transformers`/Hub conventions increasingly use instead
+    #     of embedding it inline.
+    # Check both; a hit on either is enough.
+    chat_template = ""
+
+    try:
+        path = hf_hub_download(model_id, "tokenizer_config.json")
+        with open(path, "r", encoding="utf-8") as f:
+            tokenizer_cfg = json.load(f)
+        fetched_anything = True
+
+        template_field = tokenizer_cfg.get("chat_template", "")
+        if isinstance(template_field, list):
+            # Some repos store multiple named templates as a list of dicts.
+            template_field = " ".join(
+                str(entry.get("template", "")) for entry in template_field if isinstance(entry, dict)
+            )
+        chat_template += str(template_field)
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(
+            f"[Config warning] Failed to inspect tokenizer_config.json for {model_id}: {exc}",
+            file=sys.stderr,
+        )
+        # Non-fatal: reasoning-tag detection is best-effort, doesn't block the fetch.
+
+    try:
+        path = hf_hub_download(model_id, "chat_template.jinja")
+        with open(path, "r", encoding="utf-8") as f:
+            chat_template += f.read()
+        fetched_anything = True
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(
+            f"[Config warning] Failed to fetch chat_template.jinja for {model_id}: {exc}",
+            file=sys.stderr,
+        )
+        # Non-fatal, same reasoning as above.
+
+    if "<think>" in chat_template and "</think>" in chat_template:
+        cfg["reasoning"] = {"open_tag": "<think>", "close_tag": "</think>"}
+
+    if not fetched_anything:
+        print(
+            f"[Config warning] No config.json or generation_config.json found on the Hub for {model_id}.",
+            file=sys.stderr,
+        )
+        return None
+
+    return cfg
 
 
 def _load_model_config(model_id):
-    """Load model-specific config from model_configs/<sanitized_model_id>.json.
-    Returns a dict with keys: torch_dtype, trust_remote_code, seed, generation.
-    Falls back to the Llama config if no model-specific config file exists."""
+    """Resolve a model config with a three-tier strategy:
+    1. Local model_configs/<sanitized_model_id>.json, if present.
+    2. Auto-fetched from the HF Hub (config.json / generation_config.json),
+       with decoding forced to greedy (do_sample=False, temperature=0).
+       A successful fetch is cached to disk so later runs skip the fetch.
+    3. Fall back to the Llama default config, with an explicit warning.
+    """
     sanitized = model_id.replace("/", "_")
     config_path = os.path.join(_MODEL_CONFIGS_DIR, f"{sanitized}.json")
+
     if os.path.isfile(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
             return json.load(f)
-    # Fall back to Llama config as default
-    fallback_path = os.path.join(_MODEL_CONFIGS_DIR, "meta-llama_Llama-3.2-1B-Instruct.json")
+
     print(
-        f"[Config warning] No config found at {config_path} -- falling back to "
+        f"[Config warning] No config found at {config_path} -- attempting to fetch "
+        f"{model_id}'s config from the Hugging Face Hub...",
+        file=sys.stderr,
+    )
+    cfg = _fetch_config_from_hf(model_id)
+    if cfg is not None:
+        try:
+            os.makedirs(_MODEL_CONFIGS_DIR, exist_ok=True)
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(cfg, f, ensure_ascii=False, indent=2)
+                f.write("\n")
+            print(
+                f"[Config] Auto-fetched config for {model_id} saved to {config_path} "
+                "(do_sample=False, temperature=0.0 forced).",
+                file=sys.stderr,
+            )
+        except Exception as exc:
+            print(f"[Config warning] Fetched config but failed to cache it: {exc}", file=sys.stderr)
+        return cfg
+
+    # Fall back to Llama config as default
+    fallback_path = os.path.join(_MODEL_CONFIGS_DIR, _FALLBACK_CONFIG_NAME)
+    print(
+        f"[Config warning] Could not fetch a config for {model_id} from the Hub -- falling back to "
         "meta-llama/Llama-3.2-1B-Instruct's settings (non-thinking, "
         "do_sample=False, max_new_tokens=1024). Add a model_configs/"
         f"{sanitized}.json with this model's actual recommended settings.",
@@ -49,6 +216,7 @@ def _load_model_config(model_id):
     )
     with open(fallback_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def parse_model_response(response):
     """Extract the answer marker and retain the remaining response as rationale."""
