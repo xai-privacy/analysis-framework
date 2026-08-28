@@ -1,0 +1,6 @@
+{
+  "provider": "openai",
+  "max_output_tokens": 3000,
+  "reasoning_effort": null,
+  "sleep_seconds": 0.2
+}
