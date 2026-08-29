@@ -1,0 +1,6 @@
+model,rows,api_errors,empty,parse_success,parse_success_rate,correct_first,accuracy_first,correct_last,accuracy_last,total_input_tokens,total_output_tokens,mean_chars
+claude-opus-4-20250514,10,10,10,0,0.0,0,0.0,0,0.0,0.0,0.0,0.0
+claude-opus-4-5-20251101,10,0,0,10,1.0,9,0.9,9,0.9,5671.0,7541.0,3369.0
+claude-opus-4-6,10,0,0,10,1.0,9,0.9,9,0.9,5681.0,9532.0,4312.0
+claude-sonnet-4-20250514,10,10,10,0,0.0,0,0.0,0,0.0,0.0,0.0,0.0
+claude-sonnet-4-6,10,0,0,10,1.0,9,0.9,9,0.9,5681.0,8690.0,3784.4
