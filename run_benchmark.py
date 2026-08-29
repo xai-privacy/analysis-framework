@@ -1,4 +1,3 @@
-# File: run_benchmark.py
 import argparse
 import json
 import os
@@ -20,6 +19,13 @@ except Exception as exc:  # pragma: no cover - optional dependency path
 else:
     _IMPORT_ERROR = None
 
+try:
+    from huggingface_hub import hf_hub_download
+    from huggingface_hub.utils import EntryNotFoundError
+except Exception:  # pragma: no cover - optional dependency path
+    hf_hub_download = None
+    EntryNotFoundError = Exception
+
 _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
@@ -27,35 +33,404 @@ _QUESTIONS_PATH = os.path.join(
     "LEET_Arg_Questions_cleaned.json",
 )
 _RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slm_results")
+_FALLBACK_CONFIG_NAME = "meta-llama_Llama-3.2-1B-Instruct.json"
+
+# Tag families used by reasoning models to delimit their thinking block, in the
+# two delimiter styles that appear on issue #18's model list: angle brackets
+# (<think> for DeepSeek-R1-Distill, LiquidAI, Phi-4-reasoning-plus) and square
+# brackets ([THINK] for the Ministral-3 Reasoning models). Kept as a name
+# alternation because the close form is mechanically derived from the open one.
+_REASONING_TAG_NAMES = ("think", "thought", "reasoning", "analysis")
+_REASONING_OPEN_PATTERN = re.compile(
+    r"<(?P<angle>" + "|".join(_REASONING_TAG_NAMES) + r")>"
+    r"|\[(?P<bracket>" + "|".join(_REASONING_TAG_NAMES) + r")\]",
+    re.IGNORECASE,
+)
+
+# max_new_tokens is a caller-side runtime parameter, not a property of the
+# checkpoint, so no HF repo publishes it (absent from generation_config.json in
+# all 8 models checked). Any value here is a placeholder for a first
+# characterization run, never an answer.
+#
+# Deliberately generous rather than typical. A cap that truncates tells you
+# nothing except that it truncated, and for a thinking model a response cut
+# before its closing tag has no parseable answer at all, so the run reads as a
+# reasoning failure instead of a budget problem. 8192 is what LFM2.5-Thinking
+# needed to finish all 93 questions on eos. Non-thinking models stop well short
+# of it and pay nothing for the headroom. Narrow it afterwards from measured
+# completion lengths; stop_reason shows whether the headroom was used.
+_PROVISIONAL_MAX_NEW_TOKENS = 8192
+
+
+def _config_file_resolver(model_id):
+    """Return a callable that maps a config filename to a readable local path.
+
+    Two sources, one interface. A local directory (as produced by
+    `hf download --local-dir`) already contains every file this function wants,
+    so it is read straight off disk -- no network, no auth, and it works for
+    gated models the Hub would refuse. Anything else is treated as a Hub repo
+    id. Both raise EntryNotFoundError for a missing file so callers can use one
+    except clause.
+    """
+    if os.path.isdir(model_id):
+        def resolve(filename):
+            path = os.path.join(model_id, filename)
+            if not os.path.isfile(path):
+                raise EntryNotFoundError(f"{filename} not present in {model_id}")
+            return path
+        return resolve
+    return lambda filename: hf_hub_download(model_id, filename)
+
+
+def _describe_fetch_failure(model_id, exc):
+    """Turn a huggingface_hub exception into a message that names the actual
+    cause. Every failure mode below otherwise surfaces as the same opaque HTTP
+    error, 401 without a token and 404 with one, so a gated repo, a nonexistent
+    repo and a mistyped local path are indistinguishable. The 401 in particular
+    sends you looking for a token problem that may not exist."""
+    name = type(exc).__name__
+    if name == "HFValidationError":
+        return (
+            f"{model_id!r} is not a valid Hub repo id. If it is meant to be a local "
+            "directory, check the path exists -- local directories are read directly "
+            "and never fetched."
+        )
+    if name in ("GatedRepoError", "RepositoryNotFoundError"):
+        token_hint = ""
+        if _hf_token() is None:
+            token_hint = (
+                " No Hugging Face token was found, so gated repos will always fail here; "
+                "run `hf auth login` or set HF_TOKEN."
+            )
+        path_hint = ""
+        if os.sep in model_id or "/" in model_id:
+            path_hint = (
+                f" If {model_id!r} was meant to be a local directory, it does not exist "
+                "relative to the current working directory -- check the path."
+            )
+        return (
+            f"{model_id!r} could not be read from the Hub -- it is gated, private, or "
+            f"does not exist.{token_hint}{path_hint}"
+        )
+    if name in ("LocalEntryNotFoundError", "OfflineModeIsEnabled"):
+        return f"No network access while fetching {model_id!r}, and it is not in the local cache."
+    return f"Failed to fetch config for {model_id!r}: {name}: {exc}"
+
+
+def _hf_token():
+    """Best-effort lookup of a configured HF token (env var or `hf auth login`
+    credentials file). Returns None when huggingface_hub is unavailable."""
+    try:
+        from huggingface_hub import get_token
+    except Exception:
+        return os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    try:
+        return get_token()
+    except Exception:
+        return None
+
+
+def _detect_reasoning_tags(resolve):
+    """Look for a reasoning-block tag pair declared in the tokenizer's files.
+
+    Two independent sources, unioned, because neither alone is sufficient:
+    the chat template (DeepSeek-R1 and Granite have the tags only there) and
+    added_tokens_decoder (LiquidAI, Qwen3 and SmolLM3 register them as added
+    tokens). The template itself lives in either tokenizer_config.json's
+    "chat_template" field or a standalone chat_template.jinja -- LiquidAI uses
+    only the latter, so both are checked.
+
+    This is best-effort and cannot be made complete. Phi-4-mini-reasoning
+    declares nothing anywhere and emits <think> as learned behavior; Magistral
+    keeps [THINK] in tekken.json with no template file at all. Those are caught
+    at runtime by detect_undeclared_reasoning_tag(), not here. Returns a
+    (open_tag, close_tag) pair or None.
+    """
+    haystacks = []
+
+    try:
+        with open(resolve("tokenizer_config.json"), "r", encoding="utf-8") as f:
+            tokenizer_cfg = json.load(f)
+    except EntryNotFoundError:
+        tokenizer_cfg = {}
+    except Exception as exc:
+        # Non-fatal: tag detection is best-effort and must not block the fetch.
+        print(f"[Config warning] Could not read tokenizer_config.json: {exc}", file=sys.stderr)
+        tokenizer_cfg = {}
+
+    template_field = tokenizer_cfg.get("chat_template", "")
+    if isinstance(template_field, list):
+        # Some repos store multiple named templates as a list of dicts.
+        template_field = " ".join(
+            str(entry.get("template", "")) for entry in template_field if isinstance(entry, dict)
+        )
+    haystacks.append(str(template_field))
+
+    added = tokenizer_cfg.get("added_tokens_decoder")
+    if isinstance(added, dict):
+        haystacks.extend(
+            str(entry.get("content", ""))
+            for entry in added.values()
+            if isinstance(entry, dict)
+        )
+
+    try:
+        with open(resolve("chat_template.jinja"), "r", encoding="utf-8") as f:
+            haystacks.append(f.read())
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(f"[Config warning] Could not read chat_template.jinja: {exc}", file=sys.stderr)
+
+    combined = "\n".join(haystacks)
+    for match in _REASONING_OPEN_PATTERN.finditer(combined):
+        # Case is taken from the match, not normalized: Mistral writes [THINK]
+        # in caps and the tag must be reproduced exactly to match generated text.
+        name = match.group("angle")
+        open_tag, close_tag = (f"<{name}>", f"</{name}>") if name else (
+            f"[{match.group('bracket')}]", f"[/{match.group('bracket')}]")
+        if close_tag.lower() in combined.lower():
+            return open_tag, close_tag
+    return None
+
+
+def _fetch_config_from_hf(model_id):
+    """Build a model config from a checkpoint's own config.json and
+    generation_config.json, read either from a local directory or the HF Hub.
+
+    Two rules govern what lands in the result. Values the source actually states
+    (dtype, auto_map, reasoning tags) are taken from it. Values the source is
+    silent about -- max_new_tokens above all -- are marked provisional in
+    "_provisional" so _load_model_config() keeps warning about them instead of
+    presenting a placeholder as a finished config. Decoding is forced to greedy
+    regardless of what the repo specifies.
+
+    Returns None on failure so the caller can fall back.
+    """
+    is_local = os.path.isdir(model_id)
+    if hf_hub_download is None and not is_local:
+        print(
+            "[Config warning] huggingface_hub is not available; cannot auto-fetch config.",
+            file=sys.stderr,
+        )
+        return None
+
+    resolve = _config_file_resolver(model_id)
+
+    cfg = {
+        "model_id": model_id,
+        "torch_dtype": "float16",
+        "trust_remote_code": False,
+        "seed": 0,
+        "generation": {
+            "do_sample": False,
+            "temperature": 0.0,
+            "max_new_tokens": _PROVISIONAL_MAX_NEW_TOKENS,
+        },
+    }
+    provisional = ["max_new_tokens"]
+
+    # Only the two real config files count as evidence that this checkpoint was
+    # actually resolved. The tokenizer files are inspected for reasoning tags
+    # further down and must not, on their own, make an all-defaults config look
+    # like a successful fetch.
+    fetched_anything = False
+
+    try:
+        with open(resolve("config.json"), "r", encoding="utf-8") as f:
+            model_cfg = json.load(f)
+        fetched_anything = True
+
+        # config.json's key was renamed torch_dtype -> dtype in transformers 4.56.
+        dtype = model_cfg.get("torch_dtype") or model_cfg.get("dtype")
+        if dtype in ("float16", "bfloat16"):
+            cfg["torch_dtype"] = dtype
+        elif dtype is not None:
+            cfg["torch_dtype"] = "auto"
+        # Upstream dtype is what the weights were saved in, not necessarily what
+        # runs well here -- bfloat16 is poorly supported on MPS, which is why the
+        # committed Llama config pins float16 against the Hub's bfloat16.
+        provisional.append("torch_dtype")
+
+        if "auto_map" in model_cfg:
+            cfg["trust_remote_code"] = True
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(f"[Config warning] {_describe_fetch_failure(model_id, exc)}", file=sys.stderr)
+        return None
+
+    try:
+        with open(resolve("generation_config.json"), "r", encoding="utf-8") as f:
+            gen_cfg = json.load(f)
+        fetched_anything = True
+
+        # Only length controls are taken from the repo; sampling behavior is
+        # forced below. In practice max_new_tokens is never present -- kept for
+        # the rare repo that does publish one, which then stops being a guess.
+        if "max_new_tokens" in gen_cfg:
+            cfg["generation"]["max_new_tokens"] = gen_cfg["max_new_tokens"]
+            provisional.remove("max_new_tokens")
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(f"[Config warning] {_describe_fetch_failure(model_id, exc)}", file=sys.stderr)
+        return None
+
+    if not fetched_anything:
+        print(
+            f"[Config warning] Neither config.json nor generation_config.json found for {model_id}.",
+            file=sys.stderr,
+        )
+        return None
+
+    # Forced, non-negotiable: greedy decoding for auto-fetched configs.
+    cfg["generation"]["do_sample"] = False
+    cfg["generation"]["temperature"] = 0.0
+
+    tags = _detect_reasoning_tags(resolve)
+    cfg["reasoning"] = {"open_tag": tags[0], "close_tag": tags[1]} if tags else None
+
+    cfg["_provisional"] = provisional
+    return cfg
+
+
+def _warn_provisional(model_id, cfg, config_path):
+    """Warn, on every load, about fields no source could supply. Deliberately
+    not silenced by the write to model_configs/: the whole failure mode this
+    guards against is a placeholder becoming permanent because it got cached
+    once and never questioned again."""
+    provisional = cfg.get("_provisional")
+    if not provisional:
+        return
+    if "max_new_tokens" in provisional:
+        cap = cfg.get("generation", {}).get("max_new_tokens")
+        print(
+            f"[Config warning] {model_id}: max_new_tokens={cap} is a placeholder, not a "
+            "measured value -- no HF repo publishes this field. It is set high on purpose "
+            "so a first run is not truncated. Narrow it from that run's completion lengths "
+            "and stop_reason counts.",
+            file=sys.stderr,
+        )
+    other = [f for f in provisional if f != "max_new_tokens"]
+    if other:
+        print(
+            f"[Config warning] {model_id}: {', '.join(other)} taken from the checkpoint's own "
+            "metadata, which may not match what runs well on this machine.",
+            file=sys.stderr,
+        )
+    print(
+        f'[Config] Remove "_provisional" from {config_path} once these are confirmed.',
+        file=sys.stderr,
+    )
 
 
 def _load_model_config(model_id):
-    """Load model-specific config from model_configs/<sanitized_model_id>.json.
-    Returns a dict with keys: torch_dtype, trust_remote_code, seed, generation.
-    Falls back to the Llama config if no model-specific config file exists."""
-    sanitized = model_id.replace("/", "_")
+    """Resolve a model config with a three-tier strategy:
+    1. Local model_configs/<sanitized_model_id>.json, if present.
+    2. Auto-derived from the checkpoint's own files -- read from a local
+       directory when --model points at one, otherwise fetched from the Hub --
+       with decoding forced to greedy. Cached to disk so later runs skip it,
+       but any provisional field keeps warning until a human confirms it.
+    3. Fall back to the Llama default config, with an explicit warning.
+    """
+    sanitized = model_id.replace("/", "_").strip("._")
     config_path = os.path.join(_MODEL_CONFIGS_DIR, f"{sanitized}.json")
+
     if os.path.isfile(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            cfg = json.load(f)
+        _warn_provisional(model_id, cfg, config_path)
+        return cfg
+
+    source = "local directory" if os.path.isdir(model_id) else "the Hugging Face Hub"
+    print(
+        f"[Config warning] No config found at {config_path} -- deriving {model_id}'s "
+        f"config from {source}...",
+        file=sys.stderr,
+    )
+    cfg = _fetch_config_from_hf(model_id)
+    if cfg is not None:
+        try:
+            os.makedirs(_MODEL_CONFIGS_DIR, exist_ok=True)
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(cfg, f, ensure_ascii=False, indent=2)
+                f.write("\n")
+            print(
+                f"[Config] Auto-derived config for {model_id} saved to {config_path} "
+                "(do_sample=False, temperature=0.0 forced).",
+                file=sys.stderr,
+            )
+        except Exception as exc:
+            print(f"[Config warning] Derived config but failed to cache it: {exc}", file=sys.stderr)
+        _warn_provisional(model_id, cfg, config_path)
+        return cfg
+
     # Fall back to Llama config as default
-    fallback_path = os.path.join(_MODEL_CONFIGS_DIR, "meta-llama_Llama-3.2-1B-Instruct.json")
+    fallback_path = os.path.join(_MODEL_CONFIGS_DIR, _FALLBACK_CONFIG_NAME)
     with open(fallback_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        fallback = json.load(f)
+    print(
+        f"[Config warning] Could not derive a config for {model_id} -- falling back to "
+        "meta-llama/Llama-3.2-1B-Instruct's settings (non-thinking, "
+        f"{fallback.get('torch_dtype')}, do_sample=False, "
+        f"max_new_tokens={fallback.get('generation', {}).get('max_new_tokens')}). These are "
+        "another model's values and are almost certainly wrong here. Add a "
+        f"model_configs/{sanitized}.json with this model's actual settings before trusting "
+        "any results from this run.",
+        file=sys.stderr,
+    )
+    return fallback
+
 
 def parse_model_response(response):
     """Extract the answer marker and retain the remaining response as rationale."""
+    search_text = response
+    offset = 0
+    if "<think>" in response.lower():
+        close_idx = response.lower().find("</think>")
+        if close_idx == -1:
+            # Reasoning never finished, so there is no reliable final answer.
+            return {"model_answer": None, "model_rationale": response.strip()}
+        offset = close_idx + len("</think>")
+        search_text = response[offset:]
+
     answer_match = re.search(
-        r"\bAnswer\s*-\s*\{?\s*([0-9]+|[A-Ea-e]|[①②③④⑤])"
-        r"(?=\s*(?:\}|[.:;,)]|$))\s*\}?\s*[.:]?\s*",
-        response,
+        r"\bAnswer\s*-\s*\{?\s*(?!choice\b)([0-9]+\b|[A-Ea-e]\b|[①②③④⑤])",
+        search_text,
         re.IGNORECASE,
     )
     if answer_match is None:
         return {"model_answer": None, "model_rationale": response.strip()}
 
-    rationale = (response[:answer_match.start()] + response[answer_match.end():]).strip()
+    start, end = offset + answer_match.start(), offset + answer_match.end()
+    rationale = (response[:start] + response[end:]).strip()
     return {"model_answer": answer_match.group(1).strip(), "model_rationale": rationale}
+
+
+_LEADING_TAG_PATTERN = re.compile(r"^\s*(<[A-Za-z_]+>|\[[A-Za-z_]+\])")
+
+
+def detect_undeclared_reasoning_tag(response, declared_open_tag=None):
+    """Flag a paired open/close tag opening the response that isn't the model's
+    declared reasoning tag. Returns the tag string if flagged, else None.
+
+    Unpaired tags (e.g. this dataset's own <statements>/<choices> markers, which
+    never appear with a matching close form anywhere in the questions) are not
+    flagged -- only a real open+close pair at the start of generation looks like
+    reasoning-block syntax the parser should know about.
+    """
+    match = _LEADING_TAG_PATTERN.match(response)
+    if not match:
+        return None
+    opener = match.group(1)
+    name = opener[1:-1]
+    closer = f"</{name}>" if opener.startswith("<") else f"[/{name}]"
+    if closer not in response:
+        return None
+    if declared_open_tag and opener.lower() == declared_open_tag.lower():
+        return None
+    return opener
 
 
 def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
@@ -201,6 +576,18 @@ def execution_pipeline(model_id, year=None, overwrite=False):
             response = f"Generation failed: {exc}"
 
         parsed = parse_model_response(response)
+
+        declared_open_tag = (model_cfg.get("reasoning") or {}).get("open_tag")
+        flagged_tag = detect_undeclared_reasoning_tag(response, declared_open_tag)
+        if flagged_tag:
+            print(
+                f"[Reasoning-tag warning] {question['id']}: response opens with "
+                f"{flagged_tag!r}, which isn't this model's declared reasoning tag "
+                f"({declared_open_tag!r}). Check whether the config's \"reasoning\" "
+                "field needs to be added or corrected.",
+                file=sys.stderr,
+            )
+
         result = dict(question)
         result.update(parsed)
         results.append(result)
