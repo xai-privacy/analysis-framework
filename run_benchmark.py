@@ -84,9 +84,10 @@ def _config_file_resolver(model_id):
 
 def _describe_fetch_failure(model_id, exc):
     """Turn a huggingface_hub exception into a message that names the actual
-    cause. Every failure mode below surfaces as a bare 401 otherwise -- a gated
-    repo, a nonexistent repo, and a mistyped local path are indistinguishable,
-    and the 401 sends you looking for a token problem that may not exist."""
+    cause. Every failure mode below otherwise surfaces as the same opaque HTTP
+    error, 401 without a token and 404 with one, so a gated repo, a nonexistent
+    repo and a mistyped local path are indistinguishable. The 401 in particular
+    sends you looking for a token problem that may not exist."""
     name = type(exc).__name__
     if name == "HFValidationError":
         return (
