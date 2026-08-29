@@ -1,0 +1,4 @@
+model,model_returned,questions,correct_first,acc_first,correct_last,acc_last,parse_successes,empty_responses,api_errors,total_tokens,output_tokens,reasoning_tokens,avg_response_chars
+gpt-4.1,gpt-4.1-2025-04-14,10,4,0.4,5,0.5,10,0,0,7830,2579,0,1228.9
+gpt-4.1-mini,gpt-4.1-mini-2025-04-14,10,4,0.4,4,0.4,10,0,0,8320,3069,0,1504.3
+o4-mini,o4-mini-2025-04-16,10,5,0.5,5,0.5,9,1,0,19994,14753,13184,578.4

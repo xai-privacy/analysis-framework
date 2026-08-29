@@ -1,0 +1,406 @@
+[
+  {
+    "id": "2021_02",
+    "year": "2021",
+    "problem_idx": "2",
+    "objective": "This question assesses the ability to infer the logical premises of each argument and the conclusions that follow from it.",
+    "domain": "Norms",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "<Debate> Country X’s \"Criminal Act\" prohibits the production and distribution of obscene materials, while the \"Copyright Act\" protects creative works expressing human thoughts or emotions as copyrighted works for the enhancement and development of culture and related industries. There is debate about whether obscene materials should be protected as copyrighted works under the \"Copyright Act\".Alice: The \"Copyright Act\" only requires creativity as a condition for a work, and does not demand morality. In order to encourage creation and promote cultural diversity, the recognition of a work should be value-neutral.Bob: While the \"Criminal Act\" prohibits the production and distribution of obscene materials, protecting the resulting obscene materials as copyrighted works effectively grants rights to those with \"dirty hands\" who have committed illegal acts, and recognizes property value and protection for the fruits of illegal conduct, which should not be realized as property rights. This contradicts the principles of legal unity and fairness.Charlie: Clearly socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works, but for other types of obscene materials, recognizing them as works can help minimize the infringement on freedom of expression and property rights caused by regulation of obscene materials. <question> Which of the following <statements> correctly analyzes the <debate> above?<statements> (a) Alice presupposes that creativity cannot be acknowledged for obscene forms of expression.(b) Bob does not regard murals painted in legally prohibited locations or works that incite the public in violation of the National Security Act as objects of protection under the Copyright Act.(c) Charlie presupposes that even within the same era and region, the legal evaluation of obscenity may vary depending on the purpose, method, and audience of distribution. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Alice presupposes that creativity cannot be acknowledged for obscene forms of expression.",
+      "statement_2": "(b) Bob does not regard murals painted in legally prohibited locations or works that incite the public in violation of the National Security Act as objects of protection under the Copyright Act.",
+      "statement_3": "(c) Charlie presupposes that even within the same era and region, the legal evaluation of obscenity may vary depending on the purpose, method, and audience of distribution."
+    },
+    "original_rationale": "Alice, Bob, and Charlie are debating whether obscene materials should be protected as copyrighted works under the \"Copyright Act\". Alice argues that value neutrality is necessary in determining whether something is a copyrighted work and presents \"creativity\" as the sole criterion, believing that obscene materials can be included as copyrighted works. In contrast, Bob emphasizes the unity and fairness of the law and includes \"legality\" as a requirement for copyrighted works, thereby asserting that obscene materials cannot be recognized as works. Meanwhile, Charlie suggests a compromised stance that obscene materials should be differentiated in copyright protection based on the standard of \"social harmfulness\". <choices> Explanation: (a) Alice’s position is to exclude moral standards such as obscenity from the concept or determination criteria of a work and to use creativity as the determining criterion. This presupposes that creativity can indeed be acknowledged for expressions such as obscene materials, where morality is called into question. Thus, (a) is not a correct analysis.(b) Bob’s position, based on the \"dirty hands\" theory and the principles of legal unity and fairness, sees legality as an essential element of the concept of a work. Therefore, according to Bob, murals painted in legally prohibited places or works that incite the public in violation of the National Security Act, due to their illegality, cannot be regarded as copyrighted works under the Copyright Act. (b) is a correct analysis.(c) Charlie takes a compromised stance, seeking to differentiate the protection of copyrighted works by classifying obscene materials according to the criterion of social harmfulness. In this context, the legal evaluation he refers to is that of \"authorship\", not \"obscenity\", and is affected by social harmfulness. Thus, the assertion that legal evaluation of obscenity changes depending on purpose, method, or audience is not necessarily a presupposition of Charlie’s argument. Even if the legal evaluation of obscenity does not change according to such factors, Charlie’s argument still stands. Therefore, (c) is not a correct analysis.Only (b) is the correct analysis among the <choices>, so the answer is ②.",
+    "model_rationale": "Answer-④\n\nRationale  \n1. Statement (a) is false. Alice in fact maintains that even obscene expressions may qualify as “creative works” under the Copyright Act—she presupposes that creativity should be acknowledged regardless of morality, not denied.  \n2. Statement (b) is correct. Bob’s objection to granting copyright protection to obscene materials on grounds that they are the fruits of illegal conduct reflects a general principle: works produced in violation of prohibitory laws (e.g. illegal murals or seditious tracts) likewise should not be protected.  \n3. Statement (c) is correct. Charlie distinguishes among types of obscenity—depending on content, purpose, method, and audience—implying that legal judgments about obscenity can vary even within the same era and jurisdiction.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:22:29.218022+00:00",
+    "response_id": "resp_0f2db3d52b65e5be006a921835b29c87d0807957e1fa0d0545",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 460,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1017,
+      "output_tokens_details": {
+        "reasoning_tokens": 832
+      },
+      "total_tokens": 1477
+    },
+    "error": null
+  },
+  {
+    "id": "2021_03",
+    "year": "2021",
+    "problem_idx": "3",
+    "objective": "This question assesses the ability to understand the advantages and disadvantages of two operational methods related to bankruptcy systems by comparing them.",
+    "domain": "Norms",
+    "category": "Argument Analysis",
+    "answer": "3",
+    "original_question": "Country X and Country Y operate a system where bankruptcy can be declared by the court upon the application of either the creditor or the debtor. Country X: If an individual cannot repay borrowed money, they may declare bankruptcy, and all assets they possess at the time of bankruptcy are distributed to the creditors. Any remaining debts are fully discharged. The court grants debt discharge except in cases where the debtor maliciously fails to pay despite having the ability to do so. A person who has been discharged through bankruptcy faces no restrictions on the freedoms and rights they enjoy as a citizen in daily life.Country Y: If an individual cannot repay borrowed money, they may declare bankruptcy, and all assets possessed at the time of bankruptcy are distributed to the creditors. However, unless the creditor agrees, debts to that creditor are not discharged. Creditors may exercise their rights without restriction over assets acquired by the debtor after bankruptcy until their full debt is repaid. The bankrupt individual is detained for a certain period, loses the right to vote until the debts are paid in full, and the bankruptcy record is made public. <question> Which of the following is NOT a correct analysis of the above passage? <choices> ① Someone who is concerned that creditors will continue to urge bankrupt debtors to repay their debts and that related lawsuits will never cease would support Country X's system. ② Someone who believes that individuals are rational beings who make and are responsible for their own decisions, and that the state has no need to help those who have recklessly overspent, would oppose Country X's system. ③ Someone who worries that creditors may use bankruptcy filings as a means of threat in order to collect their claims ahead of other creditors would support Country Y's system. ④ Someone who fears that individuals at risk of bankruptcy will keep taking on more debt to repay existing debt, thereby perpetuating creditor–debtor relationships, would oppose Country Y's system. ⑤ Someone who is concerned that making creditor–debtor relationships after bankruptcy subject to the will of the creditor would cause social confusion, such as the emergence of fictitious creditors, would oppose Country Y's system.",
+    "statements": {
+      "statement_1": "① Someone who is concerned that creditors will continue to urge bankrupt debtors to repay their debts and that related lawsuits will never cease would support Country X's system.",
+      "statement_2": "② Someone who believes that individuals are rational beings who make and are responsible for their own decisions, and that the state has no need to help those who have recklessly overspent, would oppose Country X's system.",
+      "statement_3": "③ Someone who worries that creditors may use bankruptcy filings as a means of threat in order to collect their claims ahead of other creditors would support Country Y's system.",
+      "statement_4": "④ Someone who fears that individuals at risk of bankruptcy will keep taking on more debt to repay existing debt, thereby perpetuating creditor–debtor relationships, would oppose Country Y's system.",
+      "statement_5": "⑤ Someone who is concerned that making creditor–debtor relationships after bankruptcy subject to the will of the creditor would cause social confusion, such as the emergence of fictitious creditors, would oppose Country Y's system."
+    },
+    "original_rationale": "Country X's system is the institutionalization of the principle of bankruptcy discharge, which releases the bankrupt debtor from liability for unpaid debts. Country Y, on the other hand, does not employ the principle of bankruptcy discharge. While Country Y maintains the principle that freely entered contracts between parties must be observed even in the bankruptcy system, Country X, in contrast, seeks to give a new opportunity to debtors through bankruptcy. Correct Answer Explanation: ③ Country Y allows for restrictions on the rights of a debtor who has been declared bankrupt, such as detention and the deprivation of voting rights. As such, a creditor could devise a plan to use bankruptcy as a means of psychological pressure to collect payment before other creditors. In trying to avoid bankruptcy, the debtor may prioritize repaying that creditor over others or even take on new debt just to repay that creditor. Therefore, someone with such concerns would not support Country Y's system. Thus, ③ is an incorrect analysis. Incorrect Answer Explanations: ① Under Country X’s system, the creditor–debtor relationship is extinguished through bankruptcy, and related lawsuits will no longer occur. Therefore, a person concerned about ongoing lawsuits would support Country X's system. ① is a correct analysis.② Since Country X's system forgives all remaining debt upon bankruptcy, it can be criticized for granting benefits to debtors who irresponsibly increased their debts beyond their means. ② is a correct analysis.④ Country Y's system involves using the debtor’s assets at the time of bankruptcy to pay part of the debt, but continuously restricts the debtor’s rights until the full debt is paid off, forcing them to keep repaying the debt. As a result, debtors would try to avoid bankruptcy without the benefit of discharge and may continue to take out more loans as a means of debt rollover. Therefore, someone concerned about this would not support Country Y's system. ④ is a correct analysis.⑤ Because Country Y's system does not provide for a universal debt discharge, there is the risk that fictitious creditors, colluding with the debtor, will fraudulently claim rights and receive a distribution of the debtor’s assets, thereby interfering with actual creditors’ recovery. Therefore, someone with this concern would oppose Country Y’s system. ⑤ is a correct analysis.",
+    "model_rationale": "Answer-③.  \nRationale  \n1. Country Y’s regime enhances creditors’ power after bankruptcy—creditors can refuse discharge and enforce claims on post‐bankruptcy assets—so a person worried that creditors will use the threat of bankruptcy to jump ahead of other creditors would want a system that neuters creditor power (Country X), not one that amplifies it.  \n2. Thus the claim that such a person would support Country Y is incorrect.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:22:36.066851+00:00",
+    "response_id": "resp_022ae7cde768c785006a92183c334487d09879b332975bb227",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 492,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1019,
+      "output_tokens_details": {
+        "reasoning_tokens": 896
+      },
+      "total_tokens": 1511
+    },
+    "error": null
+  },
+  {
+    "id": "2021_14",
+    "year": "2021",
+    "problem_idx": "14",
+    "objective": "This question assesses the ability to appropriately analyze the debate about what it means for an action to cause harm or benefit.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "1",
+    "original_question": "<Theory> For an act to \"cause harm\" to someone means that, if the act had not occurred, that person would have been in a better state. Similarly, for an act to \"benefit\" someone means that, if the act had not occurred, that person would have been in a worse state. Alice and Bob have the following debate regarding <Theory>: Alice1: I could have given my friend 50,000 won for no reason but chose not to. If I had done so, my friend would have been in a better state. According to <Theory>, my act harmed my friend. But that seems unreasonable. Bob1: <Theory> doesn't have such implications. That's because doing nothing—like simply not giving your friend 50,000 won—cannot be considered an act. Alice2: If you limit \"act\" in such a way within <Theory>, other unreasonable consequences follow. Consider someone who saw a child struggling in water and had the ability to rescue them but chose not to, resulting in the child's drowning. Not saving the child clearly harmed the child. Bob2: But this case is different. The choice not to save the child is itself the result of a deliberate decision to avoid the rescue. In this sense, not saving the child should be considered an act. Alice3: Then what about this case? Imagine A bought a gift intended for B but became attached to it and decided to keep it instead of giving it to B. In this case, although not giving the gift was a deliberate decision, it doesn't seem like A harmed B. <question> Which of the following statements in <statements> is/are correct as an analysis of the above passage? <statements> (a) According to Alice1’s interpretation of <Theory>, if I could have punched my friend and broken their nose but did not do so, then, by not punching my friend, I performed an act that benefited my friend. (b) Alice2 and Bob2 differ in their judgment about whether not rescuing the child caused harm to the child. (c) If Bob, in response to Alice3, were to assert that “A’s not giving the gift to B did, in fact, harm B,” this would make Bob’s position inconsistent. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) According to Alice1’s interpretation of <Theory>, if I could have punched my friend and broken their nose but did not do so, then, by not punching my friend, I performed an act that benefited my friend.",
+      "statement_2": "(b) Alice2 and Bob2 differ in their judgment about whether not rescuing the child caused harm to the child.",
+      "statement_3": "(c) If Bob, in response to Alice3, were to assert that “A’s not giving the gift to B did, in fact, harm B,” this would make Bob’s position inconsistent."
+    },
+    "original_rationale": "<Theory> is a counterfactual comparative account that explains what it means for an act or event to cause harm or benefit to someone. According to this view, to say that an act causes harm (or benefit) to someone means that if the act had not occurred, the person would have been better (or worse) off. Alice is trying to challenge this view through a series of counterexamples, while Bob defends the view by clarifying the definition of \"act.\" The structure of the debate is as follows: Alice1: Presents the failure to give 50,000 won to a friend as a counterexample to <Theory>. Bob1: Responds that this does not count as an act, so it’s not a true counterexample. Alice2: Raises a new counterexample involving not saving a drowning child, arguing that Bob1’s solution is inadequate. Bob2: Adds further conditions to the definition of \"act\" to show the case of not saving the child is not a counterexample. Alice3: Presents a case with additional conditions to pose another counterexample. <choices> Explanation: (a): Alice1 interprets \"doing nothing\" as an act; thus, according to <Theory>, if you do not give your friend 50,000 won, your friend is worse off, making the omission an act that harms your friend. Applying this same logic, if you could have punched your friend and broken their nose but did not, \"not punching your friend\" is considered an act. Since punching would have made your friend worse off, <Theory> would interpret not punching as benefiting your friend. Therefore, (a) is a correct analysis. (b): In the scenario with the drowning child, Alice2 claims that not rescuing the child clearly harmed the child and that this case is a counterexample to Bob1’s interpretation of <Theory>. Bob2 agrees with the assessment that not rescuing caused harm but claims, through a reinterpretation of <Theory>, that this is not a counterexample. Therefore, (b) is not a correct analysis. (c): In response to Alice3, Bob could maintain consistency by sticking with the interpretation that \"A’s not giving the gift to B counts as harming B.\" Maintaining this stance would not be inconsistent with Bob2’s previously stated position. Therefore, (c) is not a correct analysis. Only (a) is a correct analysis among <choices>, so the answer is ①.",
+    "model_rationale": "Answer-①  \nRationale  \n1. Under Alice1’s broad reading of “act,” any omission counts as an act that changes someone’s state, so by that logic not punching a friend (when you could have) would be an act that leaves them better off—i.e. a benefit.  \n2. In Alice2 Bob1’s original “omissions aren’t acts” view is overturned in Bob2 by the claim that a deliberate choice counts as an act. Both Alice2 and Bob2 agree that failing to rescue harms the child; they only debate whether omissions qualify as acts.  \n3. Bob’s revised principle (that any deliberate omission is an act and so would count as harm if the person ends up worse off) would straightforwardly classify A’s refusal to give the gift as harmful under <Theory>, so denying that harm in Alice3 would not force Bob into inconsistency.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:22:43.055701+00:00",
+    "response_id": "resp_0b98e399d9040646006a921843315887d09bf9872b0a49af06",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 568,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1100,
+      "output_tokens_details": {
+        "reasoning_tokens": 896
+      },
+      "total_tokens": 1668
+    },
+    "error": null
+  },
+  {
+    "id": "2021_16",
+    "year": "2021",
+    "problem_idx": "16",
+    "objective": "This question assesses the ability to correctly analyze and evaluate arguments.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "Alice: Elegance is not a property that belongs to Chopin's nocturnes themselves, but merely a subjective impression you have. When I listen to the nocturnes, I just feel bored the whole time. Bob: If you only felt boredom from listening to the nocturnes, that's because you're only used to hip-hop. Try to follow the delicacy expressed by the piano's tone and the development of the melody. The fact that this piece is elegant is something that anyone with an appropriate capacity for musical appreciation can recognize under normal conditions. Charlie: Even if the elegance of the nocturnes isn't just a matter of subjective feeling, I don't think it's correct to say it's a property that anyone can recognize. Isn't it rather that only people belonging to a certain culture, who are used to a particular kind of music, regard the nocturnes as elegant? This is at least unlike properties like the yellow color or round shape of a melon, which are genuinely attributable to the object itself. Bob: Even if only people from a certain group can regard the nocturnes as elegant, I think their elegance should still be seen as a genuine property of the music. After all, yellow is only seen as yellow by people who aren't color-blind, but it's still a real property of the melon, right? In the case of the nocturnes, it's just that only people with appropriate musical sensitivity can perceive the elegance. Charlie: Isn't it a more natural explanation that you two are reacting differently to the nocturnes because you each belong to groups that share different kinds of musical sensitivity? Why should we say that only people who react by calling it elegant are perceiving a real property?<question> Which of the following analyses of this debate is/are correct, according to the <statements>?<statements> (a) Bob would oppose the claim that the group of people who can perceive elegance could be larger or smaller depending on period and culture. (b) Charlie would oppose the claim that people who find Chopin's nocturnes boring may have a different kind of musical sensitivity. (c) Bob and Charlie can both accept the claim that Chopin's nocturnes are elegant, albeit for different reasons. <choices> ① (b) ② (c) ③ (a), (b) ④ (a), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Bob would oppose the claim that the group of people who can perceive elegance could be larger or smaller depending on period and culture.",
+      "statement_2": "(b) Charlie would oppose the claim that people who find Chopin's nocturnes boring may have a different kind of musical sensitivity.",
+      "statement_3": "(c) Bob and Charlie can both accept the claim that Chopin's nocturnes are elegant, albeit for different reasons."
+    },
+    "original_rationale": "This question concerns a debate over whether aesthetic properties—using the example of \"elegance\"—are real properties belonging to an object such as Chopin's nocturnes, or not. Alice's view is that aesthetic properties are not real properties of an object, and that attributing them is merely an expression of individual subjective impressions. Bob, in contrast, argues that aesthetic properties are real properties of the object, which can be perceived by listeners possessing the appropriate musical sensitivity under normal conditions. Meanwhile, Charlie contends that, although aesthetic properties are not simply a matter of individual subjective impressions, they are not genuine properties of the object either, and should be understood as being perceived differently depending on the shared musical sensitivity within each group. The question asks you to clearly recognize these differences in perspectives and to deduce their respective implications. <choices> Explanation (a) Bob claims that only those with appropriate musical sensitivity can perceive the elegance of the musical work. Since this means only that the group who can perceive elegance is limited to those with appropriate musical sensitivity, it is compatible with the idea that the size of this group could be larger or smaller depending on the era or culture. Thus, saying Bob would oppose this claim is an incorrect analysis. (b) Charlie maintains that people react differently to Chopin's nocturnes because the shared musical sensitivity of the groups they belong to is different. According to this explanation, people who find the nocturnes boring would indeed have musical sensitivities different from those who find them elegant. Therefore, (b) is also incorrect. (c) For Bob, only those with suitable musical sensitivity can perceive the genuine property of elegance in Chopin's nocturnes, so he can accept statements by people with such sensitivity that \"Chopin's nocturnes are elegant.\" Meanwhile, for Charlie, even if elegance need not be a real property of Chopin's nocturnes, it is enough if there is a group sharing the relevant musical sensitivity who feel the music is elegant; thus, Charlie too can accept a group member's assertion that \"Chopin's nocturnes are elegant.\" Therefore, (c) is a correct analysis.Since only (c) is a correct analysis, the answer is ②.",
+    "model_rationale": "Answer-④\n\nRationale  \n1. Bob insists that elegance is an objective feature “anyone with an appropriate capacity” can perceive, so he would reject the idea that the perceiving group could expand or contract with culture or period.  \n2. Charlie actually attributes people’s differing reactions (boredom versus elegance) to belonging to groups with different musical sensitivities, so he would not oppose the claim in (b).  \n3. Bob accepts the nocturnes’ elegance as an objective property; Charlie also grants that they are regarded as elegant—albeit only by a culturally conditioned group—so both can accept the claim for different reasons.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:22:50.735490+00:00",
+    "response_id": "resp_0f51ba924d59a738006a92184adf9c87d0aef2f742aed8d1d5",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 555,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1454,
+      "output_tokens_details": {
+        "reasoning_tokens": 1280
+      },
+      "total_tokens": 2009
+    },
+    "error": null
+  },
+  {
+    "id": "2021_17",
+    "year": "2021",
+    "problem_idx": "17",
+    "objective": "This question assesses the ability to correctly analyze the classical debate concerning the problem of whether belief must be based on sufficient grounds.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "3",
+    "original_question": "Alice: If I come to hold a belief based on insufficient evidence, that belief itself may not cause much harm. That belief could ultimately be true, and it might never be externally manifested in actions. However, I cannot avoid committing a crime against humanity by making myself an easy believer. The mere fact that a society holds false beliefs is a serious problem, but a greater problem is that society becomes gullible, loses the habit of examining and carefully investigating evidence, and regresses to a state of barbarism. 'ⓐ To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.' - William Clifford, \"The Ethics of Belief\" - Bob: \"Believe the truth!\", \"Avoid error!\" These are the most important commandments for anyone seeking knowledge. However, these are two distinct rules. And depending on which of these one values more, one’s entire intellectual life may differ. One may prioritize the pursuit of truth and see the avoidance of error as secondary, or conversely, consider the avoidance of error most important and the attainment of truth as secondary. Clifford recommends the latter to us. He tells us that, rather than risking the dreadful possibility of believing a falsehood based on insufficient evidence, we should suspend judgment and believe nothing. As for myself, I don’t think I take Clifford’s side. In any case, what we must not forget is that our attitude toward the obligations related to truth or error is grounded not in evidence but in sentiment. People like Clifford, who say \"It is better to never believe than to ever believe something false!\" are merely expressing a fear of being naively deceived.- William James, \"The Will to Believe\" - <question> Which of the following analyses of the passages is/are correct? Choose as indicated from <statements>.<statements> (a) Alice supports her conclusion by pointing out the undesirable consequences that will arise if people do not act according to her conclusion. (b) According to Bob, Clifford's belief in ⓐ is not based on sufficient evidence. (c) Bob's argument requires the premise that 'even a belief based on sufficient evidence can be mistaken.' <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Alice supports her conclusion by pointing out the undesirable consequences that will arise if people do not act according to her conclusion.",
+      "statement_2": "(b) According to Bob, Clifford's belief in ⓐ is not based on sufficient evidence.",
+      "statement_3": "(c) Bob's argument requires the premise that 'even a belief based on sufficient evidence can be mistaken.'"
+    },
+    "original_rationale": "The passages excerpt the core of the classic debate between Clifford and James. Clifford argues that it is wrong to form beliefs based on insufficient evidence. His argument is that, if one comes to form beliefs on insufficient evidence, society becomes more susceptible to being deceived, regressing to a barbaric state as a result.James emphasizes that the pursuit of truth and the avoidance of error are distinct intellectual tasks, pointing out that Clifford’s stance is justifiable only if one prioritizes the avoidance of error—and that the choice between the two is ultimately a matter of sentiment, not evidence. <choices> Explanation (a) Alice’s conclusion is \"To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.\" She justifies this by arguing that not following this leads society into a 'state of barbarism.' Thus, (a) is a correct analysis. (b) Bob argues that there are two epistemic duties, \"Believe the truth!\" and \"Avoid error!\", and that Clifford focuses only on the latter. He also claims that this choice is grounded not in evidence but in sentiment. Therefore, according to Bob, Clifford’s belief in ⓐ is not based on sufficient evidence. Thus, (b) is a correct analysis. (c) Bob’s argument is unrelated to the claim that \"even beliefs based on sufficient evidence can be mistaken.\" Even if that statement is false, that is, even if beliefs based on sufficient evidence could never be mistaken, Bob’s argument remains unaffected. He merely points out that the disposition to base belief only on sufficient evidence is itself grounded in sentiment. Therefore, (c) is not a correct analysis. Since only (a) and (b) are correct, the answer is ③.",
+    "model_rationale": "Answer-③.  \nRationale  \n1. Alice justifies Clifford’s injunction against believing on insufficient evidence by warning of the social ills (gullibility, loss of critical habits, regression to barbarism) that would follow—i.e. undesirable consequences if her conclusion is ignored.  \n2. Bob explicitly claims that Clifford’s rule (“better never to believe than to risk believing wrongly”) rests not on evidence but on a sentiment—hence Clifford’s belief in ⓐ is not based on sufficient evidence.  \n3. Bob never appeals to the idea that even well-evidenced beliefs can be mistaken; his critique is psychological (a fear of deception), not epistemological, so statement (c) is not required.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:23:00.258010+00:00",
+    "response_id": "resp_04ecd088efba5b5c006a921854659087d095f060955ffacae0",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 542,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1222,
+      "output_tokens_details": {
+        "reasoning_tokens": 1024
+      },
+      "total_tokens": 1764
+    },
+    "error": null
+  },
+  {
+    "id": "2021_18",
+    "year": "2021",
+    "problem_idx": "18",
+    "objective": "This question assesses the ability to correctly analyze individual arguments and their grounds, using views on epistemic objectivity and the artistic judgment of critics as its subject matter.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "A: 'Epistemic objectivity' is related not so much to whether a claim is true or false, but rather to how that claim is justified. In the process of making a claim, it is necessary to ensure that healthy common sense and rationality are not distorted by the intervention of subjective elements such as bias, prejudice, herd mentality, or personal wishes, whether they belong to oneself or anyone else. In this sense, a judgment that has secured epistemic objectivity generally possesses persuasive power.B: For a work of art to have its intended effect, it must be appreciated from a particular perspective. If the critic’s situation does not align with what the work demands, the critic cannot make an appropriate judgment about the work. For example, when an advocate delivers a speech to a specific audience, he or she must consider that audience’s unique characteristics, interests, views, passions, and prejudices. If a critic from another era or country encounters this speech, in order to make the correct judgment, the critic must take all these circumstances into account and place himself or herself in the same situation as the contemporary audience. The same applies to works of art. Even if the critic is a friend or an adversary of the artist, they must set aside their own particular circumstances and adopt the perspective presupposed by the work. <question> Which of the following analyses of the above passages is/are correct? Choose all correct answers from among the <statements> as given.<statements>(a) If two people make the same judgment about a claim, according to Alice, their judgment possesses epistemic objectivity.(b) According to Alice, the judgment that Bob’s critic makes about a work of art does not possess epistemic objectivity.(c) If two critics from different eras or countries make the same judgment about a given work of art, according to Bob, their judgment is made from the perspective presupposed by the work. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) If two people make the same judgment about a claim, according to Alice, their judgment possesses epistemic objectivity.",
+      "statement_2": "(b) According to Alice, the judgment that Bob’s critic makes about a work of art does not possess epistemic objectivity.",
+      "statement_3": "(c) If two critics from different eras or countries make the same judgment about a given work of art, according to Bob, their judgment is made from the perspective presupposed by the work."
+    },
+    "original_rationale": "The given passages contrast Alice’s position—that epistemic objectivity in judgment can be secured only by completely excluding subjective elements and fully exercising rationality—with Bob’s view that, for a critic’s judgment about a work of art to be appropriate, the critic must set aside his or her own particular circumstances and instead adopt the specific perspective presupposed by the work. <choices> Explanation(a) If two people make the same judgment about a claim, then, according to Alice, for their judgment to possess epistemic objectivity, subjective elements from themselves or anyone else must not have been involved in making that judgment. However, the mere fact that they arrived at the same judgment does not entail that such subjective elements have been excluded, so we cannot conclude that their judgment has epistemic objectivity. Thus, (a) is not a correct analysis.(b) According to Alice, for Bob’s critic’s judgment to have epistemic objectivity, subjective elements—whether from the critic or anyone else—must not have played a role in making that judgment. However, Bob’s critic needs to adopt the particular perspective required by the work, and that perspective, while not the critic’s own, nevertheless requires considering another person’s subjective elements. Therefore, (b) is a correct analysis.(c) If two critics from different eras or countries make the same judgment about a work of art, Bob’s view is that for their judgments to be proper, they must be made from the perspective presupposed by the work. However, the mere fact that their judgments are the same does not necessarily mean that they adopted the perspective presupposed by the work. Therefore, (c) is not a correct analysis.Only (b) among the <choices> is a correct analysis, so the answer is ②.",
+    "model_rationale": "",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:23:10.175007+00:00",
+    "response_id": "resp_0e00e553453a750c006a92185e549887d098240b2092972281",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 497,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 2944,
+      "output_tokens_details": {
+        "reasoning_tokens": 2944
+      },
+      "total_tokens": 3441
+    },
+    "error": null
+  },
+  {
+    "id": "2021_20",
+    "year": "2021",
+    "problem_idx": "20",
+    "objective": "This question assesses the ability to read a debate on when changes in scientific theories can be considered progressive, and to accurately analyze each perspective.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "1",
+    "original_question": "Alice: It is not clear whether changes in scientific theories constitute \"genuine progress.\" Of course, if we look at the history of science, there have been instances where a successor theory replaced a previous theory by explaining and predicting a greater number of facts. However, this does not serve as grounds for claiming that the successor theory is “truly progressive.” Those cases merely show that the successor theory received more social support or that more scientists participated in its research.Bob: Even if such external factors influenced past achievements of theories, it is not impossible to judge whether real progress has taken place. This is because the judgment of progress depends not only on past achievements but also on future achievements that could be attained. And the potential achievements that a theory may have in the future are not influenced by such external factors.Alice: It is possible to compare the past performances of theories. However, it is difficult to compare the scope of explanations and predictions they will achieve in the future, that is, the future potential of the theories. This is because we cannot know all the consequences that a theory may have in the future.Bob: We can often compare the future potential of two theories. For example, for two theories T1 and T2, suppose that we can derive all statements constituting T1 deductively from those of T2, but not vice versa. In that case, T2 will make new predictions in addition to all the predictions of T1. In this case, T2 is “more general” than T1, and therefore has more future potential. <question> Which of the following analyses of the debate above is/are correct, as given in <statements>? <statements> (a) Both Alice and Bob agree that, for changes in scientific theory to constitute \"genuine progress,\" the success of a theory should not be explained solely by social factors.(b) Both Alice and Bob agree that changes in scientific theory have occurred in such a way that the successor theory preserves the explanations and predictions of the previous theory and further provides new explanations and predictions.(c) If the theory of relativity made correct predictions in areas where Newtonian theory made incorrect ones, Bob would agree that the theory of relativity is “more general” than the Newtonian theory. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Both Alice and Bob agree that, for changes in scientific theory to constitute \"genuine progress,\" the success of a theory should not be explained solely by social factors.",
+      "statement_2": "(b) Both Alice and Bob agree that changes in scientific theory have occurred in such a way that the successor theory preserves the explanations and predictions of the previous theory and further provides new explanations and predictions.",
+      "statement_3": "(c) If the theory of relativity made correct predictions in areas where Newtonian theory made incorrect ones, Bob would agree that the theory of relativity is “more general” than the Newtonian theory."
+    },
+    "original_rationale": "The prompt introduces a debate about whether changes in scientific theory constitute “genuine progress,” in what sense this is so, and how we can judge whether progress has occurred. In the debate, Alice argues that, even if we admit to the achievements of a theory in the past, those can be explained by social factors and therefore cannot be the basis for genuine progress. Bob concedes Alice’s argument regarding past achievements, but insists that we can assess genuine progress by considering the future potential of the theory. To answer the question, we must judge whether both Alice and Bob would agree with the assertions presented in <statements>. <choices> Explanations (a): Alice argues that cases of theory success merely demonstrate the influence of social factors and therefore should not be seen as evidence of progress. This amounts to claiming that the success of a theory being explained purely through social factors would preclude genuine progress; Alice would accept this. Bob also claims that progress can be judged by the future potential of theories, which is unaffected by social factors, and would agree to the same. Therefore, (a) is a correct analysis. (b): Alice does acknowledge cases where successor theories explain and predict more facts, but this does not mean she agrees that scientific change always takes the form where successor theories preserve previous explanations and predictions and then add to them. Thus, (b) is not a correct analysis.(c): If the theory of relativity correctly predicts where Newtonian theory failed, it does not necessarily mean that relativity preserves all the predictions of Newtonian theory in addition to making new predictions. Since some predictions by Newtonian theory are not preserved, relativity would not qualify as “more general” in Bob’s sense. Thus, (c) is also not a correct analysis.Therefore, only (a) is the correct analysis, so the answer is ①.",
+    "model_rationale": "Answer-③  \nRationale  \n1. Alice denies that mere social support suffices to mark “genuine progress,” and Bob insists progress must be judged by factors (future potential) not determined by social forces—so they both reject a purely social explanation.  \n2. While Alice notes some successors explain more facts than their predecessors and Bob offers an example of one theory entailing another plus more, neither actually affirms that real historical theory change always preserves all old predictions and adds new ones.  \n3. Bob defines “more general” as a theory from which all the older theory’s statements are derivable plus additional ones—exactly how relativity relates to Newtonian theory—so he would indeed call relativity more general.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:23:25.841713+00:00",
+    "response_id": "resp_0e8c3db09a1684b8006a92186dfcb487d08fcf4eab1b73cf2f",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 563,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1223,
+      "output_tokens_details": {
+        "reasoning_tokens": 1024
+      },
+      "total_tokens": 1786
+    },
+    "error": null
+  },
+  {
+    "id": "2021_24",
+    "year": "2021",
+    "problem_idx": "24",
+    "objective": "This question assesses the ability to understand two arguments concerning the role of human nature and culture in shaping humans, and to determine whether presented survey results or research findings strengthen or weaken each argument.",
+    "domain": "Society",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "The roles of nature and culture in human development are a matter of debate, with opinions divided as follows.<Opinions>Alice: I believe that in order to understand human development, we must start from human nature. This is because there are clear differences between groups, and especially biological characteristics play a decisive role in explaining intergroup differences. In addition, many researchers have proven that differences in intelligence quotient between individuals are due to genetic factors.Bob: The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community. Because the human species is so homogeneous, I think that insisting on intergroup differences based on biological criteria stems from a misguided motivation to uphold unequal social hierarchies. Social hierarchy only limits human variability; humans can be shaped differently depending on culture or social environment. <question> Which of the following in <Statements> properly evaluates the <Opinions>? <statements> (a) Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.(b) Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.(c) Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.",
+      "statement_2": "(b) Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.",
+      "statement_3": "(c) Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument."
+    },
+    "original_rationale": "In the <Opinions>, Alice emphasizes the importance of human nature, particularly biological characteristics, in the formation of humans. She also claims that these biological traits cause differences between individuals and groups. On the other hand, Bob emphasizes the importance of culture or social environment in human development. He argues that emphasizing biological traits amounts to supporting social hierarchy and rebutts by saying there are actually very few intergroup differences based on biological factors. He further stresses the potential for human development depending on cultural or social environmental changes. <choices> Explanation:(a) The claim that, throughout history, in every society crime rates have been high in a specific group—males aged 15 to 25—means that in any culture or social environment, there is consistently a high crime rate among a particular age group of males. In other words, regardless of cultural or social environmental change, this research result, which suggests that the biological trait of being a male of a certain age greatly influences crime rates, actually strengthens Alice's argument emphasizing biological characteristics in human development, rather than weakening it. Thus, (a) is not an appropriate evaluation.(b) Various social reforms aimed at equally developing the abilities of all members of society can be understood as attempts to promote human development by changing culture or social environment. Therefore, the finding that such reforms failed does not strengthen Bob’s claim, which argues for the potential for human variability and development through environmental change. Thus, (b) is an appropriate evaluation.(c) The fact that, due to improvements in English education programs, most elementary school students’ test scores increased greatly compared to before the improvements shows that human development can be achieved through changes in environment, especially through changes in systems. Therefore, this research result weakens Alice's argument, which emphasizes biological characteristics in human development, while strengthening Bob’s argument, which emphasizes the importance of environment. Thus, (c) is not an appropriate evaluation.Therefore, only (b) in the <Choices> is an appropriate evaluation, so the correct answer is ②.",
+    "model_rationale": "Answer-②.  \nRationale  \n1. Statement (b) correctly evaluates Bob’s view: if social reforms aimed at equalizing opportunities consistently fail, that does not support Bob’s claim that culture and social environment can reliably shape and level human abilities.  \n2. Statements (a) and (c) mis-evaluate the opinions: (a) actually supports Alice’s genetic argument (group differences in crime by biological categories), and (c) in fact strengthens Bob’s environmental argument (educational interventions improving scores), contrary to what they claim.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:23:33.157264+00:00",
+    "response_id": "resp_0256347eb253fdfa006a9218754f5087d09c546bb784279cf6",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 411,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1122,
+      "output_tokens_details": {
+        "reasoning_tokens": 960
+      },
+      "total_tokens": 1533
+    },
+    "error": null
+  },
+  {
+    "id": "2021_25",
+    "year": "2021",
+    "problem_idx": "25",
+    "objective": "This question assesses the ability to understand the problems that pre-surveys can have in experimental research in social sciences and their solutions, and to find experimental results showing that viewing Black hero films reduced the degree of negative bias towards Black people.",
+    "domain": "Society",
+    "category": "Argument Analysis",
+    "answer": "5",
+    "original_question": "In social sciences, classical experimental research may not be able to generalize experimental results to the real world. For example, suppose an experimental study was conducted to determine whether ‘watching a movie where a Black person appears as a hero’ (the experimental stimulus) reduces ‘the degree of negative prejudice against Black people’, and the following findings were observed. First, in the experimental group that received the experimental stimulus, the degree of prejudice was lower in the post-test than in the pre-test. Second, in the control group that did not receive the experimental stimulus, there was no change in the degree of prejudice between the pre-test and the post-test. In this case, it can be considered that watching the movie reduced the degree of prejudice among participants in the experimental group. However, it cannot be asserted with certainty that the same effect would appear if the movie was watched by people in their everyday lives. This is because in experiments, participants may already have become sensitive to the issue of prejudice against Black people as a result of the pre-test. To solve this problem, an <experimental design> that adds an experiment without a pre-test must be implemented. If, through this, experimental results are obtained that demonstrate ‘ⓐ that watching the movie reduced the degree of prejudice’, the possibility of generalization can be increased.<Experimental Design>• Group 1: Pre-test → Experimental stimulus → Post-test.• Group 2: Pre-test → Post-test.• Group 3: No pre-test → Experimental stimulus → Post-test.• Group 4: No pre-test → Post-test.All participants in Groups 1 to 4 were randomly selected from the population. <question> Which of the following cannot be included in the experimental results that demonstrate ⓐ?<choices>① In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.② The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.③ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.④ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.⑤ The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1.",
+    "statements": {
+      "statement_1": "① In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.",
+      "statement_2": "② The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.",
+      "statement_3": "③ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.",
+      "statement_4": "④ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.",
+      "statement_5": "⑤ The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1."
+    },
+    "original_rationale": "In classical experimental research in the social sciences, conducting a pre-test can make participants more sensitive to the experimental stimulus, which may in turn influence the experimental result. Therefore, the experimental results thus obtained are difficult to generalize to the real world. To solve this problem, an additional experiment without a pre-test is required. If, in the <experimental design>, results are observed showing that the level of prejudice is reduced in the experimental groups (Groups 1 and 3) due to the experimental stimulus, while there is no change in the control groups (Groups 2 and 4), it can be demonstrated that watching the movie reduces the degree of negative prejudice against Black people (point ⓐ). As a supplementary clue, it is noted that all participants were randomly selected, enabling comparisons between groups.Correct answer explanation: ⑤ If the degree of prejudice in the post-test of Group 4 (which did not receive the experimental stimulus) is lower than that of Group 1 (which did receive the experimental stimulus), then the effect of the experimental stimulus was not found. Therefore, ⑤ cannot be used to demonstrate ⓐ.Incorrect answer explanations:① If, in Group 1, the degree of prejudice in the post-test after the experimental stimulus is lower than in the pre-test before the stimulus, then the effect of the experimental stimulus has been found. Thus, ① demonstrates ⓐ.② If the degree of prejudice in the post-test of Group 1 (which received the experimental stimulus) is lower than that in the post-test of Group 2 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ② demonstrates ⓐ.③ If the degree of prejudice in the post-test of Group 3 (which received the experimental stimulus) is lower than the degree of prejudice in the pre-test of Group 2 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ③ demonstrates ⓐ.④ If the degree of prejudice in the post-test of Group 3 (which received the experimental stimulus) is lower than the post-test in Group 4 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ④ demonstrates ⓐ.",
+    "model_rationale": "Answer-③  \nRationale  \n1. To demonstrate the treatment effect you must compare like measures (pre- vs. post- within the same group, or post-tests across groups that did or did not receive the stimulus).  \n2. Choice ③ compares Group 3’s post-test (no pre-test, stimulus) with Group 2’s pre-test (no stimulus), a cross-group, cross-occasion comparison that cannot validly show the movie’s effect.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:23:42.144616+00:00",
+    "response_id": "resp_07641f5c4c924d19006a92187e480087d0939a190a7fe5064e",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 560,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 2347,
+      "output_tokens_details": {
+        "reasoning_tokens": 2240
+      },
+      "total_tokens": 2907
+    },
+    "error": null
+  },
+  {
+    "id": "2021_28",
+    "year": "2021",
+    "problem_idx": "28",
+    "objective": "This question assesses the ability to understand a policy that changes the tiers of a progressive rate system and to determine whether each argument in the debate concerning this policy is strengthened or weakened by the presented data.",
+    "domain": "Society",
+    "category": "Argumentation and Rebuttal",
+    "answer": "4",
+    "original_question": "Country X applies the following progressive billing system for monthly household electricity rates.- Tier 1: Usage up to 200 kWh, base charge is 900 won, rate per kWh is 90 won.- Tier 2: Usage over 200 kWh and up to 400 kWh, base charge is 1,600 won, rate per kWh is 180 won.- Tier 3: Usage over 400 kWh, base charge is 7,300 won, rate per kWh is 280 won.For example, a household consuming 300 kWh in a month will pay a base charge of 1,600 won, and rates of 90 won per kWh for Tier 1 and 180 won per kWh for Tier 2, resulting in a total electricity bill of 37,600 won (=1,600 + 200×90 + 100×180).Recently, Country X introduced a “Cool Summer Policy” for electricity used in the summer, changing the tiers to ‘up to 300 kWh’, ‘over 300 kWh up to 450 kWh’, and ‘over 450 kWh’, while maintaining the same rate structure as before in each tier.<Debate> Alice: In order to ensure a stable electricity supply, power generation facilities must be able to meet the peak hourly electricity demand. The introduction of the Cool Summer Policy will reduce the stability of electricity supply.Bob: Air conditioning is a necessity, not a luxury. To lower the summer electricity bill burden for most households, it would be better to switch from the Cool Summer Policy to a flat rate system with a base charge of 1,600 won and a per kWh rate of 180 won.Charlie: It is better to focus on welfare for vulnerable groups rather than all households. The Cool Summer Policy should be modified so that it applies only to vulnerable groups. <question> Which of the following, as presented in <statements>, are appropriate evaluations of the <Debate> above?<statements> (a) Data showing that peak hourly electricity consumption in Country X occurs in summer weakens Alice’s argument.(b) Data showing that most households consume 400–450 kWh per month weakens Bob’s argument.(c) Data showing that most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month weakens Charlie’s argument. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Data showing that peak hourly electricity consumption in Country X occurs in summer weakens Alice’s argument.",
+      "statement_2": "(b) Data showing that most households consume 400–450 kWh per month weakens Bob’s argument.",
+      "statement_3": "(c) Data showing that most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month weakens Charlie’s argument."
+    },
+    "original_rationale": "Unlike a flat rate system, a progressive billing system applies different rates for each tier, and even for higher tiers, the lower tier rates are applied cumulatively for the respective amount of consumption in each tier. When the usage range of each tier is expanded by changing the tier criteria, households in higher tiers receive greater discounts. For example, in the Cool Summer Policy, households that originally belonged to Tier 1 before the change already benefit from the lowest rates, so expanding the tier does not affect them. However, households that were in Tier 2 prior to the change enjoy a rate reduction of 90 won (180–90 won) per kWh for usage between 200 and 300 kWh, and also a 700-won decrease in the base charge. Households in what was formerly Tier 3 benefit not only from this but also from a rate reduction of 100 won (280–180 won) per kWh for usage between 400 and 450 kWh, and a 5,700-won decrease in the base charge for households consuming 400–450 kWh. <choices> Explanation (a). Alice claims that if the Cool Summer Policy reduces rates, summer electricity consumption will increase, leading to higher peak hourly demand in summer and thus reduced supply stability. Therefore, if data show that peak hourly demand in Country X is actually highest not in summer, and that even with increased summer consumption due to the policy this ranking does not change, Alice’s argument would be weakened. However, data that show summer peak demand is highest do not weaken Alice’s argument. Thus, (a) is not an appropriate evaluation.(b). Under a progressive system, households with high consumption still enjoy lower rates for their usage in the lower tiers. A household using 400–450 kWh per month will fall into Tier 2 under the Cool Summer Policy, paying a base charge of 1,600 won, 90 won per kWh up to 300 kWh, and 180 won per kWh beyond 300 kWh. Under Bob’s proposed flat rate (1,600 won base, 180 won/kWh for all usage), all consumption is charged at the higher rate, leading to a bigger bill than under the Cool Summer Policy. Therefore, data showing most households are in this range would weaken Bob’s argument. So (b) is an appropriate evaluation.(c). Charlie argues the Cool Summer Policy should target only vulnerable populations for welfare reasons; this only makes sense if vulnerable groups actually benefit. If most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month, their bills would be unaffected whether the policy applies universally or only to them. Therefore, data showing this would weaken Charlie’s argument. Thus, (c) is an appropriate evaluation.Since only (b) and (c) are appropriate, the answer is ④.",
+    "model_rationale": "Answer-④\n\nRationale  \n1. Statement (a) is incorrect because if peak demand actually occurs in summer, that would reinforce Alice’s concern that relaxing summer tier thresholds undermines supply stability, not weaken it.  \n2. Statement (b) is correct because if most households use 400–450 kWh, under Bob’s proposed flat rate (1,600 + 180 × usage) they would pay substantially more than under the existing summer‐tiered rates, undermining his claim that the flat rate would lower their bills.  \n3. Statement (c) is correct because if vulnerable households consume under 200 kWh, they already benefit from the cheapest tier under both the old and summer system; limiting the Cool Summer Policy to them would confer no additional advantage, weakening Charlie’s argument.",
+    "run_id": 1,
+    "model_id": "o4-mini",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-08-28T23:23:54.866269+00:00",
+    "response_id": "resp_0478e0a2e78488b9006a92188b31b887d08d439dad9e26891f",
+    "model_returned": "o4-mini-2025-04-16",
+    "usage": {
+      "input_tokens": 593,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1305,
+      "output_tokens_details": {
+        "reasoning_tokens": 1088
+      },
+      "total_tokens": 1898
+    },
+    "error": null
+  }
+]
