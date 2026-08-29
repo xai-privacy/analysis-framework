@@ -35,70 +35,250 @@ _QUESTIONS_PATH = os.path.join(
 _RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slm_results")
 _FALLBACK_CONFIG_NAME = "meta-llama_Llama-3.2-1B-Instruct.json"
 
+# Tag families used by reasoning models to delimit their thinking block, in the
+# two delimiter styles that appear on issue #18's model list: angle brackets
+# (<think> for DeepSeek-R1-Distill, LiquidAI, Phi-4-reasoning-plus) and square
+# brackets ([THINK] for the Ministral-3 Reasoning models). Kept as a name
+# alternation because the close form is mechanically derived from the open one.
+_REASONING_TAG_NAMES = ("think", "thought", "reasoning", "analysis")
+_REASONING_OPEN_PATTERN = re.compile(
+    r"<(?P<angle>" + "|".join(_REASONING_TAG_NAMES) + r")>"
+    r"|\[(?P<bracket>" + "|".join(_REASONING_TAG_NAMES) + r")\]",
+    re.IGNORECASE,
+)
+
+# max_new_tokens is a caller-side runtime parameter, not a property of the
+# checkpoint, so no HF repo publishes it (absent from generation_config.json in
+# all 8 models checked). Any value here is a placeholder for a first
+# characterization run, never an answer.
+#
+# Deliberately generous rather than typical. A cap that truncates tells you
+# nothing except that it truncated, and for a thinking model a response cut
+# before its closing tag has no parseable answer at all, so the run reads as a
+# reasoning failure instead of a budget problem. 8192 is what LFM2.5-Thinking
+# needed to finish all 93 questions on eos. Non-thinking models stop well short
+# of it and pay nothing for the headroom. Narrow it afterwards from measured
+# completion lengths; stop_reason shows whether the headroom was used.
+_PROVISIONAL_MAX_NEW_TOKENS = 8192
+
+
+def _config_file_resolver(model_id):
+    """Return a callable that maps a config filename to a readable local path.
+
+    Two sources, one interface. A local directory (as produced by
+    `hf download --local-dir`) already contains every file this function wants,
+    so it is read straight off disk -- no network, no auth, and it works for
+    gated models the Hub would refuse. Anything else is treated as a Hub repo
+    id. Both raise EntryNotFoundError for a missing file so callers can use one
+    except clause.
+    """
+    if os.path.isdir(model_id):
+        def resolve(filename):
+            path = os.path.join(model_id, filename)
+            if not os.path.isfile(path):
+                raise EntryNotFoundError(f"{filename} not present in {model_id}")
+            return path
+        return resolve
+    return lambda filename: hf_hub_download(model_id, filename)
+
+
+def _describe_fetch_failure(model_id, exc):
+    """Turn a huggingface_hub exception into a message that names the actual
+    cause. Every failure mode below surfaces as a bare 401 otherwise -- a gated
+    repo, a nonexistent repo, and a mistyped local path are indistinguishable,
+    and the 401 sends you looking for a token problem that may not exist."""
+    name = type(exc).__name__
+    if name == "HFValidationError":
+        return (
+            f"{model_id!r} is not a valid Hub repo id. If it is meant to be a local "
+            "directory, check the path exists -- local directories are read directly "
+            "and never fetched."
+        )
+    if name in ("GatedRepoError", "RepositoryNotFoundError"):
+        token_hint = ""
+        if _hf_token() is None:
+            token_hint = (
+                " No Hugging Face token was found, so gated repos will always fail here; "
+                "run `hf auth login` or set HF_TOKEN."
+            )
+        path_hint = ""
+        if os.sep in model_id or "/" in model_id:
+            path_hint = (
+                f" If {model_id!r} was meant to be a local directory, it does not exist "
+                "relative to the current working directory -- check the path."
+            )
+        return (
+            f"{model_id!r} could not be read from the Hub -- it is gated, private, or "
+            f"does not exist.{token_hint}{path_hint}"
+        )
+    if name in ("LocalEntryNotFoundError", "OfflineModeIsEnabled"):
+        return f"No network access while fetching {model_id!r}, and it is not in the local cache."
+    return f"Failed to fetch config for {model_id!r}: {name}: {exc}"
+
+
+def _hf_token():
+    """Best-effort lookup of a configured HF token (env var or `hf auth login`
+    credentials file). Returns None when huggingface_hub is unavailable."""
+    try:
+        from huggingface_hub import get_token
+    except Exception:
+        return os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    try:
+        return get_token()
+    except Exception:
+        return None
+
+
+def _detect_reasoning_tags(resolve):
+    """Look for a reasoning-block tag pair declared in the tokenizer's files.
+
+    Two independent sources, unioned, because neither alone is sufficient:
+    the chat template (DeepSeek-R1 and Granite have the tags only there) and
+    added_tokens_decoder (LiquidAI, Qwen3 and SmolLM3 register them as added
+    tokens). The template itself lives in either tokenizer_config.json's
+    "chat_template" field or a standalone chat_template.jinja -- LiquidAI uses
+    only the latter, so both are checked.
+
+    This is best-effort and cannot be made complete. Phi-4-mini-reasoning
+    declares nothing anywhere and emits <think> as learned behavior; Magistral
+    keeps [THINK] in tekken.json with no template file at all. Those are caught
+    at runtime by detect_undeclared_reasoning_tag(), not here. Returns a
+    (open_tag, close_tag) pair or None.
+    """
+    haystacks = []
+
+    try:
+        with open(resolve("tokenizer_config.json"), "r", encoding="utf-8") as f:
+            tokenizer_cfg = json.load(f)
+    except EntryNotFoundError:
+        tokenizer_cfg = {}
+    except Exception as exc:
+        # Non-fatal: tag detection is best-effort and must not block the fetch.
+        print(f"[Config warning] Could not read tokenizer_config.json: {exc}", file=sys.stderr)
+        tokenizer_cfg = {}
+
+    template_field = tokenizer_cfg.get("chat_template", "")
+    if isinstance(template_field, list):
+        # Some repos store multiple named templates as a list of dicts.
+        template_field = " ".join(
+            str(entry.get("template", "")) for entry in template_field if isinstance(entry, dict)
+        )
+    haystacks.append(str(template_field))
+
+    added = tokenizer_cfg.get("added_tokens_decoder")
+    if isinstance(added, dict):
+        haystacks.extend(
+            str(entry.get("content", ""))
+            for entry in added.values()
+            if isinstance(entry, dict)
+        )
+
+    try:
+        with open(resolve("chat_template.jinja"), "r", encoding="utf-8") as f:
+            haystacks.append(f.read())
+    except EntryNotFoundError:
+        pass
+    except Exception as exc:
+        print(f"[Config warning] Could not read chat_template.jinja: {exc}", file=sys.stderr)
+
+    combined = "\n".join(haystacks)
+    for match in _REASONING_OPEN_PATTERN.finditer(combined):
+        # Case is taken from the match, not normalized: Mistral writes [THINK]
+        # in caps and the tag must be reproduced exactly to match generated text.
+        name = match.group("angle")
+        open_tag, close_tag = (f"<{name}>", f"</{name}>") if name else (
+            f"[{match.group('bracket')}]", f"[/{match.group('bracket')}]")
+        if close_tag.lower() in combined.lower():
+            return open_tag, close_tag
+    return None
+
 
 def _fetch_config_from_hf(model_id):
-    """Attempt to build a model config from the HF Hub's config.json /
-    generation_config.json. Decoding is forced to greedy (temperature=0,
-    do_sample=False) regardless of what the repo specifies. Also inspects
-    the model's chat template -- checking both tokenizer_config.json's
-    embedded "chat_template" field and a standalone chat_template.jinja
-    file, since repos use either convention -- for a <think>...</think>
-    pattern, and if found, populates a "reasoning" block so
-    detect_undeclared_reasoning_tag() doesn't flag it as unexpected. Returns
-    None on any failure (missing files, network error, huggingface_hub
-    unavailable) so the caller can fall back."""
-    if hf_hub_download is None:
+    """Build a model config from a checkpoint's own config.json and
+    generation_config.json, read either from a local directory or the HF Hub.
+
+    Two rules govern what lands in the result. Values the source actually states
+    (dtype, auto_map, reasoning tags) are taken from it. Values the source is
+    silent about -- max_new_tokens above all -- are marked provisional in
+    "_provisional" so _load_model_config() keeps warning about them instead of
+    presenting a placeholder as a finished config. Decoding is forced to greedy
+    regardless of what the repo specifies.
+
+    Returns None on failure so the caller can fall back.
+    """
+    is_local = os.path.isdir(model_id)
+    if hf_hub_download is None and not is_local:
         print(
             "[Config warning] huggingface_hub is not available; cannot auto-fetch config.",
             file=sys.stderr,
         )
         return None
 
+    resolve = _config_file_resolver(model_id)
+
     cfg = {
         "model_id": model_id,
         "torch_dtype": "float16",
         "trust_remote_code": False,
         "seed": 0,
-        "generation": {"do_sample": False, "temperature": 0.0, "max_new_tokens": 1024},
+        "generation": {
+            "do_sample": False,
+            "temperature": 0.0,
+            "max_new_tokens": _PROVISIONAL_MAX_NEW_TOKENS,
+        },
     }
+    provisional = ["max_new_tokens"]
 
+    # Only the two real config files count as evidence that this checkpoint was
+    # actually resolved. The tokenizer files are inspected for reasoning tags
+    # further down and must not, on their own, make an all-defaults config look
+    # like a successful fetch.
     fetched_anything = False
 
     try:
-        path = hf_hub_download(model_id, "config.json")
-        with open(path, "r", encoding="utf-8") as f:
+        with open(resolve("config.json"), "r", encoding="utf-8") as f:
             model_cfg = json.load(f)
         fetched_anything = True
 
-        dtype = model_cfg.get("torch_dtype")
+        # config.json's key was renamed torch_dtype -> dtype in transformers 4.56.
+        dtype = model_cfg.get("torch_dtype") or model_cfg.get("dtype")
         if dtype in ("float16", "bfloat16"):
             cfg["torch_dtype"] = dtype
         elif dtype is not None:
             cfg["torch_dtype"] = "auto"
+        # Upstream dtype is what the weights were saved in, not necessarily what
+        # runs well here -- bfloat16 is poorly supported on MPS, which is why the
+        # committed Llama config pins float16 against the Hub's bfloat16.
+        provisional.append("torch_dtype")
 
         if "auto_map" in model_cfg:
             cfg["trust_remote_code"] = True
     except EntryNotFoundError:
         pass
     except Exception as exc:
-        print(f"[Config warning] Failed to fetch config.json for {model_id}: {exc}", file=sys.stderr)
+        print(f"[Config warning] {_describe_fetch_failure(model_id, exc)}", file=sys.stderr)
         return None
 
     try:
-        path = hf_hub_download(model_id, "generation_config.json")
-        with open(path, "r", encoding="utf-8") as f:
+        with open(resolve("generation_config.json"), "r", encoding="utf-8") as f:
             gen_cfg = json.load(f)
         fetched_anything = True
 
-        # Only length controls are taken from the repo; sampling behavior
-        # is forced below regardless of what this file specifies.
+        # Only length controls are taken from the repo; sampling behavior is
+        # forced below. In practice max_new_tokens is never present -- kept for
+        # the rare repo that does publish one, which then stops being a guess.
         if "max_new_tokens" in gen_cfg:
             cfg["generation"]["max_new_tokens"] = gen_cfg["max_new_tokens"]
+            provisional.remove("max_new_tokens")
     except EntryNotFoundError:
         pass
     except Exception as exc:
+        print(f"[Config warning] {_describe_fetch_failure(model_id, exc)}", file=sys.stderr)
+        return None
+
+    if not fetched_anything:
         print(
-            f"[Config warning] Failed to fetch generation_config.json for {model_id}: {exc}",
+            f"[Config warning] Neither config.json nor generation_config.json found for {model_id}.",
             file=sys.stderr,
         )
         return None
@@ -107,86 +287,65 @@ def _fetch_config_from_hf(model_id):
     cfg["generation"]["do_sample"] = False
     cfg["generation"]["temperature"] = 0.0
 
-    # Heuristic: if the model's chat template references <think>...</think>,
-    # it's likely a "thinking" model that wraps reasoning in that tag. This
-    # only *adds* a reasoning block when detected; absence of a match means
-    # no "reasoning" key is set, same as before.
-    #
-    # The template can live in either of two places depending on the repo:
-    #   - embedded in tokenizer_config.json's "chat_template" field, or
-    #   - a standalone chat_template.jinja file (e.g. LiquidAI/LFM2.5-*),
-    #     which newer `transformers`/Hub conventions increasingly use instead
-    #     of embedding it inline.
-    # Check both; a hit on either is enough.
-    chat_template = ""
+    tags = _detect_reasoning_tags(resolve)
+    cfg["reasoning"] = {"open_tag": tags[0], "close_tag": tags[1]} if tags else None
 
-    try:
-        path = hf_hub_download(model_id, "tokenizer_config.json")
-        with open(path, "r", encoding="utf-8") as f:
-            tokenizer_cfg = json.load(f)
-        fetched_anything = True
-
-        template_field = tokenizer_cfg.get("chat_template", "")
-        if isinstance(template_field, list):
-            # Some repos store multiple named templates as a list of dicts.
-            template_field = " ".join(
-                str(entry.get("template", "")) for entry in template_field if isinstance(entry, dict)
-            )
-        chat_template += str(template_field)
-    except EntryNotFoundError:
-        pass
-    except Exception as exc:
-        print(
-            f"[Config warning] Failed to inspect tokenizer_config.json for {model_id}: {exc}",
-            file=sys.stderr,
-        )
-        # Non-fatal: reasoning-tag detection is best-effort, doesn't block the fetch.
-
-    try:
-        path = hf_hub_download(model_id, "chat_template.jinja")
-        with open(path, "r", encoding="utf-8") as f:
-            chat_template += f.read()
-        fetched_anything = True
-    except EntryNotFoundError:
-        pass
-    except Exception as exc:
-        print(
-            f"[Config warning] Failed to fetch chat_template.jinja for {model_id}: {exc}",
-            file=sys.stderr,
-        )
-        # Non-fatal, same reasoning as above.
-
-    if "<think>" in chat_template and "</think>" in chat_template:
-        cfg["reasoning"] = {"open_tag": "<think>", "close_tag": "</think>"}
-
-    if not fetched_anything:
-        print(
-            f"[Config warning] No config.json or generation_config.json found on the Hub for {model_id}.",
-            file=sys.stderr,
-        )
-        return None
-
+    cfg["_provisional"] = provisional
     return cfg
+
+
+def _warn_provisional(model_id, cfg, config_path):
+    """Warn, on every load, about fields no source could supply. Deliberately
+    not silenced by the write to model_configs/: the whole failure mode this
+    guards against is a placeholder becoming permanent because it got cached
+    once and never questioned again."""
+    provisional = cfg.get("_provisional")
+    if not provisional:
+        return
+    if "max_new_tokens" in provisional:
+        cap = cfg.get("generation", {}).get("max_new_tokens")
+        print(
+            f"[Config warning] {model_id}: max_new_tokens={cap} is a placeholder, not a "
+            "measured value -- no HF repo publishes this field. It is set high on purpose "
+            "so a first run is not truncated. Narrow it from that run's completion lengths "
+            "and stop_reason counts.",
+            file=sys.stderr,
+        )
+    other = [f for f in provisional if f != "max_new_tokens"]
+    if other:
+        print(
+            f"[Config warning] {model_id}: {', '.join(other)} taken from the checkpoint's own "
+            "metadata, which may not match what runs well on this machine.",
+            file=sys.stderr,
+        )
+    print(
+        f'[Config] Remove "_provisional" from {config_path} once these are confirmed.',
+        file=sys.stderr,
+    )
 
 
 def _load_model_config(model_id):
     """Resolve a model config with a three-tier strategy:
     1. Local model_configs/<sanitized_model_id>.json, if present.
-    2. Auto-fetched from the HF Hub (config.json / generation_config.json),
-       with decoding forced to greedy (do_sample=False, temperature=0).
-       A successful fetch is cached to disk so later runs skip the fetch.
+    2. Auto-derived from the checkpoint's own files -- read from a local
+       directory when --model points at one, otherwise fetched from the Hub --
+       with decoding forced to greedy. Cached to disk so later runs skip it,
+       but any provisional field keeps warning until a human confirms it.
     3. Fall back to the Llama default config, with an explicit warning.
     """
-    sanitized = model_id.replace("/", "_")
+    sanitized = model_id.replace("/", "_").strip("._")
     config_path = os.path.join(_MODEL_CONFIGS_DIR, f"{sanitized}.json")
 
     if os.path.isfile(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            cfg = json.load(f)
+        _warn_provisional(model_id, cfg, config_path)
+        return cfg
 
+    source = "local directory" if os.path.isdir(model_id) else "the Hugging Face Hub"
     print(
-        f"[Config warning] No config found at {config_path} -- attempting to fetch "
-        f"{model_id}'s config from the Hugging Face Hub...",
+        f"[Config warning] No config found at {config_path} -- deriving {model_id}'s "
+        f"config from {source}...",
         file=sys.stderr,
     )
     cfg = _fetch_config_from_hf(model_id)
@@ -197,25 +356,30 @@ def _load_model_config(model_id):
                 json.dump(cfg, f, ensure_ascii=False, indent=2)
                 f.write("\n")
             print(
-                f"[Config] Auto-fetched config for {model_id} saved to {config_path} "
+                f"[Config] Auto-derived config for {model_id} saved to {config_path} "
                 "(do_sample=False, temperature=0.0 forced).",
                 file=sys.stderr,
             )
         except Exception as exc:
-            print(f"[Config warning] Fetched config but failed to cache it: {exc}", file=sys.stderr)
+            print(f"[Config warning] Derived config but failed to cache it: {exc}", file=sys.stderr)
+        _warn_provisional(model_id, cfg, config_path)
         return cfg
 
     # Fall back to Llama config as default
     fallback_path = os.path.join(_MODEL_CONFIGS_DIR, _FALLBACK_CONFIG_NAME)
+    with open(fallback_path, "r", encoding="utf-8") as f:
+        fallback = json.load(f)
     print(
-        f"[Config warning] Could not fetch a config for {model_id} from the Hub -- falling back to "
+        f"[Config warning] Could not derive a config for {model_id} -- falling back to "
         "meta-llama/Llama-3.2-1B-Instruct's settings (non-thinking, "
-        "do_sample=False, max_new_tokens=1024). Add a model_configs/"
-        f"{sanitized}.json with this model's actual recommended settings.",
+        f"{fallback.get('torch_dtype')}, do_sample=False, "
+        f"max_new_tokens={fallback.get('generation', {}).get('max_new_tokens')}). These are "
+        "another model's values and are almost certainly wrong here. Add a "
+        f"model_configs/{sanitized}.json with this model's actual settings before trusting "
+        "any results from this run.",
         file=sys.stderr,
     )
-    with open(fallback_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    return fallback
 
 
 def parse_model_response(response):
