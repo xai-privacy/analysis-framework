@@ -393,16 +393,42 @@ def _load_model_config(model_id):
     return fallback
 
 
-def parse_model_response(response):
-    """Extract the answer marker and retain the remaining response as rationale."""
+def parse_model_response(response, open_tag="<think>", close_tag="</think>"):
+    """Extract the answer marker and retain the remaining response as rationale.
+
+    The reasoning block, where there is one, is cut away before the answer is
+    searched for. Skipping that step lets the regex match a candidate the model
+    proposed and then talked itself out of, recording a discarded guess as the
+    final answer -- a wrong score that looks exactly like a right one.
+
+    The tags come from the model's config instead of being hardcoded, because
+    neither the delimiter style nor the presence of the opener is universal:
+
+    - Mistral's reasoning models delimit with [THINK]...[/THINK], not <think>.
+    - DeepSeek-R1-Distill's chat template appends "<think>" to the *prompt*
+      (`{{'<|Assistant|><think>\\n'}}`), so generation begins already inside the
+      block and the opener never appears in the decoded completion -- only the
+      closer does.
+
+    Presence of the *closer* therefore decides whether a block was emitted; the
+    opener is only consulted to tell an unterminated block from an absent one.
+    """
     search_text = response
     offset = 0
-    if "<think>" in response.lower():
-        close_idx = response.lower().find("</think>")
+
+    if close_tag:
+        # rfind, not find: a model that emits several reasoning blocks puts its
+        # final answer after the last one, and everything earlier is working.
+        close_idx = response.lower().rfind(close_tag.lower())
         if close_idx == -1:
-            # Reasoning never finished, so there is no reliable final answer.
+            # A model whose config declares reasoning tags but whose output has
+            # no closer either ran out of budget mid-thought or never finished
+            # the block. Either way the text is reasoning in progress, not a
+            # conclusion, so no answer is reported. Deliberately strict: a
+            # missing answer shows up as unparseable in the summary, whereas a
+            # mid-reasoning guess would silently corrupt the score.
             return {"model_answer": None, "model_rationale": response.strip()}
-        offset = close_idx + len("</think>")
+        offset = close_idx + len(close_tag)
         search_text = response[offset:]
 
     answer_match = re.search(
@@ -915,9 +941,21 @@ def execution_pipeline(model_id, year=None, overwrite=False, limit=None):
             }
 
         response = generated["text"]
-        parsed = parse_model_response(response)
 
         flagged_tag = detect_undeclared_reasoning_tag(response, declared_open_tag)
+
+        # Strip with the declared pair when the config has one, otherwise with
+        # the pair the response itself opened with. Phi-4-mini-reasoning and
+        # Magistral declare no tags in any config file and emit them as learned
+        # behavior, so the config cannot supply them and the response must.
+        open_tag, close_tag = declared_open_tag, declared_close_tag
+        if not close_tag and flagged_tag:
+            inner = flagged_tag[1:-1]
+            open_tag = flagged_tag
+            close_tag = f"</{inner}>" if flagged_tag.startswith("<") else f"[/{inner}]"
+
+        parsed = parse_model_response(response, open_tag, close_tag)
+
         if flagged_tag:
             print(
                 f"[Reasoning-tag warning] {question['id']}: response opens with "
