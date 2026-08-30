@@ -1,8 +1,12 @@
 import argparse
+import hashlib
 import json
 import os
+import platform
 import re
+import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import torch
@@ -30,9 +34,15 @@ _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "m
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "benchmarks",
-    "LEET_Arg_Questions_cleaned.json",
+    # The by-statement file, matching run_claude_benchmark.py, run_openai_benchmark.py
+    # and results/evaluate_results.py. Commit f303958 moved those three and missed this
+    # one, which left SLM rows carrying original_rationale as a flat string while API
+    # rows carry the per-statement dict (90 of 93 questions differ). Same ids, same 93
+    # questions, so nothing here breaks -- only the rationale shape.
+    "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
 )
 _RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
+_RUNS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runs")
 _FALLBACK_CONFIG_NAME = "meta-llama_Llama-3.2-1B-Instruct.json"
 
 # Tag families used by reasoning models to delimit their thinking block, in the
@@ -433,15 +443,113 @@ def detect_undeclared_reasoning_tag(response, declared_open_tag=None):
     return opener
 
 
+# Every row this runner writes carries run_id 1. Decoding is greedy with a fixed
+# seed, so repeating a question reproduces the same tokens and there is nothing
+# to average over. The field exists so these files share a shape with the API
+# runners, which do sample and do support --runs.
+_RUN_ID = 1
+
+# Only the fields that change what the model emits. Everything else in a config
+# ("_provisional" bookkeeping above all) can be edited freely without
+# invalidating rows already on disk, and must not trip the drift check.
+_CONFIG_FINGERPRINT_FIELDS = ("model_id", "torch_dtype", "seed", "generation", "reasoning")
+
+
+def _utc_now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _sha256_file(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _sha256_text(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _config_fingerprint(model_cfg):
+    subset = {key: model_cfg.get(key) for key in _CONFIG_FINGERPRINT_FIELDS}
+    return _sha256_text(json.dumps(subset, sort_keys=True, ensure_ascii=False))[:12]
+
+
+def _git_state():
+    """The commit this run executed at, and whether the tree was dirty.
+
+    Both halves are needed: a commit alone describes the code only if nothing
+    was edited on top of it, and on a Colab VM that is worth recording rather
+    than assuming.
+    """
+    repo = os.path.dirname(os.path.abspath(__file__))
+
+    def git(*args):
+        return subprocess.run(args, cwd=repo, capture_output=True, text=True, timeout=10)
+
+    try:
+        head = git("git", "rev-parse", "HEAD")
+        if head.returncode != 0:
+            return {"commit": None, "dirty": None}
+        status = git("git", "status", "--porcelain")
+        return {"commit": head.stdout.strip(), "dirty": bool(status.stdout.strip())}
+    except Exception:
+        return {"commit": None, "dirty": None}
+
+
+def _versions():
+    versions = {"python": platform.python_version(), "torch": getattr(torch, "__version__", None)}
+    try:
+        import transformers
+
+        versions["transformers"] = transformers.__version__
+    except Exception:
+        versions["transformers"] = None
+    return versions
+
+
+def _device_name(device):
+    try:
+        if device == "cuda":
+            return torch.cuda.get_device_name(0)
+        if device == "mps":
+            return f"Apple Silicon ({platform.machine()})"
+    except Exception:
+        pass
+    return platform.processor() or platform.machine()
+
+
+def _run_uid(model_id):
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    return f"{stamp}_{re.sub(r'[^A-Za-z0-9_.-]+', '_', model_id).strip('_')}"
+
+
+def _write_run_metadata(path, payload):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+
+
 def generate_hf_response(model, tokenizer, user_content, device, system_prompt, gen_config):
-    """Generates a text completion natively using the proper chat template sequence."""
+    """Generate one completion and report how it ended.
+
+    Returns a dict, not a bare string, because the text alone cannot tell a
+    model that finished from one cut off at max_new_tokens -- and for a thinking
+    model those are indistinguishable in the saved output while meaning opposite
+    things: a response truncated before its closing tag has no parseable answer,
+    so a budget problem is recorded as a reasoning failure. transformers'
+    generate() reports nothing equivalent to the hosted APIs' stop_reason, so it
+    is derived here.
+    """
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_content}
     ]
     formatted = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     inputs = tokenizer(formatted, return_tensors="pt").to(device)
-    prompt_len = inputs["input_ids"].shape[1]
+    prompt_len = int(inputs["input_ids"].shape[1])
 
     generation_kwargs = dict(gen_config)
 
@@ -454,13 +562,51 @@ def generate_hf_response(model, tokenizer, user_content, device, system_prompt, 
             )
     except Exception as exc:
         print(f"[Generation Error]: {exc}", file=sys.stderr)
-        return json.dumps({"error": "generation_failed", "reason": str(exc)})
+        return {
+            "text": "",
+            "input_tokens": prompt_len,
+            "output_tokens": 0,
+            "stop_reason": None,
+            "error": f"generation_failed: {exc}",
+        }
 
-    return tokenizer.decode(
-        output_tokens[0][prompt_len:],
+    completion = output_tokens[0][prompt_len:]
+    completion_len = int(completion.shape[0])
+    cap = generation_kwargs.get("max_new_tokens")
+
+    # eos is tested before the cap, never after. A model that emits its stop
+    # token on the last permitted step finished normally, and reporting that as
+    # "length" would invent a truncation that did not happen -- which is exactly
+    # the misreading this field exists to prevent.
+    eos_ids = tokenizer.eos_token_id
+    if eos_ids is None:
+        eos_ids = set()
+    elif isinstance(eos_ids, int):
+        eos_ids = {eos_ids}
+    else:
+        eos_ids = set(eos_ids)
+
+    if completion_len and int(completion[-1]) in eos_ids:
+        stop_reason = "eos"
+    elif cap is not None and completion_len >= cap:
+        stop_reason = "length"
+    else:
+        # Neither the stop token nor the cap: some other StoppingCriteria fired.
+        stop_reason = "stop"
+
+    text = tokenizer.decode(
+        completion,
         skip_special_tokens=True,
         clean_up_tokenization_spaces=False,
     ).strip()
+
+    return {
+        "text": text,
+        "input_tokens": prompt_len,
+        "output_tokens": completion_len,
+        "stop_reason": stop_reason,
+        "error": None,
+    }
 
 
 def _result_path(model_id):
@@ -468,13 +614,141 @@ def _result_path(model_id):
     return os.path.join(_RESULTS_DIR, f"{signature}.json")
 
 
-def _load_questions(year=None):
+def _load_questions(year=None, limit=None):
     with open(_QUESTIONS_PATH, "r", encoding="utf-8") as handle:
         questions = json.load(handle)
-    if year is None:
-        return questions
-    year_prefix = f"{year}_"
-    return [question for question in questions if str(question.get("id", "")).startswith(year_prefix)]
+    if year is not None:
+        year_prefix = f"{year}_"
+        questions = [
+            question for question in questions
+            if str(question.get("id", "")).startswith(year_prefix)
+        ]
+    if limit is not None:
+        questions = questions[:limit]
+    return questions
+
+
+def _completed_ids(results):
+    """Question ids that do not need to be asked again.
+
+    A row carrying an error is not counted: those failures are transient (OOM, a
+    dropped connection, a CUDA hiccup) and a rerun can genuinely succeed.
+
+    A row truncated at max_new_tokens IS counted as done. Decoding is greedy
+    with a fixed seed, so rerunning a truncated question reproduces the same
+    truncated text token for token -- retrying spends GPU time to learn nothing
+    and never terminates. Only raising the cap changes that outcome, and raising
+    the cap is a config change, which _check_config_drift() catches instead.
+    """
+    completed = set()
+    for row in results:
+        if row.get("error") is not None:
+            continue
+        qid = row.get("id")
+        if qid is not None:
+            completed.add((qid, row.get("run_id", _RUN_ID)))
+    return completed
+
+
+def _check_config_drift(results, fingerprint, model_id):
+    """Refuse to append rows generated under different settings than the ones on disk.
+
+    The failure this prevents is silent. Raise max_new_tokens after seeing
+    truncation, rerun without --overwrite, and the finished questions are
+    skipped as complete while the remaining ones run under the new budget. The
+    file then holds two experiments and nothing in it says which row belongs to
+    which.
+    """
+    seen = {row.get("config_sha") for row in results if row.get("config_sha")}
+    stale = seen - {fingerprint}
+    if not stale:
+        return
+    raise SystemExit(
+        f"[Config drift] {model_id}: rows already in the results file were produced with "
+        f"model config {'/'.join(sorted(stale))}, but the current config fingerprints as "
+        f"{fingerprint}. Appending would mix two different generation settings in one "
+        "file. Rerun with --overwrite to discard the old rows, or restore the previous "
+        f"model_configs/ entry to keep them."
+    )
+
+
+def _percentile(sorted_values, fraction):
+    if not sorted_values:
+        return None
+    index = min(len(sorted_values) - 1, int(round(fraction * (len(sorted_values) - 1))))
+    return sorted_values[index]
+
+
+def _summarize_run(results, model_id, cap):
+    """Fold the whole result file into the numbers that decide the token budget.
+
+    Deliberately computed over every row in the file, not just this run's: the
+    question being answered is "what does this model need on this benchmark",
+    and a resumed run holds half the evidence.
+    """
+    usable = [row for row in results if row.get("error") is None and row.get("usage")]
+    outputs = sorted(row["usage"]["output_tokens"] for row in usable)
+    inputs = sorted(row["usage"]["input_tokens"] for row in usable)
+    truncated = [row for row in usable if row.get("stop_reason") == "length"]
+
+    stop_counts = {}
+    for row in usable:
+        reason = row.get("stop_reason") or "unknown"
+        stop_counts[reason] = stop_counts.get(reason, 0) + 1
+
+    return {
+        "model_id": model_id,
+        "rows_total": len(results),
+        "rows_errored": sum(1 for row in results if row.get("error") is not None),
+        "answer_parsed": sum(1 for row in results if row.get("model_answer") is not None),
+        "max_new_tokens": cap,
+        "input_tokens": {
+            "median": _percentile(inputs, 0.5),
+            "max": inputs[-1] if inputs else None,
+        },
+        "output_tokens": {
+            "median": _percentile(outputs, 0.5),
+            "p95": _percentile(outputs, 0.95),
+            "max": outputs[-1] if outputs else None,
+        },
+        "stop_reason_counts": stop_counts,
+        "truncated": len(truncated),
+        "truncated_ids": [row["id"] for row in truncated],
+        "reasoning_unclosed": sum(1 for row in usable if row.get("reasoning_closed") is False),
+    }
+
+
+def _print_summary(summary, metadata_path=None):
+    outputs = summary["output_tokens"]
+    inputs = summary["input_tokens"]
+    cap = summary["max_new_tokens"]
+
+    print(f"\n=== Run summary: {summary['model_id']} ===")
+    print(f"Rows in results file:         {summary['rows_total']}   errored: {summary['rows_errored']}")
+    print(f"Answer parsed:                {summary['answer_parsed']} / {summary['rows_total']}")
+    print(f"Input tokens  median/max:     {inputs['median']} / {inputs['max']}")
+    print(f"Output tokens median/p95/max: {outputs['median']} / {outputs['p95']} / {outputs['max']}")
+    counts = "   ".join(f"{k} {v}" for k, v in sorted(summary["stop_reason_counts"].items()))
+    print(f"stop_reason:                  {counts or 'n/a'}")
+    if summary["reasoning_unclosed"]:
+        print(f"Reasoning blocks unclosed:    {summary['reasoning_unclosed']}")
+
+    if summary["truncated"]:
+        shown = ", ".join(summary["truncated_ids"][:8])
+        more = ", ..." if len(summary["truncated_ids"]) > 8 else ""
+        print(
+            f"\n[!] {summary['truncated']} response(s) hit max_new_tokens={cap}. Those lengths are a\n"
+            f"    LOWER BOUND, not a measurement -- raise the cap in model_configs/ and rerun\n"
+            f"    with --overwrite before trusting these scores.\n"
+            f"    Truncated: {shown}{more}"
+        )
+    elif outputs["max"] is not None:
+        print(
+            f"\n[ok] Nothing hit max_new_tokens={cap}; observed max {outputs['max']}. "
+            "This is a real measurement -- document it."
+        )
+    if metadata_path:
+        print(f"Run metadata: {metadata_path}")
 
 
 def _load_existing_results(result_path, overwrite):
@@ -494,7 +768,7 @@ def _save_result(result_path, results):
         handle.write("\n")
 
 
-def execution_pipeline(model_id, year=None, overwrite=False):
+def execution_pipeline(model_id, year=None, overwrite=False, limit=None):
     if torch is None or AutoTokenizer is None or AutoModelForCausalLM is None:
         print("Missing runtime dependencies for Hugging Face benchmarking.", file=sys.stderr)
         print(f"Import error: {_IMPORT_ERROR}", file=sys.stderr)
@@ -504,19 +778,13 @@ def execution_pipeline(model_id, year=None, overwrite=False):
     print("Starting benchmarking the model via Hugging Face ...\n")
     print(f"Model: {model_id}")
     print(f"Year: {year if year is not None else 'all'}")
-    device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-    print(f"Target Compute Device: {device.upper()}")
+    print(f"Limit: {limit if limit is not None else 'all'}")
 
     model_cfg = _load_model_config(model_id)
     print(f"Model config: {model_cfg}")
 
     system_prompt = get_system_prompt()
-
-    torch.manual_seed(model_cfg.get("seed", 0))
-
-    dtype_str = model_cfg.get("torch_dtype", "float16")
-    torch_dtype = torch.float16 if dtype_str == "float16" else torch.bfloat16 if dtype_str == "bfloat16" else "auto"
-    trust_remote_code = model_cfg.get("trust_remote_code", False)
+    fingerprint = _config_fingerprint(model_cfg)
 
     gen_config = dict(model_cfg.get("generation", {}))
     gen_config.setdefault("max_new_tokens", 64)
@@ -536,6 +804,46 @@ def execution_pipeline(model_id, year=None, overwrite=False):
 
     gen_config["temperature"] = temperature
 
+    questions = _load_questions(year, limit)
+    result_path = _result_path(model_id)
+    results = _load_existing_results(result_path, overwrite)
+    _check_config_drift(results, fingerprint, model_id)
+
+    completed = _completed_ids(results)
+    pending = [q for q in questions if (q.get("id"), _RUN_ID) not in completed]
+
+    print(f"Questions selected: {len(questions)}")
+    print(f"Questions file: {os.path.basename(_QUESTIONS_PATH)}")
+    print(f"Results file: {result_path}")
+
+    # Checked before the model is loaded, never after. Resolving a 7B checkpoint
+    # costs minutes and gigabytes, and a fully-processed model needs none of it --
+    # that is what lets a notebook be re-run top to bottom without the operator
+    # having to track which models are already done.
+    if not pending:
+        print(
+            f"\n[Skip] {model_id}: all {len(questions)} selected questions already "
+            "complete. Model not loaded."
+        )
+        if results:
+            _print_summary(_summarize_run(results, model_id, gen_config.get("max_new_tokens")))
+        return
+
+    if len(pending) < len(questions):
+        print(
+            f"Resuming: {len(questions) - len(pending)} already complete, "
+            f"{len(pending)} still to run."
+        )
+
+    device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+    print(f"Target Compute Device: {device.upper()}")
+
+    torch.manual_seed(model_cfg.get("seed", 0))
+
+    dtype_str = model_cfg.get("torch_dtype", "float16")
+    torch_dtype = torch.float16 if dtype_str == "float16" else torch.bfloat16 if dtype_str == "bfloat16" else "auto"
+    trust_remote_code = model_cfg.get("trust_remote_code", False)
+
     try:
         tokenizer = AutoTokenizer.from_pretrained(model_id)
         model_kwargs = {"trust_remote_code": trust_remote_code}
@@ -554,16 +862,41 @@ def execution_pipeline(model_id, year=None, overwrite=False):
         print("Please authenticate with Hugging Face for gated models or pass a public model id.", file=sys.stderr)
         return
 
-    questions = _load_questions(year)
-    result_path = _result_path(model_id)
-    results = _load_existing_results(result_path, overwrite)
+    # Written before the first question, not after the last: a run that dies at
+    # question 47 is exactly the run whose provenance you need, and a sidecar
+    # only written on success would not exist for it.
+    run_uid = _run_uid(model_id)
+    metadata_path = os.path.join(_RUNS_DIR, run_uid, "metadata.json")
+    metadata = {
+        "run_uid": run_uid,
+        "started_at": _utc_now(),
+        "finished_at": None,
+        "argv": sys.argv,
+        "git": _git_state(),
+        "device": device,
+        "device_name": _device_name(device),
+        "versions": _versions(),
+        "model_config": model_cfg,
+        "config_sha": fingerprint,
+        "questions_file": os.path.basename(_QUESTIONS_PATH),
+        "questions_sha256": _sha256_file(_QUESTIONS_PATH),
+        "questions_selected": len(questions),
+        "questions_pending": len(pending),
+        "system_prompt_sha256": _sha256_text(system_prompt),
+        "results_file": os.path.basename(result_path),
+        "summary": None,
+    }
+    _write_run_metadata(metadata_path, metadata)
+    print(f"Run metadata: {metadata_path}")
 
-    print(f"Questions selected: {len(questions)}")
-    print(f"Results file: {result_path}")
-    for question in questions:
+    reasoning = model_cfg.get("reasoning") or {}
+    declared_open_tag = reasoning.get("open_tag")
+    declared_close_tag = reasoning.get("close_tag")
+
+    for question in pending:
         print(f"\n[{question['id']}]")
         try:
-            response = generate_hf_response(
+            generated = generate_hf_response(
                 model,
                 tokenizer,
                 question["original_question"],
@@ -573,11 +906,17 @@ def execution_pipeline(model_id, year=None, overwrite=False):
             )
         except Exception as exc:
             print(f"[Question failed]: {exc}", file=sys.stderr)
-            response = f"Generation failed: {exc}"
+            generated = {
+                "text": "",
+                "input_tokens": None,
+                "output_tokens": None,
+                "stop_reason": None,
+                "error": f"question_failed: {exc}",
+            }
 
+        response = generated["text"]
         parsed = parse_model_response(response)
 
-        declared_open_tag = (model_cfg.get("reasoning") or {}).get("open_tag")
         flagged_tag = detect_undeclared_reasoning_tag(response, declared_open_tag)
         if flagged_tag:
             print(
@@ -590,10 +929,42 @@ def execution_pipeline(model_id, year=None, overwrite=False):
 
         result = dict(question)
         result.update(parsed)
+        result.update({
+            "run_uid": run_uid,
+            "run_id": _RUN_ID,
+            "model_id": model_id,
+            "provider": "huggingface",
+            "backend": "local",
+            "config_sha": fingerprint,
+            "created_at": _utc_now(),
+            "usage": {
+                "input_tokens": generated["input_tokens"],
+                "output_tokens": generated["output_tokens"],
+            },
+            "stop_reason": generated["stop_reason"],
+            # None, not False, when the model declares no reasoning tag: "this
+            # model has no thinking block" and "its thinking block was cut off"
+            # are different facts and must not collapse into one value.
+            "reasoning_closed": (
+                declared_close_tag.lower() in response.lower()
+                if declared_close_tag else None
+            ),
+            "error": generated["error"],
+        })
         results.append(result)
         _save_result(result_path, results)
-        print(f"Model answer: {parsed['model_answer']}")
+        print(
+            f"Model answer: {parsed['model_answer']}   "
+            f"[{generated['output_tokens']} tok, stop={generated['stop_reason']}]"
+        )
         sys.stdout.flush()
+
+    summary = _summarize_run(results, model_id, gen_config.get("max_new_tokens"))
+    metadata["finished_at"] = _utc_now()
+    metadata["summary"] = summary
+    _write_run_metadata(metadata_path, metadata)
+    _print_summary(summary, metadata_path)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the LEET-Arg benchmark against an HF model.")
@@ -606,13 +977,21 @@ if __name__ == "__main__":
     )
     parser.add_argument("--year", help="Run only questions whose id starts with YEAR_.")
     parser.add_argument(
+        "--limit",
+        type=int,
+        help="Run only the first N selected questions. Completeness is measured against "
+             "the selected set, so --limit 3 then no limit resumes at question 4 rather "
+             "than restarting.",
+    )
+    parser.add_argument(
         "--overwrite",
         action="store_true",
-        help="Clear the model result file before writing responses.",
+        help="Clear the model result file before writing responses. Needed after changing "
+             "a model config, since existing rows are otherwise kept and skipped.",
     )
     args = parser.parse_args()
     try:
-        execution_pipeline(args.model, args.year, args.overwrite)
+        execution_pipeline(args.model, args.year, args.overwrite, args.limit)
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)
         sys.exit(1)
