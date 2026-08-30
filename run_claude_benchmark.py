@@ -17,7 +17,7 @@ _MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "m
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "benchmarks",
-    "LEET_Arg_Questions_cleaned.json",
+    "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
 )
 _RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
 

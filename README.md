@@ -9,7 +9,7 @@ and evaluator scores.
 - `run_benchmark.py`: Runs the LEET-Arg questions against a Hugging Face causal language model and stores parsed responses in `results/`.
 - `prompts.py`: Defines the English reasoning prompt used by the benchmark.
 - `model_configs/`: Per-model inference settings.
-- `benchmarks/LEET_Arg_Questions_cleaned.json`: The current cleaned LEET-Arg question set: 93 questions and 301 statement units.
+- `benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`: The current cleaned LEET-Arg question set: 93 questions and 301 statement units.
 - `benchmarks/LEET_Arg_Model_Responses.json`: Responses and LLM-as-a-Judge evaluations for seven models across the LEET-Arg questions.
 - `tools/clean_leet_arg.py`: Rebuilds statements for known segmentation issues in a source dataset.
 - `tools/validate_leet_arg.py`: Validates statement structure, source consistency, punctuation, and suspicious content.
@@ -97,7 +97,7 @@ For each benchmark question, the model receives only:
 
 1. The base system prompt defined in `prompts.py`.
 2. The individual LEET-Arg question from
-  `benchmarks/LEET_Arg_Questions_cleaned.json`.
+  `benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`.
 
 The model is not given the dataset answer, the expert rationale, other model
 responses, or demonstrations from other questions. The generated response is

@@ -14,7 +14,7 @@ from typing import Any, Dict, Optional
 
 
 DEFAULT_RESULTS_DIR = Path(__file__).parent
-DEFAULT_QUESTIONS = DEFAULT_RESULTS_DIR.parent / "benchmarks" / "LEET_Arg_Questions_cleaned.json"
+DEFAULT_QUESTIONS = DEFAULT_RESULTS_DIR.parent / "benchmarks" / "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json"
 DEFAULT_OUTPUT = DEFAULT_RESULTS_DIR / "main_results.csv"
 
 _CIRCLED_TO_NUMBER = {symbol: str(number) for number, symbol in enumerate("①②③④⑤", 1)}
