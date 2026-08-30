@@ -43,17 +43,17 @@ python run_benchmark.py \
 ```
 
 Use `--overwrite` to replace an existing result file. Otherwise, responses are
-appended to the model's JSON file in `slm_results/`.
+appended to the model's JSON file in `results/`.
 
 ## Evaluate Results
 
 Evaluate saved model responses with:
 
 ```bash
-python slm_results/evaluate_results.py
+python results/evaluate_results.py
 ```
 
-The evaluator creates `slm_results/main_results.csv`, reporting correct,
+The evaluator creates `results/main_results.csv`, reporting correct,
 incorrect, unparseable, and total responses for every model result file.
 
 ## Validate The Dataset

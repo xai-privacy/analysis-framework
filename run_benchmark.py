@@ -32,7 +32,7 @@ _QUESTIONS_PATH = os.path.join(
     "benchmarks",
     "LEET_Arg_Questions_cleaned.json",
 )
-_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slm_results")
+_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
 _FALLBACK_CONFIG_NAME = "meta-llama_Llama-3.2-1B-Instruct.json"
 
 # Tag families used by reasoning models to delimit their thinking block, in the

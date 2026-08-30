@@ -6,7 +6,7 @@ and evaluator scores.
 
 ## Repository Contents
 
-- `run_benchmark.py`: Runs the LEET-Arg questions against a Hugging Face causal language model and stores parsed responses in `slm_results/`.
+- `run_benchmark.py`: Runs the LEET-Arg questions against a Hugging Face causal language model and stores parsed responses in `results/`.
 - `prompts.py`: Defines the English reasoning prompt used by the benchmark.
 - `model_configs/`: Per-model inference settings.
 - `benchmarks/LEET_Arg_Questions_cleaned.json`: The current cleaned LEET-Arg question set: 93 questions and 301 statement units.
@@ -101,7 +101,7 @@ For each benchmark question, the model receives only:
 
 The model is not given the dataset answer, the expert rationale, other model
 responses, or demonstrations from other questions. The generated response is
-parsed for its answer and saved with the question in `slm_results/`.
+parsed for its answer and saved with the question in `results/`.
 
 Run all questions with Llama 3.2 1B Instruct:
 
@@ -115,7 +115,7 @@ Run only questions whose IDs start with `2021_`:
 python3 run_benchmark.py --model meta-llama/Llama-3.2-1B-Instruct --year 2021
 ```
 
-Results are written to `slm_results/<model-signature>.json`. Existing results are retained and new responses are appended by default. Use `--overwrite` to clear that model's result file before running:
+Results are written to `results/<model-signature>.json`. Existing results are retained and new responses are appended by default. Use `--overwrite` to clear that model's result file before running:
 
 ```bash
 python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --year 2021 --overwrite
@@ -147,7 +147,7 @@ python tools/clean_leet_arg.py \
 Evaluate saved model responses and create the comparison CSV:
 
 ```bash
-python3 slm_results/evaluate_results.py
+python3 results/evaluate_results.py
 ```
 
 ## Limitations

@@ -19,7 +19,7 @@ _QUESTIONS_PATH = os.path.join(
     "benchmarks",
     "LEET_Arg_Questions_cleaned.json",
 )
-_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slm_results")
+_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
 
 
 def _utc_now() -> str:

@@ -1,5 +1,5 @@
 # File: tools/audit_reasoning_tags.py
-"""Scan existing slm_results/*.json files for undeclared reasoning tags.
+"""Scan existing results/*.json files for undeclared reasoning tags.
 
 Retroactive check for the same thing run_benchmark.py now warns about live:
 a response opening with a paired open/close tag (e.g. <think>...</think> or
@@ -15,7 +15,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from run_benchmark import detect_undeclared_reasoning_tag
 
-_RESULTS_GLOB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "slm_results", "*.json")
+_RESULTS_GLOB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results", "*.json")
 _CONFIGS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "model_configs")
 
 
@@ -48,7 +48,7 @@ def main():
         print(f"{path}: {flagged_count}/{len(records)} flagged\n")
 
     if not any_flagged:
-        print("No undeclared reasoning tags found in any slm_results/*.json file.")
+        print("No undeclared reasoning tags found in any results/*.json file.")
 
 
 if __name__ == "__main__":
