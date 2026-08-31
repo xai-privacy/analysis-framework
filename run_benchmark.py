@@ -413,9 +413,14 @@ def parse_model_response(response, open_tag="<think>", close_tag="</think>"):
     Presence of the *closer* therefore decides whether a block was emitted; the
     opener is only consulted to tell an unterminated block from an absent one.
     """
+    raw_text = response.strip()
     search_text = response
     offset = 0
+    extracted_ans = None
+    json_adhered = False
+    parse_method = None
 
+    # 1. Isolate search text by ignoring everything before the final close_tag
     if close_tag:
         # rfind, not find: a model that emits several reasoning blocks puts its
         # final answer after the last one, and everything earlier is working.
@@ -427,21 +432,107 @@ def parse_model_response(response, open_tag="<think>", close_tag="</think>"):
             # conclusion, so no answer is reported. Deliberately strict: a
             # missing answer shows up as unparseable in the summary, whereas a
             # mid-reasoning guess would silently corrupt the score.
-            return {"model_answer": None, "model_rationale": response.strip()}
+            return {
+                "model_answer": None, 
+                "model_rationale": raw_text,
+                "json_adhered": False,
+                "parse_method": None
+            }
         offset = close_idx + len(close_tag)
-        search_text = response[offset:]
+        search_text = response[offset:].strip()
 
-    answer_match = re.search(
-        r"\bAnswer\s*-\s*\{?\s*(?!choice\b)([0-9]+\b|[A-Ea-e]\b|[①②③④⑤])",
-        search_text,
-        re.IGNORECASE,
-    )
-    if answer_match is None:
-        return {"model_answer": None, "model_rationale": response.strip()}
+    def _extract_key_from_dict(d):
+        if not isinstance(d, dict):
+            return None
+        for key in ["model_answer", "answer", "final_answer", "choice", "response"]:
+            if key in d and d[key] is not None:
+                val = d[key]
+                return str(val).strip()
+        return None
 
-    start, end = offset + answer_match.start(), offset + answer_match.end()
-    rationale = (response[:start] + response[end:]).strip()
-    return {"model_answer": answer_match.group(1).strip(), "model_rationale": rationale}
+    def _salvage_json_answer(text):
+        """Fallback to extract the answer directly from a malformed JSON string."""
+        for key in ["model_answer", "answer", "final_answer", "choice", "response"]:
+            # Match quoted string values (e.g., "model_answer": "④ (b), (c)")
+            match = re.search(rf'"{key}"\s*:\s*"([^"]+)"', text, re.IGNORECASE)
+            if match:
+                return match.group(1).strip()
+            
+            # Match unquoted values like integers (e.g., "model_answer": 1)
+            match_unquoted = re.search(rf'"{key}"\s*:\s*([a-zA-Z0-9①②③④⑤]+)', text, re.IGNORECASE)
+            if match_unquoted and match_unquoted.group(1).lower() != "null":
+                return match_unquoted.group(1).strip()
+        return None
+
+    # 2. Try parsing as direct pure JSON
+    try:
+        parsed = json.loads(search_text, strict=False)
+        ans = _extract_key_from_dict(parsed)
+        if ans is not None:
+            extracted_ans = ans
+            json_adhered = True
+            parse_method = "json_strict"
+    except (json.JSONDecodeError, TypeError):
+        # Salvage broken pure JSON
+        ans = _salvage_json_answer(search_text)
+        if ans is not None:
+            extracted_ans = ans
+            json_adhered = True
+            parse_method = "json_regex_salvage"
+
+    # 3. Try extracting JSON embedded in Markdown code blocks or raw JSON strings
+    if extracted_ans is None:
+        json_matches = re.findall(r"```(?:json)?\s*(\{.*?\})\s*```", search_text, re.DOTALL | re.IGNORECASE)
+        if not json_matches:
+            json_matches = re.findall(r"(\{.*?\})", search_text, re.DOTALL)
+
+        for match in reversed(json_matches):  # Search from end forward
+            try:
+                parsed = json.loads(match, strict=False)
+                ans = _extract_key_from_dict(parsed)
+                if ans is not None:
+                    extracted_ans = ans
+                    json_adhered = True
+                    parse_method = "json_embedded"
+                    break
+            except (json.JSONDecodeError, TypeError):
+                # Salvage broken embedded JSON block
+                ans = _salvage_json_answer(match)
+                if ans is not None:
+                    extracted_ans = ans
+                    json_adhered = True
+                    parse_method = "json_embedded_regex_salvage"
+                    break
+
+    # 4. Fallback to Regex patterns for text answer formats
+    if extracted_ans is None:
+        regex_patterns = [
+            # Matches: "Answer - {1}", "Answer - 1", "Answer: A", "Answer - choice 1", "Answer: [1]"
+            r"\b(?:Answer|Response|Result)\b\s*[-:]?\s*\{?\s*(?:choice\s*)?([0-9]+\b|[A-Ea-e]\b|[①②③④⑤])",
+            # Matches: "correct answer is option 1", "the answer is A", "answer should be 1"
+            r"(?:correct\s+)?answer\s+(?:is|should be)\s*(?:option|choice)?\s*[\(\[\{]*\s*([0-9]+|[A-Ea-e]|[①②③④⑤])\s*[\)\]\}]*",
+            # Matches standalone choice at end of sentence/string: "(1)", "[A]", "①"
+            r"[\(\[\{]\s*([0-9]+|[A-Ea-e]|[①②③④⑤])\s*[\)\]\}]\s*$",
+        ]
+
+        for pattern in regex_patterns:
+            matches = list(re.finditer(pattern, search_text, re.IGNORECASE))
+            if matches:
+                extracted_ans = matches[-1].group(1).strip()
+                parse_method = "regex_fallback"
+                break
+
+    # Clean up trailing/leading brackets or quotes if present
+    if extracted_ans:
+        extracted_ans = re.sub(r"^[\{\(\[\"']+|[\}\)\]\"']+$", "", extracted_ans).strip()
+
+    # RETURN: The safely extracted answer alongside the FULL raw text as rationale.
+    return {
+        "model_answer": extracted_ans,
+        "model_rationale": raw_text,
+        "json_adhered": json_adhered,
+        "parse_method": parse_method
+    }
 
 
 _LEADING_TAG_PATTERN = re.compile(r"^\s*(<[A-Za-z_]+>|\[[A-Za-z_]+\])")

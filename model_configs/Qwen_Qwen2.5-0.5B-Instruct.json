@@ -1,0 +1,16 @@
+{
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "torch_dtype": "bfloat16",
+  "trust_remote_code": false,
+  "seed": 0,
+  "generation": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "max_new_tokens": 8192
+  },
+  "reasoning": null,
+  "_provisional": [
+    "max_new_tokens",
+    "torch_dtype"
+  ]
+}

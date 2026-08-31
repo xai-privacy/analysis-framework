@@ -1,3 +1,0 @@
-root ::= "{" ws "\"infringing_product_available\"" ws ":" ws boolean ws "," ws "\"substitute_product_available\"" ws ":" ws boolean ws "}"
-boolean ::= "true" | "false"
-ws ::= [ \t\n\r]*

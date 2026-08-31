@@ -1,0 +1,6 @@
+root ::= "{" ws "\"model_answer\"" ws ":" ws string ws "," ws "\"model_rationale\"" ws ":" ws string ws "}"
+string ::= "\"" char* "\""
+char ::= [^"\\] | "\\" escape
+escape ::= "\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t" | "u" hex hex hex hex
+hex ::= [0-9a-fA-F]
+ws ::= [ \t\n\r]*
