@@ -1,0 +1,68 @@
+{
+  "run_uid": "20260830T230141Z_meta-llama_Llama-3.2-3B-Instruct",
+  "started_at": "2026-08-30T23:01:41.452893+00:00",
+  "finished_at": "2026-08-30T23:03:02.054503+00:00",
+  "argv": [
+    "run_benchmark.py",
+    "--model",
+    "meta-llama/Llama-3.2-3B-Instruct",
+    "--limit",
+    "10"
+  ],
+  "git": {
+    "commit": "5642ffe97cddee45d7869120f5c998c6db9df6fe",
+    "dirty": true
+  },
+  "device": "cuda",
+  "device_name": "Tesla T4",
+  "versions": {
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1"
+  },
+  "model_config": {
+    "model_id": "meta-llama/Llama-3.2-3B-Instruct",
+    "torch_dtype": "bfloat16",
+    "trust_remote_code": false,
+    "seed": 0,
+    "generation": {
+      "do_sample": false,
+      "temperature": 0.0,
+      "max_new_tokens": 8192
+    },
+    "reasoning": null,
+    "_provisional": [
+      "max_new_tokens",
+      "torch_dtype"
+    ]
+  },
+  "config_sha": "fab92f5b20db",
+  "questions_file": "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
+  "questions_sha256": "85ab2b842a31ee6bd63ecf5e0d3c6219ef452e34cbf50a0df92a259c220d2776",
+  "questions_selected": 10,
+  "questions_pending": 10,
+  "system_prompt_sha256": "e49081ee293a138847941f391294a59edc1d4ac6c3a0fc83ca1eabc400542964",
+  "results_file": "meta-llama_Llama-3.2-3B-Instruct.json",
+  "summary": {
+    "model_id": "meta-llama/Llama-3.2-3B-Instruct",
+    "rows_total": 10,
+    "rows_errored": 0,
+    "answer_parsed": 10,
+    "max_new_tokens": 8192,
+    "input_tokens": {
+      "median": 575,
+      "max": 606
+    },
+    "output_tokens": {
+      "median": 143,
+      "p95": 293,
+      "max": 293
+    },
+    "stop_reason_counts": {
+      "eos": 10
+    },
+    "truncated": 0,
+    "truncated_ids": [],
+    "reasoning_unclosed": 0
+  }
+}

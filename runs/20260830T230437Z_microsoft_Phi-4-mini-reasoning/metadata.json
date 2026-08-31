@@ -1,0 +1,78 @@
+{
+  "run_uid": "20260830T230437Z_microsoft_Phi-4-mini-reasoning",
+  "started_at": "2026-08-30T23:04:37.295670+00:00",
+  "finished_at": "2026-08-31T00:26:46.041824+00:00",
+  "argv": [
+    "run_benchmark.py",
+    "--model",
+    "microsoft/Phi-4-mini-reasoning",
+    "--limit",
+    "10"
+  ],
+  "git": {
+    "commit": "5642ffe97cddee45d7869120f5c998c6db9df6fe",
+    "dirty": true
+  },
+  "device": "cuda",
+  "device_name": "Tesla T4",
+  "versions": {
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1"
+  },
+  "model_config": {
+    "model_id": "microsoft/Phi-4-mini-reasoning",
+    "torch_dtype": "bfloat16",
+    "trust_remote_code": false,
+    "seed": 0,
+    "generation": {
+      "do_sample": false,
+      "temperature": 0.0,
+      "max_new_tokens": 16384,
+      "repetition_penalty": 1.1
+    },
+    "reasoning": {
+      "open_tag": "<think>",
+      "close_tag": "</think>"
+    },
+    "_provisional": [
+      "max_new_tokens",
+      "torch_dtype"
+    ]
+  },
+  "config_sha": "8bcafb1f2939",
+  "questions_file": "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
+  "questions_sha256": "85ab2b842a31ee6bd63ecf5e0d3c6219ef452e34cbf50a0df92a259c220d2776",
+  "questions_selected": 10,
+  "questions_pending": 10,
+  "system_prompt_sha256": "e49081ee293a138847941f391294a59edc1d4ac6c3a0fc83ca1eabc400542964",
+  "results_file": "microsoft_Phi-4-mini-reasoning.json",
+  "summary": {
+    "model_id": "microsoft/Phi-4-mini-reasoning",
+    "rows_total": 10,
+    "rows_errored": 0,
+    "answer_parsed": 5,
+    "max_new_tokens": 16384,
+    "input_tokens": {
+      "median": 554,
+      "max": 605
+    },
+    "output_tokens": {
+      "median": 3365,
+      "p95": 16384,
+      "max": 16384
+    },
+    "stop_reason_counts": {
+      "stop": 6,
+      "length": 4
+    },
+    "truncated": 4,
+    "truncated_ids": [
+      "2021_20",
+      "2021_24",
+      "2021_25",
+      "2021_28"
+    ],
+    "reasoning_unclosed": 3
+  }
+}

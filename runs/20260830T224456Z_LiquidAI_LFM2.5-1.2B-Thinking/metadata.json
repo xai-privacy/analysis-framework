@@ -1,0 +1,70 @@
+{
+  "run_uid": "20260830T224456Z_LiquidAI_LFM2.5-1.2B-Thinking",
+  "started_at": "2026-08-30T22:44:56.506271+00:00",
+  "finished_at": "2026-08-30T22:53:42.824957+00:00",
+  "argv": [
+    "run_benchmark.py",
+    "--model",
+    "LiquidAI/LFM2.5-1.2B-Thinking",
+    "--limit",
+    "10"
+  ],
+  "git": {
+    "commit": "5642ffe97cddee45d7869120f5c998c6db9df6fe",
+    "dirty": true
+  },
+  "device": "cuda",
+  "device_name": "Tesla T4",
+  "versions": {
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1"
+  },
+  "model_config": {
+    "model_id": "LiquidAI/LFM2.5-1.2B-Thinking",
+    "torch_dtype": "bfloat16",
+    "trust_remote_code": true,
+    "seed": 0,
+    "reasoning": {
+      "open_tag": "<think>",
+      "close_tag": "</think>"
+    },
+    "generation": {
+      "do_sample": false,
+      "temperature": 0.0,
+      "max_new_tokens": 8192
+    },
+    "_provisional": [
+      "max_new_tokens"
+    ]
+  },
+  "config_sha": "9eb3782d2207",
+  "questions_file": "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
+  "questions_sha256": "85ab2b842a31ee6bd63ecf5e0d3c6219ef452e34cbf50a0df92a259c220d2776",
+  "questions_selected": 10,
+  "questions_pending": 10,
+  "system_prompt_sha256": "e49081ee293a138847941f391294a59edc1d4ac6c3a0fc83ca1eabc400542964",
+  "results_file": "LiquidAI_LFM2.5-1.2B-Thinking.json",
+  "summary": {
+    "model_id": "LiquidAI/LFM2.5-1.2B-Thinking",
+    "rows_total": 10,
+    "rows_errored": 0,
+    "answer_parsed": 10,
+    "max_new_tokens": 8192,
+    "input_tokens": {
+      "median": 573,
+      "max": 618
+    },
+    "output_tokens": {
+      "median": 2012,
+      "p95": 4580,
+      "max": 4580
+    },
+    "stop_reason_counts": {
+      "eos": 10
+    },
+    "truncated": 0,
+    "truncated_ids": [],
+    "reasoning_unclosed": 0
+  }
+}
