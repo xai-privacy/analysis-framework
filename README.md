@@ -97,7 +97,7 @@ For each benchmark question, the model receives only:
 
 1. The base system prompt defined in `prompts.py`.
 2. The individual LEET-Arg question from
-  `benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`.
+   `benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`.
 
 The model is not given the dataset answer, the expert rationale, other model
 responses, or demonstrations from other questions. The generated response is
@@ -121,7 +121,11 @@ Results are written to `results/<model-signature>.json`. Existing results are re
 python3 run_benchmark.py --model microsoft/Phi-4-mini-instruct --year 2021 --overwrite
 ```
 
-Each stored record retains the source question and includes `model_answer` and `model_rationale`, parsed from the model's `Answer-<choice>.` response. The output terminal will not display the rationale for readibility purposes, storing it directly in the file.
+Each stored record retains the source question and includes `model_answer` and `model_rationale`, parsed from the model's `Answer-<choice>.` response. The output terminal will not display the rationale for readability purposes, storing it directly in the file.
+
+### Testing
+
+See [issue #24](https://github.com/xai-privacy/analysis-framework/issues/24) for details on testing, in particular, the [comment on the testing procedure](https://github.com/xai-privacy/analysis-framework/issues/24#issuecomment-5530569978).
 
 ## LEET-Arg Dataset
 
