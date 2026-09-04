@@ -1,0 +1,3632 @@
+{
+  "Evaluator A": {
+    "total_assigned": 120,
+    "tasks": [
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "CoT"
+      }
+    ]
+  },
+  "Evaluator B": {
+    "total_assigned": 120,
+    "tasks": [
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      }
+    ]
+  },
+  "Evaluator C": {
+    "total_assigned": 120,
+    "tasks": [
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "Baseline"
+      }
+    ]
+  },
+  "Evaluator D": {
+    "total_assigned": 120,
+    "tasks": [
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "CoT"
+      }
+    ]
+  },
+  "Evaluator E": {
+    "total_assigned": 120,
+    "tasks": [
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_22",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "CoT"
+      }
+    ]
+  },
+  "Evaluator F": {
+    "total_assigned": 120,
+    "tasks": [
+      {
+        "question_id": "2025_13",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 3",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 2",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2021_18",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 4",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_38",
+        "model": "Model 5",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2023_15",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2023_08",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2021_36",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_29",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 3",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_21",
+        "model": "Model 2",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_33",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 3",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2024_24",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_06",
+        "model": "Model 2",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 1",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2025_13",
+        "model": "Model 1",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2022_30",
+        "model": "Model 4",
+        "condition": "Baseline"
+      },
+      {
+        "question_id": "2024_01",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2021_20",
+        "model": "Model 5",
+        "condition": "Argumentation Framework"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 1",
+        "condition": "CoT"
+      },
+      {
+        "question_id": "2025_08",
+        "model": "Model 4",
+        "condition": "Baseline"
+      }
+    ]
+  }
+}
