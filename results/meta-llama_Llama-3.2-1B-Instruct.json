@@ -35,31 +35,15 @@
         "Charlie"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"The Copyright Act only requires creativity as a condition for a work, and does not demand morality.\",\n    \"Bob\": \"Protecting obscene materials as copyrighted works effectively grants rights to those with 'dirty hands' who have committed illegal acts, and recognizes property value and protection for the fruits of illegal conduct.\",\n    \"Charlie\": \"Recognizing socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works, but for other types of obscene materials, recognizing them as works can help minimize the infringement on freedom of expression and property rights caused by regulation of obscene materials.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Charlie\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T04:57:09.600466+00:00",
-    "extracted_claims": {
-      "Alice": "The Copyright Act only requires creativity as a condition for a work, and does not demand morality.",
-      "Bob": "Protecting obscene materials as copyrighted works effectively grants rights to those with 'dirty hands' who have committed illegal acts, and recognizes property value and protection for the fruits of illegal conduct.",
-      "Charlie": "Recognizing socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works, but for other types of obscene materials, recognizing them as works can help minimize the infringement on freedom of expression and property rights caused by regulation of obscene materials."
-    },
-    "extracted_attacks": [
-      [
-        "Alice",
-        "Bob"
-      ],
-      [
-        "Bob",
-        "Charlie"
-      ]
-    ],
+    "created_at": "2026-09-05T21:22:35.570325+00:00",
     "usage": {
       "input_tokens": 835,
       "output_tokens": 156
@@ -108,34 +92,15 @@
         "Country X"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Country X\": \"Someone who is concerned that creditors will continue to urge bankrupt debtors to repay their debts and that related lawsuits will never cease would support Country X's system.\",\n    \"Country Y\": \"Someone who believes that individuals are rational beings who make and are responsible for their own decisions, and that the state has no need to help those who have recklessly overspent, would oppose Country X's system.\"\n  },\n  \"attacks\": [\n    [\"Country X\", \"Country Y\"],\n    [\"Country X\", \"Country Y\"],\n    [\"Country Y\", \"Country X\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T04:59:06.793387+00:00",
-    "extracted_claims": {
-      "Country X": "Someone who is concerned that creditors will continue to urge bankrupt debtors to repay their debts and that related lawsuits will never cease would support Country X's system.",
-      "Country Y": "Someone who believes that individuals are rational beings who make and are responsible for their own decisions, and that the state has no need to help those who have recklessly overspent, would oppose Country X's system."
-    },
-    "extracted_attacks": [
-      [
-        "Country X",
-        "Country Y"
-      ],
-      [
-        "Country X",
-        "Country Y"
-      ],
-      [
-        "Country Y",
-        "Country X"
-      ]
-    ],
+    "created_at": "2026-09-05T21:24:13.526847+00:00",
     "usage": {
       "input_tokens": 871,
       "output_tokens": 129
@@ -180,34 +145,15 @@
         "Bob"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"If I could have given my friend 50,000 won for no reason but chose not to, my friend would have been in a better state.\",\n    \"Bob\": \"Not saving the child is the result of a deliberate decision to avoid the rescue.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Alice\"],\n    [\"Alice\", \"Bob\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:01:02.201048+00:00",
-    "extracted_claims": {
-      "Alice": "If I could have given my friend 50,000 won for no reason but chose not to, my friend would have been in a better state.",
-      "Bob": "Not saving the child is the result of a deliberate decision to avoid the rescue."
-    },
-    "extracted_attacks": [
-      [
-        "Alice",
-        "Bob"
-      ],
-      [
-        "Bob",
-        "Alice"
-      ],
-      [
-        "Alice",
-        "Bob"
-      ]
-    ],
+    "created_at": "2026-09-05T21:25:57.958395+00:00",
     "usage": {
       "input_tokens": 949,
       "output_tokens": 94
@@ -253,35 +199,15 @@
         "Alice"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Elegance is a subjective impression.\",\n    \"Bob\": \"Elegance is a property that anyone can recognize under normal conditions.\",\n    \"Charlie\": \"Elegance is a property that is culturally relative.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Bob\"],\n    [\"Charlie\", \"Alice\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:02:49.946328+00:00",
-    "extracted_claims": {
-      "Alice": "Elegance is a subjective impression.",
-      "Bob": "Elegance is a property that anyone can recognize under normal conditions.",
-      "Charlie": "Elegance is a property that is culturally relative."
-    },
-    "extracted_attacks": [
-      [
-        "Bob",
-        "Alice"
-      ],
-      [
-        "Charlie",
-        "Bob"
-      ],
-      [
-        "Charlie",
-        "Alice"
-      ]
-    ],
+    "created_at": "2026-09-05T21:27:36.504046+00:00",
     "usage": {
       "input_tokens": 945,
       "output_tokens": 86
@@ -310,151 +236,18 @@
     },
     "claims": {},
     "attacks": [],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"ⓐ To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.\",\n    \"Bob\": \"Believe the truth!\", \"Avoid error!\",\n    \"Charlie\": \"ⓐ People like Clifford, who say 'It is better to never believe than to ever believe something false!' are merely expressing a fear of being naively deceived.- William James, 'The Will to Believe' -\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Charlie\"]\n  ]\n}",
     "json_adhered": false,
     "parse_method": "failed",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:04:40.768125+00:00",
-    "extracted_claims": {},
-    "extracted_attacks": [],
+    "created_at": "2026-09-05T21:29:29.156730+00:00",
     "usage": {
       "input_tokens": 921,
       "output_tokens": 120
-    }
-  },
-  {
-    "id": "2021_18",
-    "year": "2021",
-    "problem_idx": "18",
-    "objective": "This question assesses the ability to correctly analyze individual arguments and their grounds, using views on epistemic objectivity and the artistic judgment of critics as its subject matter.",
-    "domain": "Humanities",
-    "category": "Argumentation and Rebuttal",
-    "answer": "2",
-    "original_question": "A: 'Epistemic objectivity' is related not so much to whether a claim is true or false, but rather to how that claim is justified. In the process of making a claim, it is necessary to ensure that healthy common sense and rationality are not distorted by the intervention of subjective elements such as bias, prejudice, herd mentality, or personal wishes, whether they belong to oneself or anyone else. In this sense, a judgment that has secured epistemic objectivity generally possesses persuasive power.B: For a work of art to have its intended effect, it must be appreciated from a particular perspective. If the critic’s situation does not align with what the work demands, the critic cannot make an appropriate judgment about the work. For example, when an advocate delivers a speech to a specific audience, he or she must consider that audience’s unique characteristics, interests, views, passions, and prejudices. If a critic from another era or country encounters this speech, in order to make the correct judgment, the critic must take all these circumstances into account and place himself or herself in the same situation as the contemporary audience. The same applies to works of art. Even if the critic is a friend or an adversary of the artist, they must set aside their own particular circumstances and adopt the perspective presupposed by the work. <question> Which of the following analyses of the above passages is/are correct? Choose all correct answers from among the <statements> as given.<statements>(a) If two people make the same judgment about a claim, according to Alice, their judgment possesses epistemic objectivity.(b) According to Alice, the judgment that Bob’s critic makes about a work of art does not possess epistemic objectivity.(c) If two critics from different eras or countries make the same judgment about a given work of art, according to Bob, their judgment is made from the perspective presupposed by the work. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) If two people make the same judgment about a claim, according to Alice, their judgment possesses epistemic objectivity.",
-      "statement_2": "(b) According to Alice, the judgment that Bob’s critic makes about a work of art does not possess epistemic objectivity.",
-      "statement_3": "(c) If two critics from different eras or countries make the same judgment about a given work of art, according to Bob, their judgment is made from the perspective presupposed by the work."
-    },
-    "original_rationale": {
-      "preliminaries": "The given passages contrast Alice’s position—that epistemic objectivity in judgment can be secured only by completely excluding subjective elements and fully exercising rationality—with Bob’s view that, for a critic’s judgment about a work of art to be appropriate, the critic must set aside his or her own particular circumstances and instead adopt the specific perspective presupposed by the work.",
-      "statement_1_rationale": "(a) If two people make the same judgment about a claim, then, according to Alice, for their judgment to possess epistemic objectivity, subjective elements from themselves or anyone else must not have been involved in making that judgment. However, the mere fact that they arrived at the same judgment does not entail that such subjective elements have been excluded, so we cannot conclude that their judgment has epistemic objectivity. Thus, (a) is not a correct analysis.",
-      "statement_2_rationale": "(b) According to Alice, for Bob’s critic’s judgment to have epistemic objectivity, subjective elements—whether from the critic or anyone else—must not have played a role in making that judgment. However, Bob’s critic needs to adopt the particular perspective required by the work, and that perspective, while not the critic’s own, nevertheless requires considering another person’s subjective elements. Therefore, (b) is a correct analysis.",
-      "statement_3_rationale": "(c) If two critics from different eras or countries make the same judgment about a work of art, Bob’s view is that for their judgments to be proper, they must be made from the perspective presupposed by the work. However, the mere fact that their judgments are the same does not necessarily mean that they adopted the perspective presupposed by the work. Therefore, (c) is not a correct analysis.",
-      "answer": "Only (b) among the <choices> is a correct analysis, so the answer is ②."
-    },
-    "claims": {
-      "Alice": "Epistemic objectivity is related not so much to whether a claim is true or false, but rather to how that claim is justified.",
-      "Bob": "For a work of art to have its intended effect, it must be appreciated from a particular perspective.",
-      "Charlie": "Charlie argues that only socially harmful obscene materials should be excluded from copyright protection."
-    },
-    "attacks": [
-      [
-        "Bob",
-        "Alice"
-      ],
-      [
-        "Charlie",
-        "Bob"
-      ]
-    ],
-    "model_rationale": "## Step 1: Analyze the first statement\nThe first statement says that epistemic objectivity is related to how a claim is justified, not whether a claim is true or false. This is a correct interpretation of epistemic objectivity.\n\n## Step 2: Analyze the second statement\nThe second statement says that a judgment that has secured epistemic objectivity generally possesses persuasive power. This is also a correct interpretation of epistemic objectivity.\n\n## Step 3: Analyze the third statement\nThe third statement says that a judgment that has secured epistemic objectivity must be made from the perspective presupposed by the work. This is a correct interpretation of epistemic objectivity.\n\n## Step 4: Analyze the fourth statement\nThe fourth statement says that if two people make the same judgment about a claim, according to Alice, their judgment possesses epistemic objectivity. This is incorrect because epistemic objectivity is about the justification of a claim, not the agreement with others.\n\n## Step 5: Analyze the fifth statement\nThe fifth statement says that if two critics from different eras or countries make the same judgment about a given work of art, according to Bob, their judgment is made from the perspective presupposed by the work. This is incorrect because epistemic objectivity is about the justification of a claim, not the perspective of the critic.\n\n## Step 6: Determine the correct answer\nBased on the analysis, the correct answer is ① (a) and ③ (a), (c).\n\n## Step 7: Write the final answer in the required format\n{\n  \"claims\": {\n    \"Alice\": \"Epistemic objectivity is related not so much to whether a claim is true or false, but rather to how that claim is justified.\",\n    \"Bob\": \"For a work of art to have its intended effect, it must be appreciated from a particular perspective.\",\n    \"Charlie\": \"Charlie argues that only socially harmful obscene materials should be excluded from copyright protection.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Bob\"]\n  ]\n}",
-    "json_adhered": true,
-    "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
-    "run_id": 1,
-    "model_id": "meta-llama/Llama-3.2-1B-Instruct",
-    "provider": "huggingface",
-    "backend": "local",
-    "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:07:25.268733+00:00",
-    "extracted_claims": {
-      "Alice": "Epistemic objectivity is related not so much to whether a claim is true or false, but rather to how that claim is justified.",
-      "Bob": "For a work of art to have its intended effect, it must be appreciated from a particular perspective.",
-      "Charlie": "Charlie argues that only socially harmful obscene materials should be excluded from copyright protection."
-    },
-    "extracted_attacks": [
-      [
-        "Bob",
-        "Alice"
-      ],
-      [
-        "Charlie",
-        "Bob"
-      ]
-    ],
-    "usage": {
-      "input_tokens": 874,
-      "output_tokens": 441
-    }
-  },
-  {
-    "id": "2021_20",
-    "year": "2021",
-    "problem_idx": "20",
-    "objective": "This question assesses the ability to read a debate on when changes in scientific theories can be considered progressive, and to accurately analyze each perspective.",
-    "domain": "Humanities",
-    "category": "Argumentation and Rebuttal",
-    "answer": "1",
-    "original_question": "Alice: It is not clear whether changes in scientific theories constitute \"genuine progress.\" Of course, if we look at the history of science, there have been instances where a successor theory replaced a previous theory by explaining and predicting a greater number of facts. However, this does not serve as grounds for claiming that the successor theory is “truly progressive.” Those cases merely show that the successor theory received more social support or that more scientists participated in its research.Bob: Even if such external factors influenced past achievements of theories, it is not impossible to judge whether real progress has taken place. This is because the judgment of progress depends not only on past achievements but also on future achievements that could be attained. And the potential achievements that a theory may have in the future are not influenced by such external factors.Alice: It is possible to compare the past performances of theories. However, it is difficult to compare the scope of explanations and predictions they will achieve in the future, that is, the future potential of the theories. This is because we cannot know all the consequences that a theory may have in the future.Bob: We can often compare the future potential of two theories. For example, for two theories T1 and T2, suppose that we can derive all statements constituting T1 deductively from those of T2, but not vice versa. In that case, T2 will make new predictions in addition to all the predictions of T1. In this case, T2 is “more general” than T1, and therefore has more future potential. <question> Which of the following analyses of the debate above is/are correct, as given in <statements>? <statements> (a) Both Alice and Bob agree that, for changes in scientific theory to constitute \"genuine progress,\" the success of a theory should not be explained solely by social factors.(b) Both Alice and Bob agree that changes in scientific theory have occurred in such a way that the successor theory preserves the explanations and predictions of the previous theory and further provides new explanations and predictions.(c) If the theory of relativity made correct predictions in areas where Newtonian theory made incorrect ones, Bob would agree that the theory of relativity is “more general” than the Newtonian theory. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) Both Alice and Bob agree that, for changes in scientific theory to constitute \"genuine progress,\" the success of a theory should not be explained solely by social factors.",
-      "statement_2": "(b) Both Alice and Bob agree that changes in scientific theory have occurred in such a way that the successor theory preserves the explanations and predictions of the previous theory and further provides new explanations and predictions.",
-      "statement_3": "(c) If the theory of relativity made correct predictions in areas where Newtonian theory made incorrect ones, Bob would agree that the theory of relativity is “more general” than the Newtonian theory."
-    },
-    "original_rationale": {
-      "preliminaries": "The prompt introduces a debate about whether changes in scientific theory constitute “genuine progress,” in what sense this is so, and how we can judge whether progress has occurred. In the debate, Alice argues that, even if we admit to the achievements of a theory in the past, those can be explained by social factors and therefore cannot be the basis for genuine progress. Bob concedes Alice’s argument regarding past achievements, but insists that we can assess genuine progress by considering the future potential of the theory. To answer the question, we must judge whether both Alice and Bob would agree with the assertions presented in <statements>.",
-      "statement_1_rationale": "(a): Alice argues that cases of theory success merely demonstrate the influence of social factors and therefore should not be seen as evidence of progress. This amounts to claiming that the success of a theory being explained purely through social factors would preclude genuine progress; Alice would accept this. Bob also claims that progress can be judged by the future potential of theories, which is unaffected by social factors, and would agree to the same. Therefore, (a) is a correct analysis.",
-      "statement_2_rationale": "(b): Alice does acknowledge cases where successor theories explain and predict more facts, but this does not mean she agrees that scientific change always takes the form where successor theories preserve previous explanations and predictions and then add to them. Thus, (b) is not a correct analysis.",
-      "statement_3_rationale": "(c): If the theory of relativity correctly predicts where Newtonian theory failed, it does not necessarily mean that relativity preserves all the predictions of Newtonian theory in addition to making new predictions. Since some predictions by Newtonian theory are not preserved, relativity would not qualify as “more general” in Bob’s sense. Thus, (c) is also not a correct analysis.",
-      "answer": "Therefore, only (a) is the correct analysis, so the answer is ①."
-    },
-    "claims": {
-      "Alice": "It is not clear whether changes in scientific theories constitute 'genuine progress.'",
-      "Bob": "It is possible to compare the past performances of theories. However, it is difficult to compare the scope of explanations and predictions they will achieve in the future."
-    },
-    "attacks": [
-      [
-        "Alice",
-        "Bob"
-      ],
-      [
-        "Bob",
-        "Alice"
-      ]
-    ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"It is not clear whether changes in scientific theories constitute 'genuine progress.'\",\n    \"Bob\": \"It is possible to compare the past performances of theories. However, it is difficult to compare the scope of explanations and predictions they will achieve in the future.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Alice\"]\n  ]\n}",
-    "json_adhered": true,
-    "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
-    "run_id": 1,
-    "model_id": "meta-llama/Llama-3.2-1B-Instruct",
-    "provider": "huggingface",
-    "backend": "local",
-    "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:09:14.733710+00:00",
-    "extracted_claims": {
-      "Alice": "It is not clear whether changes in scientific theories constitute 'genuine progress.'",
-      "Bob": "It is possible to compare the past performances of theories. However, it is difficult to compare the scope of explanations and predictions they will achieve in the future."
-    },
-    "extracted_attacks": [
-      [
-        "Alice",
-        "Bob"
-      ],
-      [
-        "Bob",
-        "Alice"
-      ]
-    ],
-    "usage": {
-      "input_tokens": 940,
-      "output_tokens": 88
     }
   },
   {
@@ -492,30 +285,15 @@
         "Alice"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"I believe that in order to understand human development, we must start from human nature.\",\n    \"Bob\": \"The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Bob\", \"Alice\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:10:46.597066+00:00",
-    "extracted_claims": {
-      "Alice": "I believe that in order to understand human development, we must start from human nature.",
-      "Bob": "The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community."
-    },
-    "extracted_attacks": [
-      [
-        "Bob",
-        "Alice"
-      ],
-      [
-        "Bob",
-        "Alice"
-      ]
-    ],
+    "created_at": "2026-09-05T21:30:58.796776+00:00",
     "usage": {
       "input_tokens": 789,
       "output_tokens": 88
@@ -561,31 +339,15 @@
         "Bob"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Experimental results cannot be generalized to the real world because participants may already be sensitive to the issue of prejudice against Black people as a result of the pre-test.\",\n    \"Bob\": \"Experimental results can be generalized to the real world because participants may not be sensitive to the issue of prejudice against Black people as a result of the pre-test.\",\n    \"Charlie\": \"Experimental results can be generalized to the real world because participants may not be sensitive to the issue of prejudice against Black people as a result of the pre-test.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Bob\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:12:43.628294+00:00",
-    "extracted_claims": {
-      "Alice": "Experimental results cannot be generalized to the real world because participants may already be sensitive to the issue of prejudice against Black people as a result of the pre-test.",
-      "Bob": "Experimental results can be generalized to the real world because participants may not be sensitive to the issue of prejudice against Black people as a result of the pre-test.",
-      "Charlie": "Experimental results can be generalized to the real world because participants may not be sensitive to the issue of prejudice against Black people as a result of the pre-test."
-    },
-    "extracted_attacks": [
-      [
-        "Bob",
-        "Alice"
-      ],
-      [
-        "Charlie",
-        "Bob"
-      ]
-    ],
+    "created_at": "2026-09-05T21:32:52.836607+00:00",
     "usage": {
       "input_tokens": 939,
       "output_tokens": 139
@@ -627,34 +389,106 @@
         "Charlie"
       ]
     ],
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"The introduction of the Cool Summer Policy will reduce the stability of electricity supply.\",\n    \"Bob\": \"The introduction of the Cool Summer Policy will lower the summer electricity bill burden for most households.\",\n    \"Charlie\": \"The introduction of the Cool Summer Policy should be modified so that it applies only to vulnerable groups.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Charlie\"]\n  ]\n}",
     "json_adhered": true,
     "parse_method": "strict_json",
-    "run_uid": "20260905T045506Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
     "run_id": 1,
     "model_id": "meta-llama/Llama-3.2-1B-Instruct",
     "provider": "huggingface",
     "backend": "local",
     "config_sha": "0ebdf0e4a7dd",
-    "created_at": "2026-09-05T05:14:37.404683+00:00",
-    "extracted_claims": {
-      "Alice": "The introduction of the Cool Summer Policy will reduce the stability of electricity supply.",
-      "Bob": "The introduction of the Cool Summer Policy will lower the summer electricity bill burden for most households.",
-      "Charlie": "The introduction of the Cool Summer Policy should be modified so that it applies only to vulnerable groups."
-    },
-    "extracted_attacks": [
-      [
-        "Alice",
-        "Bob"
-      ],
-      [
-        "Bob",
-        "Charlie"
-      ]
-    ],
+    "created_at": "2026-09-05T21:34:58.274126+00:00",
     "usage": {
       "input_tokens": 952,
       "output_tokens": 98
+    }
+  },
+  {
+    "id": "2021_34",
+    "year": "2021",
+    "problem_idx": "34",
+    "objective": "This question assesses the ability to correctly judge whether experimental results strengthen or weaken a given hypothesis.",
+    "domain": "Humanities",
+    "category": "Argument Evaluation & Problem Solving",
+    "answer": "5",
+    "original_question": "To test the following hypotheses, [Experiment 1] and [Experiment 2] were conducted.(Hypothesis 1) People choose actions that maximize their expected payoff*.(Hypothesis 2) The more people believe that their advantageous but unfair actions are unlikely to be detected by the other party, the more likely they are to engage in such actions.[Experiment 1] Participants are randomly assigned as proposers and responders. The proposer is to suggest one of the following ways to split 10,000 won, which they will receive from the experimenter, with the responder:• 5-5 Option: The proposer and responder each get 5,000 won.• 8-2 Option: The proposer gets 8,000 won and the responder gets 2,000 won.• Coin Option: Toss a fair coin. If heads, the 5-5 option applies; if tails, the 8-2 option applies.The responder can accept or reject the proposer’s offer. If the responder accepts the proposed 5-5 or 8-2 option, the money is split as offered. If the Coin Option is proposed and the responder accepts, the experimenter tosses the coin in front of the responder and they split the money according to the coin’s outcome. If the responder rejects any offer, both proposer and responder receive 0 won. The rules are provided to the participants in advance.[Experiment 2] Everything is the same as [Experiment 1] except for the following. If the proposer chooses the Coin Option, the experimenter tosses the coin without the responder’s knowledge and informs the responder that either the 5-5 or 8-2 option has been offered, depending on whether the coin came up heads or tails. For example, if the responder is offered the 8-2 option, they do not know whether the proposer selected it directly or the coin toss resulted in the 8-2 outcome.* Expected payoff: The sum of the values obtained by multiplying the “payoff received in each scenario due to an action” by the “probability the person believes each scenario will occur.”<question> Which of the following <statements> is/are appropriate evaluation(s) of the passage above? Choose as listed from among <statements>.<statements>(a) If 60% of responders rejected the 8-2 offer in [Experiment 1], (Hypothesis 1) is weakened.(b) In [Experiment 1], if a proposer believes that the probabilities of the responder accepting the 5-5, 8-2, and Coin Options are 100%, 20%, and 80%, respectively, and chooses the Coin Option, (Hypothesis 1) is strengthened.(c) If participants believe that the 5-5 and Coin Options are fair but the 8-2 option is unfair, and if the rate of proposers choosing the 8-2 Option is higher in [Experiment 2] than in [Experiment 1], then (Hypothesis 2) is strengthened. <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c).",
+    "statements": {
+      "statement_1": "(a) If 60% of responders rejected the 8-2 offer in [Experiment 1], (Hypothesis 1) is weakened.",
+      "statement_2": "(b) In [Experiment 1], if a proposer believes that the probabilities of the responder accepting the 5-5, 8-2, and Coin Options are 100%, 20%, and 80%, respectively, and chooses the Coin Option, (Hypothesis 1) is strengthened.",
+      "statement_3": "(c) If participants believe that the 5-5 and Coin Options are fair but the 8-2 option is unfair, and if the rate of proposers choosing the 8-2 Option is higher in [Experiment 2] than in [Experiment 1], then (Hypothesis 2) is strengthened."
+    },
+    "original_rationale": "(Hypothesis 1) is a common-sense view that people act to maximize their expected payoff. (Hypothesis 2) states that people will choose unfair actions that benefit themselves when they think such unfairness is unlikely to be detected by the other party.In [Experiment 1], the proposer chooses one of three possible options:5-5 Option: Both proposer and responder get 5,000 won.8-2 Option: The proposer gets 8,000 won, the responder gets 2,000 won.Coin Option: A fair coin is tossed. If heads, the 5-5 Option is selected; if tails, the 8-2 Option is selected.The responder can accept or reject the offer. If rejected, both get 0 won. If the proposer selects the 5-5 or 8-2 Option and the responder accepts, the money is split as proposed.If the proposer selects the Coin Option and the responder accepts, the experimenter tosses the coin in the responder’s presence; if heads, they split 5,000 won each; if tails, 8,000 won to the proposer and 2,000 won to the responder.In [Experiment 2], just like [Experiment 1], the proposer selects one of the three options. However, if the Coin Option is selected, the experimenter tosses the coin without the responder’s knowledge; if heads, informs the responder the 5-5 Option is being offered; if tails, informs the responder of the 8-2 Option. Everything else proceeds as in [Experiment 1].For example, when the responder is offered the 8-2 Option, they do not know if the proposer chose it directly or if it was the result of a coin toss. The proposer also knows that the responder cannot distinguish the source of the offer. <choices> Explanation:(a) In [Experiment 1], if the responder is offered the 8-2 Option, their expected payoff is 0 won if they reject and 2,000 won if they accept. According to (Hypothesis 1), which states people act to maximize expected payoff, the responder should accept the 8-2 offer. Therefore, if a majority—60% of responders—reject the offer, (Hypothesis 1) is weakened. Thus, (a) is an appropriate evaluation.(b) In [Experiment 1], if a proposer believes the responder will accept the 5-5, 8-2, and Coin Options with probabilities 100%, 20%, and 80%, respectively, the expected payoffs for each are:5-5 Option: 5,000 × 1.00 = 5,000 won8-2 Option: 8,000 × 0.20 = 1,600 wonCoin Option: {(5,000 × 0.5) + (8,000 × 0.5)} × 0.8 = (2,500 + 4,000) × 0.8 = 6,500 × 0.8 = 5,200 wonIf the proposer chooses the Coin Option, which yields the highest expected payoff, this aligns with (Hypothesis 1)—the principle of maximizing expected payoff. So (b) is an appropriate evaluation.(c) In [Experiment 1], the responder knows which option the proposer chose. In [Experiment 2], however, when offered the 8-2 Option, the responder cannot know if it was chosen directly by the proposer or resulted from the coin toss. Therefore, in [Experiment 2], the proposer can obscure the fact that they offered the 8-2 Option directly. That is, the proposer can believe that their unfair action (offering the 8-2 Option) is less likely to be detected by the other party. In [Experiment 1], such belief is not possible. Thus, if the rate of proposers choosing the 8-2 Option is higher in [Experiment 2] than in [Experiment 1], (Hypothesis 2) is strengthened. So (c) is also an appropriate evaluation.All of (a), (b), and (c) are appropriate evaluations, so the correct answer is ⑤.",
+    "claims": {
+      "Alice": "The proposer's expected payoff is higher when the proposer chooses the 5-5 option.",
+      "Bob": "The proposer's expected payoff is higher when the proposer chooses the 8-2 option.",
+      "Charlie": "The proposer's expected payoff is higher when the proposer chooses the Coin Option."
+    },
+    "attacks": [
+      [
+        "Bob",
+        "Alice"
+      ],
+      [
+        "Charlie",
+        "Bob"
+      ]
+    ],
+    "json_adhered": true,
+    "parse_method": "strict_json",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_id": 1,
+    "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+    "provider": "huggingface",
+    "backend": "local",
+    "config_sha": "0ebdf0e4a7dd",
+    "created_at": "2026-09-05T21:37:18.123361+00:00",
+    "usage": {
+      "input_tokens": 1120,
+      "output_tokens": 103
+    }
+  },
+  {
+    "id": "2021_35",
+    "year": "2021",
+    "problem_idx": "35",
+    "objective": "This question assesses the ability to judge whether a hypothetical experimental result weakens a theory about what a concept is.",
+    "domain": "Humanities",
+    "category": "Argument Evaluation & Problem Solving",
+    "answer": "3",
+    "original_question": "<Theory> The concept of A consists of the characteristics that define A, that is, the characteristics that constitute the necessary and sufficient conditions for something to be A. For example, if the necessary and sufficient condition for an entity to be a “bachelor” is to be an unmarried man, then for an entity to be a bachelor, he must be both unmarried and male, and all entities who are both unmarried and male are bachelors. In this case, the concept of bachelor is composed of the characteristics of being unmarried and being male. If someone possesses the concept of A, they would use the concept of A to determine whether a specific entity belongs to category A or not. The time it takes to determine, using the concept of A, whether an entity falls under A is the sum of the time required to check whether that entity possesses each of the defining characteristics of A. <Experiment> Scientists presented participants with various kinds of animals, and asked them to perform a task to judge whether each animal was a bird. After posing questions like “Is x a bird?” they measured the time taken for participants to answer. The results showed that the average response time to say that a sparrow is a bird was 0.4 seconds, while for a penguin, it was 1.4 seconds on average. <question> Which of the following, as found among <statements>, is an appropriate evaluation of <Theory>? <statements> (a) If participants did not possess the concept of bird and answered based on the feel or impression of the words “sparrow” and “penguin,” then the results of <Experiment> do not weaken <Theory>. (b) If the time taken to confirm whether a sparrow and a penguin possess each characteristic that constitutes the concept of bird differs, then the results of <Experiment> weaken <Theory>. (c) If people who think that the concept of human is defined as “rational animal” take less time to judge whether an entity is a human than to judge whether the same entity is an animal, <Theory> is weakened. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) If participants did not possess the concept of bird and answered based on the feel or impression of the words “sparrow” and “penguin,” then the results of <Experiment> do not weaken <Theory>.",
+      "statement_2": "(b) If the time taken to confirm whether a sparrow and a penguin possess each characteristic that constitutes the concept of bird differs, then the results of <Experiment> weaken <Theory>.",
+      "statement_3": "(c) If people who think that the concept of human is defined as “rational animal” take less time to judge whether an entity is a human than to judge whether the same entity is an animal, <Theory> is weakened."
+    },
+    "original_rationale": "According to <Theory>, a concept is, in effect, equivalent to a definition: the concept of A consists of the characteristics that serve as the necessary and sufficient conditions for something to be A. A person who possesses the concept of A will use it to determine whether a particular entity belongs to A. Therefore, by measuring the time taken to categorize using the concept, <Theory> can be evaluated. The <Experiment> presents, in a simplified manner, a psychological experiment that demonstrates the so-called “typicality effect.”Explanation for <choices>: (a) If the participants did not possess the concept of bird, then they did not use the concept of bird in the categorization task. <Experiment> can only be used to evaluate <Theory> if the participants answered using the concept of bird. Therefore, if participants answered based on the impression the language gave, rather than using the concept, the results of <Experiment> do not weaken <Theory>. (a) is an appropriate evaluation. (b) Suppose the concept of bird consists of characteristic X and characteristic Y. The results of <Experiment> show that answering whether a sparrow is a bird is faster than answering whether a penguin is a bird. Thus, only if the time it takes to check whether a sparrow and a penguin possess X and Y is the same, or shorter for the penguin, would <Experiment> weaken <Theory>. If the time taken to check each characteristic differs, and the time is shorter for the sparrow, then <Theory> is still compatible with the results of <Experiment>. Therefore, the results of <Experiment> do not weaken <Theory>. (b) is not an appropriate evaluation. (c) People who think the concept of human is defined as a rational animal would need to check whether an entity is rational and whether it is an animal to judge it as human. Therefore, the time required to judge whether something is human cannot be shorter than the time required to judge whether it is an animal. If the opposite were observed, <Theory> would be weakened. (c) is an appropriate evaluation. Therefore, among the <choices>, only (a) and (c) are appropriate evaluations. The correct answer is ③.",
+    "claims": {
+      "Alice": "The concept of A consists of the characteristics that define A",
+      "Bob": "The concept of A is composed of the characteristics of being unmarried and being male",
+      "Charlie": "The concept of A is defined as the necessary and sufficient conditions for something to be A"
+    },
+    "attacks": [
+      [
+        "Bob",
+        "Alice"
+      ],
+      [
+        "Charlie",
+        "Bob"
+      ]
+    ],
+    "json_adhered": true,
+    "parse_method": "strict_json",
+    "run_uid": "20260905T212036Z_meta-llama_Llama-3.2-1B-Instruct",
+    "run_id": 1,
+    "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+    "provider": "huggingface",
+    "backend": "local",
+    "config_sha": "0ebdf0e4a7dd",
+    "created_at": "2026-09-05T21:39:10.027791+00:00",
+    "usage": {
+      "input_tokens": 908,
+      "output_tokens": 92
     }
   }
 ]

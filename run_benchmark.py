@@ -395,7 +395,6 @@ def _load_model_config(model_id):
 
 def parse_model_response(response, open_tag="<think>", close_tag="</think>"):
     """Extract claims and attacks from the model's JSON output."""
-    raw_text = response.strip()
     search_text = response
     offset = 0
 
@@ -432,10 +431,14 @@ def parse_model_response(response, open_tag="<think>", close_tag="</think>"):
     return {
         "claims": claims,
         "attacks": attacks,
-        "model_rationale": raw_text,
-        "json_adhered": bool(claims and attacks),
+        "json_adhered": isinstance(parsed, dict),
         "parse_method": "strict_json" if parsed else "failed"
     }
+
+
+def model_user_content(question):
+    """Return the only question field exposed to the language model."""
+    return question["original_question"]
 
 
 _LEADING_TAG_PATTERN = re.compile(r"^\s*(<[A-Za-z_]+>|\[[A-Za-z_]+\])")
@@ -919,7 +922,7 @@ def execution_pipeline(model_id, year=None, overwrite=False, limit=None):
             generated = generate_hf_response(
                 model,
                 tokenizer,
-                question["original_question"],
+                model_user_content(question),
                 device,
                 system_prompt,
                 gen_config,
@@ -969,8 +972,6 @@ def execution_pipeline(model_id, year=None, overwrite=False, limit=None):
             "backend": "local",
             "config_sha": fingerprint,
             "created_at": _utc_now(),
-            "extracted_claims": parsed.get("claims"),
-            "extracted_attacks": parsed.get("attacks"),
             "usage": {
                 "input_tokens": generated["input_tokens"],
                 "output_tokens": generated["output_tokens"],
