@@ -1,0 +1,3 @@
+# Only one dependency -- this harness talks to Ollama over plain HTTP.
+# Runs on any Python >= 3.9, including 3.14 (no Outlines constraint here).
+requests>=2.31.0
