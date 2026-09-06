@@ -431,6 +431,7 @@ def parse_model_response(response, open_tag="<think>", close_tag="</think>"):
     return {
         "claims": claims,
         "attacks": attacks,
+        "raw_model_response": response,
         "json_adhered": isinstance(parsed, dict),
         "parse_method": "strict_json" if parsed else "failed"
     }
