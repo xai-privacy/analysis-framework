@@ -1,0 +1,36 @@
+SUMMARY
+The frontier models generally adhere to the expected solver-readable format. Across 60 outputs, all were parseable JSON objects with the required top-level keys: claims and attacks. So at the basic schema level, the prompt works.
+
+However, strict prompt adherence is not perfect. The main issues are:
+1. Claude Opus models often wrap JSON in Markdown fences.
+2. Some models use choice numbers or generic IDs instead of meaningful speaker/entity IDs.
+3. Some outputs are valid but semantically empty, especially o4-mini on 2021_03 and 2021_25.
+4. Claude Sonnet produced one duplicate attack on 2021_16.
+
+So the current prompt is good enough for initial solver ingestion if we allow light preprocessing, such as stripping Markdown fences and deduplicating attacks. But if the solver requires raw exact JSON and meaningful stable node IDs, we should strengthen the prompt and add semantic validation.
+
+
+Model	                    Basic JSON/schema adherence	    Strict prompt adherence	Notes
+claude-sonnet-4-6	    10/10	                    mostly good	                Direct JSON, but one empty ult (2021_25) aph and one duplicate attack.
+claude-opus-4-6	            10/10	                    partial	                All outputs are fenced with ```json, which violates “Do not wrap in Markdown fences.”
+claude-opus-4-5-20251101    10/10	                    partial	                9/10 outputs are fenced with ```json; some generic speaker IDs.
+gpt-4.1-mini	            10/10	                    mostly good	                Direct JSON, but uses choice symbols as claim IDs for 2021_03.
+gpt-4.1	                    10/10	                    mostly good	                Direct JSON, but uses generic "Speaker" for one case.
+o4-mini	                    10/10	                    mixed	                Direct JSON, but returns empty graphs for some questions.a
+
+
+
+
+EXAMPLE
+
+Model	                    Question IDs showing behavior	Gold answer	Behavior
+claude-sonnet-4-6	    2021_25	                        5	        Empty graph: {"claims": {}, "attacks": []}
+claude-sonnet-4-6	    2021_16	                        2	        Duplicate attack: ["Charlie", "Bob"] appears twice
+claude-sonnet-4-6	    2021_03	                        3	        Uses choice symbols ①, ②, ③, ④, ⑤ as claim IDs
+claude-opus-4-6	            all 10 questions	                mixed	        Valid JSON, but wrapped in Markdown fences
+claude-opus-4-5-20251101    9 of 10 questions	                mixed	        Valid JSON, but wrapped in Markdown fences
+claude-opus-4-5-20251101    2021_03, 2021_25	                3, 5	        Uses generic IDs like Question, Researcher
+gpt-4.1-mini	            2021_03	                        3	        Uses choice symbols as claim IDs
+gpt-4.1-mini	            2021_25	                        5	        Uses generic IDs like Researcher, Critic
+gpt-4.1	                    2021_25	                        5	        Uses generic ID Speaker
+o4-mini	                    2021_03, 2021_25	                3, 5	        Empty result
