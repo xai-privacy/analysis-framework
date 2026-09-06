@@ -13,13 +13,21 @@ from anthropic import Anthropic
 from prompts import get_system_prompt
 
 
-_MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
+_MODEL_CONFIGS_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "model_configs",
+)
+
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "benchmarks",
     "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
 )
-_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
+
+_RESULTS_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "results",
+)
 
 
 def _utc_now() -> str:
@@ -82,14 +90,26 @@ def _existing_question_run_pairs(results):
 
 
 def _load_claude_model_config(model_id: str) -> Dict[str, Any]:
+    """
+    Optional Anthropic config.
+
+    Supported fields:
+    - provider
+    - max_tokens
+    - sleep_seconds
+
+    Note:
+    We intentionally do not pass temperature to Anthropic Messages API here
+    because the installed SDK/client may reject temperature for Messages.create().
+    """
+
     sanitized = model_id.replace("/", "_")
     config_path = os.path.join(_MODEL_CONFIGS_DIR, f"{sanitized}.json")
 
     default_config = {
         "provider": "anthropic",
         "max_tokens": 3000,
-        "temperature": 0,
-        "sleep_seconds": 0.2
+        "sleep_seconds": 0.2,
     }
 
     if not os.path.isfile(config_path):
@@ -105,7 +125,27 @@ def _load_claude_model_config(model_id: str) -> Dict[str, Any]:
 
     merged = dict(default_config)
     merged.update(user_config)
+
+    # Remove temperature if an older config file still contains it.
+    # We keep the run stable by using the provider/API default.
+    merged.pop("temperature", None)
+
     return merged
+
+
+def _build_prompt(original_question: str) -> str:
+    """
+    Put the benchmark question first, then the current prompt instruction.
+
+    This mirrors the OpenAI runner's behavior:
+        original_question + "\\n\\n" + get_system_prompt()
+
+    This is important because the benchmark question itself contains an
+    embedded multiple-choice task. By placing the graph-extraction instruction
+    at the end of the user message, we make the final task instruction explicit.
+    """
+
+    return f"{original_question.strip()}\n\n{get_system_prompt().strip()}"
 
 
 def _extract_claude_visible_text(message) -> str:
@@ -113,11 +153,13 @@ def _extract_claude_visible_text(message) -> str:
     Convert Claude Messages API content blocks into one text string.
 
     Baseline rule:
-    - model_rationale should contain whatever visible text Claude returned.
-    - We do not parse the answer here.
-    - If Anthropic returns non-text blocks, we include a compact marker so the
+    - model_rationale stores whatever visible text Claude returned.
+    - We do not parse the graph here.
+    - We do not repair invalid JSON here.
+    - If Anthropic returns non-text blocks, include compact markers so the
       baseline file makes that visible rather than silently dropping it.
     """
+
     chunks = []
 
     for block in message.content:
@@ -126,7 +168,6 @@ def _extract_claude_visible_text(message) -> str:
         if block_type == "text":
             chunks.append(getattr(block, "text", "") or "")
         elif block_type == "thinking":
-            # If extended thinking is ever enabled, preserve it visibly.
             chunks.append(getattr(block, "thinking", "") or "")
         elif block_type == "redacted_thinking":
             chunks.append("[REDACTED_THINKING_BLOCK]")
@@ -141,22 +182,28 @@ def _call_claude_model(
     model_id: str,
     original_question: str,
     max_tokens: int,
-    temperature: Optional[float],
 ):
+    """
+    Call Anthropic Claude Messages API.
+
+    Important:
+    - Do not pass temperature.
+    - Do not use the system field for this prompt version.
+    - Put original_question + graph-extraction prompt together in the user
+      message so Claude sees the graph instruction after the embedded
+      multiple-choice question.
+    """
+
     kwargs: Dict[str, Any] = {
         "model": model_id,
         "max_tokens": max_tokens,
-        "system": get_system_prompt(),
         "messages": [
             {
                 "role": "user",
-                "content": original_question,
+                "content": _build_prompt(original_question),
             }
         ],
     }
-
-    if temperature is not None:
-        kwargs["temperature"] = temperature
 
     message = client.messages.create(**kwargs)
 
@@ -195,11 +242,7 @@ def execution_pipeline(
     print(f"Model config: {model_cfg}")
 
     max_tokens = int(model_cfg.get("max_tokens", 3000))
-    temperature = model_cfg.get("temperature", 0)
     sleep_seconds = float(model_cfg.get("sleep_seconds", 0.2))
-
-    if temperature is not None:
-        temperature = float(temperature)
 
     questions = _load_questions(year=year, limit=limit)
     result_path = _result_path(model_id)
@@ -210,7 +253,6 @@ def execution_pipeline(
     print(f"Questions path: {_QUESTIONS_PATH}")
     print(f"Results file: {result_path}")
     print(f"Max tokens: {max_tokens}")
-    print(f"Temperature: {temperature}")
     print()
 
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
@@ -226,20 +268,22 @@ def execution_pipeline(
             print(f"\n[{qid}] run={run_id}")
 
             result = dict(question)
+
             result.update(
                 {
-                    # Sebastian baseline instruction:
-                    # Store raw visible model output here.
+                    # Raw visible model output.
+                    # For the argument-graph prompt, this should ideally be
+                    # one JSON object with claims and attacks.
                     "model_rationale": "",
 
-                    # No model_answer field.
+                    # No model_answer field here because the current prompt is
+                    # graph extraction, not multiple-choice answer prediction.
                     "run_id": run_id,
                     "model_id": model_id,
                     "provider": "anthropic",
                     "backend": "api",
-                    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+                    "prompt_version": "argument_graph_json_from_prompts_py",
                     "max_tokens": max_tokens,
-                    "temperature": temperature,
                     "created_at": _utc_now(),
                     "response_id": None,
                     "model_returned": None,
@@ -256,7 +300,6 @@ def execution_pipeline(
                     model_id=model_id,
                     original_question=question["original_question"],
                     max_tokens=max_tokens,
-                    temperature=temperature,
                 )
 
                 result["model_rationale"] = response_payload["text"]
@@ -289,14 +332,30 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Run the LEET-Arg benchmark against an Anthropic Claude model."
     )
+
     parser.add_argument(
         "--model",
         required=True,
         help="Claude model id, e.g. claude-sonnet-4-6.",
     )
-    parser.add_argument("--year", help="Run only questions whose id starts with YEAR_.")
-    parser.add_argument("--limit", type=int, help="Run only the first N selected questions.")
-    parser.add_argument("--runs", type=int, default=1)
+
+    parser.add_argument(
+        "--year",
+        help="Run only questions whose id starts with YEAR_.",
+    )
+
+    parser.add_argument(
+        "--limit",
+        type=int,
+        help="Run only the first N selected questions.",
+    )
+
+    parser.add_argument(
+        "--runs",
+        type=int,
+        default=1,
+    )
+
     parser.add_argument(
         "--overwrite",
         action="store_true",
@@ -316,4 +375,3 @@ if __name__ == "__main__":
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)
         sys.exit(1)
-
