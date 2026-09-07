@@ -1,0 +1,474 @@
+[
+  {
+    "id": "2023_23",
+    "year": "2023",
+    "problem_idx": "23",
+    "objective": "This question assesses the ability to analyze and compare two theories that have points of contention regarding pleasure and pain, by applying them to various situations.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "5",
+    "original_question": "According to Theory A on pleasure, pleasure is a kind of sensation that we like—in other words, pleasure itself—while pain is an unpleasant sensation that we dislike. On the other hand, according to Theory B, pleasure has nothing to do with the sensation we feel; rather, it arises when a subject’s abilities and relevant conditions are well-matched with the object in which those abilities are exercised. In summary, to act with pleasure means that the subject is performing work that matches their ability under good conditions and doing so excellently. In contrast, pain arises when the subject’s ability and conditions are not well-matched with the object of their ability. Theory A appeals to the feeling that accompanies pleasure and pain, which gives it intuitive persuasive power. However, Theory B argues that pleasure and pain should not be explained as sensations, but rather by the fitness that characterizes pleasurable or painful activity. In a recent interview, three exceptional mathematicians—Alice, Bob, and Charlie—who solved a long-standing mathematical problem, spoke as follows about the pleasure of mathematics. Alice: I had been preparing for a long time to solve this age-old problem. I worked on it systematically and focused all my efforts. Of course, there were many challenges and moments of frustration. At times, it was painful. But believing in myself and the process of solving the problem was truly a pleasurable experience. Bob: After years of intensive effort, I finally solved this problem. That moment was exhilarating—because I had worked so hard for it. However, the pain I felt during the long period of confusion outweighed that moment of pleasure. In fact, I feel more pleasure when I solve many easy problems that don’t require concentration. Charlie: Do I find mathematics pleasurable? Just as there are no students who study simply because they love studying, for me, mathematics is just a job. Especially when I wrestled with difficult problems, it was painful. I worked hard out of a sense of duty, which made me good at mathematics, and in the end, I was able to solve that problem through focused effort. <question> Which of the following is the most appropriate analysis of the above passage? <statements> (1) According to Theory A, neither Bob nor Charlie experienced pleasure when solving difficult problems through intense focus. (2) According to Theory B, the pleasure Bob feels when solving easy problems is no less than the pleasure Alice experienced. (3) According to both Theory A and B, the pain Bob recounts is considered pleasure. (4) According to both Theory A and B, the experience Bob had solving easy problems was pleasurable. (5) According to Theory A, mathematics is not pleasurable for Charlie; however, according to Theory B, mathematics is a pleasurable activity for Charlie. <choices> ①(1) ②(2) ③(3) ④(4) ⑤(5).",
+    "statements": {
+      "statement_1": "(1) According to Theory A, neither Bob nor Charlie experienced pleasure when solving difficult problems through intense focus.",
+      "statement_2": "(2) According to Theory B, the pleasure Bob feels when solving easy problems is no less than the pleasure Alice experienced.",
+      "statement_3": "(3) According to both Theory A and B, the pain Bob recounts is considered pleasure.",
+      "statement_4": "(4) According to both Theory A and B, the experience Bob had solving easy problems was pleasurable.",
+      "statement_5": "(5) According to Theory A, mathematics is not pleasurable for Charlie; however, according to Theory B, mathematics is a pleasurable activity for Charlie."
+    },
+    "original_rationale": {
+      "preliminaries": "The passage introduces two theories regarding pleasure and pain. Theory A explains pleasure and pain in terms of phenomenal feelings, namely pleasure and displeasure. This aligns well with modern intuitions. However, Theory B explains pleasure not as a phenomenal feeling, but as the fitness about human activity. Theory B defines pleasure as “the subject performing excellently at work that matches their ability in good conditions.” In the passage, Alice, Bob, and Charlie are mathematicians of such high ability that they have solved a long-standing problem. According to Theory A, only if they felt pleasure while doing mathematics would their experience be considered pleasurable. On the other hand, according to Theory B, regardless of one’s feelings, the experience of solving a difficult problem that matches their outstanding abilities is pleasurable. The fact that Alice “prepared for a long time,” “systematically,” and “focused her efforts to solve it,” means that she solved a problem that matched her abilities in good conditions and did so with excellence. Therefore, Alice is a case that fits the pleasure described by Theory B. Bob says that while he did feel a moment of pleasure when he solved the difficult problem, the process was arduous and he felt more pain overall. According to Theory A, Bob experienced both a moment of pleasure and pain while solving the difficult problem. Since Theory A holds that he actually feels more pleasure when solving easy problems, this would be considered pleasurable. However, since Bob is a mathematician of such high ability that solving easy problems does not match his ability, according to Theory B, this feeling is not considered pleasure, regardless of what he feels subjectively. Rather, even though he says he felt pain, the experience of solving a difficult, fitting problem through years of effort is, according to B, a pleasurable one. Charlie says that when struggling with difficult problems, he felt pain. Nevertheless, out of a sense of duty he worked hard, became good at mathematics, and through focused effort solved a difficult problem. According to Theory A, Charlie only felt pain while solving difficult problems. However, from Theory B’s perspective, even if his motivation was a sense of duty, since he worked hard, became proficient, and ultimately solved the problem through focused effort, regardless of his subjective pleasure or displeasure, Charlie’s experience is a pleasurable one.",
+      "statement_1_rationale": "① Although Bob says he suffered and felt a lot of pain while solving the difficult problem, he did feel a moment of pleasure upon finally solving it. Charlie did not feel pleasure while solving the problem. According to Theory A, Charlie did not experience pleasure, but Bob did. So (1) is not appropriate.",
+      "statement_2_rationale": "② According to Theory B, Alice’s experience is one of pleasure because she solved a problem that matched her outstanding ability. Bob solving easy problems that do not require concentration is not a good fit for his abilities, so it is not a pleasurable experience under Theory B. Thus, (2) is not appropriate.",
+      "statement_3_rationale": "③ Bob experienced pain while solving a difficult problem, but ultimately solved it, so Theory B would consider it a pleasurable experience. However, Theory A would consider his pain to be simply pain. Therefore, (3) is not appropriate.",
+      "statement_4_rationale": "④ According to Theory A, Bob felt pleasure when solving easy problems, so these are pleasurable experiences for him. However, under Theory B, since solving easy problems is not an experience that matches his high ability, it cannot be considered pleasure. So, (4) is not appropriate.",
+      "statement_5_rationale": "⑤ According to Theory A, since Charlie did math not because he liked it but out of duty, mathematics is not pleasurable for him. In contrast, according to Theory B, even if it was out of a sense of duty, since Charlie worked hard, became good at math, and ultimately solved the difficult problem, the experience is pleasurable. Therefore, (5) is the most appropriate analysis.",
+      "answer": "Only ⑤ is the correct analysis among the <choices>, so the answer is ⑤."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Alice believes that overcoming challenges in mathematics through preparation and belief in the process is genuinely pleasurable despite frustration and pain.\",\n    \"Bob\": \"Bob believes that although solving difficult math problems brought some pleasure at the end, the process was mostly painful, and he feels more pleasure solving easy problems.\",\n    \"Charlie\": \"Charlie sees mathematics as a job done out of duty, not pleasure, especially finding work on difficult problems painful.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:16.167985+00:00",
+    "response_id": "resp_0fce1d906aaffafd006a9f1aa085e887d0a78660c58563f2de",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 1038,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 105,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1143
+    },
+    "error": null
+  },
+  {
+    "id": "2022_19",
+    "year": "2022",
+    "problem_idx": "19",
+    "objective": "This question assesses the ability to understand the given research data and determine whether new evidence from r strengthens or weakens a hypothesis.",
+    "domain": "Humanities",
+    "category": "Argument Evaluation & Problem Solving",
+    "answer": "5",
+    "original_question": "The research team surveyed a group of philosophers and a group of laypeople regarding their agreement with the following three statements.(Statement A) If a claim is true for someone, it is true for everyone.(Statement B) If everyone agrees with a claim, then the claim is true.(Statement C) If a claim is true, it represents a fact.In both groups, the proportion of respondents who agreed with (C) exceeded 80%. For (B), the proportion of those who disagreed was much larger in both groups, but the agreement rate was higher among philosophers. What is interesting is (A): 83% of philosophers agreed with (A), whereas only slightly over 40% of laypeople did, and in fact, a higher proportion of laypeople responded that they disagreed. Where does this difference regarding (A) originate? According to the research team, (A) can be interpreted in one of two ways:[Interpretation 1] If it has been determined that a claim is true, its truth is objective.[Interpretation 2] If someone thinks a claim is true, everyone will agree with them.Saying that the truth of a claim is objective means that its truth is not relative to each individual’s perspective. The research team states, \"ⓐ The reason the proportion of agreement with (A) among laypeople was significantly lower than among philosophers is that philosophers tend to read (A) as [Interpretation 1], while laypeople tend to read it as [Interpretation 2].\" Despite this difference, the research team also believes that \"ⓑ Regarding the objectivity of truth, the opinions of laypeople and philosophers are in accord.\" This is because (A) and (C) are statements that affirm the objectivity of truth, while (B) denies it, and the proportion of agreement with (C) was similarly high among both laypeople and philosophers, while the proportion who disagreed with (B) was also similarly high in both groups. <question> Which of the following evaluations, as given in <statements>, is/are correct regarding the above passage? <statements> (a) If additional research revealed that the vast majority of philosophers responded \"disagree\" to [Interpretation 2], ⓐ would be strengthened.(b) If additional research revealed that the vast majority of laypeople responded \"agree\" to [Interpretation 1], ⓑ would be strengthened.(c) If it were found that the difference in agreement rates with (B) between laypeople and philosophers was due to some philosophers who actually disagreed with (B) mistakenly responding \"agree,\" then ⓑ would be strengthened. <choices>① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) If additional research revealed that the vast majority of philosophers responded \"disagree\" to [Interpretation 2], ⓐ would be strengthened.",
+      "statement_2": "(b) If additional research revealed that the vast majority of laypeople responded \"agree\" to [Interpretation 1], ⓑ would be strengthened.",
+      "statement_3": "(c) If it were found that the difference in agreement rates with (B) between laypeople and philosophers was due to some philosophers who actually disagreed with (B) mistakenly responding \"agree,\" then ⓑ would be strengthened."
+    },
+    "original_rationale": {
+      "preliminaries": "Presenting statements that either affirm (A, C) or deny (B) the objectivity of truth to philosophers and laypeople, and surveying their agreement, allows one to infer from the results that philosophers and laypeople generally have similar intuitions about truth. However, opinions diverged on (A), and the main content of this passage is to explore why. The passage’s main claim is the hypothesis ⓐ to explain this difference, and ultimately, the claim that philosophers and laypeople agree on the objectivity of truth (ⓑ).",
+      "statement_1_rationale": "(a) The experimental results can be summarized as follows.- Philosophers generally agree with original statement (A), with no mention of Interpretations 1 or 2, disagree with (B), and agree with (C).- Laypeople generally disagree with the original (A), with no mention of Interpretations 1 or 2, disagree with (B), and agree with (C).Furthermore, according to ⓐ, based on the passage’s information, the responses are as follows:- Philosophers agree with original (A), agree with Interpretation 1 of (A), do not mention Interpretation 2, disagree with (B), and agree with (C).- Laypeople do not mention original (A), agree with Interpretation 1 (b), disagree with Interpretation 2, disagree with (B), and agree with (C).ⓐ is the hypothesis that \"laypeople presented negative opinions on (A), not because their views differ from philosophers regarding (A) itself, but because their interpretation differs.\" Therefore, if in the above response table the philosophers and laypeople match (i.e., if a is \"disagree,\" b is \"agree\"), then ⓐ is further strengthened. Thus, if the evidence in (a) is obtained and a becomes \"disagree,\" ⓐ is strengthened. Thus, (a) is a valid evaluation.",
+      "statement_2_rationale": "(b). According to the passage, the evidence supporting ⓑ is that for (C), which affirms the objectivity of truth, the agreement rate among philosophers and laypeople was similarly high, and for (B), which denies it, the disagreement rate was similarly high in both groups. Meanwhile, [Interpretation 1] explicitly affirms the objectivity of truth. Therefore, if laypeople—who had a high rate of disagreement with (A)—are found to agree with [Interpretation 1], it provides further evidence that laypeople, like philosophers, agree with statements affirming the objectivity of truth. Thus, ⓑ is strengthened. (b) is a correct evaluation.",
+      "statement_3_rationale": "(c). According to the passage, for (B), the majority of both philosophers and laypeople disagreed, but the agreement rate was higher among philosophers. However, if it is discovered that, as described in (c), some philosophers who actually disagreed accidentally responded \"agree,\" then the agreement and disagreement rates for (B) among the two groups would become even more similar, thus strengthening ⓑ. (c) is also a correct evaluation.",
+      "answer": "Therefore, since (a), (b), and (c) are all valid evaluations, the answer is ⑤."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"a\": \"If additional research revealed that the vast majority of philosophers responded 'disagree' to Interpretation 2, it would support the idea that philosophers interpret (A) as Interpretation 1, strengthening ⓐ.\",\n    \"b\": \"If additional research revealed that the vast majority of laypeople responded 'agree' to Interpretation 1, it would support the idea that laypeople and philosophers share beliefs about the objectivity of truth, strengthening ⓑ.\",\n    \"c\": \"If the difference in agreement rates with (B) was due to some philosophers mistakenly responding 'agree' when they actually disagreed, it would support ⓑ by indicating that philosophers and laypeople similarly reject (B).\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:18.257560+00:00",
+    "response_id": "resp_04de41f96621fc1d006a9f1aa26b3c87d089d6261ea9826736",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 1031,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 161,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1192
+    },
+    "error": null
+  },
+  {
+    "id": "2024_14",
+    "year": "2024",
+    "problem_idx": "14",
+    "objective": "This question assesses the ability to appropriately analyze and evaluate arguments supporting the claim that exceptions to the attribution of responsibility exist, within the problem of responsibility attribution related to the post-truth phenomenon.",
+    "domain": "Humanities",
+    "category": "Argument Evaluation & Analysis",
+    "answer": "1",
+    "original_question": "In the process of public opinion formation, it is increasingly common for personal beliefs or emotions to wield greater influence than the truth. A typical example is when posts on social networking platforms—written based on personal feelings yet differing from the facts—still exert significant social influence. These phenomena manifest in various ways, one of which is when people claim something as true without verification, even though it is possible to check the authenticity of the information. We may tend to think simply that, in such cases, the speaker is to be held responsible. However, according to A, \"ⓐEven in such cases, responsibility does not always lie with the speaker.” For example, suppose that under normal observation conditions, Alice looks down from the rooftop of a tall building and sees what appears to be a crowd of people gathered in the plaza next to the building. Alice then claims, \"There are many people gathered in the plaza.\" However, in reality, what was in the plaza were not people, but human-shaped mannequins installed for an event. Since Alice's observation felt clear to her, she did not take the simple step of going down to the ground floor to check the facts. Had Alice herself felt suspicious of her evidence or had someone else requested verification, she would have checked, but she was so confident in her experience that she did not feel the need. According to A, even if Alice's claim is not true in this case, it is difficult to assign responsibility to Alice. A accepts the premise that responsibility is assigned to the agent only in cases where the act itself is subject to blame. According to A, in the above example, Alice’s act of claiming \"there are many people gathered in the plaza\" is, in itself, not blameworthy. Alice's assertion is merely a cognitive error. Therefore, responsibility is not assigned to Alice. A states that in cases of believing or asserting something untrue as the truth, what is crucial is not a permissible level of negligence or cognitive error, as in the above example, but rather an active attitude of intentionally avoiding or refusing to acquire information. Responsibility is, of course, assigned to an agent with such an attitude. It is clear that someone who intentionally refuses even a very simple verification process and spreads fake news warrants responsibility. <question> Which is the correct evaluation of ⓐ? <choices> ① If an act that is not, in itself, subject to blame is not cognitive error, then ⓐ is weakened. ② If it is not always the case that responsibility is assigned to someone who believes in and spreads fake news, then ⓐ is weakened. ③ If there are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame, then ⓐ is weakened. ④ If all false assertions made under normal observation conditions always stem from an active avoidance attitude, then ⓐ is strengthened. ⑤ If in situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur, then ⓐ is strengthened.",
+    "statements": {
+      "statement_1": "① If an act that is not, in itself, subject to blame is not cognitive error, then ⓐ is weakened.",
+      "statement_2": "② If it is not always the case that responsibility is assigned to someone who believes in and spreads fake news, then ⓐ is weakened.",
+      "statement_3": "③ If there are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame, then ⓐ is weakened.",
+      "statement_4": "④ If all false assertions made under normal observation conditions always stem from an active avoidance attitude, then ⓐ is strengthened.",
+      "statement_5": "⑤ If in situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur, then ⓐ is strengthened."
+    },
+    "original_rationale": {
+      "preliminaries": "The argument that A presents to support ⓐ is as follows: [Premise 1] If responsibility is assigned to the agent, then the act itself is subject to blame. (\"Responsibility is assigned to the agent only in cases where the act itself is subject to blame…\") [Premise 2] Alice's case is merely a cognitive error. [Premise 3] An act that is merely a cognitive error is not, in itself, blameworthy. [Conclusion 1] Therefore, Alice’s case is not one where responsibility is assigned to the agent. [Premise 4] Alice's case is one where she asserts something as true without checking the facts, even though it was possible to verify the authenticity of the information. [Conclusion 2] Therefore, not all cases where someone asserts something as true without verification (even though verification is possible) warrant assigning responsibility to the speaker.",
+      "statement_1_rationale": "① If you convert the first part of ① into its contrapositive, it means that all acts that are cognitive errors are, in themselves, subject to blame. This would make [Premise 3] false, thereby weakening A’s argument. Therefore, ① is a correct evaluation.",
+      "statement_2_rationale": "② The claim in ⓐ is that not all cases where someone asserts a falsehood without checking the facts (even though they could check) are cases where responsibility is assigned to the speaker. Believing in and spreading fake news is an example of such a \"case\" as confirmed at the end of the passage. If it is not always the case that responsibility is assigned to someone who believes in and spreads fake news, this actually aligns with ⓐ and therefore strengthens it, not weakens it. For this reason, ② is not a correct evaluation.",
+      "statement_3_rationale": "③ The example of Alice cited by A is precisely a case where \"responsibility is not assigned to the agent of an act that is not, in itself, subject to blame.\" Thus, ③ is consistent with the example A uses to support their claim and therefore strengthens ⓐ, making it incorrect as an evaluation.",
+      "statement_4_rationale": "④ If, even under normal observation conditions—in other words, even when it is possible to confirm the truth—all false assertions always stem not from cognitive error but from an active avoidance attitude, then the scope of assigning responsibility to the speaker expands to include all such cases under normal observation. In other words, ⓐ’s claim that there are cases where the speaker is not to blame is weakened. Therefore, ④ is not a correct evaluation.",
+      "statement_5_rationale": "⑤ A’s argument is limited to situations where it is possible to determine the truth. A contrasts cases of “permissible levels of negligence or cognitive error” (where fact-checking is possible but not done) with cases of “actively avoiding or refusing to acquire information,” assigning responsibility only in the latter. Thus, we cannot know what stance A would take if it were impossible to verify the truth. Even if such situations were included in A’s argument, if acts that are merely cognitive errors cannot occur in those situations, the scope of responsibility exemption that A proposes is thereby reduced. Thus, ⑤ is not a correct evaluation.",
+      "answer": "Only ① is the correct analysis among the <choices>, so the answer is ①."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Responsibility for spreading false information is only assigned when there is intentional avoidance or refusal to acquire information, not for cognitive errors like Alice's case.\",\n    \"Alice\": \"Alice believes her observation and makes a claim based on a cognitive error, but does not intentionally avoid verification.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:20.341112+00:00",
+    "response_id": "resp_08e94dd22787c9ec006a9f1aa4766087d0af513cad66ff1433",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 1071,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 76,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1147
+    },
+    "error": null
+  },
+  {
+    "id": "2021_25",
+    "year": "2021",
+    "problem_idx": "25",
+    "objective": "This question assesses the ability to understand the problems that pre-surveys can have in experimental research in social sciences and their solutions, and to find experimental results showing that viewing Black hero films reduced the degree of negative bias towards Black people.",
+    "domain": "Society",
+    "category": "Argument Analysis",
+    "answer": "5",
+    "original_question": "In social sciences, classical experimental research may not be able to generalize experimental results to the real world. For example, suppose an experimental study was conducted to determine whether ‘watching a movie where a Black person appears as a hero’ (the experimental stimulus) reduces ‘the degree of negative prejudice against Black people’, and the following findings were observed. First, in the experimental group that received the experimental stimulus, the degree of prejudice was lower in the post-test than in the pre-test. Second, in the control group that did not receive the experimental stimulus, there was no change in the degree of prejudice between the pre-test and the post-test. In this case, it can be considered that watching the movie reduced the degree of prejudice among participants in the experimental group. However, it cannot be asserted with certainty that the same effect would appear if the movie was watched by people in their everyday lives. This is because in experiments, participants may already have become sensitive to the issue of prejudice against Black people as a result of the pre-test. To solve this problem, an <experimental design> that adds an experiment without a pre-test must be implemented. If, through this, experimental results are obtained that demonstrate ‘ⓐ that watching the movie reduced the degree of prejudice’, the possibility of generalization can be increased.<Experimental Design>• Group 1: Pre-test → Experimental stimulus → Post-test.• Group 2: Pre-test → Post-test.• Group 3: No pre-test → Experimental stimulus → Post-test.• Group 4: No pre-test → Post-test.All participants in Groups 1 to 4 were randomly selected from the population. <question> Which of the following cannot be included in the experimental results that demonstrate ⓐ?<choices>① In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.② The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.③ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.④ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.⑤ The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1.",
+    "statements": {
+      "statement_1": "① In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.",
+      "statement_2": "② The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.",
+      "statement_3": "③ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.",
+      "statement_4": "④ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.",
+      "statement_5": "⑤ The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1."
+    },
+    "original_rationale": {
+      "preliminaries": "In classical experimental research in the social sciences, conducting a pre-test can make participants more sensitive to the experimental stimulus, which may in turn influence the experimental result. Therefore, the experimental results thus obtained are difficult to generalize to the real world. To solve this problem, an additional experiment without a pre-test is required. If, in the <experimental design>, results are observed showing that the level of prejudice is reduced in the experimental groups (Groups 1 and 3) due to the experimental stimulus, while there is no change in the control groups (Groups 2 and 4), it can be demonstrated that watching the movie reduces the degree of negative prejudice against Black people (point ⓐ). As a supplementary clue, it is noted that all participants were randomly selected, enabling comparisons between groups.",
+      "statement_1_rationale": "① If, in Group 1, the degree of prejudice in the post-test after the experimental stimulus is lower than in the pre-test before the stimulus, then the effect of the experimental stimulus has been found. Thus, ① demonstrates ⓐ.",
+      "statement_2_rationale": "② If the degree of prejudice in the post-test of Group 1 (which received the experimental stimulus) is lower than that in the post-test of Group 2 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ② demonstrates ⓐ.",
+      "statement_3_rationale": "③ If the degree of prejudice in the post-test of Group 3 (which received the experimental stimulus) is lower than the degree of prejudice in the pre-test of Group 2 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ③ demonstrates ⓐ.",
+      "statement_4_rationale": "④ If the degree of prejudice in the post-test of Group 3 (which received the experimental stimulus) is lower than the post-test in Group 4 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ④ demonstrates ⓐ.",
+      "statement_5_rationale": "⑤ If the degree of prejudice in the post-test of Group 4 (which did not receive the experimental stimulus) is lower than that of Group 1 (which did receive the experimental stimulus), then the effect of the experimental stimulus was not found. Therefore, ⑤ cannot be used to demonstrate ⓐ.",
+      "answer": "Only ⑤ is the correct analysis among the <choices>, so the answer is ⑤."
+    },
+    "model_rationale": "{\n  \"claims\": {},\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:22.065854+00:00",
+    "response_id": "resp_0cf00081d59eae9c006a9f1aa628c487d09bdc2f8ec829fa4a",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 945,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 14,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 959
+    },
+    "error": null
+  },
+  {
+    "id": "2021_35",
+    "year": "2021",
+    "problem_idx": "35",
+    "objective": "This question assesses the ability to judge whether a hypothetical experimental result weakens a theory about what a concept is.",
+    "domain": "Humanities",
+    "category": "Argument Evaluation & Problem Solving",
+    "answer": "3",
+    "original_question": "<Theory> The concept of A consists of the characteristics that define A, that is, the characteristics that constitute the necessary and sufficient conditions for something to be A. For example, if the necessary and sufficient condition for an entity to be a “bachelor” is to be an unmarried man, then for an entity to be a bachelor, he must be both unmarried and male, and all entities who are both unmarried and male are bachelors. In this case, the concept of bachelor is composed of the characteristics of being unmarried and being male. If someone possesses the concept of A, they would use the concept of A to determine whether a specific entity belongs to category A or not. The time it takes to determine, using the concept of A, whether an entity falls under A is the sum of the time required to check whether that entity possesses each of the defining characteristics of A. <Experiment> Scientists presented participants with various kinds of animals, and asked them to perform a task to judge whether each animal was a bird. After posing questions like “Is x a bird?” they measured the time taken for participants to answer. The results showed that the average response time to say that a sparrow is a bird was 0.4 seconds, while for a penguin, it was 1.4 seconds on average. <question> Which of the following, as found among <statements>, is an appropriate evaluation of <Theory>? <statements> (a) If participants did not possess the concept of bird and answered based on the feel or impression of the words “sparrow” and “penguin,” then the results of <Experiment> do not weaken <Theory>. (b) If the time taken to confirm whether a sparrow and a penguin possess each characteristic that constitutes the concept of bird differs, then the results of <Experiment> weaken <Theory>. (c) If people who think that the concept of human is defined as “rational animal” take less time to judge whether an entity is a human than to judge whether the same entity is an animal, <Theory> is weakened. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) If participants did not possess the concept of bird and answered based on the feel or impression of the words “sparrow” and “penguin,” then the results of <Experiment> do not weaken <Theory>.",
+      "statement_2": "(b) If the time taken to confirm whether a sparrow and a penguin possess each characteristic that constitutes the concept of bird differs, then the results of <Experiment> weaken <Theory>.",
+      "statement_3": "(c) If people who think that the concept of human is defined as “rational animal” take less time to judge whether an entity is a human than to judge whether the same entity is an animal, <Theory> is weakened."
+    },
+    "original_rationale": {
+      "preliminaries": "According to <Theory>, a concept is, in effect, equivalent to a definition: the concept of A consists of the characteristics that serve as the necessary and sufficient conditions for something to be A. A person who possesses the concept of A will use it to determine whether a particular entity belongs to A. Therefore, by measuring the time taken to categorize using the concept, <Theory> can be evaluated. The <Experiment> presents, in a simplified manner, a psychological experiment that demonstrates the so-called “typicality effect.",
+      "statement_1_rationale": "(a) If the participants did not possess the concept of bird, then they did not use the concept of bird in the categorization task. <Experiment> can only be used to evaluate <Theory> if the participants answered using the concept of bird. Therefore, if participants answered based on the impression the language gave, rather than using the concept, the results of <Experiment> do not weaken <Theory>. (a) is an appropriate evaluation.",
+      "statement_2_rationale": "(b) Suppose the concept of bird consists of characteristic X and characteristic Y. The results of <Experiment> show that answering whether a sparrow is a bird is faster than answering whether a penguin is a bird. Thus, only if the time it takes to check whether a sparrow and a penguin possess X and Y is the same, or shorter for the penguin, would <Experiment> weaken <Theory>. If the time taken to check each characteristic differs, and the time is shorter for the sparrow, then <Theory> is still compatible with the results of <Experiment>. Therefore, the results of <Experiment> do not weaken <Theory>. (b) is not an appropriate evaluation.",
+      "statement_3_rationale": "(c) People who think the concept of human is defined as a rational animal would need to check whether an entity is rational and whether it is an animal to judge it as human. Therefore, the time required to judge whether something is human cannot be shorter than the time required to judge whether it is an animal. If the opposite were observed, <Theory> would be weakened. (c) is an appropriate evaluation.",
+      "answer": "Therefore, among the <choices>, only (a) and (c) are appropriate evaluations. The correct answer is ③."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"a\": \"If participants answered based on impression without using the concept, the experimental results do not undermine the theory.\",\n    \"b\": \"If checking for the defining characteristics of 'bird' takes different times for different animals, the experimental results weaken the theory.\",\n    \"c\": \"If people use a more complex definition yet judge 'human' faster than 'animal', the theory is weakened.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:23.016130+00:00",
+    "response_id": "resp_0b018c1cf8669e46006a9f1aa719c487d08ed400adcb0cce94",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 914,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 97,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1011
+    },
+    "error": null
+  },
+  {
+    "id": "2025_23",
+    "year": "2025",
+    "problem_idx": "23",
+    "objective": "This question assesses the ability to understand two different viewpoints on the question 'What is a proposition?' and, based on the information provided in the passage, to determine what can be inferred from each viewpoint.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "5",
+    "original_question": "The meaning that a sentence carries is commonly called a \"proposition.\" Below are two different views on what a proposition is. Alice: The proposition expressed by a sentence is the set of possible worlds in which that sentence is true. For example, the sentences \"Suchul is tall\" and \"Suchul is a student\" express different propositions, since the set of possible worlds where Suchul is tall and the set of possible worlds where Suchul is a student are different sets. If a certain sentence is true in every possible world, then the proposition it expresses is the set of all possible worlds. For instance, the sentence \"3 is odd or not odd\" expresses the proposition which is the set of all possible worlds. Bob: A proposition is a kind of ordered pair. For example, the proposition expressed by the sentence \"3 is odd\" can be understood as an ordered pair composed of the object referred to by \"3\" and the property referred to by \"is odd.\" If we let the object referred to by \"3\" be m and the property referred to by \"is odd\" be F, then the proposition expressed by \"3 is odd\" is <m, F>. As another example, the sentence \"Suchul loves Heeyoung\" expresses a proposition that can be understood as an ordered triplet composed of the object referred to by \"Suchul,\" the object referred to by \"Heeyoung,\" and the binary relation referred to by \"loves.\" If the object referred to by \"Suchul\" is a, the object referred to by \"Heeyoung\" is b, and the binary relation referred to by \"loves\" is r, then the proposition expressed by \"Suchul loves Heeyoung\" is <a, b, r>. <question> Which of the following can be correctly inferred? Choose as many as applicable from <statements>. <statements> (a). Both Alice and Bob would agree that, provided \"Suchul\" and \"Heeyoung\" refer to different objects, the sentences \"Suchul loves Heeyoung\" and \"Heeyoung loves Suchul\" express different propositions. (b). A person who believes that the sentences \"A round square exists\" and \"3 is odd and not odd\" have different meanings would oppose Alice's view. (c). If \"Morning Star\" and \"Evening Star\" refer to the same object, then someone who believes that the sentences \"The Morning Star is beautiful\" and \"The Evening Star is beautiful\" have different meanings would oppose Bob's view. <choices> ① (b) ② (c) ③ (a), (b) ④ (a), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a). Both Alice and Bob would agree that, provided \"Suchul\" and \"Heeyoung\" refer to different objects, the sentences \"Suchul loves Heeyoung\" and \"Heeyoung loves Suchul\" express different propositions.",
+      "statement_2": "(b). A person who believes that the sentences \"A round square exists\" and \"3 is odd and not odd\" have different meanings would oppose Alice's view.",
+      "statement_3": "(c). If \"Morning Star\" and \"Evening Star\" refer to the same object, then someone who believes that the sentences \"The Morning Star is beautiful\" and \"The Evening Star is beautiful\" have different meanings would oppose Bob's view."
+    },
+    "original_rationale": {
+      "preliminaries": "The passage introduces two different perspectives on the question of what a proposition is. Each view is as follows: Alice: According to Alice, the proposition expressed by a sentence is the set of possible worlds in which the sentence is true. For example, the proposition expressed by the sentence \"Suchul is tall\" is the set of all possible worlds where \"Suchul is tall\" holds. If a certain sentence is true in all possible worlds, then the proposition it expresses is the set of all possible worlds; if a sentence is false in all possible worlds, the proposition it expresses is the empty set. Bob: According to Bob, a proposition is a sort of ordered pair built from the referents of its sub-expressions. For example, the proposition expressed by \"3 is odd\" is the ordered pair consisting of the object referred to by \"3\" and the property referred to by \"is odd.\" \"4 is odd\" expresses the ordered pair of the referent of \"4\" and the referent of \"is odd.\" Since the referents of \"3\" and \"4\" are not identical, these two ordered pairs are not identical, so the two sentences express different propositions.",
+      "statement_1_rationale": "(a) According to Alice, \"Suchul loves Heeyoung\" expresses the proposition as the set of possible worlds in which it is true that Suchul loves Heeyoung, and \"Heeyoung loves Suchul\" expresses the set of possible worlds in which it is true that Heeyoung loves Suchul. These two sets are not identical. Thus, the two sentences express different propositions. On the other hand, according to Bob, if \"Suchul\" refers to a, \"Heeyoung\" refers to b, and \"loves\" refers to the binary relation R, then \"Suchul loves Heeyoung\" expresses the proposition <a, b, R>, and \"Heeyoung loves Suchul\" expresses <b, a, R>. Since a and b are different, <a, b, R> and <b, a, R> are also different. Therefore, both Alice and Bob would agree that the two sentences express different propositions, making (a) a valid inference.",
+      "statement_2_rationale": "(b) Both \"A round square exists\" and \"3 is odd and not odd\" are false in every possible world. Therefore, according to Alice, the proposition expressed by both sentences is the empty set, and thus the same. Anyone who believes that the two sentences have different meanings would oppose Alice's view, so (b) is a valid inference.",
+      "statement_3_rationale": "(c) If \"Morning Star\" and \"Evening Star\" refer to the same object (let's denote it as a), and the property referred to by \"is beautiful\" as G, then according to Bob, \"The Morning Star is beautiful\" and \"The Evening Star is beautiful\" both express the proposition <a, G>. Therefore, anyone who believes these two sentences have different meanings would object to Bob's view, making (c) a valid inference.",
+      "answer": "All of (a), (b), and (c) are valid inferences, so the answer is ⑤."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"A proposition is the set of possible worlds in which the sentence is true.\",\n    \"Bob\": \"A proposition is an ordered pair or tuple of the objects and relations referred to by the sentence.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:24.541040+00:00",
+    "response_id": "resp_08ba0b8707f5236a006a9f1aa8a5bc87d0816bc85cc7f2c66a",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 1010,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 60,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1070
+    },
+    "error": null
+  },
+  {
+    "id": "2022_03",
+    "year": "2022",
+    "problem_idx": "3",
+    "objective": "This question assesses the ability to properly understand the differences among various views regarding the grounds for judgments on the unconstitutionality of laws, and to apply them to <situations> to make correct judgments.",
+    "domain": "Norms",
+    "category": "Argument Evaluation & Problem Solving",
+    "answer": "2",
+    "original_question": "The Constitution is the highest law, establishing the fundamental values of the nation; if a statute violates the Constitution, that law becomes null and void. The question here is which aspect of a statute provides grounds for judging its unconstitutionality. One might say that the literal meaning of the legal text is the core aspect that serves as the basis for unconstitutionality, but in reality, while the Constitution prohibits discrimination, it is rare for a statute to explicitly contain words or sentences that say \"discriminate.\" Fundamentally, the aspect of a law that is judged as unconstitutional is ⓐ ‘the direct consequence that is expected when the legal sentence representing the statute is applied to a specific case.’ For example, if Legal Sentence A contains content punishing those who commit adultery, the deciding aspect for the constitutionality of the law represented by A is the punishment imposed on those who commit adultery as a result of applying A. Some argue that we must examine ⓑ 'the impact that the enforcement of the statute has on the entire society.' For instance, in considering whether a statute giving extra points to a certain group in employment is unconstitutional due to discrimination, it is said that one must also observe the impact such granting of extra points has on others in the society. On the other hand, some still seek the decisive aspect for judgment of unconstitutionality in the meaning of the legal sentence, yet claim that the meaning of the legal sentence is ⓒ 'the contextual meaning that the legal sentence conveys within the context of the society’s history.' Whether a law represented by a legal sentence establishing a women-only educational institution violates the constitutional prohibition on discrimination depends on whether the establishment of such an institution aims to uplift women's status in the given country or is grounded in a historical context of separation and discrimination against women. <Situation> In Country X, after experiencing numerous wars, the national flag has become a symbol of the nation’s very existence, and flag burning is considered a criminal act that violates constitutional order, as it is regarded as an act undermining the authority of the state. However, when Country X’s parliament legislated Law L, represented by Legal Sentence R, to punish those who burn the national flag in order to protect the dignity and authority of the flag, acts of flag burning—which had almost never occurred previously—became frequent as opponents of the law protested, and sympathizers with the act of flag burning also grew in number. <question> From the following <statements>, which ones correctly evaluate the <situation>? <statements> (a) If ⓐ is considered the core aspect providing grounds for judgment of unconstitutionality, then Law L in Country X is unconstitutional.(b) The aspect ⓑ of Law L does not align with the legislative purpose of L as represented by R.(c) If ⓒ is considered the core aspect providing grounds for judgment of unconstitutionality, then Law L in Country X is unconstitutional. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) If ⓐ is considered the core aspect providing grounds for judgment of unconstitutionality, then Law L in Country X is unconstitutional.",
+      "statement_2": "(b) The aspect ⓑ of Law L does not align with the legislative purpose of L as represented by R.",
+      "statement_3": "(c) If ⓒ is considered the core aspect providing grounds for judgment of unconstitutionality, then Law L in Country X is unconstitutional."
+    },
+    "original_rationale": {
+      "preliminaries": "The literal meaning of the legal sentence, the direct result of applying the sentence in specific cases, the broad social impact when the law is enforced in society, and the historical context that the legal sentence has within the society—all these provide grounds for determining whether a law is unconstitutional. In the <situation>, a statute was enacted to punish acts that, under Country X’s constitutional order, are considered crimes; however, the social impact of the law’s enforcement actually runs counter to the original legislative intent.",
+      "statement_1_rationale": "(a) The direct result of applying R is punishing those who commit the act of burning the flag. Since there is social consensus in Country X’s constitutional order that burning the flag is a crime, if ⓐ is considered the core aspect for judging unconstitutionality, Law L would be judged not to be unconstitutional. Thus (a) is not a correct evaluation.",
+      "statement_2_rationale": "(b) The aspect ⓑ of Law L refers to the impact of L’s enforcement on the entire society. Here, the enforcement of L has led to an increase in acts of flag burning—which were previously rare—and greater support for such acts, thus running counter to L’s original legislative purpose of protecting the dignity and authority of the flag. Thus (b) is a correct evaluation.",
+      "statement_3_rationale": "(c) The viewpoint that sees ⓒ as the core aspect looks at the historical context of R in Country X. Given that, through repeated wars, Country X’s flag has come to symbolize national authority and dignity, flag burning is undoubtedly an anti-state, anti-constitutional act. Therefore, a law punishing it cannot be considered unconstitutional. Thus (c) is not a correct evaluation.Thus,",
+      "answer": "Thus, only (b) is a correct assessment, and the answer is ②."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"ⓐ\": \"The constitutionality of a law should be judged by the direct consequences expected when the law is applied to specific cases.\",\n    \"ⓑ\": \"The constitutionality of a law should be judged by the impact its enforcement has on the entire society.\",\n    \"ⓒ\": \"The constitutionality of a law should be judged by the contextual meaning the legal sentence conveys within the context of society’s history.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:26.413018+00:00",
+    "response_id": "resp_0aaf4eb4db9c769b006a9f1aaa82f087d094734bedb47dc732",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 1087,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 102,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1189
+    },
+    "error": null
+  },
+  {
+    "id": "2023_29",
+    "year": "2023",
+    "problem_idx": "29",
+    "objective": "This question assesses the ability to understand the argument that the principal-agent problem in housing transactions arises due to information asymmetry and the agent's pursuit of self-interest, and to determine whether each research finding strengthens or weakens this argument.",
+    "domain": "Society",
+    "category": "Argument Evaluation & Analysis",
+    "answer": "1",
+    "original_question": "When a principal delegates tasks to an agent, but cannot perfectly observe the agent’s actions, the agent may behave in ways that maximize their own interests at the expense of the principal’s interests. This is called the principal-agent problem. There is an argument that “the principal-agent problem also arises for homeowners who sell their house through real estate agents.” In the United States, real estate agents usually receive a 6% commission on the sale price, but after other participants take their share, the agent effectively receives only about 1.5%. Since the commission is linked to the sale price, it may seem the agent is incentivized to sell the house at the highest possible price. However, this is only true to a limited extent. For example, if the sale price is increased by $10,000, the agent only earns an additional $150. In order to obtain this higher price, the property would need to stay on the market longer, incurring costs for advertising and showing the home to potential buyers. Therefore, rather than paying these extra costs for an additional $150, the agent is incentivized to sell the house at a reasonable price relatively quickly. Homeowners, who have far less information than agents regarding their home’s value or the likelihood of a sale, are prone to accept the agent’s suggestion to settle for a lower price. <question> Which of the following assessments in <statements> is/are correct based on the above passage? <statements> (a). The finding that agents leave their own properties on the market longer than those belonging to others reinforces the argument that the principal-agent problem applies to homeowners selling through real estate agents. (b). The finding that increasing the effective commission rate from 1.5% to 3.5% led to homes spending less time on the market reinforces the argument that the principal-agent problem applies to homeowners selling through real estate agents. (c). The finding that the development of information and communication technology, making housing price information easier and more accurate to obtain, has shortened the time homes spend on the market, reinforces the argument that the principal-agent problem applies to homeowners selling through real estate agents. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a). The finding that agents leave their own properties on the market longer than those belonging to others reinforces the argument that the principal-agent problem applies to homeowners selling through real estate agents.",
+      "statement_2": "(b). The finding that increasing the effective commission rate from 1.5% to 3.5% led to homes spending less time on the market reinforces the argument that the principal-agent problem applies to homeowners selling through real estate agents.",
+      "statement_3": "(c). The finding that the development of information and communication technology, making housing price information easier and more accurate to obtain, has shortened the time homes spend on the market, reinforces the argument that the principal-agent problem applies to homeowners selling through real estate agents."
+    },
+    "original_rationale": {
+      "preliminaries": "The principal-agent problem commonly arises in economic relationships where there is asymmetric information. In situations where the principal cannot fully observe or control the agent’s actions, and where the agent has goals differing from those of the principal, the agent will act to maximize their own benefit. This leads to the so-called “moral hazard” phenomenon. Applying the principal-agent problem to the U.S. housing market, the agent may be motivated to quickly close a sale at a relatively low price, rather than pursuing the higher price desired by the homeowner, considering their own commission and the effort required. It is important to recognize that, given commission structures and costs, the agent may seek to minimize the amount of time a property is on the market. On the other hand, if the root cause of the principal-agent problem—information asymmetry—diminishes, the problem itself is mitigated.",
+      "statement_1_rationale": "(a) When selling their own property, the agent acts as the principal, not an agent, so the principal-agent problem does not occur. According to ⓐ, the agent (serving as an agent) is motivated to get rid of listings from the market quickly, at a reasonable price, to maximize their own interests, meaning that, if ⓐ is correct, properties stay on the market longer when the agent is the owner (the principal) than when acting as an agent for others. Thus, the finding that agents’ own properties remain on the market longer than those belonging to others reinforces ⓐ’s argument. Assessment (a) is correct.",
+      "statement_2_rationale": "(b) When the effective commission rate linked to the sale price increases, the agent stands to gain more by achieving a higher sale price. Therefore, to maximize profit, the agent should be willing to keep the property on the market for longer. If ⓐ is correct—that the agent seeks to maximize their own benefit then, an increase in the commission rate should lengthen the time on the market, not shorten it. Thus, the finding that increasing the commission rate reduced time on the market does NOT reinforce ⓐ. Assessment (b) is incorrect.",
+      "statement_3_rationale": "(c) According to the last sentence of the passage, homeowners have less information about home values than agents, making them vulnerable to accepting the agent’s advice for a lower price. If advances in information and communication technology allow homeowners to access price information more easily and accurately, they are more likely to refuse agents’ suggestions for lower prices and more likely to hold out for a higher price, keeping the property on the market longer. If the principal-agent problem ⓐ is correct, then as information asymmetry is reduced, the time on the market should increase, not decrease. Thus, the finding that information technology has reduced time on the market does NOT reinforce ⓐ. Assessment (c) is incorrect.",
+      "answer": "Only (a) is a correct assessment. The answer is ①."
+    },
+    "model_rationale": "{\n  \"claims\": {},\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:28.016118+00:00",
+    "response_id": "resp_0688ed8cfeada166006a9f1aac1ee087d09d7515a7b0cbe13f",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 926,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 14,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 940
+    },
+    "error": null
+  },
+  {
+    "id": "2021_28",
+    "year": "2021",
+    "problem_idx": "28",
+    "objective": "This question assesses the ability to understand a policy that changes the tiers of a progressive rate system and to determine whether each argument in the debate concerning this policy is strengthened or weakened by the presented data.",
+    "domain": "Society",
+    "category": "Argumentation and Rebuttal",
+    "answer": "4",
+    "original_question": "Country X applies the following progressive billing system for monthly household electricity rates.- Tier 1: Usage up to 200 kWh, base charge is 900 won, rate per kWh is 90 won.- Tier 2: Usage over 200 kWh and up to 400 kWh, base charge is 1,600 won, rate per kWh is 180 won.- Tier 3: Usage over 400 kWh, base charge is 7,300 won, rate per kWh is 280 won.For example, a household consuming 300 kWh in a month will pay a base charge of 1,600 won, and rates of 90 won per kWh for Tier 1 and 180 won per kWh for Tier 2, resulting in a total electricity bill of 37,600 won (=1,600 + 200×90 + 100×180).Recently, Country X introduced a “Cool Summer Policy” for electricity used in the summer, changing the tiers to ‘up to 300 kWh’, ‘over 300 kWh up to 450 kWh’, and ‘over 450 kWh’, while maintaining the same rate structure as before in each tier.<Debate> Alice: In order to ensure a stable electricity supply, power generation facilities must be able to meet the peak hourly electricity demand. The introduction of the Cool Summer Policy will reduce the stability of electricity supply.Bob: Air conditioning is a necessity, not a luxury. To lower the summer electricity bill burden for most households, it would be better to switch from the Cool Summer Policy to a flat rate system with a base charge of 1,600 won and a per kWh rate of 180 won.Charlie: It is better to focus on welfare for vulnerable groups rather than all households. The Cool Summer Policy should be modified so that it applies only to vulnerable groups. <question> Which of the following, as presented in <statements>, are appropriate evaluations of the <Debate> above?<statements> (a) Data showing that peak hourly electricity consumption in Country X occurs in summer weakens Alice’s argument.(b) Data showing that most households consume 400–450 kWh per month weakens Bob’s argument.(c) Data showing that most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month weakens Charlie’s argument. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Data showing that peak hourly electricity consumption in Country X occurs in summer weakens Alice’s argument.",
+      "statement_2": "(b) Data showing that most households consume 400–450 kWh per month weakens Bob’s argument.",
+      "statement_3": "(c) Data showing that most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month weakens Charlie’s argument."
+    },
+    "original_rationale": {
+      "preliminaries": "Unlike a flat rate system, a progressive billing system applies different rates for each tier, and even for higher tiers, the lower tier rates are applied cumulatively for the respective amount of consumption in each tier. When the usage range of each tier is expanded by changing the tier criteria, households in higher tiers receive greater discounts. For example, in the Cool Summer Policy, households that originally belonged to Tier 1 before the change already benefit from the lowest rates, so expanding the tier does not affect them. However, households that were in Tier 2 prior to the change enjoy a rate reduction of 90 won (180–90 won) per kWh for usage between 200 and 300 kWh, and also a 700-won decrease in the base charge. Households in what was formerly Tier 3 benefit not only from this but also from a rate reduction of 100 won (280–180 won) per kWh for usage between 400 and 450 kWh, and a 5,700-won decrease in the base charge for households consuming 400–450 kWh.",
+      "statement_1_rationale": "(a) Alice claims that if the Cool Summer Policy reduces rates, summer electricity consumption will increase, leading to higher peak hourly demand in summer and thus reduced supply stability. Therefore, if data show that peak hourly demand in Country X is actually highest not in summer, and that even with increased summer consumption due to the policy this ranking does not change, Alice’s argument would be weakened. However, data that show summer peak demand is highest do not weaken Alice’s argument. Thus, (a) is not an appropriate evaluation.",
+      "statement_2_rationale": "(b) Under a progressive system, households with high consumption still enjoy lower rates for their usage in the lower tiers. A household using 400–450 kWh per month will fall into Tier 2 under the Cool Summer Policy, paying a base charge of 1,600 won, 90 won per kWh up to 300 kWh, and 180 won per kWh beyond 300 kWh. Under Bob’s proposed flat rate (1,600 won base, 180 won/kWh for all usage), all consumption is charged at the higher rate, leading to a bigger bill than under the Cool Summer Policy. Therefore, data showing most households are in this range would weaken Bob’s argument. So (b) is an appropriate evaluation.",
+      "statement_3_rationale": "c) Charlie argues the Cool Summer Policy should target only vulnerable populations for welfare reasons; this only makes sense if vulnerable groups actually benefit. If most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month, their bills would be unaffected whether the policy applies universally or only to them. Therefore, data showing this would weaken Charlie’s argument. Thus, (c) is an appropriate evaluation.",
+      "answer": "Since only (b) and (c) are appropriate, the answer is ④."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"The Cool Summer Policy reduces supply stability since power generation facilities need to meet peak hourly demand.\",\n    \"Bob\": \"A flat rate system is preferable to Cool Summer Policy to lessen the electricity bill burden for most households.\",\n    \"Charlie\": \"Cool Summer Policy should be limited to vulnerable groups instead of all households.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:29.262545+00:00",
+    "response_id": "resp_04450f333dcc979d006a9f1aad5a4c87d0a8d58ec608c3eb63",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 978,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 83,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1061
+    },
+    "error": null
+  },
+  {
+    "id": "2025_10",
+    "year": "2025",
+    "problem_idx": "10",
+    "objective": "This question assesses the ability to find valid arguments regarding the evaluation of advertisements for '1+1 promotions' and the administrative measures of regulatory bodies.",
+    "domain": "Norms",
+    "category": "Argument Evaluation & Analysis",
+    "answer": "3",
+    "original_question": "Company P released product A on August 1, 2023. From August 1, 2023 to August 31, 2023, the product was sold at the fixed price of 15,000 won. Thereafter, without specifying any discount rate, the price was set at 14,500 won from September 1 to September 10, 2023; at 13,500 won from September 11 to September 20, 2023; and at 11,000 won from September 21 to September 30, 2023. From October 1, 2023, Company P advertised a ‘Buy 1 Get 1 Free’ promotion for product A for six months via newspapers and flyers, indicating the sale price of one unit as 15,000 won. On February 1, 2024, regulatory agency Q imposed a fine on Company P on the grounds that the ‘Buy 1 Get 1 Free’ advertisement violated [the Regulation]. Q’s reasoning was: “ⓐ Regardless of the method of sale, consumers consider themselves to be purchasing at a 50% discount compared to the previous transaction price, so the ‘Buy 1 Get 1 Free’ promotion is deemed a discount sale.” [Regulation] Article ○ (Discount Sales) ① When a business entity conducts a discount sale of goods, the discount rate shall be indicated, and the previous transaction price for the 30 days immediately preceding the start of advertising shall be stated. However, if the price changed continuously during those 30 days, the previous transaction price shall be either the lower of (i) the average price for the 30 days, or (ii) the average of the lowest and highest prices within that period. ② Notwithstanding Paragraph 1, where discount sales are conducted consecutively under different conditions, the previous transaction price during the 30 days prior to the first discount sale shall be stated. ③ In case of violation of Paragraph 1 or Article 2, a fine not exceeding 30 million won may be imposed. <question> Which of the following can be correctly inferred from the above? Select all correct statements from <statements>. <statements> (a) If the interpretation is that Company P’s act of indicating 15,000 won as the sale price is solely for the purpose of a giveaway because the discount rate for the ‘Buy 1 Get 1 Free’ promotion was not directly stated, this weakens ⓐ. (b) According to Q, Company P should have indicated the sale price of product A as 13,000 won. (c) If sales involving discounts without indicating the discount rate are also regarded as discount sales, then even if Company P’s ‘Buy 1 Get 1 Free’ event is acknowledged as a discount sale, the fact that Company P indicated 15,000 won as the sale price in this event does not violate [the Regulation]. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c).",
+    "statements": {
+      "statement_1": "(a) If the interpretation is that Company P’s act of indicating 15,000 won as the sale price is solely for the purpose of a giveaway because the discount rate for the ‘Buy 1 Get 1 Free’ promotion was not directly stated, this weakens ⓐ.",
+      "statement_2": "(b) According to Q, Company P should have indicated the sale price of product A as 13,000 won.",
+      "statement_3": "(c) If sales involving discounts without indicating the discount rate are also regarded as discount sales, then even if Company P’s ‘Buy 1 Get 1 Free’ event is acknowledged as a discount sale, the fact that Company P indicated 15,000 won as the sale price in this event does not violate [the Regulation]."
+    },
+    "original_rationale": {
+      "preliminaries": "The passage states that Company P advertised a ‘Buy 1 Get 1 Free’ promotion for product A starting October 1, 2023, and that regulatory agency Q imposed a fine on the grounds that this advertisement violated [the Regulation]. [The Regulation] stipulates the requirement to indicate the discount rate and the previous transaction price when a business entity conducts a discount sale.",
+      "statement_1_rationale": "(a) If the interpretation is that Company P’s indication of 15,000 won as the sale price was solely for the purpose of a giveaway, as the discount rate was not directly stated for the ‘Buy 1 Get 1 Free’ event, then the event would be considered a giveaway rather than a discount sale. This weakens the claim that “the ‘Buy 1 Get 1 Free’ promotion is deemed a discount sale” (ⓐ). Thus, (a) is a correct inference.",
+      "statement_2_rationale": "(b) According to Q, Company P’s ‘Buy 1 Get 1 Free’ event is considered a discount sale. In this case, under Article ○, Paragraph 1 of [the Regulation], the discount rate and the previous transaction price for the 30 days immediately prior to the advertisement must be indicated. Since Company P’s prices fluctuated during those 30 days, in accordance with the proviso of Article ○, Paragraph 1, the lower figure between (i) the average price for the 30 days (which is the average of 14,500 won, 13,500 won, and 11,000 won, thus 13,000 won) and (ii) the average of the lowest and highest prices (the average of 11,000 won and 14,500 won, thus 12,750 won) must be indicated as the previous transaction price. Consequently, Company P should have indicated the lower price, which is 12,700 won. Therefore, (b) is not a correct inference.",
+      "statement_3_rationale": "(c) If sales involving discounts without indication of the discount rate are also regarded as discount sales, then P’s sales at 14,500 won (from September 1–10, 2023), at 13,500 won (from September 11–20, 2023), and at 11,000 won (from September 21–30, 2023) should all be considered discount sales. Thus, if P’s ‘Buy 1 Get 1 Free’ promotion is recognized as a discount sale, it falls under consecutive discount sales under different conditions. Therefore, under Article ○, Paragraph 2 of [the Regulation], the previous transaction price for the 30 days immediately before the first discount sale, which is 15,000 won, must be indicated as the sale price for A. Thus, (c) is a correct inference.",
+      "answer": "Only (a) and (c) from the statements are correct inferences, so the answer is ③."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Q\": \"Q argues that Company P's 'Buy 1 Get 1 Free' promotion should be regarded as a discount sale requiring indication of the discount rate and proper previous transaction price per the Regulation.\",\n    \"Company P\": \"Company P maintains that simply stating the sale price for a 'Buy 1 Get 1 Free' promotion without indicating a discount rate does not necessarily constitute a discount sale that violates the Regulation.\"\n  },\n  \"attacks\": [\n    [\"Company P\", \"Q\"]\n  ]\n}",
+    "run_id": 1,
+    "model_id": "gpt-4.1",
+    "provider": "openai",
+    "backend": "api",
+    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
+    "max_output_tokens": 3000,
+    "reasoning_effort": null,
+    "created_at": "2026-09-07T20:12:30.516335+00:00",
+    "response_id": "resp_0f3d613a1df1651d006a9f1aaeb73887d0ad7cf7f27c40e0cb",
+    "model_returned": "gpt-4.1-2025-04-14",
+    "usage": {
+      "input_tokens": 1091,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 113,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 1204
+    },
+    "error": null
+  }
+]

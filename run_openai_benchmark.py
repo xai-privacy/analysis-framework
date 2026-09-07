@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -20,6 +21,12 @@ _QUESTIONS_PATH = os.path.join(
     "benchmarks",
     "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
 )
+
+_TEST_SET_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "testing",
+    "LEET_Arg_Questions_Test_Set.json",
+)
 _RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
 
 
@@ -27,12 +34,33 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _result_path(model_id: str) -> str:
+def _result_path(model_id: str, result_tag: Optional[str] = None) -> str:
     signature = re.sub(r"[^A-Za-z0-9_.-]+", "_", model_id).strip("_")
+
+    if result_tag:
+        tag = re.sub(r"[^A-Za-z0-9_.-]+", "_", result_tag).strip("_")
+        signature = f"{signature}__{tag}"
+
     return os.path.join(_RESULTS_DIR, f"{signature}.json")
 
 
-def _load_questions(year: Optional[str] = None, limit: Optional[int] = None):
+def _load_excluded_ids(exclude_ids_path: Optional[str]) -> set:
+    if not exclude_ids_path:
+        return set()
+
+    with open(exclude_ids_path, "r", encoding="utf-8") as handle:
+        rows = json.load(handle)
+
+    return {str(row["id"]) for row in rows if "id" in row}
+
+
+def _load_questions(
+    year: Optional[str] = None,
+    limit: Optional[int] = None,
+    exclude_ids_path: Optional[str] = None,
+    sample_size: Optional[int] = None,
+    seed: int = 7,
+):
     with open(_QUESTIONS_PATH, "r", encoding="utf-8") as handle:
         questions = json.load(handle)
 
@@ -43,6 +71,22 @@ def _load_questions(year: Optional[str] = None, limit: Optional[int] = None):
             for question in questions
             if str(question.get("id", "")).startswith(year_prefix)
         ]
+
+    excluded_ids = _load_excluded_ids(exclude_ids_path)
+    if excluded_ids:
+        questions = [
+            question
+            for question in questions
+            if str(question.get("id")) not in excluded_ids
+        ]
+
+    if sample_size is not None:
+        if sample_size > len(questions):
+            raise ValueError(
+                f"sample_size={sample_size} is larger than available question count={len(questions)}"
+            )
+        rng = random.Random(seed)
+        questions = rng.sample(questions, sample_size)
 
     if limit is not None:
         questions = questions[:limit]
@@ -166,6 +210,10 @@ def execution_pipeline(
     limit: Optional[int] = None,
     runs: int = 1,
     overwrite: bool = False,
+    exclude_ids_path: Optional[str] = None,
+    sample_size: Optional[int] = None,
+    seed: int = 7,
+    result_tag: Optional[str] = None,
 ):
     print("Starting benchmarking the model via OpenAI Responses API ...\n")
     print(f"Model: {model_id}")
@@ -180,13 +228,23 @@ def execution_pipeline(
     reasoning_effort = model_cfg.get("reasoning_effort")
     sleep_seconds = float(model_cfg.get("sleep_seconds", 0.2))
 
-    questions = _load_questions(year=year, limit=limit)
-    result_path = _result_path(model_id)
+    questions = _load_questions(
+        year=year,
+        limit=limit,
+        exclude_ids_path=exclude_ids_path,
+        sample_size=sample_size,
+        seed=seed,
+    )
+    result_path = _result_path(model_id, result_tag=result_tag)
     results = _load_existing_results(result_path, overwrite)
     completed = _existing_question_run_pairs(results)
 
     print(f"Questions selected: {len(questions)}")
     print(f"Questions path: {_QUESTIONS_PATH}")
+    print(f"Exclude IDs path: {exclude_ids_path if exclude_ids_path else 'none'}")
+    print(f"Sample size: {sample_size if sample_size is not None else 'none'}")
+    print(f"Seed: {seed}")
+    print(f"Result tag: {result_tag if result_tag else 'none'}")
     print(f"Results file: {result_path}")
     print(f"Max output tokens: {max_output_tokens}")
     print(f"Reasoning effort: {reasoning_effort}")
@@ -278,6 +336,28 @@ if __name__ == "__main__":
         action="store_true",
         help="Clear the model result file before writing responses.",
     )
+    parser.add_argument(
+        "--exclude-ids-path",
+        default=None,
+        help="JSON file containing question IDs to exclude, e.g. testing/LEET_Arg_Questions_Test_Set.json.",
+    )
+    parser.add_argument(
+        "--sample-size",
+        type=int,
+        default=None,
+        help="Randomly sample N questions after exclusions.",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=7,
+        help="Random seed used with --sample-size.",
+    )
+    parser.add_argument(
+        "--result-tag",
+        default=None,
+        help="Optional suffix for output filename, e.g. non_test_10_seed7.",
+    )
 
     args = parser.parse_args()
 
@@ -288,6 +368,10 @@ if __name__ == "__main__":
             limit=args.limit,
             runs=args.runs,
             overwrite=args.overwrite,
+            exclude_ids_path=args.exclude_ids_path,
+            sample_size=args.sample_size,
+            seed=args.seed,
+            result_tag=args.result_tag,
         )
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)

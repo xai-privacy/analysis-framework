@@ -2,7 +2,6 @@
 import argparse
 import json
 import os
-import random
 import re
 import sys
 import time
@@ -14,60 +13,25 @@ from anthropic import Anthropic
 from prompts import get_system_prompt
 
 
-_MODEL_CONFIGS_DIR = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "model_configs",
-)
-
+_MODEL_CONFIGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "model_configs")
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "benchmarks",
     "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
 )
-
-_TEST_SET_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "testing",
-    "LEET_Arg_Questions_Test_Set.json",
-)
-
-_RESULTS_DIR = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "results",
-)
+_RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
 
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _result_path(model_id: str, result_tag: Optional[str] = None) -> str:
+def _result_path(model_id: str) -> str:
     signature = re.sub(r"[^A-Za-z0-9_.-]+", "_", model_id).strip("_")
-
-    if result_tag:
-        tag = re.sub(r"[^A-Za-z0-9_.-]+", "_", result_tag).strip("_")
-        signature = f"{signature}__{tag}"
-
     return os.path.join(_RESULTS_DIR, f"{signature}.json")
 
 
-def _load_excluded_ids(exclude_ids_path: Optional[str]) -> set:
-    if not exclude_ids_path:
-        return set()
-
-    with open(exclude_ids_path, "r", encoding="utf-8") as handle:
-        rows = json.load(handle)
-
-    return {str(row["id"]) for row in rows if "id" in row}
-
-
-def _load_questions(
-    year: Optional[str] = None,
-    limit: Optional[int] = None,
-    exclude_ids_path: Optional[str] = None,
-    sample_size: Optional[int] = None,
-    seed: int = 7,
-):
+def _load_questions(year: Optional[str] = None, limit: Optional[int] = None):
     with open(_QUESTIONS_PATH, "r", encoding="utf-8") as handle:
         questions = json.load(handle)
 
@@ -78,22 +42,6 @@ def _load_questions(
             for question in questions
             if str(question.get("id", "")).startswith(year_prefix)
         ]
-
-    excluded_ids = _load_excluded_ids(exclude_ids_path)
-    if excluded_ids:
-        questions = [
-            question
-            for question in questions
-            if str(question.get("id")) not in excluded_ids
-        ]
-
-    if sample_size is not None:
-        if sample_size > len(questions):
-            raise ValueError(
-                f"sample_size={sample_size} is larger than available question count={len(questions)}"
-            )
-        rng = random.Random(seed)
-        questions = rng.sample(questions, sample_size)
 
     if limit is not None:
         questions = questions[:limit]
@@ -134,26 +82,14 @@ def _existing_question_run_pairs(results):
 
 
 def _load_claude_model_config(model_id: str) -> Dict[str, Any]:
-    """
-    Optional Anthropic config.
-
-    Supported fields:
-    - provider
-    - max_tokens
-    - sleep_seconds
-
-    Note:
-    We intentionally do not pass temperature to Anthropic Messages API here
-    because the installed SDK/client may reject temperature for Messages.create().
-    """
-
     sanitized = model_id.replace("/", "_")
     config_path = os.path.join(_MODEL_CONFIGS_DIR, f"{sanitized}.json")
 
     default_config = {
         "provider": "anthropic",
         "max_tokens": 3000,
-        "sleep_seconds": 0.2,
+        "temperature": 0,
+        "sleep_seconds": 0.2
     }
 
     if not os.path.isfile(config_path):
@@ -169,27 +105,7 @@ def _load_claude_model_config(model_id: str) -> Dict[str, Any]:
 
     merged = dict(default_config)
     merged.update(user_config)
-
-    # Remove temperature if an older config file still contains it.
-    # We keep the run stable by using the provider/API default.
-    merged.pop("temperature", None)
-
     return merged
-
-
-def _build_prompt(original_question: str) -> str:
-    """
-    Put the benchmark question first, then the current prompt instruction.
-
-    This mirrors the OpenAI runner's behavior:
-        original_question + "\\n\\n" + get_system_prompt()
-
-    This is important because the benchmark question itself contains an
-    embedded multiple-choice task. By placing the graph-extraction instruction
-    at the end of the user message, we make the final task instruction explicit.
-    """
-
-    return f"{original_question.strip()}\n\n{get_system_prompt().strip()}"
 
 
 def _extract_claude_visible_text(message) -> str:
@@ -197,13 +113,11 @@ def _extract_claude_visible_text(message) -> str:
     Convert Claude Messages API content blocks into one text string.
 
     Baseline rule:
-    - model_rationale stores whatever visible text Claude returned.
-    - We do not parse the graph here.
-    - We do not repair invalid JSON here.
-    - If Anthropic returns non-text blocks, include compact markers so the
+    - model_rationale should contain whatever visible text Claude returned.
+    - We do not parse the answer here.
+    - If Anthropic returns non-text blocks, we include a compact marker so the
       baseline file makes that visible rather than silently dropping it.
     """
-
     chunks = []
 
     for block in message.content:
@@ -212,6 +126,7 @@ def _extract_claude_visible_text(message) -> str:
         if block_type == "text":
             chunks.append(getattr(block, "text", "") or "")
         elif block_type == "thinking":
+            # If extended thinking is ever enabled, preserve it visibly.
             chunks.append(getattr(block, "thinking", "") or "")
         elif block_type == "redacted_thinking":
             chunks.append("[REDACTED_THINKING_BLOCK]")
@@ -226,30 +141,28 @@ def _call_claude_model(
     model_id: str,
     original_question: str,
     max_tokens: int,
+    temperature: Optional[float],
 ):
-    """
-    Call Anthropic Claude Messages API.
-
-    Important:
-    - Do not pass temperature.
-    - Do not use the system field for this prompt version.
-    - Put original_question + graph-extraction prompt together in the user
-      message so Claude sees the graph instruction after the embedded
-      multiple-choice question.
-    """
-
     kwargs: Dict[str, Any] = {
         "model": model_id,
         "max_tokens": max_tokens,
+        "system": get_system_prompt(),
         "messages": [
             {
                 "role": "user",
-                "content": _build_prompt(original_question),
+                "content": original_question,
             }
         ],
     }
 
+    '''
+    if temperature is not None:
+        kwargs["temperature"] = temperature
+    
     message = client.messages.create(**kwargs)
+    '''
+    message = client.messages.create(**kwargs)
+
 
     usage = None
     if getattr(message, "usage", None) is not None:
@@ -275,10 +188,6 @@ def execution_pipeline(
     limit: Optional[int] = None,
     runs: int = 1,
     overwrite: bool = False,
-    exclude_ids_path: Optional[str] = None,
-    sample_size: Optional[int] = None,
-    seed: int = 7,
-    result_tag: Optional[str] = None,
 ):
     print("Starting benchmarking the model via Anthropic Claude Messages API ...\n")
     print(f"Model: {model_id}")
@@ -290,27 +199,22 @@ def execution_pipeline(
     print(f"Model config: {model_cfg}")
 
     max_tokens = int(model_cfg.get("max_tokens", 3000))
+    temperature = model_cfg.get("temperature", 0)
     sleep_seconds = float(model_cfg.get("sleep_seconds", 0.2))
 
-    questions = _load_questions(
-        year=year,
-        limit=limit,
-        exclude_ids_path=exclude_ids_path,
-        sample_size=sample_size,
-        seed=seed,
-    )
-    result_path = _result_path(model_id, result_tag=result_tag)
+    if temperature is not None:
+        temperature = float(temperature)
+
+    questions = _load_questions(year=year, limit=limit)
+    result_path = _result_path(model_id)
     results = _load_existing_results(result_path, overwrite)
     completed = _existing_question_run_pairs(results)
 
     print(f"Questions selected: {len(questions)}")
     print(f"Questions path: {_QUESTIONS_PATH}")
-    print(f"Exclude IDs path: {exclude_ids_path if exclude_ids_path else 'none'}")
-    print(f"Sample size: {sample_size if sample_size is not None else 'none'}")
-    print(f"Seed: {seed}")
-    print(f"Result tag: {result_tag if result_tag else 'none'}")
     print(f"Results file: {result_path}")
     print(f"Max tokens: {max_tokens}")
+    print(f"Temperature: {temperature}")
     print()
 
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
@@ -326,22 +230,20 @@ def execution_pipeline(
             print(f"\n[{qid}] run={run_id}")
 
             result = dict(question)
-
             result.update(
                 {
-                    # Raw visible model output.
-                    # For the argument-graph prompt, this should ideally be
-                    # one JSON object with claims and attacks.
+                    # Sebastian baseline instruction:
+                    # Store raw visible model output here.
                     "model_rationale": "",
 
-                    # No model_answer field here because the current prompt is
-                    # graph extraction, not multiple-choice answer prediction.
+                    # No model_answer field.
                     "run_id": run_id,
                     "model_id": model_id,
                     "provider": "anthropic",
                     "backend": "api",
-                    "prompt_version": "argument_graph_json_from_prompts_py",
+                    "prompt_version": "leet_arg_paper_prompt_from_prompts_py",
                     "max_tokens": max_tokens,
+                    "temperature": temperature,
                     "created_at": _utc_now(),
                     "response_id": None,
                     "model_returned": None,
@@ -358,6 +260,7 @@ def execution_pipeline(
                     model_id=model_id,
                     original_question=question["original_question"],
                     max_tokens=max_tokens,
+                    temperature=temperature,
                 )
 
                 result["model_rationale"] = response_payload["text"]
@@ -390,56 +293,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Run the LEET-Arg benchmark against an Anthropic Claude model."
     )
-
     parser.add_argument(
         "--model",
         required=True,
         help="Claude model id, e.g. claude-sonnet-4-6.",
     )
-
-    parser.add_argument(
-        "--year",
-        help="Run only questions whose id starts with YEAR_.",
-    )
-
-    parser.add_argument(
-        "--limit",
-        type=int,
-        help="Run only the first N selected questions.",
-    )
-
-    parser.add_argument(
-        "--runs",
-        type=int,
-        default=1,
-    )
-
+    parser.add_argument("--year", help="Run only questions whose id starts with YEAR_.")
+    parser.add_argument("--limit", type=int, help="Run only the first N selected questions.")
+    parser.add_argument("--runs", type=int, default=1)
     parser.add_argument(
         "--overwrite",
         action="store_true",
         help="Clear the model result file before writing responses.",
-    )
-    parser.add_argument(
-        "--exclude-ids-path",
-        default=None,
-        help="JSON file containing question IDs to exclude, e.g. testing/LEET_Arg_Questions_Test_Set.json.",
-    )
-    parser.add_argument(
-        "--sample-size",
-        type=int,
-        default=None,
-        help="Randomly sample N questions after exclusions.",
-    )
-    parser.add_argument(
-        "--seed",
-        type=int,
-        default=7,
-        help="Random seed used with --sample-size.",
-    )
-    parser.add_argument(
-        "--result-tag",
-        default=None,
-        help="Optional suffix for output filename, e.g. non_test_10_seed7.",
     )
 
     args = parser.parse_args()
@@ -451,11 +316,8 @@ if __name__ == "__main__":
             limit=args.limit,
             runs=args.runs,
             overwrite=args.overwrite,
-            exclude_ids_path=args.exclude_ids_path,
-            sample_size=args.sample_size,
-            seed=args.seed,
-            result_tag=args.result_tag,
         )
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)
         sys.exit(1)
+

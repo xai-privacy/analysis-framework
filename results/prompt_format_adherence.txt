@@ -1,36 +1,545 @@
+PROMPT FORMAT ADHERENCE REPORT
+Run: non-test 10-question sample from benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json
+Exclusion: IDs from testing/LEET_Arg_Questions_Test_Set.json were excluded before sampling
+Models: claude-opus-4-5-20251101, claude-opus-4-6, claude-sonnet-4-6, gpt-4.1-mini, gpt-4.1, o4-mini
+
 SUMMARY
-The frontier models generally adhere to the expected solver-readable format. Across 60 outputs, all were parseable JSON objects with the required top-level keys: claims and attacks. So at the basic schema level, the prompt works.
+All six result files contain 10 rows. All 60 outputs are parseable as JSON and pass the basic schema check: top-level claims object plus attacks list.
 
-However, strict prompt adherence is not perfect. The main issues are:
-1. Claude Opus models often wrap JSON in Markdown fences.
-2. Some models use choice numbers or generic IDs instead of meaningful speaker/entity IDs.
-3. Some outputs are valid but semantically empty, especially o4-mini on 2021_03 and 2021_25.
-4. Claude Sonnet produced one duplicate attack on 2021_16.
+However, strict prompt adherence is mixed. The main issues are:
+1. Claude Opus models returned JSON inside Markdown code fences.
+2. Some models used generic or choice/statement-style claim IDs instead of meaningful speaker/entity IDs.
+3. Some models returned valid but empty graphs.
+4. Some outputs contain multiple claims but no attacks; this may be correct for non-debate passages, but it is flagged as a solver-quality warning.
 
-So the current prompt is good enough for initial solver ingestion if we allow light preprocessing, such as stripping Markdown fences and deduplicating attacks. But if the solver requires raw exact JSON and meaningful stable node IDs, we should strengthen the prompt and add semantic validation.
+MODEL SUMMARY
+Model                               Rows    JSON   Schema  Direct  Fenced Strict OK  Notes
+claude-opus-4-5-20251101              10      10       10       0      10         0  10 Markdown fences, 2 generic-ID cases, 2 choice/statement-ID cases, 1 no-attacks multi-claim warnings
+claude-opus-4-6                       10      10       10       0      10         0  10 Markdown fences, 2 generic-ID cases, 3 choice/statement-ID cases, 2 no-attacks multi-claim warnings
+claude-sonnet-4-6                     10      10       10      10       0         5  2 empty graphs, 1 generic-ID cases, 3 choice/statement-ID cases, 2 no-attacks multi-claim warnings
+gpt-4.1-mini                          10      10       10      10       0         6  4 choice/statement-ID cases, 7 no-attacks multi-claim warnings
+gpt-4.1                               10      10       10      10       0         5  2 empty graphs, 3 choice/statement-ID cases, 7 no-attacks multi-claim warnings
+o4-mini                               10      10       10      10       0         4  5 empty graphs, 1 choice/statement-ID cases, 2 no-attacks multi-claim warnings
 
+QUESTION IDS USED
+2023_23, 2022_19, 2024_14, 2021_25, 2021_35, 2025_23, 2022_03, 2023_29, 2021_28, 2025_10
 
-Model	                    Basic JSON/schema adherence	    Strict prompt adherence	Notes
-claude-sonnet-4-6	    10/10	                    mostly good	                Direct JSON, but one empty ult (2021_25) aph and one duplicate attack.
-claude-opus-4-6	            10/10	                    partial	                All outputs are fenced with ```json, which violates “Do not wrap in Markdown fences.”
-claude-opus-4-5-20251101    10/10	                    partial	                9/10 outputs are fenced with ```json; some generic speaker IDs.
-gpt-4.1-mini	            10/10	                    mostly good	                Direct JSON, but uses choice symbols as claim IDs for 2021_03.
-gpt-4.1	                    10/10	                    mostly good	                Direct JSON, but uses generic "Speaker" for one case.
-o4-mini	                    10/10	                    mixed	                Direct JSON, but returns empty graphs for some questions.a
+WARNING DETAILS BY MODEL
 
+claude-opus-4-5-20251101
+------------------------
+choice_or_statement_claim_id: 2 question(s) -> 2024_14, 2021_35
+generic_claim_id: 2 question(s) -> 2021_25, 2023_29
+markdown_fence: 10 question(s) -> 2023_23, 2022_19, 2024_14, 2021_25, 2021_35, 2025_23, 2022_03, 2023_29, 2021_28, 2025_10
+no_attacks_multi_claim: 1 question(s) -> 2025_23
 
+claude-opus-4-6
+---------------
+choice_or_statement_claim_id: 3 question(s) -> 2024_14, 2021_35, 2023_29
+generic_claim_id: 2 question(s) -> 2021_25, 2023_29
+markdown_fence: 10 question(s) -> 2023_23, 2022_19, 2024_14, 2021_25, 2021_35, 2025_23, 2022_03, 2023_29, 2021_28, 2025_10
+no_attacks_multi_claim: 2 question(s) -> 2022_19, 2024_14
 
+claude-sonnet-4-6
+-----------------
+choice_or_statement_claim_id: 3 question(s) -> 2024_14, 2023_29, 2025_10
+empty_claims: 2 question(s) -> 2021_25, 2021_35
+generic_claim_id: 1 question(s) -> 2023_29
+no_attacks_multi_claim: 2 question(s) -> 2022_19, 2025_23
 
-EXAMPLE
+gpt-4.1-mini
+------------
+choice_or_statement_claim_id: 4 question(s) -> 2024_14, 2021_35, 2022_03, 2025_10
+no_attacks_multi_claim: 7 question(s) -> 2023_23, 2021_35, 2025_23, 2022_03, 2023_29, 2021_28, 2025_10
 
-Model	                    Question IDs showing behavior	Gold answer	Behavior
-claude-sonnet-4-6	    2021_25	                        5	        Empty graph: {"claims": {}, "attacks": []}
-claude-sonnet-4-6	    2021_16	                        2	        Duplicate attack: ["Charlie", "Bob"] appears twice
-claude-sonnet-4-6	    2021_03	                        3	        Uses choice symbols ①, ②, ③, ④, ⑤ as claim IDs
-claude-opus-4-6	            all 10 questions	                mixed	        Valid JSON, but wrapped in Markdown fences
-claude-opus-4-5-20251101    9 of 10 questions	                mixed	        Valid JSON, but wrapped in Markdown fences
-claude-opus-4-5-20251101    2021_03, 2021_25	                3, 5	        Uses generic IDs like Question, Researcher
-gpt-4.1-mini	            2021_03	                        3	        Uses choice symbols as claim IDs
-gpt-4.1-mini	            2021_25	                        5	        Uses generic IDs like Researcher, Critic
-gpt-4.1	                    2021_25	                        5	        Uses generic ID Speaker
-o4-mini	                    2021_03, 2021_25	                3, 5	        Empty result
+gpt-4.1
+-------
+choice_or_statement_claim_id: 3 question(s) -> 2022_19, 2024_14, 2021_35
+empty_claims: 2 question(s) -> 2021_25, 2023_29
+no_attacks_multi_claim: 7 question(s) -> 2023_23, 2022_19, 2024_14, 2021_35, 2025_23, 2022_03, 2021_28
+
+o4-mini
+-------
+choice_or_statement_claim_id: 1 question(s) -> 2024_14
+empty_claims: 5 question(s) -> 2021_25, 2021_35, 2022_03, 2023_29, 2025_10
+no_attacks_multi_claim: 2 question(s) -> 2025_23, 2021_28
+
+PER-QUESTION DETAILS
+
+Model: claude-opus-4-5-20251101
+Question: 2023_23 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 2
+Attacks: [["Bob", "Alice"], ["Charlie", "Alice"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Alice": "Mathematics is pleasurable because the systematic process of solving a challenging problem that matches one's abilities and focused effort is a truly pleasurable experience.",\n    "Bob": "The pain experienced during the long period of confusion outweighs the momentary pleasure of solving difficult problems, and
+
+Model: claude-opus-4-5-20251101
+Question: 2022_19 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: ResearchTeam
+Num claims: 1 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "ResearchTeam": "The difference in agreement rates with Statement A between philosophers and laypeople stems from different interpretations, yet both groups share similar views on the objectivity of truth based on responses to Statements B and C."\n  },\n  "attacks": []\n}\n```
+
+Model: claude-opus-4-5-20251101
+Question: 2024_14 | Gold answer: 1
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;markdown_fence
+Claim IDs: A
+Num claims: 1 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "A": "Even when speakers make false claims without verification, responsibility does not always lie with the speaker because mere cognitive errors under normal conditions are not blameworthy, and only intentional avoidance of information warrants responsibility."\n  },\n  "attacks": []\n}\n```
+
+Model: claude-opus-4-5-20251101
+Question: 2021_25 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: generic_claim_id;markdown_fence
+Claim IDs: Researcher, Solomon
+Num claims: 2 | Num attacks: 1
+Attacks: [["Solomon", "Researcher"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Researcher": "Classical experimental research with pre-tests may not generalize to real-world settings because pre-tests can sensitize participants to the issue being studied.",\n    "Solomon": "Adding groups without pre-tests (Solomon four-group design) can demonstrate whether the experimental effect occurs independentl
+
+Model: claude-opus-4-5-20251101
+Question: 2021_35 | Gold answer: 3
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;markdown_fence
+Claim IDs: Theory, Experiment, StatementA, StatementB, StatementC
+Num claims: 5 | Num attacks: 3
+Attacks: [["Experiment", "Theory"], ["StatementA", "Experiment"], ["StatementC", "Theory"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Theory": "The time to categorize an entity is the sum of times needed to check each defining characteristic of the concept.",\n    "Experiment": "People categorize sparrows as birds faster (0.4s) than penguins (1.4s), suggesting unequal categorization times for members of the same category.",\n    "StatementA": "If partic
+
+Model: claude-opus-4-5-20251101
+Question: 2025_23 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence;no_attacks_multi_claim
+Claim IDs: Alice, Bob
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "Alice": "A proposition is the set of possible worlds in which a sentence is true, so sentences true in the same possible worlds express the same proposition.",\n    "Bob": "A proposition is an ordered tuple composed of the objects and properties/relations referred to by the sentence's components."\n  },\n  "attacks": []\n}\n
+
+Model: claude-opus-4-5-20251101
+Question: 2022_03 | Gold answer: 2
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: ⓐ, ⓑ, ⓒ
+Num claims: 3 | Num attacks: 2
+Attacks: [["ⓑ", "ⓐ"], ["ⓒ", "ⓐ"]]
+Excerpt: ```json\n{\n  "claims": {\n    "ⓐ": "The core aspect for judging unconstitutionality is the direct consequence expected when the legal sentence is applied to a specific case.",\n    "ⓑ": "The core aspect for judging unconstitutionality is the impact that enforcement of the statute has on the entire society.",\n    "ⓒ": "The core aspect for judging uncon
+
+Model: claude-opus-4-5-20251101
+Question: 2023_29 | Gold answer: 1
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: generic_claim_id;markdown_fence
+Claim IDs: Passage
+Num claims: 1 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "Passage": "Real estate agents are incentivized to sell homes quickly at lower prices rather than maximizing sale price for homeowners, demonstrating the principal-agent problem."\n  },\n  "attacks": []\n}\n```
+
+Model: claude-opus-4-5-20251101
+Question: 2021_28 | Gold answer: 4
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 2
+Attacks: [["Bob", "Alice"], ["Charlie", "Bob"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Alice": "The Cool Summer Policy will reduce the stability of electricity supply because power generation facilities must meet peak hourly electricity demand.",\n    "Bob": "A flat rate system with a base charge of 1,600 won and 180 won per kWh would better lower summer electricity bills for most households than the Cool 
+
+Model: claude-opus-4-5-20251101
+Question: 2025_10 | Gold answer: 3
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: Company P, Regulatory Agency Q
+Num claims: 2 | Num attacks: 1
+Attacks: [["Regulatory Agency Q", "Company P"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Company P": "The 15,000 won price indication for the 'Buy 1 Get 1 Free' promotion is a valid sale price for a giveaway event, not a discount sale requiring previous transaction price disclosure.",\n    "Regulatory Agency Q": "The 'Buy 1 Get 1 Free' promotion constitutes a 50% discount sale that violates the Regulation be
+
+Model: claude-opus-4-6
+Question: 2023_23 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 2
+Attacks: [["Bob", "Alice"], ["Charlie", "Alice"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Alice": "Alice finds the process of solving difficult problems pleasurable despite the pain, because she believed in herself and systematically matched her abilities to the challenge.",\n    "Bob": "Bob finds more pleasure in solving many easy problems than in the painful struggle of solving difficult ones, despite the e
+
+Model: claude-opus-4-6
+Question: 2022_19 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence;no_attacks_multi_claim
+Claim IDs: ResearchTeam, EvaluatorA, EvaluatorB, EvaluatorC
+Num claims: 4 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "ResearchTeam": "The difference in agreement with Statement A between philosophers and laypeople stems from different interpretations, yet both groups share the same view on the objectivity of truth.",\n    "EvaluatorA": "If philosophers mostly disagree with Interpretation 2, this supports the claim that philosophers read
+
+Model: claude-opus-4-6
+Question: 2024_14 | Gold answer: 1
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;markdown_fence;no_attacks_multi_claim
+Claim IDs: A, Alice
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "A": "Even when someone asserts something false without verification, responsibility does not always lie with the speaker, because mere cognitive errors under normal conditions are not blameworthy acts.",\n    "Alice": "There are many people gathered in the plaza, based on clear observation from the rooftop."\n  },\n  "atta
+
+Model: claude-opus-4-6
+Question: 2021_25 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: generic_claim_id;markdown_fence
+Claim IDs: Questioner
+Num claims: 1 | Num attacks: 0
+Attacks: []
+Excerpt: ```json\n{\n  "claims": {\n    "Questioner": "The Solomon four-group design can identify which experimental results demonstrate that watching the movie reduced prejudice, and one specific result cannot be included as evidence of this effect."\n  },\n  "attacks": []\n}\n```
+
+Model: claude-opus-4-6
+Question: 2021_35 | Gold answer: 3
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;markdown_fence
+Claim IDs: StatementA, StatementB, StatementC, Theory
+Num claims: 4 | Num attacks: 2
+Attacks: [["StatementB", "Theory"], ["StatementC", "Theory"]]
+Excerpt: ```json\n{\n  "claims": {\n    "StatementA": "If participants lacked the concept of bird and answered based on word impressions, the experiment results do not weaken the theory.",\n    "StatementB": "If the time to confirm each defining characteristic differs between sparrow and penguin, the experiment results weaken the theory.",\n    "StatementC": "If
+
+Model: claude-opus-4-6
+Question: 2025_23 | Gold answer: 5
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: Alice, Bob
+Num claims: 2 | Num attacks: 2
+Attacks: [["Bob", "Alice"], ["Alice", "Bob"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Alice": "A proposition is the set of possible worlds in which a sentence is true, so sentences true in exactly the same possible worlds express the same proposition.",\n    "Bob": "A proposition is a structured ordered tuple composed of the objects and properties/relations referred to by the sentence's components."\n  },\n
+
+Model: claude-opus-4-6
+Question: 2022_03 | Gold answer: 2
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: ViewA, ViewB, ViewC
+Num claims: 3 | Num attacks: 3
+Attacks: [["ViewB", "ViewA"], ["ViewC", "ViewA"], ["ViewC", "ViewB"]]
+Excerpt: ```json\n{\n  "claims": {\n    "ViewA": "The core aspect for judging unconstitutionality is the direct consequence expected when the legal sentence is applied to a specific case.",\n    "ViewB": "The core aspect for judging unconstitutionality is the impact that enforcement of the statute has on the entire society.",\n    "ViewC": "The core aspect for j
+
+Model: claude-opus-4-6
+Question: 2023_29 | Gold answer: 1
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;generic_claim_id;markdown_fence
+Claim IDs: Passage, StatementA, StatementB, StatementC
+Num claims: 4 | Num attacks: 1
+Attacks: [["StatementB", "Passage"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Passage": "Real estate agents are incentivized to sell homes quickly at lower prices rather than maximizing sale price for homeowners, illustrating the principal-agent problem.",\n    "StatementA": "Agents leaving their own properties on the market longer than clients' properties reinforces the principal-agent problem ar
+
+Model: claude-opus-4-6
+Question: 2021_28 | Gold answer: 4
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 2
+Attacks: [["Bob", "Alice"], ["Charlie", "Bob"]]
+Excerpt: ```json\n{\n  "claims": {\n    "Alice": "The Cool Summer Policy will reduce the stability of electricity supply by increasing peak demand.",\n    "Bob": "A flat rate system with a base charge of 1,600 won and 180 won per kWh would be better than the Cool Summer Policy to lower summer electricity bills for most households.",\n    "Charlie": "The Cool Sum
+
+Model: claude-opus-4-6
+Question: 2025_10 | Gold answer: 3
+JSON mode: fenced | schema_valid: True | strict_ok: False
+Warnings: markdown_fence
+Claim IDs: CompanyP, AgencyQ
+Num claims: 2 | Num attacks: 2
+Attacks: [["AgencyQ", "CompanyP"], ["CompanyP", "AgencyQ"]]
+Excerpt: ```json\n{\n  "claims": {\n    "CompanyP": "Company P's 'Buy 1 Get 1 Free' promotion at 15,000 won per unit is a legitimate giveaway, not a discount sale, and thus does not require indicating a discount rate or previous transaction price.",\n    "AgencyQ": "Company P's 'Buy 1 Get 1 Free' promotion is effectively a 50% discount sale relative to the prev
+
+Model: claude-sonnet-4-6
+Question: 2022_19 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: research_team_a, research_team_b
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "research_team_a": "Philosophers read statement (A) as affirming objective truth, while laypeople read it as claiming universal agreement, explaining the difference in agreement rates.",\n    "research_team_b": "Despite differing interpretations of (A), laypeople and philosophers share the same view on the objectivity of truth, a
+
+Model: claude-sonnet-4-6
+Question: 2024_14 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id
+Claim IDs: A, We
+Num claims: 2 | Num attacks: 1
+Attacks: [["A", "We"]]
+Excerpt: {\n  "claims": {\n    "A": "Responsibility for false assertions does not always lie with the speaker, as mere cognitive errors under normal observation conditions are not blameworthy; only an active attitude of intentionally avoiding or refusing to acquire information warrants responsibility.",\n    "We": "In cases where someone claims something as tr
+
+Model: claude-sonnet-4-6
+Question: 2021_25 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {},\n  "attacks": []\n}
+
+Model: claude-sonnet-4-6
+Question: 2021_35 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {},\n  "attacks": []\n}
+
+Model: claude-sonnet-4-6
+Question: 2025_23 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "A proposition is the set of possible worlds in which a sentence is true.",\n    "Bob": "A proposition is a structured ordered tuple composed of the objects, properties, and relations referred to by the parts of a sentence."\n  },\n  "attacks": []\n}
+
+Model: claude-sonnet-4-6
+Question: 2023_29 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;generic_claim_id
+Claim IDs: Passage, a, b, c
+Num claims: 4 | Num attacks: 2
+Attacks: [["b", "Passage"], ["c", "Passage"]]
+Excerpt: {\n  "claims": {\n    "Passage": "The principal-agent problem applies to homeowners selling through real estate agents because agents are incentivized to sell quickly at a reasonable price rather than maximizing the sale price, exploiting homeowners' information disadvantage.",\n    "a": "Agents leaving their own properties on the market longer than o
+
+Model: claude-sonnet-4-6
+Question: 2025_10 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id
+Claim IDs: Q, a, b, c
+Num claims: 4 | Num attacks: 1
+Attacks: [["a", "Q"]]
+Excerpt: {\n  "claims": {\n    "Q": "The Buy 1 Get 1 Free advertisement violates the Regulation because it constitutes a discount sale at 50% off the previous transaction price without properly indicating the discount rate and previous transaction price.",\n    "a": "The 15,000 won indicated in the Buy 1 Get 1 Free promotion is solely for the purpose of a give
+
+Model: gpt-4.1-mini
+Question: 2023_23 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "Alice finds pleasure in the belief and process of solving difficult problems despite pain and frustration.",\n    "Bob": "Bob feels more pleasure from solving easy problems than from solving difficult problems which involved more pain.",\n    "Charlie": "Charlie views mathematics as a duty rather than pleasure, experienc
+
+Model: gpt-4.1-mini
+Question: 2024_14 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id
+Claim IDs: A
+Num claims: 1 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "A": "Responsibility for false claims depends on the agent's attitude toward verification, not mere cognitive error; only intentional avoidance or refusal to verify warrants responsibility."\n  },\n  "attacks": []\n}
+
+Model: gpt-4.1-mini
+Question: 2021_35 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;no_attacks_multi_claim
+Claim IDs: a, b, c
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "a": "If participants did not possess the concept of bird and answered based on feel or impression, the experiment results do not weaken the theory.",\n    "b": "If the time taken to confirm each characteristic of bird differs for sparrow and penguin, the experiment results weaken the theory.",\n    "c": "If people take less time 
+
+Model: gpt-4.1-mini
+Question: 2025_23 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "A proposition is the set of possible worlds where the sentence is true.",\n    "Bob": "A proposition is an ordered tuple of the objects and properties or relations referred to by the sentence."\n  },\n  "attacks": []\n}
+
+Model: gpt-4.1-mini
+Question: 2022_03 | Gold answer: 2
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;no_attacks_multi_claim
+Claim IDs: (a), (b), (c)
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "(a)": "If the direct legal consequence (ⓐ) is the core for judging unconstitutionality, then Law L is unconstitutional.",\n    "(b)": "The societal impact (ⓑ) of Law L does not align with its legislative purpose.",\n    "(c)": "If the contextual meaning in society's history (ⓒ) is the core for judging unconstitutionality, then La
+
+Model: gpt-4.1-mini
+Question: 2023_29 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Assessment A, Assessment B, Assessment C
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Assessment A": "Agents leaving their own properties on the market longer than others supports the principal-agent problem in real estate sales.",\n    "Assessment B": "Increasing the effective commission rate reduces time homes spend on the market, supporting the principal-agent problem.",\n    "Assessment C": "Improved informati
+
+Model: gpt-4.1-mini
+Question: 2021_28 | Gold answer: 4
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "The Cool Summer Policy reduces the stability of electricity supply by impacting the ability to meet peak hourly demand.",\n    "Bob": "A flat rate system with a base charge of 1,600 won and a per kWh rate of 180 won is better to lower summer electricity bills for most households.",\n    "Charlie": "The Cool Summer Policy
+
+Model: gpt-4.1-mini
+Question: 2025_10 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;no_attacks_multi_claim
+Claim IDs: a, b, c
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "a": "If the 15,000 won indication is solely for giveaway purposes without a stated discount rate, this weakens Q's reasoning ⓐ that the promotion counts as a discount sale.",\n    "b": "Q argues that company P should have indicated the sale price as 13,000 won for the 'Buy 1 Get 1 Free' promotion.",\n    "c": "If undisclosed disc
+
+Model: gpt-4.1
+Question: 2023_23 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "Alice believes that overcoming challenges in mathematics through preparation and belief in the process is genuinely pleasurable despite frustration and pain.",\n    "Bob": "Bob believes that although solving difficult math problems brought some pleasure at the end, the process was mostly painful, and he feels more pleas
+
+Model: gpt-4.1
+Question: 2022_19 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;no_attacks_multi_claim
+Claim IDs: a, b, c
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "a": "If additional research revealed that the vast majority of philosophers responded 'disagree' to Interpretation 2, it would support the idea that philosophers interpret (A) as Interpretation 1, strengthening ⓐ.",\n    "b": "If additional research revealed that the vast majority of laypeople responded 'agree' to Interpretation
+
+Model: gpt-4.1
+Question: 2024_14 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;no_attacks_multi_claim
+Claim IDs: A, Alice
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "A": "Responsibility for spreading false information is only assigned when there is intentional avoidance or refusal to acquire information, not for cognitive errors like Alice's case.",\n    "Alice": "Alice believes her observation and makes a claim based on a cognitive error, but does not intentionally avoid verification."\n  },
+
+Model: gpt-4.1
+Question: 2021_25 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {},\n  "attacks": []\n}
+
+Model: gpt-4.1
+Question: 2021_35 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id;no_attacks_multi_claim
+Claim IDs: a, b, c
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "a": "If participants answered based on impression without using the concept, the experimental results do not undermine the theory.",\n    "b": "If checking for the defining characteristics of 'bird' takes different times for different animals, the experimental results weaken the theory.",\n    "c": "If people use a more complex d
+
+Model: gpt-4.1
+Question: 2025_23 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "A proposition is the set of possible worlds in which the sentence is true.",\n    "Bob": "A proposition is an ordered pair or tuple of the objects and relations referred to by the sentence."\n  },\n  "attacks": []\n}
+
+Model: gpt-4.1
+Question: 2022_03 | Gold answer: 2
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: ⓐ, ⓑ, ⓒ
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "ⓐ": "The constitutionality of a law should be judged by the direct consequences expected when the law is applied to specific cases.",\n    "ⓑ": "The constitutionality of a law should be judged by the impact its enforcement has on the entire society.",\n    "ⓒ": "The constitutionality of a law should be judged by the contextual me
+
+Model: gpt-4.1
+Question: 2023_29 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {},\n  "attacks": []\n}
+
+Model: gpt-4.1
+Question: 2021_28 | Gold answer: 4
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "Alice": "The Cool Summer Policy reduces supply stability since power generation facilities need to meet peak hourly demand.",\n    "Bob": "A flat rate system is preferable to Cool Summer Policy to lessen the electricity bill burden for most households.",\n    "Charlie": "Cool Summer Policy should be limited to vulnerable groups i
+
+Model: o4-mini
+Question: 2024_14 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: choice_or_statement_claim_id
+Claim IDs: A
+Num claims: 1 | Num attacks: 0
+Attacks: []
+Excerpt: {\n  "claims": {\n    "A": "Responsibility for false assertions arises only when the agent intentionally avoids or refuses to acquire information, not in cases of mere cognitive error"\n  },\n  "attacks": []\n}
+
+Model: o4-mini
+Question: 2021_25 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims":{},"attacks":[]}
+
+Model: o4-mini
+Question: 2021_35 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims":{},"attacks":[]}
+
+Model: o4-mini
+Question: 2025_23 | Gold answer: 5
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob
+Num claims: 2 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims":{"Alice":"A proposition is the set of possible worlds in which a sentence is true","Bob":"A proposition is an ordered tuple of the entities and the relation(s) or property referred to by a sentence"},"attacks":[]}
+
+Model: o4-mini
+Question: 2022_03 | Gold answer: 2
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims": {}, "attacks": []}
+
+Model: o4-mini
+Question: 2023_29 | Gold answer: 1
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims":{},"attacks":[]}
+
+Model: o4-mini
+Question: 2021_28 | Gold answer: 4
+JSON mode: direct | schema_valid: True | strict_ok: True
+Warnings: no_attacks_multi_claim
+Claim IDs: Alice, Bob, Charlie
+Num claims: 3 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims":{"Alice":"Cool Summer Policy reduces stability of electricity supply","Bob":"Electricity billing should be a flat rate with base charge of 1,600 won and rate of 180 won per kWh","Charlie":"Cool Summer Policy should apply only to vulnerable groups"},"attacks":[]}
+
+Model: o4-mini
+Question: 2025_10 | Gold answer: 3
+JSON mode: direct | schema_valid: True | strict_ok: False
+Warnings: empty_claims
+Claim IDs: 
+Num claims: 0 | Num attacks: 0
+Attacks: []
+Excerpt: {"claims": {},"attacks": []}
+
+INTERPRETATION FOR TEAM
+The current prompt works at the basic solver-readable level: every tested frontier-model output could be parsed into the expected JSON schema. For a robust solver, a lightweight preprocessor should strip Markdown fences and then parse/validate JSON.
+
+The current prompt is not perfect for exact raw-output adherence. Claude Opus outputs often need Markdown-fence cleanup, and several models sometimes produce weak graph nodes or empty graphs. Therefore, the prompt is acceptable for initial solver ingestion with normalization, but the solver should include validation and warning flags before relying on graph quality.
+
+RECOMMENDED NEXT PROMPT HARDENING
+Add: "The first character of your response must be { and the last character must be }. Do not use Markdown fences."
+Add: "Use meaningful speaker/entity/position IDs from the passage. Do not use choice numbers, statement labels, Question, Speaker, Researcher, Critic, or other generic labels unless they explicitly appear as speakers in the passage."
+Add: "If no explicit attack/rebuttal exists, attacks may be empty, but do not return an empty claims object unless the passage truly contains no identifiable claims."
