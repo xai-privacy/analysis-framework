@@ -1,0 +1,255 @@
+PROMPT FORMAT ADHERENCE REPORT — TEST SET RUN (16 QUESTIONS)
+========================================================================
+
+SUMMARY
+The current test-set run used 16 question IDs from testing/LEET_Arg_Questions_Test_Set.json:
+2021_18, 2021_20, 2021_33, 2021_36, 2022_30, 2022_38, 2023_08, 2023_15, 2024_01, 2024_06, 2024_21, 2024_24, 2024_29, 2025_08, 2025_13, 2025_22
+
+Across the six frontier models, all 96 model outputs were non-empty, had no API errors, were parseable as JSON, and passed the basic schema check for the expected top-level keys: claims and attacks.
+
+However, strict prompt adherence is mixed. The main issues are:
+1. Claude Opus models still wrap many/all responses in Markdown ```json fences, even though the prompt says not to use Markdown fences.
+2. Some models return valid but semantically empty graphs: {"claims": {}, "attacks": []}.
+3. Several models use generic, statement-like, theory-label, or lowercase node IDs rather than speaker/entity IDs. This is most common for non-dialogue questions.
+4. In this present 16-question run, no duplicate attacks were detected by the validator.
+
+BOTTOM LINE
+The current prompt is good enough for initial solver ingestion if the solver strips Markdown fences and accepts schema-valid JSON. It is not yet perfect if the solver requires exact raw JSON with no cleanup and stable meaningful graph node IDs.
+
+MODEL SUMMARY
+
+Model                               JSON parse     Schema  Direct JSON  Strict OK  Notes
+--------------------------------------------------------------------------------------------------------------------------------------------
+claude-sonnet-4-6                        16/16      16/16        16/16      12/16  Direct JSON for all 16. Basic schema 16/16. Warnings: empty graphs on 2021_33, 2022_38, 2024_24; uses non-speaker/theory labels ⓐ and ⓑ on 2021_36.
+claude-opus-4-6                          16/16      16/16         0/16       0/16  All 16 are parseable and schema-valid after stripping Markdown fences, but all 16 are wrapped in ```json fences, violating the raw 'no Markdown fences' instruction. Also uses generic/statement-like node IDs on 2021_33, 2021_36, 2022_38, 2024_24.
+claude-opus-4-5-20251101                 16/16      16/16         3/16       3/16  16/16 parseable and schema-valid. 13/16 are wrapped in ```json fences. Direct JSON only on 2021_20, 2023_15, 2024_29. Also uses generic/statement-like node IDs on 2021_33, 2021_36, 2022_38, 2024_24.
+gpt-4.1-mini                             16/16      16/16        16/16      12/16  Direct JSON for all 16 and 16/16 schema-valid. No empty graphs. Warnings: statement-like/lowercase node IDs on 2021_33, 2021_36, 2022_38, 2024_24.
+gpt-4.1                                  16/16      16/16        16/16      13/16  Direct JSON for all 16 and 16/16 schema-valid. No empty graphs. Warnings: statement-like/lowercase node IDs on 2021_33, 2021_36, 2024_24.
+o4-mini                                  16/16      16/16        16/16      12/16  Direct JSON for all 16 and 16/16 schema-valid. Warnings: empty graphs on 2021_33, 2021_36, 2022_38, 2024_24.
+
+BEHAVIOR EXAMPLES
+
+Model                                Question ID   Gold  Behavior
+------------------------------------------------------------------------------------------------------------------------
+claude-sonnet-4-6                        2021_33      5  Empty graph
+claude-sonnet-4-6                        2021_36      2  Non-speaker/generic/statement-like node IDs: ⓐ, ⓑ
+claude-sonnet-4-6                        2022_38      3  Empty graph
+claude-sonnet-4-6                        2024_24      1  Empty graph
+claude-opus-4-6                          2021_18      2  Markdown fenced JSON
+claude-opus-4-6                          2021_20      1  Markdown fenced JSON
+claude-opus-4-6                          2021_33      5  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage, StatementA, StatementB, StatementC
+claude-opus-4-6                          2021_36      2  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: StatementA, StatementB, StatementC
+claude-opus-4-6                          2022_30      2  Markdown fenced JSON
+claude-opus-4-6                          2022_38      3  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage
+claude-opus-4-6                          2023_08      4  Markdown fenced JSON
+claude-opus-4-6                          2023_15      4  Markdown fenced JSON
+claude-opus-4-6                          2024_01      4  Markdown fenced JSON
+claude-opus-4-6                          2024_06      3  Markdown fenced JSON
+claude-opus-4-6                          2024_21      2  Markdown fenced JSON
+claude-opus-4-6                          2024_24      1  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: StatementA, StatementB, StatementC
+claude-opus-4-6                          2024_29      5  Markdown fenced JSON
+claude-opus-4-6                          2025_08      5  Markdown fenced JSON
+claude-opus-4-6                          2025_13      4  Markdown fenced JSON
+claude-opus-4-6                          2025_22      2  Markdown fenced JSON
+claude-opus-4-5-20251101                 2021_18      2  Markdown fenced JSON
+claude-opus-4-5-20251101                 2021_33      5  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage
+claude-opus-4-5-20251101                 2021_36      2  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: ExplanationA, ExplanationB
+claude-opus-4-5-20251101                 2022_30      2  Markdown fenced JSON
+claude-opus-4-5-20251101                 2022_38      3  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage
+claude-opus-4-5-20251101                 2023_08      4  Markdown fenced JSON
+claude-opus-4-5-20251101                 2024_01      4  Markdown fenced JSON
+claude-opus-4-5-20251101                 2024_06      3  Markdown fenced JSON
+claude-opus-4-5-20251101                 2024_21      2  Markdown fenced JSON
+claude-opus-4-5-20251101                 2024_24      1  Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Hypothesis
+claude-opus-4-5-20251101                 2025_08      5  Markdown fenced JSON
+claude-opus-4-5-20251101                 2025_13      4  Markdown fenced JSON
+claude-opus-4-5-20251101                 2025_22      2  Markdown fenced JSON
+gpt-4.1-mini                             2021_33      5  Non-speaker/generic/statement-like node IDs: a, b, c
+gpt-4.1-mini                             2021_36      2  Non-speaker/generic/statement-like node IDs: a, b
+gpt-4.1-mini                             2022_38      3  Non-speaker/generic/statement-like node IDs: Statement a, Statement b, Statement c
+gpt-4.1-mini                             2024_24      1  Non-speaker/generic/statement-like node IDs: a, b, c
+gpt-4.1                                  2021_33      5  Non-speaker/generic/statement-like node IDs: a, b, c
+gpt-4.1                                  2021_36      2  Non-speaker/generic/statement-like node IDs: a, b, c
+gpt-4.1                                  2024_24      1  Non-speaker/generic/statement-like node IDs: a, b, c
+o4-mini                                  2021_33      5  Empty graph
+o4-mini                                  2021_36      2  Empty graph
+o4-mini                                  2022_38      3  Empty graph
+o4-mini                                  2024_24      1  Empty graph
+
+DETAILS BY MODEL
+
+claude-sonnet-4-6
+-----------------
+Rows: 16
+API errors: 0
+Empty model_rationale responses: 0
+JSON parse success: 16/16
+Schema valid: 16/16
+Direct raw JSON with no Markdown fence: 16/16
+Strict OK under these checks: 12/16
+Notes: Direct JSON for all 16. Basic schema 16/16. Warnings: empty graphs on 2021_33, 2022_38, 2024_24; uses non-speaker/theory labels ⓐ and ⓑ on 2021_36.
+Question-level warnings:
+  - 2021_33 (gold answer 5): Empty graph
+    Preview: {   "claims": {},   "attacks": [] }
+  - 2021_36 (gold answer 2): Non-speaker/generic/statement-like node IDs: ⓐ, ⓑ
+    Preview: {   "claims": {     "ⓐ": "The ancestors of the tiger chameleon originally lived in their current location and became isolated on islands as the continents separated and drifted apart from Gondwana.",     "ⓑ": "The ancestors of the tiger chameleon reached the Seychelles by rafting...
+  - 2022_38 (gold answer 3): Empty graph
+    Preview: {   "claims": {},   "attacks": [] }
+  - 2024_24 (gold answer 1): Empty graph
+    Preview: {"claims": {}, "attacks": []}
+
+claude-opus-4-6
+---------------
+Rows: 16
+API errors: 0
+Empty model_rationale responses: 0
+JSON parse success: 16/16
+Schema valid: 16/16
+Direct raw JSON with no Markdown fence: 0/16
+Strict OK under these checks: 0/16
+Notes: All 16 are parseable and schema-valid after stripping Markdown fences, but all 16 are wrapped in ```json fences, violating the raw 'no Markdown fences' instruction. Also uses generic/statement-like node IDs on 2021_33, 2021_36, 2022_38, 2024_24.
+Question-level warnings:
+  - 2021_18 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Epistemic objectivity is achieved by ensuring that judgments are free from subjective distortions such as bias, prejudice, herd mentality, or personal wishes, and such judgments generally possess persuasive power.",     "B": "Correct judgment of ...
+  - 2021_20 (gold answer 1): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "Changes in scientific theories cannot be judged as genuine progress because superior performance of successor theories can be explained by social factors, and we cannot compare the future potential of theories since we cannot know all their f...
+  - 2021_33 (gold answer 5): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage, StatementA, StatementB, StatementC
+    Preview: ```json {   "claims": {     "Passage": "C (Alice's fall) is the cause of E (Alice's death) because there exists a chain of causal dependence from C through D to E, even though E does not directly causally depend on C.",     "StatementA": "From the passage, 'Alice's fall from the ...
+  - 2021_36 (gold answer 2): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: StatementA, StatementB, StatementC
+    Preview: ```json {   "claims": {     "StatementA": "The existence of chameleons on the volcanic Comoros islands (never connected to a continent) supports the rafting hypothesis ⓑ, not the vicariance hypothesis ⓐ.",     "StatementB": "West-to-east ocean currents since the Seychelles split ...
+  - 2022_30 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "A basic income system paying the same amount unconditionally to every citizen is necessary to prepare for job losses from digital transformation and to eliminate welfare blind spots.",     "B": "Basic income paid within the limits of the governme...
+  - 2022_38 (gold answer 3): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage
+    Preview: ```json {   "claims": {     "Passage": "The presence or absence of specific commensal gut bacteria in the mother's gut is important for abnormal immune activation that can cause autism in offspring."   },   "attacks": [] } ```
+  - 2023_08 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "Article A should punish mediation by anyone, not just public officials, since non-public officials can also use personal influence to affect public officials' duties.",     "Bob": "Article A should punish those who pursue their own interests ...
+  - 2023_15 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "AI robots should predict human behavior by discovering patterns from big data about human actions in given situations, without needing to understand internal states.",     "Bob": "AI robots should be pre-inputted with normative information re...
+  - 2024_01 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Tort law is a system designed to restore the original state destroyed by a tort and to fully remedy the victim from the victim's perspective, based on justice and ethics rather than social utility.",     "B": "Tort law should aim not only at rest...
+  - 2024_06 (gold answer 3): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "The act of photographing the interior of another person's residence from outside without authorization constitutes the crime of secret surveillance, because surveillance includes visual methods and infringes on the resident's sense of privacy.", ...
+  - 2024_21 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "A generalized criterion of the form 'If property F is attributed to artwork W, then W is excellent' cannot be established as a universal standard for criticism, as shown by counterexamples like Warhol's Brillo Box.",     "Bob": "A generalized...
+  - 2024_24 (gold answer 1): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: StatementA, StatementB, StatementC
+    Preview: ```json {   "claims": {     "StatementA": "If most people in Group 1 who judged Bob's action as coerced also judged Bob as moral, this weakens the hypothesis because the hypothesis predicts coerced good actions should not lead to morality judgments.",     "StatementB": "If Group ...
+  - 2024_29 (gold answer 5): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "Economic behavior is driven by independent, rational, self-interested individuals, and social relationships hinder the competitive market's self-regulation.",     "Bob": "Orderly market transactions depend on concrete social relationships and...
+  - 2025_08 (gold answer 5): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "Alice argues that public goods management should be privatized for efficiency and service quality, but the state must ensure citizens do not bear costs exceeding what they would pay under direct state management.",     "Bob": "Bob argues that...
+  - 2025_13 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Alice and Bob should be punished equally because differing outcomes were determined by luck beyond their control, and punishing based on luck violates equal treatment.",     "B": "Alice should be punished more severely because murder success is a...
+  - 2025_22 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Groups do not exist as entities; only individual members exist, and group statements are shorthand for statements about individuals acting together.",     "B": "A group like Samshingi exists as a new entity, but it is identical to the mere collec...
+
+claude-opus-4-5-20251101
+------------------------
+Rows: 16
+API errors: 0
+Empty model_rationale responses: 0
+JSON parse success: 16/16
+Schema valid: 16/16
+Direct raw JSON with no Markdown fence: 3/16
+Strict OK under these checks: 3/16
+Notes: 16/16 parseable and schema-valid. 13/16 are wrapped in ```json fences. Direct JSON only on 2021_20, 2023_15, 2024_29. Also uses generic/statement-like node IDs on 2021_33, 2021_36, 2022_38, 2024_24.
+Question-level warnings:
+  - 2021_18 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Epistemic objectivity is about how a claim is justified, requiring that judgments not be distorted by subjective elements like bias, prejudice, or personal wishes.",     "B": "To properly judge a work of art, critics must adopt the perspective pr...
+  - 2021_33 (gold answer 5): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage
+    Preview: ```json {   "claims": {     "Passage": "C (Alice's fall) is the cause of E (her death) because there exists a chain of causal dependence from C through D to E, even though E does not directly causally depend on C."   },   "attacks": [] } ```
+  - 2021_36 (gold answer 2): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: ExplanationA, ExplanationB
+    Preview: ```json {   "claims": {     "ExplanationA": "The tiger chameleon's ancestors originally lived in the Seychelles when it was part of Gondwana and became isolated as continents separated and drifted apart.",     "ExplanationB": "The tiger chameleon's ancestors reached the Seychelle...
+  - 2022_30 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Basic income should be introduced to prepare for job losses from digital transformation and to eliminate welfare blind spots through universal provision.",     "B": "Basic income within fiscal limits will be too low to effectively address welfare...
+  - 2022_38 (gold answer 3): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Passage
+    Preview: ```json {   "claims": {     "Passage": "The presence or absence of certain commensal gut bacteria in the mother's gut is important for abnormal immune activation that can cause autism in offspring."   },   "attacks": [] } ```
+  - 2023_08 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "Article A should punish mediation by anyone, not just public officials, since non-public officials can also use personal influence to affect public officials' duties.",     "Bob": "Article A should punish those who pursue their own interests ...
+  - 2024_01 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Tort law is a system designed to restore the original state destroyed by a tort and remedy the victim based on justice and ethics, with complete restoration from the victim's perspective being the measure of true remedy.",     "B": "Tort law shou...
+  - 2024_06 (gold answer 3): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "The act of photographing the interior of another person's residence from outside without authorization constitutes the crime of secret surveillance because surveillance includes visual methods and infringes on privacy security.",     "B": "The ac...
+  - 2024_21 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "A generalized standard of criticism like 'If property F is attributed to artwork W, then W is excellent' cannot be established because the same property may make one artwork excellent but not another.",     "Bob": "A generalized standard of c...
+  - 2024_24 (gold answer 1): Markdown fenced JSON; Non-speaker/generic/statement-like node IDs: Hypothesis
+    Preview: ```json {   "claims": {     "Hypothesis": "People judge bad actions under pressure as voluntary and use them to infer morality, but judge good actions as coerced and don't use them to infer morality."   },   "attacks": [] } ```
+  - 2025_08 (gold answer 5): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "Alice": "The state should privatize management of public goods for efficiency while ensuring citizens do not bear costs exceeding what they would pay under direct state management.",     "Bob": "The state should adopt co-governance instead of privatiz...
+  - 2025_13 (gold answer 4): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Alice and Bob should not be punished differently because the outcome was determined by luck beyond their control, and different punishments would not treat them equally.",     "B": "A successful murder should be punished more severely because suc...
+  - 2025_22 (gold answer 2): Markdown fenced JSON
+    Preview: ```json {   "claims": {     "A": "Groups do not exist as entities; only individual members exist, and group statements should be reduced to statements about individuals acting together.",     "B": "Samshingi exists as a new entity identical to the mere collection of Alice, Bob, a...
+
+gpt-4.1-mini
+------------
+Rows: 16
+API errors: 0
+Empty model_rationale responses: 0
+JSON parse success: 16/16
+Schema valid: 16/16
+Direct raw JSON with no Markdown fence: 16/16
+Strict OK under these checks: 12/16
+Notes: Direct JSON for all 16 and 16/16 schema-valid. No empty graphs. Warnings: statement-like/lowercase node IDs on 2021_33, 2021_36, 2022_38, 2024_24.
+Question-level warnings:
+  - 2021_33 (gold answer 5): Non-speaker/generic/statement-like node IDs: a, b, c
+    Preview: {   "claims": {     "a": "The passage supports that Alice's fall from the 10th floor is the cause of her death.",     "b": "From Definition 1 and the fact that the poison did not spread, no event causally depends on the poison spreading event B.",     "c": "From Definition 1, the...
+  - 2021_36 (gold answer 2): Non-speaker/generic/statement-like node IDs: a, b
+    Preview: {   "claims": {     "a": "The tiger chameleon’s ancestors lived on the Seychelles when it separated from other land masses, evolving independently after continental drift.",     "b": "The tiger chameleon's ancestors originated from Africa or Madagascar and reached the Seychelles ...
+  - 2022_38 (gold answer 3): Non-speaker/generic/statement-like node IDs: Statement a, Statement b, Statement c
+    Preview: {   "claims": {     "Statement a": "If IL-17 is produced when X1's DC is cultured with X2's T H 17, but not when X1's DC is cultured with Y2's T H 17, then hypothesis ⓐ is reinforced.",     "Statement b": "If IL-17 is produced when X1's DC is cultured with Y2's T H 17, but not wh...
+  - 2024_24 (gold answer 1): Non-speaker/generic/statement-like node IDs: a, b, c
+    Preview: {   "claims": {     "a": "If most in Group 1 say coerced and moral, the hypothesis is weakened.",     "b": "If Group 1 mostly say coerced and Group 2 mostly say voluntary, the hypothesis is weakened.",     "c": "If Group 1 mostly say don’t know morality and Group 2 mostly say imm...
+
+gpt-4.1
+-------
+Rows: 16
+API errors: 0
+Empty model_rationale responses: 0
+JSON parse success: 16/16
+Schema valid: 16/16
+Direct raw JSON with no Markdown fence: 16/16
+Strict OK under these checks: 13/16
+Notes: Direct JSON for all 16 and 16/16 schema-valid. No empty graphs. Warnings: statement-like/lowercase node IDs on 2021_33, 2021_36, 2024_24.
+Question-level warnings:
+  - 2021_33 (gold answer 5): Non-speaker/generic/statement-like node IDs: a, b, c
+    Preview: {   "claims": {     "a": "Alice's fall from the 10th floor is the cause of her death.",     "b": "No event causally depends on B, since B did not actually occur.",     "c": "If C is the cause of E, then E causally depends on C, so since E does not causally depend on C, C is not t...
+  - 2021_36 (gold answer 2): Non-speaker/generic/statement-like node IDs: a, b, c
+    Preview: {   "claims": {     "a": "The existence of chameleon species on remote volcanic islands like the Comoros, which were never connected to continents, supports the idea that chameleons became isolated due to continental drift.",     "b": "If ocean currents have always flowed from we...
+  - 2024_24 (gold answer 1): Non-speaker/generic/statement-like node IDs: a, b, c
+    Preview: {   "claims": {     "a": "If most people in Group 1 who answered that Bob’s action was coerced also answered that Bob is moral, the hypothesis is weakened.",     "b": "If most people in Group 1 answered that Bob’s action was coerced, but most in Group 2 answered that Bob’s action...
+
+o4-mini
+-------
+Rows: 16
+API errors: 0
+Empty model_rationale responses: 0
+JSON parse success: 16/16
+Schema valid: 16/16
+Direct raw JSON with no Markdown fence: 16/16
+Strict OK under these checks: 12/16
+Notes: Direct JSON for all 16 and 16/16 schema-valid. Warnings: empty graphs on 2021_33, 2021_36, 2022_38, 2024_24.
+Question-level warnings:
+  - 2021_33 (gold answer 5): Empty graph
+    Preview: {"claims":{},"attacks":[]}
+  - 2021_36 (gold answer 2): Empty graph
+    Preview: {"claims":{},"attacks":[]}
+  - 2022_38 (gold answer 3): Empty graph
+    Preview: {"claims":{},"attacks":[]}
+  - 2024_24 (gold answer 1): Empty graph
+    Preview: {"claims":{},"attacks":[]}
+
+RECOMMENDED TEAM-FACING INTERPRETATION
+
+The frontier models adhere to the basic expected solver-readable format on the 16-question test set: every output can be parsed into a JSON object with claims and attacks, and no API/empty-response failures occurred.
+
+The remaining problems are strict-format and semantic-quality warnings, not basic parse failures. Claude Opus models may need fence-stripping. o4-mini and Claude Sonnet sometimes return empty graphs for non-dialogue questions. GPT-4.1 and GPT-4.1-mini are strongest for raw JSON adherence, but still sometimes use statement-like node IDs in non-dialogue questions.
+
+RECOMMENDED NEXT PROMPT TWEAK
+
+Add a generic instruction such as:
+
+If the passage does not contain named speakers, use the main entities, theories, hypotheses, or positions from the passage as node IDs. Do not use "Passage", "Question", "Speaker", "StatementA", "StatementB", lowercase statement labels, or empty claims unless the passage truly contains no extractable argumentative positions.
+
+Also add:
+
+The first character of your response must be { and the last character must be }. Do not use Markdown code fences.
