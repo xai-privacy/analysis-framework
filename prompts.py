@@ -2,6 +2,7 @@
 import os
 
 _BASE_PROMPT = """You extract an argument graph from the <Debate>.
+For the arguments, can you model their “attack relations” in the form of directed acyclic graphs in the sense that one argument is directed against another, if any?
 
 Return ONLY one valid JSON object with exactly these keys:
 

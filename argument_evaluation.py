@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description="Run argument evaluation over a JSO
 parser.add_argument(
     "--model", 
     type=str, 
-    default="meta-llama/Meta-Llama-3.1-8B-Instruct", 
+    default="meta-llama/Llama-3.2-1B-Instruct", 
     help="The Hugging Face model ID"
 )
 parser.add_argument(
