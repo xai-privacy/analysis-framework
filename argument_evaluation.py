@@ -6,41 +6,29 @@ from pydantic import BaseModel, Field
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # 1. Parse Command Line Arguments
-parser = argparse.ArgumentParser(description="Run argument evaluation with a specific Hugging Face model.")
+parser = argparse.ArgumentParser(description="Run argument evaluation over a JSON file with a Hugging Face model.")
 parser.add_argument(
     "--model", 
     type=str, 
     default="meta-llama/Meta-Llama-3.1-8B-Instruct", 
-    help="The Hugging Face model ID (e.g., meta-llama/Meta-Llama-3.1-8B-Instruct)"
+    help="The Hugging Face model ID"
+)
+parser.add_argument(
+    "--input", 
+    type=str, 
+    default="results.json", 
+    help="Path to the input JSON file containing the extracted claims and statements"
 )
 args = parser.parse_args()
 MODEL_ID = args.model
+INPUT_FILE = args.input
 
-# 2. Direct output from your previous argument extraction step
-claims_dict = {
-    "Alice": "The 'Copyright Act' only requires creativity as a condition for a work, and does not demand morality. In order to encourage creation and promote cultural diversity, the recognition of a work should be value-neutral.",
-    "Bob": "While the 'Criminal Act' prohibits the production and distribution of obscene materials, protecting the resulting obscene materials as copyrighted works effectively grants rights to those with 'dirty hands' who have committed illegal acts, and recognizes property value and protection for the fruits of illegal conduct, which should not be realized as property rights. This contradicts the principles of legal unity and fairness.",
-    "Charlie": "Clearly socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works, but for other types of obscene materials, recognizing them as works can help minimize the infringement on freedom of expression and property rights caused by regulation of obscene materials."
-}
-
-attacks_list = [
-    ('Bob', 'Alice'),
-    ('Alice', 'Bob')
-]
-
-# 3. Raw verbatim statements passed as input
-raw_statements = {
-    "statement_1": "(a) Alice presupposes that creativity cannot be acknowledged for obscene forms of expression.",
-    "statement_2": "(b) Bob does not regard murals painted in legally prohibited locations or works that incite the public in violation of the National Security Act as objects of protection under the Copyright Act.",
-    "statement_3": "(c) Charlie presupposes that even within the same era and region, the legal evaluation of obscenity may vary depending on the purpose, method, and audience of distribution."
-}
-
-# 4. Simplified Pydantic schema for evaluation output
+# 2. Simplified Pydantic schema for evaluation output
 class StatementEvaluation(BaseModel):
     is_correct: bool = Field(description="True if the statement's logical analysis is correct, False if it is incorrect")
     reasoning: str = Field(description="Concise logical explanation of why the statement is correct or incorrect")
 
-# Initialize Hugging Face Model
+# 3. Initialize Hugging Face Model
 device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
 print(f"Loading model {MODEL_ID} on {device}...")
@@ -63,18 +51,15 @@ Your JSON must strictly adhere to this schema:
     {json.dumps(claims, indent=2)}
     
     Attack Relations (Attacker -> Target):
-    {attacks}
+    {json.dumps(attacks, indent=2)}
     
     Verbatim Evaluation Statement to Analyze:
-    <statements>
     "{statement_text}"
-    </statements>
     
     Task:
     Evaluate if the provided statement is logically correct based on the argument graph.
     1. Set `is_correct` to True if the statement's assessment is logically accurate, or False if it is logically flawed or incorrect.
     2. Provide your `reasoning` for why the statement is correct or incorrect.
-    Given the arguments you identified and their attack relations, which of the following statements in <statements> is/are correct as an analysis of the above passage?
     """
     
     messages = [
@@ -108,15 +93,50 @@ Your JSON must strictly adhere to this schema:
     if json_match:
         response_text = json_match.group(1)
         
-    return StatementEvaluation.model_validate_json(response_text)
+    # Safely parse JSON to prevent crashes on single statement failures
+    try:
+        return StatementEvaluation.model_validate_json(response_text)
+    except Exception as e:
+        return StatementEvaluation(
+            is_correct=False, 
+            reasoning=f"Failed to parse model output. Raw output: {response_text}"
+        )
 
-# 5. Run evaluation loop
-print("\n--- Verbatim Statement Analysis Results ---\n")
+# 4. Run evaluation loop over the JSON file
+print(f"\n--- Loading {INPUT_FILE} ---\n")
 
-for stmt_id, stmt_text in raw_statements.items():
-    res = evaluate_verbatim_statement(stmt_text, claims_dict, attacks_list)
+try:
+    with open(INPUT_FILE, 'r', encoding='utf-8') as f:
+        questions_data = json.load(f)
+except FileNotFoundError:
+    print(f"Error: Could not find the file '{INPUT_FILE}'. Please ensure the path is correct.")
+    exit(1)
+
+for item in questions_data:
+    q_id = item.get("id", "Unknown_ID")
+    claims = item.get("claims", {})
+    attacks = item.get("attacks", [])
+    statements = item.get("statements", {})
     
-    status = "CORRECT" if res.is_correct else "INCORRECT"
-    print(f"[{stmt_id}]")
-    print(f"  Evaluation : {status}")
-    print(f"  Reasoning  : {res.reasoning}\n")
+    print(f"=== Processing Question ID: {q_id} ===")
+    
+    # Check for malformed or empty data structures
+    if not claims or not attacks or not statements:
+        print(f"  -> Skipping due to malformed/empty claims, attacks, or statements.\n")
+        if statements:
+            for stmt_id in statements.keys():
+                print(f"  [{stmt_id}]")
+                print(f"    Evaluation : null")
+                print(f"    Reasoning  : null\n")
+        else:
+            print("  [No statements found]\n")
+        continue
+
+    # Evaluate each statement if the graph is well-formed
+    for stmt_id, stmt_text in statements.items():
+        res = evaluate_verbatim_statement(stmt_text, claims, attacks)
+        
+        status = "CORRECT" if res.is_correct else "INCORRECT"
+        print(f"  [{stmt_id}]")
+        print(f"    Evaluation : {status}")
+        print(f"    Reasoning  : {res.reasoning}\n")
