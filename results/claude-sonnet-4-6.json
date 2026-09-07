@@ -1,5 +1,204 @@
 [
   {
+    "id": "2021_02",
+    "year": "2021",
+    "problem_idx": "2",
+    "objective": "This question assesses the ability to infer the logical premises of each argument and the conclusions that follow from it.",
+    "domain": "Norms",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "<Debate> Country X’s \"Criminal Act\" prohibits the production and distribution of obscene materials, while the \"Copyright Act\" protects creative works expressing human thoughts or emotions as copyrighted works for the enhancement and development of culture and related industries. There is debate about whether obscene materials should be protected as copyrighted works under the \"Copyright Act\".Alice: The \"Copyright Act\" only requires creativity as a condition for a work, and does not demand morality. In order to encourage creation and promote cultural diversity, the recognition of a work should be value-neutral.Bob: While the \"Criminal Act\" prohibits the production and distribution of obscene materials, protecting the resulting obscene materials as copyrighted works effectively grants rights to those with \"dirty hands\" who have committed illegal acts, and recognizes property value and protection for the fruits of illegal conduct, which should not be realized as property rights. This contradicts the principles of legal unity and fairness.Charlie: Clearly socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works, but for other types of obscene materials, recognizing them as works can help minimize the infringement on freedom of expression and property rights caused by regulation of obscene materials. <question> Which of the following <statements> correctly analyzes the <debate> above?<statements> (a) Alice presupposes that creativity cannot be acknowledged for obscene forms of expression.(b) Bob does not regard murals painted in legally prohibited locations or works that incite the public in violation of the National Security Act as objects of protection under the Copyright Act.(c) Charlie presupposes that even within the same era and region, the legal evaluation of obscenity may vary depending on the purpose, method, and audience of distribution. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Alice presupposes that creativity cannot be acknowledged for obscene forms of expression.",
+      "statement_2": "(b) Bob does not regard murals painted in legally prohibited locations or works that incite the public in violation of the National Security Act as objects of protection under the Copyright Act.",
+      "statement_3": "(c) Charlie presupposes that even within the same era and region, the legal evaluation of obscenity may vary depending on the purpose, method, and audience of distribution."
+    },
+    "original_rationale": {
+      "preliminaries": "Alice, Bob, and Charlie are debating whether obscene materials should be protected as copyrighted works under the \"Copyright Act\". Alice argues that value neutrality is necessary in determining whether something is a copyrighted work and presents \"creativity\" as the sole criterion, believing that obscene materials can be included as copyrighted works. In contrast, Bob emphasizes the unity and fairness of the law and includes \"legality\" as a requirement for copyrighted works, thereby asserting that obscene materials cannot be recognized as works. Meanwhile, Charlie suggests a compromised stance that obscene materials should be differentiated in copyright protection based on the standard of \"social harmfulness\". <choices>",
+      "statement_1_rationale": "(a) Alice’s position is to exclude moral standards such as obscenity from the concept or determination criteria of a work and to use creativity as the determining criterion. This presupposes that creativity can indeed be acknowledged for expressions such as obscene materials, where morality is called into question. Thus, (a) is not a correct analysis.",
+      "statement_2_rationale": "(b) Bob’s position, based on the \"dirty hands\" theory and the principles of legal unity and fairness, sees legality as an essential element of the concept of a work. Therefore, according to Bob, murals painted in legally prohibited places or works that incite the public in violation of the National Security Act, due to their illegality, cannot be regarded as copyrighted works under the Copyright Act. (b) is a correct analysis.",
+      "statement_3_rationale": "(c) Charlie takes a compromised stance, seeking to differentiate the protection of copyrighted works by classifying obscene materials according to the criterion of social harmfulness. In this context, the legal evaluation he refers to is that of \"authorship\", not \"obscenity\", and is affected by social harmfulness. Thus, the assertion that legal evaluation of obscenity changes depending on purpose, method, or audience is not necessarily a presupposition of Charlie’s argument. Even if the legal evaluation of obscenity does not change according to such factors, Charlie’s argument still stands. Therefore, (c) is not a correct analysis.",
+      "answer": "Only (b) is the correct analysis among the <choices>, so the answer is ②."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Obscene materials should be protected as copyrighted works as long as they meet the creativity requirement, with no moral conditions attached.\",\n    \"Bob\": \"Obscene materials should not receive copyright protection because granting rights to illegal conduct contradicts legal unity and fairness.\",\n    \"Charlie\": \"Only clearly socially harmful obscene materials should be excluded from copyright protection, while other obscene materials should be recognized as works to minimize infringement on freedom of expression and property rights.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Bob\"]\n  ]\n}",
+    "run_id": 1,
+    "model_id": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "backend": "api",
+    "prompt_version": "argument_graph_json_from_prompts_py",
+    "max_tokens": 3000,
+    "created_at": "2026-09-06T18:37:11.821548+00:00",
+    "response_id": "msg_011CenfrThUEPVHPSixt1vik",
+    "model_returned": "claude-sonnet-4-6",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 908,
+      "output_tokens": 146
+    },
+    "error": null
+  },
+  {
+    "id": "2021_03",
+    "year": "2021",
+    "problem_idx": "3",
+    "objective": "This question assesses the ability to understand the advantages and disadvantages of two operational methods related to bankruptcy systems by comparing them.",
+    "domain": "Norms",
+    "category": "Argument Analysis",
+    "answer": "3",
+    "original_question": "Country X and Country Y operate a system where bankruptcy can be declared by the court upon the application of either the creditor or the debtor. Country X: If an individual cannot repay borrowed money, they may declare bankruptcy, and all assets they possess at the time of bankruptcy are distributed to the creditors. Any remaining debts are fully discharged. The court grants debt discharge except in cases where the debtor maliciously fails to pay despite having the ability to do so. A person who has been discharged through bankruptcy faces no restrictions on the freedoms and rights they enjoy as a citizen in daily life.Country Y: If an individual cannot repay borrowed money, they may declare bankruptcy, and all assets possessed at the time of bankruptcy are distributed to the creditors. However, unless the creditor agrees, debts to that creditor are not discharged. Creditors may exercise their rights without restriction over assets acquired by the debtor after bankruptcy until their full debt is repaid. The bankrupt individual is detained for a certain period, loses the right to vote until the debts are paid in full, and the bankruptcy record is made public. <question> Which of the following is NOT a correct analysis of the above passage? <choices> ① Someone who is concerned that creditors will continue to urge bankrupt debtors to repay their debts and that related lawsuits will never cease would support Country X's system. ② Someone who believes that individuals are rational beings who make and are responsible for their own decisions, and that the state has no need to help those who have recklessly overspent, would oppose Country X's system. ③ Someone who worries that creditors may use bankruptcy filings as a means of threat in order to collect their claims ahead of other creditors would support Country Y's system. ④ Someone who fears that individuals at risk of bankruptcy will keep taking on more debt to repay existing debt, thereby perpetuating creditor–debtor relationships, would oppose Country Y's system. ⑤ Someone who is concerned that making creditor–debtor relationships after bankruptcy subject to the will of the creditor would cause social confusion, such as the emergence of fictitious creditors, would oppose Country Y's system.",
+    "statements": {
+      "statement_1": "① Someone who is concerned that creditors will continue to urge bankrupt debtors to repay their debts and that related lawsuits will never cease would support Country X's system.",
+      "statement_2": "② Someone who believes that individuals are rational beings who make and are responsible for their own decisions, and that the state has no need to help those who have recklessly overspent, would oppose Country X's system.",
+      "statement_3": "③ Someone who worries that creditors may use bankruptcy filings as a means of threat in order to collect their claims ahead of other creditors would support Country Y's system.",
+      "statement_4": "④ Someone who fears that individuals at risk of bankruptcy will keep taking on more debt to repay existing debt, thereby perpetuating creditor–debtor relationships, would oppose Country Y's system.",
+      "statement_5": "⑤ Someone who is concerned that making creditor–debtor relationships after bankruptcy subject to the will of the creditor would cause social confusion, such as the emergence of fictitious creditors, would oppose Country Y's system."
+    },
+    "original_rationale": {
+      "preliminaries": "Country X's system is the institutionalization of the principle of bankruptcy discharge, which releases the bankrupt debtor from liability for unpaid debts. Country Y, on the other hand, does not employ the principle of bankruptcy discharge. While Country Y maintains the principle that freely entered contracts between parties must be observed even in the bankruptcy system, Country X, in contrast, seeks to give a new opportunity to debtors through bankruptcy.",
+      "statement_1_rationale": "① Under Country X’s system, the creditor–debtor relationship is extinguished through bankruptcy, and related lawsuits will no longer occur. Therefore, a person concerned about ongoing lawsuits would support Country X's system. ① is a correct analysis.",
+      "statement_2_rationale": "② Since Country X's system forgives all remaining debt upon bankruptcy, it can be criticized for granting benefits to debtors who irresponsibly increased their debts beyond their means. ② is a correct analysis.",
+      "statement_3_rationale": "③ Country Y allows for restrictions on the rights of a debtor who has been declared bankrupt, such as detention and the deprivation of voting rights. As such, a creditor could devise a plan to use bankruptcy as a means of psychological pressure to collect payment before other creditors. In trying to avoid bankruptcy, the debtor may prioritize repaying that creditor over others or even take on new debt just to repay that creditor. Therefore, someone with such concerns would not support Country Y's system. Thus, ③ is an incorrect analysis.",
+      "statement_4_rationale": "④ Country Y's system involves using the debtor’s assets at the time of bankruptcy to pay part of the debt, but continuously restricts the debtor’s rights until the full debt is paid off, forcing them to keep repaying the debt. As a result, debtors would try to avoid bankruptcy without the benefit of discharge and may continue to take out more loans as a means of debt rollover. Therefore, someone concerned about this would not support Country Y's system. ④ is a correct analysis.",
+      "statement_5_rationale": "⑤ Because Country Y's system does not provide for a universal debt discharge, there is the risk that fictitious creditors, colluding with the debtor, will fraudulently claim rights and receive a distribution of the debtor’s assets, thereby interfering with actual creditors’ recovery. Therefore, someone with this concern would oppose Country Y’s system. ⑤ is a correct analysis.",
+      "answer": "Only ③ is the incorrect analysis among the <choices>, so the answer is ③."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"①\": \"Country X's system is supported because it prevents endless debt-repayment disputes and lawsuits by fully discharging debts.\",\n    \"②\": \"Country X's system is opposed because the state should not relieve individuals of debts resulting from their own irresponsible decisions.\",\n    \"③\": \"Country Y's system is supported because it prevents creditors from abusing bankruptcy filings as threats to gain repayment priority.\",\n    \"④\": \"Country Y's system is opposed because it traps debtors in a cycle of accumulating more debt to repay existing obligations.\",\n    \"⑤\": \"Country Y's system is opposed because leaving post-bankruptcy creditor-debtor relations to creditor discretion invites social problems like fictitious creditors.\"\n  },\n  \"attacks\": []\n}",
+    "run_id": 1,
+    "model_id": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "backend": "api",
+    "prompt_version": "argument_graph_json_from_prompts_py",
+    "max_tokens": 3000,
+    "created_at": "2026-09-06T18:37:16.464601+00:00",
+    "response_id": "msg_011CenfroEiBXAAz94pxMns9",
+    "model_returned": "claude-sonnet-4-6",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 957,
+      "output_tokens": 193
+    },
+    "error": null
+  },
+  {
+    "id": "2021_14",
+    "year": "2021",
+    "problem_idx": "14",
+    "objective": "This question assesses the ability to appropriately analyze the debate about what it means for an action to cause harm or benefit.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "1",
+    "original_question": "<Theory> For an act to \"cause harm\" to someone means that, if the act had not occurred, that person would have been in a better state. Similarly, for an act to \"benefit\" someone means that, if the act had not occurred, that person would have been in a worse state. Alice and Bob have the following debate regarding <Theory>: Alice1: I could have given my friend 50,000 won for no reason but chose not to. If I had done so, my friend would have been in a better state. According to <Theory>, my act harmed my friend. But that seems unreasonable. Bob1: <Theory> doesn't have such implications. That's because doing nothing—like simply not giving your friend 50,000 won—cannot be considered an act. Alice2: If you limit \"act\" in such a way within <Theory>, other unreasonable consequences follow. Consider someone who saw a child struggling in water and had the ability to rescue them but chose not to, resulting in the child's drowning. Not saving the child clearly harmed the child. Bob2: But this case is different. The choice not to save the child is itself the result of a deliberate decision to avoid the rescue. In this sense, not saving the child should be considered an act. Alice3: Then what about this case? Imagine A bought a gift intended for B but became attached to it and decided to keep it instead of giving it to B. In this case, although not giving the gift was a deliberate decision, it doesn't seem like A harmed B. <question> Which of the following statements in <statements> is/are correct as an analysis of the above passage? <statements> (a) According to Alice1’s interpretation of <Theory>, if I could have punched my friend and broken their nose but did not do so, then, by not punching my friend, I performed an act that benefited my friend. (b) Alice2 and Bob2 differ in their judgment about whether not rescuing the child caused harm to the child. (c) If Bob, in response to Alice3, were to assert that “A’s not giving the gift to B did, in fact, harm B,” this would make Bob’s position inconsistent. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) According to Alice1’s interpretation of <Theory>, if I could have punched my friend and broken their nose but did not do so, then, by not punching my friend, I performed an act that benefited my friend.",
+      "statement_2": "(b) Alice2 and Bob2 differ in their judgment about whether not rescuing the child caused harm to the child.",
+      "statement_3": "(c) If Bob, in response to Alice3, were to assert that “A’s not giving the gift to B did, in fact, harm B,” this would make Bob’s position inconsistent."
+    },
+    "original_rationale": {
+      "preliminaries": "<Theory> is a counterfactual comparative account that explains what it means for an act or event to cause harm or benefit to someone. According to this view, to say that an act causes harm (or benefit) to someone means that if the act had not occurred, the person would have been better (or worse) off. Alice is trying to challenge this view through a series of counterexamples, while Bob defends the view by clarifying the definition of \"act.\" The structure of the debate is as follows: Alice1: Presents the failure to give 50,000 won to a friend as a counterexample to <Theory>. Bob1: Responds that this does not count as an act, so it’s not a true counterexample. Alice2: Raises a new counterexample involving not saving a drowning child, arguing that Bob1’s solution is inadequate. Bob2: Adds further conditions to the definition of \"act\" to show the case of not saving the child is not a counterexample. Alice3: Presents a case with additional conditions to pose another counterexample. <choices>",
+      "statement_1_rationale": "(a): Alice1 interprets \"doing nothing\" as an act; thus, according to <Theory>, if you do not give your friend 50,000 won, your friend is worse off, making the omission an act that harms your friend. Applying this same logic, if you could have punched your friend and broken their nose but did not, \"not punching your friend\" is considered an act. Since punching would have made your friend worse off, <Theory> would interpret not punching as benefiting your friend. Therefore, (a) is a correct analysis.",
+      "statement_2_rationale": "(b): In the scenario with the drowning child, Alice2 claims that not rescuing the child clearly harmed the child and that this case is a counterexample to Bob1’s interpretation of <Theory>. Bob2 agrees with the assessment that not rescuing caused harm but claims, through a reinterpretation of <Theory>, that this is not a counterexample. Therefore, (b) is not a correct analysis.",
+      "statement_3_rationale": "(c): In response to Alice3, Bob could maintain consistency by sticking with the interpretation that \"A’s not giving the gift to B counts as harming B.\" Maintaining this stance would not be inconsistent with Bob2’s previously stated position. Therefore, (c) is not a correct analysis.",
+      "answer": "Only (a) is a correct analysis among <choices>, so the answer is ①."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Alice argues that <Theory> leads to unreasonable implications whether or not omissions are counted as acts, because either non-gifts harm recipients or non-rescues do not harm victims.\",\n    \"Bob\": \"Bob argues that <Theory> is sound because genuine omissions are not acts, while deliberate decisions not to act do count as acts and can cause harm.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Alice\"]\n  ]\n}",
+    "run_id": 1,
+    "model_id": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "backend": "api",
+    "prompt_version": "argument_graph_json_from_prompts_py",
+    "max_tokens": 3000,
+    "created_at": "2026-09-06T18:37:21.199465+00:00",
+    "response_id": "msg_011Cenfs9Pv4EwzmAPyu7XQV",
+    "model_returned": "claude-sonnet-4-6",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 1013,
+      "output_tokens": 123
+    },
+    "error": null
+  },
+  {
+    "id": "2021_16",
+    "year": "2021",
+    "problem_idx": "16",
+    "objective": "This question assesses the ability to correctly analyze and evaluate arguments.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "Alice: Elegance is not a property that belongs to Chopin's nocturnes themselves, but merely a subjective impression you have. When I listen to the nocturnes, I just feel bored the whole time. Bob: If you only felt boredom from listening to the nocturnes, that's because you're only used to hip-hop. Try to follow the delicacy expressed by the piano's tone and the development of the melody. The fact that this piece is elegant is something that anyone with an appropriate capacity for musical appreciation can recognize under normal conditions. Charlie: Even if the elegance of the nocturnes isn't just a matter of subjective feeling, I don't think it's correct to say it's a property that anyone can recognize. Isn't it rather that only people belonging to a certain culture, who are used to a particular kind of music, regard the nocturnes as elegant? This is at least unlike properties like the yellow color or round shape of a melon, which are genuinely attributable to the object itself. Bob: Even if only people from a certain group can regard the nocturnes as elegant, I think their elegance should still be seen as a genuine property of the music. After all, yellow is only seen as yellow by people who aren't color-blind, but it's still a real property of the melon, right? In the case of the nocturnes, it's just that only people with appropriate musical sensitivity can perceive the elegance. Charlie: Isn't it a more natural explanation that you two are reacting differently to the nocturnes because you each belong to groups that share different kinds of musical sensitivity? Why should we say that only people who react by calling it elegant are perceiving a real property?<question> Which of the following analyses of this debate is/are correct, according to the <statements>?<statements> (a) Bob would oppose the claim that the group of people who can perceive elegance could be larger or smaller depending on period and culture. (b) Charlie would oppose the claim that people who find Chopin's nocturnes boring may have a different kind of musical sensitivity. (c) Bob and Charlie can both accept the claim that Chopin's nocturnes are elegant, albeit for different reasons. <choices> ① (b) ② (c) ③ (a), (b) ④ (a), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Bob would oppose the claim that the group of people who can perceive elegance could be larger or smaller depending on period and culture.",
+      "statement_2": "(b) Charlie would oppose the claim that people who find Chopin's nocturnes boring may have a different kind of musical sensitivity.",
+      "statement_3": "(c) Bob and Charlie can both accept the claim that Chopin's nocturnes are elegant, albeit for different reasons."
+    },
+    "original_rationale": {
+      "preliminaries": "This question concerns a debate over whether aesthetic properties—using the example of \"elegance\"—are real properties belonging to an object such as Chopin's nocturnes, or not. Alice's view is that aesthetic properties are not real properties of an object, and that attributing them is merely an expression of individual subjective impressions. Bob, in contrast, argues that aesthetic properties are real properties of the object, which can be perceived by listeners possessing the appropriate musical sensitivity under normal conditions. Meanwhile, Charlie contends that, although aesthetic properties are not simply a matter of individual subjective impressions, they are not genuine properties of the object either, and should be understood as being perceived differently depending on the shared musical sensitivity within each group. The question asks you to clearly recognize these differences in perspectives and to deduce their respective implications.",
+      "statement_1_rationale": "(a) Bob claims that only those with appropriate musical sensitivity can perceive the elegance of the musical work. Since this means only that the group who can perceive elegance is limited to those with appropriate musical sensitivity, it is compatible with the idea that the size of this group could be larger or smaller depending on the era or culture. Thus, saying Bob would oppose this claim is an incorrect analysis.",
+      "statement_2_rationale": "(b) Charlie maintains that people react differently to Chopin's nocturnes because the shared musical sensitivity of the groups they belong to is different. According to this explanation, people who find the nocturnes boring would indeed have musical sensitivities different from those who find them elegant. Therefore, (b) is also incorrect.",
+      "statement_3_rationale": "(c) For Bob, only those with suitable musical sensitivity can perceive the genuine property of elegance in Chopin's nocturnes, so he can accept statements by people with such sensitivity that \"Chopin's nocturnes are elegant.\" Meanwhile, for Charlie, even if elegance need not be a real property of Chopin's nocturnes, it is enough if there is a group sharing the relevant musical sensitivity who feel the music is elegant; thus, Charlie too can accept a group member's assertion that \"Chopin's nocturnes are elegant.\" Therefore, (c) is a correct analysis.",
+      "answer": "Since only (c) is a correct analysis, the answer is ②."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Elegance is merely a subjective impression and not a real property of Chopin's nocturnes.\",\n    \"Bob\": \"Elegance is a genuine property of Chopin's nocturnes that anyone with appropriate musical sensitivity can perceive.\",\n    \"Charlie\": \"Elegance in the nocturnes is culturally relative and not a genuine objective property of the music.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Bob\"],\n    [\"Bob\", \"Charlie\"],\n    [\"Charlie\", \"Bob\"]\n  ]\n}",
+    "run_id": 1,
+    "model_id": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "backend": "api",
+    "prompt_version": "argument_graph_json_from_prompts_py",
+    "max_tokens": 3000,
+    "created_at": "2026-09-06T18:37:24.942158+00:00",
+    "response_id": "msg_011CenfsRU485aQiCXYvwPV9",
+    "model_returned": "claude-sonnet-4-6",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 1014,
+      "output_tokens": 144
+    },
+    "error": null
+  },
+  {
+    "id": "2021_17",
+    "year": "2021",
+    "problem_idx": "17",
+    "objective": "This question assesses the ability to correctly analyze the classical debate concerning the problem of whether belief must be based on sufficient grounds.",
+    "domain": "Humanities",
+    "category": "Argumentation and Rebuttal",
+    "answer": "3",
+    "original_question": "Alice: If I come to hold a belief based on insufficient evidence, that belief itself may not cause much harm. That belief could ultimately be true, and it might never be externally manifested in actions. However, I cannot avoid committing a crime against humanity by making myself an easy believer. The mere fact that a society holds false beliefs is a serious problem, but a greater problem is that society becomes gullible, loses the habit of examining and carefully investigating evidence, and regresses to a state of barbarism. 'ⓐ To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.' - William Clifford, \"The Ethics of Belief\" - Bob: \"Believe the truth!\", \"Avoid error!\" These are the most important commandments for anyone seeking knowledge. However, these are two distinct rules. And depending on which of these one values more, one’s entire intellectual life may differ. One may prioritize the pursuit of truth and see the avoidance of error as secondary, or conversely, consider the avoidance of error most important and the attainment of truth as secondary. Clifford recommends the latter to us. He tells us that, rather than risking the dreadful possibility of believing a falsehood based on insufficient evidence, we should suspend judgment and believe nothing. As for myself, I don’t think I take Clifford’s side. In any case, what we must not forget is that our attitude toward the obligations related to truth or error is grounded not in evidence but in sentiment. People like Clifford, who say \"It is better to never believe than to ever believe something false!\" are merely expressing a fear of being naively deceived.- William James, \"The Will to Believe\" - <question> Which of the following analyses of the passages is/are correct? Choose as indicated from <statements>.<statements> (a) Alice supports her conclusion by pointing out the undesirable consequences that will arise if people do not act according to her conclusion. (b) According to Bob, Clifford's belief in ⓐ is not based on sufficient evidence. (c) Bob's argument requires the premise that 'even a belief based on sufficient evidence can be mistaken.' <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Alice supports her conclusion by pointing out the undesirable consequences that will arise if people do not act according to her conclusion.",
+      "statement_2": "(b) According to Bob, Clifford's belief in ⓐ is not based on sufficient evidence.",
+      "statement_3": "(c) Bob's argument requires the premise that 'even a belief based on sufficient evidence can be mistaken.'"
+    },
+    "original_rationale": {
+      "preliminaries": "The passages excerpt the core of the classic debate between Clifford and James. Clifford argues that it is wrong to form beliefs based on insufficient evidence. His argument is that, if one comes to form beliefs on insufficient evidence, society becomes more susceptible to being deceived, regressing to a barbaric state as a result.James emphasizes that the pursuit of truth and the avoidance of error are distinct intellectual tasks, pointing out that Clifford’s stance is justifiable only if one prioritizes the avoidance of error—and that the choice between the two is ultimately a matter of sentiment, not evidence.",
+      "statement_1_rationale": "(a) Alice’s conclusion is \"To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.\" She justifies this by arguing that not following this leads society into a 'state of barbarism.' Thus, (a) is a correct analysis.",
+      "statement_2_rationale": "(b) Bob argues that there are two epistemic duties, \"Believe the truth!\" and \"Avoid error!\", and that Clifford focuses only on the latter. He also claims that this choice is grounded not in evidence but in sentiment. Therefore, according to Bob, Clifford’s belief in ⓐ is not based on sufficient evidence. Thus, (b) is a correct analysis.",
+      "statement_3_rationale": "(c) Bob’s argument is unrelated to the claim that \"even beliefs based on sufficient evidence can be mistaken.\" Even if that statement is false, that is, even if beliefs based on sufficient evidence could never be mistaken, Bob’s argument remains unaffected. He merely points out that the disposition to base belief only on sufficient evidence is itself grounded in sentiment. Therefore, (c) is not a correct analysis.",
+      "answer": "Since only (a) and (b) are correct, the answer is ③."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"It is always wrong to believe something on insufficient evidence, because doing so makes society gullible and causes a regression toward barbarism.\",\n    \"Bob\": \"Clifford's strict evidentialism is merely an expression of sentiment and fear, not a rationally grounded imperative, and one may reasonably prioritize the pursuit of truth over the avoidance of error.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"]\n  ]\n}",
+    "run_id": 1,
+    "model_id": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "backend": "api",
+    "prompt_version": "argument_graph_json_from_prompts_py",
+    "max_tokens": 3000,
+    "created_at": "2026-09-06T18:37:27.701549+00:00",
+    "response_id": "msg_011CenfsdKC4vBFEwNAvVJn9",
+    "model_returned": "claude-sonnet-4-6",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 1006,
+      "output_tokens": 116
+    },
+    "error": null
+  },
+  {
     "id": "2021_18",
     "year": "2021",
     "problem_idx": "18",
@@ -20,21 +219,21 @@
       "statement_3_rationale": "(c) If two critics from different eras or countries make the same judgment about a work of art, Bob’s view is that for their judgments to be proper, they must be made from the perspective presupposed by the work. However, the mere fact that their judgments are the same does not necessarily mean that they adopted the perspective presupposed by the work. Therefore, (c) is not a correct analysis.",
       "answer": "Only (b) among the <choices> is a correct analysis, so the answer is ②."
     },
-    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Epistemic objectivity in judgment requires that claims be justified without distortion from subjective elements such as bias, prejudice, herd mentality, or personal wishes.\",\n    \"B\": \"Appropriate judgment of a work of art requires adopting the particular perspective presupposed by the work, including the specific circumstances and audience it was created for.\"\n  },\n  \"attacks\": []\n}",
+    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Epistemic objectivity is secured when a judgment is justified without distortion from subjective elements such as bias, prejudice, herd mentality, or personal wishes.\",\n    \"B\": \"Appropriate judgment about a work of art requires adopting the particular perspective presupposed by the work, including the circumstances and characteristics of its intended audience, rather than one's own subjective standpoint.\"\n  },\n  \"attacks\": []\n}",
     "run_id": 1,
     "model_id": "claude-sonnet-4-6",
     "provider": "anthropic",
     "backend": "api",
     "prompt_version": "argument_graph_json_from_prompts_py",
     "max_tokens": 3000,
-    "created_at": "2026-09-07T15:54:43.005564+00:00",
-    "response_id": "msg_011CepMGkv2K3uerBhXUEvBV",
+    "created_at": "2026-09-06T18:37:31.084944+00:00",
+    "response_id": "msg_011CenfsscRHoELvWBe4DQmv",
     "model_returned": "claude-sonnet-4-6",
     "stop_reason": "end_turn",
     "stop_sequence": null,
     "usage": {
       "input_tokens": 933,
-      "output_tokens": 100
+      "output_tokens": 109
     },
     "error": null
   },
@@ -59,399 +258,87 @@
       "statement_3_rationale": "(c): If the theory of relativity correctly predicts where Newtonian theory failed, it does not necessarily mean that relativity preserves all the predictions of Newtonian theory in addition to making new predictions. Since some predictions by Newtonian theory are not preserved, relativity would not qualify as “more general” in Bob’s sense. Thus, (c) is also not a correct analysis.",
       "answer": "Therefore, only (a) is the correct analysis, so the answer is ①."
     },
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"It is unclear whether changes in scientific theories constitute genuine progress, since past achievements of successor theories can be explained by social factors rather than true advancement, and future potential cannot be reliably compared because we cannot know all future consequences of a theory.\",\n    \"Bob\": \"Genuine progress in science can be judged by comparing the future potential of theories, which is not influenced by social factors, and theories can be compared by their logical generality—if all statements of T1 are derivable from T2 but not vice versa, T2 has greater future potential and represents genuine progress.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"],\n    [\"Bob\", \"Alice\"]\n  ]\n}",
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"It is not possible to objectively judge genuine progress in science because past achievements reflect social factors and future potential cannot be fully known.\",\n    \"Bob\": \"Genuine progress in science can be judged by comparing theories' future potential, which is not influenced by social factors, and can be assessed through logical generality.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Alice\", \"Bob\"]\n  ]\n}",
     "run_id": 1,
     "model_id": "claude-sonnet-4-6",
     "provider": "anthropic",
     "backend": "api",
     "prompt_version": "argument_graph_json_from_prompts_py",
     "max_tokens": 3000,
-    "created_at": "2026-09-07T15:54:46.235689+00:00",
-    "response_id": "msg_011CepMGz3Z5nUK3FkjCkgC4",
+    "created_at": "2026-09-06T18:37:34.704622+00:00",
+    "response_id": "msg_011Cenft9CY19MzGPTKLreaC",
     "model_returned": "claude-sonnet-4-6",
     "stop_reason": "end_turn",
     "stop_sequence": null,
     "usage": {
       "input_tokens": 999,
-      "output_tokens": 168
+      "output_tokens": 111
     },
     "error": null
   },
   {
-    "id": "2021_33",
+    "id": "2021_24",
     "year": "2021",
-    "problem_idx": "33",
-    "objective": "This question assesses the ability to properly understand (definition 1) and (definition 2) and the arguments applying these definitions to specific cases, and to derive valid conclusions from them.",
-    "domain": "Humanities",
+    "problem_idx": "24",
+    "objective": "This question assesses the ability to understand two arguments concerning the role of human nature and culture in shaping humans, and to determine whether presented survey results or research findings strengthen or weaken each argument.",
+    "domain": "Society",
+    "category": "Argumentation and Rebuttal",
+    "answer": "2",
+    "original_question": "The roles of nature and culture in human development are a matter of debate, with opinions divided as follows.<Opinions>Alice: I believe that in order to understand human development, we must start from human nature. This is because there are clear differences between groups, and especially biological characteristics play a decisive role in explaining intergroup differences. In addition, many researchers have proven that differences in intelligence quotient between individuals are due to genetic factors.Bob: The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community. Because the human species is so homogeneous, I think that insisting on intergroup differences based on biological criteria stems from a misguided motivation to uphold unequal social hierarchies. Social hierarchy only limits human variability; humans can be shaped differently depending on culture or social environment. <question> Which of the following in <Statements> properly evaluates the <Opinions>? <statements> (a) Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.(b) Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.(c) Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "statements": {
+      "statement_1": "(a) Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.",
+      "statement_2": "(b) Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.",
+      "statement_3": "(c) Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument."
+    },
+    "original_rationale": {
+      "preliminaries": "In the <Opinions>, Alice emphasizes the importance of human nature, particularly biological characteristics, in the formation of humans. She also claims that these biological traits cause differences between individuals and groups. On the other hand, Bob emphasizes the importance of culture or social environment in human development. He argues that emphasizing biological traits amounts to supporting social hierarchy and rebutts by saying there are actually very few intergroup differences based on biological factors. He further stresses the potential for human development depending on cultural or social environmental changes.",
+      "statement_1_rationale": "(a) The claim that, throughout history, in every society crime rates have been high in a specific group—males aged 15 to 25—means that in any culture or social environment, there is consistently a high crime rate among a particular age group of males. In other words, regardless of cultural or social environmental change, this research result, which suggests that the biological trait of being a male of a certain age greatly influences crime rates, actually strengthens Alice's argument emphasizing biological characteristics in human development, rather than weakening it. Thus, (a) is not an appropriate evaluation.",
+      "statement_2_rationale": "(b) Various social reforms aimed at equally developing the abilities of all members of society can be understood as attempts to promote human development by changing culture or social environment. Therefore, the finding that such reforms failed does not strengthen Bob’s claim, which argues for the potential for human variability and development through environmental change. Thus, (b) is an appropriate evaluation.",
+      "statement_3_rationale": "(c) The fact that, due to improvements in English education programs, most elementary school students’ test scores increased greatly compared to before the improvements shows that human development can be achieved through changes in environment, especially through changes in systems. Therefore, this research result weakens Alice's argument, which emphasizes biological characteristics in human development, while strengthening Bob’s argument, which emphasizes the importance of environment. Thus, (c) is not an appropriate evaluation.",
+      "answer": "Therefore, only (b) in the <Choices> is an appropriate evaluation, so the correct answer is ②."
+    },
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Biological and genetic factors, including intergroup differences, play a decisive role in human development.\",\n    \"Bob\": \"Human groups are biologically homogeneous, and human development is shaped primarily by culture and social environment rather than biological differences.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Alice\", \"Bob\"]\n  ]\n}",
+    "run_id": 1,
+    "model_id": "claude-sonnet-4-6",
+    "provider": "anthropic",
+    "backend": "api",
+    "prompt_version": "argument_graph_json_from_prompts_py",
+    "max_tokens": 3000,
+    "created_at": "2026-09-06T18:37:38.162285+00:00",
+    "response_id": "msg_011CenftPw4AAiskNP5DN3nf",
+    "model_returned": "claude-sonnet-4-6",
+    "stop_reason": "end_turn",
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 852,
+      "output_tokens": 96
+    },
+    "error": null
+  },
+  {
+    "id": "2021_25",
+    "year": "2021",
+    "problem_idx": "25",
+    "objective": "This question assesses the ability to understand the problems that pre-surveys can have in experimental research in social sciences and their solutions, and to find experimental results showing that viewing Black hero films reduced the degree of negative bias towards Black people.",
+    "domain": "Society",
     "category": "Argument Analysis",
     "answer": "5",
-    "original_question": "Let us accept the following two definitions. (Definition 1) \"Event Y causally depends on event X\" means that both X and Y actually occurred, and if X had not occurred, Y would not have occurred either. (Definition 2) \"Event X is the cause of event Y\" means that there exists a chain of causal dependence leading from X to Y. As soon as Alice drank a fatal dose of poison, she fell from the 10th floor of a building, hit the ground, and died. The events A~E are as follows: A: Alice drinks the poison B: The poison spreads throughout her body C: Alice falls from the 10th floor of the building D: Alice hits the ground E: Alice's death From C through D to E, all events actually occurred. However, ⓐ B did not actually occur; that is, Alice died before the poison could spread throughout her body. On the other hand, ⓑ \"If C had not occurred, E would not have occurred\" is false. If C had not occurred, the chain of causal dependence from A through B to E would have been realized. Thus, it may seem to follow that ⓒ C is not the cause of E. However, even when Z does not causally depend on X, it is possible that Y causally depends on X, and Z causally depends on Y. If C had not occurred, D would not have occurred, and if D had not occurred, E would not have occurred. <question> Which of the following analyses of the passage above is/are correct according to the <statements> given below? <statements> (a) From the passage, \"Alice's fall from the 10th floor is the cause of her death\" follows. (b) From (Definition 1) and ⓐ, \"No event causally depends on B\" follows. (c) From (Definition 1), ⓑ, and \"If C is the cause of E, then E causally depends on C,\" ⓒ follows. <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c).",
+    "original_question": "In social sciences, classical experimental research may not be able to generalize experimental results to the real world. For example, suppose an experimental study was conducted to determine whether ‘watching a movie where a Black person appears as a hero’ (the experimental stimulus) reduces ‘the degree of negative prejudice against Black people’, and the following findings were observed. First, in the experimental group that received the experimental stimulus, the degree of prejudice was lower in the post-test than in the pre-test. Second, in the control group that did not receive the experimental stimulus, there was no change in the degree of prejudice between the pre-test and the post-test. In this case, it can be considered that watching the movie reduced the degree of prejudice among participants in the experimental group. However, it cannot be asserted with certainty that the same effect would appear if the movie was watched by people in their everyday lives. This is because in experiments, participants may already have become sensitive to the issue of prejudice against Black people as a result of the pre-test. To solve this problem, an <experimental design> that adds an experiment without a pre-test must be implemented. If, through this, experimental results are obtained that demonstrate ‘ⓐ that watching the movie reduced the degree of prejudice’, the possibility of generalization can be increased.<Experimental Design>• Group 1: Pre-test → Experimental stimulus → Post-test.• Group 2: Pre-test → Post-test.• Group 3: No pre-test → Experimental stimulus → Post-test.• Group 4: No pre-test → Post-test.All participants in Groups 1 to 4 were randomly selected from the population. <question> Which of the following cannot be included in the experimental results that demonstrate ⓐ?<choices>① In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.② The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.③ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.④ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.⑤ The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1.",
     "statements": {
-      "statement_1": "(a) From the passage, \"Alice's fall from the 10th floor is the cause of her death\" follows.",
-      "statement_2": "(b) From (Definition 1) and ⓐ, \"No event causally depends on B\" follows.",
-      "statement_3": "(c) From (Definition 1), ⓑ, and \"If C is the cause of E, then E causally depends on C,\" ⓒ follows."
+      "statement_1": "① In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.",
+      "statement_2": "② The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.",
+      "statement_3": "③ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.",
+      "statement_4": "④ The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.",
+      "statement_5": "⑤ The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1."
     },
     "original_rationale": {
-      "preliminaries": "The sequence of events described in the passage is as follows: - There is a causal flow where C occurs → then D occurs → then E follows - There is a separate flow from A to B - That is, C → D → E, and A → B Among these two flows, the causal flow starting with C all actually occurred, but in the flow from A to B, only B did not actually occur. The sequence of causal dependence from C through D to E all actually happened (only B, shown in blue in the diagram, did not actually occur). And If C had not occurred, D would not have occurred. If D had not occurred, E would not have occurred. Both of these statements hold. However, as in ⓑ, \"If C had not occurred, E would not have occurred\" does not hold. Assume C did not occur, even though it actually did. In that case, Alice would have died from the poison. That is, the chain of causal dependence from A through B to E would have been realized. So, as in ⓒ, it seems that C is not the cause of E. However, ⓒ is not the claim of the passage. As described in the last four lines of the passage, it is not contradictory for the following two statements to be true at the same time: X - Y - Z (1) \"If X had not occurred, Z would not have occurred\" is false. (2) \"If X had not occurred, Y would not have occurred,\" and \"If Y had not occurred, Z would not have occurred\" are both true. Here, (1) corresponds to ⓑ, and (2) to the last sentence of the passage. Therefore, the claim of the passage is the last sentence, not ⓒ.",
-      "statement_1_rationale": "(a) According to the last sentence of the passage, the following holds: (1) If C had not occurred, D would not have occurred. (2) If D had not occurred, E would not have occurred. Applying (Definition 1) to (1), (2), and \"From C through D to E, all actually occurred\" from the passage, we get the following: (3) D causally depends on C. (4) E causally depends on D. Finally, applying (Definition 2) to (3) and (4), we get: (5) C is the cause of E. That is, Alice's fall from the 10th floor is the cause of her death. This is also the overall conclusion of the passage. Thus, (a) is a correct analysis.",
-      "statement_2_rationale": "(b) If we insert event B into (Definition 1), it reads as follows: Y causally depends on B if and only if (B occurred & Y occurred & if B had not occurred, Y would not have occurred). However, according to ⓐ, the underlined part is false, so the right side of the biconditional above is always false. Therefore, for any event Y, the left side of the biconditional above is always false. So, for any event Y, \"Y causally depends on B\" is false. That is, no event causally depends on B. (b) is a correct analysis.",
-      "statement_3_rationale": "(c) As in the explanation of (b), (Definition 1) is a biconditional. Inserting events C and E into (Definition 1), it reads: E causally depends on C if and only if (C occurred & E occurred & if C had not occurred, E would not have occurred). However, according to ⓑ, the underlined part is false, so the right side of the biconditional above is always false and, therefore, the left side is always false. That is, E does not causally depend on C. If we add \"If C is the cause of E, then E causally depends on C\" (which is logically equivalent to its contrapositive, \"If E does not causally depend on C, then C is not the cause of E\"), we can conclude \"C is not the cause of E,\" which corresponds to ⓒ. Therefore, ⓒ can be deduced. Thus, (c) is a correct analysis.",
-      "answer": "Since all of (a), (b), and (c) in <choices> are correct analyses, the answer is ⑤."
-    },
-    "model_rationale": "{\n  \"claims\": {},\n  \"attacks\": []\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:54:50.513043+00:00",
-    "response_id": "msg_011CepMHJHg9ErWtbsJsBBVZ",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 975,
-      "output_tokens": 18
-    },
-    "error": null
-  },
-  {
-    "id": "2021_36",
-    "year": "2021",
-    "problem_idx": "36",
-    "objective": "This question assesses the ability to understand two competing hypotheses regarding the origin of the tiger chameleon living in the Seychelles Islands and to find evidence that strengthens or weakens each hypothesis.",
-    "domain": null,
-    "category": "Argumentation and Rebuttal",
-    "answer": "2",
-    "original_question": "In the Seychelles of the Western Indian Ocean lives an endemic species known as the ‘tiger chameleon.’ However, the Seychelles is a remote location, approximately 1,100 km northeast of Madagascar—a large island off the southeastern coast of Africa—and about 2,800 km west of India. How did such a small animal, unable to fly nor particularly skilled at swimming, come to inhabit this place? Two explanations have been presented regarding this question. One is that ⓐ ‘the ancestors of the tiger chameleon originally lived in their current location, but became isolated on islands as the continents separated and drifted.’ The Seychelles was originally part of the supercontinent Gondwana together with Africa, India, and Madagascar; as India-Madagascar and Africa separated, followed by the split between India and Madagascar, and finally the split between India and the Seychelles, the islands reached their current position. According to this explanation, the ancestor of the tiger chameleon evolved independently after the Seychelles separated from other regions. The other explanation, ⓑ, is that ‘the ancestor of the tiger chameleon reached the Seychelles by rafting on floating branches or similar debris from rivers or coasts on Madagascar or Africa.’ According to this, the ancestor originally lived in Africa or Madagascar, and after events such as flooding near its habitat washed it out to sea, it migrated to the Seychelles on floating debris, and then evolved independently. <question> Which of the following <statements> correctly assess ⓐ and ⓑ? <statements> (a) The fact that there are chameleon species that inhabit only the Comoros—a remote island formed by undersea volcanic activity and never connected to a continent—supports ⓐ.(b) If there is research showing that since the Seychelles split from India, the ocean currents in the Western Indian Ocean have flowed from west to east, this would weaken ⓑ.(c) If there is research showing that the most recent common ancestor of East African chameleons and tiger chameleons appeared later than the most recent common ancestor of Madagascan chameleons and tiger chameleons, this would weaken ⓐ but not weaken ⓑ. <choices>① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) The fact that there are chameleon species that inhabit only the Comoros—a remote island formed by undersea volcanic activity and never connected to a continent—supports ⓐ.",
-      "statement_2": "(b) If there is research showing that since the Seychelles split from India, the ocean currents in the Western Indian Ocean have flowed from west to east, this would weaken ⓑ.",
-      "statement_3": "(c) If there is research showing that the most recent common ancestor of East African chameleons and tiger chameleons appeared later than the most recent common ancestor of Madagascan chameleons and tiger chameleons, this would weaken ⓐ but not weaken ⓑ."
-    },
-    "original_rationale": {
-      "preliminaries": "According to ⓐ, the separation of continents influenced the evolution of the tiger chameleon. The order in which the continents separated from the Seychelles was ‘Africa → Madagascar → India’, so the order of divergence of chameleons living in these regions and the tiger chameleon should be the same. However, according to ⓑ, the tiger chameleon came to inhabit the Seychelles independently of continental drift, so the divergence order need not match that of ⓐ. In addition, ⓑ includes the claim that even animals not adept at swimming can occasionally colonize remote islands by chance.",
-      "statement_1_rationale": "(a) If there are chameleon species inhabiting only a remote island, such as the Comoros, which was formed by undersea volcanic eruptions and was never connected to a continent, those species must have migrated there from elsewhere. This strongly suggests that long-distance dispersal of chameleons is possible. Therefore, (a) actually strengthens ⓑ—the claim that the Seychelles tiger chameleon arrived from outside—but does not strengthen ⓐ. Thus, (a) is not a proper assessment.",
-      "statement_2_rationale": "(b) According to ⓑ, the ancestors of the tiger chameleon living in Africa or Madagascar would have to move eastward to the Seychelles on floating debris. Thus, if the ocean currents flowed from west to east, it would make such a journey easier (see the figure above). Therefore, such research would not weaken ⓑ but rather strengthen it. Thus, (b) is also not a proper assessment.",
-      "statement_3_rationale": "(c) According to ⓐ, since Africa separated from the Seychelles before Madagascar did, chameleons in East Africa would have diverged earlier and evolved independently. Therefore, the most recent common ancestor of the Seychelles tiger chameleon and Madagascar chameleons should have emerged later than that of the tiger chameleon and East African chameleons. Thus, if research showed the reverse, ⓐ would be weakened. In ⓑ, the claim is that the ancestor immigrated after the Seychelles had settled as an island, regardless of the order of continental separation. Thus, if East African chameleons migrated to the Seychelles by rafting, the most recent common ancestor of the tiger chameleon and East African chameleons would have appeared after that of the tiger chameleon and Madagascar chameleons. Such results actually strengthen ⓑ but, at the very least, do not weaken it. Thus, (c) is a proper assessment.",
-      "answer": "Of the <choices>, only (c) is a proper assessment, so the correct answer is ②."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"ⓐ\": \"The ancestors of the tiger chameleon originally lived in their current location and became isolated on islands as the continents separated and drifted apart from Gondwana.\",\n    \"ⓑ\": \"The ancestors of the tiger chameleon reached the Seychelles by rafting on floating debris from Madagascar or Africa, then evolved independently.\"\n  },\n  \"attacks\": [\n    [\"ⓐ\", \"ⓑ\"],\n    [\"ⓑ\", \"ⓐ\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:54:52.048112+00:00",
-    "response_id": "msg_011CepMHQvX5ETcZn5vGnghV",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1036,
-      "output_tokens": 140
-    },
-    "error": null
-  },
-  {
-    "id": "2022_30",
-    "year": "2022",
-    "problem_idx": "30",
-    "objective": "This question assesses the ability to understand arguments for and against the basic income system and to determine whether given economic data strengthens or weakens each of those arguments.",
-    "domain": "Society",
-    "category": "Argument Evaluation & Problem Solving",
-    "answer": "2",
-    "original_question": "A: Due to future technological changes such as digital transformation, opportunities to earn income through jobs may decrease. In order to prepare for this, it is necessary to introduce a basic income system which pays the same amount unconditionally to every citizen without any individual conditions. Even if welfare benefits are concentrated on those who are selected as being in social risk, there may still be blind spots, and there is also considerable friction caused by the selection process. Universal provision can alleviate these problems and provide practical help to everyone without any blind spots.B: Although basic income appears to solve poverty by providing a certain amount to everyone, if the basic income is paid only within the limits permitted by the government’s fiscal situation, the benefit level will be too low to effectively address the blind spots.C: If existing welfare systems are reorganized and the public sector is reformed, it would be possible to secure the financial resources for basic income. If everyone receives a certain benefit, polarization will be alleviated. Accordingly, tax resistance will decrease, public support for redistributive policies will increase, and a virtuous cycle is expected in which overall welfare funding will also expand.D: Strengthening the existing social safety net, such as the Basic Livelihood Security System for supporting the living expenses of the poor or employment insurance to compensate for income loss from unemployment, is a more effective alternative for addressing polarization than basic income. <question> Which of the following evaluations regarding the above debate is correct? Choose as it is from the <statements>.<statements> (a) Research findings that more jobs will disappear than be newly created due to the spread of AI with the development of the Fourth Industrial Revolution weaken Alice’s argument.(b) If there is a survey result that emergency disaster relief funds temporarily provided to all citizens to support those suffering from national disasters did not affect the business closure rate among self-employed people, then Bob’s argument is weakened.(c) If, when basic income is provided with funds obtained by integrating existing welfare systems, the income share of the highest income decile significantly decreases compared to the lowest income decile, then Charlie's argument is strengthened and Dave’s is weakened. <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) Research findings that more jobs will disappear than be newly created due to the spread of AI with the development of the Fourth Industrial Revolution weaken Alice’s argument.",
-      "statement_2": "(b) If there is a survey result that emergency disaster relief funds temporarily provided to all citizens to support those suffering from national disasters did not affect the business closure rate among self-employed people, then Bob’s argument is weakened.",
-      "statement_3": "(c) If, when basic income is provided with funds obtained by integrating existing welfare systems, the income share of the highest income decile significantly decreases compared to the lowest income decile, then Charlie's argument is strengthened and Dave’s is weakened."
-    },
-    "original_rationale": {
-      "preliminaries": "Alice and Charlie support the basic income system. Alice argues that because technological changes reduce jobs and prevent people from earning a livelihood, basic income is needed, and that selective welfare benefits fail to help those in the blind spots. Charlie argues that basic income helps alleviate polarization and thus brings about a virtuous cycle in the welfare sector. On the other hand, Bob and Dave oppose basic income. Bob argues that, due to fiscal constraints, the size of basic income is small and thus ineffective in addressing blind spots. Dave argues that targeted welfare systems are more effective at alleviating polarization than basic income.",
-      "statement_1_rationale": "(a) Research that finds more jobs disappear than are newly created means that jobs overall will decrease; such results actually strengthen, not weaken, Alice’s argument. So (a) is not a correct evaluation.",
-      "statement_2_rationale": "(b) Temporary national disaster relief payments are not a basic income due to their lack of permanence. Even if such funds share some functions of basic income, the fact that the emergency funds did not affect the business closure rate among self-employed people means they did not have a practical effect on those facing closure. Therefore, such findings do not weaken Bob’s argument that basic income is ineffective at addressing blind spots. (b) is not a correct evaluation.",
-      "statement_3_rationale": "(c) If consolidating existing welfare programs into a basic income reduces the income share gap between the highest and lowest income deciles, this means polarization is being alleviated. Thus, Charlie’s claim (that basic income helps reduce polarization) is strengthened, and Dave’s claim (that basic income is less effective than existing welfare at reducing polarization) is weakened. (c) is a correct evaluation.",
-      "answer": "As only (c) in <choices> is a correct evaluation, the answer is ②."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Basic income should be introduced to prepare for job losses from digital transformation and to eliminate welfare blind spots through universal provision.\",\n    \"B\": \"Basic income paid within fiscal limits will have benefit levels too low to effectively address welfare blind spots.\",\n    \"C\": \"Reorganizing existing welfare systems can fund basic income, and universal benefits will reduce polarization and create a virtuous cycle of expanding welfare funding.\",\n    \"D\": \"Strengthening existing social safety nets like Basic Livelihood Security and employment insurance is more effective than basic income for addressing polarization.\"\n  },\n  \"attacks\": [\n    [\"B\", \"A\"],\n    [\"C\", \"B\"],\n    [\"D\", \"A\"],\n    [\"D\", \"C\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:54:55.570625+00:00",
-    "response_id": "msg_011CepMHg6qJg3WFs3g2hf5k",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 979,
-      "output_tokens": 178
-    },
-    "error": null
-  },
-  {
-    "id": "2022_38",
-    "year": "2022",
-    "problem_idx": "38",
-    "objective": "This question assesses the ability to understand the mechanism of immune activation and to determine whether hypotheses about the influence of gut bacteria on immune activation are strengthened or weakened by individual experimental results.",
-    "domain": null,
-    "category": "Argument Evaluation & Problem Solving",
-    "answer": "3",
-    "original_question": "One of the main causes of autism in children is thought to be abnormal immune activation in the mother during pregnancy. Dendritic cells (DCs) present in the mother's gut become activated when a virus infects the body. These DCs activate T H 17 immune cells located in the gut, and the IL-17 protein secreted by these T H 17 cells is transmitted to the fetus, thereby interfering with brain development. Recently, the hypothesis ⓐ has been proposed, suggesting that the presence or absence of certain commensal gut bacteria in the mother's gut is important for such abnormal immune activation. Although the specific role of the gut bacteria is not clearly understood, it is said that this immune activation does not occur when the mother lacks these particular gut bacteria. The following experiment was planned to verify this. <Experiment>• Four groups of pregnant mice (X1, X2, Y1, Y2) were prepared as follows:- Mouse group X1 has specific commensal bacteria in the gut and is infected with a virus.- Mouse group X2 has specific commensal bacteria in the gut and is not infected with a virus.- Mouse group Y1 lacks specific commensal bacteria in the gut and is infected with a virus.- Mouse group Y2 lacks specific commensal bacteria in the gut and is not infected with a virus.• After a certain period, DCs and T H 17 cells were isolated from each mouse's gut. Care was taken to prevent any contamination of the isolated cells with viruses or bacteria. The isolated DCs and T H 17 cells were mixed and cultured, and the amount of IL-17 secreted was measured.• The offspring born from each mouse were analyzed for autistic traits. <question>Of the following, which are appropriate evaluations of the above passage? Choose from the <statements> as they are.<statements>(a) If IL-17 is produced when X1's DC is cultured with X2's T H 17, but not when X1's DC is cultured with Y2's T H 17, then ⓐ is reinforced.(b) If IL-17 is produced when X1's DC is cultured with Y2's T H 17, but not when Y1's DC is cultured with Y2's T H 17, then ⓐ is reinforced.(c) If the offspring born from X1 show autistic tendencies and the offspring born from Y2 do not, then ⓐ is reinforced. <choices>① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) If IL-17 is produced when X1's DC is cultured with X2's T H 17, but not when X1's DC is cultured with Y2's T H 17, then ⓐ is reinforced.",
-      "statement_2": "(b) If IL-17 is produced when X1's DC is cultured with Y2's T H 17, but not when Y1's DC is cultured with Y2's T H 17, then ⓐ is reinforced.",
-      "statement_3": "(c) If the offspring born from X1 show autistic tendencies and the offspring born from Y2 do not, then ⓐ is reinforced."
-    },
-    "original_rationale": {
-      "preliminaries": "Abnormal maternal immune activation consists of three steps. Step 1 is the process where DCs in the gut are activated by a certain viral infection. Step 2 is the process where the activated DC activates the T H 17 immune cells in the gut. Step 3 is the process where these T H 17 cells secrete the IL-17 protein, which ultimately interferes with fetal brain development. Therefore, experimental results showing the production of IL-17 or the phenomenon of offspring mice displaying autistic traits both indicate that both DCs and T H 17 immune cells have been activated, while the opposite results indicate that either the DC or T H 17 immune cells were not activated.The passage presents the hypothesis that gut bacteria are involved in this abnormal immune activation. That is, when the mother harbors certain specific gut bacteria, this process occurs, but when these specific gut bacteria are absent, immune activation does not occur even if infection is present.",
-      "statement_1_rationale": "(a) Here, the DC from X1 is the same, but only the T H 17 cells differ. X1 mice were infected with a virus, so their DCs would be activated. If the activated DC activates X2's T H 17 but not Y2's T H 17, it means that X2's and Y2's T H 17 cells differ in their state. The only difference between X2 and Y2 is the presence of specific gut bacteria, so we can infer that X2's T H 17 cells were influenced by the specific gut bacteria prior to isolation. Thus, this result strengthens ⓐ. Therefore, (a) is an appropriate evaluation.",
-      "statement_2_rationale": "(b) Here, the T H 17 from Y2 is the same, but the DCs differ. Both X1 and Y1 were infected with the virus, so their DCs would be activated. In this case, the DCs from these mice should be able to activate Y2's T H 17. If only X1's DC can activate Y2's T H 17 but Y1's DC cannot, it means that X1's and Y1's DCs are somehow different. The only difference is the presence of specific gut bacteria, so we can infer that X1's DCs were influenced by the specific gut bacteria prior to isolation. Thus, this result supports ⓐ. Therefore, (b) is an appropriate evaluation.",
-      "statement_3_rationale": "(c) X1 mice have specific commensal bacteria and are infected with a virus, while Y2 mice lack specific commensal bacteria and are not infected with a virus. If immune activation occurs in X1 mice but not in Y2, it is uncertain whether X1's immune activation is due to the existence of specific gut bacteria or some other factor. This is because X1 and Y2 differ both in terms of the presence of specific gut bacteria and viral infection. Therefore, this phenomenon does not strengthen ⓐ. (c) is not an appropriate evaluation.",
-      "answer": "In (a), it can be inferred that specific gut bacteria affect T H 17, while in (b), specific gut bacteria affect DCs. The experimental results in (a) and (b) are incompatible, but note that either result still strengthens ⓐ. Only (a) and (b) are appropriate evaluations, so the answer is ③."
-    },
-    "model_rationale": "{\n  \"claims\": {},\n  \"attacks\": []\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:54:59.934680+00:00",
-    "response_id": "msg_011CepMHzdJumBjvdFRFERkh",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1080,
-      "output_tokens": 18
-    },
-    "error": null
-  },
-  {
-    "id": "2023_08",
-    "year": "2023",
-    "problem_idx": "8",
-    "objective": "This question assesses the ability to find a rule that satisfies all the candies mentioned by Gap, Eul, and Byung.",
-    "domain": "Norms",
-    "category": "Argument Analysis",
-    "answer": "4",
-    "original_question": "\"Mediation\" refers to facilitating convenience between a person and their counterpart by brokering certain matters. Article A of Country X’s \"Criminal Law\" punishes specific acts of mediation.Alice: Even people without the status of public officials can use personal influence such as alumni or regional ties to affect the duties of public officials, so Article A punishes mediation by such people as well.Bob: Because protecting public trust in the execution of public officials' duties is important, Article A punishes those who pursue their own interests under the guise of mediation concerning a public official’s duty, regardless of whether they actually performed mediation.Charlie: There is no need to prohibit bona fide mediation acts, so Article A prohibits mediation concerning a public official’s duty undertaken for one’s own interests. In this case, for preventive effect, Article A also compels those involved in mediation not to retain any property acquired in connection with the mediation. <question> Which of the following most appropriately describes the content of Article A, satisfying all the matters mentioned by Alice, Bob, and Charlie? <statements>(1) Anyone who receives or promises to receive money or benefits in connection with mediation regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years or a fine not exceeding 10 million won.(2) Anyone who receives or promises to receive money or benefits and mediates regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years, and any property acquired thereby shall be confiscated.(3) Any public official who, by using their position, receives or promises to receive money or benefits in connection with mediation regarding matters pertaining to another public official’s duties shall be punished by imprisonment for not more than five years or a fine not exceeding 10 million won.(4) Anyone who receives or promises to receive money or benefits in connection with mediation regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years or a fine not exceeding 10 million won, and any property acquired thereby shall be confiscated.(5) Anyone who provides or expresses the intention to provide money or benefits in connection with mediation regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years or disqualification for not more than seven years, and any property acquired thereby shall be confiscated. <choices> ①(1) ②(2) ③(3) ④(4) ⑤(5)",
-    "statements": {
-      "statement_1": "(1) Anyone who receives or promises to receive money or benefits in connection with mediation regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years or a fine not exceeding 10 million won.",
-      "statement_2": "(2) Anyone who receives or promises to receive money or benefits and mediates regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years, and any property acquired thereby shall be confiscated.",
-      "statement_3": "(3) Any public official who, by using their position, receives or promises to receive money or benefits in connection with mediation regarding matters pertaining to another public official’s duties shall be punished by imprisonment for not more than five years or a fine not exceeding 10 million won.",
-      "statement_4": "(4) Anyone who receives or promises to receive money or benefits in connection with mediation regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years or a fine not exceeding 10 million won, and any property acquired thereby shall be confiscated.",
-      "statement_5": "(5) Anyone who provides or expresses the intention to provide money or benefits in connection with mediation regarding matters pertaining to a public official’s duties shall be punished by imprisonment for not more than five years or disqualification for not more than seven years, and any property acquired thereby shall be confiscated."
-    },
-    "original_rationale": {
-      "preliminaries": "According to Alice, Article A punishes not only the mediation acts of public officials but also those by people who are not public officials.According to Bob, Article A punishes not only actual mediation but also acts where one pursues their own interests under the guise of mediation with respect to a public official’s duty.According to Charlie, Article A prohibits mediation acts undertaken to obtain personal gain and does not allow retention of any property acquired in connection with mediation.",
-      "statement_1_rationale": "① Only imprisonment or fines are possible, and there is no provision for confiscation of property, so it does not meet Charlie’s requirement. Although, in practice, a fine may function as a de facto confiscation, since the upper limit is set at 10 million won, it may not recover all property acquired through mediation, and if one is sentenced only to imprisonment, they may retain the property acquired through mediation. Thus, ① is not appropriate.",
-      "statement_2_rationale": "② Only punishes actual acts of mediation, so it does not satisfy Bob’s point, and thus is not appropriate.",
-      "statement_3_rationale": "③ Only applies to public officials, so it does not meet Alice’s requirement, and as there is no provision for confiscation of property, it does not meet Charlie’s point. Although, in practice, a fine may serve as a de facto confiscation, since the upper limit is set at 10 million won, it may not recover all property, and property may be retained if sentenced to imprisonment. Thus, ③ is also inappropriate.",
-      "statement_4_rationale": "④ Since it does not require public official status, it satisfies Alice’s point; it punishes anyone who pursues personal gain by receiving or promising to receive money or benefits without requiring actual mediation, matching Bob’s point; and, since it punishes those who pursue personal gain through mediation and confiscates acquired property, it fulfills Charlie’s point. Thus, ④ most appropriately describes Article A, satisfying all matters mentioned by Alice, Bob, and Charlie.",
-      "statement_5_rationale": "⑤ This punishes persons who provide or express the intent to provide benefits to those who are asked to mediate, rather than punishing those who act under the pretense of mediation to pursue personal gain, and so it does not meet Bob or Charlie’s criteria. ⑤ is not appropriate as the content of Article A.",
-      "answer": "Only (4) is the correct analysis among the <choices>, so the answer is ④."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Article A should punish mediation by anyone, including non-public officials who use personal influence such as alumni or regional ties to affect public officials' duties.\",\n    \"Bob\": \"Article A should punish those who pursue their own interests under the guise of mediation regarding a public official's duty, regardless of whether actual mediation was performed.\",\n    \"Charlie\": \"Article A should prohibit only mediation undertaken for one's own interests and should mandate confiscation of any property acquired in connection with such mediation.\"\n  },\n  \"attacks\": []\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:01.471934+00:00",
-    "response_id": "msg_011CepMJ7DSAHzfT8gak8MNX",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1036,
-      "output_tokens": 136
-    },
-    "error": null
-  },
-  {
-    "id": "2023_15",
-    "year": "2023",
-    "problem_idx": "15",
-    "objective": "This question assesses the ability to understand and analyze different viewpoints on what approaches should be taken to increase the prediction success rate when designing an AI robot that predicts human behavior.",
-    "domain": "Humanities",
-    "category": "Argumentation and Rebuttal",
-    "answer": "4",
-    "original_question": "There is a debate about which method should be chosen to design an artificial intelligence robot that predicts human behavior. Alice: People believe that human behavior can be successfully predicted through an understanding of humans’ internal states. However, we do not know exactly what method is needed to understand internal states that cannot be directly observed. Therefore, a way to predict human behavior without understanding internal states is needed. The method we can take in this case is to design the AI robot so that it can discover sophisticated patterns on its own, using big data, regarding which actions humans take in given situations. Bob: Alice’s method cannot be seen as one that can successfully predict human behavior. Human behavior, which is based on countless 'what if...' assumptions, requires a different approach in order to be predicted accurately. To improve the chances of successful prediction, it is necessary to pre-input the possible behaviors in given situations. All humans have a tendency to act according to social norms to avoid disadvantages. Therefore, if information about norms restricting human actions is entered when designing the AI robot, it will increase the success rate of predicting human behavior. Charlie: Even if we follow the methods proposed by Alice and Bob, it is difficult to predict human behavior successfully. Human actions are caused by various internal states. Thus, even if we apply both Alice's and Bob’s methods, predictions can still be wrong. Sometimes humans, even when aware of which actions are disadvantageous to themselves, do not follow norms due to stronger internal desires. Therefore, even if the design process becomes complex and inefficient, it should be designed to predict human behavior by considering not only normative information but also internal states such as intentions and desires. <question> Which of the following analyses about the debate is/are correct? Choose all that apply from <statements>. <statements> (a) Alice agrees, but Charlie does not, that if the AI robot cannot understand the internal states of humans, then it is impossible to predict human behavior. (b) Alice and Bob agree that there are patterns in human behavior in specific situations. (c) Bob and Charlie agree that it is necessary to consider normative information in order to predict human behavior. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) Alice agrees, but Charlie does not, that if the AI robot cannot understand the internal states of humans, then it is impossible to predict human behavior.",
-      "statement_2": "(b) Alice and Bob agree that there are patterns in human behavior in specific situations.",
-      "statement_3": "(c) Bob and Charlie agree that it is necessary to consider normative information in order to predict human behavior."
-    },
-    "original_rationale": {
-      "preliminaries": "The given passage presents a debate among three people, Alice, Bob, and Charlie, regarding which method should be taken in designing an AI robot that predicts human behavior in order to maximize the prediction success rate. Alice proposes that, since in practice it is difficult for an AI robot to be designed to understand humans’ internal states, the information about internal states should be excluded, and the AI should be designed to autonomously find patterns in human behavior in given situations using big data. According to Bob, Alice’s method cannot be seen as one capable of successfully predicting human behavior. Bob asserts that the success rate of predictions can be improved by providing information about the norms which restrict possible human actions. Charlie argues that an AI robot must be designed to understand humans’ internal states. Since human behavior is caused by internal states, and sometimes people do not act according to social norms due to stronger desires, it is necessary to design the AI to predict behavior by considering not only information about norms, but also internal states such as intentions and desires.",
-      "statement_1_rationale": "(a) Alice argues for designing an AI robot that excludes understanding of internal states and instead finds behavioral patterns through big data. Therefore, Alice does not agree that if the AI cannot understand internal states, it cannot predict human behavior. Charlie, on the other hand, claims that, even if both Alice's and Bob’s methods are applied, predictions may fail since behaviors result from various internal states; thus, he asserts that it is necessary to design AI to consider internal states such as intentions and desires. Therefore, Charlie does agree that, if the robot cannot understand internal states, it cannot predict human behavior. Thus, (a) is not a correct analysis.",
-      "statement_2_rationale": "(b) Alice, from the statement “The method we can take in this case is to design the AI robot so that it can discover sophisticated patterns on its own... regarding which actions humans take in given situations,” clearly agrees that there are patterns in human behavior in specific situations. Bob states, “All humans have a tendency to act in accordance with social norms to avoid disadvantages,” which also indicates that he agrees patterns exist in specific situations. Thus, (b) is a correct analysis.",
-      "statement_3_rationale": "(c) Bob says that entering information about norms will increase the success rate of predicting human behavior and thus agrees that considering normative information is necessary. Charlie says, “Therefore… it is necessary to design the prediction to consider not only information about norms but also internal states such as intentions and desires,” which also means he agrees norm information should be considered. (c) is, therefore, a correct analysis.",
-      "answer": "Only (b) and (c) are correct, so the answer is ④."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"AI robots should predict human behavior by discovering patterns in big data without needing to understand internal states.\",\n    \"Bob\": \"AI robots should predict human behavior by pre-inputting possible behaviors and normative information about social norms.\",\n    \"Charlie\": \"AI robots should predict human behavior by considering both normative information and internal states such as intentions and desires.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Alice\"],\n    [\"Charlie\", \"Bob\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:04.554937+00:00",
-    "response_id": "msg_011CepMJM4syWvPktGpfnCj2",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 979,
-      "output_tokens": 129
-    },
-    "error": null
-  },
-  {
-    "id": "2024_01",
-    "year": "2024",
-    "problem_idx": "1",
-    "objective": "This question assesses the ability to understand two perspectives on the nature of torts and the objectives of tort law, among other things, and to determine whether court judgments strengthen or weaken these perspectives.",
-    "domain": "Norms",
-    "category": "Argument Evaluation & Analysis",
-    "answer": "4",
-    "original_question": "<Opinion> A: A tort is an act that destroys the originally just or equitable state of affairs. Therefore, the law of torts is a system designed to restore the original state that was destroyed by a tort and to remedy the victim. The aim of restoration in tort law is a demand based on justice or ethics, not because it contributes to the promotion of social utility or is functionally useful. Furthermore, unless the victim is completely restored to the state prior to the tort from the victim's perspective, rather than from the viewpoint of the perpetrator or a third party (including the social community), true remedy for the victim has failed. B: The essence of a tort lies in the fact that it is an unlawful act committed intentionally or negligently by a person. Therefore, the law of torts should aim not only at restoring the loss caused by a tort but also at preventing tortious conduct. Tort law should provide behavioral guidelines for members of society and give incentives to promote desirable behavior. Preventive messages should be addressed not only to the perpetrator, but to all members of the community, including the perpetrator. When deciding what kind of message to deliver, it is necessary to seriously consider what constitutes the greatest good for the community. <question> Which of the following in <statements> is correct as an assessment of the <Opinion>? <statements> (a) In a case where damages involved the destruction of property and the cost of repair exceeded the replacement value of the item, if a court in country X ruled that the perpetrator must compensate the victim for the full repair cost, this would weaken A. (b) In a case where an employee transferred company C’s trade secrets to a competitor for profit, but the company suffered no actual damage, if a court in country X ruled that the illicit gains should nonetheless be compensated to the company as damages, this would strengthen B. (c) In a case where someone repeatedly used demeaning expressions to defame another, but the victim forgave the offender, if a court in country X ruled compensation should be paid not to the victim but to a third party on the grounds that tolerating such demeaning expressions would undermine free debate in society, this would weaken A and strengthen B. <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) In a case where damages involved the destruction of property and the cost of repair exceeded the replacement value of the item, if a court in country X ruled that the perpetrator must compensate the victim for the full repair cost, this would weaken A.",
-      "statement_2": "(b) In a case where an employee transferred company C’s trade secrets to a competitor for profit, but the company suffered no actual damage, if a court in country X ruled that the illicit gains should nonetheless be compensated to the company as damages, this would strengthen B.",
-      "statement_3": "(c) In a case where someone repeatedly used demeaning expressions to defame another, but the victim forgave the offender, if a court in country X ruled compensation should be paid not to the victim but to a third party on the grounds that tolerating such demeaning expressions would undermine free debate in society, this would weaken A and strengthen B."
-    },
-    "original_rationale": {
-      "preliminaries": "There is a conflict between two opinions regarding whether a judge in a tort case should focus solely on adjusting the interests of the parties, or resolve what appears to be a private dispute in a way that is best for the interests of the community as a whole. Opinion A emphasizes restoration of loss, while Opinion B focuses on prevention of tortious acts. The key points of A and B are as follows:A: Tort law should prioritize restoring the interests harmed by the tort to their original state, without considering any further social utility or usefulness. Compensation should be such that, from the perspective of the victim, a complete restoration to the pre-tort condition is possible.B: Tort law should provide behavioral guidelines to members of society so that torts can be prevented. In this context, the preventive message should be sent not only to the perpetrator but to all members of the community as pertaining to the greatest good.",
-      "statement_1_rationale": "(a) In cases where property is damaged by a tort, there can be situations in which the repair cost for the damaged part exceeds the replacement value of the object. In such cases, the only way to truly restore the item to its original state is through repair. Therefore, if a ruling requires the perpetrator to pay for the repair rather than just the replacement value, this strengthens A, which emphasizes restoration from the victim’s perspective. Thus, (a) is not a correct assessment.",
-      "statement_2_rationale": "(b) In cases where an employee transfers company trade secrets to a competitor and gains benefit, but the company's loss is negligible or virtually nonexistent, a ruling that the perpetrator must pay over all illicit profits to the company as damages reflects a preventive, rather than restorative, approach. Such a decision signals to potential wrongdoers and the community that such conduct is wrong and is intended to prevent similar actions. Thus, this strengthens B, making (b) a correct assessment.",
-      "statement_3_rationale": "(c) If there is a ruling that compensation should be paid not to the victim but to a third party, with the reason being that tolerating repeated demeaning expressions undermines free debate in society, this weakens A, which emphasizes the importance of restoration to the victim, ignoring social utility or functionality. On the other hand, it strengthens B, as the court is sending a message about the greater good and regulating harmful conduct in society. Thus, (c) is a correct assessment.",
-      "answer": "Of the above, only (b) and (c) are correct, so the answer is ④."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Tort law should focus on fully restoring the victim to their prior state as a matter of justice, not social utility.\",\n    \"B\": \"Tort law should aim at both restoring losses and preventing tortious conduct by providing behavioral guidelines for the greatest good of the community.\"\n  },\n  \"attacks\": [\n    [\"A\", \"B\"],\n    [\"B\", \"A\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:07.719196+00:00",
-    "response_id": "msg_011CepMJZv3DMBMUtXYigW7q",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1005,
-      "output_tokens": 104
-    },
-    "error": null
-  },
-  {
-    "id": "2024_06",
-    "year": "2024",
-    "problem_idx": "6",
-    "objective": "This question assesses the ability to comprehend the reasoning behind viewpoints and to judge whether new information reinforces or undermines them.",
-    "domain": "Norms",
-    "category": "Argument Evaluation & Analysis",
-    "answer": "3",
-    "original_question": "An incident occurred in Country X where a drone was used to film the interior of a high-rise apartment living room without permission, raising the issue of whether \"ⓐ the act of photographing the interior of another person's residence from outside without authorization\" can be punished under [the Regulation]. [Regulation] Article 1 (Crime of Secret Surveillance): Anyone who records or listens to others’ undisclosed residence or building interiors by means such as recording or listening shall be punished by imprisonment for not more than five years. Article 2 (Crime of Illegal Search): Anyone who searches another person’s residence or building without authority shall be punished by imprisonment for not more than three years. <Opinions> A: ⓐ falls under the crime of secret surveillance. 'Surveillance' means ascertaining information about the interior of a residence, thereby infringing on the sense of security regarding privacy enjoyed by the resident; and 'by means such as recording or listening' should not necessarily be restricted to only auditory or acoustic methods but can include visual methods such as video recording or viewing. B: ⓐ falls under the crime of illegal search. 'Search' refers to examining a certain place in order to discover a person or object. Although the existing interpretation of illegal search crimes punished those who, having lawfully entered a residence or building, conducted a search without authority, the text of the illegal search crime itself is not limited only to when someone has entered the residence or building. Therefore, illegal search crimes should also cover cases where a person unlawfully enters or, even from outside, searches the interior without authority; thus, a person who conducts such a search from outside the residence or building can also be punished. <question> Considering the above <Opinions>, which of the following from <statements> are correct? <statements> (a). If the Country X court has ruled that merely peeking into another’s residence through the window from the outside with the naked eye does not constitute 'surveillance' under the crime of secret surveillance, then A is weakened. (b). If the legislative intent behind prescribing different penalties in Article 1 and Article 2 is that unlawfully entering another’s residence to obtain information is more wrongful than obtaining information by lawful entry, then B is strengthened. (c). If the Country X court has ruled that an act where the police, to find the wanted person, film Bob’s residence from outside using a drone without a warrant does not infringe on the sense of privacy but does constitute an unlawful “search,” then A is weakened and B is strengthened. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a). If the Country X court has ruled that merely peeking into another’s residence through the window from the outside with the naked eye does not constitute 'surveillance' under the crime of secret surveillance, then A is weakened.",
-      "statement_2": "(b). If the legislative intent behind prescribing different penalties in Article 1 and Article 2 is that unlawfully entering another’s residence to obtain information is more wrongful than obtaining information by lawful entry, then B is strengthened.",
-      "statement_3": "(c). If the Country X court has ruled that an act where the police, to find the wanted person, film Bob’s residence from outside using a drone without a warrant does not infringe on the sense of privacy but does constitute an unlawful “search,” then A is weakened and B is strengthened."
-    },
-    "original_rationale": {
-      "preliminaries": "Regarding whether it is possible to punish the act of filming the interior of a high-rise apartment from outside using a drone without authorization, Opinion A applies Article 1 to argue that one can be punished for the crime of secret surveillance, while Opinion B applies Article 2 to argue that one can be punished for the crime of illegal search. The reasoning of A and B is as follows. A: First, A relies on the definition of 'surveillance' as ‘ascertaining information about the interior of a residence, thereby infringing on the sense of security regarding privacy enjoyed by the resident.’ A regards the act of filming the interior of a residence using a drone as infringing on a resident’s sense of security. Second, A is based on the fact that Article 1 punishes the act of ascertaining information about the interior of a residence \"by means such as recording or listening.\" The term \"such as\" allows for expansive interpretation, thereby including visual methods like video recording or viewing. In other words, A claims that visual methods, such as filming by drone, can also fall under \"means such as recording or listening.\"B: According to the conventional interpretation in Country X, the crime of illegal search was limited to cases where a person who had lawfully entered a residence or building conducted a search without authority. However, Article 2 does not specifically state that the crime is limited to cases where someone has entered the residence or building. Based on this, B argues that those who unlawfully enter a residence or building and conduct an unauthorized search, as well as those who search the interior without entering, can be punished for illegal search. Therefore, filming with a drone constitutes an unauthorized search of the interior from outside the residence or building, and can be punished accordingly.",
-      "statement_1_rationale": "(a) Looking into a residence through a window from outside with the naked eye is considered \"viewing,\" which is a visual method that A claims is included within the meaning of \"surveillance.\" However, if the Country X court rules that viewing does not constitute \"surveillance\" under the crime of secret surveillance, there is a high likelihood that recording, like viewing, does not constitute \"surveillance\" either, as both are visual methods. This decision thus weakens A's argument that \"surveillance\" includes visual as well as auditory methods. Therefore, (a) is a correct evaluation.",
-      "statement_2_rationale": "(b) Article 1 (Crime of Secret Surveillance) and Article 2 (Crime of Illegal Search) have penalties of not more than five years and not more than three years, respectively. If the legislative intent of prescribing different penalties is that unlawfully entering another’s residence to obtain information is more wrongful than lawfully obtaining information by entry, this supposes that secret surveillance means unlawfully entering to obtain information, while illegal search refers to obtaining information after lawful entry. That is, both articles presuppose \"entering the residence,\" differing only on the legality of entry. Therefore, based on legislative intent about sentencing, the traditional interpretation that illegal search is limited to cases of lawful entry is strengthened. However, B argues against this conventional interpretation, insisting that the crime of illegal search can be applied even to those who search from outside. Thus, B’s argument is not strengthened. (b) is therefore an incorrect evaluation.",
-      "statement_3_rationale": "(c) If the Country X court found that the police’s filming from outside by drone without a warrant did not infringe on the sense of privacy but nonetheless constituted an unlawful “search,” then, since the act does not infringe on the sense of privacy, A (who defines “surveillance” as infringing the sense of privacy) is weakened. On the other hand, the finding that this action constitutes an unlawful \"search\" strengthens B's argument that such conduct falls under the crime of illegal search. Therefore, (c) is a correct evaluation.",
-      "answer": "Since only (a) and (c) are correct evaluations, the answer is ③."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"The act of photographing the interior of another person's residence from outside without authorization constitutes the crime of secret surveillance under Article 1.\",\n    \"B\": \"The act of photographing the interior of another person's residence from outside without authorization constitutes the crime of illegal search under Article 2.\"\n  },\n  \"attacks\": [\n    [\"A\", \"B\"],\n    [\"B\", \"A\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:11.096014+00:00",
-    "response_id": "msg_011CepMJpMCny3iqHX3fx1Wd",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1095,
-      "output_tokens": 108
-    },
-    "error": null
-  },
-  {
-    "id": "2024_21",
-    "year": "2024",
-    "problem_idx": "21",
-    "objective": "This question assesses the ability to read opinions on whether there are generalized criteria applicable to art criticism, if so, to what extent generalization is possible, and how these critical standards can be applied to specific works, and to analyze their implications.",
-    "domain": "Humanities",
-    "category": "Argument Analysis",
-    "answer": "2",
-    "original_question": "Art criticism is a linguistic activity that evaluates works of art. A critic pays attention to the structural features or the representational and expressive properties of a work, and on this basis, presents reasons that provide the grounds for aesthetic evaluation of the work. Based on the following <Critique>, Alice and Bob present their views.<Critique>- Evaluation: Michelangelo’s <Pietà> is excellent.- Reason: Michelangelo’s <Pietà> looks lifelike.Alice: Someone who thinks the evaluation in <Critique> is valid might claim that the standard \"If an artwork W looks lifelike, then W is excellent\" was applied in <Critique>. However, this standard cannot be applied to Warhol's <Brillo Box>. Even though <Brillo Box> has the same appearance as an actual soap box, that does not necessarily make it excellent. Therefore, it cannot be established that \"If property F is attributed to artwork W, then W is excellent\" serves as a general criterion for criticism.Bob: There is no generalized standard of criticism that can be applied without exception to all works of art. However, works of art can be categorized as belonging to at least one specific category. In that case, we can find a generalized standard of criticism that guarantees excellence, in the sense that a work realizes the purpose of its category—for example: \"For an artwork W belonging to category C, if property F contributes to the purpose of C, then F makes W excellent.\" The evaluation in <Critique> can be seen as applying the standard: \"For artwork W belonging to the category of Renaissance sculpture, as long as the property of 'lifelikeness' contributes to the purpose of Renaissance sculpture, 'lifelikeness' makes W excellent.\"<question> Which of the following analyses about the above text is correct? Select all correct answers as indicated in <statements>.<statements>(a) According to Alice, a standard for criticism cannot be generalized in any way, so evaluations must always be made only from the perspective of individual works.(b) When evaluating a painting, the judgment \"Any work of art with unity is excellent, so this work is excellent\" applies the 'generalized standard for criticism' advocated by Bob.(c) The claim, \"Even if 'an implausible plot,' which is a typical attribute that undermines the excellence of a play, contributes to the purpose of the Theater of the Absurd, there still cannot be a generalized standard for criticism of the Theater of the Absurd,\" does not contradict Alice’s position but contradicts Bob’s position. <choices>① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) According to Alice, a standard for criticism cannot be generalized in any way, so evaluations must always be made only from the perspective of individual works.",
-      "statement_2": "(b) When evaluating a painting, the judgment \"Any work of art with unity is excellent, so this work is excellent\" applies the 'generalized standard for criticism' advocated by Bob.",
-      "statement_3": "(c) The claim, \"Even if 'an implausible plot,' which is a typical attribute that undermines the excellence of a play, contributes to the purpose of the Theater of the Absurd, there still cannot be a generalized standard for criticism of the Theater of the Absurd,\" does not contradict Alice’s position but contradicts Bob’s position."
-    },
-    "original_rationale": {
-      "preliminaries": "Art criticism consists of a critic’s evaluation and the reasons provided in support of that evaluation. Therefore, discussion concerning the existence of a generalized critical standard capable of supporting these reasons is essential. To solve this problem, one must accurately grasp the possible perspectives arising in the debate between universalists, who assert the existence of a generalized standard, and particularists, who deny such a standard, and appropriately analyze the implications.",
-      "statement_1_rationale": "(a) Alice’s argument is that \"If a property F is attributed to artwork W, then W is excellent\"—that is, a generalized standard of criticism—cannot be established. Therefore, according to Alice, such a generalized standard cannot be established at this broad level. However, this does not necessarily entail that a less general (i.e., more specific or limited) standard can never be established. The claim that even on such a limited level, no critical standard can be generalized is, in fact, stronger than what Alice actually argued. Thus, the assertion that evaluation must always be made only from the perspective of individual works does not strictly follow from Alice’s argument. Therefore, (a) is not a correct analysis.",
-      "statement_2_rationale": "(b) When evaluating a painting, the assertion \"Any work of art with unity is excellent, so this work is excellent\" presupposes that \"Any unified work of art is excellent\" applies without exception to all works of art. However, Bob asserts there is no generalized standard for criticism that can be applied without exception to all artworks. Thus, (b) is not a correct analysis.",
-      "statement_3_rationale": "(c) Alice’s position is that there is no generalized standard for criticism—that is, no property guarantees the excellence of all works of art. Therefore, it does not contradict Alice’s position to claim that there cannot be a generalized standard of criticism even for the Theater of the Absurd. Bob’s position, however, is that there is a generalized standard, at least at the level of category—for example, properties that contribute to realizing the purpose of a particular category. But (c) claims that even if \"an implausible plot\" contributes to the purpose of the Theater of the Absurd, there still can be no generalized standard for criticism for this category—so (c) does contradict Bob’s position. Thus, (c) is a correct analysis.",
-      "answer": "Since only (c) is a correct analysis, the answer is ②."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"There is no generalizable standard of criticism that can be applied universally across all artworks, since any proposed property-based standard fails when applied to different works.\",\n    \"Bob\": \"While no single standard applies to all art, generalized standards of criticism can be established within specific categories of art, guaranteeing excellence when a property contributes to the purpose of that category.\"\n  },\n  \"attacks\": [\n    [\"Alice\", \"Bob\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:14.359292+00:00",
-    "response_id": "msg_011CepMK44DfvWmyfg5peRmX",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1093,
-      "output_tokens": 116
-    },
-    "error": null
-  },
-  {
-    "id": "2024_24",
-    "year": "2024",
-    "problem_idx": "24",
-    "objective": "This question assesses the ability to determine whether a presented hypothesis is weakened or strengthened based on presented experimental results, where the hypothesis concerns how people judge an actor's morality when the actor acts under situational pressure.",
-    "domain": "Society",
-    "category": "Argument Evaluation & Analysis",
-    "answer": "1",
-    "original_question": "<Hypothesis> People judge Action X, which is performed under situational pressure, and the morality of the actor as follows: - If X is bad, they judge it as voluntary; if X is good, they judge it as coerced.- If X is judged as voluntary, people judge the actor’s morality based on X, but if X is judged as coerced, they don’t use X to infer morality.<Experiment> 100 participants are divided into Group 1 and Group 2. Group 1 reads Passage 1 and Group 2 reads Passage 2, respectively.Passage 1: Alice and Bob encounter a homeless person. Alice tells Bob to give all the money he has to the homeless person. Bob gives all the money he had to the homeless person. → Since the action is good, it is considered coerced. No judgment of morality.Passage 2: Alice and Bob encounter a homeless person. Alice tells Bob to take the homeless person’s money. Bob takes the homeless person’s money. → Since the action is bad, it is considered voluntary. Judgment of morality.After reading the passage, each group is asked whether Bob’s action was voluntary or coerced, and whether Bob is moral or not. <question> Which of the following evaluations about the text is/are correct according to <statements>? <statements> (a) If most people in Group 1 who answered that Bob’s action was coerced also answered that Bob is moral, the <hypothesis> is weakened.(b) If most people in Group 1 answered that Bob’s action was coerced, but most in Group 2 answered that Bob’s action was voluntary, the <hypothesis> is weakened.(c) If most people in Group 1 answered that they don’t know whether Bob is moral or not, but most in Group 2 answered that Bob is immoral, the <hypothesis> is weakened. <choices> ① (a) ② (c) ③ (a), (b) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) If most people in Group 1 who answered that Bob’s action was coerced also answered that Bob is moral, the <hypothesis> is weakened.",
-      "statement_2": "(b) If most people in Group 1 answered that Bob’s action was coerced, but most in Group 2 answered that Bob’s action was voluntary, the <hypothesis> is weakened.",
-      "statement_3": "(c) If most people in Group 1 answered that they don’t know whether Bob is moral or not, but most in Group 2 answered that Bob is immoral, the <hypothesis> is weakened."
-    },
-    "original_rationale": {
-      "preliminaries": "According to the <hypothesis>, when an actor performs an action under situational pressure, people’s judgment of the actor’s morality differs depending on whether the action itself is good or bad. If the action is good, people judge the action as coerced, and if the action is judged as coerced, they do not judge the actor’s morality based on it. On the other hand, if the action is bad, people judge the action as voluntary, and if it is judged as voluntary, they judge the actor’s morality based on it. In Passages 1 and 2, Bob’s actions can be seen as a good action and a bad action, respectively. Therefore, according to the <hypothesis>, people in Group 1 would judge Bob’s action as coerced and would not judge Bob’s morality from it, whereas people in Group 2 would judge Bob’s action as voluntary and judge Bob’s morality based on it.",
-      "statement_1_rationale": "(a) Since Bob’s action in Passage 1 is a good action, according to the <hypothesis>, people would judge Bob’s action as coerced and would not judge Bob’s morality based on his action. If most people in Group 1 who answered that Bob’s action was coerced also answered that Bob is moral, this means they are judging Bob’s morality based on his action. This is contrary to the prediction of the <hypothesis> and thus weakens it. Statement (a) is a correct evaluation.",
-      "statement_2_rationale": "(b) Since Bob’s action in Passage 1 and Passage 2 are, respectively, a good action and a bad action, according to the <hypothesis>, people would judge the former as coerced and the latter as voluntary. Therefore, if most people in Group 1 judge the former as coerced and most in Group 2 judge the latter as voluntary, this matches the prediction of the <hypothesis>. Thus, such a result would not weaken the <hypothesis>. Statement (b) is an incorrect evaluation.",
-      "statement_3_rationale": "(c) Since Bob’s actions in Passage 1 and Passage 2 are, respectively, good and bad, according to the <hypothesis>, people would not judge Bob’s morality from Passage 1 but would make judgments about his morality in Passage 2. Therefore, if most people in Group 1 answer that they don’t know whether Bob is moral, and most in Group 2 answer that Bob is immoral, this matches the prediction of the <hypothesis>. Thus, such a result would not weaken the <hypothesis>. Statement (c) is an incorrect evaluation.",
-      "answer": "Only (a) is correct, so the answer is ①."
+      "preliminaries": "In classical experimental research in the social sciences, conducting a pre-test can make participants more sensitive to the experimental stimulus, which may in turn influence the experimental result. Therefore, the experimental results thus obtained are difficult to generalize to the real world. To solve this problem, an additional experiment without a pre-test is required. If, in the <experimental design>, results are observed showing that the level of prejudice is reduced in the experimental groups (Groups 1 and 3) due to the experimental stimulus, while there is no change in the control groups (Groups 2 and 4), it can be demonstrated that watching the movie reduces the degree of negative prejudice against Black people (point ⓐ). As a supplementary clue, it is noted that all participants were randomly selected, enabling comparisons between groups.",
+      "statement_1_rationale": "① If, in Group 1, the degree of prejudice in the post-test after the experimental stimulus is lower than in the pre-test before the stimulus, then the effect of the experimental stimulus has been found. Thus, ① demonstrates ⓐ.",
+      "statement_2_rationale": "② If the degree of prejudice in the post-test of Group 1 (which received the experimental stimulus) is lower than that in the post-test of Group 2 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ② demonstrates ⓐ.",
+      "statement_3_rationale": "③ If the degree of prejudice in the post-test of Group 3 (which received the experimental stimulus) is lower than the degree of prejudice in the pre-test of Group 2 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ③ demonstrates ⓐ.",
+      "statement_4_rationale": "④ If the degree of prejudice in the post-test of Group 3 (which received the experimental stimulus) is lower than the post-test in Group 4 (which did not receive the stimulus), then the effect of the experimental stimulus has been found. Thus, ④ demonstrates ⓐ.",
+      "statement_5_rationale": "⑤ If the degree of prejudice in the post-test of Group 4 (which did not receive the experimental stimulus) is lower than that of Group 1 (which did receive the experimental stimulus), then the effect of the experimental stimulus was not found. Therefore, ⑤ cannot be used to demonstrate ⓐ.",
+      "answer": "Only ⑤ is the correct analysis among the <choices>, so the answer is ⑤."
     },
     "model_rationale": "{\"claims\": {}, \"attacks\": []}",
     "run_id": 1,
@@ -460,170 +347,53 @@
     "backend": "api",
     "prompt_version": "argument_graph_json_from_prompts_py",
     "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:18.091997+00:00",
-    "response_id": "msg_011CepMKLQUEkRTsmvVDJjBH",
+    "created_at": "2026-09-06T18:37:41.070186+00:00",
+    "response_id": "msg_011CenftcQ9W2DWkRQhc1Sdj",
     "model_returned": "claude-sonnet-4-6",
     "stop_reason": "end_turn",
     "stop_sequence": null,
     "usage": {
-      "input_tokens": 952,
+      "input_tokens": 1047,
       "output_tokens": 13
     },
     "error": null
   },
   {
-    "id": "2024_29",
-    "year": "2024",
-    "problem_idx": "29",
-    "objective": "This question assesses the ability to grasp the core elements of arguments explaining economic behavior and market operations, properly analyze the structure of the debate, and compare and evaluate each argument.",
+    "id": "2021_28",
+    "year": "2021",
+    "problem_idx": "28",
+    "objective": "This question assesses the ability to understand a policy that changes the tiers of a progressive rate system and to determine whether each argument in the debate concerning this policy is strengthened or weakened by the presented data.",
     "domain": "Society",
     "category": "Argumentation and Rebuttal",
-    "answer": "5",
-    "original_question": "Alice: Economic behavior is the action of independent and rational individuals pursuing their own self-interest. The foundation of the ideal market, where perfect competition and self-regulation occur, is precisely the behavior of such atomized and rational people. Social relationships among people only hinder the competitive market.Bob: But, in reality, the market doesn’t function so perfectly. Coercion and deception also occur in the market. Of course, even coercion and deception arise from the pursuit of self-interest. Can the market really exert enough self-regulation to suppress people’s coercion and deception? At the very least, a certain degree of trust among people must be present.Charlie: The source of such trust is generalized morality. There exists an implicit agreement that one must respect others, and people mostly follow that agreement automatically. Humans naturally obey the commands of the norms and value systems we agree upon, because these are thoroughly internalized through socialization. Because morality is strongly shared, orderly transactions are guaranteed.Bob: However, in reality, it’s rare to find transaction situations where we can confirm that generalized morality is at work and that economic behavior is based on trust. To explain the general existence of orderly transactions in the market, we must pay attention to the fact that the intentional actions of agents are rooted in their current, concrete social relationships. What fosters trust and suppresses wrongdoing in the market are these specific private relationships and their networks. We prefer to trade with people who have a good reputation, not simply relying on generalized morality. Moreover, rather than depending only on general reputation, we try to gather information from acquaintances who know the trading partner well. Of course, we also try to maintain our own good reputation. The assumption of atomized individuals cannot explain reality. <question> Which of the following analyses of the above debate is/are correct according to the statements in <statements>? <statements> (a). Both Alice and Bob assume individuals who pursue their own self-interest. (b). Alice does not agree, but Bob does agree, with the claim that the social nature of relationships, which naturally develop as economic relations are sustained, is positive for economic life. (c). The concrete social relationships in which individuals are involved at the time of decision-making are more important to Bob than to Charlie. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a). Both Alice and Bob assume individuals who pursue their own self-interest.",
-      "statement_2": "(b). Alice does not agree, but Bob does agree, with the claim that the social nature of relationships, which naturally develop as economic relations are sustained, is positive for economic life.",
-      "statement_3": "(c). The concrete social relationships in which individuals are involved at the time of decision-making are more important to Bob than to Charlie."
-    },
-    "original_rationale": {
-      "preliminaries": "Alice takes the utilitarian, classical and neo-classical economic perspective. Charlie holds an extreme sociological position. Alice assumes under-socialized actors, while Charlie assumes over-socialized actors. In contrast, Bob criticizes both these positions for presupposing atomized individuals free from the context of social relations when explaining economic behavior, and emphasizes that even for rational actors, their private relationships and networks matter.",
-      "statement_1_rationale": "(a) Alice explicitly states, “Economic behavior is the action of individuals pursuing their own self-interest.” Although Bob refutes Alice's opinion, Bob also asserts that coercion and deception arise in the process of pursuing self-interest, indicating that Bob also assumes individuals pursue their own self-interest. Thus, (a) is a correct analysis.",
-      "statement_2_rationale": "(b) Alice considers social relationships to be an impediment to competitive markets, so she would not agree that the social nature of relationships, which naturally develop as economic relations are sustained, is positive for economic life. However, Bob, seeing that concrete social relationships foster trust, would agree with the claim. Thus, (b) is also a correct analysis.",
-      "statement_3_rationale": "(c) Bob considers the concrete social relationships an individual maintains at the time of decision-making to have an important impact on intentional action, whereas Charlie focuses on generalized morality and does not consider current concrete social relationships to be very important in behavior. No matter what the present social relationships are, people follow the internalized, generalized morality due to socialization. Thus, (c) is a correct analysis.",
-      "answer": "Since (a), (b), and (c) are all correct, the answer is ⑤."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Economic behavior is driven by atomized, rational, self-interested individuals, and the ideal market functions through perfect competition and self-regulation without needing social relationships.\",\n    \"Bob\": \"Orderly market transactions are best explained by concrete, specific social relationships and networks of trust, not by atomized individualism or generalized morality.\",\n    \"Charlie\": \"Trust in the market is grounded in generalized morality and shared norms that are internalized through socialization, guaranteeing orderly transactions.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Bob\", \"Charlie\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:19.644516+00:00",
-    "response_id": "msg_011CepMKSueA61qrTott6Qyd",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1022,
-      "output_tokens": 153
-    },
-    "error": null
-  },
-  {
-    "id": "2025_08",
-    "year": "2025",
-    "problem_idx": "8",
-    "objective": "This question assesses the ability to accurately understand and evaluate the view on how the state manages public goods.",
-    "domain": "Norms",
-    "category": "Argument Evaluation & Analysis",
-    "answer": "5",
-    "original_question": "A public good is a commodity that can be collectively used by the public, and its ownership belongs to the people. Anyone can access and use public goods, and no one can be prohibited from using them. However, if public goods are not properly managed, their value inevitably decreases. To prevent such a decline in benefits, the state manages public goods under the name of \"administration.\" However, there is an issue of inefficiency in such cases, so the following <opinion> has been put forward regarding how the state should manage public goods.<opinion>Alice: Since the management of public goods has been completely delegated to the state by the people, the state can manage public goods directly or have a third party do so. In order to efficiently manage public goods and guarantee a quality of service appropriate to the usage price, there is a need to privatize the management of public goods. However, in cases where the state directly manages public goods, citizens have granted the state discretion regarding management methods on the condition that they do not bear any costs exceeding what they would bear under direct state management. The state must satisfy this condition.Bob: Privatization inevitably leads to considerations of profit, so in the end, the cost of using public goods, which was previously managed by the state, will ultimately rise, or there will be a decline in service quality relative to previous prices. Therefore, the state should adopt “co-governance” as an alternative to privatization. Except in cases where it is necessary to prevent a decrease in benefits, the state should not be directly involved in the management of public goods; instead, members of society who use public goods should resolve issues that arise on a self-governing basis. If co-governance in civil society fails, public goods will remain unmanaged. Therefore, members of society must strive to prevent the failure of co-governance. <question> Of the analyses regarding <opinion>, which of the following <statements> are correct? <statements> (a) According to Alice, if, after the privatization of public good X, the usage price exceeds what citizens would have paid if the state had managed it directly, the state cannot make citizens bear the excess portion.(b) According to Bob, if co-governance by members of society fails, the state may become directly involved in the management of public goods.(c) Research indicating that the state can control the usage price of public goods while preventing a qualitative decline in services through privatization would strengthen Alice's opinion and weaken Bob's opinion. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) According to Alice, if, after the privatization of public good X, the usage price exceeds what citizens would have paid if the state had managed it directly, the state cannot make citizens bear the excess portion.",
-      "statement_2": "(b) According to Bob, if co-governance by members of society fails, the state may become directly involved in the management of public goods.",
-      "statement_3": "(c) Research indicating that the state can control the usage price of public goods while preventing a qualitative decline in services through privatization would strengthen Alice's opinion and weaken Bob's opinion."
-    },
-    "original_rationale": {
-      "preliminaries": "In the passage, opinions advocating the management of public goods through privatization and those advocating management through \"co-governance\" are introduced. The main points of each opinion are as follows.Alice: This view argues that since citizens have fully delegated the management of public goods to the state, the state can have a third party manage public goods, and, in order to efficiently manage public goods and guarantee service quality appropriate to the usage price, management should be privatized rather than handled directly by the state.Bob: This view, considering the problems of privatization, argues that public goods should be managed through \"co-governance\" and that except for special circumstances, the state should not become directly involved in managing public goods.",
-      "statement_1_rationale": "(a) According to Alice, even if the state does not directly manage public goods but instead entrusts them to a third party through measures such as privatization, citizens have granted the state discretion over management methods on the condition that they are not required to bear costs exceeding what they would have borne under direct state management. Therefore, after privatization, if the usage price of public good X exceeds what citizens would have paid under direct state management, the state cannot require citizens to bear the excess portion. Thus, (a) is a correct analysis.",
-      "statement_2_rationale": "(b) According to Bob, if \"co-governance\" fails, then public goods remain unmanaged. If public goods are unmanaged, a decline in benefits will inevitably occur, so the state must act to prevent this decline. In such situations, even according to Bob, the state may directly participate in the management of public goods. Therefore, (b) is a correct analysis.",
-      "statement_3_rationale": "(c) Research showing that through privatization, the state can control the usage price of public goods while preventing a decline in service quality would strengthen Alice's argument that it is possible to guarantee service quality commensurate with usage price through privatization, and it would weaken Bob’s argument, which points out that privatization leads to increased usage prices or a decline in service quality. Therefore, (c) is also a correct analysis.",
-      "answer": "Since (a), (b), and (c) in the <statements> are all correct analyses, the answer is ⑤."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"Public goods should be privatized to improve efficiency and service quality, but the state must ensure citizens do not bear costs exceeding what they would under direct state management.\",\n    \"Bob\": \"Public goods should be managed through co-governance by members of civil society rather than privatization, as privatization inevitably raises costs or lowers service quality.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:24.001796+00:00",
-    "response_id": "msg_011CepMKmekvGvaTn7FQoUQe",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 1048,
-      "output_tokens": 109
-    },
-    "error": null
-  },
-  {
-    "id": "2025_13",
-    "year": "2025",
-    "problem_idx": "13",
-    "objective": "This question assesses the ability to understand various viewpoints regarding whether the punishments imposed on two actors, both of whom acted with malicious intent, should differ in a scenario where one succeeded in murder and the other failed, and to analyze the implications of each viewpoint, as well as their commonalities and differences.",
-    "domain": "Humanities",
-    "category": "Argumentation and Rebuttal",
     "answer": "4",
-    "original_question": "Alice and Bob each devised a meticulous plan with malicious intent to murder someone and attempted to carry it out. Alice succeeded in committing the murder, while Bob failed. In such a case, Alice is punished far more severely. Can this be justified? There are the following <views> on this matter. <View> A: Even though both Alice and Bob had the intention to kill, the fact that Alice's attempt succeeded and Bob's failed was due to 'luck.' It cannot be justified to impose different degrees of punishment on the two based on outcomes determined by luck, which is beyond their own control. This is because doing so does not treat them equally. Therefore, Alice and Bob should not be punished differently. B: The severity of punishment should depend on how malicious the criminal's intent was, but it is difficult to determine this precisely. In this situation, whether the murder succeeded is a good indicator of the malice of the intent. The more malicious the intent, the more meticulously the murder will be planned, and thus the greater the likelihood of success. Therefore, a successful murder should be punished more severely than a failed attempt. C: Punishing Alice more severely than Bob can be considered 'punishment by luck,' and such punishment can be a way to realize equal treatment. For example, in ancient times, when punishing traitors, only a few 'unlucky' people were punished through random drawing (lottery). Since the decision to punish was made for all traitors by giving each the same odds in the draw, one could say that they were treated equally. Similarly, punishing Alice and Bob differently based on the 'lottery' of murder success is also a way to realize equal treatment. <question> Among the following <statements>, which are correct analyses of the <views> above? <statements> (a) According to A, someone who had no intention to kill but killed a pedestrian through reckless driving, and someone who intended to kill and injured a pedestrian through reckless driving, should be punished the same. (b) If it is true both that the more malicious the intent, the more one is swayed by emotion and thus has poorer judgment, and that poorer judgment lowers the likelihood of a successful plan, then B's position is weakened. (c) A and C both agree that Alice and Bob should be treated equally in terms of punishment, but hold different opinions about what the punishment should be. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+    "original_question": "Country X applies the following progressive billing system for monthly household electricity rates.- Tier 1: Usage up to 200 kWh, base charge is 900 won, rate per kWh is 90 won.- Tier 2: Usage over 200 kWh and up to 400 kWh, base charge is 1,600 won, rate per kWh is 180 won.- Tier 3: Usage over 400 kWh, base charge is 7,300 won, rate per kWh is 280 won.For example, a household consuming 300 kWh in a month will pay a base charge of 1,600 won, and rates of 90 won per kWh for Tier 1 and 180 won per kWh for Tier 2, resulting in a total electricity bill of 37,600 won (=1,600 + 200×90 + 100×180).Recently, Country X introduced a “Cool Summer Policy” for electricity used in the summer, changing the tiers to ‘up to 300 kWh’, ‘over 300 kWh up to 450 kWh’, and ‘over 450 kWh’, while maintaining the same rate structure as before in each tier.<Debate> Alice: In order to ensure a stable electricity supply, power generation facilities must be able to meet the peak hourly electricity demand. The introduction of the Cool Summer Policy will reduce the stability of electricity supply.Bob: Air conditioning is a necessity, not a luxury. To lower the summer electricity bill burden for most households, it would be better to switch from the Cool Summer Policy to a flat rate system with a base charge of 1,600 won and a per kWh rate of 180 won.Charlie: It is better to focus on welfare for vulnerable groups rather than all households. The Cool Summer Policy should be modified so that it applies only to vulnerable groups. <question> Which of the following, as presented in <statements>, are appropriate evaluations of the <Debate> above?<statements> (a) Data showing that peak hourly electricity consumption in Country X occurs in summer weakens Alice’s argument.(b) Data showing that most households consume 400–450 kWh per month weakens Bob’s argument.(c) Data showing that most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month weakens Charlie’s argument. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
     "statements": {
-      "statement_1": "(a) According to A, someone who had no intention to kill but killed a pedestrian through reckless driving, and someone who intended to kill and injured a pedestrian through reckless driving, should be punished the same.",
-      "statement_2": "(b) If it is true both that the more malicious the intent, the more one is swayed by emotion and thus has poorer judgment, and that poorer judgment lowers the likelihood of a successful plan, then B's position is weakened.",
-      "statement_3": "(c) A and C both agree that Alice and Bob should be treated equally in terms of punishment, but hold different opinions about what the punishment should be."
+      "statement_1": "(a) Data showing that peak hourly electricity consumption in Country X occurs in summer weakens Alice’s argument.",
+      "statement_2": "(b) Data showing that most households consume 400–450 kWh per month weakens Bob’s argument.",
+      "statement_3": "(c) Data showing that most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month weakens Charlie’s argument."
     },
     "original_rationale": {
-      "preliminaries": "The passage presents several viewpoints on whether it is justifiable to punish two people—Alice and Bob, both of whom had malicious intent to kill but faced different results, with differing severities of punishment. A argues that since the success or failure is due to 'luck,' it is not justifiable to punish the two differently. B argues that the difference in outcomes reflects the degree of malice in intent and thus justifies different punishments. C sees punishing differently based on success or failure as an example of 'punishment by luck,' which can be a method to treat individuals equally.",
-      "statement_1_rationale": "(a) A argues that two people with malicious intent who had different outcomes due to luck must be punished the same. However, A does not present any position on whether someone who had no intent to kill but killed someone, and someone who intended to kill and hurt someone, should be punished equally. Therefore, (a) is not a correct analysis.",
-      "statement_2_rationale": "(b) B's position is that the more malicious the intent, the higher the likelihood of a successful murder, and thus successful murder should be punished more severely. However, if it is true both that the more malicious the intent, the more judgment decreases due to emotional involvement, and that poorer judgment lowers the likelihood of success, then the more malicious the intent, the less likely the murder is to succeed. Thus, B's position is weakened. (b) is a correct analysis.",
-      "statement_3_rationale": "(c) Both A and C agree that Alice and Bob had malicious intent and only luck led to different outcomes, so they agree that they should be treated equally in punishment. However, A and C differ in their views of what the punishment should be: A argues that Alice and Bob should be punished identically, while C argues that treating Alice and Bob differently based on the 'lottery' of murder success is the way to achieve equal treatment. Thus, (c) is also a correct analysis.",
-      "answer": "Only (b) and (c) are correct analyses, so the answer is ④."
+      "preliminaries": "Unlike a flat rate system, a progressive billing system applies different rates for each tier, and even for higher tiers, the lower tier rates are applied cumulatively for the respective amount of consumption in each tier. When the usage range of each tier is expanded by changing the tier criteria, households in higher tiers receive greater discounts. For example, in the Cool Summer Policy, households that originally belonged to Tier 1 before the change already benefit from the lowest rates, so expanding the tier does not affect them. However, households that were in Tier 2 prior to the change enjoy a rate reduction of 90 won (180–90 won) per kWh for usage between 200 and 300 kWh, and also a 700-won decrease in the base charge. Households in what was formerly Tier 3 benefit not only from this but also from a rate reduction of 100 won (280–180 won) per kWh for usage between 400 and 450 kWh, and a 5,700-won decrease in the base charge for households consuming 400–450 kWh.",
+      "statement_1_rationale": "(a) Alice claims that if the Cool Summer Policy reduces rates, summer electricity consumption will increase, leading to higher peak hourly demand in summer and thus reduced supply stability. Therefore, if data show that peak hourly demand in Country X is actually highest not in summer, and that even with increased summer consumption due to the policy this ranking does not change, Alice’s argument would be weakened. However, data that show summer peak demand is highest do not weaken Alice’s argument. Thus, (a) is not an appropriate evaluation.",
+      "statement_2_rationale": "(b) Under a progressive system, households with high consumption still enjoy lower rates for their usage in the lower tiers. A household using 400–450 kWh per month will fall into Tier 2 under the Cool Summer Policy, paying a base charge of 1,600 won, 90 won per kWh up to 300 kWh, and 180 won per kWh beyond 300 kWh. Under Bob’s proposed flat rate (1,600 won base, 180 won/kWh for all usage), all consumption is charged at the higher rate, leading to a bigger bill than under the Cool Summer Policy. Therefore, data showing most households are in this range would weaken Bob’s argument. So (b) is an appropriate evaluation.",
+      "statement_3_rationale": "c) Charlie argues the Cool Summer Policy should target only vulnerable populations for welfare reasons; this only makes sense if vulnerable groups actually benefit. If most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month, their bills would be unaffected whether the policy applies universally or only to them. Therefore, data showing this would weaken Charlie’s argument. Thus, (c) is an appropriate evaluation.",
+      "answer": "Since only (b) and (c) are appropriate, the answer is ④."
     },
-    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Alice and Bob should be punished equally because differential punishment based on luck-determined outcomes violates equal treatment.\",\n    \"B\": \"Alice should be punished more severely than Bob because success in murder indicates greater malice of intent, which should determine punishment severity.\",\n    \"C\": \"Punishing Alice more severely than Bob based on the random outcome of success is itself a valid form of equal treatment, analogous to punishment by lottery.\"\n  },\n  \"attacks\": [\n    [\"A\", \"B\"],\n    [\"A\", \"C\"],\n    [\"B\", \"A\"],\n    [\"C\", \"A\"]\n  ]\n}",
+    "model_rationale": "{\n  \"claims\": {\n    \"Alice\": \"The Cool Summer Policy will reduce the stability of electricity supply because it increases electricity consumption, raising peak hourly demand.\",\n    \"Bob\": \"A flat rate system with a base charge of 1,600 won and 180 won per kWh would better lower the summer electricity bill burden for most households than the Cool Summer Policy.\",\n    \"Charlie\": \"The Cool Summer Policy should be modified to apply only to vulnerable groups rather than all households.\"\n  },\n  \"attacks\": [\n    [\"Bob\", \"Alice\"],\n    [\"Charlie\", \"Bob\"]\n  ]\n}",
     "run_id": 1,
     "model_id": "claude-sonnet-4-6",
     "provider": "anthropic",
     "backend": "api",
     "prompt_version": "argument_graph_json_from_prompts_py",
     "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:27.275908+00:00",
-    "response_id": "msg_011CepML1buMhKbULKBo1949",
+    "created_at": "2026-09-06T18:37:43.170284+00:00",
+    "response_id": "msg_011CenftmKBWAq5UBhkPff5d",
     "model_returned": "claude-sonnet-4-6",
     "stop_reason": "end_turn",
     "stop_sequence": null,
     "usage": {
-      "input_tokens": 1048,
-      "output_tokens": 153
-    },
-    "error": null
-  },
-  {
-    "id": "2025_22",
-    "year": "2025",
-    "problem_idx": "22",
-    "objective": "This question assesses the ability to understand various views on the existence of a group and, based on the information provided in the prompt, to determine what can be inferred from each view.",
-    "domain": "Humanities",
-    "category": "Argumentation and Rebuttal",
-    "answer": "2",
-    "original_question": "Alice, Bob, and Charlie formed a dance group called “Samshingi.” The following are discussions about the existence of the group. A: There is no such thing as a group. The only things that exist are the members of the group. For example, the statement “Samshingi performed” does not make sense; instead, one should say “Alice, Bob, and Charlie performed together.” B: Samshingi is a new entity distinct from the three individuals, but it is identical to the mere collection of Alice, Bob, and Charlie. Samshingi, as the collection of Alice, Bob, and Charlie, has the three as its parts and occupies a specific space. C: Even if the members change, Samshingi can continue to exist. Samshingi comes into existence only when the three form the group, but it is different from each individual or their mere collection. Samshingi should be seen not as something that occupies a particular space, but as an abstract entity. <question> Which of the following can be properly inferred from the above? Choose all correct statements from <statements> as they are. <statements> (a) Both A and B agree that only Alice, Bob, and Charlie exist, and that the group Samshingi does not exist. (b) Suppose that after the formation of Samshingi, Alice, Bob, and Charlie become interested in chess and form a chess club called “Checkmate.” B agrees, but C does not, that Samshingi and Checkmate are identical. (c) Both A and C agree that Samshingi continues to exist even if Alice is replaced by a new member. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
-    "statements": {
-      "statement_1": "(a) Both A and B agree that only Alice, Bob, and Charlie exist, and that the group Samshingi does not exist.",
-      "statement_2": "(b) Suppose that after the formation of Samshingi, Alice, Bob, and Charlie become interested in chess and form a chess club called “Checkmate.” B agrees, but C does not, that Samshingi and Checkmate are identical.",
-      "statement_3": "(c) Both A and C agree that Samshingi continues to exist even if Alice is replaced by a new member."
-    },
-    "original_rationale": {
-      "preliminaries": "This problem presents various perspectives on the existence of social groups. Each perspective is as follows: A: According to A, groups do not exist. Only the individual members exist. From this viewpoint, the term “Samshingi” does not refer to any entity. Therefore, strictly speaking, the statement “Samshingi performed” cannot be true. B: According to B, the group exists as a concrete entity. The group is identical to the mere collection of its members. For instance, Samshingi is identical to the collection of Alice, Bob, and Charlie, and since the collection occupies a particular space, the group is a concrete entity. In this view, “Samshingi performed” can be understood as “the collection of Alice, Bob, and Charlie performed,” and if the collection did perform, the sentence is true. C: According to C, the group can continue to exist even when its members are replaced. The group, as an entity, is different from each member or their collection and, since it does not occupy a specific space, is considered an abstract entity. Such an abstract entity comes into existence only when the group is formed.",
-      "statement_1_rationale": "(a) According to A, the group does not exist, and only the individual members do. Therefore, there is no group Samshingi that is distinct from Alice, Bob, and Charlie. According to B, however, the group does exist and is identical to the mere collection of the members. Because A agrees but B does not, (a) is not a correct inference.",
-      "statement_2_rationale": "(b) According to B, Samshingi is identical to the collection of Alice, Bob, and Charlie. Checkmate is also identical to the collection of Alice, Bob, and Charlie. Therefore, Samshingi and Checkmate are the same entity. According to C, a group only comes into existence when it is formed, and since Samshingi and Checkmate were formed at different times, they are not the same. B agrees and C disagrees, so (b) is a correct inference.",
-      "statement_3_rationale": "(c) According to A, Samshingi does not exist regardless of whether members are replaced. According to C, Samshingi is an entity capable of persisting even when its members are replaced. Therefore, A does not agree but C does, so (c) is not a correct inference.",
-      "answer": "Only (b) is a correct inference, so the answer is ②."
-    },
-    "model_rationale": "{\n  \"claims\": {\n    \"A\": \"Only individual members exist; groups like Samshingi do not exist as entities.\",\n    \"B\": \"Samshingi exists as a new entity identical to the mere collection of Alice, Bob, and Charlie, occupying specific space.\",\n    \"C\": \"Samshingi exists as an abstract entity distinct from individuals or their collection, capable of persisting through membership changes.\"\n  },\n  \"attacks\": [\n    [\"A\", \"B\"],\n    [\"A\", \"C\"],\n    [\"B\", \"A\"],\n    [\"C\", \"B\"]\n  ]\n}",
-    "run_id": 1,
-    "model_id": "claude-sonnet-4-6",
-    "provider": "anthropic",
-    "backend": "api",
-    "prompt_version": "argument_graph_json_from_prompts_py",
-    "max_tokens": 3000,
-    "created_at": "2026-09-07T15:55:31.395789+00:00",
-    "response_id": "msg_011CepMLJyvHGPXjabRBWLL3",
-    "model_returned": "claude-sonnet-4-6",
-    "stop_reason": "end_turn",
-    "stop_sequence": null,
-    "usage": {
-      "input_tokens": 895,
-      "output_tokens": 145
+      "input_tokens": 1072,
+      "output_tokens": 140
     },
     "error": null
   }

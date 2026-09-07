@@ -21,7 +21,7 @@ _MODEL_CONFIGS_DIR = os.path.join(
 _QUESTIONS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "benchmarks",
-    "LEET_Arg_Questions_Test_Set_full.json",
+    "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json",
 )
 
 _RESULTS_DIR = os.path.join(
@@ -39,12 +39,8 @@ def _result_path(model_id: str) -> str:
     return os.path.join(_RESULTS_DIR, f"{signature}.json")
 
 
-def _load_questions(
-    questions_path: str = _QUESTIONS_PATH,
-    year: Optional[str] = None,
-    limit: Optional[int] = None,
-):
-    with open(questions_path, "r", encoding="utf-8") as handle:
+def _load_questions(year: Optional[str] = None, limit: Optional[int] = None):
+    with open(_QUESTIONS_PATH, "r", encoding="utf-8") as handle:
         questions = json.load(handle)
 
     if year is not None:
@@ -235,7 +231,6 @@ def execution_pipeline(
     limit: Optional[int] = None,
     runs: int = 1,
     overwrite: bool = False,
-    questions_path: str = _QUESTIONS_PATH,
 ):
     print("Starting benchmarking the model via Anthropic Claude Messages API ...\n")
     print(f"Model: {model_id}")
@@ -249,17 +244,13 @@ def execution_pipeline(
     max_tokens = int(model_cfg.get("max_tokens", 3000))
     sleep_seconds = float(model_cfg.get("sleep_seconds", 0.2))
 
-    questions = _load_questions(
-        questions_path=questions_path,
-        year=year,
-        limit=limit,
-    )
+    questions = _load_questions(year=year, limit=limit)
     result_path = _result_path(model_id)
     results = _load_existing_results(result_path, overwrite)
     completed = _existing_question_run_pairs(results)
 
     print(f"Questions selected: {len(questions)}")
-    print(f"Questions path: {questions_path}")
+    print(f"Questions path: {_QUESTIONS_PATH}")
     print(f"Results file: {result_path}")
     print(f"Max tokens: {max_tokens}")
     print()
@@ -370,11 +361,6 @@ if __name__ == "__main__":
         action="store_true",
         help="Clear the model result file before writing responses.",
     )
-    parser.add_argument(
-        "--questions-path",
-        default=_QUESTIONS_PATH,
-        help="Path to benchmark questions JSON file.",
-    )
 
     args = parser.parse_args()
 
@@ -385,7 +371,6 @@ if __name__ == "__main__":
             limit=args.limit,
             runs=args.runs,
             overwrite=args.overwrite,
-            questions_path=args.questions_path,
         )
     except Exception as exc:
         print(f"Benchmark failed: {exc}", file=sys.stderr)
