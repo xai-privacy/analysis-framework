@@ -1,0 +1,179 @@
+<View>
+  <Style>
+    /* Base Layout and Responsive Columns */
+    .container {
+      display: flex;
+      gap: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #2c3e50;
+    }
+    .main-panel {
+      flex: 1.2;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    .side-panel {
+      flex: 0.8;
+      max-height: 88vh;
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+    }
+
+    /* Cards and Visual Bounding Boxes */
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .card-question {
+      border-left: 6px solid #2980b9;
+      background: #f4f7f9;
+    }
+    .card-ground-truth {
+      border-left: 6px solid #27ae60;
+      background: #f0f9f4;
+    }
+    .card-model {
+      border-left: 6px solid #8e44ad;
+      background: #f8f4fc;
+    }
+
+    /* Section Headings and Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .badge-question { background: #d4e6f1; color: #1b4f72; }
+    .badge-ground-truth { background: #d4efdf; color: #117864; }
+    .badge-model { background: #ebdef0; color: #512e5f; }
+
+    /* Text Formatting */
+    .text-content {
+      white-space: pre-wrap; /* Preserves \n line breaks */
+      word-wrap: break-word;
+      line-height: 1.65;
+      font-size: 14.5px;
+      color: #2c3e50;
+    }
+
+    .sub-description {
+      font-size: 12px;
+      color: #7f8c8d;
+      margin-bottom: 8px;
+    }
+  </Style>
+
+  <!-- TOP INSTRUCTION BANNER -->
+  <View style="background: #eef2f5; border: 1px solid #d5dbdb; padding: 10px 15px; border-radius: 6px; margin-bottom: 15px;">
+    <Header value="📋 Evaluator Guidelines: Compare the Model Response against the Ground Truth Benchmark. Refer to the external annotation manual for scoring rules." size="5"/>
+  </View>
+
+  <View className="container">
+    <!-- LEFT COLUMN: QUESTION, GROUND TRUTH, AND MODEL RESPONSE -->
+    <View className="main-panel">
+      
+      <!-- 1. ORIGINAL QUESTION AND SCENARIO BACKGROUND -->
+      <View className="card card-question">
+        <View className="badge badge-question">Scenario, Question and Options</View>
+        <Header value="Highlight Arguments and Counter-Arguments" size="5"/>
+        <Labels name="argument_labels" toName="original_question">
+          <Label value="Argument / Counter-argument" background="#FFF176"/>
+        </Labels>
+        <View className="text-content">
+          <Text name="original_question" value="$original_question"/>
+        </View>
+      </View>
+
+      <!-- 2. GROUND TRUTH BENCHMARK RATIONALE -->
+      <View className="card card-ground-truth">
+        <View className="badge badge-ground-truth">Ground Truth Benchmark (Reference)</View>
+        <Header value="Benchmark Rationale and Correct Answer" size="4"/>
+        
+        <View className="text-content">
+          <Header value="Preliminaries" size="6"/>
+          <Text name="gt_prelim" value="$original_rationale.preliminaries"/>
+          
+          <Header value="Statement Analysis" size="6"/>
+          <Text name="gt_s1" value="$original_rationale.statement_1_rationale"/>
+          <Text name="gt_s2" value="$original_rationale.statement_2_rationale"/>
+          <Text name="gt_s3" value="$original_rationale.statement_3_rationale"/>
+          
+          <Header value="Correct Benchmark Answer" size="6"/>
+          <Text name="gt_ans" value="$original_rationale.answer"/>
+        </View>
+      </View>
+
+      <!-- 3. MODEL RESPONSE TO EVALUATE -->
+      <View className="card card-model">
+        <View className="badge badge-model">Model Output (To Evaluate)</View>
+        <Header value="Model Rationale and Generated Response" size="4"/>
+        <View className="text-content">
+          <Text name="model_rationale" value="$model_rationale"/>
+        </View>
+      </View>
+
+    </View>
+
+    <!-- RIGHT COLUMN: EVALUATION FORM -->
+    <View className="side-panel">
+      <Header value="Evaluation Assessment" size="3"/>
+
+      <!-- SECTION 1: ANSWER CORRECTNESS -->
+      <Header value="1. Answer Correctness" size="4"/>
+      <View className="sub-description">Does the model's final choice/verdict match the Ground Truth answer?</View>
+      <Choices name="answer_correctness" toName="model_rationale" required="true">
+        <Choice value="Correct (Matches Benchmark)"/>
+        <Choice value="Incorrect (Differs from Benchmark)"/>
+      </Choices>
+
+      <!-- SECTION 2: REASONING QUALITY -->
+      <Header value="2. Overall Reasoning Quality" size="4"/>
+      <View className="sub-description">How sound is the model's rationale compared to the Ground Truth rationale?</View>
+      <Choices name="reasoning_quality" toName="model_rationale" required="true">
+        <Choice value="Valid" hint="Logically sound, complete, uses correct legal/logical principles."/>
+        <Choice value="Flawed-Incomplete" hint="Correct direction, but skips logical steps, uses weak grounds, or contains minor errors."/>
+        <Choice value="Invalid" hint="Contradictory logic, hallucinated rules, or fundamentally wrong reasoning."/>
+      </Choices>
+
+      <!-- SECTION 3: STATEMENT-LEVEL VERDICTS -->
+      <Header value="3. Statement-Level Breakdown" size="4"/>
+      
+      <Header value="Statement (a) Analysis" size="5"/>
+      <Choices name="stmt_a_eval" toName="model_rationale" required="true">
+        <Choice value="Correct Logic"/>
+        <Choice value="Flawed/Incorrect Logic"/>
+        <Choice value="Not Addressed"/>
+      </Choices>
+
+      <Header value="Statement (b) Analysis" size="5"/>
+      <Choices name="stmt_b_eval" toName="model_rationale" required="true">
+        <Choice value="Correct Logic"/>
+        <Choice value="Flawed/Incorrect Logic"/>
+        <Choice value="Not Addressed"/>
+      </Choices>
+
+      <Header value="Statement (c) Analysis" size="5"/>
+      <Choices name="stmt_c_eval" toName="model_rationale" required="true">
+        <Choice value="Correct Logic"/>
+        <Choice value="Flawed/Incorrect Logic"/>
+        <Choice value="Not Addressed / N/A"/>
+      </Choices>
+
+    </View>
+  </View>
+</View>
