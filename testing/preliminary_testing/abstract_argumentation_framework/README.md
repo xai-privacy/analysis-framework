@@ -17,8 +17,10 @@ None of these questions appear in the [held out test set](https://github.com/xai
 
 Each question analysis file contains:
 
-- LEET-Arg question ID
-- LEET-Arg question
-- prompts
-- model responses
-- result analysis
+- LEET-Arg Question ID
+- AI Model Tested and Procedure
+- Question Domain and Category
+- Original Rationale
+- Baseline Prompt
+- Argumentation Framework Prompts
+- Results Analysis
