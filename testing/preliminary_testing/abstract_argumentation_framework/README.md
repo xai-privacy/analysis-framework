@@ -13,6 +13,8 @@ This folder contains [preliminary testing results for the argumentation framewor
 - 2025_39
 - 2025_40
 
+The taxonomy.md file contains issues with questions 2025_25, 2025_29, 2025_30, 2025_39 and 2025_40 where the responses of the model is factually wrong and problems while performing the reasoning.
+
 None of these questions appear in the [held out test set](https://github.com/xai-privacy/analysis-framework/blob/main/testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json).
 
 Each question analysis file contains:
