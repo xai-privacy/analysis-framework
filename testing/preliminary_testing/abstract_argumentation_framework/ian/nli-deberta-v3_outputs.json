@@ -1,0 +1,4407 @@
+{
+  "model": "cross-encoder/nli-deberta-v3-base",
+  "theory": "on",
+  "set": "multi",
+  "skipped_single_passage": [],
+  "created": "2026-09-28 09:40:45",
+  "graphs": {
+    "2021_01": {
+      "gold_answer": "3",
+      "category": "Argument Evaluation & Problem Solving",
+      "preamble": "Country X operates a system of public review for its Supreme Court justices. According to the Constitution of Country X, Supreme Court justices are appointed by the Cabinet, but after appointment, a public vote is held at the time of the next general election for members of the legislature. If more than half of the voters wish for the removal of a justice, that justice is dismissed. If a voter marks an '×' under the name of a justice, it is counted as in favor of dismissal; those who do not mark are considered to have expressed confidence in the justice. Afterward, justices are subject to the same public review every 10 years until their retirement age. In Country Y, there are the following opinions regarding the potential adoption of this system.<Opinions>",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "If the appointment of Supreme Court justices is left exclusively to the president and the sovereign people have no means of control, there is no way to restrain a justice no matter how biased their way of thinking may be. We need to introduce this system to establish a mechanism for judicial oversight by the people.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "That’s a reasonable point. However, the method used in Country X has the problem that unless voters proactively express their desire for removal, it is treated as opposition to removal, which means it does not properly reflect the will of the voters. If this system is introduced exactly as it is, it could soon become meaningless.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "If improvements are made, those concerns can be dispelled. But ultimately, if this system is introduced, Supreme Court justices will be swayed by popular opinion instead of judging cases according to law and their beliefs, and the independence of the judiciary will be undermined.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0022,
+            "neutral": 0.9975
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0001,
+            "neutral": 0.9992
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0337,
+            "neutral": 0.9662
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0003,
+            "neutral": 0.9996
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0017,
+            "entailment": 0.0009,
+            "neutral": 0.9974
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0022,
+            "neutral": 0.9975
+          }
+        }
+      ]
+    },
+    "2021_02": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "<Debate> Country X’s \"Criminal Act\" prohibits the production and distribution of obscene materials, while the \"Copyright Act\" protects creative works expressing human thoughts or emotions as copyrighted works for the enhancement and development of culture and related industries. There is debate about whether obscene materials should be protected as copyrighted works under the \"Copyright Act\".",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "The \"Copyright Act\" only requires creativity as a condition for a work, and does not demand morality. In order to encourage creation and promote cultural diversity, the recognition of a work should be value-neutral.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "While the \"Criminal Act\" prohibits the production and distribution of obscene materials, protecting the resulting obscene materials as copyrighted works effectively grants rights to those with \"dirty hands\" who have committed illegal acts, and recognizes property value and protection for the fruits of illegal conduct, which should not be realized as property rights. This contradicts the principles of legal unity and fairness.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Clearly socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works, but for other types of obscene materials, recognizing them as works can help minimize the infringement on freedom of expression and property rights caused by regulation of obscene materials.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0006,
+            "neutral": 0.9993
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.0004,
+            "neutral": 0.9988
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0006,
+            "neutral": 0.9993
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0003,
+            "neutral": 0.9995
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0008,
+            "neutral": 0.9986
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0003,
+            "neutral": 0.9995
+          }
+        }
+      ]
+    },
+    "2021_14": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "<Theory> For an act to \"cause harm\" to someone means that, if the act had not occurred, that person would have been in a better state. Similarly, for an act to \"benefit\" someone means that, if the act had not occurred, that person would have been in a worse state. Alice and Bob have the following debate regarding <Theory>:",
+      "nodes": [
+        {
+          "id": "Alice1",
+          "speaker": "Alice",
+          "label": "Alice1",
+          "text": "I could have given my friend 50,000 won for no reason but chose not to. If I had done so, my friend would have been in a better state. According to <Theory>, my act harmed my friend. But that seems unreasonable.",
+          "order": 1
+        },
+        {
+          "id": "Bob1",
+          "speaker": "Bob",
+          "label": "Bob1",
+          "text": "<Theory> doesn't have such implications. That's because doing nothing—like simply not giving your friend 50,000 won—cannot be considered an act.",
+          "order": 2
+        },
+        {
+          "id": "Alice2",
+          "speaker": "Alice",
+          "label": "Alice2",
+          "text": "If you limit \"act\" in such a way within <Theory>, other unreasonable consequences follow. Consider someone who saw a child struggling in water and had the ability to rescue them but chose not to, resulting in the child's drowning. Not saving the child clearly harmed the child.",
+          "order": 3
+        },
+        {
+          "id": "Bob2",
+          "speaker": "Bob",
+          "label": "Bob2",
+          "text": "But this case is different. The choice not to save the child is itself the result of a deliberate decision to avoid the rescue. In this sense, not saving the child should be considered an act.",
+          "order": 4
+        },
+        {
+          "id": "Alice3",
+          "speaker": "Alice",
+          "label": "Alice3",
+          "text": "Then what about this case? Imagine A bought a gift intended for B but became attached to it and decided to keep it instead of giving it to B. In this case, although not giving the gift was a deliberate decision, it doesn't seem like A harmed B.",
+          "order": 5
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice1",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.9985,
+            "entailment": 0.0002,
+            "neutral": 0.0012
+          }
+        },
+        {
+          "src": "Alice1",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0477,
+            "neutral": 0.9521
+          }
+        },
+        {
+          "src": "Alice1",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0104,
+            "entailment": 0.0229,
+            "neutral": 0.9667
+          }
+        },
+        {
+          "src": "Alice1",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.007,
+            "entailment": 0.0013,
+            "neutral": 0.9917
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.0345,
+            "entailment": 0.0101,
+            "neutral": 0.9554
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.2724,
+            "neutral": 0.7271
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.958,
+            "entailment": 0.0044,
+            "neutral": 0.0376
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.0007,
+            "entailment": 0.0023,
+            "neutral": 0.997
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0103,
+            "neutral": 0.989
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.9937,
+            "entailment": 0.0004,
+            "neutral": 0.0059
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0032,
+            "entailment": 0.0091,
+            "neutral": 0.9877
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.0261,
+            "entailment": 0.001,
+            "neutral": 0.9729
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.0013,
+            "entailment": 0.0049,
+            "neutral": 0.9938
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.9992,
+            "entailment": 0.0001,
+            "neutral": 0.0007
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0385,
+            "neutral": 0.9611
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.0069,
+            "entailment": 0.0034,
+            "neutral": 0.9897
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.0051,
+            "entailment": 0.0007,
+            "neutral": 0.9942
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.0303,
+            "entailment": 0.0034,
+            "neutral": 0.9663
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.0263,
+            "entailment": 0.002,
+            "neutral": 0.9717
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0146,
+            "entailment": 0.0413,
+            "neutral": 0.9441
+          }
+        }
+      ]
+    },
+    "2021_15": {
+      "gold_answer": "4",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "A belief that is simply true is not knowledge. For a true belief to become knowledge, it must be justified. However, \"ⓐ Even if the beliefs gained from works of art may possibly be true, they are never justified.\" For example, Dickens’ realist novel \"Bleak House\" accurately depicts the process of inheritance lawsuits in 19th-century England. However, merely reading \"Bleak House\" does not provide us with evidence for the accuracy of that depiction.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "According to what Alice said, an encyclopedia is no different from \"Bleak House.\" This is because, simply by reading an encyclopedia, one has no reason to believe that the information obtained from it is accurate.",
+          "order": 2
+        },
+        {
+          "id": "Alice#2",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "That is not the case. In the case of an encyclopedia, there is a procedure to confirm its accuracy by experts in the relevant field, the so-called \"institutional guarantee.\" However, in the case of \"Bleak House,\" no one is required to verify the claims the author makes within the work.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "\"ⓑ As a publication practice, an institutional guarantee only shows that there was a process of author or content verification, but does not show that the verification was successful.\" Simply reading an encyclopedia does not allow us to know whether such verification procedures were successfully carried out or not.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0017,
+            "entailment": 0.0005,
+            "neutral": 0.9979
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0007,
+            "neutral": 0.9987
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0033,
+            "neutral": 0.9963
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0016,
+            "neutral": 0.9979
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0002,
+            "neutral": 0.9992
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.9944,
+            "neutral": 0.0055
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0013,
+            "neutral": 0.9985
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.999,
+            "entailment": 0.0,
+            "neutral": 0.001
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.9597,
+            "entailment": 0.0042,
+            "neutral": 0.0361
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.009,
+            "neutral": 0.9909
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0003,
+            "neutral": 0.9991
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0017,
+            "entailment": 0.0004,
+            "neutral": 0.9979
+          }
+        }
+      ]
+    },
+    "2021_16": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Elegance is not a property that belongs to Chopin's nocturnes themselves, but merely a subjective impression you have. When I listen to the nocturnes, I just feel bored the whole time.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "If you only felt boredom from listening to the nocturnes, that's because you're only used to hip-hop. Try to follow the delicacy expressed by the piano's tone and the development of the melody. The fact that this piece is elegant is something that anyone with an appropriate capacity for musical appreciation can recognize under normal conditions.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Even if the elegance of the nocturnes isn't just a matter of subjective feeling, I don't think it's correct to say it's a property that anyone can recognize. Isn't it rather that only people belonging to a certain culture, who are used to a particular kind of music, regard the nocturnes as elegant? This is at least unlike properties like the yellow color or round shape of a melon, which are genuinely attributable to the object itself.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Even if only people from a certain group can regard the nocturnes as elegant, I think their elegance should still be seen as a genuine property of the music. After all, yellow is only seen as yellow by people who aren't color-blind, but it's still a real property of the melon, right? In the case of the nocturnes, it's just that only people with appropriate musical sensitivity can perceive the elegance.",
+          "order": 4
+        },
+        {
+          "id": "Charlie#2",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Isn't it a more natural explanation that you two are reacting differently to the nocturnes because you each belong to groups that share different kinds of musical sensitivity? Why should we say that only people who react by calling it elegant are perceiving a real property?",
+          "order": 5
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9766,
+            "entailment": 0.0001,
+            "neutral": 0.0233
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0002,
+            "neutral": 0.9997
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0024,
+            "entailment": 0.2572,
+            "neutral": 0.7404
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie#2",
+          "probs": {
+            "contradiction": 0.0018,
+            "entailment": 0.0005,
+            "neutral": 0.9977
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9982,
+            "entailment": 0.0004,
+            "neutral": 0.0014
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0502,
+            "entailment": 0.0003,
+            "neutral": 0.9495
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0014,
+            "entailment": 0.986,
+            "neutral": 0.0126
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie#2",
+          "probs": {
+            "contradiction": 0.0195,
+            "entailment": 0.0007,
+            "neutral": 0.9798
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0041,
+            "entailment": 0.0006,
+            "neutral": 0.9952
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.999,
+            "entailment": 0.0002,
+            "neutral": 0.0008
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.9915,
+            "neutral": 0.0082
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Charlie#2",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.9866,
+            "neutral": 0.0129
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9983,
+            "entailment": 0.0,
+            "neutral": 0.0016
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9877,
+            "entailment": 0.0007,
+            "neutral": 0.0116
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0256,
+            "neutral": 0.9743
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Charlie#2",
+          "probs": {
+            "contradiction": 0.0585,
+            "entailment": 0.0278,
+            "neutral": 0.9137
+          }
+        },
+        {
+          "src": "Charlie#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9186,
+            "entailment": 0.0002,
+            "neutral": 0.0813
+          }
+        },
+        {
+          "src": "Charlie#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.1544,
+            "entailment": 0.0019,
+            "neutral": 0.8437
+          }
+        },
+        {
+          "src": "Charlie#2",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.001,
+            "neutral": 0.999
+          }
+        },
+        {
+          "src": "Charlie#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0031,
+            "entailment": 0.9811,
+            "neutral": 0.0158
+          }
+        }
+      ]
+    },
+    "2021_17": {
+      "gold_answer": "3",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "If I come to hold a belief based on insufficient evidence, that belief itself may not cause much harm. That belief could ultimately be true, and it might never be externally manifested in actions. However, I cannot avoid committing a crime against humanity by making myself an easy believer. The mere fact that a society holds false beliefs is a serious problem, but a greater problem is that society becomes gullible, loses the habit of examining and carefully investigating evidence, and regresses to a state of barbarism. 'ⓐ To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.' - William Clifford, \"The Ethics of Belief\" -",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "\"Believe the truth!\", \"Avoid error!\" These are the most important commandments for anyone seeking knowledge. However, these are two distinct rules. And depending on which of these one values more, one’s entire intellectual life may differ. One may prioritize the pursuit of truth and see the avoidance of error as secondary, or conversely, consider the avoidance of error most important and the attainment of truth as secondary. Clifford recommends the latter to us. He tells us that, rather than risking the dreadful possibility of believing a falsehood based on insufficient evidence, we should suspend judgment and believe nothing. As for myself, I don’t think I take Clifford’s side. In any case, what we must not forget is that our attitude toward the obligations related to truth or error is grounded not in evidence but in sentiment. People like Clifford, who say \"It is better to never believe than to ever believe something false!\" are merely expressing a fear of being naively deceived.- William James, \"The Will to Believe\" -",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.0006,
+            "neutral": 0.9986
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0014,
+            "entailment": 0.0004,
+            "neutral": 0.9983
+          }
+        }
+      ]
+    },
+    "2021_20": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "It is not clear whether changes in scientific theories constitute \"genuine progress.\" Of course, if we look at the history of science, there have been instances where a successor theory replaced a previous theory by explaining and predicting a greater number of facts. However, this does not serve as grounds for claiming that the successor theory is “truly progressive.” Those cases merely show that the successor theory received more social support or that more scientists participated in its research.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Even if such external factors influenced past achievements of theories, it is not impossible to judge whether real progress has taken place. This is because the judgment of progress depends not only on past achievements but also on future achievements that could be attained. And the potential achievements that a theory may have in the future are not influenced by such external factors.",
+          "order": 2
+        },
+        {
+          "id": "Alice#2",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "It is possible to compare the past performances of theories. However, it is difficult to compare the scope of explanations and predictions they will achieve in the future, that is, the future potential of the theories. This is because we cannot know all the consequences that a theory may have in the future.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "We can often compare the future potential of two theories. For example, for two theories T1 and T2, suppose that we can derive all statements constituting T1 deductively from those of T2, but not vice versa. In that case, T2 will make new predictions in addition to all the predictions of T1. In this case, T2 is “more general” than T1, and therefore has more future potential.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0034,
+            "entailment": 0.0013,
+            "neutral": 0.9953
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0,
+            "entailment": 0.0026,
+            "neutral": 0.9974
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0007,
+            "neutral": 0.9992
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.01,
+            "entailment": 0.6348,
+            "neutral": 0.3552
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0016,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0008,
+            "neutral": 0.9989
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0,
+            "entailment": 0.001,
+            "neutral": 0.9989
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.2016,
+            "entailment": 0.0078,
+            "neutral": 0.7906
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.001,
+            "neutral": 0.9986
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0012,
+            "neutral": 0.9987
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0009,
+            "entailment": 0.0013,
+            "neutral": 0.9978
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0061,
+            "entailment": 0.0015,
+            "neutral": 0.9924
+          }
+        }
+      ]
+    },
+    "2021_24": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "The roles of nature and culture in human development are a matter of debate, with opinions divided as follows.<Opinions>",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "I believe that in order to understand human development, we must start from human nature. This is because there are clear differences between groups, and especially biological characteristics play a decisive role in explaining intergroup differences. In addition, many researchers have proven that differences in intelligence quotient between individuals are due to genetic factors.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community. Because the human species is so homogeneous, I think that insisting on intergroup differences based on biological criteria stems from a misguided motivation to uphold unequal social hierarchies. Social hierarchy only limits human variability; humans can be shaped differently depending on culture or social environment.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9988,
+            "entailment": 0.0001,
+            "neutral": 0.0012
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0776,
+            "entailment": 0.0002,
+            "neutral": 0.9222
+          }
+        }
+      ]
+    },
+    "2021_28": {
+      "gold_answer": "4",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Country X applies the following progressive billing system for monthly household electricity rates.- Tier 1: Usage up to 200 kWh, base charge is 900 won, rate per kWh is 90 won.- Tier 2: Usage over 200 kWh and up to 400 kWh, base charge is 1,600 won, rate per kWh is 180 won.- Tier 3: Usage over 400 kWh, base charge is 7,300 won, rate per kWh is 280 won.For example, a household consuming 300 kWh in a month will pay a base charge of 1,600 won, and rates of 90 won per kWh for Tier 1 and 180 won per kWh for Tier 2, resulting in a total electricity bill of 37,600 won (=1,600 + 200×90 + 100×180).Recently, Country X introduced a “Cool Summer Policy” for electricity used in the summer, changing the tiers to ‘up to 300 kWh’, ‘over 300 kWh up to 450 kWh’, and ‘over 450 kWh’, while maintaining the same rate structure as before in each tier.<Debate>",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "In order to ensure a stable electricity supply, power generation facilities must be able to meet the peak hourly electricity demand. The introduction of the Cool Summer Policy will reduce the stability of electricity supply.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Air conditioning is a necessity, not a luxury. To lower the summer electricity bill burden for most households, it would be better to switch from the Cool Summer Policy to a flat rate system with a base charge of 1,600 won and a per kWh rate of 180 won.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "It is better to focus on welfare for vulnerable groups rather than all households. The Cool Summer Policy should be modified so that it applies only to vulnerable groups.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9341,
+            "entailment": 0.0009,
+            "neutral": 0.065
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.9924,
+            "entailment": 0.0006,
+            "neutral": 0.007
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9742,
+            "entailment": 0.0011,
+            "neutral": 0.0247
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0287,
+            "neutral": 0.9708
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9902,
+            "entailment": 0.0009,
+            "neutral": 0.0089
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0021,
+            "neutral": 0.9975
+          }
+        }
+      ]
+    },
+    "2022_05": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Eighty years ago, Island K was unlawfully occupied by the state, resulting in the forced expulsion of the indigenous resident, Alice, from Island K, after which she struggled to live in a foreign land. If Alice were still alive, she should be compensated for the wrong committed by the state; however, Alice has already passed away. A debate arose as to whether compensation should now be made to Alice's surviving child, Bob. The following arguments were presented:",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Compensation should be given to the person affected by the wrongful act. ⓐ To compensate person S for wrongful act X is to provide S with benefits such that S achieves the standard of living that they would have enjoyed had X not occurred. Compensation should only occur when the victim’s standard of living has been worsened, and only in such cases. Therefore, compensation should be given to Bob to the extent that his standard of living would have been, had the unlawful occupation of Island K eighty years ago not occurred.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "There is a serious problem with Alice’s argument. Had the unlawful occupation of Island K not occurred, Bob’s father would not have met Bob’s mother, but instead would have met another woman, resulting in a completely different child being born—and Bob would not have existed at all. Therefore, it is incorrect to say that Bob would have enjoyed a higher standard of living if the unlawful occupation hadn’t happened; in fact, there is simply no answer to the question of what Bob’s standard of living would have been in that alternate scenario.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "The wrongful act that gives rise to Bob's claim to compensation is not the unlawful occupation of Island K eighty years ago, but rather the fact that, at some point after Bob was born, no compensation was given to Alice for the occupation of Island K. If this had not been the case—in other words, if compensation had been given to Alice for the occupation after Bob was born—then Alice would have been able to provide Bob with better educational opportunities and resources, and Bob would have had a better life. Since such compensation was not given in the past, Bob must be compensated now.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0246,
+            "entailment": 0.0243,
+            "neutral": 0.9511
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0038,
+            "entailment": 0.6638,
+            "neutral": 0.3324
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0179,
+            "entailment": 0.7788,
+            "neutral": 0.2033
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.3524,
+            "neutral": 0.6467
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0019,
+            "entailment": 0.9697,
+            "neutral": 0.0284
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0013,
+            "entailment": 0.2593,
+            "neutral": 0.7394
+          }
+        }
+      ]
+    },
+    "2022_08": {
+      "gold_answer": "2",
+      "category": "Argument Evaluation & Problem Solving",
+      "preamble": "[Regulation] Article 1 (Definition) “Child” refers to a minor. Article 2 (Physical Child Abuse) Anyone who commits an act of physical abuse by assaulting a child or causing harm to his or her physical health and development shall be punished by imprisonment for not more than 5 years. Article 3 (Sexual Child Abuse) Anyone who commits an act of sexual abuse causing sexual humiliation to a child shall be punished by imprisonment for not more than 6 years. <Review Opinions>",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Crimes of child abuse are distinct from general violent crimes in that the guardian, who has a duty of care, inflicts harm upon the person to be protected. Therefore, the child, as the person to be protected, should be excluded from being the subject of the act in Articles 2 and 3, and the subject should be limited to “adults” who are the guardians.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "The [Regulation] aims to thoroughly punish the perpetrators of abuse and thereby provide strong protection for children, who are the victims of various abusive acts. Therefore, the subject of the acts in Articles 2 and 3 should be retained as “anyone” as in the current regulation.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "In relation to sexual acts, child victims cannot be treated in the same way as adult victims who possess sexual self-determination. Therefore, it is reasonable to delete the phrase “causing sexual humiliation” from Article 3.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9993,
+            "entailment": 0.0001,
+            "neutral": 0.0006
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0076,
+            "entailment": 0.0037,
+            "neutral": 0.9887
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9982,
+            "entailment": 0.0003,
+            "neutral": 0.0015
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.9977,
+            "entailment": 0.0001,
+            "neutral": 0.0021
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0192,
+            "entailment": 0.0168,
+            "neutral": 0.964
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9991,
+            "entailment": 0.0001,
+            "neutral": 0.0008
+          }
+        }
+      ]
+    },
+    "2022_12": {
+      "gold_answer": "3",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Country X’s Criminal Act punishes those who steal another person's property as the crime of theft. Regarding the meaning of “property” under the Criminal Act, Alice, Bob, and Charlie are debating as follows.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "I think “property” refers to an “object with economic value,” and here, “economic value” means pure economic value, that is, monetary value. Therefore, under the Criminal Act, property is irrelevant to whether the ownership and transfer of the object are lawful.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "I agree with Alice that property does not necessarily have to be lawfully owned or lawfully traded. However, since “economic value,” which is a conceptual element of property, is subjectively attached by the owner, I think that as long as the owner’s intention to possess is expressed—regardless of whether there is any monetary exchange value—such an object should be seen as property under the Criminal Act.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "For \"economic value,” a conceptual element of property, to be recognized, there must be monetary exchange value. But I believe this is a necessary, not a sufficient, condition. In order for something to be property under the Criminal Act, not only must it have monetary exchange value, but its ownership and transfer must also be lawful.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0007,
+            "entailment": 0.0026,
+            "neutral": 0.9967
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.8247,
+            "entailment": 0.0005,
+            "neutral": 0.1749
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0083,
+            "entailment": 0.0705,
+            "neutral": 0.9212
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.896,
+            "entailment": 0.0007,
+            "neutral": 0.1033
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9991,
+            "entailment": 0.0001,
+            "neutral": 0.0009
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9426,
+            "entailment": 0.0024,
+            "neutral": 0.055
+          }
+        }
+      ]
+    },
+    "2022_16": {
+      "gold_answer": "4",
+      "category": "Argument Evaluation & Problem Solving",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Socrates",
+          "speaker": "Socrates",
+          "label": "Socrates",
+          "text": "Regarding an object, isn’t it that we either know it or do not know it, one of the two? Then, necessarily, a person making a judgment must be judging about something they know or about something they do not know, correct?",
+          "order": 1
+        },
+        {
+          "id": "Theaetetus",
+          "speaker": "Theaetetus",
+          "label": "Theaetetus",
+          "text": "That is necessary.",
+          "order": 2
+        },
+        {
+          "id": "Socrates#2",
+          "speaker": "Socrates",
+          "label": "Socrates",
+          "text": "And it is impossible for someone to both know and not know an object at the same time, or to not know and know at the same time.",
+          "order": 3
+        },
+        {
+          "id": "Theaetetus#2",
+          "speaker": "Theaetetus",
+          "label": "Theaetetus",
+          "text": "That is so.",
+          "order": 4
+        },
+        {
+          "id": "Socrates#3",
+          "speaker": "Socrates",
+          "label": "Socrates",
+          "text": "Then, if someone who makes a false judgment is someone who knows the object of their judgment, does that mean that he considers something he knows not as itself, but as something else that he knows? So, even though he knows both, does he end up not knowing both again?",
+          "order": 5
+        },
+        {
+          "id": "Theaetetus#3",
+          "speaker": "Theaetetus",
+          "label": "Theaetetus",
+          "text": "That is impossible.",
+          "order": 6
+        },
+        {
+          "id": "Socrates#4",
+          "speaker": "Socrates",
+          "label": "Socrates",
+          "text": "If someone who makes a false judgment does not know the object of their judgment, does that mean he thinks of what he does not know as some other thing he does not know? So, is it possible for someone who does not know either you or me to come to the idea that “Socrates is Theaetetus” or “Theaetetus is Socrates”?",
+          "order": 7
+        },
+        {
+          "id": "Theaetetus#4",
+          "speaker": "Theaetetus",
+          "label": "Theaetetus",
+          "text": "How could that be possible?",
+          "order": 8
+        },
+        {
+          "id": "Socrates#5",
+          "speaker": "Socrates",
+          "label": "Socrates",
+          "text": "Indeed, there is never a case where someone considers what they know to be something they do not know, nor is there a case where someone considers what they do not know to be something they know. So then, how could one make a false judgment? Because we either know an object or we do not know it, and in either case, making a false judgment seems impossible.",
+          "order": 9
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Socrates",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0022,
+            "neutral": 0.9976
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.0424,
+            "entailment": 0.0056,
+            "neutral": 0.9521
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.014,
+            "neutral": 0.9855
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0043,
+            "entailment": 0.0203,
+            "neutral": 0.9755
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.9698,
+            "entailment": 0.0004,
+            "neutral": 0.0298
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.006,
+            "entailment": 0.089,
+            "neutral": 0.9049
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.0015,
+            "entailment": 0.0005,
+            "neutral": 0.998
+          }
+        },
+        {
+          "src": "Socrates",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.082,
+            "neutral": 0.9178
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.9829,
+            "neutral": 0.017
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.0009,
+            "entailment": 0.0019,
+            "neutral": 0.9972
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.0018,
+            "entailment": 0.9086,
+            "neutral": 0.0897
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0062,
+            "entailment": 0.2484,
+            "neutral": 0.7454
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.9999,
+            "entailment": 0.0,
+            "neutral": 0.0001
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.0016,
+            "entailment": 0.0064,
+            "neutral": 0.992
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.9927,
+            "entailment": 0.0001,
+            "neutral": 0.0072
+          }
+        },
+        {
+          "src": "Theaetetus",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.0012,
+            "entailment": 0.0377,
+            "neutral": 0.9611
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.9702,
+            "neutral": 0.0295
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0006,
+            "neutral": 0.9989
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.9851,
+            "neutral": 0.0141
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0113,
+            "entailment": 0.0871,
+            "neutral": 0.9016
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.9918,
+            "neutral": 0.008
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.0148,
+            "entailment": 0.0172,
+            "neutral": 0.968
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.0011,
+            "entailment": 0.0031,
+            "neutral": 0.9958
+          }
+        },
+        {
+          "src": "Socrates#2",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.9528,
+            "neutral": 0.0472
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.9159,
+            "neutral": 0.0839
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0008,
+            "neutral": 0.999
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0008,
+            "neutral": 0.9991
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0039,
+            "entailment": 0.1586,
+            "neutral": 0.8375
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.9999,
+            "entailment": 0.0,
+            "neutral": 0.0001
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.0013,
+            "entailment": 0.0087,
+            "neutral": 0.99
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.1473,
+            "entailment": 0.0001,
+            "neutral": 0.8526
+          }
+        },
+        {
+          "src": "Theaetetus#2",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0158,
+            "neutral": 0.9839
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0043,
+            "entailment": 0.9665,
+            "neutral": 0.0292
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0004,
+            "neutral": 0.9992
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.9996,
+            "entailment": 0.0,
+            "neutral": 0.0003
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.0086,
+            "entailment": 0.0026,
+            "neutral": 0.9888
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.998,
+            "entailment": 0.0001,
+            "neutral": 0.0019
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.2041,
+            "entailment": 0.0101,
+            "neutral": 0.7859
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0014,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Socrates#3",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.6114,
+            "entailment": 0.064,
+            "neutral": 0.3246
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0012,
+            "entailment": 0.9107,
+            "neutral": 0.088
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.9992,
+            "entailment": 0.0002,
+            "neutral": 0.0006
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.0,
+            "entailment": 0.0091,
+            "neutral": 0.9909
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.9999,
+            "entailment": 0.0001,
+            "neutral": 0.0001
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0335,
+            "entailment": 0.0898,
+            "neutral": 0.8767
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.0029,
+            "entailment": 0.006,
+            "neutral": 0.9911
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.9947,
+            "entailment": 0.0004,
+            "neutral": 0.0048
+          }
+        },
+        {
+          "src": "Theaetetus#3",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.2633,
+            "neutral": 0.7359
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0152,
+            "entailment": 0.9345,
+            "neutral": 0.0503
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0022,
+            "entailment": 0.0006,
+            "neutral": 0.9972
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.9982,
+            "entailment": 0.0001,
+            "neutral": 0.0017
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.0088,
+            "entailment": 0.0059,
+            "neutral": 0.9853
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.9974,
+            "entailment": 0.0004,
+            "neutral": 0.0022
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.9865,
+            "entailment": 0.0005,
+            "neutral": 0.013
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.0017,
+            "entailment": 0.0478,
+            "neutral": 0.9504
+          }
+        },
+        {
+          "src": "Socrates#4",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.2156,
+            "entailment": 0.3305,
+            "neutral": 0.4539
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.9525,
+            "neutral": 0.0471
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0269,
+            "entailment": 0.0101,
+            "neutral": 0.963
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.9974,
+            "entailment": 0.0002,
+            "neutral": 0.0024
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.9988,
+            "entailment": 0.0003,
+            "neutral": 0.0009
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0078,
+            "entailment": 0.1688,
+            "neutral": 0.8234
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.9994,
+            "entailment": 0.0001,
+            "neutral": 0.0004
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.0018,
+            "entailment": 0.0055,
+            "neutral": 0.9927
+          }
+        },
+        {
+          "src": "Theaetetus#4",
+          "dst": "Socrates#5",
+          "probs": {
+            "contradiction": 0.0014,
+            "entailment": 0.1815,
+            "neutral": 0.8172
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Socrates",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.988,
+            "neutral": 0.0118
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Theaetetus",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0019,
+            "neutral": 0.998
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Socrates#2",
+          "probs": {
+            "contradiction": 0.0108,
+            "entailment": 0.8251,
+            "neutral": 0.164
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Theaetetus#2",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.9913,
+            "neutral": 0.0084
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Socrates#3",
+          "probs": {
+            "contradiction": 0.0054,
+            "entailment": 0.0287,
+            "neutral": 0.9658
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Theaetetus#3",
+          "probs": {
+            "contradiction": 0.0052,
+            "entailment": 0.0164,
+            "neutral": 0.9784
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Socrates#4",
+          "probs": {
+            "contradiction": 0.0007,
+            "entailment": 0.0102,
+            "neutral": 0.9891
+          }
+        },
+        {
+          "src": "Socrates#5",
+          "dst": "Theaetetus#4",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.9562,
+            "neutral": 0.0434
+          }
+        }
+      ]
+    },
+    "2022_18": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "My child, the exam is tomorrow. Why aren't you studying?",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Mother, that’s a good question. I have chosen not to study.",
+          "order": 2
+        },
+        {
+          "id": "Alice#2",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Could you give a convincing explanation as to why you’ve made such a surprising choice?",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "The exam I am taking is designed to rank all test-takers from first to last place. I found out that other test-takers are happy even if their rank goes up just a little. But I do not feel any joy when my rank goes up. And I want more people to experience happiness. So, wouldn't my not studying make other test-takers happy? If I don't study, more students will move up in the rankings. Therefore, not studying is justified.",
+          "order": 4
+        },
+        {
+          "id": "Alice#3",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "You’re saying that just by not studying, you can somehow cause others to be happy? It seems to me you’re making a remarkable claim that you can do nothing and yet make others happy. If others are happy because of their own rank, isn't that because they studied? It has nothing to do with you not doing anything.",
+          "order": 5
+        },
+        {
+          "id": "Bob#3",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "That's not true, Mother. If I were to study, more people would get a score lower than mine, compared to if I did not study. In that case, wouldn’t my effort take away their chance to experience happiness?",
+          "order": 6
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0017,
+            "neutral": 0.9978
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0008,
+            "neutral": 0.9991
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0151,
+            "entailment": 0.0011,
+            "neutral": 0.9838
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#3",
+          "probs": {
+            "contradiction": 0.4524,
+            "entailment": 0.0104,
+            "neutral": 0.5372
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#3",
+          "probs": {
+            "contradiction": 0.2317,
+            "entailment": 0.0001,
+            "neutral": 0.7682
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0018,
+            "neutral": 0.9979
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0002,
+            "neutral": 0.9996
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0023,
+            "entailment": 0.002,
+            "neutral": 0.9957
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#3",
+          "probs": {
+            "contradiction": 0.5749,
+            "entailment": 0.0045,
+            "neutral": 0.4207
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#3",
+          "probs": {
+            "contradiction": 0.3122,
+            "entailment": 0.0001,
+            "neutral": 0.6876
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9809,
+            "entailment": 0.0001,
+            "neutral": 0.019
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0019,
+            "entailment": 0.0001,
+            "neutral": 0.998
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0028,
+            "entailment": 0.0015,
+            "neutral": 0.9957
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice#3",
+          "probs": {
+            "contradiction": 0.8844,
+            "entailment": 0.0029,
+            "neutral": 0.1127
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#3",
+          "probs": {
+            "contradiction": 0.0011,
+            "entailment": 0.0002,
+            "neutral": 0.9987
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9169,
+            "entailment": 0.0003,
+            "neutral": 0.0828
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0011,
+            "entailment": 0.0004,
+            "neutral": 0.9984
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0007,
+            "entailment": 0.0003,
+            "neutral": 0.999
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#3",
+          "probs": {
+            "contradiction": 0.0753,
+            "entailment": 0.106,
+            "neutral": 0.8187
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob#3",
+          "probs": {
+            "contradiction": 0.9951,
+            "entailment": 0.0004,
+            "neutral": 0.0045
+          }
+        },
+        {
+          "src": "Alice#3",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.5112,
+            "entailment": 0.0012,
+            "neutral": 0.4876
+          }
+        },
+        {
+          "src": "Alice#3",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0021,
+            "entailment": 0.0014,
+            "neutral": 0.9965
+          }
+        },
+        {
+          "src": "Alice#3",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.001,
+            "neutral": 0.9989
+          }
+        },
+        {
+          "src": "Alice#3",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.006,
+            "entailment": 0.0016,
+            "neutral": 0.9924
+          }
+        },
+        {
+          "src": "Alice#3",
+          "dst": "Bob#3",
+          "probs": {
+            "contradiction": 0.9931,
+            "entailment": 0.0007,
+            "neutral": 0.0063
+          }
+        },
+        {
+          "src": "Bob#3",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.2016,
+            "entailment": 0.0002,
+            "neutral": 0.7982
+          }
+        },
+        {
+          "src": "Bob#3",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0165,
+            "entailment": 0.0027,
+            "neutral": 0.9809
+          }
+        },
+        {
+          "src": "Bob#3",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0001,
+            "neutral": 0.9995
+          }
+        },
+        {
+          "src": "Bob#3",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0584,
+            "entailment": 0.002,
+            "neutral": 0.9396
+          }
+        },
+        {
+          "src": "Bob#3",
+          "dst": "Alice#3",
+          "probs": {
+            "contradiction": 0.966,
+            "entailment": 0.0104,
+            "neutral": 0.0235
+          }
+        }
+      ]
+    },
+    "2022_22": {
+      "gold_answer": "4",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Predicates related to people’s tastes, such as “delicious” or “fun,” are called taste predicates. Regarding sentences containing taste predicates, Alice and Bob had the following debate.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "The sentence “Gopchang is delicious” always grammatically includes the hidden phrase “to x.” Here, ‘x’ is a variable whose value is filled by the speaker in a given context. For example, if Jiwoo, who finds gopchang delicious, says, “Gopchang is delicious,” Jiwoo’s statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion. On the other hand, if Youngho, who does not like gopchang, says the same sentence, Youngho’s statement expresses the different proposition <Gopchang is delicious to Youngho>, which becomes a false assertion.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "When Jiwoo says “Gopchang is delicious,” Youngho can respond by saying “No, gopchang is not delicious!” and then the two would start to argue about it. But if Alice’s view is correct, then Jiwoo merely expresses the proposition <Gopchang is delicious to Jiwoo> and Youngho is expressing the denial of a different proposition, so they are not really engaging in a genuine dispute. However, clearly in such situations the two can have a real argument, which shows there is a serious problem with Alice’s view. To resolve this, we should take the sentence “Gopchang is delicious” to express the proposition <Gopchang is delicious>, regardless of who says it.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0164,
+            "entailment": 0.001,
+            "neutral": 0.9826
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0069,
+            "entailment": 0.0022,
+            "neutral": 0.9909
+          }
+        }
+      ]
+    },
+    "2022_26": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Suppose a person P has the ability to either perform or not perform the act of eating meat (Act A) and the act of donating to an animal protection organization (Act B), and for convenience, assume there are no other possible acts. If we disregard any mutual influence between performing A and B and only consider the outcome of each act individually, performing A leads to a bad outcome (－80), and performing B leads to a good outcome (+100). If neither A nor B is performed, the outcome is 0 for each. In this case, there will be four 'action combinations' consisting of acts that P may or may not perform. Each combination also has its own outcome value, which is the sum of the outcomes of the acts comprising the combination. For instance, if P performs A but does not perform B, the outcome value of that action combination is the lowest among the four combinations, －80. If certain conditions are met, all acts belonging to that action combination are permitted, so even A, which independently carries a negative outcome value, could be permissible. Regarding the condition under which acts belonging to an action combination are permitted, Alice, Bob, and Charlie respectively assert the following:",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "A person's act is permissible only if it belongs to the combination among the possible action combinations, as determined by their abilities, that yields the maximum outcome value, and only in that case.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "A person's act is permissible only if it belongs to the combination among those the person is actually inclined to carry out in reality that yields the maximum outcome value, and only in that case. However, although P can in fact choose whether or not to perform A and whether or not to perform B, the combination where P does not perform A but performs B is never a combination that P would choose in reality.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "A person's act is permissible only if it belongs to any of the combinations, among those possible based on their abilities, whose outcome value is 0 or positive, and only in that case.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.997,
+            "neutral": 0.0029
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.997,
+            "neutral": 0.0029
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.9971,
+            "neutral": 0.0028
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.9971,
+            "neutral": 0.0028
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.997,
+            "neutral": 0.0029
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.997,
+            "neutral": 0.0029
+          }
+        }
+      ]
+    },
+    "2023_03": {
+      "gold_answer": "4",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "The truth that should be pursued in criminal procedure is the substance of the case, that is, the “objective truth.” Moreover, in order to discover the objective truth, the judge’s active involvement and investigative activities are necessary, no less than those of the parties to the case (defendant, prosecutor). Therefore, if it is necessary for discovering the truth and there is no significant procedural violation, the judge can also directly collect or investigate evidence without being restricted by the claims or requests of the parties.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "The “substance of the case” or “objective truth” can only be known by God (or an absolute being). Even the conclusion reached by the judge based on the facts and evidence presented by the parties is, strictly speaking, no more than the judge’s subjective truth. The reason why the judge’s subjective truth is trusted and given normative force under the name of a “judgment” is because it is not merely an individual’s subjective truth, but a conclusion derived through a fair criminal procedure. Therefore, what should be pursued in criminal procedure is the “truth through procedure,” and, to that end, the parties must be guaranteed a fair opportunity to contest the truth in court. At this time, the judge’s role should be to interpret, apply, and observe procedure fairly and strictly in order to ensure the truth. In other words, the judge should perform the role of an adjudicator from the neutral position of a third party, making decisions based on the arguments and proof presented by the parties within the prescribed procedure.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Objective truth exists, and criminal procedure is a process established to approach such objective truth as closely as possible. Accordingly, I basically agree that criminal procedure should pursue objective truth by clearly revealing the facts of the case. However, the discovery of objective truth should be entrusted entirely to the parties’ submission and proof of evidence, and it is undesirable for the judge to intervene directly and actively in this process of discovering the truth. Therefore, as a rule, the judge should perform the role of a neutral adjudicator as a third party; however, since objective truth obtained through human rights violations cannot acquire legitimacy, the judge also has the role and duty to supervise the criminal procedure so that human rights violations do not occur in its course and to rectify them if they do occur.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.6232,
+            "entailment": 0.0156,
+            "neutral": 0.3612
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.9949,
+            "entailment": 0.0001,
+            "neutral": 0.005
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.001,
+            "entailment": 0.0009,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0032,
+            "entailment": 0.0458,
+            "neutral": 0.951
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0313,
+            "entailment": 0.0004,
+            "neutral": 0.9683
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.9915,
+            "neutral": 0.0081
+          }
+        }
+      ]
+    },
+    "2023_08": {
+      "gold_answer": "4",
+      "category": "Argument Analysis",
+      "preamble": "\"Mediation\" refers to facilitating convenience between a person and their counterpart by brokering certain matters. Article A of Country X’s \"Criminal Law\" punishes specific acts of mediation.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Even people without the status of public officials can use personal influence such as alumni or regional ties to affect the duties of public officials, so Article A punishes mediation by such people as well.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Because protecting public trust in the execution of public officials' duties is important, Article A punishes those who pursue their own interests under the guise of mediation concerning a public official’s duty, regardless of whether they actually performed mediation.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "There is no need to prohibit bona fide mediation acts, so Article A prohibits mediation concerning a public official’s duty undertaken for one’s own interests. In this case, for preventive effect, Article A also compels those involved in mediation not to retain any property acquired in connection with the mediation.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0035,
+            "neutral": 0.9962
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0013,
+            "entailment": 0.0002,
+            "neutral": 0.9985
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0014,
+            "entailment": 0.0093,
+            "neutral": 0.9893
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0002,
+            "neutral": 0.9993
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0043,
+            "entailment": 0.0012,
+            "neutral": 0.9944
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0059,
+            "neutral": 0.994
+          }
+        }
+      ]
+    },
+    "2023_13": {
+      "gold_answer": "3",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Risks may sometimes materialize and sometimes not. Investing in stocks involves the risk of losing the principal, and in reality, there are occasions when this risk is realized and principal loss occurs, and times when it does not. The kind of risk that does not materialize, as in the latter case, is called “pure risk.” Alice, Bob, Charlie, and Diane are having a debate about whether an act that only imposes pure risk on others is morally wrong.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "An act that imposes risk on others is, in itself, morally wrong regardless of whether the risk materializes. Anyone who is exposed to a risk inevitably suffers some harm. Think of a passenger riding on a plane with a risk of crashing due to poor maintenance. Even if the risk of a crash does not materialize and the person was unaware of the risk, you can still say the passenger was harmed merely by being exposed to a life-threatening situation for an extended period.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "But it is wrong to indiscriminately condemn acts that impose pure risk as morally wrong. The only cases in which such acts can be judged morally wrong are those in which, had the person known about the risk, their autonomous choice of action could have been different.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "That’s not right. If you limit the scope in that way, you’ll have a lot of cases that go against our intuition. Sometimes, imposing pure risk on people who are in a coma or on infants can also be morally wrong. But such people lack the capacity for autonomous choice in the first place, so there wouldn’t be any change in their decisions, would there?",
+          "order": 3
+        },
+        {
+          "id": "Diane",
+          "speaker": "Diane",
+          "label": "Diane",
+          "text": "I have a different view. Imagine a car that runs a red light, and a pedestrian narrowly avoids being hit. Even though the risk of a traffic accident did not materialize, the pedestrian could have experienced considerable psychological trauma. In cases of pure risk, I think we should only judge the act as morally wrong when some kind of incidental harm has actually occurred, as in this scenario.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0028,
+            "entailment": 0.0006,
+            "neutral": 0.9967
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0016,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Diane",
+          "probs": {
+            "contradiction": 0.0031,
+            "entailment": 0.0033,
+            "neutral": 0.9936
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0027,
+            "entailment": 0.0047,
+            "neutral": 0.9926
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.001,
+            "neutral": 0.9985
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Diane",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0057,
+            "neutral": 0.9942
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0049,
+            "neutral": 0.9947
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0007,
+            "neutral": 0.9987
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Diane",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0012,
+            "neutral": 0.9985
+          }
+        },
+        {
+          "src": "Diane",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0017,
+            "entailment": 0.0083,
+            "neutral": 0.99
+          }
+        },
+        {
+          "src": "Diane",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0009,
+            "neutral": 0.9989
+          }
+        },
+        {
+          "src": "Diane",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0007,
+            "neutral": 0.999
+          }
+        }
+      ]
+    },
+    "2023_14": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "It’s not physically possible to harm a dead person, but there are cases where people mistakenly think that something can still benefit or harm them. For example, viciously spreading false rumors about someone who has died does not actually harm them. However, it can still hurt the feelings of living people related to them, such as descendants or others who admired them.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "But why do living people feel hurt? It’s because they think the vicious rumour harmed the deceased as well. Suppose, for instance, a mother adamantly declared during her lifetime that she would never sell the house she lived in, and wished for it not to be sold even after her death. After the mother passes away, her daughter inherits the house and, following her mother's wishes, does not intend to sell it. The reason for this is that she believes selling it would go against her mother’s wishes. In this case, the daughter's action fulfills a desire her mother had in life but which no longer exists. Isn’t it beneficial to someone to have their desires satisfied, regardless of whether they are alive or dead?",
+          "order": 2
+        },
+        {
+          "id": "Alice#2",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "I don’t think so. Whether the desire existed in the past or it's a desire for the future, any desire that no longer exists cannot be beneficial to that person, whenever it might be fulfilled. The daughter's action should not be considered beneficial or harmful to her deceased mother.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Then what about this case? Parents, thinking about their 20-year-old son’s future, advise him to get a professional license. The son, however, currently has no desire for money and prefers volunteer work. The parents predict that in a few years, he will surely change his mind and want money, and they say that he will regret not having gotten the license when that time comes. After much consideration, the son, though he still does not desire money, agrees with his parents' prediction and judges that what he should do now is to obtain the license.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0014,
+            "neutral": 0.9983
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0007,
+            "neutral": 0.999
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0004,
+            "neutral": 0.9994
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0013,
+            "neutral": 0.9984
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.9761,
+            "neutral": 0.0236
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0013,
+            "neutral": 0.9983
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0002,
+            "neutral": 0.9995
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0013,
+            "entailment": 0.0078,
+            "neutral": 0.9908
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.001,
+            "neutral": 0.9985
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0004,
+            "neutral": 0.9991
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.0012,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0541,
+            "entailment": 0.0021,
+            "neutral": 0.9438
+          }
+        }
+      ]
+    },
+    "2023_15": {
+      "gold_answer": "4",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "There is a debate about which method should be chosen to design an artificial intelligence robot that predicts human behavior.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "People believe that human behavior can be successfully predicted through an understanding of humans’ internal states. However, we do not know exactly what method is needed to understand internal states that cannot be directly observed. Therefore, a way to predict human behavior without understanding internal states is needed. The method we can take in this case is to design the AI robot so that it can discover sophisticated patterns on its own, using big data, regarding which actions humans take in given situations.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Alice’s method cannot be seen as one that can successfully predict human behavior. Human behavior, which is based on countless 'what if...' assumptions, requires a different approach in order to be predicted accurately. To improve the chances of successful prediction, it is necessary to pre-input the possible behaviors in given situations. All humans have a tendency to act according to social norms to avoid disadvantages. Therefore, if information about norms restricting human actions is entered when designing the AI robot, it will increase the success rate of predicting human behavior.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Even if we follow the methods proposed by Alice and Bob, it is difficult to predict human behavior successfully. Human actions are caused by various internal states. Thus, even if we apply both Alice's and Bob’s methods, predictions can still be wrong. Sometimes humans, even when aware of which actions are disadvantageous to themselves, do not follow norms due to stronger internal desires. Therefore, even if the design process becomes complex and inefficient, it should be designed to predict human behavior by considering not only normative information but also internal states such as intentions and desires.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0035,
+            "entailment": 0.0003,
+            "neutral": 0.9963
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0011,
+            "entailment": 0.0011,
+            "neutral": 0.9978
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0019,
+            "entailment": 0.0004,
+            "neutral": 0.9977
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0007,
+            "entailment": 0.0013,
+            "neutral": 0.998
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0034,
+            "entailment": 0.0005,
+            "neutral": 0.9961
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0104,
+            "entailment": 0.0021,
+            "neutral": 0.9875
+          }
+        }
+      ]
+    },
+    "2023_18": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "In the novel \"A Study in Scarlet,\" the statement \"Holmes is a detective\" appears explicitly, so the proposition <Holmes is a detective> is explicitly true in this novel. However, nowhere in \"A Study in Scarlet\" is there any explicit statement about the number of Holmes’s nostrils. Nevertheless, it is common knowledge that Holmes is a human within the work, and humans generally have two nostrils, so a proposition such as <Holmes has two nostrils> would also be true in \"A Study in Scarlet.\" In fact, although not expressed explicitly, there are many propositions that are implicitly true in \"A Study in Scarlet,\" such as <The earth is round> and <All humans die>.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Accepting that there are propositions that are implicitly true in fiction leads to unreasonable consequences. First, let’s note that sequels to fictional works can exist. Sequels have the power to determine the truth of things not made explicit in the original work. For example, in the novel \"The Hobbit,\" it is not specified what kind of ring Bilbo possesses, but in its sequels, \"The Lord of the Rings\" series, it is made explicit that the ring is the One Ring. In this case, it is reasonable to regard the proposition that Bilbo’s ring is the One Ring as true even in \"The Hobbit.\" Now, suppose the following. Conan Doyle writes a sequel to \"A Study in Scarlet\" titled \"A Study in Red,\" and in that novel there is an explicit statement: \"In fact, Holmes, who had had three nostrils since birth, was able to smell very well.\" Then it would also be reasonable to see the proposition <Holmes has three nostrils> as explicitly true not only in \"A Study in Red\" but also in \"A Study in Scarlet.\" However, if <Holmes has two nostrils> is implicitly true in \"A Study in Scarlet,\" then Holmes must have both two and three nostrils at the same time in \"A Study in Scarlet.\" This is clearly an unreasonable consequence. Therefore, one can conclude that there is no such thing as implicit truth in fiction in addition to explicit truth.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.4045,
+            "entailment": 0.0007,
+            "neutral": 0.5948
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0219,
+            "entailment": 0.0004,
+            "neutral": 0.9776
+          }
+        }
+      ]
+    },
+    "2023_20": {
+      "gold_answer": "3",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "A lie is a statement made with the intention of making the other person believe a falsehood as if it were true. In contrast, a statement that is true but easily misunderstood by the listener is called a “misleading statement.” Should a misleading statement be morally less blameworthy just because it is true, compared to a lie?",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Not necessarily. That’s because a lie can be made even without the intention to deceive the other person. For example, suppose everyone knows that A is a murderer, and A too knows that everyone thinks so, but A brazenly insists, “I am not a murderer.”",
+          "order": 2
+        },
+        {
+          "id": "Alice#2",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Let's compare the case where A, who actually killed B, lies by saying “I did not kill B,” and the case where A makes a misleading statement by saying “I risked my life to save B twice.” In both cases, A intends to make the listener believe that A is not a murderer, so in that respect, both involve the intention to make the listener believe a falsehood. That’s why I think misleading statements and lies are equally wrong.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "While misleading statements are always wrong in that they are intended to deceive the listener despite being true, lies are not always so. If the mere fact that what someone says turns out to be false is itself morally blameworthy, then scientists would have to be said to be doing something wrong, since some of their predictions later turn out to be false. However, if the scientist sincerely said something at the time, they cannot be morally blamed simply because it turns out to be false later.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0018,
+            "entailment": 0.0014,
+            "neutral": 0.9968
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.018,
+            "entailment": 0.0031,
+            "neutral": 0.9789
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0023,
+            "neutral": 0.9971
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0017,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.9348,
+            "entailment": 0.0006,
+            "neutral": 0.0646
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0037,
+            "neutral": 0.996
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0026,
+            "entailment": 0.0011,
+            "neutral": 0.9963
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.8944,
+            "entailment": 0.0003,
+            "neutral": 0.1054
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0016,
+            "entailment": 0.0033,
+            "neutral": 0.9951
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0255,
+            "neutral": 0.9742
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0106,
+            "neutral": 0.9891
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0019,
+            "entailment": 0.0132,
+            "neutral": 0.9849
+          }
+        }
+      ]
+    },
+    "2023_23": {
+      "gold_answer": "5",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "According to Theory A on pleasure, pleasure is a kind of sensation that we like—in other words, pleasure itself—while pain is an unpleasant sensation that we dislike. On the other hand, according to Theory B, pleasure has nothing to do with the sensation we feel; rather, it arises when a subject’s abilities and relevant conditions are well-matched with the object in which those abilities are exercised. In summary, to act with pleasure means that the subject is performing work that matches their ability under good conditions and doing so excellently. In contrast, pain arises when the subject’s ability and conditions are not well-matched with the object of their ability. Theory A appeals to the feeling that accompanies pleasure and pain, which gives it intuitive persuasive power. However, Theory B argues that pleasure and pain should not be explained as sensations, but rather by the fitness that characterizes pleasurable or painful activity. In a recent interview, three exceptional mathematicians—Alice, Bob, and Charlie—who solved a long-standing mathematical problem, spoke as follows about the pleasure of mathematics.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "I had been preparing for a long time to solve this age-old problem. I worked on it systematically and focused all my efforts. Of course, there were many challenges and moments of frustration. At times, it was painful. But believing in myself and the process of solving the problem was truly a pleasurable experience.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "After years of intensive effort, I finally solved this problem. That moment was exhilarating—because I had worked so hard for it. However, the pain I felt during the long period of confusion outweighed that moment of pleasure. In fact, I feel more pleasure when I solve many easy problems that don’t require concentration.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Do I find mathematics pleasurable? Just as there are no students who study simply because they love studying, for me, mathematics is just a job. Especially when I wrestled with difficult problems, it was painful. I worked hard out of a sense of duty, which made me good at mathematics, and in the end, I was able to solve that problem through focused effort.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.022,
+            "neutral": 0.9779
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0358,
+            "neutral": 0.964
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0011,
+            "neutral": 0.9988
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0656,
+            "neutral": 0.9342
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0011,
+            "neutral": 0.9988
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0189,
+            "neutral": 0.981
+          }
+        }
+      ]
+    },
+    "2023_35": {
+      "gold_answer": "4",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "A program X has been developed that can engage in everyday Korean conversation. Alice, Bob, and Charlie are debating whether there is a fundamental difference between X's Korean language ability and that of a native Korean speaker.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Let’s suppose there is an Englishman named Roy who can remember everything he hears. To Roy, who knows no Korean at all, we play all the possible everyday Korean conversations that X can produce. Now, Roy has memorized virtually every possible combination of sequentially related Korean words and sentences that might occur in daily conversation. Any ordinary Korean who converses with Roy would think that Roy’s Korean is fluent. However, Roy does not understand the meaning of Korean. Since X’s Korean ability is similar to Roy’s, there is a fundamental difference between X and native speakers of Korean in terms of Korean language ability.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Let’s assume that a neuroscientist named Minsoo has implanted a neural program into his brain. This neural program is designed to find solutions to various equations using mathematical symbols, such as numbers and operators, and it works so that as soon as Minsoo looks at a formula, the solution immediately appears in his consciousness. There is essentially no difference between Minsoo obtaining answers to equations directly and the neural program doing so. However, unlike Minsoo, the neural program itself does not understand the meaning of mathematical symbols—for example, the meaning of the numeral 0. The way X uses Korean is, in principle, no different from the way the neural program solves mathematical equations. Therefore, X’s Korean language ability and the neural program’s mathematical ability are similar. Thus, X and native Korean speakers are fundamentally the same in terms of Korean language ability.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "Of course, X itself does not understand the meaning of Korean. But let’s consider Robot R, which is equipped with X, and can perceive the world and act accordingly through various sensory sensors. In this case, for example, if R actually sees a real sweet potato, the symbol 'sweet potato' would be activated in R’s electronic brain. Not only can R engage in everyday Korean conversation, it can also appropriately respond to real objects or phenomena indicated by Korean words or sentences. Understanding the meaning of Korean doesn’t seem to be any different from this.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9371,
+            "entailment": 0.0205,
+            "neutral": 0.0424
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0203,
+            "entailment": 0.0142,
+            "neutral": 0.9655
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.8501,
+            "entailment": 0.0271,
+            "neutral": 0.1228
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0039,
+            "entailment": 0.022,
+            "neutral": 0.9741
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0853,
+            "entailment": 0.0494,
+            "neutral": 0.8653
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.006,
+            "entailment": 0.0536,
+            "neutral": 0.9404
+          }
+        }
+      ]
+    },
+    "2024_15": {
+      "gold_answer": "5",
+      "category": "Argument Evaluation & Analysis",
+      "preamble": "Let’s suppose there are three worlds, A, B, and C. A: 100 million people live here. Each of them enjoys a high welfare level of 100 units. B: 10 billion people live here, each enjoying a modest yet worthwhile welfare level of 5 units. Then, 100 million people who were living in A migrate to B. The 100 million migrants from A enjoy a welfare level of 105 units each. The original 10 billion inhabitants of B continue to enjoy 5 units of welfare each. C: All 10.1 billion people residing in B migrate to C, where previously no one lived. All 10.1 billion inhabitants of C enjoy a welfare level of 10 units each. <Opinions>",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "The people who migrated from A to B now have a higher level of welfare than when they lived in A. Additionally, the remaining people in B continue to enjoy their worthwhile welfare level of 5 units each. Therefore, B is better than A.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "In C, there is complete equality, and the average welfare in C is also higher than in B. Therefore, C is better than B.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "The total sum of welfare is greater in C than in A, but the average welfare is higher in A than in C. Therefore, A is better than C.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0704,
+            "entailment": 0.0097,
+            "neutral": 0.92
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.9967,
+            "entailment": 0.0009,
+            "neutral": 0.0023
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0053,
+            "entailment": 0.3961,
+            "neutral": 0.5985
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.9961,
+            "entailment": 0.0013,
+            "neutral": 0.0026
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9956,
+            "entailment": 0.0012,
+            "neutral": 0.0033
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9974,
+            "entailment": 0.0004,
+            "neutral": 0.0023
+          }
+        }
+      ]
+    },
+    "2024_18": {
+      "gold_answer": "5",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice1",
+          "speaker": "Alice",
+          "label": "Alice1",
+          "text": "The symbol 'dog' written on paper is about dogs. Likewise, our thought-of-dog in our heads is also about dogs. But just as it's tricky to explain why the arbitrary symbol 'dog' is about dogs, it's also tricky to explain how the thought-of-dog is about dogs.",
+          "order": 1
+        },
+        {
+          "id": "Bob1",
+          "speaker": "Bob",
+          "label": "Bob1",
+          "text": "That’s simple to explain. If object X causally triggers a certain thought, and if that thought is causally triggered only when X exists, then the thought is about X. Think about something like the elevator indicator. The 7th-floor indicator turns on when, and only when, the elevator reaches the 7th floor. In the same way that the 7th-floor indicator is about the 7th floor, the thought-of-dog is about dogs.",
+          "order": 2
+        },
+        {
+          "id": "Alice2",
+          "speaker": "Alice",
+          "label": "Alice2",
+          "text": "Your view isn’t satisfactory. For example, suppose Charlie sees a dog. The causal chain from the dog to Charlie’s thought-of-dog is very long. Light reflects off the dog’s fur and enters Charlie’s retina. The retina is activated in a specific pattern, and that information is delivered through the optic nerve to the brain. Finally, the thought-of-dog is formed deep in Charlie’s brain. Let’s call “pattern of activation on Charlie’s retina” ‘d-pattern.' Then we could say that it is the d-pattern—not the dog itself—that causally triggers, and only triggers, Charlie’s thought-of-dog.",
+          "order": 3
+        },
+        {
+          "id": "Bob2",
+          "speaker": "Bob",
+          "label": "Bob2",
+          "text": "But if you trace back the causal chain leading to that d-pattern, at the very end there is always the dog itself. So Charlie’s thought-of-dog is still about the dog; nothing changes.",
+          "order": 4
+        },
+        {
+          "id": "Alice3",
+          "speaker": "Alice",
+          "label": "Alice3",
+          "text": "Then let’s say on a foggy evening Charlie mistakes a sheep for a dog and thinks, “There’s a dog beyond that fog.” Now Charlie’s thought-of-dog has been triggered by a sheep, whereas in a normal situation, it would have been triggered by an actual dog, not a sheep. The thought-of-dog can be caused either by the sheep or by the dog. So you’d have to say the thought-of-dog is triggered by a dog-or-sheep. Therefore, if your view is correct, Charlie’s thought-of-dog would be about not the dog, but the object dog-or-sheep.",
+          "order": 5
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice1",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.9995,
+            "entailment": 0.0002,
+            "neutral": 0.0003
+          }
+        },
+        {
+          "src": "Alice1",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.0007,
+            "neutral": 0.9985
+          }
+        },
+        {
+          "src": "Alice1",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.002,
+            "neutral": 0.9974
+          }
+        },
+        {
+          "src": "Alice1",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.0015,
+            "entailment": 0.0206,
+            "neutral": 0.9779
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.9912,
+            "entailment": 0.0006,
+            "neutral": 0.0082
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.9905,
+            "entailment": 0.0002,
+            "neutral": 0.0093
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0015,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Bob1",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.006,
+            "entailment": 0.3966,
+            "neutral": 0.5974
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0017,
+            "neutral": 0.998
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.0149,
+            "entailment": 0.0028,
+            "neutral": 0.9823
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0011,
+            "entailment": 0.0005,
+            "neutral": 0.9984
+          }
+        },
+        {
+          "src": "Alice2",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.0057,
+            "entailment": 0.0108,
+            "neutral": 0.9835
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0022,
+            "neutral": 0.9977
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.0069,
+            "entailment": 0.0095,
+            "neutral": 0.9836
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.144,
+            "entailment": 0.0009,
+            "neutral": 0.8551
+          }
+        },
+        {
+          "src": "Bob2",
+          "dst": "Alice3",
+          "probs": {
+            "contradiction": 0.0021,
+            "entailment": 0.0975,
+            "neutral": 0.9003
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Alice1",
+          "probs": {
+            "contradiction": 0.001,
+            "entailment": 0.0077,
+            "neutral": 0.9912
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Bob1",
+          "probs": {
+            "contradiction": 0.0876,
+            "entailment": 0.0397,
+            "neutral": 0.8727
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Alice2",
+          "probs": {
+            "contradiction": 0.9916,
+            "entailment": 0.0006,
+            "neutral": 0.0079
+          }
+        },
+        {
+          "src": "Alice3",
+          "dst": "Bob2",
+          "probs": {
+            "contradiction": 0.0814,
+            "entailment": 0.0041,
+            "neutral": 0.9145
+          }
+        }
+      ]
+    },
+    "2024_19": {
+      "gold_answer": "5",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Every proposition concerns only one subject of discourse, such as mathematics or ethics, and there is no proposition that is about nothing. Furthermore, a proposition is true or false only relative to the subject of discourse it concerns. Therefore, it is inappropriate to simply say, \"Proposition p is true\" or \"Proposition q is false.\" Instead, we should say things like \"Proposition p is mathematically true\" or \"Proposition q is ethically false.\" A proposition is not true in relation to any subject of discourse other than its own. That is, an ethical proposition p is not mathematically true. However, according to the Law of Excluded Middle, every proposition is either true or false. In other words, if a proposition is not true, then it is false, and if it is not false, then it is true. At a glance, my view seems to conflict with the Law of Excluded Middle, because a proposition can be mathematically true without being ethically true. However, it is a contradiction to say that a proposition is both mathematically true and not mathematically true, but it is not a contradiction to say that it is mathematically true and not ethically true.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "That’s not so. A contradiction arises if you accept both your view and the Law of Excluded Middle. Let’s call the proposition “Murder is wrong” r. Since r is an ethical proposition, it is not mathematically true. According to your view, all truth and falsity are relative to a subject of discourse, so the statement “r is not mathematically true” is also true relative to some specific subject of discourse. Since it is clear that the truth/falsity of a value judgement about murder is not a mathematical subject, let’s assume that the statement “r is not mathematically true” belongs to the subject of ethics. By our assumption, “r is not mathematically true” is ethically true. However, in your view, since every proposition belongs to only one subject of discourse, an ethically true proposition is not mathematically true. Therefore, the statement “r is not mathematically true” is not mathematically true. But, according to the Law of Excluded Middle, for any proposition p, if “p is not true” is not true, then p is true. Therefore, r is mathematically true. This contradicts our assumption that r is not mathematically true.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.3101,
+            "entailment": 0.179,
+            "neutral": 0.5109
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0568,
+            "entailment": 0.0899,
+            "neutral": 0.8533
+          }
+        }
+      ]
+    },
+    "2024_20": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Humans interact with the world based on perception. However, sometimes humans perceive objects incorrectly. The ability to perceive in a way that accurately corresponds to the external world was important in human evolution, as it can make a difference in actual behavior. That's why distinguishing between accurate representation and misrepresentation is important.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "With perception alone, we cannot distinguish between accurate representation and misrepresentation. Visual perception is determined only by the information delivered to the retina. At this time, there may be multiple external objects corresponding to the same perception, but we cannot know which one is the real one. For example, a brownish-yellow surface is perceived as a neutral yellow when its surroundings are red, and a greenish-yellow surface is also perceived as neutral yellow when its surroundings are green. In these cases, we perceive only the neutral yellow and have no way of knowing what the actual color of the surface is.",
+          "order": 2
+        },
+        {
+          "id": "Alice#2",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "So, what you're saying is that it's difficult to tell the difference between an unripe and a ripe banana, right? If I can't know what I'm seeing, I can't pick and eat a ripe banana. This would be a disadvantage for humans in the course of evolution.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Of course, it would be nice to be able to identify and eat only ripe ones. However, we don't need to know precisely at every moment whether it is unripe or fully ripe. There are more yellow bananas within our range of action. Supermarket shelves are full of yellow bananas. So if you eat based on the perception of yellow, you'll end up eating ripe bananas.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0045,
+            "neutral": 0.9954
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0004,
+            "neutral": 0.9995
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0012,
+            "entailment": 0.0012,
+            "neutral": 0.9975
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0,
+            "entailment": 0.0049,
+            "neutral": 0.9951
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0004,
+            "neutral": 0.9993
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0018,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0,
+            "entailment": 0.0018,
+            "neutral": 0.9982
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0016,
+            "neutral": 0.9982
+          }
+        },
+        {
+          "src": "Alice#2",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0005,
+            "neutral": 0.9994
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0017,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0037,
+            "neutral": 0.9962
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice#2",
+          "probs": {
+            "contradiction": 0.0004,
+            "entailment": 0.0001,
+            "neutral": 0.9995
+          }
+        }
+      ]
+    },
+    "2024_21": {
+      "gold_answer": "2",
+      "category": "Argument Analysis",
+      "preamble": "Art criticism is a linguistic activity that evaluates works of art. A critic pays attention to the structural features or the representational and expressive properties of a work, and on this basis, presents reasons that provide the grounds for aesthetic evaluation of the work. Based on the following <Critique>, Alice and Bob present their views.<Critique>- Evaluation: Michelangelo’s <Pietà> is excellent.- Reason: Michelangelo’s <Pietà> looks lifelike.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Someone who thinks the evaluation in <Critique> is valid might claim that the standard \"If an artwork W looks lifelike, then W is excellent\" was applied in <Critique>. However, this standard cannot be applied to Warhol's <Brillo Box>. Even though <Brillo Box> has the same appearance as an actual soap box, that does not necessarily make it excellent. Therefore, it cannot be established that \"If property F is attributed to artwork W, then W is excellent\" serves as a general criterion for criticism.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "There is no generalized standard of criticism that can be applied without exception to all works of art. However, works of art can be categorized as belonging to at least one specific category. In that case, we can find a generalized standard of criticism that guarantees excellence, in the sense that a work realizes the purpose of its category—for example: \"For an artwork W belonging to category C, if property F contributes to the purpose of C, then F makes W excellent.\" The evaluation in <Critique> can be seen as applying the standard: \"For artwork W belonging to the category of Renaissance sculpture, as long as the property of 'lifelikeness' contributes to the purpose of Renaissance sculpture, 'lifelikeness' makes W excellent.\"",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0152,
+            "entailment": 0.0241,
+            "neutral": 0.9606
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.1476,
+            "entailment": 0.2473,
+            "neutral": 0.6052
+          }
+        }
+      ]
+    },
+    "2024_22": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Emotions always require an appropriate evaluative belief. Fear of an object is based on the belief that the object is dangerous to me, and sadness over some event is grounded in the belief that the event is a significant loss for me. If I hold beliefs that contradict these evaluative beliefs, then I am either not experiencing an emotion or am both affirming and denying a claim at the same time.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Not only is it fully possible, but it is also in fact common, to experience emotions without holding the appropriate evaluative beliefs. For instance, someone might firmly believe that a spider in front of them is not dangerous to them, yet still feel fear toward the spider. Furthermore, it is evident that animals and infants also experience emotions like fear. However, animals or infants without linguistic ability do not possess evaluative concepts such as “danger” at all, and thus cannot hold beliefs such as “something is dangerous to me.”",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.9973,
+            "entailment": 0.0001,
+            "neutral": 0.0026
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9976,
+            "entailment": 0.0,
+            "neutral": 0.0024
+          }
+        }
+      ]
+    },
+    "2024_29": {
+      "gold_answer": "5",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Economic behavior is the action of independent and rational individuals pursuing their own self-interest. The foundation of the ideal market, where perfect competition and self-regulation occur, is precisely the behavior of such atomized and rational people. Social relationships among people only hinder the competitive market.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "But, in reality, the market doesn’t function so perfectly. Coercion and deception also occur in the market. Of course, even coercion and deception arise from the pursuit of self-interest. Can the market really exert enough self-regulation to suppress people’s coercion and deception? At the very least, a certain degree of trust among people must be present.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "The source of such trust is generalized morality. There exists an implicit agreement that one must respect others, and people mostly follow that agreement automatically. Humans naturally obey the commands of the norms and value systems we agree upon, because these are thoroughly internalized through socialization. Because morality is strongly shared, orderly transactions are guaranteed.",
+          "order": 3
+        },
+        {
+          "id": "Bob#2",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "However, in reality, it’s rare to find transaction situations where we can confirm that generalized morality is at work and that economic behavior is based on trust. To explain the general existence of orderly transactions in the market, we must pay attention to the fact that the intentional actions of agents are rooted in their current, concrete social relationships. What fosters trust and suppresses wrongdoing in the market are these specific private relationships and their networks. We prefer to trade with people who have a good reputation, not simply relying on generalized morality. Moreover, rather than depending only on general reputation, we try to gather information from acquaintances who know the trading partner well. Of course, we also try to maintain our own good reputation. The assumption of atomized individuals cannot explain reality.",
+          "order": 4
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0008,
+            "neutral": 0.999
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0006,
+            "neutral": 0.9992
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0209,
+            "entailment": 0.002,
+            "neutral": 0.9771
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.4441,
+            "entailment": 0.0007,
+            "neutral": 0.5552
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0006,
+            "entailment": 0.0007,
+            "neutral": 0.9987
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0064,
+            "neutral": 0.9935
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.127,
+            "entailment": 0.0001,
+            "neutral": 0.8729
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0001,
+            "entailment": 0.0016,
+            "neutral": 0.9983
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob#2",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0009,
+            "neutral": 0.9989
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.9845,
+            "entailment": 0.0001,
+            "neutral": 0.0154
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0,
+            "entailment": 0.0038,
+            "neutral": 0.9961
+          }
+        },
+        {
+          "src": "Bob#2",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0018,
+            "neutral": 0.9977
+          }
+        }
+      ]
+    },
+    "2025_01": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "Country X, which operates a compulsory military service system, stipulates in its \"Military Service Act\" that the mandatory service period for those required to serve is 3 years for rank-and-file soldiers, 7 years for non-commissioned officers (NCOs), and 10 years for commissioned officers. Recently, an amendment to the \"Military Service Act\" has been submitted to the National Assembly of country X, which would reduce the mandatory service period for NCOs and officers to the same level as that of rank-and-file soldiers. The following is a debate between Alice and Bob regarding this amendment.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "I am opposed to the amendment. The reason the mandatory service period for officers and NCOs is longer than for rank-and-file soldiers is that, in order to equip themselves with job competencies suitable for their rank, they are appointed after a long period of training at the country's expense. For example, air force pilots or NCOs requiring technical expertise have to undergo lengthy education on expensive specialized equipment. The current mandatory service period is the minimum time required for the country to fully utilize the job competencies of officers and NCOs.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "I think differently. The mandatory service of officers and NCOs has both the character of fulfilling the constitutional duty of national defense and the character of realizing the constitutional right to choose one’s occupation. A three-year service period, like that for rank-and-file soldiers, leans more toward the character of fulfilling the national defense duty, but any service period exceeding that is more strongly characterized as occupational activity. Forcing service beyond three years seems to excessively restrict the occupational freedom and the pursuit of happiness of officers and NCOs.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0015,
+            "entailment": 0.0184,
+            "neutral": 0.9801
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0022,
+            "entailment": 0.0046,
+            "neutral": 0.9931
+          }
+        }
+      ]
+    },
+    "2025_08": {
+      "gold_answer": "5",
+      "category": "Argument Evaluation & Analysis",
+      "preamble": "A public good is a commodity that can be collectively used by the public, and its ownership belongs to the people. Anyone can access and use public goods, and no one can be prohibited from using them. However, if public goods are not properly managed, their value inevitably decreases. To prevent such a decline in benefits, the state manages public goods under the name of \"administration.\" However, there is an issue of inefficiency in such cases, so the following <opinion> has been put forward regarding how the state should manage public goods.<opinion>",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Since the management of public goods has been completely delegated to the state by the people, the state can manage public goods directly or have a third party do so. In order to efficiently manage public goods and guarantee a quality of service appropriate to the usage price, there is a need to privatize the management of public goods. However, in cases where the state directly manages public goods, citizens have granted the state discretion regarding management methods on the condition that they do not bear any costs exceeding what they would bear under direct state management. The state must satisfy this condition.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "Privatization inevitably leads to considerations of profit, so in the end, the cost of using public goods, which was previously managed by the state, will ultimately rise, or there will be a decline in service quality relative to previous prices. Therefore, the state should adopt “co-governance” as an alternative to privatization. Except in cases where it is necessary to prevent a decrease in benefits, the state should not be directly involved in the management of public goods; instead, members of society who use public goods should resolve issues that arise on a self-governing basis. If co-governance in civil society fails, public goods will remain unmanaged. Therefore, members of society must strive to prevent the failure of co-governance.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0122,
+            "entailment": 0.0039,
+            "neutral": 0.984
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0038,
+            "entailment": 0.0038,
+            "neutral": 0.9924
+          }
+        }
+      ]
+    },
+    "2025_23": {
+      "gold_answer": "5",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "The meaning that a sentence carries is commonly called a \"proposition.\" Below are two different views on what a proposition is.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "The proposition expressed by a sentence is the set of possible worlds in which that sentence is true. For example, the sentences \"Suchul is tall\" and \"Suchul is a student\" express different propositions, since the set of possible worlds where Suchul is tall and the set of possible worlds where Suchul is a student are different sets. If a certain sentence is true in every possible world, then the proposition it expresses is the set of all possible worlds. For instance, the sentence \"3 is odd or not odd\" expresses the proposition which is the set of all possible worlds.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "A proposition is a kind of ordered pair. For example, the proposition expressed by the sentence \"3 is odd\" can be understood as an ordered pair composed of the object referred to by \"3\" and the property referred to by \"is odd.\" If we let the object referred to by \"3\" be m and the property referred to by \"is odd\" be F, then the proposition expressed by \"3 is odd\" is <m, F>. As another example, the sentence \"Suchul loves Heeyoung\" expresses a proposition that can be understood as an ordered triplet composed of the object referred to by \"Suchul,\" the object referred to by \"Heeyoung,\" and the binary relation referred to by \"loves.\" If the object referred to by \"Suchul\" is a, the object referred to by \"Heeyoung\" is b, and the binary relation referred to by \"loves\" is r, then the proposition expressed by \"Suchul loves Heeyoung\" is <a, b, r>.",
+          "order": 2
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0016,
+            "entailment": 0.314,
+            "neutral": 0.6844
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0021,
+            "entailment": 0.0224,
+            "neutral": 0.9755
+          }
+        }
+      ]
+    },
+    "2025_24": {
+      "gold_answer": "2",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "In art, fiction and non-fiction can be distinguished by whether their content is fabricated or factual. For example, the reason “The Tale of Hong Gildong” is fiction is because its content is invented by the author and did not actually happen. On the other hand, the content of “The Annals of the Joseon Dynasty” consists of things that really happened, and thus the Annals are non-fiction.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "It is correct that the term ‘fiction’ generally refers to something that is fabricated. However, at least in the case of artistic fiction, this is not a satisfactory definition. This is because fictional works of art are generally a mixture of things that are made up and things that are factual. Taking into account our conventions of appreciating artworks, fiction and non-fiction in art can be distinguished not by how similar or different their content is to actual facts, but instead by what kind of mental attitude is appropriate for properly appreciating that content. To properly appreciate fiction, one must participate in imagining the presented content; to properly appreciate non-fiction, one must hold a belief about the presented content. For example, to properly appreciate “The Tale of Hong Gildong,” one must take part in imagining the content that “Hong Gildong established the state of Yuldoguk.” If “The Tale of Hong Gildong” were a non-fictional work, we would consider it appropriate to have a belief in the corresponding content, rather than participating in imagining it.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "When appreciating non-fictional works, it is of course appropriate to hold beliefs about the content of the work. However, it does not follow that participating in imagining the content of a non-fiction work is an inappropriate way of appreciating it. Even while watching a non-fiction work such as a documentary dealing with the reality of war, we can vividly imagine the horrific events that occurred, and doing so is an appropriate way to appreciate the work.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0013,
+            "entailment": 0.0006,
+            "neutral": 0.9981
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0009,
+            "neutral": 0.9986
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0003,
+            "entailment": 0.0005,
+            "neutral": 0.9991
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0042,
+            "neutral": 0.9956
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0005,
+            "entailment": 0.0014,
+            "neutral": 0.998
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0002,
+            "entailment": 0.0022,
+            "neutral": 0.9976
+          }
+        }
+      ]
+    },
+    "2025_25": {
+      "gold_answer": "1",
+      "category": "Argumentation and Rebuttal",
+      "preamble": "An artist created an artwork by placing an intricately crafted artificial flower inside a transparent cubic acrylic box with sides about 1 meter long, and installing a fluorescent light on one face. He named the work \"ⓐ Two Types of Permanence\" and sold it to an art museum. He instructed the museum to keep the piece always connected to power, but that when the fluorescent light eventually reached the end of its lifespan, it should be left as is and not replaced. Years later, the fluorescent light finally ceased to function. Judging it important to display the work in its original appearance, the museum suggested to the artist that the light should be replaced with a new one whenever it failed. Although the artist strongly objected, he eventually agreed to allow the light to be replaced, out of concern that refusing the museum's request might make it difficult to display and sell works in the future. A debate arose among critics regarding the impact of the artist's approval on the identity and meaning of the piece.",
+      "nodes": [
+        {
+          "id": "Alice",
+          "speaker": "Alice",
+          "label": "Alice",
+          "text": "Since replacing the fluorescent light is based on the artist's approval, this change does not alter the identity of the work. However, because this is a change in an essential attribute of the work, the work should now be seen as having only a superficial meaning, unlike before.",
+          "order": 1
+        },
+        {
+          "id": "Bob",
+          "speaker": "Bob",
+          "label": "Bob",
+          "text": "The artist only approved the alteration of the work’s physical attribute due to the museum's pressure. This act of approval does not reflect the artist's true intention. Since the identity of the work lies in the artist’s true intention, even if the work’s physical attribute has changed, its identity remains the same as before, and thus its meaning has also not changed.",
+          "order": 2
+        },
+        {
+          "id": "Charlie",
+          "speaker": "Charlie",
+          "label": "Charlie",
+          "text": "The work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity—even if that approval aligns with the artist's true intentions.",
+          "order": 3
+        }
+      ],
+      "pairs": [
+        {
+          "src": "Alice",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0897,
+            "entailment": 0.0083,
+            "neutral": 0.902
+          }
+        },
+        {
+          "src": "Alice",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0053,
+            "entailment": 0.0036,
+            "neutral": 0.9911
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.012,
+            "entailment": 0.0016,
+            "neutral": 0.9864
+          }
+        },
+        {
+          "src": "Bob",
+          "dst": "Charlie",
+          "probs": {
+            "contradiction": 0.0524,
+            "entailment": 0.0142,
+            "neutral": 0.9334
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Alice",
+          "probs": {
+            "contradiction": 0.0008,
+            "entailment": 0.003,
+            "neutral": 0.9962
+          }
+        },
+        {
+          "src": "Charlie",
+          "dst": "Bob",
+          "probs": {
+            "contradiction": 0.0699,
+            "entailment": 0.0099,
+            "neutral": 0.9202
+          }
+        }
+      ]
+    }
+  }
+}
