@@ -32,8 +32,8 @@ Instructions are for macOS. Fine-tuning works on Apple MacBook Air M2 with 16 GB
 5. To diagnose and fix problems with your formatted data run the following scripts.
 
    ```bash
-   python3 diagnose.py
-   python3 repair.py
+   python3 json_diagnose.py
+   python3 json_repair.py
    ```
 
 6. Start training.
