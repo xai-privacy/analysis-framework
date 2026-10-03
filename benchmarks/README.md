@@ -33,11 +33,13 @@ metadata fields are byte-identical to upstream; everything below touches `statem
 - **Statements re-derived** from `original_question` for 9 records with confirmed upstream
   segmentation errors, using a "next expected label only" rule: 2021_25, 2021_34, 2022_19, 2023_11,
   2023_17, 2023_29, 2024_27, 2025_17, 2025_39. All other records' `statements` are upstream text.
+- **2021_13**: corrected `answer` from "4" to "3" per @sungjunleeee's [comment](https://github.com/xai-privacy/analysis-framework/issues/14#issuecomment-5964850636).
 - **2025_05**: statements manually reconstructed (upstream had `statements: null`). Hardcoded as
   `MANUAL_2025_05_STATEMENTS` in the script, so future edits go there, not the JSON.
 - **2022_31**: `original_question` choice markers normalized from 1.–5. to ①–⑤. Applied by hand, not
   by the script — a clean re-run reverts it.
-- **4 records dropped** for inconsistent `original_rationale`, not repaired: 2021_01, 2021_13,
+- **2025_16**: corrected the choices in the `original_question` per @sungjunleeee's [comment](https://github.com/xai-privacy/analysis-framework/issues/14#issuecomment-5964850636).
+- **3 records dropped** for inconsistent `original_rationale`, not repaired: 2021_01,
   2021_15, 2023_37.
 - **Cosmetic spacing** normalized (`"(a) ."` → `"(a)."`) in 6 records: 2022_08, 2023_29, 2024_06,
   2024_22, 2024_29, 2025_23.
