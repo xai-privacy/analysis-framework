@@ -1,0 +1,201 @@
+{
+  "summary": {
+    "model": "mlx-community/Llama-3.2-3B-Instruct-4bit",
+    "adapter_path": "./adapters/direct",
+    "ids_file": "./data/valid_ids.json",
+    "max_tokens": 700,
+    "n": 15,
+    "strict_format_rate": 1.0,
+    "parse_rate": 1.0,
+    "accuracy": 0.13333333333333333,
+    "per_category": {
+      "Argument Analysis": {
+        "n": 2,
+        "accuracy": 0.0,
+        "strict_format_rate": 1.0
+      },
+      "Argument Evaluation & Analysis": {
+        "n": 4,
+        "accuracy": 0.0,
+        "strict_format_rate": 1.0
+      },
+      "Argument Evaluation & Problem Solving": {
+        "n": 2,
+        "accuracy": 0.5,
+        "strict_format_rate": 1.0
+      },
+      "Argumentation and Rebuttal": {
+        "n": 7,
+        "accuracy": 0.14285714285714285,
+        "strict_format_rate": 1.0
+      }
+    }
+  },
+  "records": [
+    {
+      "id": "2021_02",
+      "domain": "Norms",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 2,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.77,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2022_12",
+      "domain": "Norms",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 3,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.63,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2022_19",
+      "domain": "Humanities",
+      "category": "Argument Evaluation & Problem Solving",
+      "gold_answer": 5,
+      "pred_answer": 5,
+      "correct": true,
+      "strict_format": true,
+      "seconds": 2.12,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2022_26",
+      "domain": "Humanities",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 2,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.92,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2022_31",
+      "domain": "Society",
+      "category": "Argument Evaluation & Problem Solving",
+      "gold_answer": 2,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 2.0,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2023_28",
+      "domain": "Society",
+      "category": "Argument Evaluation & Analysis",
+      "gold_answer": 1,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.73,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2024_05",
+      "domain": "Norms",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 3,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 2.1,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2024_17",
+      "domain": "Humanities",
+      "category": "Argument Analysis",
+      "gold_answer": 2,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.98,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2024_18",
+      "domain": "Humanities",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 5,
+      "pred_answer": 5,
+      "correct": true,
+      "strict_format": true,
+      "seconds": 2.26,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2024_20",
+      "domain": "Humanities",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 1,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.73,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2024_28",
+      "domain": "Society",
+      "category": "Argument Evaluation & Analysis",
+      "gold_answer": 3,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.74,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2024_37",
+      "domain": null,
+      "category": "Argument Evaluation & Analysis",
+      "gold_answer": 4,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.91,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2025_21",
+      "domain": "Humanities",
+      "category": "Argument Analysis",
+      "gold_answer": 2,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.9,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2025_25",
+      "domain": "Humanities",
+      "category": "Argumentation and Rebuttal",
+      "gold_answer": 1,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.9,
+      "output": "Answer: 5"
+    },
+    {
+      "id": "2025_26",
+      "domain": null,
+      "category": "Argument Evaluation & Analysis",
+      "gold_answer": 1,
+      "pred_answer": 5,
+      "correct": false,
+      "strict_format": true,
+      "seconds": 1.82,
+      "output": "Answer: 5"
+    }
+  ]
+}
