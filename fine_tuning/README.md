@@ -1,6 +1,8 @@
 # Fine-tuning of Llama 3B Instruct
 
-Instructions are for macOS. Fine-tuning works on Apple MacBook Air M2 with 16 GB RAM. It is not necessary to download the model.
+Instructions are for macOS. Fine-tuning works on Apple M series MacBooks with 16 GB RAM. One full training run (180 iterations) on the LEET-Arg dataset should take less than 30 minutes (as measured on a MacBook Pro M5 with 16 GB RAM). Peak memory usage will be 10 GB, the fans will run fast, and no other work is possible.
+
+It is not necessary to download the model.
 
 1. Create Python virtual environment and activate it.
 
@@ -28,6 +30,8 @@ Instructions are for macOS. Fine-tuning works on Apple MacBook Air M2 with 16 GB
      "text": "<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n\nHow do I reset my router?<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\nUnplug the power cable for 30 seconds and plug it back in.<|eot_id|>"
    }
    ```
+
+   Note that when using MLX’s chat format (`{"messages": [...]}`), MLX converts each line into the Llama 3.2 template using the tokenizer that comes with the model. `mlx_lm.generate` (see below) applies the chat template to `--prompt` by default. So, a hand-written Llama prompt gets wrapped twice unless you add `--ignore-chat-template`.
 
 5. To diagnose and fix problems with your formatted data run the following scripts.
 
