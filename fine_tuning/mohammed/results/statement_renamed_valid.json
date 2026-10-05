@@ -1,0 +1,415 @@
+{
+  "summary": {
+    "model": "mlx-community/Llama-3.2-3B-Instruct-4bit",
+    "adapter_path": "./adapters/mohammed_llama32_3b_statement_renamed_s7_i100",
+    "mode": "statement_renamed",
+    "n_questions": 15,
+    "n_statements": 49,
+    "statement_accuracy": 0.02040816326530612,
+    "question_accuracy": 0.0,
+    "question_parse_rate": 0.0,
+    "predicted_label_counts": {
+      "CORRECT": 2
+    }
+  },
+  "records": [
+    {
+      "id": "2021_02",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        false,
+        true,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Iris",
+        "Bob": "Jonas",
+        "Charlie": "Anika"
+      },
+      "seconds": 1.73,
+      "output": "!! 1:1 1:1 1:1"
+    },
+    {
+      "id": "2022_12",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        true,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Iris",
+        "Bob": "Jonas",
+        "Charlie": "Marcus"
+      },
+      "seconds": 15.24,
+      "output": "1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    },
+    {
+      "id": "2022_19",
+      "category": "Argument Evaluation & Problem Solving",
+      "gold_labels": [
+        true,
+        true,
+        true
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Marcus",
+        "Bob": "Nora",
+        "Charlie": "Priya"
+      },
+      "seconds": 2.07,
+      "output": "1! 1 1 1 1"
+    },
+    {
+      "id": "2022_26",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        false,
+        true,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Sofia",
+        "Bob": "Mei",
+        "Charlie": "Dylan"
+      },
+      "seconds": 2.38,
+      "output": "1!! 1 1 1:1 1 1:1 1:1 1:1"
+    },
+    {
+      "id": "2022_31",
+      "category": "Argument Evaluation & Problem Solving",
+      "gold_labels": [
+        false,
+        false,
+        true
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Leo",
+        "Bob": "Hugo",
+        "Charlie": "Lena"
+      },
+      "seconds": 2.5,
+      "output": "Statement 1:1: 1\nStatement 2:1: 1\nStatement 3:1: 1"
+    },
+    {
+      "id": "2023_28",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Noah",
+        "Bob": "Priya",
+        "Charlie": "Nora"
+      },
+      "seconds": 2.16,
+      "output": "Statement 1:1:1\nStatement 2:1:1\nStatement 3:1:1"
+    },
+    {
+      "id": "2024_05",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 5,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "standalone_not",
+      "name_map": {
+        "Alice": "Dylan",
+        "Bob": "Lena",
+        "Charlie": "Nora"
+      },
+      "seconds": 15.87,
+      "output": "1: CORRECT\nStatement 1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:!!! !! 1:1 1:1 1:1 1:1 1:1 1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:1:"
+    },
+    {
+      "id": "2024_17",
+      "category": "Argument Analysis",
+      "gold_labels": [
+        false,
+        true,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Victor",
+        "Bob": "Priya",
+        "Charlie": "Daniel"
+      },
+      "seconds": 2.25,
+      "output": "Statement 1:1:1\nStatement 2:1:1\nStatement 3:1:1"
+    },
+    {
+      "id": "2024_18",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        true,
+        true
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Jonas",
+        "Bob": "Marcus",
+        "Charlie": "Caleb"
+      },
+      "seconds": 2.54,
+      "output": "1! 1:1 1:1 1:1 1:1"
+    },
+    {
+      "id": "2024_20",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Leo",
+        "Bob": "Marcus",
+        "Charlie": "Nora"
+      },
+      "seconds": 1.83,
+      "output": "1!! 1:1 1:1"
+    },
+    {
+      "id": "2024_28",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        true,
+        false,
+        true
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Hugo",
+        "Bob": "Ethan",
+        "Charlie": "Omar"
+      },
+      "seconds": 2.42,
+      "output": "1:1\nStatement 1:1:1:1\nStatement 2:1:1:1\nStatement 3:1:1:1"
+    },
+    {
+      "id": "2024_37",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        false,
+        true,
+        true
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Noah",
+        "Bob": "Felix",
+        "Charlie": "Amina"
+      },
+      "seconds": 2.11,
+      "output": "Statement 1:1:1\nStatement 1:1:1"
+    },
+    {
+      "id": "2025_21",
+      "category": "Argument Analysis",
+      "gold_labels": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 1,
+      "statement_total": 5,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "standalone_correct",
+      "name_map": {
+        "Alice": "Anika",
+        "Bob": "Dylan",
+        "Charlie": "Maya"
+      },
+      "seconds": 15.61,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3:1:1:Statement 1:1:Statement 2:1:Statement 3:1:Statement 31:1:Statement 31:1:Statement 32:1:Statement 31:1:Statement 2:1:Statement 1:1:Statement 2:1:Statement 3:1:Statement 1:1:Statement 2:1:Statement 3:1:1:Statement 1:1:Statement 2:1:Statement 3:1:1:Statement 1:1:Statement 2:1:Statement 3:1:1:Statement 1:1:Statement 2:1:Statement 3:1:1:1:Statement 1:1:Statement 2:1:Statement 3:1:1:1:Statement 1:1:Statement 2:1:Statement 3:1:1:1:Statement 1:1:Statement 2:1:Statement 3:1:1:1:1:Statement 1:1:Statement 2:1:Statement 1:1:Statement 1:1:Statement 2:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 2:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 2:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 2:Statement 1:Statement 2:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 2:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:Statement 1:1:"
+    },
+    {
+      "id": "2025_25",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Anika",
+        "Bob": "Nora",
+        "Charlie": "Victor"
+      },
+      "seconds": 2.45,
+      "output": "1!! 1:1\nStatement 1:1:1:1\nStatement 1:1:1:1"
+    },
+    {
+      "id": "2025_26",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        null,
+        null,
+        null
+      ],
+      "statement_correct": 0,
+      "statement_total": 3,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": {
+        "Alice": "Caleb",
+        "Bob": "Leo",
+        "Charlie": "Jonas"
+      },
+      "seconds": 2.02,
+      "output": "Statement 1:1:1\nStatement 1:1:1"
+    }
+  ]
+}

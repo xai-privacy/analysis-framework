@@ -1,0 +1,392 @@
+{
+  "2021_03": {
+    "Alice": "Tara",
+    "Bob": "Hugo",
+    "Charlie": "Noah"
+  },
+  "2021_13": {
+    "Alice": "Mei",
+    "Bob": "Tara",
+    "Charlie": "Leo"
+  },
+  "2021_14": {
+    "Alice": "Dylan",
+    "Bob": "Tara",
+    "Charlie": "Daniel"
+  },
+  "2021_16": {
+    "Alice": "Amina",
+    "Bob": "Anika",
+    "Charlie": "Hugo"
+  },
+  "2021_17": {
+    "Alice": "Hugo",
+    "Bob": "Victor",
+    "Charlie": "Anika"
+  },
+  "2021_24": {
+    "Alice": "Maya",
+    "Bob": "Victor",
+    "Charlie": "Sara"
+  },
+  "2021_25": {
+    "Alice": "Priya",
+    "Bob": "Noah",
+    "Charlie": "Iris"
+  },
+  "2021_28": {
+    "Alice": "Amina",
+    "Bob": "Victor",
+    "Charlie": "Ethan"
+  },
+  "2021_34": {
+    "Alice": "Sara",
+    "Bob": "Felix",
+    "Charlie": "Rina"
+  },
+  "2021_35": {
+    "Alice": "Tara",
+    "Bob": "Nora",
+    "Charlie": "Iris"
+  },
+  "2021_37": {
+    "Alice": "Maya",
+    "Bob": "Mei",
+    "Charlie": "Noah"
+  },
+  "2022_01": {
+    "Alice": "Noah",
+    "Bob": "Daniel",
+    "Charlie": "Leo"
+  },
+  "2022_03": {
+    "Alice": "Nora",
+    "Bob": "Sofia",
+    "Charlie": "Daniel"
+  },
+  "2022_05": {
+    "Alice": "Rina",
+    "Bob": "Maya",
+    "Charlie": "Ethan"
+  },
+  "2022_08": {
+    "Alice": "Tara",
+    "Bob": "Jonas",
+    "Charlie": "Maya"
+  },
+  "2022_16": {
+    "Alice": "Priya",
+    "Bob": "Rina",
+    "Charlie": "Lena"
+  },
+  "2022_17": {
+    "Alice": "Anika",
+    "Bob": "Hugo",
+    "Charlie": "Iris"
+  },
+  "2022_18": {
+    "Alice": "Mei",
+    "Bob": "Maya",
+    "Charlie": "Hugo"
+  },
+  "2022_21": {
+    "Alice": "Caleb",
+    "Bob": "Dylan",
+    "Charlie": "Anika"
+  },
+  "2022_22": {
+    "Alice": "Caleb",
+    "Bob": "Noah",
+    "Charlie": "Nora"
+  },
+  "2022_28": {
+    "Alice": "Felix",
+    "Bob": "Hugo",
+    "Charlie": "Iris"
+  },
+  "2022_29": {
+    "Alice": "Rina",
+    "Bob": "Nora",
+    "Charlie": "Dylan"
+  },
+  "2022_36": {
+    "Alice": "Noah",
+    "Bob": "Anika",
+    "Charlie": "Sara"
+  },
+  "2022_39": {
+    "Alice": "Sara",
+    "Bob": "Noah",
+    "Charlie": "Lena"
+  },
+  "2023_02": {
+    "Alice": "Ethan",
+    "Bob": "Priya",
+    "Charlie": "Sofia"
+  },
+  "2023_03": {
+    "Alice": "Rina",
+    "Bob": "Anika",
+    "Charlie": "Felix"
+  },
+  "2023_06": {
+    "Alice": "Lena",
+    "Bob": "Priya",
+    "Charlie": "Rina"
+  },
+  "2023_09": {
+    "Alice": "Lena",
+    "Bob": "Amina",
+    "Charlie": "Nora"
+  },
+  "2023_11": {
+    "Alice": "Felix",
+    "Bob": "Amina",
+    "Charlie": "Ethan"
+  },
+  "2023_13": {
+    "Alice": "Iris",
+    "Bob": "Nora",
+    "Charlie": "Tara"
+  },
+  "2023_14": {
+    "Alice": "Sofia",
+    "Bob": "Noah",
+    "Charlie": "Iris"
+  },
+  "2023_17": {
+    "Alice": "Sara",
+    "Bob": "Jonas",
+    "Charlie": "Tara"
+  },
+  "2023_18": {
+    "Alice": "Caleb",
+    "Bob": "Marcus",
+    "Charlie": "Omar"
+  },
+  "2023_19": {
+    "Alice": "Maya",
+    "Bob": "Priya",
+    "Charlie": "Sofia"
+  },
+  "2023_20": {
+    "Alice": "Marcus",
+    "Bob": "Priya",
+    "Charlie": "Dylan"
+  },
+  "2023_21": {
+    "Alice": "Sara",
+    "Bob": "Hugo",
+    "Charlie": "Felix"
+  },
+  "2023_22": {
+    "Alice": "Nora",
+    "Bob": "Felix",
+    "Charlie": "Caleb"
+  },
+  "2023_23": {
+    "Alice": "Amina",
+    "Bob": "Victor",
+    "Charlie": "Rina"
+  },
+  "2023_25": {
+    "Alice": "Amina",
+    "Bob": "Iris",
+    "Charlie": "Maya"
+  },
+  "2023_26": {
+    "Alice": "Leo",
+    "Bob": "Jonas",
+    "Charlie": "Sofia"
+  },
+  "2023_27": {
+    "Alice": "Amina",
+    "Bob": "Marcus",
+    "Charlie": "Sofia"
+  },
+  "2023_29": {
+    "Alice": "Anika",
+    "Bob": "Leo",
+    "Charlie": "Ethan"
+  },
+  "2023_35": {
+    "Alice": "Leo",
+    "Bob": "Maya",
+    "Charlie": "Nora"
+  },
+  "2024_13": {
+    "Alice": "Noah",
+    "Bob": "Iris",
+    "Charlie": "Amina"
+  },
+  "2024_14": {
+    "Alice": "Anika",
+    "Bob": "Maya",
+    "Charlie": "Priya"
+  },
+  "2024_15": {
+    "Alice": "Anika",
+    "Bob": "Rina",
+    "Charlie": "Felix"
+  },
+  "2024_19": {
+    "Alice": "Iris",
+    "Bob": "Nora",
+    "Charlie": "Hugo"
+  },
+  "2024_22": {
+    "Alice": "Nora",
+    "Bob": "Lena",
+    "Charlie": "Mei"
+  },
+  "2024_25": {
+    "Alice": "Noah",
+    "Bob": "Sofia",
+    "Charlie": "Leo"
+  },
+  "2024_27": {
+    "Alice": "Daniel",
+    "Bob": "Mei",
+    "Charlie": "Iris"
+  },
+  "2025_01": {
+    "Alice": "Sara",
+    "Bob": "Rina",
+    "Charlie": "Marcus"
+  },
+  "2025_02": {
+    "Alice": "Rina",
+    "Bob": "Anika",
+    "Charlie": "Nora"
+  },
+  "2025_05": {
+    "Alice": "Marcus",
+    "Bob": "Nora",
+    "Charlie": "Iris"
+  },
+  "2025_10": {
+    "Alice": "Anika",
+    "Bob": "Lena",
+    "Charlie": "Maya"
+  },
+  "2025_16": {
+    "Alice": "Maya",
+    "Bob": "Leo",
+    "Charlie": "Priya"
+  },
+  "2025_17": {
+    "Alice": "Sofia",
+    "Bob": "Amina",
+    "Charlie": "Marcus"
+  },
+  "2025_23": {
+    "Alice": "Maya",
+    "Bob": "Hugo",
+    "Charlie": "Anika"
+  },
+  "2025_24": {
+    "Alice": "Rina",
+    "Bob": "Nora",
+    "Charlie": "Anika"
+  },
+  "2025_28": {
+    "Alice": "Anika",
+    "Bob": "Rina",
+    "Charlie": "Tara"
+  },
+  "2025_29": {
+    "Alice": "Nora",
+    "Bob": "Tara",
+    "Charlie": "Iris"
+  },
+  "2025_30": {
+    "Alice": "Priya",
+    "Bob": "Daniel",
+    "Charlie": "Caleb"
+  },
+  "2025_39": {
+    "Alice": "Ethan",
+    "Bob": "Dylan",
+    "Charlie": "Priya"
+  },
+  "2025_40": {
+    "Alice": "Ethan",
+    "Bob": "Amina",
+    "Charlie": "Leo"
+  },
+  "2021_02": {
+    "Alice": "Iris",
+    "Bob": "Jonas",
+    "Charlie": "Anika"
+  },
+  "2022_12": {
+    "Alice": "Iris",
+    "Bob": "Jonas",
+    "Charlie": "Marcus"
+  },
+  "2022_19": {
+    "Alice": "Marcus",
+    "Bob": "Nora",
+    "Charlie": "Priya"
+  },
+  "2022_26": {
+    "Alice": "Sofia",
+    "Bob": "Mei",
+    "Charlie": "Dylan"
+  },
+  "2022_31": {
+    "Alice": "Leo",
+    "Bob": "Hugo",
+    "Charlie": "Lena"
+  },
+  "2023_28": {
+    "Alice": "Noah",
+    "Bob": "Priya",
+    "Charlie": "Nora"
+  },
+  "2024_05": {
+    "Alice": "Dylan",
+    "Bob": "Lena",
+    "Charlie": "Nora"
+  },
+  "2024_17": {
+    "Alice": "Victor",
+    "Bob": "Priya",
+    "Charlie": "Daniel"
+  },
+  "2024_18": {
+    "Alice": "Jonas",
+    "Bob": "Marcus",
+    "Charlie": "Caleb"
+  },
+  "2024_20": {
+    "Alice": "Leo",
+    "Bob": "Marcus",
+    "Charlie": "Nora"
+  },
+  "2024_28": {
+    "Alice": "Hugo",
+    "Bob": "Ethan",
+    "Charlie": "Omar"
+  },
+  "2024_37": {
+    "Alice": "Noah",
+    "Bob": "Felix",
+    "Charlie": "Amina"
+  },
+  "2025_21": {
+    "Alice": "Anika",
+    "Bob": "Dylan",
+    "Charlie": "Maya"
+  },
+  "2025_25": {
+    "Alice": "Anika",
+    "Bob": "Nora",
+    "Charlie": "Victor"
+  },
+  "2025_26": {
+    "Alice": "Caleb",
+    "Bob": "Leo",
+    "Charlie": "Jonas"
+  }
+}

@@ -1,0 +1,6 @@
+file                                  stmt_acc     q_acc     parse predictions
+statement_20_valid.json                  0.469     0.133     0.867 {'CORRECT': 45}
+statement_40_valid.json                  0.490     0.000     1.000 {'INCORRECT': 49}
+statement_60_valid.json                  0.429     0.000     0.867 {'INCORRECT': 45, 'CORRECT': 1}
+statement_80_valid.json                  0.490     0.000     1.000 {'INCORRECT': 49}
+statement_100_valid.json                 0.592     0.267     1.000 {'CORRECT': 19, 'INCORRECT': 30}

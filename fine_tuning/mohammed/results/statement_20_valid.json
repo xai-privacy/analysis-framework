@@ -1,0 +1,355 @@
+{
+  "summary": {
+    "model": "mlx-community/Llama-3.2-3B-Instruct-4bit",
+    "adapter_path": "./adapters/statement_20",
+    "mode": "statement_only",
+    "n_questions": 15,
+    "n_statements": 49,
+    "statement_accuracy": 0.46938775510204084,
+    "question_accuracy": 0.13333333333333333,
+    "question_parse_rate": 0.8666666666666667,
+    "predicted_label_counts": {
+      "CORRECT": 45
+    }
+  },
+  "records": [
+    {
+      "id": "2021_02",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        false,
+        true,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 1.88,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2022_12",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        true,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 2,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 1.92,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2022_19",
+      "category": "Argument Evaluation & Problem Solving",
+      "gold_labels": [
+        true,
+        true,
+        true
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 3,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": true,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.38,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2022_26",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        false,
+        true,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.24,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2022_31",
+      "category": "Argument Evaluation & Problem Solving",
+      "gold_labels": [
+        false,
+        false,
+        true
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.33,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2023_28",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.06,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2024_05",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true,
+        null,
+        null
+      ],
+      "statement_correct": 2,
+      "statement_total": 5,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "standalone_not",
+      "name_map": null,
+      "seconds": 2.51,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2024_17",
+      "category": "Argument Analysis",
+      "gold_labels": [
+        false,
+        true,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.17,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2024_18",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        true,
+        true
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 3,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": true,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.59,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2024_20",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.07,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2024_28",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        true,
+        false,
+        true
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 2,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.06,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2024_37",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        false,
+        true,
+        true
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 2,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.24,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2025_21",
+      "category": "Argument Analysis",
+      "gold_labels": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true,
+        null,
+        null
+      ],
+      "statement_correct": 1,
+      "statement_total": 5,
+      "all_parsed": false,
+      "question_correct": false,
+      "label_mode": "standalone_correct",
+      "name_map": null,
+      "seconds": 2.33,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2025_25",
+      "category": "Argumentation and Rebuttal",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.24,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    },
+    {
+      "id": "2025_26",
+      "category": "Argument Evaluation & Analysis",
+      "gold_labels": [
+        true,
+        false,
+        false
+      ],
+      "pred_labels": [
+        true,
+        true,
+        true
+      ],
+      "statement_correct": 1,
+      "statement_total": 3,
+      "all_parsed": true,
+      "question_correct": false,
+      "label_mode": "combination",
+      "name_map": null,
+      "seconds": 2.15,
+      "output": "Statement 1: CORRECT\nStatement 2: CORRECT\nStatement 3: CORRECT"
+    }
+  ]
+}
