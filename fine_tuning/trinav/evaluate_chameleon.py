@@ -14,11 +14,7 @@ try:
     from .chameleon_utils import (
         DATA_DIR,
         HERE,
-        answer_from_verdicts,
-        gold_verdicts,
         load_cuda_model,
-        load_dataset,
-        load_final_test_ids,
         parse_verdicts,
         read_jsonl,
     )
@@ -27,11 +23,7 @@ except ImportError:
     from chameleon_utils import (
         DATA_DIR,
         HERE,
-        answer_from_verdicts,
-        gold_verdicts,
         load_cuda_model,
-        load_dataset,
-        load_final_test_ids,
         parse_verdicts,
         read_jsonl,
     )
@@ -85,15 +77,21 @@ def main():
     rows = read_jsonl(args.data)
     if args.limit is not None:
         rows = rows[:args.limit]
-    test_ids = load_final_test_ids()
+    test_ids = set()
+    split_path = DATA_DIR / "split.json"
+    if split_path.is_file():
+        split = json.loads(split_path.read_text(encoding="utf-8"))
+        test_ids = set(map(str, split.get("test_ids", [])))
+        if not test_ids:
+            test_ids = {
+                qid for qid, reason in split.get("excluded", {}).items()
+                if reason == "final test question"
+            }
     leaked = test_ids & {str(row["id"]) for row in rows}
     if leaked:
         raise SystemExit(f"Refusing to evaluate final-test IDs: {sorted(leaked)}")
-
-    questions = {str(question["id"]): question for question in load_dataset()}
-    missing = sorted({str(row["id"]) for row in rows} - set(questions))
-    if missing:
-        raise SystemExit(f"Validation IDs missing from LEET-Arg source: {missing}")
+    if any(not isinstance(row.get("evaluation"), dict) for row in rows):
+        raise SystemExit("Evaluation metadata missing; regenerate train/valid data first")
 
     model, tokenizer, _ = load_cuda_model(
         args.model,
@@ -149,16 +147,23 @@ def main():
             generated[0, prompt_length:], skip_special_tokens=True
         ).strip()
 
-        question = questions[qid]
-        gold = gold_verdicts(question)
+        evaluation = row["evaluation"]
+        gold = evaluation["gold_verdicts"]
         predicted = parse_verdicts(output)
         parsed_all = all(label in predicted for label in gold)
-        predicted_answer = answer_from_verdicts(question, predicted) if parsed_all else None
+        matched_answers = [
+            int(answer)
+            for answer, answer_verdicts in evaluation["answer_verdicts"].items()
+            if all(predicted.get(label) is verdict for label, verdict in answer_verdicts.items())
+            and len(predicted) == len(answer_verdicts)
+        ] if parsed_all else []
+        predicted_answer = matched_answers[0] if len(matched_answers) == 1 else None
+        gold_answer = int(evaluation["gold_answer"])
         record = {
             "id": qid,
-            "gold_answer": int(question["answer"]),
+            "gold_answer": gold_answer,
             "pred_answer": predicted_answer,
-            "question_correct": predicted_answer == int(question["answer"]),
+            "question_correct": predicted_answer == gold_answer,
             "parsed_all": parsed_all,
             "statements": {
                 label: {"gold": verdict, "pred": predicted.get(label)}
@@ -175,7 +180,7 @@ def main():
         print(
             f"[{index}/{len(rows)}] {qid}: statements "
             f"{statement_hits}/{len(gold)}, answer {predicted_answer} "
-            f"(gold {question['answer']}), {record['seconds']}s",
+            f"(gold {gold_answer}), {record['seconds']}s",
             flush=True,
         )
 

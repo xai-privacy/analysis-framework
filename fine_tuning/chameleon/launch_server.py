@@ -6,12 +6,12 @@ chi.use_site("KVM@TACC")
 
 key_name = "my-chi-key"  # Make sure this matches your KVM@TACC key pair name
 
-print("Booting H100 VM directly (no lease needed!)...")
+print("Booting VM directly (no lease needed!)...")
 
 server = chi.server.create_server(
-    server_name="test-cpu-vm",
+    server_name="trinav-cpu-vm",
     image_name="CC-Ubuntu22.04",
-    flavor_name="m1.medium",
+    flavor_name="m1.xlarge",
     key_name=key_name,
     network_name="sharednet1"
 )

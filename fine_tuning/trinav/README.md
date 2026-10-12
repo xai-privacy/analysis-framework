@@ -35,30 +35,69 @@ environment. Start with one NVIDIA GPU. The training script uses QLoRA: a
 4-bit NF4 base model and LoRA adapters, with loss masked on the system/user
 prompt so only the assistant rationale and verdicts are trained.
 
-The default model is the gated `meta-llama/Llama-3.2-3B-Instruct`. Accept its
-license on Hugging Face and authenticate from the Chameleon instance. Install
-the CUDA-enabled PyTorch build recommended for the selected Chameleon image;
-the requirements file intentionally does not replace PyTorch with a CPU build.
+**Model compatibility:** Jun's run used
+`mlx-community/Llama-3.2-3B-Instruct-4bit`, an MLX-format quantized checkpoint.
+The Chameleon scripts use Transformers and bitsandbytes, which cannot load that
+MLX artifact directly. They therefore default to the original
+`meta-llama/Llama-3.2-3B-Instruct` weights and quantize those to NF4 during load.
+This keeps the same Llama 3.2 3B Instruct model family, but it is **not the exact
+same quantized checkpoint** Jun trained. The script rejects Jun's MLX model ID
+instead of silently treating it as compatible. To fine-tune the exact MLX
+checkpoint, use an MLX-compatible Apple Silicon environment; the current
+CUDA/Chameleon workflow cannot promise identical base weights.
+
+Accept the original Llama model's license on Hugging Face and authenticate from
+the Chameleon instance. The model is fetched by Transformers when the run
+starts; no model files need to be uploaded with your scripts. Install the
+CUDA-enabled PyTorch build recommended for the selected Chameleon image; the
+requirements file intentionally does not replace PyTorch with a CPU build.
+
+### Upload the Trinav folder
+
+From `analysis-framework/fine_tuning/chameleon` on your local machine, create
+the destination and copy the complete personal workflow. Put SSH options before
+the source/destination operands:
 
 ```bash
-cd analysis-framework
+ssh -o StrictHostKeyChecking=no -i ../my-chi-key.pem \
+	cc@129.114.26.200 'mkdir -p ~/xai'
+
+scp -o StrictHostKeyChecking=no -i ../my-chi-key.pem -r ../trinav \
+	cc@129.114.26.200:~/xai/
+```
+
+Then log in and enter the uploaded directory:
+
+```bash
+ssh -o StrictHostKeyChecking=no -i ../my-chi-key.pem cc@129.114.26.200
+cd ~/xai/trinav
+```
+
+The uploaded `trinav` directory includes the train/validation JSONL, split
+manifest, scripts, and Python requirements. That is sufficient for training,
+evaluation, and plotting. `prepare_data.py` is for regenerating the data from
+the repository; to run it remotely, upload the repository benchmark source, the
+final-test ID file, and `fine_tuning/jun/leet_arg_format.py` as well.
+
+```bash
 nvidia-smi
-python3 -m venv .venv
+python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
+python -c 'import torch; assert torch.cuda.is_available(), "CUDA PyTorch/GPU is unavailable"; print(torch.__version__, torch.cuda.get_device_name(0))'
 python -m pip install --upgrade pip
-python -m pip install -r fine_tuning/trinav/requirements-chameleon.txt
+python -m pip install -r requirements-chameleon.txt
 hf auth login
-python fine_tuning/trinav/prepare_data.py
 ```
 
 Train for 180 steps, evaluating and saving every 20 steps, matching Jun's run:
 
 ```bash
-python fine_tuning/trinav/train_chameleon.py \
+python train_chameleon.py \
 	--model meta-llama/Llama-3.2-3B-Instruct \
-	--train-data fine_tuning/trinav/data/train.jsonl \
-	--valid-data fine_tuning/trinav/data/valid.jsonl \
-	--output-dir fine_tuning/trinav/adapters_chameleon \
+	--train-data data/train.jsonl \
+	--valid-data data/valid.jsonl \
+	--split data/split.json \
+	--output-dir adapters_chameleon \
 	--max-steps 180 \
 	--eval-steps 20 \
 	--learning-rate 1e-4 \
@@ -76,8 +115,8 @@ validation loss every 20 steps. Export the raw log rows and plot the curves
 after training:
 
 ```bash
-python fine_tuning/trinav/plot_training_metrics.py \
-	--trainer-state fine_tuning/trinav/adapters_chameleon/trainer_state.json
+python plot_training_metrics.py \
+	--trainer-state adapters_chameleon/trainer_state.json
 ```
 
 This writes `training_metrics.csv` and `training_metrics.png` beside the
@@ -90,15 +129,15 @@ Evaluate the base model with the output-format hint, then evaluate the adapter
 with the same prompt used in training:
 
 ```bash
-python fine_tuning/trinav/evaluate_chameleon.py \
+python evaluate_chameleon.py \
 	--model meta-llama/Llama-3.2-3B-Instruct \
 	--format-hint \
-	--out fine_tuning/trinav/results/base_hint.json
+	--out results/base_hint.json
 
-python fine_tuning/trinav/evaluate_chameleon.py \
+python evaluate_chameleon.py \
 	--model meta-llama/Llama-3.2-3B-Instruct \
-	--adapter-path fine_tuning/trinav/adapters_chameleon \
-	--out fine_tuning/trinav/results/finetuned.json
+	--adapter-path adapters_chameleon \
+	--out results/finetuned.json
 ```
 
 Evaluation reports parse rate, statement accuracy, and question accuracy, and

@@ -26,6 +26,8 @@ except ImportError:
         validate_data_split,
     )
 
+# This CUDA workflow uses the compatible
+# original Hugging Face model weights and must not be described as identical.
 DEFAULT_MODEL = "meta-llama/Llama-3.2-3B-Instruct"
 
 

@@ -3,21 +3,27 @@
 from __future__ import annotations
 
 import json
-import sys
+import re
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 DATA_DIR = HERE / "data"
 
-sys.path.insert(0, str(REPO))
-from fine_tuning.jun.leet_arg_format import (  # noqa: E402
-    answer_from_verdicts,
-    gold_verdicts,
-    load_dataset,
-    load_final_test_ids,
-    parse_verdicts,
-)
+HEADER_RE = re.compile(r"^\W*Statement\s*(\(\w\)|[①②③④⑤])", re.M)
+VERDICT_WORD_RE = re.compile(r"Verdict\W*(INCORRECT|CORRECT)", re.I)
+
+
+def parse_verdicts(output: str):
+    """Read verdicts from the per-statement format used by Jun's run."""
+    verdicts = {}
+    headers = list(HEADER_RE.finditer(output))
+    for header, following in zip(headers, headers[1:] + [None]):
+        block = output[header.end():following.start() if following else len(output)]
+        match = VERDICT_WORD_RE.search(block)
+        if match and header.group(1) not in verdicts:
+            verdicts[header.group(1)] = match.group(1).upper() == "CORRECT"
+    return verdicts
 
 
 def read_jsonl(path: Path):
@@ -48,7 +54,12 @@ def validate_data_split(train_rows, valid_rows, split_path: Path):
     if set(valid_ids) != set(split.get("valid", [])):
         raise ValueError("Validation JSONL IDs do not match split.json")
 
-    test_ids = load_final_test_ids()
+    test_ids = set(map(str, split.get("test_ids", [])))
+    if not test_ids:
+        test_ids = {
+            qid for qid, reason in split.get("excluded", {}).items()
+            if reason == "final test question"
+        }
     leaked = test_ids & (set(train_ids) | set(valid_ids))
     if leaked:
         raise ValueError(f"Final test questions found in train/valid data: {sorted(leaked)}")
@@ -66,6 +77,11 @@ def validate_data_split(train_rows, valid_rows, split_path: Path):
         if not all(isinstance(m.get("content"), str) and m["content"].strip()
                    for m in messages):
             raise ValueError(f"{row['id']}: message content cannot be blank")
+        evaluation = row.get("evaluation")
+        if not isinstance(evaluation, dict) or not isinstance(
+            evaluation.get("gold_verdicts"), dict
+        ) or not isinstance(evaluation.get("answer_verdicts"), dict):
+            raise ValueError(f"{row['id']}: missing evaluation metadata; regenerate data")
 
     return split
 
@@ -74,38 +90,53 @@ def load_cuda_model(model_id: str, adapter_path: str | None = None):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-    if not torch.cuda.is_available():
-        raise RuntimeError(
-            "CUDA GPU not detected. Run this script in a GPU-backed Chameleon instance, "
-            "not the local CPU-only environment."
+    if model_id == "mlx-community/Llama-3.2-3B-Instruct-4bit":
+        raise ValueError(
+            "Jun's exact checkpoint is MLX-quantized and cannot be loaded by this "
+            "Transformers/bitsandbytes CUDA trainer. Use its original "
+            "meta-llama/Llama-3.2-3B-Instruct checkpoint (or a local Transformers-format "
+            "copy) as the compatible base; this is not the identical 4-bit checkpoint."
         )
 
-    compute_dtype = (
-        torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-    )
-    quantization = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_use_double_quant=True,
-        bnb_4bit_compute_dtype=compute_dtype,
-    )
+    has_gpu = torch.cuda.is_available()
 
     tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
 
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        quantization_config=quantization,
-        torch_dtype=compute_dtype,
-        device_map={"": torch.cuda.current_device()},
-        low_cpu_mem_usage=True,
-    )
+    if has_gpu:
+        compute_dtype = (
+            torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+        )
+        quantization = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_compute_dtype=compute_dtype,
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            quantization_config=quantization,
+            torch_dtype=compute_dtype,
+            device_map={"": torch.cuda.current_device()},
+            low_cpu_mem_usage=True,
+        )
+    else:
+        print("WARNING: CUDA GPU not detected. Falling back to CPU.")
+        compute_dtype = torch.float32
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            torch_dtype=compute_dtype,
+            device_map="cpu",
+            low_cpu_mem_usage=True,
+        )
+
     if adapter_path:
         from peft import PeftModel
 
         model = PeftModel.from_pretrained(model, adapter_path)
+        
     model.config.pad_token_id = tokenizer.pad_token_id
     return model, tokenizer, compute_dtype
 
@@ -114,11 +145,7 @@ __all__ = [
     "DATA_DIR",
     "HERE",
     "REPO",
-    "answer_from_verdicts",
-    "gold_verdicts",
     "load_cuda_model",
-    "load_dataset",
-    "load_final_test_ids",
     "parse_verdicts",
     "read_jsonl",
     "validate_data_split",
