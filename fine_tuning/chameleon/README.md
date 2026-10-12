@@ -13,12 +13,10 @@ python3 launch_server.py
 
 The script creates a server, waits for it to become active, and associates a
 floating IP. Its `key_name` (`my-chi-key`) must match the name of your
-Chameleon SSH key pair. The corresponding private SSH key is
-[`../trinav/my-chi-key.pem`](../trinav/my-chi-key.pem); use it to connect to the
-printed IP:
+Chameleon SSH key pair::
 
 ```bash
-ssh -i ../trinav/my-chi-key.pem cc@<floating-ip>
+ssh -i <private key path> cc@<floating-ip>
 ```
 
 Keep the private key secure and do not commit or share it.
