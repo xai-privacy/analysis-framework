@@ -1,0 +1,233 @@
+[
+  {
+    "id": "2021_14",
+    "category": "Argumentation and Rebuttal",
+    "review_status": "DRAFT_NEEDS_REVIEW",
+    "statements": [
+      {
+        "statement": 1,
+        "statement_text": "According to Alice1’s interpretation of <Theory>, if I could have punched my friend and broken their nose but did not do so, then, by not punching my friend, I performed an act that benefited my friend.",
+        "premises": [
+          "<Theory> defines benefit counterfactually: an act benefits someone if, without that act, the person would have been worse off.",
+          "Alice1 treats an omission such as not giving money as an act for purposes of <Theory>.",
+          "Punching the friend would have made the friend worse off than not punching them."
+        ],
+        "rule_type": "COUNTERFACTUAL",
+        "rule": "If an omission counts as an act and the alternative action would have made the person worse off, then the omission counts as benefiting the person under the counterfactual theory.",
+        "application": "Under Alice1's interpretation, not punching counts as an act. Because punching would have made the friend worse off, the counterfactual comparison classifies not punching as a benefit.",
+        "relation": "ENTAILMENT",
+        "conclusion": "CORRECT"
+      },
+      {
+        "statement": 2,
+        "statement_text": "Alice2 and Bob2 differ in their judgment about whether not rescuing the child caused harm to the child.",
+        "premises": [
+          "Alice2 says that not rescuing the drowning child clearly harmed the child.",
+          "Bob2 also treats the deliberate choice not to rescue as an act and does not deny that the omission caused harm."
+        ],
+        "rule_type": "ENTAILMENT",
+        "rule": "If two speakers both accept the same claim, it is incorrect to say that they differ about that claim.",
+        "application": "Alice2 and Bob2 disagree about whether the case is a counterexample and about what counts as an act, but they do not disagree that the child was harmed.",
+        "relation": "CONTRADICTION",
+        "conclusion": "INCORRECT"
+      },
+      {
+        "statement": 3,
+        "statement_text": "If Bob, in response to Alice3, were to assert that “A’s not giving the gift to B did, in fact, harm B,” this would make Bob’s position inconsistent.",
+        "premises": [
+          "Bob2 says a deliberate omission can count as an act.",
+          "Alice3's gift case also involves a deliberate decision not to give the gift."
+        ],
+        "rule_type": "OTHER",
+        "rule": "A later claim is inconsistent with an earlier position only if the two commitments cannot both be maintained.",
+        "application": "Bob can consistently say that the deliberate omission in the gift case counts as an act and harms B. That does not contradict his earlier criterion for deliberate omissions.",
+        "relation": "NONE",
+        "conclusion": "INCORRECT"
+      }
+    ]
+  },
+  {
+    "id": "2021_16",
+    "category": "Argumentation and Rebuttal",
+    "review_status": "DRAFT_NEEDS_REVIEW",
+    "statements": [
+      {
+        "statement": 1,
+        "statement_text": "Bob would oppose the claim that the group of people who can perceive elegance could be larger or smaller depending on period and culture.",
+        "premises": [
+          "Bob says elegance is a real property perceived by people with appropriate musical sensitivity.",
+          "Bob allows that only a certain group may have the sensitivity needed to perceive elegance."
+        ],
+        "rule_type": "ENTAILMENT",
+        "rule": "Saying that only suitably sensitive observers perceive a property does not imply that the size of that observer group must be fixed across times or cultures.",
+        "application": "Bob's view is compatible with the group of suitably sensitive listeners being larger or smaller in different periods or cultures.",
+        "relation": "CONTRADICTION",
+        "conclusion": "INCORRECT"
+      },
+      {
+        "statement": 2,
+        "statement_text": "Charlie would oppose the claim that people who find Chopin's nocturnes boring may have a different kind of musical sensitivity.",
+        "premises": [
+          "Charlie explains different reactions to the nocturnes by differences in the shared musical sensitivity of groups."
+        ],
+        "rule_type": "ENTAILMENT",
+        "rule": "If different reactions are explained by different shared sensitivities, then people with different reactions may have different kinds of sensitivity.",
+        "application": "Charlie's own explanation allows people who find the nocturnes boring to have a different musical sensitivity from those who find them elegant.",
+        "relation": "CONTRADICTION",
+        "conclusion": "INCORRECT"
+      },
+      {
+        "statement": 3,
+        "statement_text": "Bob and Charlie can both accept the claim that Chopin's nocturnes are elegant, albeit for different reasons.",
+        "premises": [
+          "Bob regards elegance as a genuine property perceived by people with appropriate sensitivity.",
+          "Charlie allows a group sharing a particular musical sensitivity to regard the nocturnes as elegant, without treating elegance as an observer-independent property."
+        ],
+        "rule_type": "ENTAILMENT",
+        "rule": "Two speakers can accept the same surface claim while supporting it with different underlying theories.",
+        "application": "Bob can accept 'the nocturnes are elegant' as a claim about a real property, while Charlie can accept it as a claim made within a group sharing a sensitivity.",
+        "relation": "SUPPORT",
+        "conclusion": "CORRECT"
+      }
+    ]
+  },
+  {
+    "id": "2021_24",
+    "category": "Argumentation and Rebuttal",
+    "review_status": "DRAFT_NEEDS_REVIEW",
+    "statements": [
+      {
+        "statement": 1,
+        "statement_text": "Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.",
+        "premises": [
+          "Alice argues that biological characteristics are important for explaining stable differences between groups.",
+          "The proposed evidence says the same sex-and-age group has a much higher crime rate across societies and historical periods."
+        ],
+        "rule_type": "STRENGTHEN",
+        "rule": "Evidence of a stable group difference across varying cultures and environments tends to support, rather than weaken, a claim that biological characteristics contribute to that difference.",
+        "application": "A persistent cross-cultural difference among males aged 15–25 is more consistent with Alice's biological explanation than with the claim that the evidence weakens her.",
+        "relation": "SUPPORT",
+        "conclusion": "INCORRECT"
+      },
+      {
+        "statement": 2,
+        "statement_text": "Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.",
+        "premises": [
+          "Bob argues that human abilities can be shaped by culture and social environment.",
+          "The proposed evidence says reforms intended to develop abilities through social change failed."
+        ],
+        "rule_type": "STRENGTHEN",
+        "rule": "Evidence that interventions of the kind predicted by a theory fail does not strengthen that theory.",
+        "application": "Failed social reforms do not provide positive support for Bob's claim that social/environmental change can develop abilities.",
+        "relation": "NONE",
+        "conclusion": "CORRECT"
+      },
+      {
+        "statement": 3,
+        "statement_text": "Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument.",
+        "premises": [
+          "Alice emphasizes biological characteristics in development.",
+          "Bob emphasizes the possibility of development through culture and social environment.",
+          "The proposed evidence says scores increased after an educational program was improved."
+        ],
+        "rule_type": "STRENGTHEN",
+        "rule": "If changing an environmental intervention improves performance, that evidence supports an environmental-development claim and counts against a claim that emphasizes fixed biological explanation for the observed outcome.",
+        "application": "Improved English education followed by higher scores supports Bob's environmental view and weakens, rather than strengthens, Alice's biological emphasis.",
+        "relation": "CONTRADICTION",
+        "conclusion": "INCORRECT"
+      }
+    ]
+  },
+  {
+    "id": "2022_16",
+    "category": "Argument Evaluation & Problem Solving",
+    "review_status": "DRAFT_NEEDS_REVIEW",
+    "statements": [
+      {
+        "statement": 1,
+        "statement_text": "According to Socrates, even if one knows only 'a' and does not know 'b', one can still make a true judgment such as “a is b.”",
+        "premises": [
+          "Socrates argues that judgment concerns objects one knows or does not know.",
+          "His argument treats lack of knowledge of an object as preventing the relevant identification judgment."
+        ],
+        "rule_type": "ENTAILMENT",
+        "rule": "A claim is not supported by an argument if the argument does not permit the required judgment under the stated knowledge conditions.",
+        "application": "The dialogue does not support making 'a is b' when b is not known; the rationale treats this as a case in which the judgment cannot be made.",
+        "relation": "CONTRADICTION",
+        "conclusion": "INCORRECT"
+      },
+      {
+        "statement": 2,
+        "statement_text": "According to Socrates, if one knows neither 'a' nor 'b', one cannot even make a false judgment such as “a is b.”",
+        "premises": [
+          "Socrates asks whether someone who knows neither of two objects could judge one to be the other.",
+          "He rejects that possibility."
+        ],
+        "rule_type": "ENTAILMENT",
+        "rule": "If the argument explicitly rules out forming a judgment between two unknown objects, then it entails that a false identification judgment cannot be made in that case.",
+        "application": "Because neither a nor b is known, Socrates says the judgment 'a is b' cannot arise.",
+        "relation": "ENTAILMENT",
+        "conclusion": "CORRECT"
+      },
+      {
+        "statement": 3,
+        "statement_text": "If it is actually possible to make a false judgment such as “a is b” while knowing both 'a' and 'b', then Socrates’ argument loses its persuasiveness.",
+        "premises": [
+          "Socrates' argument relies on the claim that a person who knows both objects cannot falsely identify one as the other.",
+          "The hypothetical says such a false judgment is in fact possible."
+        ],
+        "rule_type": "CONTRADICTION",
+        "rule": "If a conclusion depends on a premise and that premise is shown false by a counterexample, the argument is undermined.",
+        "application": "A genuine false judgment made while knowing both a and b would directly contradict one of the premises used to argue that false judgment is impossible.",
+        "relation": "ATTACK",
+        "conclusion": "CORRECT"
+      }
+    ]
+  },
+  {
+    "id": "2025_29",
+    "category": "Argument Evaluation & Analysis",
+    "review_status": "DRAFT_NEEDS_REVIEW",
+    "statements": [
+      {
+        "statement": 1,
+        "statement_text": "If the female singers’ scores were higher in the experimental group than in the control group, ⓐ is supported.",
+        "premises": [
+          "Hypothesis ⓐ says women display greater creativity when working separately from men than when working together with men.",
+          "Female singers work with the male singer and male musicians in the control condition, but perform separately from them in the experimental condition."
+        ],
+        "rule_type": "SUPPORT",
+        "rule": "If an experimental manipulation directly instantiates the contrast in a hypothesis, an outcome in the predicted direction supports the hypothesis.",
+        "application": "Higher female creativity scores in the separate-work experimental condition than in the mixed-work control condition match the direction predicted by ⓐ.",
+        "relation": "SUPPORT",
+        "conclusion": "CORRECT"
+      },
+      {
+        "statement": 2,
+        "statement_text": "If the total score of all female singers was higher than that of all male singers, ⓐ is supported.",
+        "premises": [
+          "Hypothesis ⓐ compares women's creativity when working separately from men versus together with men.",
+          "A total female-versus-male score comparison does not by itself compare women's scores across the experimental and control conditions."
+        ],
+        "rule_type": "OTHER",
+        "rule": "Evidence supports a comparative causal hypothesis only if it bears on the contrast the hypothesis actually makes; an aggregate comparison on a different contrast may be insufficient.",
+        "application": "Women having a higher total score than men could occur even if women did not score higher when separated from men, so the aggregate sex comparison does not necessarily support ⓐ.",
+        "relation": "NONE",
+        "conclusion": "INCORRECT"
+      },
+      {
+        "statement": 3,
+        "statement_text": "If the female singers’ scores in the control group were slightly lower than those of the male singers, but in the experimental group the female singers’ scores were higher than those of the male singers, ⓐ is weakened.",
+        "premises": [
+          "Hypothesis ⓐ predicts better female creativity when separated from men.",
+          "The proposed result moves women from slightly below men in the control condition to above men in the experimental condition."
+        ],
+        "rule_type": "WEAKEN",
+        "rule": "An observed pattern in the direction predicted by a hypothesis supports rather than weakens that hypothesis, assuming the relevant comparison is otherwise appropriate.",
+        "application": "The stated pattern is consistent with women's performance improving in the separate-work condition, so it does not provide evidence that ⓐ is weakened.",
+        "relation": "CONTRADICTION",
+        "conclusion": "INCORRECT"
+      }
+    ]
+  }
+]
