@@ -1,0 +1,8 @@
+# Install a CUDA-enabled PyTorch build supplied/recommended by the Chameleon image.
+# This file intentionally does not install or replace torch.
+transformers>=4.50,<6
+peft>=0.14,<1
+accelerate>=1.2,<2
+bitsandbytes>=0.45,<1
+huggingface_hub>=0.34
+matplotlib>=3.8,<4
