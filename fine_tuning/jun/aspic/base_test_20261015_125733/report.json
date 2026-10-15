@@ -1,0 +1,62 @@
+{
+ "model": "llama3.2:3b",
+ "example": "2022_17",
+ "json_mode": true,
+ "rows": [
+  {
+   "id": "2022_08",
+   "secs": 10.6,
+   "parsed": true,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 2,
+   "error": "invalid translation: 'args'"
+  },
+  {
+   "id": "2022_12",
+   "secs": 10.8,
+   "parsed": true,
+   "valid": true,
+   "stmt_ok": 1,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 3,
+   "error": ""
+  },
+  {
+   "id": "2022_22",
+   "secs": 3.4,
+   "parsed": true,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 4,
+   "error": "invalid translation: 'premises'"
+  },
+  {
+   "id": "2022_36",
+   "secs": 25.7,
+   "parsed": true,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 5,
+   "pred": null,
+   "gold": 1,
+   "error": "no check for statement(s) ['1', '2', '3', '4', '5']"
+  },
+  {
+   "id": "2022_39",
+   "secs": 11.6,
+   "parsed": true,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 1,
+   "error": "invalid translation: 'args'"
+  }
+ ]
+}

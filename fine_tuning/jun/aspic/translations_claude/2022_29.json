@@ -1,0 +1,65 @@
+{
+  "id": "2022_29",
+  "positions": {
+    "ⓐ": {"thesis": "c1", "summary": "The decline in US crime is closely related to (reduced) lead exposure."}
+  },
+  "claims": {
+    "c1": {"text": "ⓐ The decline in crime in the United States is closely related to lead exposure.", "source": "passage"},
+    "c2": {"text": "US violent and property crime declined sharply from the early 1990s, and the decline continued until 2020.", "source": "passage"},
+    "c3": {"text": "From the end of World War II until the early 1970s, increasing lead emissions from cars were followed by a rise in violent crime.", "source": "passage"},
+    "c4": {"text": "After lead began to be removed from gasoline in the 1970s, violent crime subsequently decreased.", "source": "passage"},
+    "c5": {"text": "Rates of violent and property crime are highest in the late teens to early twenties.", "source": "passage"},
+    "c6": {"text": "For children, unlike adolescents or adults, lead exposure affects brain development and the future potential for criminal behavior, inducing aggression and impulsivity.", "source": "passage"},
+    "c7": {"text": "The effect of childhood lead exposure on crime appears about 20 years later, when the children reach their late teens or early twenties.", "source": "rationale"}
+  },
+  "premises": [
+    {"claim": "c2", "by": "*", "kind": "axiom"},
+    {"claim": "c3", "by": "ⓐ", "kind": "ordinary"},
+    {"claim": "c4", "by": "ⓐ", "kind": "ordinary"},
+    {"claim": "c5", "by": "*", "kind": "axiom"},
+    {"claim": "c6", "by": "*", "kind": "axiom"}
+  ],
+  "rules": [
+    {"id": "r1", "by": "ⓐ", "if": ["c3", "c4"], "then": "c1", "type": "defeasible", "source": "passage"},
+    {"id": "r2", "by": "*", "if": ["c5", "c6"], "then": "c7", "type": "defeasible", "source": "rationale"}
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {"op": "strengthens", "claim": "c1", "add": {
+        "claims": {
+          "h1": {"text": "The average blood lead level of American children aged 1-5 in 2000 had dropped to half the level of 1990.", "source": "statement"}
+        },
+        "premises": [{"claim": "h1", "by": "*", "kind": "axiom"}],
+        "rules": [{"id": "ra1", "by": "*", "if": ["h1", "c7", "c2"], "then": "c1", "type": "defeasible", "source": "rationale"}]
+      }},
+      "note": "Lower childhood lead around 1990-2000 predicts less crime around 2010-2020, which matches the continued decline."
+    },
+    "b": {
+      "check": {"op": "weakens", "claim": "c1", "add": {
+        "claims": {
+          "h2": {"text": "The sharp decline in violent crime in the US began in the 1990s rather than the 1970s.", "source": "statement"},
+          "h3": {"text": "The decline in crime is not related to the removal of lead in the 1970s, because the timing does not match.", "source": "rationale"}
+        },
+        "premises": [{"claim": "h2", "by": "*", "kind": "axiom"}],
+        "rules": [{"id": "rb1", "by": "*", "if": ["h2"], "then": "h3", "type": "defeasible", "source": "rationale"}],
+        "contraries": [["h3", "c1"]],
+        "undercuts": [{"claim": "c7", "rule": "rb1"}]
+      }},
+      "note": "Naive timing argument rb1 is undercut by the ~20-year lag c7, so the 1990s start fits ⓐ."
+    },
+    "c": {
+      "check": {"op": "strengthens", "claim": "c1", "add": {
+        "claims": {
+          "h4": {"text": "Adolescents in the United States who committed crimes had four times the bone lead content of those who did not.", "source": "statement"},
+          "h5": {"text": "Lead exposure is positively correlated with criminal behavior.", "source": "rationale"}
+        },
+        "premises": [{"claim": "h4", "by": "*", "kind": "axiom"}],
+        "rules": [
+          {"id": "rc1", "by": "*", "if": ["h4"], "then": "h5", "type": "defeasible", "source": "rationale"},
+          {"id": "rc2", "by": "*", "if": ["h5", "c4"], "then": "c1", "type": "defeasible", "source": "rationale"}
+        ]
+      }}
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+ "model": "llama3.2:3b",
+ "example": "2022_17",
+ "json_mode": false,
+ "rows": [
+  {
+   "id": "2022_08",
+   "secs": 11.1,
+   "parsed": false,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 2,
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 1324 (char 1323)"
+  },
+  {
+   "id": "2022_12",
+   "secs": 11.1,
+   "parsed": true,
+   "valid": true,
+   "stmt_ok": 1,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 3,
+   "error": ""
+  },
+  {
+   "id": "2022_22",
+   "secs": 19.0,
+   "parsed": false,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 4,
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 376 (char 375)"
+  },
+  {
+   "id": "2022_36",
+   "secs": 25.4,
+   "parsed": true,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 5,
+   "pred": null,
+   "gold": 1,
+   "error": "no check for statement(s) ['1', '2', '3', '4', '5']"
+  },
+  {
+   "id": "2022_39",
+   "secs": 11.2,
+   "parsed": false,
+   "valid": false,
+   "stmt_ok": 0,
+   "stmt_n": 3,
+   "pred": null,
+   "gold": 1,
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 1463 (char 1462)"
+  }
+ ]
+}

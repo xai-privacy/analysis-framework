@@ -1,0 +1,208 @@
+{
+ "id": "2021_37",
+ "positions": {
+  "ⓐ": {
+   "thesis": "c1",
+   "summary": "Combustion occurs when oxygen in gaseous oxygen combines with a substance, while caloric escapes into the air, generating heat."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "ⓐ In combustion, oxygen in gaseous oxygen combines with the burning substance, and caloric escapes into the air, generating heat.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Heat is a massless substance called caloric, and heat generation is the release of combined caloric.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Gaseous oxygen is a compound of oxygen and caloric.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Gases contain far more caloric than solids or liquids.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Caloric is massless.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c5",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "ⓐ",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c1",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c1",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "When many solid substances combust, heat is generated and gas is produced at the same time.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Since the produced gas requires large amounts of caloric, little or no caloric escapes, so heat should not be generated under ⓐ.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1",
+        "c4"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c1"
+      ]
+     ]
+    }
+   },
+   "note": "Solid-to-gas combustion consumes caloric rather than releasing it, attacking rather than strengthening ⓐ."
+  },
+  "b": {
+   "check": {
+    "op": "weakens",
+    "claim": "c1",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "Gunpowder containing oxygen compounds combusts explosively and releases massive heat without gaseous oxygen.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "Caloric in gaseous oxygen is not the source of heat generated during combustion.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h3"
+       ],
+       "then": "h4",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h4",
+       "c1"
+      ]
+     ]
+    }
+   },
+   "note": "Combustion releasing heat without gaseous oxygen undermines the claim that caloric from gaseous oxygen is the source of combustion heat."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "c1",
+    "add": {
+     "claims": {
+      "h5": {
+       "text": "No matter how much heat released during combustion enters the air, the mass of air does not increase.",
+       "source": "statement"
+      },
+      "h6": {
+       "text": "If heat were a substance added to the air, air mass would increase.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h5"
+       ],
+       "then": "h6",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h6",
+       "c1"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "c5",
+       "rule": "rc1"
+      }
+     ]
+    }
+   },
+   "note": "The naive attack rc1 assumes caloric has mass, but since caloric is massless (c5), rc1 is undercut."
+  }
+ }
+}

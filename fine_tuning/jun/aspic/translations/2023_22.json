@@ -1,0 +1,273 @@
+{
+ "id": "2023_22",
+ "positions": {
+  "CRS": {
+   "thesis": "c3",
+   "summary": "Understanding word meaning depends on understanding and following usage rules; failing to understand usage rules means failing to understand word meaning."
+  },
+  "The following argument": {
+   "thesis": "c10",
+   "summary": "Conceptual role semantics leads to an infinite regress, so no one can understand the meaning of any word, refuting CRS."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Understanding word meaning requires understanding the usage rules of that word.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Following usage rules means using the word based on an understanding of those rules.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Failing to understand the usage rules of a word means failing to understand the meaning of that word.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "To understand usage rules, those rules must first be expressed linguistically and clearly.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Linguistic expressions of rules contain multiple words.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "To understand a rule, one must understand the meanings of all words included in its linguistic expression.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "An infinite regress occurs when understanding rule words requires understanding their rules, and so on.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Infinite regress entails that no one can understand the meaning of any word.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "That no one understands the meaning of any word is absurd/unreasonable.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Conceptual role semantics must be rejected.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": [
+    "CRS",
+    "The following argument"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "CRS",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "The following argument",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c6",
+   "by": "The following argument",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "CRS",
+   "if": [
+    "c1",
+    "c2"
+   ],
+   "then": "c3",
+   "type": "strict",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "The following argument",
+   "if": [
+    "c1",
+    "c4",
+    "c5",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "The following argument",
+   "if": [
+    "c7"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "The following argument",
+   "if": [
+    "c8",
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c3",
+   "c10"
+  ]
+ ],
+ "statements": {
+  "1": {
+   "check": {
+    "op": "not",
+    "arg": {
+     "op": "weakens",
+     "claim": "c3",
+     "add": {
+      "claims": {
+       "h1": {
+        "text": "An artificial intelligence appears that can use Korean perfectly, as well as a native Korean.",
+        "source": "statement"
+       }
+      },
+      "premises": [
+       {
+        "claim": "h1",
+        "by": "*",
+        "kind": "axiom"
+       }
+      ]
+     }
+    }
+   },
+   "note": "Mere behavioral competence of AI without establishing whether it understands rules does not affect CRS, so CRS is not weakened."
+  },
+  "2": {
+   "check": {
+    "op": "weakens",
+    "claim": "c10",
+    "add": {
+     "claims": {
+      "h2": {
+       "text": "Rules for word usage do not necessarily have to be expressed linguistically.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c4"
+      ]
+     ]
+    }
+   },
+   "note": "Denying that rules must be linguistically expressed directly undermines premise c4 of the counterargument."
+  },
+  "3": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c3",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "A person in fact understands the meaning of every word included in the definition of 'ppyojukhada'.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ]
+    }
+   },
+   "note": "CRS already assumes speakers understand meanings; showing a person understands words merely affirms empirical fact without providing a new argument or strengthening CRS."
+  },
+  "4": {
+   "check": {
+    "op": "weakens",
+    "claim": "c10",
+    "add": {
+     "claims": {
+      "h4": {
+       "text": "It is possible to understand the meaning of a statement even if it contains words whose meanings one does not understand.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h4",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "contraries": [
+      [
+       "h4",
+       "c6"
+      ]
+     ]
+    }
+   },
+   "note": "Being able to understand a rule without understanding all constituent words directly undermines premise c6 of the counterargument."
+  },
+  "5": {
+   "check": {
+    "op": "not",
+    "arg": {
+     "op": "weakens",
+     "claim": "c3",
+     "add": {
+      "claims": {
+       "h5": {
+        "text": "An agent does not understand the meaning of a word but can use it according to the usage rules.",
+        "source": "statement"
+       }
+      },
+      "premises": [
+       {
+        "claim": "h5",
+        "by": "*",
+        "kind": "axiom"
+       }
+      ]
+     }
+    }
+   },
+   "note": "CRS defines understanding meaning by understanding rules (not merely using per rules); an agent following rules without understanding meaning is not a counterexample."
+  }
+ }
+}

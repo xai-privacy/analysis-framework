@@ -1,0 +1,855 @@
+[
+  {
+    "id": "2022_17",
+    "positions": {
+      "A": {
+       "thesis": "c7",
+       "summary": "Evil is an existence and not a privation, because evil admits of degrees while privation does not."
+      },
+      "B": {
+       "thesis": "c13",
+       "summary": "Evil is a privation that admits of degrees based on distance from the good, and evil depends on good."
+      }
+    },
+    "claims": {
+      "c1": {
+        "text": "Privation does not admit of more or less.",
+        "source": "passage"
+      },
+      "c2": {
+        "text": "'This is lacking' and 'this is not lacking' are contradictory, allowing no middle ground.",
+        "source": "passage"
+      },
+      "c3": {
+        "text": "Existence admits of more or less, since there can be degrees of perfection in existence.",
+        "source": "passage"
+      },
+      "c4": {
+        "text": "Evil admits of degrees (some evil things are more evil than others).",
+        "source": "passage"
+      },
+      "c5": {
+        "text": "Evil is not a privation.",
+        "source": "passage"
+      },
+      "c6": {
+        "text": "Evil is a privation.",
+        "source": "passage"
+      },
+      "c7": {
+        "text": "Evil is an existence.",
+        "source": "rationale"
+      },
+      "c8": {
+        "text": "Concepts involving privation (such as inequality or dissimilarity) admit of more or less depending on distance from perfection/good.",
+        "source": "passage"
+      },
+      "c9": {
+        "text": "Something more lacking in goodness is more evil.",
+        "source": "passage"
+      },
+      "c10": {
+        "text": "Privation does not exist in itself, but increases or decreases according to the cause producing it.",
+        "source": "passage"
+      },
+      "c11": {
+        "text": "Good can exist without evil, but evil cannot exist without good.",
+        "source": "statement"
+      },
+      "c12": {
+        "text": "Evil can exist independently of good.",
+        "source": "rationale"
+      },
+      "c13": {
+        "text": "Evil is a privation that admits of degrees.",
+        "source": "passage"
+      }
+    },
+    "premises": [
+      {
+        "claim": "c2",
+        "by": "A",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c3",
+        "by": "A",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c4",
+        "by": [
+          "A",
+          "B"
+        ],
+        "kind": "axiom"
+      },
+      {
+        "claim": "c8",
+        "by": "B",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c10",
+        "by": "B",
+        "kind": "ordinary"
+      }
+    ],
+    "rules": [
+      {
+        "id": "r1",
+        "by": "A",
+        "if": [
+          "c2"
+        ],
+        "then": "c1",
+        "type": "strict",
+        "source": "passage"
+      },
+      {
+        "id": "r2",
+        "by": "A",
+        "if": [
+          "c1",
+          "c4"
+        ],
+        "then": "c5",
+        "type": "strict",
+        "source": "passage"
+      },
+      {
+        "id": "r3",
+        "by": "A",
+        "if": [
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "then": "c7",
+        "type": "defeasible",
+        "source": "rationale"
+      },
+      {
+        "id": "r4",
+        "by": "A",
+        "if": [
+          "c7"
+        ],
+        "then": "c12",
+        "type": "defeasible",
+        "source": "rationale"
+      },
+      {
+        "id": "r5",
+        "by": "B",
+        "if": [
+          "c8",
+          "c4"
+        ],
+        "then": "c9",
+        "type": "defeasible",
+        "source": "passage"
+      },
+      {
+        "id": "r6",
+        "by": "B",
+        "if": [
+          "c9"
+        ],
+        "then": "c13",
+        "type": "defeasible",
+        "source": "passage"
+      },
+      {
+        "id": "r7",
+        "by": "B",
+        "if": [
+          "c13"
+        ],
+        "then": "c6",
+        "type": "strict",
+        "source": "passage"
+      },
+      {
+        "id": "r8",
+        "by": "B",
+        "if": [
+          "c6",
+          "c10"
+        ],
+        "then": "c11",
+        "type": "defeasible",
+        "source": "rationale"
+      }
+    ],
+    "contraries": [
+      [
+        "c5",
+        "c6"
+      ],
+      [
+        "c1",
+        "c8"
+      ],
+      [
+        "c11",
+        "c12"
+      ]
+    ],
+    "statements": {
+      "a": {
+        "check": {
+          "op": "and",
+          "args": [
+            {
+              "op": "holds",
+              "by": "B",
+              "claim": "c6"
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "holds",
+                "by": "A",
+                "claim": "c6"
+              }
+            }
+          ]
+        },
+        "note": "B argues evil is a privation (c6), whereas A concludes evil is not a privation (c5, contrary of c6)."
+      },
+      "b": {
+        "check": {
+          "op": "and",
+          "args": [
+            {
+              "op": "assumes",
+              "by": "A",
+              "claim": "c4"
+            },
+            {
+              "op": "assumes",
+              "by": "B",
+              "claim": "c4"
+            }
+          ]
+        },
+        "note": "Both A and B take the degree of evil (c4) as an established premise."
+      },
+      "c": {
+        "check": {
+          "op": "and",
+          "args": [
+            {
+              "op": "holds",
+              "by": "B",
+              "claim": "c11"
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "holds",
+                "by": "A",
+                "claim": "c11"
+              }
+            }
+          ]
+        },
+        "note": "B derives that good can exist without evil but not vice versa (c11), whereas A views evil as an independent existence (c12)."
+      }
+    }
+  },
+  {
+    "id": "2021_37",
+    "positions": {
+      "ⓐ": {
+        "thesis": "c1",
+        "summary": "Combustion occurs when oxygen in gaseous oxygen combines with a substance, while caloric escapes into the air, generating heat."
+      }
+    },
+    "claims": {
+      "c1": {
+        "text": "ⓐ In combustion, oxygen in gaseous oxygen combines with the burning substance, and caloric escapes into the air, generating heat.",
+        "source": "passage"
+      },
+      "c2": {
+        "text": "Heat is a massless substance called caloric, and heat generation is the release of combined caloric.",
+        "source": "passage"
+      },
+      "c3": {
+        "text": "Gaseous oxygen is a compound of oxygen and caloric.",
+        "source": "passage"
+      },
+      "c4": {
+        "text": "Gases contain far more caloric than solids or liquids.",
+        "source": "passage"
+      },
+      "c5": {
+        "text": "Caloric is massless.",
+        "source": "passage"
+      }
+    },
+    "premises": [
+      {
+        "claim": "c2",
+        "by": "ⓐ",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c3",
+        "by": "ⓐ",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c4",
+        "by": "*",
+        "kind": "axiom"
+      },
+      {
+        "claim": "c5",
+        "by": "*",
+        "kind": "axiom"
+      }
+    ],
+    "rules": [
+      {
+        "id": "r1",
+        "by": "ⓐ",
+        "if": [
+          "c2",
+          "c3"
+        ],
+        "then": "c1",
+        "type": "defeasible",
+        "source": "passage"
+      }
+    ],
+    "contraries": [],
+    "statements": {
+      "a": {
+        "check": {
+          "op": "strengthens",
+          "claim": "c1",
+          "add": {
+            "claims": {
+              "h1": {
+                "text": "When many solid substances combust, heat is generated and gas is produced at the same time.",
+                "source": "statement"
+              },
+              "h2": {
+                "text": "Since the produced gas requires large amounts of caloric, little or no caloric escapes, so heat should not be generated under ⓐ.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h1",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "ra1",
+                "by": "*",
+                "if": [
+                  "h1",
+                  "c4"
+                ],
+                "then": "h2",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "h2",
+                "c1"
+              ]
+            ]
+          }
+        },
+        "note": "Solid-to-gas combustion consumes caloric rather than releasing it, attacking rather than strengthening ⓐ."
+      },
+      "b": {
+        "check": {
+          "op": "weakens",
+          "claim": "c1",
+          "add": {
+            "claims": {
+              "h3": {
+                "text": "Gunpowder containing oxygen compounds combusts explosively and releases massive heat without gaseous oxygen.",
+                "source": "statement"
+              },
+              "h4": {
+                "text": "Caloric in gaseous oxygen is not the source of heat generated during combustion.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h3",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "rb1",
+                "by": "*",
+                "if": [
+                  "h3"
+                ],
+                "then": "h4",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "h4",
+                "c1"
+              ]
+            ]
+          }
+        },
+        "note": "Combustion releasing heat without gaseous oxygen undermines the claim that caloric from gaseous oxygen is the source of combustion heat."
+      },
+      "c": {
+        "check": {
+          "op": "weakens",
+          "claim": "c1",
+          "add": {
+            "claims": {
+              "h5": {
+                "text": "No matter how much heat released during combustion enters the air, the mass of air does not increase.",
+                "source": "statement"
+              },
+              "h6": {
+                "text": "If heat were a substance added to the air, air mass would increase.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h5",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "rc1",
+                "by": "*",
+                "if": [
+                  "h5"
+                ],
+                "then": "h6",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "h6",
+                "c1"
+              ]
+            ],
+            "undercuts": [
+              {
+                "claim": "c5",
+                "rule": "rc1"
+              }
+            ]
+          }
+        },
+        "note": "The naive attack rc1 assumes caloric has mass, but since caloric is massless (c5), rc1 is undercut."
+      }
+    }
+  },
+  {
+    "id": "2024_15",
+    "positions": {
+      "Alice": {
+        "thesis": "c7",
+        "summary": "B is better than A."
+      },
+      "Bob": {
+        "thesis": "c10",
+        "summary": "C is better than B."
+      },
+      "Charlie": {
+        "thesis": "c13",
+        "summary": "A is better than C."
+      }
+    },
+    "claims": {
+      "c1": {
+        "text": "In A, 100M people enjoy 100 units each (total: 10B, avg: 100, completely equal).",
+        "source": "passage"
+      },
+      "c2": {
+        "text": "In B, 100M people enjoy 105 units and 10B people enjoy 5 units (total: 60.5B, avg: ~6, unequal).",
+        "source": "passage"
+      },
+      "c3": {
+        "text": "In C, 10.1B people enjoy 10 units each (total: 101B, avg: 10, completely equal).",
+        "source": "passage"
+      },
+      "c4": {
+        "text": "Migrants in B have higher welfare (105) than in A (100), and original B inhabitants maintain worthwhile welfare (5).",
+        "source": "passage"
+      },
+      "c5": {
+        "text": "In C there is complete equality and higher average welfare than in B.",
+        "source": "passage"
+      },
+      "c6": {
+        "text": "Total welfare is greater in C than in A, but average welfare is higher in A than in C.",
+        "source": "passage"
+      },
+      "c7": {
+        "text": "B is better than A.",
+        "source": "passage"
+      },
+      "c8": {
+        "text": "A is better than B.",
+        "source": "rationale"
+      },
+      "c9": {
+        "text": "C is not better than B.",
+        "source": "rationale"
+      },
+      "c10": {
+        "text": "C is better than B.",
+        "source": "passage"
+      },
+      "c11": {
+        "text": "C is better than A.",
+        "source": "rationale"
+      },
+      "c12": {
+        "text": "A is not better than C.",
+        "source": "rationale"
+      },
+      "c13": {
+        "text": "A is better than C.",
+        "source": "passage"
+      }
+    },
+    "premises": [
+      {
+        "claim": "c1",
+        "by": "*",
+        "kind": "axiom"
+      },
+      {
+        "claim": "c2",
+        "by": "*",
+        "kind": "axiom"
+      },
+      {
+        "claim": "c3",
+        "by": "*",
+        "kind": "axiom"
+      },
+      {
+        "claim": "c4",
+        "by": "Alice",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c5",
+        "by": "Bob",
+        "kind": "ordinary"
+      },
+      {
+        "claim": "c6",
+        "by": "Charlie",
+        "kind": "ordinary"
+      }
+    ],
+    "rules": [
+      {
+        "id": "r1",
+        "by": "Alice",
+        "if": [
+          "c4"
+        ],
+        "then": "c7",
+        "type": "defeasible",
+        "source": "passage"
+      },
+      {
+        "id": "r2",
+        "by": "Bob",
+        "if": [
+          "c5"
+        ],
+        "then": "c10",
+        "type": "defeasible",
+        "source": "passage"
+      },
+      {
+        "id": "r3",
+        "by": "Charlie",
+        "if": [
+          "c6"
+        ],
+        "then": "c13",
+        "type": "defeasible",
+        "source": "passage"
+      }
+    ],
+    "contraries": [
+      [
+        "c7",
+        "c8"
+      ],
+      [
+        "c10",
+        "c9"
+      ],
+      [
+        "c13",
+        "c11"
+      ],
+      [
+        "c13",
+        "c12"
+      ]
+    ],
+    "hypotheticals": {
+      "less_inequality": {
+        "claims": {
+          "h1": {
+            "text": "A world with less inequality is considered a better world.",
+            "source": "statement"
+          }
+        },
+        "premises": [
+          {
+            "claim": "h1",
+            "by": "*",
+            "kind": "axiom"
+          }
+        ],
+        "rules": [
+          {
+            "id": "rh1",
+            "by": "*",
+            "if": [
+              "h1",
+              "c1",
+              "c2"
+            ],
+            "then": "c8",
+            "type": "strict",
+            "source": "rationale"
+          }
+        ]
+      },
+      "higher_average": {
+        "claims": {
+          "h2": {
+            "text": "A world with a higher average welfare is considered a better world.",
+            "source": "statement"
+          }
+        },
+        "premises": [
+          {
+            "claim": "h2",
+            "by": "*",
+            "kind": "axiom"
+          }
+        ],
+        "rules": [
+          {
+            "id": "rh2",
+            "by": "*",
+            "if": [
+              "h2",
+              "c1",
+              "c2"
+            ],
+            "then": "c8",
+            "type": "strict",
+            "source": "rationale"
+          }
+        ]
+      },
+      "greater_total": {
+        "claims": {
+          "h3": {
+            "text": "A world with a greater total welfare is considered a better world.",
+            "source": "statement"
+          }
+        },
+        "premises": [
+          {
+            "claim": "h3",
+            "by": "*",
+            "kind": "axiom"
+          }
+        ],
+        "rules": [
+          {
+            "id": "rh3",
+            "by": "*",
+            "if": [
+              "h3",
+              "c3",
+              "c1"
+            ],
+            "then": "c11",
+            "type": "strict",
+            "source": "rationale"
+          }
+        ]
+      }
+    },
+    "statements": {
+      "a": {
+        "check": {
+          "op": "and",
+          "args": [
+            {
+              "op": "status",
+              "claim": "Alice",
+              "is": [
+                "OUT"
+              ],
+              "add": "less_inequality"
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "status",
+                "claim": "Bob",
+                "is": [
+                  "OUT"
+                ],
+                "add": "less_inequality"
+              }
+            }
+          ]
+        },
+        "note": "Under the equality criterion, A is better than B, rebutting Alice's conclusion (Alice is OUT), while Bob's conclusion (C is better than B) remains undefeated."
+      },
+      "b": {
+        "check": {
+          "op": "and",
+          "args": [
+            {
+              "op": "holds",
+              "by": "Bob",
+              "claim": "c13",
+              "add": {
+                "claims": {
+                  "h4": {
+                    "text": "Between worlds with equal distribution, the world with higher average welfare is better.",
+                    "source": "rationale"
+                  }
+                },
+                "premises": [
+                  {
+                    "claim": "h4",
+                    "by": "Bob",
+                    "kind": "ordinary"
+                  }
+                ],
+                "rules": [
+                  {
+                    "id": "rb1",
+                    "by": "Bob",
+                    "if": [
+                      "h4",
+                      "c1",
+                      "c3"
+                    ],
+                    "then": "c13",
+                    "type": "defeasible",
+                    "source": "rationale"
+                  }
+                ]
+              }
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "holds",
+                "by": "Bob",
+                "claim": "c7",
+                "add": {
+                  "claims": {
+                    "h5": {
+                      "text": "A world with both complete equality and higher average welfare is better than an unequal world with lower average welfare.",
+                      "source": "rationale"
+                    }
+                  },
+                  "premises": [
+                    {
+                      "claim": "h5",
+                      "by": "Bob",
+                      "kind": "ordinary"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "id": "rb2",
+                      "by": "Bob",
+                      "if": [
+                        "h5",
+                        "c1",
+                        "c2"
+                      ],
+                      "then": "c8",
+                      "type": "defeasible",
+                      "source": "rationale"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "note": "Applying Bob's equality and average welfare criteria leads Bob to agree that A is better than C (c13) and reject that B is better than A (c7)."
+      },
+      "c": {
+        "check": {
+          "op": "and",
+          "args": [
+            {
+              "op": "status",
+              "claim": "Alice",
+              "is": [
+                "OUT"
+              ],
+              "add": "higher_average"
+            },
+            {
+              "op": "not",
+              "arg": {
+                "op": "status",
+                "claim": "Bob",
+                "is": [
+                  "OUT"
+                ],
+                "add": "greater_total"
+              }
+            },
+            {
+              "op": "status",
+              "claim": "Charlie",
+              "is": [
+                "OUT"
+              ],
+              "add": "greater_total"
+            }
+          ]
+        },
+        "note": "Higher average welfare makes A better than B, denying Alice. Greater total welfare makes C better than A (denying Charlie) and C better than B (leaving Bob not denied)."
+      }
+    }
+  }
+]

@@ -1,0 +1,2 @@
+{"id": "2022_18", "positions": {"A": {"thesis": "c1"}, "B": {"thesis": "c2"}}, "claims": {"c1": {"text": "The proposition expressed by a sentence containing a taste predicate is the same regardless of who says it."}, "c2": {"text": "The proposition expressed by a sentence containing a taste predicate is different depending on who says it."}, "c3": {"text": "If Jiwoo says "}}," ": "Gopchang is delicious", " Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.":"}, " 
+    }

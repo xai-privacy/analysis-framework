@@ -1,0 +1,260 @@
+{
+ "id": "2022_17",
+ "positions": {
+  "A": {
+   "thesis": "c7",
+   "summary": "Evil is an existence and not a privation, because evil admits of degrees while privation does not."
+  },
+  "B": {
+   "thesis": "c13",
+   "summary": "Evil is a privation that admits of degrees based on distance from the good, and evil depends on good."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Privation does not admit of more or less.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "'This is lacking' and 'this is not lacking' are contradictory, allowing no middle ground.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Existence admits of more or less, since there can be degrees of perfection in existence.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Evil admits of degrees (some evil things are more evil than others).",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Evil is not a privation.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Evil is a privation.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Evil is an existence.",
+   "source": "rationale"
+  },
+  "c8": {
+   "text": "Concepts involving privation (such as inequality or dissimilarity) admit of more or less depending on distance from perfection/good.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Something more lacking in goodness is more evil.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Privation does not exist in itself, but increases or decreases according to the cause producing it.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "Good can exist without evil, but evil cannot exist without good.",
+   "source": "statement"
+  },
+  "c12": {
+   "text": "Evil can exist independently of good.",
+   "source": "rationale"
+  },
+  "c13": {
+   "text": "Evil is a privation that admits of degrees.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": [
+    "A",
+    "B"
+   ],
+   "kind": "axiom"
+  },
+  {
+   "claim": "c8",
+   "by": "B",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c10",
+   "by": "B",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c2"
+   ],
+   "then": "c1",
+   "type": "strict",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "A",
+   "if": [
+    "c1",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "strict",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "A",
+   "if": [
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r4",
+   "by": "A",
+   "if": [
+    "c7"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r5",
+   "by": "B",
+   "if": [
+    "c8",
+    "c4"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r6",
+   "by": "B",
+   "if": [
+    "c9"
+   ],
+   "then": "c13",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r7",
+   "by": "B",
+   "if": [
+    "c13"
+   ],
+   "then": "c6",
+   "type": "strict",
+   "source": "passage"
+  },
+  {
+   "id": "r8",
+   "by": "B",
+   "if": [
+    "c6",
+    "c10"
+   ],
+   "then": "c11",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c6"
+  ],
+  [
+   "c1",
+   "c8"
+  ],
+  [
+   "c11",
+   "c12"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "B",
+      "claim": "c6"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "A",
+       "claim": "c6"
+      }
+     }
+    ]
+   },
+   "note": "B argues evil is a privation (c6), whereas A concludes evil is not a privation (c5, contrary of c6)."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "assumes",
+      "by": "A",
+      "claim": "c4"
+     },
+     {
+      "op": "assumes",
+      "by": "B",
+      "claim": "c4"
+     }
+    ]
+   },
+   "note": "Both A and B take the degree of evil (c4) as an established premise."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "B",
+      "claim": "c11"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "A",
+       "claim": "c11"
+      }
+     }
+    ]
+   },
+   "note": "B derives that good can exist without evil but not vice versa (c11), whereas A views evil as an independent existence (c12)."
+  }
+ }
+}

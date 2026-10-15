@@ -1,0 +1,193 @@
+{
+ "id": "2021_34",
+ "positions": {
+  "Hypothesis 1": {
+   "thesis": "c1",
+   "summary": "People choose actions that maximize their expected payoff."
+  },
+  "Hypothesis 2": {
+   "thesis": "c2",
+   "summary": "The more people believe their advantageous but unfair actions are unlikely to be detected, the more likely they are to engage in them."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "People choose actions that maximize their expected payoff.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The more people believe their advantageous but unfair actions are unlikely to be detected by the other party, the more likely they are to engage in such actions.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Hypothesis 1",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Hypothesis 2",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "c1",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "60% of responders rejected the 8-2 offer in [Experiment 1].",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Responders chose 0 won over 2,000 won, failing to choose the action that maximizes expected payoff.",
+       "source": "rationale"
+      },
+      "h3": {
+       "text": "People do not always choose actions that maximize their expected payoff.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "h3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "c1",
+       "h3"
+      ]
+     ]
+    }
+   },
+   "note": "Rejecting 2,000 won for 0 won contradicts expected payoff maximization, undermining Hypothesis 1."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c1",
+    "add": {
+     "claims": {
+      "h4": {
+       "text": "In [Experiment 1], a proposer believes acceptance probabilities for 5-5, 8-2, and Coin are 100%, 20%, and 80%, and chooses the Coin Option.",
+       "source": "statement"
+      },
+      "h5": {
+       "text": "Expected payoffs are 5,000 won for 5-5, 1,600 won for 8-2, and 5,200 won for Coin, making Coin the expected payoff-maximizing action.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h4",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h4"
+       ],
+       "then": "h5",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "rb2",
+       "by": "*",
+       "if": [
+        "h5"
+       ],
+       "then": "c1",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "The proposer selects the option with the highest expected payoff (5,200 won), which provides evidence confirming Hypothesis 1."
+  },
+  "c": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c2",
+    "add": {
+     "claims": {
+      "h6": {
+       "text": "Participants view 5-5 and Coin as fair and 8-2 as unfair, and the rate of proposers choosing 8-2 is higher in [Experiment 2] than in [Experiment 1].",
+       "source": "statement"
+      },
+      "h7": {
+       "text": "In Experiment 2, the proposer believes unfair actions can be obscured by the coin toss, increasing the rate of choosing unfair actions.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h6",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h6"
+       ],
+       "then": "h7",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "rc2",
+       "by": "*",
+       "if": [
+        "h7"
+       ],
+       "then": "c2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Proposers choose the unfair 8-2 option more when it can be disguised as a coin outcome, directly supporting Hypothesis 2."
+  }
+ }
+}

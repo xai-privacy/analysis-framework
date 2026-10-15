@@ -1,0 +1,174 @@
+{
+ "id": "2023_26",
+ "positions": {
+  "A": {
+   "thesis": "c1",
+   "summary": "Survey the single polling station whose vote difference from the district total was smallest in the previous election."
+  },
+  "B": {
+   "thesis": "c2",
+   "summary": "Stratify polling stations with similar party results from the previous election and randomly sample stations from each stratum."
+  },
+  "C": {
+   "thesis": "c3",
+   "summary": "Travel to all polling stations in the district, surveying each station in proportion to its eligible voters."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Method A surveys the station with the smallest past vote difference to represent the district.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Method B stratifies polling stations by past party results and samples from each stratum.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Method C visits all polling stations in sequence for a set time, sampling proportionally to eligible voters.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Method A assumes that voting patterns at the selected polling station remain stable and consistent with the previous election.",
+   "source": "rationale"
+  },
+  "c5": {
+   "text": "Method A is applicable.",
+   "source": "rationale"
+  },
+  "c6": {
+   "text": "Method A is difficult to apply.",
+   "source": "statement"
+  },
+  "c7": {
+   "text": "Method B assumes that polling stations across the district are heterogeneous in voter political orientation.",
+   "source": "rationale"
+  },
+  "c8": {
+   "text": "Method B assumes that polling stations within the same district are generally homogeneous in terms of voters' political orientation.",
+   "source": "statement"
+  },
+  "c9": {
+   "text": "Data from the previous election about vote counts per polling station is essential for Method C.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "A",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "B",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "C",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "B",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c1",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c6"
+  ],
+  [
+   "c7",
+   "c8"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "status",
+    "claim": "c5",
+    "is": [
+     "OUT"
+    ],
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "There has been significant change in the population's social characteristics in a polling station since the last election.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Past election results no longer reflect current voting patterns for that station.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "c6",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Significant demographic changes undermine the assumption of historical stability (c4), concluding c6 and putting c5 OUT."
+  },
+  "b": {
+   "check": {
+    "op": "assumes",
+    "by": "B",
+    "claim": "c8"
+   },
+   "note": "Method B stratifies because polling stations are heterogeneous (c7); it does not assume they are homogeneous (c8)."
+  },
+  "c": {
+   "check": {
+    "op": "assumes",
+    "by": "C",
+    "claim": "c9"
+   },
+   "note": "Method C visits all stations and only samples proportionally to current eligible voters, so prior election data is not assumed or needed."
+  }
+ }
+}

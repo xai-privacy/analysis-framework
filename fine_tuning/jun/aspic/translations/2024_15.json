@@ -1,0 +1,385 @@
+{
+ "id": "2024_15",
+ "positions": {
+  "Alice": {
+   "thesis": "c7",
+   "summary": "B is better than A."
+  },
+  "Bob": {
+   "thesis": "c10",
+   "summary": "C is better than B."
+  },
+  "Charlie": {
+   "thesis": "c13",
+   "summary": "A is better than C."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "In A, 100M people enjoy 100 units each (total: 10B, avg: 100, completely equal).",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "In B, 100M people enjoy 105 units and 10B people enjoy 5 units (total: 60.5B, avg: ~6, unequal).",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "In C, 10.1B people enjoy 10 units each (total: 101B, avg: 10, completely equal).",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Migrants in B have higher welfare (105) than in A (100), and original B inhabitants maintain worthwhile welfare (5).",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "In C there is complete equality and higher average welfare than in B.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Total welfare is greater in C than in A, but average welfare is higher in A than in C.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "B is better than A.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "A is better than B.",
+   "source": "rationale"
+  },
+  "c9": {
+   "text": "C is not better than B.",
+   "source": "rationale"
+  },
+  "c10": {
+   "text": "C is better than B.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "C is better than A.",
+   "source": "rationale"
+  },
+  "c12": {
+   "text": "A is not better than C.",
+   "source": "rationale"
+  },
+  "c13": {
+   "text": "A is better than C.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c4"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c5"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Charlie",
+   "if": [
+    "c6"
+   ],
+   "then": "c13",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c7",
+   "c8"
+  ],
+  [
+   "c10",
+   "c9"
+  ],
+  [
+   "c13",
+   "c11"
+  ],
+  [
+   "c13",
+   "c12"
+  ]
+ ],
+ "hypotheticals": {
+  "less_inequality": {
+   "claims": {
+    "h1": {
+     "text": "A world with less inequality is considered a better world.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h1",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rh1",
+     "by": "*",
+     "if": [
+      "h1",
+      "c1",
+      "c2"
+     ],
+     "then": "c8",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  },
+  "higher_average": {
+   "claims": {
+    "h2": {
+     "text": "A world with a higher average welfare is considered a better world.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rh2",
+     "by": "*",
+     "if": [
+      "h2",
+      "c1",
+      "c2"
+     ],
+     "then": "c8",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  },
+  "greater_total": {
+   "claims": {
+    "h3": {
+     "text": "A world with a greater total welfare is considered a better world.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h3",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rh3",
+     "by": "*",
+     "if": [
+      "h3",
+      "c3",
+      "c1"
+     ],
+     "then": "c11",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  }
+ },
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "status",
+      "claim": "Alice",
+      "is": [
+       "OUT"
+      ],
+      "add": "less_inequality"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "status",
+       "claim": "Bob",
+       "is": [
+        "OUT"
+       ],
+       "add": "less_inequality"
+      }
+     }
+    ]
+   },
+   "note": "Under the equality criterion, A is better than B, rebutting Alice's conclusion (Alice is OUT), while Bob's conclusion (C is better than B) remains undefeated."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c13",
+      "add": {
+       "claims": {
+        "h4": {
+         "text": "Between worlds with equal distribution, the world with higher average welfare is better.",
+         "source": "rationale"
+        }
+       },
+       "premises": [
+        {
+         "claim": "h4",
+         "by": "Bob",
+         "kind": "ordinary"
+        }
+       ],
+       "rules": [
+        {
+         "id": "rb1",
+         "by": "Bob",
+         "if": [
+          "h4",
+          "c1",
+          "c3"
+         ],
+         "then": "c13",
+         "type": "defeasible",
+         "source": "rationale"
+        }
+       ]
+      }
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "Bob",
+       "claim": "c7",
+       "add": {
+        "claims": {
+         "h5": {
+          "text": "A world with both complete equality and higher average welfare is better than an unequal world with lower average welfare.",
+          "source": "rationale"
+         }
+        },
+        "premises": [
+         {
+          "claim": "h5",
+          "by": "Bob",
+          "kind": "ordinary"
+         }
+        ],
+        "rules": [
+         {
+          "id": "rb2",
+          "by": "Bob",
+          "if": [
+           "h5",
+           "c1",
+           "c2"
+          ],
+          "then": "c8",
+          "type": "defeasible",
+          "source": "rationale"
+         }
+        ]
+       }
+      }
+     }
+    ]
+   },
+   "note": "Applying Bob's equality and average welfare criteria leads Bob to agree that A is better than C (c13) and reject that B is better than A (c7)."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "status",
+      "claim": "Alice",
+      "is": [
+       "OUT"
+      ],
+      "add": "higher_average"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "status",
+       "claim": "Bob",
+       "is": [
+        "OUT"
+       ],
+       "add": "greater_total"
+      }
+     },
+     {
+      "op": "status",
+      "claim": "Charlie",
+      "is": [
+       "OUT"
+      ],
+      "add": "greater_total"
+     }
+    ]
+   },
+   "note": "Higher average welfare makes A better than B, denying Alice. Greater total welfare makes C better than A (denying Charlie) and C better than B (leaving Bob not denied)."
+  }
+ }
+}

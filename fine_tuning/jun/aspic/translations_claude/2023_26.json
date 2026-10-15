@@ -1,0 +1,57 @@
+{
+  "id": "2023_26",
+  "positions": {
+    "Method A": {"thesis": "c3", "summary": "Survey the polling place whose previous-election result was closest to the district total."},
+    "Method B": {"thesis": "c7", "summary": "Stratify stations by previous-election results and sample stations from every stratum."},
+    "Method C": {"thesis": "c10", "summary": "Visit all polling stations in turn and survey for a set time at each."}
+  },
+  "claims": {
+    "c1": {"text": "Method A compares each polling station's result in the previous election with the overall district tally and surveys the station where the difference is smallest.", "source": "passage"},
+    "c2": {"text": "Voting behavior at each polling station is similar to that in the previous election.", "source": "rationale"},
+    "c3": {"text": "Method A yields a representative sample of the district.", "source": "rationale"},
+    "c4": {"text": "Method B groups polling stations with similar party-specific results in the previous election into strata and randomly selects stations from each stratum in proportion to voters.", "source": "passage"},
+    "c5": {"text": "Polling stations within the same district are heterogeneous in voters' political orientation.", "source": "rationale"},
+    "c6": {"text": "Polling stations within the same district are generally homogeneous in voters' political orientation.", "source": "statement"},
+    "c7": {"text": "Method B yields a representative sample of the district.", "source": "rationale"},
+    "c8": {"text": "Method C travels to all polling stations in the district, surveying at each for a set time, with sample sizes proportional to the number of eligible voters.", "source": "passage"},
+    "c9": {"text": "Method C does not need previous-election vote counts per polling station.", "source": "rationale"},
+    "c10": {"text": "Method C yields a representative sample of the district.", "source": "rationale"},
+    "c11": {"text": "In method C, data from the previous election about vote counts per polling station is essential.", "source": "statement"}
+  },
+  "premises": [
+    {"claim": "c1", "by": "Method A", "kind": "axiom"},
+    {"claim": "c2", "by": "Method A", "kind": "ordinary"},
+    {"claim": "c4", "by": "Method B", "kind": "axiom"},
+    {"claim": "c5", "by": "Method B", "kind": "ordinary"},
+    {"claim": "c8", "by": "Method C", "kind": "axiom"}
+  ],
+  "rules": [
+    {"id": "r1", "by": "Method A", "if": ["c1", "c2"], "then": "c3", "type": "defeasible", "source": "rationale"},
+    {"id": "r2", "by": "Method B", "if": ["c4", "c5"], "then": "c7", "type": "defeasible", "source": "rationale"},
+    {"id": "r3", "by": "Method C", "if": ["c8"], "then": "c9", "type": "strict", "source": "rationale"},
+    {"id": "r4", "by": "Method C", "if": ["c8"], "then": "c10", "type": "defeasible", "source": "rationale"}
+  ],
+  "contraries": [["c5", "c6"], ["c9", "c11"]],
+  "statements": {
+    "a": {
+      "check": {"op": "weakens", "claim": "Method A", "add": {
+        "claims": {
+          "h1": {"text": "The population's social characteristics at a polling station have changed significantly since the last election.", "source": "statement"},
+          "h2": {"text": "Voting behavior at that polling station may differ considerably from the previous election.", "source": "rationale"}
+        },
+        "premises": [{"claim": "h1", "by": "*", "kind": "axiom"}],
+        "rules": [{"id": "ra1", "by": "*", "if": ["h1"], "then": "h2", "type": "defeasible", "source": "rationale"}],
+        "contraries": [["h2", "c2"]]
+      }},
+      "note": "'Difficult to apply' read as: the change undermines A's assumption c2, so A's representativeness is weakened."
+    },
+    "b": {
+      "check": {"op": "assumes", "by": "Method B", "claim": "c6"},
+      "note": "B assumes heterogeneity (c5), the contrary of c6."
+    },
+    "c": {
+      "check": {"op": "holds", "by": "Method C", "claim": "c11"},
+      "note": "C derives c9 (data not needed), the contrary of c11."
+    }
+  }
+}

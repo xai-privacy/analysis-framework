@@ -1,0 +1,63 @@
+{
+  "id": "2021_37",
+  "positions": {
+    "Lavoisier": {"thesis": "c6", "summary": "ⓐ: in combustion the caloric in gaseous oxygen escapes into the air, and this generates the heat."}
+  },
+  "claims": {
+    "c1": {"text": "Combustion is a process in which a substance combines with oxygen.", "source": "passage"},
+    "c2": {"text": "Caloric is a massless substance.", "source": "passage"},
+    "c3": {"text": "Heat is generated when caloric that had been combined with a substance is released.", "source": "passage"},
+    "c4": {"text": "Gases contain far more caloric than solids or liquids.", "source": "passage"},
+    "c5": {"text": "Gaseous oxygen is a compound of oxygen and caloric.", "source": "passage"},
+    "c6": {"text": "ⓐ In combustion, the oxygen in gaseous oxygen combines with the burning substance, while the caloric in gaseous oxygen escapes into the air, thus generating heat.", "source": "passage"}
+  },
+  "premises": [
+    {"claim": "c1", "by": "Lavoisier", "kind": "ordinary"},
+    {"claim": "c2", "by": "Lavoisier", "kind": "ordinary"},
+    {"claim": "c3", "by": "Lavoisier", "kind": "ordinary"},
+    {"claim": "c4", "by": "Lavoisier", "kind": "ordinary"},
+    {"claim": "c5", "by": "Lavoisier", "kind": "ordinary"}
+  ],
+  "rules": [
+    {"id": "r1", "by": "Lavoisier", "if": ["c1", "c3", "c5"], "then": "c6", "type": "defeasible", "source": "passage"}
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {"op": "strengthens", "claim": "c6", "add": {
+        "claims": {
+          "h1": {"text": "When many solid substances combust, heat is generated and gas is produced at the same time.", "source": "statement"},
+          "h2": {"text": "Where a solid turns into a gaseous product, the product must take up caloric, so little caloric escapes and ⓐ cannot explain the heat.", "source": "rationale"}
+        },
+        "premises": [{"claim": "h1", "by": "*", "kind": "axiom"}],
+        "rules": [{"id": "ra1", "by": "*", "if": ["h1", "c4"], "then": "h2", "type": "defeasible", "source": "rationale"}],
+        "contraries": [["h2", "c6"]]
+      }},
+      "note": "The fact gives no new argument for ⓐ; with c4 it even conflicts with ⓐ, so it does not strengthen."
+    },
+    "b": {
+      "check": {"op": "weakens", "claim": "c6", "add": {
+        "claims": {
+          "h3": {"text": "Gunpowder, which contains compounds of oxygen, can combust explosively and release a massive amount of heat even without gaseous oxygen.", "source": "statement"},
+          "h4": {"text": "The heat generated in combustion does not come from caloric escaping from gaseous oxygen.", "source": "rationale"}
+        },
+        "premises": [{"claim": "h3", "by": "*", "kind": "axiom"}],
+        "rules": [{"id": "rb1", "by": "*", "if": ["h3"], "then": "h4", "type": "defeasible", "source": "rationale"}],
+        "contraries": [["h4", "c6"]]
+      }}
+    },
+    "c": {
+      "check": {"op": "weakens", "claim": "c6", "add": {
+        "claims": {
+          "h5": {"text": "No matter how much heat generated during combustion is released into the air, the mass of the air does not increase.", "source": "statement"},
+          "h6": {"text": "Nothing escapes from gaseous oxygen into the air during combustion.", "source": "rationale"}
+        },
+        "premises": [{"claim": "h5", "by": "*", "kind": "axiom"}],
+        "rules": [{"id": "rc1", "by": "*", "if": ["h5"], "then": "h6", "type": "defeasible", "source": "rationale"}],
+        "contraries": [["h6", "c6"]],
+        "undercuts": [{"claim": "c2", "rule": "rc1"}]
+      }},
+      "note": "Naive inference rc1 (no mass gain, so nothing escaped) is undercut by c2: caloric is massless."
+    }
+  }
+}
