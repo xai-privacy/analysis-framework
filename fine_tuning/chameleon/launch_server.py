@@ -35,8 +35,8 @@ print(f"Using flavor ID: {flavor_id}")
 
 # 2. Launch the server using the custom reservation flavor
 server = chi.server.create_server(
-    server_name="xai-cpu-vm",
-    image_name="CC-Ubuntu22.04",
+    server_name="xai-gpu-vm",
+    image_name="CC-Ubuntu24.04-CUDA-VGPU",
     flavor_id=flavor_id,
     key_name=key_name,
     network_name="sharednet1"
