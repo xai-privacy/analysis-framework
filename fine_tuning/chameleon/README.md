@@ -90,14 +90,14 @@ The GPU check must pass before continuing.
 nvidia-smi
 python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
-python -c 'import torch; assert torch.cuda.is_available(), "CUDA PyTorch/GPU is unavailable"; print(torch.__version__, torch.cuda.get_device_name(0))'
 python -m pip install --upgrade pip
 python -m pip install -r requirements-chameleon.txt
 hf auth login
+sudo reboot
 ```
 
 Accept the `meta-llama/Llama-3.2-3B-Instruct` license on Hugging Face before
-authenticating. Then fine-tune for 180 steps, evaluating and saving every 20:
+authenticating. Log back into the same directory again. Then fine-tune for 180 steps, evaluating and saving every 20:
 
 ```bash
 python train_chameleon.py \

@@ -38,34 +38,60 @@ class MaskedChatDataset(Dataset):
         self.examples = []
         for row in rows:
             messages = row["messages"]
-            prefix_ids = tokenizer.apply_chat_template(
-                messages[:2], tokenize=True, add_generation_prompt=True
+            prompt_text = tokenizer.apply_chat_template(
+                messages[:2], tokenize=False, add_generation_prompt=True
             )
-            full_ids = tokenizer.apply_chat_template(
-                messages, tokenize=True, add_generation_prompt=False
+            full_text = tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=False
             )
-            if hasattr(prefix_ids, "tolist"):
-                prefix_ids = prefix_ids.tolist()
+            shared_text_length = 0
+            for prompt_char, full_char in zip(prompt_text, full_text):
+                if prompt_char != full_char:
+                    break
+                shared_text_length += 1
+
+            prompt_difference = len(prompt_text) - shared_text_length
+            if prompt_difference > 64:
+                raise ValueError(
+                    f"{row['id']}: rendered prompt differs from the full chat by "
+                    f"{prompt_difference} characters before the answer; refusing to mask prompt loss"
+                )
+
+            target_start = shared_text_length
+            if target_start >= len(full_text):
+                raise ValueError(f"{row['id']}: rendered assistant target is empty")
+
+            encoded = tokenizer(
+                full_text,
+                add_special_tokens=False,
+                return_offsets_mapping=True,
+            )
+            full_ids = encoded["input_ids"]
+            offsets = encoded["offset_mapping"]
             if hasattr(full_ids, "tolist"):
                 full_ids = full_ids.tolist()
-            if prefix_ids and isinstance(prefix_ids[0], list):
-                prefix_ids = prefix_ids[0]
+            if hasattr(offsets, "tolist"):
+                offsets = offsets.tolist()
             if full_ids and isinstance(full_ids[0], list):
                 full_ids = full_ids[0]
-            if full_ids[:len(prefix_ids)] != prefix_ids:
-                raise ValueError(
-                    f"{row['id']}: tokenizer chat template does not preserve the "
-                    "generation prompt as a prefix; refusing to mask the wrong tokens"
-                )
+            if offsets and isinstance(offsets[0][0], list):
+                offsets = offsets[0]
+
+            if len(full_ids) != len(offsets):
+                raise ValueError(f"{row['id']}: tokenizer returned mismatched token offsets")
             if len(full_ids) > max_seq_length:
                 raise ValueError(
                     f"{row['id']}: {len(full_ids)} tokens exceeds --max-seq-length "
                     f"{max_seq_length}; increase the limit rather than silently truncating"
                 )
-            if len(full_ids) <= len(prefix_ids):
+
+            labels = [
+                token_id if end > target_start and start >= target_start else -100
+                for token_id, (start, end) in zip(full_ids, offsets)
+            ]
+            if all(label == -100 for label in labels):
                 raise ValueError(f"{row['id']}: assistant target tokenized as empty")
 
-            labels = [-100] * len(prefix_ids) + full_ids[len(prefix_ids):]
             self.examples.append({
                 "input_ids": full_ids,
                 "attention_mask": [1] * len(full_ids),
@@ -158,7 +184,6 @@ def main():
         data_seed=args.seed,
         dataloader_num_workers=2,
         remove_unused_columns=False,
-        save_safetensors=True,
     )
     trainer = Trainer(
         model=model,
