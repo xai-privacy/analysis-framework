@@ -1,0 +1,324 @@
+{
+ "id": "2024_22",
+ "positions": {
+  "Alice": {
+   "thesis": "c1",
+   "summary": "Emotions always require an appropriate evaluative belief."
+  },
+  "Bob": {
+   "thesis": "c5",
+   "summary": "It is possible and common to experience emotions without holding appropriate evaluative beliefs."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Emotions always require an appropriate evaluative belief.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Fear is based on the belief that the object is dangerous, and sadness is grounded in the belief that the event is a significant loss.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "If one holds beliefs contradicting evaluative beliefs, one either does not experience emotion or affirms and denies a claim simultaneously.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Someone can firmly believe a spider is not dangerous, yet still feel fear toward it.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "It is possible and common to experience emotions without holding the appropriate evaluative beliefs.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Animals and infants experience emotions like fear.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Animals and infants lack linguistic ability.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Without linguistic ability, one does not possess evaluative concepts such as 'danger'.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Animals and infants do not possess evaluative concepts such as 'danger'.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "If one does not possess an evaluative concept, one cannot hold beliefs using that concept (e.g., 'something is dangerous to me').",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "Animals and infants cannot hold beliefs such as 'something is dangerous to me'.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Animals and infants experience fear without holding the belief that something is dangerous to them.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c10",
+   "by": "Bob",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c1",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c7",
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c9",
+    "c10"
+   ],
+   "then": "c11",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Bob",
+   "if": [
+    "c6",
+    "c11"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r6",
+   "by": "Bob",
+   "if": [
+    "c12"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c1",
+   "c5"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "ha1": {
+       "text": "It is fully possible and common to hold contradictory beliefs.",
+       "source": "statement"
+      },
+      "ha2": {
+       "text": "There is little difference between holding contradictory beliefs and holding emotions that contradict evaluative beliefs.",
+       "source": "statement"
+      },
+      "ha3": {
+       "text": "The spider fear case is merely holding contradictory beliefs rather than experiencing emotion without evaluative belief.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "ha1",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "ha2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "ha1",
+        "ha2"
+       ],
+       "then": "ha3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "undercuts": [
+      {
+       "claim": "c4",
+       "rule": "ra1"
+      }
+     ]
+    }
+   },
+   "note": "A tempting inference that spider fear is just contradictory beliefs is blocked because Bob does not contest the possibility of contradictory beliefs, and experiencing emotion contradicting belief is compatible with Bob's claim."
+  },
+  "b": {
+   "check": {
+    "op": "weakens",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "hb1": {
+       "text": "Emotions requiring evaluative beliefs is not equivalent to evaluative beliefs being sufficient for emotions.",
+       "source": "statement"
+      },
+      "hb2": {
+       "text": "Sensations like pleasure or pain are essential aspects of emotion, and animals or infants can easily experience them.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hb1",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "hb2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": []
+    }
+   },
+   "note": "Statement (b) clarifies necessity vs. sufficiency and supplements Alice's position without attacking Bob's premises or inferences."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "hc1": {
+       "text": "Having a concept does not necessarily mean having the ability to express it linguistically.",
+       "source": "statement"
+      },
+      "hc2": {
+       "text": "An animal fleeing a predator can be regarded as having a belief about the danger posed by the predator regardless of linguistic ability.",
+       "source": "statement"
+      },
+      "hc3": {
+       "text": "Animals can possess evaluative concepts and hold beliefs such as 'something is dangerous to me'.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hc1",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "hc2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "hc1",
+        "hc2"
+       ],
+       "then": "hc3",
+       "type": "defeasible",
+       "source": "statement"
+      }
+     ],
+     "contraries": [
+      [
+       "hc3",
+       "c9"
+      ],
+      [
+       "hc3",
+       "c11"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "hc1",
+       "rule": "r3"
+      }
+     ]
+    }
+   },
+   "note": "Refutes Bob's premise/intermediate conclusion that animals lack evaluative concepts/beliefs, and undercuts rule r3 connecting lack of language to lack of concepts."
+  }
+ }
+}

@@ -1,0 +1,406 @@
+{
+  "id": "2021_14",
+  "positions": {
+    "Alice1": {
+      "thesis": "c4",
+      "summary": "Under <Theory>, choosing not to give 50,000 won is an act that harmed the friend, which is unreasonable."
+    },
+    "Bob1": {
+      "thesis": "c6",
+      "summary": "Doing nothing cannot be considered an act, so <Theory> does not imply that not giving 50,000 won harmed the friend."
+    },
+    "Alice2": {
+      "thesis": "c9",
+      "summary": "Not saving the drowning child clearly harmed the child, so excluding doing nothing from acts leads to unreasonable consequences."
+    },
+    "Bob2": {
+      "thesis": "c12",
+      "summary": "Not saving the child was the result of a deliberate decision, so it is an act that harmed the child under <Theory>."
+    },
+    "Alice3": {
+      "thesis": "c15",
+      "summary": "Not giving the gift was a deliberate decision but does not seem to have harmed B, so Bob's definition still leads to unreasonable consequences."
+    },
+    "Bob": {
+      "thesis": "c6",
+      "summary": "Bob defends <Theory> against Alice's counterexamples by clarifying the definition of an act."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "For an act to cause harm to someone means that, if the act had not occurred, that person would have been in a better state.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "For an act to benefit someone means that, if the act had not occurred, that person would have been in a worse state.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Alice chose not to give her friend 50,000 won for no reason, but if she had, her friend would have been in a better state.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "According to <Theory>, Alice's not giving 50,000 won was an act that harmed her friend, which is unreasonable.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Simply doing nothing, such as not giving a friend 50,000 won, cannot be considered an act.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "<Theory> does not imply that simply not giving 50,000 won harmed the friend.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Someone saw a child struggling in water, had the ability to rescue them but chose not to, resulting in the child's drowning.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Not saving the struggling child clearly harmed the child.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Limiting 'act' within <Theory> to exclude doing nothing leads to unreasonable consequences.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "The choice not to save the child is the result of a deliberate decision to avoid the rescue.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "An omission that is the result of a deliberate decision should be considered an act.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "Not saving the child was an act that harmed the child under <Theory>.",
+      "source": "passage"
+    },
+    "c13": {
+      "text": "A bought a gift intended for B, but decided to keep it instead of giving it to B, which was a deliberate decision.",
+      "source": "passage"
+    },
+    "c14": {
+      "text": "A's not giving the gift to B does not seem to have harmed B.",
+      "source": "passage"
+    },
+    "c15": {
+      "text": "Even treating deliberate omissions as acts, <Theory> leads to unreasonable consequences.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "Alice1",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": [
+        "Bob",
+        "Bob1"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c8",
+      "by": "Alice2",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": [
+        "Bob",
+        "Bob2"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c11",
+      "by": [
+        "Bob",
+        "Bob2"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c13",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c14",
+      "by": "Alice3",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice1",
+      "if": [
+        "c1",
+        "c3"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": [
+        "Bob",
+        "Bob1"
+      ],
+      "if": [
+        "c1",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Alice2",
+      "if": [
+        "c5",
+        "c8"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": [
+        "Bob",
+        "Bob2"
+      ],
+      "if": [
+        "c1",
+        "c7",
+        "c10",
+        "c11"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": [
+        "Bob",
+        "Bob2"
+      ],
+      "if": [
+        "c8",
+        "c11"
+      ],
+      "then": "c12",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r6",
+      "by": "Alice3",
+      "if": [
+        "c1",
+        "c11",
+        "c13",
+        "c14"
+      ],
+      "then": "c15",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c4",
+      "c6"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "Alice1",
+        "claim": "h4",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "I could have punched my friend and broken their nose but did not do so.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "If I had punched my friend and broken their nose, my friend would have been in a worse state.",
+              "source": "rationale"
+            },
+            "h3": {
+              "text": "Under Alice1's interpretation of <Theory>, refraining from punching is an act.",
+              "source": "rationale"
+            },
+            "h4": {
+              "text": "By not punching my friend, I performed an act that benefited my friend.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h3",
+              "by": "Alice1",
+              "kind": "ordinary"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "Alice1",
+              "if": [
+                "c2",
+                "h1",
+                "h2",
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Under Alice1's view that omissions are acts, not punching is an act without which the friend would be worse off, so it benefited the friend."
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice2",
+            "claim": "c8"
+          },
+          {
+            "op": "not",
+            "arg": {
+              "op": "holds",
+              "by": "Bob2",
+              "claim": "c8"
+            }
+          }
+        ]
+      },
+      "note": "Alice2 and Bob2 differ on whether not saving the child caused harm: Alice2 holds c8 as a premise, but Bob2 also derives c8 via r4, so they do not differ."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "h6"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "h7"
+          }
+        ],
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "If A had given the gift to B, B would have been in a better state.",
+              "source": "rationale"
+            },
+            "h6": {
+              "text": "A's not giving the gift to B harmed B.",
+              "source": "statement"
+            },
+            "h7": {
+              "text": "A's not giving the gift to B did not harm B.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h6",
+              "by": "Bob",
+              "kind": "ordinary"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "Bob",
+              "if": [
+                "c1",
+                "c11",
+                "c13",
+                "h5"
+              ],
+              "then": "h6",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "rc2",
+              "by": "Bob",
+              "if": [
+                "c5",
+                "c13"
+              ],
+              "then": "h7",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h6",
+              "h7"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c13",
+              "rule": "rc2"
+            }
+          ]
+        }
+      },
+      "note": "Inconsistency requires Bob to hold both h6 and its contrary h7. The naive inference rc2 (from Bob1) to h7 is undercut by c13 (deliberate decision), so Bob does not derive h7."
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+ "id": "2024_17",
+ "positions": {
+  "Author": {
+   "thesis": "c1",
+   "summary": "Goodness has two dimensions: primary goodness (essential perfection) and secondary goodness (accidental properties)."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Goodness has two dimensions: primary goodness and secondary goodness.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Primary goodness (ⓐ) refers to the essential perfection that a being possesses, such that if lacking it, the being can no longer be that being.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Primary goodness (ⓐ) signifies, in an active sense, the negation of privation.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Secondary goodness refers to the relationship between a subject and the accidental properties that accompany its being rather than constitute it.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The first type of secondary goodness (ⓑ) refers to the suitability in which a property, in and of itself, contributes to the perfection of the being it belongs to.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "A sick person is still human.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Health is not a primary goodness (ⓐ) to a human, but a secondary one (ⓑ).",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "The second type of secondary goodness (ⓒ) refers to the overall goodness found in a being when a certain property belongs to it, rather than an individual property itself being good.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Food being delicious is an example of the second type of secondary goodness (ⓒ) resulting from the harmony of various elements like salinity, acidity, and texture.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Author",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Author",
+   "if": [
+    "c2"
+   ],
+   "then": "c3",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Author",
+   "if": [
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Author",
+    "claim": "h2",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Evil is the privation of goodness.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Evil is primary goodness (ⓐ).",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ]
+    }
+   },
+   "note": "Author cannot derive that evil is primary goodness (ⓐ) from evil being the privation of goodness; primary goodness actively signifies the negation of privation (c3)."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Author",
+    "claim": "h4",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "An object's beauty is the harmonious totality of size, shape, color, etc. that the object possesses.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "Beauty is the second type of secondary goodness (ⓒ).",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "Author",
+       "if": [
+        "h3",
+        "c8"
+       ],
+       "then": "h4",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Beauty as the harmonious totality of an object's properties matches the definition of ⓒ (c8)."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "Author",
+    "claim": "h6",
+    "add": {
+     "claims": {
+      "h5": {
+       "text": "Health is always good for humans.",
+       "source": "rationale"
+      },
+      "h6": {
+       "text": "Health is primary goodness (ⓐ).",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "contraries": [
+      [
+       "h6",
+       "c7"
+      ]
+     ]
+    }
+   },
+   "note": "Author cannot derive that health is primary goodness (ⓐ); health is secondary goodness (ⓑ) because a sick person is still human."
+  }
+ }
+}

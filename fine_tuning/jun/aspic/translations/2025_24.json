@@ -1,0 +1,219 @@
+{
+ "id": "2025_24",
+ "positions": {
+  "Alice": {
+   "thesis": "c1",
+   "summary": "In art, fiction and non-fiction can be distinguished by whether their content is fabricated or factual."
+  },
+  "Bob": {
+   "thesis": "c5",
+   "summary": "Fiction and non-fiction in art are distinguished by what mental attitude is appropriate for properly appreciating their content: fiction requires imagining, while non-fiction requires believing."
+  },
+  "Charlie": {
+   "thesis": "c10",
+   "summary": "Participating in imagining the content of a non-fictional work can also be an appropriate way to appreciate it."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "In art, fiction and non-fiction can be distinguished by whether their content is fabricated or factual.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The Tale of Hong Gildong is fiction because its content is invented by the author and did not actually happen.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The Annals of the Joseon Dynasty is non-fiction because its content consists of things that really happened.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Fictional works of art are generally a mixture of things that are made up and things that are factual.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Fiction and non-fiction in art are distinguished by what kind of mental attitude is appropriate for properly appreciating that content.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "To properly appreciate fiction, one must participate in imagining the presented content.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Holding beliefs about the content of non-fictional works is an appropriate way to appreciate them.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "To properly appreciate non-fiction, one must hold a belief about the presented content rather than participating in imagining it.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Even when watching a non-fiction work such as a war documentary, vividly imagining the horrific events that occurred is an appropriate way to appreciate the work.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Participating in imagining the content of a non-fiction work is an appropriate way to appreciate it.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "Among fictional works, there are those for which participating in imagination is an inappropriate way of appreciating them.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": [
+    "Bob",
+    "Charlie"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c1",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c6",
+    "c8"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Charlie",
+   "if": [
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c8",
+   "c10"
+  ]
+ ],
+ "hypotheticals": {
+  "imagining_annals": {
+   "claims": {
+    "h1": {
+     "text": "It is appropriate for us to participate in imagining while reading The Annals of the Joseon Dynasty.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h1",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "ha1",
+     "by": "*",
+     "if": [
+      "h1",
+      "c3"
+     ],
+     "then": "c10",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  }
+ },
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "strengthens",
+      "claim": "Alice",
+      "add": "imagining_annals"
+     },
+     {
+      "op": "weakens",
+      "claim": "Bob",
+      "add": "imagining_annals"
+     }
+    ]
+   },
+   "note": "Imagining the Annals provides a non-fiction case where imagination is appropriate, weakening Bob; but Alice takes no stance linking imagination to fiction, so Alice is not strengthened."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c7"
+     },
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "c7"
+     }
+    ]
+   },
+   "note": "Both Bob and Charlie agree that holding beliefs about the content of non-fictional works is an appropriate way to appreciate them."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "Charlie",
+    "claim": "c11"
+   },
+   "note": "Charlie only discusses non-fiction and takes no stance on whether imagination is inappropriate for any fictional works."
+  }
+ }
+}

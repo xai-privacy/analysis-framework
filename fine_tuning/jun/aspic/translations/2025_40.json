@@ -1,0 +1,235 @@
+{
+ "id": "2025_40",
+ "positions": {
+  "Experiment": {
+   "thesis": "c5",
+   "summary": "Br promotes plant growth by binding to cell surface receptors and activating intracellular signaling proteins."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Steroid hormones generally have low polarity and easily penetrate the cell membrane, whereas peptide hormones have high polarity and cannot penetrate.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Peptide hormones bind to receptors on the cell surface and activate intracellular signaling proteins through receptor structural changes.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Animal steroid hormones penetrate the cell membrane easily.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The plant steroid hormone brassinolide (Br) promotes plant growth but cannot penetrate the cell membrane easily.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Br promotes plant growth by binding to cell surface receptors and activating intracellular signaling proteins.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Among Arabidopsis mutants, mutant A and mutant B were isolated, one having a defect only in the Br biosynthesis gene and the other only in the Br receptor gene.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Both mutant A and mutant B showed a growth-inhibited phenotype compared to the wild type.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "When Br was applied, the inhibited growth of A was not restored, but B’s growth was restored.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Mutant C showed a growth-inhibited phenotype due solely to a mutation in the gene for the signaling protein that recognizes structural changes in the Br receptor.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "If a growth-inhibited mutant's growth is restored by Br application, it has a defect in Br biosynthesis; if not restored, it has a defect in the Br receptor.",
+   "source": "rationale"
+  },
+  "c11": {
+   "text": "A cannot synthesize Br, and B has a defect in the Br receptor.",
+   "source": "statement"
+  },
+  "c12": {
+   "text": "B cannot synthesize Br, and A has a defect in the Br receptor.",
+   "source": "rationale"
+  },
+  "c13": {
+   "text": "Since mutant C has a defect in the intracellular signaling protein, applying Br cannot restore C's inhibited growth.",
+   "source": "rationale"
+  },
+  "c14": {
+   "text": "After Br treatment, B's growth is restored while C's growth remains inhibited, so B and C show different phenotypes.",
+   "source": "rationale"
+  },
+  "c15": {
+   "text": "After Br treatment, B and C show similar phenotypes.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c6",
+   "by": "Experiment",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c7",
+   "by": "Experiment",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c8",
+   "by": "Experiment",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c9",
+   "by": "Experiment",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c10",
+   "by": "*",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Experiment",
+   "if": [
+    "c2",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Experiment",
+   "if": [
+    "c6",
+    "c8",
+    "c10"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r3",
+   "by": "Experiment",
+   "if": [
+    "c9",
+    "c2"
+   ],
+   "then": "c13",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r4",
+   "by": "Experiment",
+   "if": [
+    "c8",
+    "c13"
+   ],
+   "then": "c14",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c11",
+   "c12"
+  ],
+  [
+   "c14",
+   "c15"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Experiment",
+    "claim": "h2",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "The difference in membrane permeability between animal and plant steroid hormones is determined only by polarity.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Br is more polar than animal steroid hormones.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "Experiment",
+       "if": [
+        "h1",
+        "c1",
+        "c3",
+        "c4"
+       ],
+       "then": "h2",
+       "type": "strict",
+       "source": "statement"
+      }
+     ]
+    }
+   },
+   "note": "If permeability depends only on polarity, then because animal steroids cross easily (c3) while Br does not (c4), Br must be more polar (h2)."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Experiment",
+    "claim": "c11"
+   },
+   "note": "Experiment infers c12 (B is biosynthesis mutant, A is receptor mutant) from rescue results (c8, c10), so it cannot build an argument for c11."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "Experiment",
+    "claim": "c15"
+   },
+   "note": "Experiment derives that B recovers while C does not recover (c14), which is contrary to c15; thus c15 does not hold."
+  }
+ }
+}

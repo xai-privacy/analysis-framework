@@ -1,0 +1,317 @@
+{
+  "id": "2024_18",
+  "positions": {
+    "Bob1": {
+      "thesis": "c3",
+      "summary": "Charlie's thought-of-dog is about dogs because an object X is what a thought is about if X causally triggers, and only triggers, that thought."
+    },
+    "Alice2": {
+      "thesis": "c6",
+      "summary": "Under Bob1's view, Charlie's thought-of-dog is about the retinal d-pattern, not the dog itself."
+    },
+    "Bob2": {
+      "thesis": "c3",
+      "summary": "Charlie's thought-of-dog is still about dogs because tracing the causal chain of the d-pattern back always leads to the dog itself."
+    },
+    "Alice3": {
+      "thesis": "c14",
+      "summary": "Under Bob1's view, because a sheep can also trigger the thought, Charlie's thought-of-dog is about the disjunctive object dog-or-sheep."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "If an object X causally triggers a certain thought, and if that thought is causally triggered only when X exists, then the thought is about X.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "A dog causally triggers Charlie's thought-of-dog, and that thought is causally triggered only when a dog exists.",
+      "source": "rationale"
+    },
+    "c3": {
+      "text": "Charlie's thought-of-dog is about dogs.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In the causal chain from a dog to the thought-of-dog, light reaches the retina to form the d-pattern, which activates the optic nerve to trigger the thought.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "It is the d-pattern—not the dog itself—that causally triggers, and only triggers, Charlie’s thought-of-dog.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Charlie's thought-of-dog is about the d-pattern.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Charlie's thought-of-dog is not about the dog.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Tracing back the causal chain leading to the d-pattern, at the very end there is always the dog itself.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "For objects a, b, and c, if a causally triggers b and b causally triggers c, then a causally triggers c.",
+      "source": "statement"
+    },
+    "c10": {
+      "text": "The dog causally triggers Charlie's thought-of-dog.",
+      "source": "rationale"
+    },
+    "c11": {
+      "text": "On a foggy evening, Charlie mistakes a sheep for a dog, triggering the thought-of-dog.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "Charlie's thought-of-dog can be caused either by a sheep or by a dog.",
+      "source": "passage"
+    },
+    "c13": {
+      "text": "Charlie's thought-of-dog is causally triggered, and only triggered, by a dog-or-sheep.",
+      "source": "passage"
+    },
+    "c14": {
+      "text": "Charlie's thought-of-dog is about the object dog-or-sheep.",
+      "source": "passage"
+    },
+    "c15": {
+      "text": "The d-pattern is an entity other than a dog.",
+      "source": "background"
+    },
+    "c16": {
+      "text": "The object dog-or-sheep is an entity other than a dog.",
+      "source": "background"
+    },
+    "c17": {
+      "text": "Charlie's thought-of-dog is about something other than a dog.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": [
+        "Bob1",
+        "Alice2",
+        "Alice3"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Bob1",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "Alice2",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Bob2",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Bob2",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c11",
+      "by": "Alice3",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c12",
+      "by": "Alice3",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c15",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c16",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Bob1",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Alice2",
+      "if": [
+        "c1",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Alice2",
+      "if": [
+        "c6",
+        "c15"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r4",
+      "by": "Alice2",
+      "if": [
+        "c6",
+        "c15"
+      ],
+      "then": "c17",
+      "type": "strict",
+      "source": "statement"
+    },
+    {
+      "id": "r5",
+      "by": "Bob2",
+      "if": [
+        "c4",
+        "c8",
+        "c9"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r6",
+      "by": "Bob2",
+      "if": [
+        "c1",
+        "c10"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r7",
+      "by": "Alice3",
+      "if": [
+        "c11",
+        "c12"
+      ],
+      "then": "c13",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r8",
+      "by": "Alice3",
+      "if": [
+        "c1",
+        "c13"
+      ],
+      "then": "c14",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r9",
+      "by": "Alice3",
+      "if": [
+        "c14",
+        "c16"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r10",
+      "by": "Alice3",
+      "if": [
+        "c14",
+        "c16"
+      ],
+      "then": "c17",
+      "type": "strict",
+      "source": "statement"
+    }
+  ],
+  "contraries": [
+    [
+      "c3",
+      "c7"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "Alice2",
+        "claim": "c6",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The starting point of the causal chain leading up to ⓐ is not the whole dog but just a part of the dog.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ]
+        }
+      },
+      "note": "Alice2's argument relies on the proximal d-pattern causally triggering and only triggering the thought; changing the distal origin from the whole dog to a part of the dog leaves her premise intact, so her conclusion still holds."
+    },
+    "b": {
+      "check": {
+        "op": "assumes",
+        "by": "Bob2",
+        "claim": "c9"
+      },
+      "note": "Bob2 presupposes the principle of causal transitivity (c9) to bridge the causal chain from the dog through the d-pattern to the thought."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice2",
+            "claim": "c17"
+          },
+          {
+            "op": "holds",
+            "by": "Alice3",
+            "claim": "c17"
+          }
+        ]
+      },
+      "note": "Both Alice2 (deriving that the thought is about the d-pattern) and Alice3 (deriving that the thought is about dog-or-sheep) conclude that, granting Bob1's principle, the thought is about something other than a dog."
+    }
+  }
+}

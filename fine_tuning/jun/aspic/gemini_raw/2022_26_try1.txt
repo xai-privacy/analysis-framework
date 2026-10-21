@@ -1,0 +1,211 @@
+{
+  "id": "2022_26",
+  "positions": {
+    "Alice": {
+      "thesis": "c11",
+      "summary": "P's act A can never be permitted, because only the combination yielding the maximum outcome value among ability-possible combinations (Combination 3) is permitted."
+    },
+    "Bob": {
+      "thesis": "c10",
+      "summary": "P's act A can be permitted, because Combination 3 is never chosen in reality, and Combination 1 yields the maximum outcome value among realistic combinations."
+    },
+    "Charlie": {
+      "thesis": "c10",
+      "summary": "P's act A can be permitted, because any combination with an outcome value of 0 or positive is permitted (Combinations 1, 3, and 4)."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Performing A leads to an outcome of -80, performing B leads to +100, and not performing either leads to 0.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "The four possible action combinations and their outcome values are: C1 (A and B) = 20, C2 (A and not B) = -80, C3 (not A and B) = 100, and C4 (not A and not B) = 0.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Among the possible action combinations based on P's abilities, Combination 3 yields the maximum outcome value.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The combination where P does not perform A but performs B (Combination 3) is never a combination that P would choose in reality.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Among the combinations P is inclined to choose in reality (Combinations 1, 2, and 4), Combination 1 yields the maximum outcome value.",
+      "source": "rationale"
+    },
+    "c6": {
+      "text": "Among the possible action combinations based on P's abilities, Combinations 1, 3, and 4 have outcome values that are 0 or positive.",
+      "source": "rationale"
+    },
+    "c7": {
+      "text": "A person's act is permissible only if it belongs to the combination among the possible action combinations based on their abilities that yields the maximum outcome value, and only in that case.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "A person's act is permissible only if it belongs to the combination among those the person is actually inclined to carry out in reality that yields the maximum outcome value, and only in that case.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "A person's act is permissible only if it belongs to any of the combinations among those possible based on their abilities whose outcome value is 0 or positive, and only in that case.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "P's act A can be permitted.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "P's act A can never be permitted in any case.",
+      "source": "statement"
+    },
+    "c12": {
+      "text": "Three action combinations of P can be permitted.",
+      "source": "rationale"
+    },
+    "c13": {
+      "text": "Two action combinations of P can be permitted.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c7",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Charlie",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c3",
+        "c7"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c4",
+        "c5",
+        "c8"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Charlie",
+      "if": [
+        "c6",
+        "c9"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Charlie",
+      "if": [
+        "c6",
+        "c9"
+      ],
+      "then": "c12",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c10",
+      "c11"
+    ],
+    [
+      "c12",
+      "c13"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c11"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c11"
+          }
+        ]
+      },
+      "note": "Alice concludes that P's A can never be permitted, whereas Bob concludes that P's A can be permitted (in Combination 1)."
+    },
+    "b": {
+      "check": {
+        "op": "holds",
+        "by": "Charlie",
+        "claim": "c10"
+      },
+      "note": "Charlie concludes that Combinations 1, 3, and 4 are permitted; because Combination 1 includes act A, P's A can be permitted."
+    },
+    "c": {
+      "check": {
+        "op": "holds",
+        "by": "Charlie",
+        "claim": "c13"
+      },
+      "note": "Charlie concludes that 3 action combinations (Combinations 1, 3, and 4) are permitted, not 2."
+    }
+  }
+}

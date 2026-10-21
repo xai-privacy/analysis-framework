@@ -1,0 +1,213 @@
+{
+  "id": "2023_06",
+  "positions": {
+    "P Middle School": {
+      "thesis": "c7",
+      "summary": "P Middle School may discipline Alice in accordance with the School Regulations for tarnishing the school's reputation."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "[School Regulations] Article 1: If a student, while at school, engages in behavior that damages the dignity of a student or tarnishes the reputation of the school, the principal may discipline the student for educational purposes.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Alice posted information about an investigated corporal punishment incident at her school on social media from home.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Alice posted the information while receiving a real-time online class (during class hours).",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Alice posted the information to protect the public's right to know.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Alice's posting sparked a social controversy, tarnishing the reputation of P Middle School.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Alice's posting was engaged in while at school.",
+      "source": "rationale"
+    },
+    "c7": {
+      "text": "P Middle School may discipline Alice in accordance with the School Regulations.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "P Middle School",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "P Middle School",
+      "if": [
+        "c1",
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The 'school' specified in the School Regulations should be regarded solely as a physical space.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "Alice's posting was not engaged in while at school.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c2"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "c6",
+              "h2"
+            ]
+          ]
+        }
+      },
+      "note": "If school is solely a physical space, Alice's act from home was not at school (h2), which undermines P Middle School's ordinary premise c6."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "A student's freedom of expression for public interest should be guaranteed without limitation.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "Alice cannot be disciplined for her posting.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3",
+                "c4"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "c7",
+              "h4"
+            ]
+          ]
+        }
+      },
+      "note": "If freedom of expression for public interest cannot be limited, disciplining Alice is impermissible (h4), directly rebutting the thesis c7."
+    },
+    "c": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "All student activities during class hours should be regarded as activities within the school.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h5",
+                "c3"
+              ],
+              "then": "c6",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "If class-hour activities count as school activities, Alice's online class posting is established as within school (c6), supplying an inferential basis for c6 and giving c7 a new argument."
+    }
+  }
+}

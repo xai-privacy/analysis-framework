@@ -1,0 +1,292 @@
+{
+ "id": "2025_25",
+ "positions": {
+  "Alice": {
+   "thesis": "c6",
+   "summary": "Replacing the fluorescent light does not alter the work's identity because it was approved by the artist, but it changes an essential attribute and thereby alters the work's meaning to something superficial."
+  },
+  "Bob": {
+   "thesis": "c11",
+   "summary": "The artist's approval was coerced and does not reflect their true intention, so the work's identity and meaning remain unchanged despite the physical alteration."
+  },
+  "Charlie": {
+   "thesis": "c14",
+   "summary": "The work was completed when made public, so subsequent acts of approval cannot alter its identity even if they align with the artist's true intentions."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The artist created ⓐ and instructed that the fluorescent light not be replaced when it reached the end of its lifespan.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The fluorescent light ceased to function, and the artist agreed to its replacement under museum pressure.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Replacing the fluorescent light is based on the artist's approval.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Replacing the fluorescent light does not alter the identity of the work.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Replacing the fluorescent light is a change in an essential attribute of the work.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "The work should now be seen as having only a superficial meaning, unlike before.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "A change in some physical attribute of the work can alter its meaning.",
+   "source": "statement"
+  },
+  "c8": {
+   "text": "The artist approved altering the physical attribute due to museum pressure, which does not reflect the artist's true intention.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "The identity of the work lies in the artist's true intention.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Even if the physical attribute has changed, the work's identity remains the same as before.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "The meaning of the work has not changed.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "If the identity of the work remains the same as before, its meaning does not change.",
+   "source": "passage"
+  },
+  "c13": {
+   "text": "The work was complete at the moment it was made public.",
+   "source": "passage"
+  },
+  "c14": {
+   "text": "Any subsequent act of approval cannot alter the work's identity, even if it aligns with the artist's true intentions.",
+   "source": "passage"
+  },
+  "c15": {
+   "text": "An act of approval by the creator after the fact has the same effect as the physical act of making the work at the time of creation.",
+   "source": "statement"
+  },
+  "c16": {
+   "text": "An act of approval by the creator after the fact does not have the same effect as making the work at the time of creation.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c12",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c13",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c5",
+    "c7"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c8",
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c10",
+    "c12"
+   ],
+   "then": "c11",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Charlie",
+   "if": [
+    "c13"
+   ],
+   "then": "c14",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r6",
+   "by": "Charlie",
+   "if": [
+    "c14"
+   ],
+   "then": "c16",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c6",
+   "c11"
+  ],
+  [
+   "c15",
+   "c16"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Alice",
+    "claim": "c7"
+   },
+   "note": "According to Alice, changing an essential physical attribute alters the meaning of the work."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Charlie",
+    "claim": "c15"
+   },
+   "note": "Charlie denies that subsequent approval has the same status as creation, concluding c16 instead."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "h2",
+      "add": "secret_replacement"
+     },
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "h2",
+      "add": "secret_replacement"
+     }
+    ]
+   },
+   "note": "Under secret replacement, Bob derives c11 (meaning does not change) because the artist's true intention is not involved, while Charlie also has no derivation for h2."
+  }
+ },
+ "hypotheticals": {
+  "secret_replacement": {
+   "claims": {
+    "h1": {
+     "text": "The museum secretly replaced the fluorescent light of ⓐ with a new one without the creator's knowledge.",
+     "source": "statement"
+    },
+    "h2": {
+     "text": "The meaning of ⓐ could change.",
+     "source": "statement"
+    },
+    "h3": {
+     "text": "Replacing the light secretly without the creator's knowledge does not reflect the artist's true intention.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "h3",
+     "by": "Bob",
+     "kind": "ordinary"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rc1",
+     "by": "Bob",
+     "if": [
+      "h3",
+      "c9"
+     ],
+     "then": "c10",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ],
+   "contraries": [
+    [
+     "h2",
+     "c11"
+    ]
+   ]
+  }
+ }
+}

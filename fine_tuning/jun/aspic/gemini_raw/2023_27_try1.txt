@@ -1,0 +1,265 @@
+{
+  "id": "2023_27",
+  "positions": {
+    "Argument": {
+      "thesis": "c1",
+      "summary": "The birth rate will decrease due to COVID-19 because of marriage postponement, income reduction among young and low-income groups, and childcare difficulties."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The birth rate will decrease due to COVID-19.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Strong social distancing and restrictions on public facilities and travel led many people to postpone or give up on marriage.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Especially among low-income groups and young people, unemployment rates rose and income decreased, increasing economic hardship.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Because the economic burden of childbirth and childrearing is high, a decrease in income will result in a decrease in births.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Remote work stress and the closure or partial operation of childcare facilities made raising children even more difficult.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Due to childcare and childrearing challenges, families with or without children are likely to postpone or give up on having children.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c2",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Argument",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Argument",
+      "if": [
+        "c2"
+      ],
+      "then": "c1",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Argument",
+      "if": [
+        "c3",
+        "c4"
+      ],
+      "then": "c1",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Argument",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c1",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "Argument",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The total number of infants and young children decreased from July 2019 to July 2022.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "There was no difference in the population under one year old from July 2019 to July 2022.",
+              "source": "statement"
+            },
+            "h3": {
+              "text": "A lack of difference in the population under one year old indicates little change in the birth rate, so a decrease in total infants does not mean a fall in the birth rate.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "ra2",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "h3",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "h3",
+              "rule": "ra1"
+            }
+          ]
+        }
+      },
+      "note": "The tempting inference ra1 (decrease in infants implies decrease in birth rate) is undercut by h3: no difference in the under-one population indicates little change in births."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "Argument",
+        "add": {
+          "claims": {
+            "h4": {
+              "text": "Per capita GDP in 2019 was 31,929,000 KRW and in 2020 was 31,637,000 KRW, showing little difference.",
+              "source": "statement"
+            },
+            "h5": {
+              "text": "Incomes among low-income groups and young people did not decrease.",
+              "source": "rationale"
+            },
+            "h6": {
+              "text": "Per capita GDP can remain unchanged even if low-income and young people's incomes decrease, provided middle or upper income groups' incomes increase.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h6",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h4"
+              ],
+              "then": "h5",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "c3",
+              "h5"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "h6",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "The tempting inference rb1 (stable per capita GDP implies youth and low-income incomes did not drop) is undercut by h6: per capita GDP can remain unchanged if higher-income groups earn more."
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "Argument",
+        "add": {
+          "claims": {
+            "h7": {
+              "text": "In August 2019 and August 2021, the percentage of economically active and inactive women who reported being currently pregnant was 10% for both groups, showing almost no change.",
+              "source": "statement"
+            },
+            "h8": {
+              "text": "Families did not postpone or give up on having children due to childcare and childrearing challenges.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h7",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h7"
+              ],
+              "then": "h8",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "c6",
+              "h8"
+            ]
+          ]
+        }
+      },
+      "note": "The stable pregnancy rate supports h8, which is contrary to c6, undermining the childcare ground of the argument."
+    }
+  }
+}

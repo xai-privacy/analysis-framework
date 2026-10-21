@@ -1,0 +1,195 @@
+{
+ "id": "2022_03",
+ "positions": {
+  "ⓐ": {
+   "thesis": "c12",
+   "summary": "Under aspect ⓐ, Law L is not unconstitutional because the direct consequence of applying R is punishing flag burning, which violates Country X's constitutional order."
+  },
+  "ⓑ": {
+   "thesis": "c10",
+   "summary": "The aspect ⓑ of Law L does not align with the legislative purpose of L, because enforcing L led to frequent flag burning and an increase in sympathizers."
+  },
+  "ⓒ": {
+   "thesis": "c12",
+   "summary": "Under aspect ⓒ, Law L is not unconstitutional because in the historical context of Country X, the flag symbolizes national existence and flag burning is an anti-constitutional act."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The aspect of a law judged as unconstitutional is ⓐ the direct consequence expected when the legal sentence representing the statute is applied to a specific case.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The aspect of a law to examine for unconstitutionality is ⓑ the impact that the enforcement of the statute has on the entire society.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The decisive aspect for judgment of unconstitutionality is ⓒ the contextual meaning that the legal sentence conveys within the context of the society's history.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "In Country X, after experiencing numerous wars, the national flag has become a symbol of the nation's existence, and flag burning is considered a criminal act that violates constitutional order.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Country X's parliament legislated Law L, represented by Legal Sentence R, to punish those who burn the national flag in order to protect the dignity and authority of the flag.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "When Law L was legislated, acts of flag burning became frequent as opponents protested, and sympathizers with flag burning grew in number.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "The direct consequence of applying Legal Sentence R to a specific case is punishing those who burn the national flag.",
+   "source": "rationale"
+  },
+  "c8": {
+   "text": "Punishing an act that violates the constitutional order does not violate the Constitution.",
+   "source": "rationale"
+  },
+  "c9": {
+   "text": "Within Country X's historical context, Legal Sentence R conveys the meaning of protecting national existence and state authority by punishing an anti-constitutional act.",
+   "source": "rationale"
+  },
+  "c10": {
+   "text": "The aspect ⓑ of Law L does not align with the legislative purpose of L as represented by R.",
+   "source": "statement"
+  },
+  "c11": {
+   "text": "The aspect ⓑ of Law L aligns with the legislative purpose of L as represented by R.",
+   "source": "rationale"
+  },
+  "c12": {
+   "text": "Law L in Country X is not unconstitutional.",
+   "source": "rationale"
+  },
+  "c13": {
+   "text": "Law L in Country X is unconstitutional.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "ⓑ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "ⓒ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c5",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c6",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c7",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "*",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "ⓒ",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "ⓐ",
+   "if": [
+    "c1",
+    "c4",
+    "c7",
+    "c8"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r2",
+   "by": "ⓑ",
+   "if": [
+    "c2",
+    "c5",
+    "c6"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "ⓒ",
+   "if": [
+    "c3",
+    "c4",
+    "c5",
+    "c8",
+    "c9"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c10",
+   "c11"
+  ],
+  [
+   "c12",
+   "c13"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "ⓐ",
+    "claim": "c13"
+   },
+   "note": "Under ⓐ, punishing flag burning punishes an act violating constitutional order, deriving c12 ('not unconstitutional'). ⓐ cannot derive c13 ('unconstitutional')."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "ⓑ",
+    "claim": "c10"
+   },
+   "note": "Aspect ⓑ (enforcement resulting in frequent flag burning and more sympathizers) contradicts the legislative purpose of protecting flag dignity, deriving c10."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "ⓒ",
+    "claim": "c13"
+   },
+   "note": "Under ⓒ, the historical context shows flag burning is anti-constitutional, so Law L is not unconstitutional (c12). ⓒ cannot derive c13 ('unconstitutional')."
+  }
+ }
+}

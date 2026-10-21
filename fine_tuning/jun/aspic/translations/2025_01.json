@@ -1,0 +1,259 @@
+{
+ "id": "2025_01",
+ "positions": {
+  "Alice": {
+   "thesis": "c4",
+   "summary": "Opposed to the amendment because the current mandatory service period is the minimum time needed to fully utilize competencies acquired through lengthy state-funded training."
+  },
+  "Bob": {
+   "thesis": "c8",
+   "summary": "Supports the amendment because mandatory service beyond three years is occupational activity, and forcing it excessively restricts occupational freedom."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The Military Service Act sets the mandatory service period at 3 years for rank-and-file soldiers, 7 years for NCOs, and 10 years for commissioned officers.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Officers and NCOs are appointed after a long period of training at the country's expense to equip them with job competencies suitable for their rank.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The current mandatory service period is the minimum time required for the country to fully utilize the job competencies of officers and NCOs.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The amendment reducing the mandatory service period for NCOs and officers should be opposed.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The mandatory service of officers and NCOs has both the character of fulfilling the constitutional duty of national defense and realizing the constitutional right to choose one's occupation.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "A 3-year service period leans toward fulfilling the national defense duty, but service exceeding 3 years is more strongly characterized as occupational activity.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Forcing service beyond 3 years excessively restricts the occupational freedom and the pursuit of happiness of officers and NCOs.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "The amendment reducing the mandatory service period for NCOs and officers should be supported.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Bob",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2"
+   ],
+   "then": "c3",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c5",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c7"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c4",
+   "c8"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "Alice",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Due to IT advancement, military automation and modernization have rapidly progressed, significantly reducing the time and cost required to enhance job competency compared to the past.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "The current mandatory service period is no longer the minimum time required for the country to fully utilize the job competencies of officers and NCOs.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "c3",
+       "h2"
+      ]
+     ]
+    }
+   },
+   "note": "Reducing training time and cost undercuts the premise that current long service periods are the minimum necessary, weakening Alice's argument."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "Individuals can choose among soldier, NCO, and officer at their own will, and only qualified applicants are selected for officers and NCOs.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "Mandatory service beyond 3 years for officers and NCOs does not excessively restrict their occupational freedom or pursuit of happiness.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h3"
+       ],
+       "then": "h4",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "c7",
+       "h4"
+      ]
+     ]
+    }
+   },
+   "note": "Voluntary choice of service path means service beyond 3 years is not an excessive restriction, which weakens Bob's argument rather than strengthening it."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "strengthens",
+      "claim": "Alice",
+      "add": "court_judgment"
+     },
+     {
+      "op": "weakens",
+      "claim": "Bob",
+      "add": "court_judgment"
+     }
+    ]
+   },
+   "note": "The ruling that 3-year service for soldiers is constitutional only affirms compulsory service itself and is unrelated to NCO/officer terms, so it neither strengthens Alice nor weakens Bob."
+  }
+ },
+ "hypotheticals": {
+  "court_judgment": {
+   "claims": {
+    "h5": {
+     "text": "The Constitutional Court judged that the provision setting the mandatory service period at 3 years for rank-and-file soldiers does not violate the constitution.",
+     "source": "statement"
+    },
+    "h6": {
+     "text": "The compulsory military service system itself is constitutional.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h5",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rc1",
+     "by": "*",
+     "if": [
+      "h5"
+     ],
+     "then": "h6",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ]
+  }
+ }
+}

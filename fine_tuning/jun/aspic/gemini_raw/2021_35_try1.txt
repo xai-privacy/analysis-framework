@@ -1,0 +1,207 @@
+{
+  "id": "2021_35",
+  "positions": {
+    "Theory": {
+      "thesis": "c3",
+      "summary": "The time to determine category membership using concept A is the sum of the times required to check each of A's defining characteristics."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The concept of A consists of the characteristics that define A, which constitute the necessary and sufficient conditions for something to be A.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "If someone possesses the concept of A, they use the concept of A to determine whether an entity belongs to category A.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "The time required to determine, using the concept of A, whether an entity falls under A is the sum of the times required to check whether that entity possesses each defining characteristic of A.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In the experiment, the average response time to judge whether an animal was a bird was 0.4 seconds for a sparrow and 1.4 seconds for a penguin.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Theory",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Theory",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Theory",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "not",
+        "arg": {
+          "op": "weakens",
+          "claim": "c3",
+          "add": {
+            "claims": {
+              "ha1": {
+                "text": "Participants did not possess the concept of bird and answered based on the feel or impression of the words 'sparrow' and 'penguin'.",
+                "source": "statement"
+              },
+              "ha2": {
+                "text": "The time to determine whether an animal is a bird is not the sum of the times required to check each defining characteristic of a bird.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "ha1",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "ra1",
+                "by": "*",
+                "if": [
+                  "c4"
+                ],
+                "then": "ha2",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "ha2",
+                "c3"
+              ]
+            ],
+            "undercuts": [
+              {
+                "claim": "ha1",
+                "rule": "ra1"
+              }
+            ]
+          }
+        }
+      },
+      "note": "Naive inference ra1 (difference in response times shows categorization time is not the sum of characteristic check times) is undercut by ha1: participants did not possess or use the concept of bird."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "hb1": {
+              "text": "The time taken to confirm whether a sparrow and a penguin possess each characteristic that constitutes the concept of bird differs.",
+              "source": "statement"
+            },
+            "hb2": {
+              "text": "The time to determine whether an animal is a bird is not the sum of the times required to check each defining characteristic of a bird.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hb1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "c4"
+              ],
+                "then": "hb2",
+                "type": "defeasible",
+                "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "hb2",
+              "c3"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "hb1",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference rb1 is undercut by hb1: if checking individual characteristics takes different amounts of time, different total response times are fully compatible with Theory."
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "hc1": {
+              "text": "People who think the concept of human is defined as 'rational animal' take less time to judge whether an entity is a human than to judge whether the same entity is an animal.",
+              "source": "statement"
+            },
+            "hc2": {
+              "text": "The time to judge whether an entity is a human is not the sum of the times required to check whether it possesses each defining characteristic of human.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hc1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "hc1"
+              ],
+              "then": "hc2",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "hc2",
+              "c3"
+            ]
+          ]
+        }
+      },
+      "note": "Judging human takes less time than judging animal alone, directly contradicting Theory's claim that total categorization time is the sum of times to check each defining characteristic."
+    }
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "id": "2022_08",
+  "positions": {
+    "Alice": {
+      "thesis": "c5",
+      "summary": "Child abuse perpetrators should exclude children and be limited to adult guardians with a duty of care."
+    },
+    "Bob": {
+      "thesis": "c7",
+      "summary": "The subject of child abuse should be retained as 'anyone' to thoroughly punish perpetrators and protect child victims."
+    },
+    "Charlie": {
+      "thesis": "c9",
+      "summary": "The phrase 'causing sexual humiliation' should be deleted from Article 3 because child victims lack adult sexual self-determination."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In child abuse crimes, the guardian who has a duty of care inflicts harm upon the person to be protected.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Guardians are adults, and persons to be protected are children (minors).",
+      "source": "rationale"
+    },
+    "c3": {
+      "text": "Minors should be excluded from being the subject of the act in Articles 2 and 3.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The subject of child abuse should be limited to adults who are guardians.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Children should be excluded from being perpetrators of child abuse, and the subject should be limited to adult guardians.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "The regulation aims to thoroughly punish perpetrators of abuse and provide strong protection for children who are victims.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The subject of the acts in Articles 2 and 3 should be retained as 'anyone' as in the current regulation.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "In relation to sexual acts, child victims cannot be treated in the same way as adult victims who possess sexual self-determination.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "It is reasonable to delete the phrase 'causing sexual humiliation' from Article 3.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Child abuse cases must clearly and dichotomously distinguish between perpetrators and victims at the specific crime level.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Charlie",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c6",
+        "c10"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Charlie",
+      "if": [
+        "c8"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c5",
+      "c7"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "Alice",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Recently, more minors are entering social relationships in which one minor is the guardian or supervisor of another minor.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "Guardians can be minors, so guardians are not necessarily adults.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1"
+              ],
+              "then": "h2",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h2",
+              "c2"
+            ]
+          ]
+        }
+      },
+      "note": "Minors acting as guardians undermines Alice's premise c2 that guardians are adults, so it weakens rather than strengthens Alice."
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "Bob",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "A significant number of perpetrators of child abuse were themselves victims of child abuse as children, so it is impossible to dichotomously distinguish between victims and perpetrators.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "A clear, dichotomous distinction between perpetrators and victims cannot be maintained.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h4",
+              "c10"
+            ]
+          ]
+        }
+      },
+      "note": "The macroscopic blurring of perpetrator and victim attacks Bob's premise c10 rather than supporting Bob's proposal to retain 'anyone'."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "strengthens",
+            "claim": "Bob",
+            "add": "c_findings"
+          },
+          {
+            "op": "strengthens",
+            "claim": "Charlie",
+            "add": "c_findings"
+          }
+        ]
+      },
+      "note": "The finding that abusive sexual requests between minors harm development even without shame supports both retaining minors as perpetrators (Bob) and deleting the humiliation requirement (Charlie)."
+    }
+  },
+  "hypotheticals": {
+    "c_findings": {
+      "claims": {
+        "h5": {
+          "text": "Cases where minors make sexual requests to other minors involving filming are increasing, and responding without shame or discomfort still critically impairs development, so there is great need to punish sexual requests between minors as abuse.",
+          "source": "statement"
+        },
+        "h6": {
+          "text": "Minors who perpetrate sexual requests against other minors should be subject to punishment for child abuse.",
+          "source": "rationale"
+        },
+        "h7": {
+          "text": "Child sexual abuse occurs and inflicts severe harm even in the absence of sexual humiliation.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h5",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rc1",
+          "by": "*",
+          "if": [
+            "h5"
+          ],
+          "then": "h6",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rc2",
+          "by": "Bob",
+          "if": [
+            "h6"
+          ],
+          "then": "c7",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rc3",
+          "by": "*",
+          "if": [
+            "h5"
+          ],
+          "then": "h7",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rc4",
+          "by": "Charlie",
+          "if": [
+            "h7"
+          ],
+          "then": "c9",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ]
+    }
+  }
+}

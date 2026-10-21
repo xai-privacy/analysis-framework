@@ -1,0 +1,229 @@
+{
+ "id": "2023_28",
+ "positions": {
+  "A": {
+   "thesis": "c5",
+   "summary": "Unions are monopolistic suppliers of labor that extract higher wages for members, while non-members and non-union workers earn lower wages in the competitive market."
+  },
+  "B": {
+   "thesis": "c9",
+   "summary": "Unions are collective representatives that increase overall productivity, raising wage levels for all workers at unionized firms so members and non-members earn similar wages."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Labor unions are monopolistic suppliers of labor that exercise monopoly power in supplying labor within their membership.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The labor of non-members and non-union workers is traded in a competitive market.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Unions can extract higher wages for members than the competitive market wage.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Labor displaced by higher union wages enters the competitive market, lowering competitive market wages and increasing the wage premium.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Union members earn higher wages than non-members and non-union workers, while non-members and non-union workers have similar wages.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Labor unions are a system of collective representation that demands equal pay for equal work and represents minorities.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Union activities raise worker satisfaction, prevent arbitrary changes, and increase overall worker productivity.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Increased worker productivity naturally raises overall wage levels across the unionized company.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "At unionized companies, wages of union members and non-members are relatively similar, and both are higher than wages of non-union workers.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "B",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c1",
+    "c2"
+   ],
+   "then": "c3",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "A",
+   "if": [
+    "c3",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "B",
+   "if": [
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "B",
+   "if": [
+    "c7"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "B",
+   "if": [
+    "c6",
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c9"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "strengthens",
+      "claim": "A",
+      "add": "survey_a"
+     },
+     {
+      "op": "weakens",
+      "claim": "B",
+      "add": "survey_a"
+     }
+    ]
+   },
+   "note": "Survey results confirm A's predicted wage structure (members > non-members ≈ non-union) and contradict B's prediction (members ≈ non-members > non-union)."
+  },
+  "b": {
+   "check": {
+    "op": "weakens",
+    "claim": "A",
+    "add": "survey_b"
+   },
+   "note": "A makes no claims or predictions about gender wage differentials, so finding a smaller gap among members neither strengthens nor weakens A."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "B",
+    "add": "survey_c"
+   },
+   "note": "B explicitly predicts that union activities raise company-wide productivity so that members and non-members earn similar wages; hence this finding does not weaken B."
+  }
+ },
+ "hypotheticals": {
+  "survey_a": {
+   "claims": {
+    "h1": {
+     "text": "A survey comparing workers of similar occupations and skill levels found that union members' wages are higher than those of non-members, and there is no wage difference between non-members and non-union workers.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h1",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "ra1",
+     "by": "*",
+     "if": [
+      "h1"
+     ],
+     "then": "c5",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  },
+  "survey_b": {
+   "claims": {
+    "h2": {
+     "text": "A survey on the gender wage gap among workers of similar occupation and skill level found that the gender wage gap is smaller among union members than among non-members.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ]
+  },
+  "survey_c": {
+   "claims": {
+    "h3": {
+     "text": "A survey of workers at companies with unions found that the wages of union members are similar to those of non-members with similar occupations and skill.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h3",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ]
+  }
+ }
+}

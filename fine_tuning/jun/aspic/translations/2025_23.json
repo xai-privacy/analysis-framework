@@ -1,0 +1,270 @@
+{
+ "id": "2025_23",
+ "positions": {
+  "Alice": {
+   "thesis": "c1",
+   "summary": "The proposition expressed by a sentence is the set of possible worlds in which that sentence is true."
+  },
+  "Bob": {
+   "thesis": "c2",
+   "summary": "A proposition is an ordered tuple composed of the referents of the sentence's sub-expressions."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The proposition expressed by a sentence is the set of possible worlds in which that sentence is true.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "A proposition is an ordered tuple composed of the referents of the sentence's sub-expressions.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The proposition expressed by 'Suchul loves Heeyoung' is <a, b, r>, where a is Suchul, b is Heeyoung, and r is the binary relation 'loves'.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "If a sentence is true in every possible world, the proposition it expresses is the set of all possible worlds.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Sentences express different propositions if the sets of possible worlds in which they are true are different sets.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Alice",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [],
+ "contraries": [],
+ "hypotheticals": {
+  "diff_objects": {
+   "claims": {
+    "ha1": {
+     "text": "'Suchul loves Heeyoung' and 'Heeyoung loves Suchul' express different propositions.",
+     "source": "statement"
+    },
+    "ha2": {
+     "text": "'Suchul' and 'Heeyoung' refer to different objects.",
+     "source": "statement"
+    },
+    "ha3": {
+     "text": "When Suchul and Heeyoung are different objects, the set of possible worlds where Suchul loves Heeyoung is different from the set of possible worlds where Heeyoung loves Suchul.",
+     "source": "rationale"
+    },
+    "ha4": {
+     "text": "The proposition expressed by 'Heeyoung loves Suchul' is <b, a, r>, where b is Heeyoung, a is Suchul, and r is 'loves'.",
+     "source": "rationale"
+    },
+    "ha5": {
+     "text": "Since a and b are different objects, <a, b, r> and <b, a, r> are different ordered triplets.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "ha2",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "ha3",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "ha4",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "ha5",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "ra1",
+     "by": "Alice",
+     "if": [
+      "c5",
+      "ha2",
+      "ha3"
+     ],
+     "then": "ha1",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "ra2",
+     "by": "Bob",
+     "if": [
+      "c2",
+      "c3",
+      "ha2",
+      "ha4",
+      "ha5"
+     ],
+     "then": "ha1",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ]
+  }
+ },
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "ha1",
+      "add": "diff_objects"
+     },
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "ha1",
+      "add": "diff_objects"
+     }
+    ]
+   },
+   "note": "Both Alice and Bob derive that the two sentences express different propositions when Suchul and Heeyoung refer to different objects."
+  },
+  "b": {
+   "check": {
+    "op": "weakens",
+    "claim": "Alice",
+    "add": {
+     "claims": {
+      "hb1": {
+       "text": "The sentences 'A round square exists' and '3 is odd and not odd' have different meanings.",
+       "source": "statement"
+      },
+      "hb2": {
+       "text": "'A round square exists' and '3 is odd and not odd' are both false in every possible world, so their sets of possible worlds are both the empty set.",
+       "source": "rationale"
+      },
+      "hb3": {
+       "text": "The proposition expressed by a sentence is not the set of possible worlds in which that sentence is true.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hb1",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "hb2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "hb1",
+        "hb2"
+       ],
+       "then": "hb3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "hb3",
+       "c1"
+      ]
+     ]
+    }
+   },
+   "note": "Believing two impossible sentences with identical truth sets (empty set) have different meanings attacks Alice's thesis that propositions are truth sets across possible worlds."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "hc1": {
+       "text": "'Morning Star' and 'Evening Star' refer to the same object.",
+       "source": "statement"
+      },
+      "hc2": {
+       "text": "The sentences 'The Morning Star is beautiful' and 'The Evening Star is beautiful' have different meanings.",
+       "source": "statement"
+      },
+      "hc3": {
+       "text": "A proposition is not an ordered tuple composed of the referents of the sentence's sub-expressions.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hc1",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "hc2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "hc1",
+        "hc2"
+       ],
+       "then": "hc3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "hc3",
+       "c2"
+      ]
+     ]
+    }
+   },
+   "note": "When two names co-refer, believing sentences differing only by those names have different meanings attacks Bob's thesis that propositions are ordered tuples of referents."
+  }
+ }
+}

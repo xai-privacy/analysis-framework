@@ -1,0 +1,241 @@
+{
+ "id": "2022_36",
+ "positions": {
+  "Author": {
+   "thesis": "c1",
+   "summary": "Differences between East and West in treating robots as human appear to be the result of cultural selection through Mohist and Confucian traditions."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Differences between East and West in treating robots as if they were human appear to be the result of cultural selection.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "When shown an Aibo wagging its tail and spinning, Korean participants were more likely than Westerners to answer that people and robots could become friends.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "When shown a child trying to break Aibo's tail, Korean participants were much more likely than Westerners to morally instruct the child not to bully Aibo.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in an inherent principle within the judging subject.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Applying Mohist and Confucianist theory, people can consider Aibo a friend when it brings joy, and treat it as a subject of moral consideration when feeling sympathy for it.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Research findings suggest that across Korean society, cultural selection has taken place through Mohism and Confucianism, partially determining the social aspects of Korean emotions and morality.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Author",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Author",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Author",
+   "if": [
+    "c5",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Author",
+   "if": [
+    "c4",
+    "c7",
+    "c8"
+   ],
+   "then": "c1",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "undercuts": [],
+ "statements": {
+  "1": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c1"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c4"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c7"
+     },
+     {
+      "op": "assumes",
+      "by": "Author",
+      "claim": "c8"
+     }
+    ]
+   },
+   "note": "G1 correctly represents the argument structure: d (c4), g (c7), and a (c1) are derived, while h (c8) is an unargued premise."
+  },
+  "2": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c4"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c7"
+     },
+     {
+      "op": "assumes",
+      "by": "Author",
+      "claim": "c1"
+     }
+    ]
+   },
+   "note": "G2 posits a -> h with in-degree 0 for a, incorrectly asserting that a (c1) is an unargued premise rather than the main conclusion."
+  },
+  "3": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c1"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c4"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c7"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "assumes",
+       "by": "Author",
+       "claim": "c8"
+      }
+     }
+    ]
+   },
+   "note": "G3 posits g -> h, asserting that h (c8) is derived from g rather than being an independent unargued premise."
+  },
+  "4": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c4"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c7"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "assumes",
+       "by": "Author",
+       "claim": "c8"
+      }
+     }
+    ]
+   },
+   "note": "G4 posits d -> h and a -> h, treating h (c8) as a derived final conclusion rather than an unargued premise."
+  },
+  "5": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "assumes",
+      "by": "Author",
+      "claim": "c4"
+     },
+     {
+      "op": "assumes",
+      "by": "Author",
+      "claim": "c7"
+     },
+     {
+      "op": "holds",
+      "by": "Author",
+      "claim": "c1"
+     }
+    ]
+   },
+   "note": "G5 omits the derivation of d and g, asserting that d (c4) and g (c7) are unargued premises."
+  }
+ }
+}

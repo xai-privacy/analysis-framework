@@ -1,0 +1,238 @@
+{
+  "id": "2023_09",
+  "positions": {
+    "View 1": {
+      "thesis": "c5",
+      "summary": "Shipping drugs from manufacturer status to wholesaler status constitutes a sale because it is a transaction between entities with separate statuses."
+    },
+    "View 2": {
+      "thesis": "c8",
+      "summary": "Internal transfer within the same company does not constitute a sale because sale presupposes a transaction with an independent third party."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Company P holds licenses for both drug manufacturing and drug sales, simultaneously holding the status of both a drug manufacturer and a drug wholesaler.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Company P shipped drugs under its manufacturer status and received them under its wholesaler status.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Article 2 is intended to strictly manage and prevent the abnormal distribution of drugs.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Moving drugs from the manufacturer side to the wholesaler side can be regarded as a transaction between entities with separate statuses.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Company P shipping drugs from its manufacturer status and receiving them as a wholesaler constitutes a 'sale' under the regulations.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "'Sale' generally means transferring goods to another person in exchange for a price, presupposing a giver and a recipient.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Receiving and managing drugs within the same company is merely an internal transfer and not a transaction with an independent third party.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Company P shipping drugs from its manufacturer status and receiving them as a wholesaler does not constitute a 'sale' under the regulations.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "View 1",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "View 1",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "View 2",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "View 2",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "View 1",
+      "if": [
+        "c3",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "View 2",
+      "if": [
+        "c6",
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c5",
+      "c8"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "View 1",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "A person intending to be a drug wholesaler must obtain permission from local heads, while a manufacturer must obtain permission from the FDA head.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "The statuses of drug manufacturer and drug wholesaler are separate and independent.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "ra2",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "c4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Separate licensing authorities support rather than undermine separate statuses, so View 1 is not weakened."
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "View 2",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The concept of 'delivery' included in 'sale' under Article 1 encompasses the transfer of a thing itself irrespective of the transaction counterparty.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3",
+                "c2"
+              ],
+              "then": "c5",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "If delivery irrespective of counterparty constitutes a sale, the internal transfer qualifies as a sale, which supports View 1 and opposes View 2."
+    },
+    "c": {
+      "check": {
+        "op": "strengthens",
+        "claim": "View 2",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "According to the purpose of Article 2, the concept of sale means distribution of drugs to the general public.",
+              "source": "statement"
+            },
+            "h6": {
+              "text": "Company P's internal shipment and receipt of drugs is not distribution of drugs to the general public.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h6",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h5",
+                "h6"
+              ],
+              "then": "c8",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "If sale requires distribution to the general public, internal transfer between manufacturer and wholesaler is not a sale, providing a direct argument for View 2."
+    }
+  }
+}

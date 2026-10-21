@@ -1,0 +1,300 @@
+{
+  "id": "2021_03",
+  "positions": {
+    "Country X": {
+      "thesis": "c4",
+      "summary": "Country X operates a bankruptcy system that discharges remaining debts and preserves civil rights, giving debtors a fresh start."
+    },
+    "Country Y": {
+      "thesis": "c9",
+      "summary": "Country Y operates a bankruptcy system that maintains debt liability unless creditors agree, allows enforcement on after-acquired assets, and restricts debtor rights."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In Country X and Country Y, bankruptcy can be declared by the court upon application of either creditor or debtor when an individual cannot repay borrowed money, and assets are distributed to creditors.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "In Country X, any remaining debts are fully discharged except when the debtor maliciously fails to pay despite having the ability to do so.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "In Country X, a person discharged through bankruptcy faces no restrictions on the freedoms and rights enjoyed as a citizen in daily life.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Country X's bankruptcy system should be supported.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Country X's bankruptcy system should be opposed.",
+      "source": "rationale"
+    },
+    "c6": {
+      "text": "In Country Y, debts to a creditor are not discharged unless that creditor agrees.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "In Country Y, creditors may exercise rights without restriction over assets acquired by the debtor after bankruptcy until full repayment.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "In Country Y, the bankrupt individual is detained for a period, loses voting rights until debts are paid in full, and the bankruptcy record is made public.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Country Y's bankruptcy system should be supported.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Country Y's bankruptcy system should be opposed.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c7",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c8",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Country X",
+      "if": [
+        "c2",
+        "c3"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Country Y",
+      "if": [
+        "c6",
+        "c7",
+        "c8"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c4",
+      "c5"
+    ],
+    [
+      "c9",
+      "c10"
+    ]
+  ],
+  "statements": {
+    "1": {
+      "check": {
+        "op": "strengthens",
+        "claim": "Country X",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Creditors will continue to urge bankrupt debtors to repay their debts and related lawsuits will never cease.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c2"
+              ],
+              "then": "c4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "The concern regarding ongoing debt collection and endless litigation is addressed by debt discharge in Country X, strengthening support for Country X."
+    },
+    "2": {
+      "check": {
+        "op": "weakens",
+        "claim": "Country X",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "Individuals are rational beings responsible for their own decisions, and the state has no need to help those who have recklessly overspent.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h2",
+                "c2"
+              ],
+              "then": "c5",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "The principle that the state should not bail out reckless overspenders attacks Country X's discharge system, weakening support for Country X."
+    },
+    "3": {
+      "check": {
+        "op": "strengthens",
+        "claim": "Country Y",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "Creditors may use bankruptcy filings as a means of threat in order to collect their claims ahead of other creditors.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h3",
+                "c8"
+              ],
+              "then": "c10",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Worry about creditors using bankruptcy filings as threats actually leads to opposing Country Y because its rights restrictions enable those threats; it attacks Country Y rather than strengthening it."
+    },
+    "4": {
+      "check": {
+        "op": "weakens",
+        "claim": "Country Y",
+        "add": {
+          "claims": {
+            "h4": {
+              "text": "Individuals at risk of bankruptcy will keep taking on more debt to repay existing debt, thereby perpetuating creditor–debtor relationships.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rd1",
+              "by": "*",
+              "if": [
+                "h4",
+                "c6",
+                "c8"
+              ],
+              "then": "c10",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Fear of debt rollover caused by lack of discharge and continued restrictions attacks Country Y, weakening support for Country Y."
+    },
+    "5": {
+      "check": {
+        "op": "weakens",
+        "claim": "Country Y",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "Making creditor–debtor relationships after bankruptcy subject to the will of the creditor causes social confusion, such as the emergence of fictitious creditors.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "re1",
+              "by": "*",
+              "if": [
+                "h5",
+                "c6"
+              ],
+              "then": "c10",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Concern over fictitious creditors emerging due to discharge depending on creditor consent attacks Country Y, weakening support for Country Y."
+    }
+  }
+}

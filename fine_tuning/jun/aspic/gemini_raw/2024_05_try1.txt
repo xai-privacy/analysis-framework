@@ -1,0 +1,399 @@
+{
+  "id": "2024_05",
+  "positions": {
+    "A": {
+      "thesis": "c3",
+      "summary": "Autonomy has inherent value; restriction is justified only when the exercise of autonomy fundamentally infringes upon autonomy itself."
+    },
+    "B": {
+      "thesis": "c5",
+      "summary": "Autonomy is protected for party utility; restriction is justified if the utility gained by the parties exceeds the cost to the parties."
+    },
+    "C": {
+      "thesis": "c7",
+      "summary": "Autonomy is protected for societal utility; restriction is evaluated by utility to society as a whole, with compensation required if party cost exceeds party utility."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Autonomy should be protected because the value lies in autonomy itself rather than the consequences it brings.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "The originally intended will should be respected over what was expressed, even if the displayed intention differs and the other party relies on it.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "State intervention in autonomy is justified only when the exercise of autonomy so fundamentally infringes upon autonomy itself.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Autonomy should be protected by focusing on the utility it brings to the parties, rather than the value of autonomy itself.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "A restriction on autonomy is justified if the absolute value of the cost (-) to the parties caused by restricting autonomy is less than the absolute value of the utility (+) gained by the parties.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "The mere fact that restriction of autonomy increases the utility of a third party (including the State or society) does not justify restricting autonomy.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Autonomy should be protected by focusing on the utility it brings to society as a whole, rather than its value in itself.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Restriction on autonomy is evaluated focusing on the utility to society as a whole rather than to the parties.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "If the absolute value of the cost (-) to the parties caused by restricting autonomy is greater than the absolute value of the utility (+) to the parties, restriction of autonomy is permissible only if the difference is compensated by the State, etc.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "To the extent of compensation by the State, etc., the utility of the parties is considered to have increased.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "A",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "A",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "A",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "B",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "B",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "B",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "C",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "C",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "C",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "C",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "A",
+      "if": [
+        "c1"
+      ],
+      "then": "c2",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "B",
+      "if": [
+        "c4"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "C",
+      "if": [
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "1": {
+      "check": {
+        "op": "holds",
+        "by": "A",
+        "claim": "h1_2",
+        "add": {
+          "claims": {
+            "h1_1": {
+              "text": "One party unintentionally expresses intention ⓑ instead of the intended will ⓐ, and the other party recognizes ⓑ as the intention.",
+              "source": "statement"
+            },
+            "h1_2": {
+              "text": "The originally intended will ⓐ should be respected over the expressed intention ⓑ.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1_1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "A",
+              "if": [
+                "c2",
+                "h1_1"
+              ],
+              "then": "h1_2",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "A holds that the originally intended will prevails over expressed and relied-upon intention, applying directly to ⓐ over ⓑ."
+    },
+    "2": {
+      "check": {
+        "op": "holds",
+        "by": "B",
+        "claim": "h2_1",
+        "add": {
+          "claims": {
+            "h2_1": {
+              "text": "When restricting the parties' autonomy is justified, the sum of the cost (-) and utility (+) to the parties is always positive (+).",
+              "source": "statement"
+            },
+            "h2_2": {
+              "text": "If the absolute value of a negative cost is less than the absolute value of a positive utility, their sum is positive (+).",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2_2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "B",
+              "if": [
+                "c5",
+                "h2_2"
+              ],
+              "then": "h2_1",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Under B, restriction is justified only when party cost is strictly less than party utility in absolute value, so the sum is always positive."
+    },
+    "3": {
+      "check": {
+        "op": "holds",
+        "by": "C",
+        "claim": "h3_1",
+        "add": {
+          "claims": {
+            "h3_1": {
+              "text": "When restricting the parties' autonomy, there are cases where the sum of the cost (-) and utility (+) to the parties is negative (-).",
+              "source": "statement"
+            }
+          },
+          "rules": [
+            {
+              "id": "rc3_1",
+              "by": "C",
+              "if": [
+                "c8"
+              ],
+              "then": "h3_1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "c9",
+              "rule": "rc3_1"
+            }
+          ]
+        }
+      },
+      "note": "Tempting inference rc3_1 (that focusing on societal utility allows negative net party utility) is undercut by c9: restriction is permissible only if the difference is compensated."
+    },
+    "4": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "A",
+            "claim": "h4_2",
+            "add": {
+              "claims": {
+                "h4_1": {
+                  "text": "The sum of the cost (-) and utility (+) to the parties caused by restricting autonomy is positive (+), but the exercise of autonomy does not fundamentally infringe upon autonomy itself.",
+                  "source": "rationale"
+                },
+                "h4_2": {
+                  "text": "The parties' autonomy cannot be restricted.",
+                  "source": "statement"
+                }
+              },
+              "premises": [
+                {
+                  "claim": "h4_1",
+                  "by": "*",
+                  "kind": "axiom"
+                }
+              ],
+              "rules": [
+                {
+                  "id": "ra4",
+                  "by": "A",
+                  "if": [
+                    "h4_1",
+                    "c3"
+                  ],
+                  "then": "h4_2",
+                  "type": "strict",
+                  "source": "rationale"
+                }
+              ]
+            }
+          },
+          {
+            "op": "holds",
+            "by": "C",
+            "claim": "h4_2",
+            "add": {
+              "claims": {
+                "h4_3": {
+                  "text": "The sum of the cost (-) and utility (+) to the parties caused by restricting autonomy is positive (+), but the restriction generates a net cost to society as a whole.",
+                  "source": "rationale"
+                },
+                "h4_2": {
+                  "text": "The parties' autonomy cannot be restricted.",
+                  "source": "statement"
+                }
+              },
+              "premises": [
+                {
+                  "claim": "h4_3",
+                  "by": "*",
+                  "kind": "axiom"
+                }
+              ],
+              "rules": [
+                {
+                  "id": "rc4",
+                  "by": "C",
+                  "if": [
+                    "h4_3",
+                    "c8"
+                  ],
+                  "then": "h4_2",
+                  "type": "strict",
+                  "source": "rationale"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "note": "Both A and C hold that autonomy cannot be restricted even if net party utility is positive: under A when autonomy itself is not fundamentally infringed, and under C when societal net utility is negative."
+    },
+    "5": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "C",
+            "claim": "h5_2",
+            "add": "country_x_act"
+          },
+          {
+            "op": "not",
+            "arg": {
+              "op": "holds",
+              "by": "B",
+              "claim": "h5_2",
+              "add": "country_x_act"
+            }
+          }
+        ]
+      },
+      "note": "Country X's Act restricts autonomy based on net utility to society as a whole, which is supported by C (focusing on societal utility) but not by B (which explicitly rejects third-party utility as justification)."
+    }
+  },
+  "hypotheticals": {
+    "country_x_act": {
+      "claims": {
+        "h5_1": {
+          "text": "The Basic Regulatory Act of Country X provides that the parties' autonomy may only be restricted if the total utility produced for society as a whole exceeds the costs generated by restricting autonomy.",
+          "source": "statement"
+        },
+        "h5_2": {
+          "text": "The restriction on autonomy under the Basic Regulatory Act of Country X is justified.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h5_1",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rc5",
+          "by": "C",
+          "if": [
+            "h5_1",
+            "c8"
+          ],
+          "then": "h5_2",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ]
+    }
+  }
+}

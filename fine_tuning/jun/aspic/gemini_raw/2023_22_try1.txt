@@ -1,0 +1,331 @@
+{
+  "id": "2023_22",
+  "positions": {
+    "conceptual role semantics": {
+      "thesis": "c3",
+      "summary": "Understanding a word's meaning requires following its usage rules based on an understanding of those rules."
+    },
+    "the following argument": {
+      "thesis": "c10",
+      "summary": "Conceptual role semantics leads to an infinite regress and the absurd conclusion that no one understands any word, so it must be rejected."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Understanding the meaning of a word depends on the ability to follow the usage rules of that word.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "To follow the usage rules of a word does not merely mean to use the word according to those rules, but to use it based on an understanding of those rules.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Failing to understand the usage rules of a word means failing to understand the meaning of that word.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "For understanding of usage rules to be established, those rules must first be expressed linguistically and clearly.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Expressing usage rules linguistically requires using several words.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "In order to understand a rule, one must understand the meanings of all the words included in its expression.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "To understand the words used in a rule requires understanding their usage rules, leading to an infinite regress.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "If such an infinite regress occurs, no one can truly understand the meaning of any word that we use.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "The conclusion that no one truly understands the meaning of any word is highly unreasonable.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Conceptual role semantics cannot be accepted.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "conceptual role semantics",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "conceptual role semantics",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "the following argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "the following argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "the following argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "the following argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "the following argument",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "conceptual role semantics",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c3",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "the following argument",
+      "if": [
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "the following argument",
+      "if": [
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "the following argument",
+      "if": [
+        "c8",
+        "c9"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c3",
+      "c10"
+    ]
+  ],
+  "statements": {
+    "1": {
+      "check": {
+        "op": "not",
+        "arg": {
+          "op": "weakens",
+          "claim": "conceptual role semantics",
+          "add": {
+            "claims": {
+              "h1": {
+                "text": "An artificial intelligence appears that can use Korean as well as a native Korean.",
+                "source": "statement"
+              },
+              "h2": {
+                "text": "The artificial intelligence shows that understanding word meaning does not require understanding usage rules.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h1",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "r1_ai",
+                "by": "*",
+                "if": [
+                  "h1"
+                ],
+                "then": "h2",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "h2",
+                "c3"
+              ]
+            ],
+            "undercuts": [
+              {
+                "claim": "c2",
+                "rule": "r1_ai"
+              }
+            ]
+          }
+        }
+      },
+      "note": "The naive inference that an AI's linguistic performance weakens conceptual role semantics is undercut by c2: merely using words according to rules is not following rules based on understanding."
+    },
+    "2": {
+      "check": {
+        "op": "weakens",
+        "claim": "the following argument",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The rules for word usage do not necessarily have to be expressed linguistically.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "contraries": [
+            [
+              "h3",
+              "c4"
+            ]
+          ]
+        }
+      },
+      "note": "Denying premise c4 directly undermines the following argument, weakening it."
+    },
+    "3": {
+      "check": {
+        "op": "strengthens",
+        "claim": "conceptual role semantics",
+        "add": {
+          "claims": {
+            "h4": {
+              "text": "There is a person who understands the meaning of every word included in the rule 'Apply ppyojukhada to objects with a very thin end that can pierce through something.'",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ]
+        }
+      },
+      "note": "The fact that someone understands all words in the example rule does not provide an argument for conceptual role semantics, nor does it defeat its attackers, so it does not strengthen it."
+    },
+    "4": {
+      "check": {
+        "op": "weakens",
+        "claim": "the following argument",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "It is possible to understand the meaning of a statement even if it contains words whose meanings one does not understand.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "contraries": [
+            [
+              "h5",
+              "c6"
+            ]
+          ]
+        }
+      },
+      "note": "Denying premise c6 directly undermines the following argument, weakening it."
+    },
+    "5": {
+      "check": {
+        "op": "not",
+        "arg": {
+          "op": "weakens",
+          "claim": "conceptual role semantics",
+          "add": {
+            "claims": {
+              "h6": {
+                "text": "There is an agent who does not understand the meaning of a word but can use it according to the usage rules.",
+                "source": "statement"
+              },
+              "h7": {
+                "text": "The agent counterexemplifies conceptual role semantics.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h6",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "r5_agent",
+                "by": "*",
+                "if": [
+                  "h6"
+                ],
+                "then": "h7",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "h7",
+                "c3"
+              ]
+            ],
+            "undercuts": [
+              {
+                "claim": "c2",
+                "rule": "r5_agent"
+              }
+            ]
+          }
+        }
+      },
+      "note": "Merely using a word according to rules without understanding rules is consistent with conceptual role semantics, and inferring a counterexample is undercut by c2."
+    }
+  }
+}

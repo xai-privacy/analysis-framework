@@ -1,0 +1,194 @@
+{
+ "id": "2024_28",
+ "positions": {
+  "Theory": {
+   "thesis": "c5",
+   "summary": "Presenting the main ingredient before the final product increases preference compared to the reverse order, an effect that is stronger when product familiarity is lower."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "People tend to find it easier to process information when it is presented in a familiar order.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The feeling that information processing is easy leads to a sense of familiarity with the subject.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "An increase in familiarity with the subject increases preference for the subject.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Presenting the main ingredient before the final product follows an inherently familiar order based on temporal flow.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Consumers' preference for a product is higher when the main ingredient is presented before the product than in the reverse order.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "The effect of familiar presentation order on preference is greater when product familiarity is lower, and smaller when product familiarity is higher.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "In the experiment on olive soap, men generally had low familiarity, while women had high familiarity.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Theory",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Theory",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Theory",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Theory",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Theory",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Theory",
+   "if": [
+    "c1",
+    "c2",
+    "c3",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c5",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Men had a significantly higher preference for olive soap when the information was presented in the 'olive oil–olive soap' order compared to the reverse order.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1",
+        "c6",
+        "c7"
+       ],
+       "then": "c5",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Men have low product familiarity (c7); finding that they strongly prefer the ingredient-first order confirms Theory's prediction and provides an empirical argument for c5."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c5",
+    "add": {
+     "claims": {
+      "h2": {
+       "text": "Women felt information processing was easier in the 'olive soap–olive oil' order than in the reverse order, but men did not feel this way.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h2",
+        "c7"
+       ],
+       "then": "c5",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "undercuts": [
+      {
+       "claim": "c4",
+       "rule": "rb1"
+      }
+     ]
+    }
+   },
+   "note": "The tempting inference rb1 (that high product familiarity makes product-first order easier, supporting Theory) is undercut by c4: temporal flow (ingredient first) defines the familiar order for all consumers, and familiarity only moderates effect size."
+  },
+  "c": {
+   "check": {
+    "op": "not",
+    "arg": {
+     "op": "status",
+     "claim": "c5",
+     "is": [
+      "OUT"
+     ],
+     "add": {
+      "claims": {
+       "h3": {
+        "text": "Among individuals with similar familiarity with olive soap, there was no significant difference in product preference between men and women.",
+        "source": "statement"
+       }
+      },
+      "premises": [
+       {
+        "claim": "h3",
+        "by": "*",
+        "kind": "axiom"
+       }
+      ]
+     }
+    }
+   },
+   "note": "Compatible with Theory: the finding that individuals with similar product familiarity have similar preferences does not deny or refute Theory (status of c5 is not OUT)."
+  }
+ }
+}

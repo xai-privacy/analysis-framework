@@ -1,0 +1,261 @@
+{
+  "id": "2023_25",
+  "positions": {
+    "Functionalists": {
+      "thesis": "c3",
+      "summary": "Mental states exist, because attributing them through folk psychology successfully explains and predicts human behavior."
+    },
+    "Eliminativists": {
+      "thesis": "c8",
+      "summary": "Folk psychology has failed to predict phenomena, so mental states and mental terms should be eliminated."
+    },
+    "Instrumentalists": {
+      "thesis": "c7",
+      "summary": "Attributing mental states is a useful tool for predicting behavior, but mental states do not actually exist."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "We successfully understand the human mind and predict behavior by attributing mental states to others through folk psychology.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Folk psychology is a theoretical system composed of mental terms such as beliefs and desires.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Mental states exist.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Mental terms are useful for predicting behavior and understanding others.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Theories without scientific explanatory power and predictive ability disappear, along with their posited entities and terms.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Folk psychology lacks scientific explanatory power and predictive ability because we often misunderstand others.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Mental states do not exist.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Mental terms should be eliminated and folk psychology should be discarded.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Attributing mental states to a chess computer allows us to predict its moves more efficiently, even though the computer has no mental states.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Attributing mental states to humans in our explanations is a great help for predicting human behavior.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "Mental terms are necessary.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Functionalists",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": [
+        "Eliminativists",
+        "*"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Eliminativists",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Instrumentalists",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Instrumentalists",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "Instrumentalists",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Functionalists",
+      "if": [
+        "c1"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Functionalists",
+      "if": [
+        "c1"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Eliminativists",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Eliminativists",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": "Instrumentalists",
+      "if": [
+        "c10"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r6",
+      "by": "*",
+      "if": [
+        "c4"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "rationale"
+    }
+  ],
+  "contraries": [
+    [
+      "c1",
+      "c6"
+    ],
+    [
+      "c3",
+      "c7"
+    ],
+    [
+      "c4",
+      "c8"
+    ],
+    [
+      "c8",
+      "c11"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Functionalists",
+            "claim": "c3"
+          },
+          {
+            "op": "holds",
+            "by": "Instrumentalists",
+            "claim": "c7"
+          },
+          {
+            "op": "holds",
+            "by": "Functionalists",
+            "claim": "c4"
+          },
+          {
+            "op": "holds",
+            "by": "Instrumentalists",
+            "claim": "c4"
+          }
+        ]
+      },
+      "note": "Functionalists hold mental states exist (c3) while Instrumentalists hold they do not (c7); both positions hold that mental terms are useful (c4)."
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Eliminativists",
+            "claim": "c11"
+          },
+          {
+            "op": "holds",
+            "by": "Instrumentalists",
+            "claim": "c11"
+          }
+        ]
+      },
+      "note": "Instrumentalists hold that mental terms are necessary (deriving c11 from c4 via r6), whereas Eliminativists argue mental terms must be removed (c8, contrary to c11)."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Eliminativists",
+            "claim": "c7"
+          },
+          {
+            "op": "holds",
+            "by": "Instrumentalists",
+            "claim": "c7"
+          },
+          {
+            "op": "holds",
+            "by": "Eliminativists",
+            "claim": "c6"
+          },
+          {
+            "op": "holds",
+            "by": "Instrumentalists",
+            "claim": "c6"
+          }
+        ]
+      },
+      "note": "Both hold that mental states do not exist (c7), and Eliminativists support this using the failure of folk psychology (c6), but Instrumentalists do not hold or advance c6."
+    }
+  }
+}

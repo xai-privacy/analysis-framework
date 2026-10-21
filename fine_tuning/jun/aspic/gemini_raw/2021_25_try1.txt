@@ -1,0 +1,252 @@
+{
+  "id": "2021_25",
+  "positions": {
+    "ⓐ": {
+      "thesis": "c1",
+      "summary": "Watching the movie (the experimental stimulus) reduced the degree of negative prejudice against Black people."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Watching the movie (the experimental stimulus) reduced the degree of negative prejudice against Black people.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Watching the movie (the experimental stimulus) did not reduce the degree of negative prejudice against Black people.",
+      "source": "rationale"
+    },
+    "c3": {
+      "text": "In the experimental design, Group 1 receives pre-test, experimental stimulus, and post-test; Group 2 receives pre-test and post-test without experimental stimulus.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In the experimental design, Group 3 receives no pre-test, experimental stimulus, and post-test; Group 4 receives no pre-test and post-test without experimental stimulus.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "All participants in Groups 1 to 4 were randomly selected from the population.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Because participants were randomly selected, baseline prejudice is equivalent across groups, enabling comparisons between groups.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "ⓐ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [],
+  "contraries": [
+    [
+      "c1",
+      "c2"
+    ]
+  ],
+  "undercuts": [],
+  "statements": {
+    "1": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "In Group 1, the degree of prejudice in the post-test was lower than the degree of prejudice in the pre-test.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r1_1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c3"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Pre-test to post-test reduction in Group 1 (which received the stimulus) demonstrates ⓐ."
+    },
+    "2": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "The degree of prejudice in the post-test of Group 1 was lower than the degree of prejudice in the post-test of Group 2.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r2_1",
+              "by": "*",
+              "if": [
+                "h2",
+                "c3",
+                "c6"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Post-test of Group 1 (stimulus) lower than post-test of Group 2 (control) demonstrates ⓐ."
+    },
+    "3": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the pre-test of Group 2.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r3_1",
+              "by": "*",
+              "if": [
+                "h3",
+                "c4",
+                "c6"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Post-test of Group 3 (stimulus, no pre-test) lower than baseline (pre-test of Group 2) demonstrates ⓐ."
+    },
+    "4": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h4": {
+              "text": "The degree of prejudice in the post-test of Group 3 was lower than the degree of prejudice in the post-test of Group 4.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r4_1",
+              "by": "*",
+              "if": [
+                "h4",
+                "c4",
+                "c6"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Post-test of Group 3 (stimulus) lower than post-test of Group 4 (control) without pre-test demonstrates ⓐ."
+    },
+    "5": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "The degree of prejudice in the post-test of Group 4 was lower than the degree of prejudice in the post-test of Group 1.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r5_1",
+              "by": "*",
+              "if": [
+                "h5",
+                "c3",
+                "c4",
+                "c6"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Group 4 (control) having lower post-test prejudice than Group 1 (stimulus) does not support ⓐ; it supports c2 (the stimulus did not reduce prejudice), so strengthens evaluates to false."
+    }
+  }
+}

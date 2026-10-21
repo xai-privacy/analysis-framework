@@ -1,0 +1,228 @@
+{
+  "id": "2022_18",
+  "positions": {
+    "Bob": {
+      "thesis": "c6",
+      "summary": "Not studying is justified because it allows more test-takers to move up in rank and be happy, which Bob desires."
+    },
+    "Alice": {
+      "thesis": "c10",
+      "summary": "Not studying is not justified because others' happiness is caused by their own studying, not by inaction."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The exam is designed to rank all test-takers from first to last place.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Other test-takers are happy when their rank goes up.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Bob wants more people to experience happiness.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "If Bob does not study, more test-takers will move up in the rankings.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Bob not studying makes other test-takers happy.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Not studying is justified.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "If Bob studies, more people get a lower score than his, compared to if he did not study.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "The cause of other test-takers' happiness is that they studied.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Not studying cannot be the cause of other test-takers' happiness.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Bob's claim that he should not study is unjustified.",
+      "source": "rationale"
+    },
+    "c11": {
+      "text": "Not doing something cannot be the cause of anything else.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Alice",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Bob",
+      "if": [
+        "c2",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c3",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Alice",
+      "if": [
+        "c8",
+        "c9"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "rationale"
+    }
+  ],
+  "contraries": [
+    [
+      "c5",
+      "c9"
+    ],
+    [
+      "c6",
+      "c10"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "c6",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Not every means of attaining what one wants is justified just because one desires it.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "h1",
+              "rule": "r2"
+            }
+          ]
+        }
+      },
+      "note": "Undercuts Bob's defeasible step r2 from wanting an outcome to justifying inaction as a means."
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c4",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "Bob's score goes up when he studies as compared to not studying.",
+              "source": "statement"
+            },
+            "h3": {
+              "text": "A score increase does not entail a rank change for others, as Bob could remain in last place.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "c4",
+              "type": "defeasible",
+              "source": "statement"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "h3",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "Tests whether the fact that Bob's score rises establishes/strengthens premise c4; the tempting inference rb1 is undercut by h3, so it fails to strengthen c4."
+    },
+    "c": {
+      "check": {
+        "op": "assumes",
+        "by": "Alice",
+        "claim": "c11"
+      },
+      "note": "Alice's argument does not assume the general principle that inaction can never cause anything; she argues specifically from the cause being students' own studying."
+    }
+  }
+}

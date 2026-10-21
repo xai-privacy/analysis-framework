@@ -1,0 +1,344 @@
+{
+ "id": "2022_12",
+ "positions": {
+  "Alice": {
+   "thesis": "c4",
+   "summary": "Property under the Criminal Act is an object with monetary value, regardless of whether ownership and transfer are lawful."
+  },
+  "Bob": {
+   "thesis": "c7",
+   "summary": "Property under the Criminal Act is an object for which the owner's intention to possess is expressed, regardless of monetary value or lawful ownership."
+  },
+  "Charlie": {
+   "thesis": "c10",
+   "summary": "Property under the Criminal Act requires both monetary exchange value and lawful ownership and transfer."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Under the Criminal Act, 'property' refers to an object with economic value.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Economic value means pure economic value, that is, monetary value.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Under the Criminal Act, property is irrelevant to whether the ownership and transfer of the object are lawful.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "An object with monetary value is property under the Criminal Act, regardless of whether its ownership and transfer are lawful.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Economic value is subjectively attached by the owner.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Property does not necessarily have to be lawfully owned or lawfully traded.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "As long as the owner's intention to possess is expressed, the object is property under the Criminal Act, regardless of whether there is monetary exchange value.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Monetary exchange value is a necessary condition for economic value to be recognized.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "In order for something to be property under the Criminal Act, its ownership and transfer must be lawful.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "An object is property under the Criminal Act only if it has monetary exchange value and its ownership and transfer are lawful.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": [
+    "Alice",
+    "Bob",
+    "Charlie"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c1",
+    "c5",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Charlie",
+   "if": [
+    "c1",
+    "c8",
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c3",
+   "c9"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Alice",
+    "claim": "h4",
+    "add": "narcotics"
+   },
+   "note": "Alice requires only monetary value and considers lawful ownership irrelevant, so she regards narcotics as property."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "h4",
+      "add": "narcotics"
+     },
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "h8",
+      "add": "fan_letter"
+     }
+    ]
+   },
+   "note": "Bob considers subjective attachment and expressed intention to possess sufficient, so he regards both items as property."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "h8",
+      "add": "fan_letter"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "Charlie",
+       "claim": "h4",
+       "add": "narcotics"
+      }
+     }
+    ]
+   },
+   "note": "Charlie requires both monetary exchange value and lawful ownership/transfer. The fan letter lacks monetary exchange value, so Charlie does not regard it as property."
+  }
+ },
+ "hypotheticals": {
+  "narcotics": {
+   "claims": {
+    "h1": {
+     "text": "Narcotics are illegally owned by a drug dealer and prohibited by law from being owned.",
+     "source": "statement"
+    },
+    "h2": {
+     "text": "Narcotics have monetary value.",
+     "source": "rationale"
+    },
+    "h3": {
+     "text": "The drug dealer has expressed an intention to possess the narcotics.",
+     "source": "rationale"
+    },
+    "h4": {
+     "text": "Narcotics illegally owned by a drug dealer are property under the Criminal Act.",
+     "source": "statement"
+    },
+    "h5": {
+     "text": "Narcotics illegally owned by a drug dealer are not property under the Criminal Act.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "h2",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "h3",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "ra1",
+     "by": "Alice",
+     "if": [
+      "c4",
+      "h2"
+     ],
+     "then": "h4",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rb1",
+     "by": "Bob",
+     "if": [
+      "c7",
+      "h3"
+     ],
+     "then": "h4",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rc1",
+     "by": "Charlie",
+     "if": [
+      "c10",
+      "h1"
+     ],
+     "then": "h5",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ],
+   "contraries": [
+    [
+     "h4",
+     "h5"
+    ]
+   ]
+  },
+  "fan_letter": {
+   "claims": {
+    "h6": {
+     "text": "A fan letter cherished by a celebrity is not subject to transaction and has no monetary exchange value.",
+     "source": "statement"
+    },
+    "h7": {
+     "text": "The celebrity expresses an intention to possess the cherished fan letter.",
+     "source": "rationale"
+    },
+    "h8": {
+     "text": "A fan letter cherished by a celebrity is property under the Criminal Act.",
+     "source": "statement"
+    },
+    "h9": {
+     "text": "A fan letter cherished by a celebrity is not property under the Criminal Act.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h6",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "h7",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rb2",
+     "by": "Bob",
+     "if": [
+      "c7",
+      "h7"
+     ],
+     "then": "h8",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rc2",
+     "by": "Charlie",
+     "if": [
+      "c10",
+      "h6"
+     ],
+     "then": "h9",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ],
+   "contraries": [
+    [
+     "h8",
+     "h9"
+    ]
+   ]
+  }
+ }
+}

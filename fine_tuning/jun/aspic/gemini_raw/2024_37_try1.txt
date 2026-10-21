@@ -1,0 +1,247 @@
+{
+  "id": "2024_37",
+  "positions": {
+    "Mendelian genetics": {
+      "thesis": "c1",
+      "summary": "ⓐ It does not matter whether a particular gene comes from the sperm or the egg."
+    },
+    "Surani": {
+      "thesis": "c5",
+      "summary": "ⓑ The activity of a gene at a specific region of DNA can differ depending on whether this region was inherited from either parent."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "ⓐ It does not matter whether a particular gene comes from the sperm or the egg.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "In mammals, for some genes, only the allele derived exclusively from either the sperm or the egg is expressed.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "DNA methylation, in which a methyl group attaches to DNA, can cause parent-of-origin specific gene expression.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "During spermatogenesis and oogenesis, existing DNA methylation is reset, and new, sex-specific DNA methylation occurs.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "ⓑ The activity of a gene at a specific region of DNA can differ depending on whether this region was inherited from either parent.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "In the offspring of genetically modified mice, DNA inherited from the mother was highly methylated, whereas DNA inherited from the father was methylated to a lesser extent.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "DNA methylation is related to the regulation of gene expression.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "ⓒ Regulation of gene expression by DNA methylation can occur through a mechanism where the methyl group interferes with the binding of a regulatory protein to DNA.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "ⓓ Regulation of gene expression by DNA methylation can occur through a mechanism where a regulatory protein binds to DNA via the methyl group.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "A regulatory protein can either activate or suppress the expression of a gene.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "During early embryonic development of mice, only gene X derived from the father is expressed, and gene X derived from the mother is not.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "A specific regulatory protein binds only to the DNA of the maternally inherited gene X.",
+      "source": "passage"
+    },
+    "c13": {
+      "text": "The regulation of gene X's expression corresponds to mechanism ⓒ.",
+      "source": "rationale"
+    },
+    "c14": {
+      "text": "The regulation of gene X's expression corresponds to mechanism ⓓ.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Mendelian genetics",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Surani",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c7",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c8",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c9",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c10",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c11",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c12",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [],
+  "contraries": [
+    [
+      "c1",
+      "c5"
+    ],
+    [
+      "c1",
+      "c2"
+    ],
+    [
+      "c13",
+      "c14"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "premises": [
+            {
+              "claim": "c6",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "c6",
+                "c7"
+              ],
+              "then": "c5",
+              "type": "defeasible",
+              "source": "passage"
+            }
+          ]
+        }
+      },
+      "note": "Surani's experimental results show sex-specific methylation differences that lead to differential gene activity (ⓑ), which conflicts with ⓐ; therefore, the results weaken ⓐ rather than reinforce it."
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c5",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Prader-Willi syndrome appears in a child only when a particular chromosomal abnormality is inherited from the father but not when inherited from the mother.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h1"
+              ],
+              "then": "c5",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "The inheritance-dependent manifestation of Prader-Willi syndrome provides a new empirical argument supporting differential gene activity based on parental origin (ⓑ)."
+    },
+    "c": {
+      "check": {
+        "op": "status",
+        "claim": "c14",
+        "is": [
+          "IN"
+        ],
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "Only the DNA of gene X inherited from the mother is methylated.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h2",
+                "c12",
+                "c9"
+              ],
+              "then": "c14",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Since the regulatory protein binds only to maternal DNA of gene X, and only maternal DNA is methylated, the protein binds to DNA via the methyl group, fulfilling the definition of mechanism ⓓ."
+    }
+  }
+}

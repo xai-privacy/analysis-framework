@@ -1,0 +1,260 @@
+{
+ "id": "2023_35",
+ "positions": {
+  "Alice": {
+   "thesis": "c5",
+   "summary": "There is a fundamental difference between X and native Korean speakers, because X, like Roy, does not understand the meaning of Korean."
+  },
+  "Bob": {
+   "thesis": "c6",
+   "summary": "X and native Korean speakers are fundamentally the same in Korean language ability, because not understanding the meaning of symbols does not prevent having the ability, as with the neural program."
+  },
+  "Charlie": {
+   "thesis": "c13",
+   "summary": "Robot R understands the meaning of Korean because it can perceive the world through sensors and appropriately respond to real objects indicated by Korean words."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Roy has memorized virtually every possible combination of sequentially related Korean words and sentences in daily conversation.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Roy does not understand the meaning of Korean.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "X's Korean language ability is similar to Roy's.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "X does not understand the meaning of Korean.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "There is a fundamental difference between X and native speakers of Korean in terms of Korean language ability.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "X and native Korean speakers are fundamentally the same in terms of Korean language ability.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "The neural program itself does not understand the meaning of mathematical symbols.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "There is essentially no difference between Minsoo obtaining answers to equations directly and the neural program doing so.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "The way X uses Korean is, in principle, no different from the way the neural program solves mathematical equations.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "X's Korean language ability and the neural program's mathematical ability are similar.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "Robot R is equipped with X, and can perceive the world and act accordingly through various sensory sensors.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "R can appropriately respond to real objects or phenomena indicated by Korean words or sentences.",
+   "source": "passage"
+  },
+  "c13": {
+   "text": "Understanding the meaning of Korean consists in appropriately responding to real objects or phenomena indicated by Korean words or sentences.",
+   "source": "passage"
+  },
+  "c14": {
+   "text": "There is no fundamental difference in Korean language ability between R and a native Korean speaker.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c11",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c12",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c13",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c7",
+    "c9"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Bob",
+   "if": [
+    "c8",
+    "c10"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r6",
+   "by": "Bob",
+   "if": [
+    "c6",
+    "c11"
+   ],
+   "then": "c14",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r7",
+   "by": "Charlie",
+   "if": [
+    "c11",
+    "c12"
+   ],
+   "then": "c13",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c6"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Alice",
+    "claim": "h2",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Roy and R actually see a potato.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Both Roy and R recall the symbol 'potato'.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ]
+    }
+   },
+   "note": "Alice holds that Roy does not understand the meaning of Korean, so seeing a potato does not cause Roy to recall the symbol 'potato'; Alice cannot derive h2."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "c14"
+   },
+   "note": "Bob holds that X and native speakers are fundamentally the same; since R is equipped with X, Bob extends this conclusion to R."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "c4"
+     },
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c4"
+     }
+    ]
+   },
+   "note": "Both Alice and Bob derive that X does not understand the meaning of Korean."
+  }
+ }
+}

@@ -1,0 +1,296 @@
+{
+ "id": "2024_14",
+ "positions": {
+  "A": {
+   "thesis": "c7",
+   "summary": "ⓐ Even when asserting without verification when verification is possible, responsibility does not always lie with the speaker, as shown by Alice's unblameworthy cognitive error."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Responsibility is assigned to the agent only in cases where the act itself is subject to blame.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Alice asserted something as true without verification, even though verification was possible under normal observation conditions.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Alice's assertion is merely a cognitive error.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "An act that is merely a cognitive error is not, in itself, subject to blame.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Alice's act of asserting is not, in itself, subject to blame.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Responsibility is not assigned to Alice.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "ⓐ Even in cases where someone asserts something as true without verification when verification is possible, responsibility does not always lie with the speaker.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Responsibility is assigned to an agent who has an active attitude of intentionally avoiding or refusing verification.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "In all cases where someone asserts something as true without verification under normal observation conditions, responsibility lies with the speaker.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "A",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c3",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "A",
+   "if": [
+    "c1",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "A",
+   "if": [
+    "c2",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c7",
+   "c9"
+  ]
+ ],
+ "statements": {
+  "1": {
+   "check": {
+    "op": "weakens",
+    "claim": "c7",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "An act that is not, in itself, subject to blame is not a cognitive error.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "All acts that are cognitive errors are, in themselves, subject to blame.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "r1_1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "c4",
+       "h2"
+      ]
+     ]
+    }
+   },
+   "note": "Contrapositive of h1 contradicts c4, undermining A's sub-argument for c5, c6, and c7."
+  },
+  "2": {
+   "check": {
+    "op": "weakens",
+    "claim": "c7",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "It is not always the case that responsibility is assigned to someone who believes in and spreads fake news.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "Believing in and spreading fake news is an instance of asserting something as true without verification when verification is possible.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "h4",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "r2_1",
+       "by": "*",
+       "if": [
+        "h3",
+        "h4"
+       ],
+       "then": "c7",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h3",
+       "c8"
+      ]
+     ]
+    }
+   },
+   "note": "Spreading fake news is an instance of asserting without verification; not assigning responsibility supports c7 rather than weakening it, while c8 is not a premise of c7."
+  },
+  "3": {
+   "check": {
+    "op": "weakens",
+    "claim": "c7",
+    "add": {
+     "claims": {
+      "h5": {
+       "text": "There are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ]
+    }
+   },
+   "note": "h5 describes the exact nature of Alice's case and is consistent with A's premises, so it does not attack or weaken c7."
+  },
+  "4": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c7",
+    "add": {
+     "claims": {
+      "h6": {
+       "text": "All false assertions made under normal observation conditions always stem from an active avoidance attitude.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h6",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "r4_1",
+       "by": "*",
+       "if": [
+        "h6",
+        "c8"
+       ],
+       "then": "c9",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h6",
+       "c3"
+      ]
+     ]
+    }
+   },
+   "note": "If all false assertions under normal conditions stem from active avoidance, all such speakers bear responsibility (c9, contrary to c7) and Alice's premise c3 is undermined, which weakens rather than strengthens c7."
+  },
+  "5": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c7",
+    "add": {
+     "claims": {
+      "h7": {
+       "text": "In situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h7",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ]
+    }
+   },
+   "note": "c7 explicitly applies to cases where verification is possible; eliminating cognitive errors where verification is impossible provides no support for c7."
+  }
+ }
+}

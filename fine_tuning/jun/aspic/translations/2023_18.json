@@ -1,0 +1,217 @@
+{
+ "id": "2023_18",
+ "positions": {
+  "Alice": {
+   "thesis": "c5",
+   "summary": "In fiction, there are propositions that are implicitly true in addition to explicit truth, such as common-sense facts."
+  },
+  "Bob": {
+   "thesis": "c11",
+   "summary": "There is no such thing as implicit truth in fiction in addition to explicit truth, because sequels can create unreasonable contradictions."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "In 'A Study in Scarlet', the statement 'Holmes is a detective' appears explicitly, so <Holmes is a detective> is explicitly true in this novel.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Nowhere in 'A Study in Scarlet' is there any explicit statement about the number of Holmes's nostrils.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "It is common knowledge that Holmes is human within the work, and humans generally have two nostrils.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The proposition <Holmes has two nostrils> is implicitly true in 'A Study in Scarlet'.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "In fiction, there are propositions that are implicitly true in addition to explicit truth.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Propositions such as <The earth is round> and <All humans die> are implicitly true in 'A Study in Scarlet'.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Sequels to fictional works have the power to determine the truth of things not made explicit in the original work.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "If a sequel 'A Study in Red' explicitly states Holmes had three nostrils since birth, <Holmes has three nostrils> is true in 'A Study in Scarlet'.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "If <Holmes has two nostrils> is implicitly true in 'A Study in Scarlet', Holmes must have both two and three nostrils at the same time in 'A Study in Scarlet'.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Holmes having both two and three nostrils at the same time in 'A Study in Scarlet' is an unreasonable consequence.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "There is no such thing as implicit truth in fiction in addition to explicit truth.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Any proposition must be either true or false in a particular fiction.",
+   "source": "statement"
+  },
+  "c13": {
+   "text": "The proposition <Holmes has two nostrils> could be true in 'A Study in Scarlet' and later become false.",
+   "source": "statement"
+  },
+  "c14": {
+   "text": "The proposition <The earth is round> is true in 'A Study in Scarlet'.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c10",
+   "by": "Bob",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c7"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Bob",
+   "if": [
+    "c9",
+    "c10"
+   ],
+   "then": "c11",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c11"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "assumes",
+    "by": "Alice",
+    "claim": "c12"
+   },
+   "note": "Alice accepts common-sense implicit truths, but does not presuppose the principle of bivalence for every proposition in fiction."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "c13"
+   },
+   "note": "Bob argues that <Holmes has two nostrils> was never implicitly true to begin with, not that its truth value changes over time."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "c14",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "A sequel to 'A Study in Scarlet' contains an explicit statement that the earth is round.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "Bob",
+       "if": [
+        "c7",
+        "h1"
+       ],
+       "then": "c14",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "According to Bob, if a sequel explicitly states 'The earth is round', that proposition becomes true in the original work."
+  }
+ }
+}

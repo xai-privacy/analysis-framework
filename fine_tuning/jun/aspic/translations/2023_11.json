@@ -1,0 +1,277 @@
+{
+ "id": "2023_11",
+ "positions": {
+  "Viewpoint 1": {
+   "thesis": "c4",
+   "summary": "Taxation should be based on the economic community, so aggregated taxation should be imposed on the real estate holdings of companies in Group P."
+  },
+  "Viewpoint 2": {
+   "thesis": "c7",
+   "summary": "Imposing aggregate taxation only on registered groups creates unfairness between Group P and unregistered Group Q, so each company should be taxed individually."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Real estate holding tax rates: up to 500 million won is 0.5%, over 500 million up to 1 billion won is 1.5%, over 1 billion up to 2 billion won is 2.5%, over 2 billion won is 3.5%.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Alice and Bob belong to registered Group P, while Charlie and Diane belong to unregistered entity Q.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Under current tax law, real estate held by each company is taxed individually.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Aggregated taxation should be imposed on the real estate holdings of the companies within Group P.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Taxation should be carried out based on the unit of the economic community.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Companies within a single group registered in the corporate registry can be viewed as an economic community.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Each company should be taxed individually according to the current tax law, regardless of group registration status.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "If aggregate taxation is imposed only on registered groups, Group P ends up paying more taxes than Group Q despite both being economic communities, resulting in an unfair outcome.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Companies run by the Q family also have the characteristics of an economic community.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c5",
+   "by": [
+    "Viewpoint 1",
+    "Viewpoint 2"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": [
+    "Viewpoint 1",
+    "Viewpoint 2"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Viewpoint 2",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Viewpoint 2",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Viewpoint 1",
+   "if": [
+    "c5",
+    "c6"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Viewpoint 2",
+   "if": [
+    "c8"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c4",
+   "c7"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "status",
+    "claim": "ha2",
+    "is": [
+     "IN"
+    ],
+    "add": {
+     "claims": {
+      "ha1": {
+       "text": "The total real estate value of the companies in Group P does not exceed 500 million won.",
+       "source": "statement"
+      },
+      "ha2": {
+       "text": "The total tax amount for Group P will not differ whether taxation is according to Viewpoint 1 or Viewpoint 2.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "ha1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "ha1",
+        "c1"
+       ],
+       "then": "ha2",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "When total value <= 500 million won, both aggregate and individual taxation apply the 0.5% rate, so the total tax amount is identical and ha2 is IN."
+  },
+  "b": {
+   "check": {
+    "op": "status",
+    "claim": "hb2",
+    "is": [
+     "IN"
+    ],
+    "add": {
+     "claims": {
+      "hb1": {
+       "text": "The total real estate value of the companies in Group P exceeds 2 billion won.",
+       "source": "statement"
+      },
+      "hb2": {
+       "text": "There is no situation in which the total tax amount for Group P is the same under Viewpoint 1 and Viewpoint 2.",
+       "source": "statement"
+      },
+      "hb3": {
+       "text": "If each company in Group P owns real estate exceeding 2 billion won, both Viewpoint 1 and Viewpoint 2 apply the 3.5% tax rate, resulting in the same total tax amount.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hb1",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "hb3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "hb1"
+       ],
+       "then": "hb2",
+       "type": "defeasible",
+       "source": "statement"
+      }
+     ],
+     "contraries": [
+      [
+       "hb2",
+       "hb3"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "hb3",
+       "rule": "rb1"
+      }
+     ]
+    }
+   },
+   "note": "The naive inference rb1 concluding hb2 is undercut and rebutted by hb3, causing hb2 to be OUT rather than IN."
+  },
+  "c": {
+   "check": {
+    "op": "status",
+    "claim": "Viewpoint 2",
+    "is": [
+     "OUT"
+    ],
+    "add": {
+     "claims": {
+      "hc1": {
+       "text": "The tax law is revised to treat substantive economic entities like Q as groups registered in the corporate registry.",
+       "source": "statement"
+      },
+      "hc2": {
+       "text": "Unregistered economic communities like Q are also subject to aggregate taxation, eliminating the unfairness between P and Q.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hc1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "hc1",
+        "c9"
+       ],
+       "then": "hc2",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ],
+     "undercuts": [
+      {
+       "claim": "hc2",
+       "rule": "r2"
+      }
+     ]
+    }
+   },
+   "note": "Viewpoint 2's objection to aggregate taxation on P was its thesis c7 via rule r2 based on unfairness c8. Revising the law to treat Q as registered eliminates that unfairness (hc2), undercutting r2 so Viewpoint 2's thesis is OUT."
+  }
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "id": "2022_05",
+ "positions": {
+  "Alice": {
+   "thesis": "c4",
+   "summary": "Compensation should be given to Bob for the unlawful occupation of Island K eighty years ago, because under principle ⓐ Bob's standard of living was worsened by it."
+  },
+  "Bob": {
+   "thesis": "c6",
+   "summary": "Had the unlawful occupation not occurred Bob would not exist at all, so his standard of living was not worsened and cannot be determined under principle ⓐ."
+  },
+  "Charlie": {
+   "thesis": "c9",
+   "summary": "Bob must be compensated now because the state failed to compensate Alice after Bob was born, worsening Bob's standard of living."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Compensation should be given to the person affected by the wrongful act.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Principle ⓐ: To compensate person S for wrongful act X is to provide S with benefits such that S achieves the standard of living that they would have enjoyed had X not occurred; compensation should only occur when the victim's standard of living has been worsened, and only in such cases.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Had the unlawful occupation of Island K eighty years ago not occurred, Bob would have enjoyed a higher standard of living.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Compensation should be given to Bob for the unlawful occupation of Island K eighty years ago.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Had the unlawful occupation of Island K not occurred, Bob's father would not have met Bob's mother, and Bob would not have existed at all.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "It is incorrect to say Bob would have enjoyed a higher standard of living if the unlawful occupation hadn't happened, and there is no answer to what Bob's standard of living would have been.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "The wrongful act that gives rise to Bob's claim to compensation is the failure to compensate Alice after Bob was born, not the unlawful occupation eighty years ago.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "If compensation had been given to Alice for the occupation after Bob was born, Alice would have provided Bob with better opportunities and resources, and Bob would have had a better life.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Compensation should be given to Bob.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": [
+    "Alice",
+    "Charlie"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c4"
+   ],
+   "then": "c9",
+   "type": "strict",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Charlie",
+   "if": [
+    "c2",
+    "c7",
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c3",
+   "c6"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "status",
+    "claim": "Alice",
+    "is": [
+     "OUT"
+    ],
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Although Alice herself would have enjoyed a far higher standard of living had the unlawful occupation of Island K not occurred eighty years ago, Bob would, on the contrary, have enjoyed a lower standard of living.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Compensation should not be given to Bob for the unlawful occupation of Island K eighty years ago.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "c2",
+        "h1"
+       ],
+       "then": "h2",
+       "type": "strict",
+       "source": "statement"
+      }
+     ],
+     "contraries": [
+      [
+       "c4",
+       "h2"
+      ]
+     ]
+    }
+   },
+   "note": "Under principle ⓐ, compensation only occurs if the standard of living was worsened; if Bob's standard of living was lower without the occupation, then Bob should not be compensated (h2), which strictly rebuts Alice's conclusion (c4)."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "c4",
+    "add": {
+     "premises": [
+      {
+       "claim": "c2",
+       "by": "Bob",
+       "kind": "ordinary"
+      }
+     ]
+    }
+   },
+   "note": "Even if Bob accepts principle ⓐ (c2), he has no argument to conclude c4 because under ⓐ counterfactual non-existence prevents establishing that his standard of living was worsened."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "Charlie",
+       "claim": "c2"
+      }
+     },
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "c9"
+     },
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "c9"
+     }
+    ]
+   },
+   "note": "Charlie relies on principle ⓐ (c2) to infer that failing to compensate Alice worsened Bob's life, so Charlie holds c2; thus the first conjunct fails, making (c) false."
+  }
+ }
+}

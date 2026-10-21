@@ -2,53 +2,57 @@
  "id": "2023_26",
  "positions": {
   "A": {
-   "thesis": "c1",
-   "summary": "Survey the single polling station whose vote difference from the district total was smallest in the previous election."
+   "thesis": "c3",
+   "summary": "Method A selects the polling station whose previous election result was closest to the district total, assuming voting behavior remains similar."
   },
   "B": {
-   "thesis": "c2",
-   "summary": "Stratify polling stations with similar party results from the previous election and randomly sample stations from each stratum."
+   "thesis": "c6",
+   "summary": "Method B stratifies polling stations by party-specific results and samples from each stratum, assuming polling stations across the district are heterogeneous."
   },
   "C": {
-   "thesis": "c3",
-   "summary": "Travel to all polling stations in the district, surveying each station in proportion to its eligible voters."
+   "thesis": "c9",
+   "summary": "Method C visits all polling stations in sequence and samples in proportion to eligible voters, without pre-selecting polling stations."
   }
  },
  "claims": {
   "c1": {
-   "text": "Method A surveys the station with the smallest past vote difference to represent the district.",
+   "text": "In Method A, the previous election's overall district vote tally and individual polling station results are compared to select the station where the difference is smallest.",
    "source": "passage"
   },
   "c2": {
-   "text": "Method B stratifies polling stations by past party results and samples from each stratum.",
-   "source": "passage"
+   "text": "Voting behavior at a particular polling station will be similar to that in the previous election.",
+   "source": "rationale"
   },
   "c3": {
-   "text": "Method C visits all polling stations in sequence for a set time, sampling proportionally to eligible voters.",
+   "text": "Method A is applicable for predicting district election results by surveying the polling place of the station where the previous difference was smallest.",
    "source": "passage"
   },
   "c4": {
-   "text": "Method A assumes that voting patterns at the selected polling station remain stable and consistent with the previous election.",
-   "source": "rationale"
+   "text": "In Method B, polling stations with similar party-specific results in the previous election are grouped into strata, and stations are selected randomly from each stratum according to voter proportions.",
+   "source": "passage"
   },
   "c5": {
-   "text": "Method A is applicable.",
+   "text": "Polling stations within the same district are heterogeneous in terms of voters' political orientation, while stations within the same stratum are homogeneous.",
    "source": "rationale"
   },
   "c6": {
-   "text": "Method A is difficult to apply.",
-   "source": "statement"
+   "text": "Method B accurately predicts district election results by ensuring polling stations with diverse characteristics are evenly included in the sample.",
+   "source": "passage"
   },
   "c7": {
-   "text": "Method B assumes that polling stations across the district are heterogeneous in voter political orientation.",
-   "source": "rationale"
-  },
-  "c8": {
-   "text": "Method B assumes that polling stations within the same district are generally homogeneous in terms of voters' political orientation.",
+   "text": "Polling stations within the same district are generally homogeneous in terms of voters' political orientation.",
    "source": "statement"
   },
+  "c8": {
+   "text": "In Method C, surveyors travel to all polling stations in the district without pre-selecting stations, determining sample size in proportion to eligible voters.",
+   "source": "passage"
+  },
   "c9": {
-   "text": "Data from the previous election about vote counts per polling station is essential for Method C.",
+   "text": "Method C accurately predicts district election results by surveying voters at all polling stations across the district.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "In Method C, data from the previous election about vote counts per polling station is essential.",
    "source": "statement"
   }
  },
@@ -60,23 +64,23 @@
   },
   {
    "claim": "c2",
-   "by": "B",
-   "kind": "axiom"
-  },
-  {
-   "claim": "c3",
-   "by": "C",
-   "kind": "axiom"
-  },
-  {
-   "claim": "c4",
    "by": "A",
    "kind": "ordinary"
   },
   {
-   "claim": "c7",
+   "claim": "c4",
+   "by": "B",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c5",
    "by": "B",
    "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "C",
+   "kind": "axiom"
   }
  ],
  "rules": [
@@ -85,28 +89,45 @@
    "by": "A",
    "if": [
     "c1",
-    "c4"
+    "c2"
    ],
-   "then": "c5",
+   "then": "c3",
    "type": "defeasible",
-   "source": "rationale"
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "B",
+   "if": [
+    "c4",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "C",
+   "if": [
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
   }
  ],
  "contraries": [
   [
    "c5",
-   "c6"
-  ],
-  [
-   "c7",
-   "c8"
+   "c7"
   ]
  ],
  "statements": {
   "a": {
    "check": {
     "op": "status",
-    "claim": "c5",
+    "claim": "A",
     "is": [
      "OUT"
     ],
@@ -117,7 +138,7 @@
        "source": "statement"
       },
       "h2": {
-       "text": "Past election results no longer reflect current voting patterns for that station.",
+       "text": "Voting behavior at the polling station may differ considerably from that in the previous election.",
        "source": "rationale"
       }
      },
@@ -136,39 +157,35 @@
         "h1"
        ],
        "then": "h2",
-       "type": "defeasible",
-       "source": "rationale"
-      },
-      {
-       "id": "ra2",
-       "by": "*",
-       "if": [
-        "h2"
-       ],
-       "then": "c6",
        "type": "strict",
        "source": "rationale"
       }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c2"
+      ]
      ]
     }
    },
-   "note": "Significant demographic changes undermine the assumption of historical stability (c4), concluding c6 and putting c5 OUT."
+   "note": "Population change strictly implies divergent voting behavior (h2), which undermines A's ordinary premise c2, causing A's thesis status to drop to OUT."
   },
   "b": {
    "check": {
     "op": "assumes",
     "by": "B",
-    "claim": "c8"
+    "claim": "c7"
    },
-   "note": "Method B stratifies because polling stations are heterogeneous (c7); it does not assume they are homogeneous (c8)."
+   "note": "Method B assumes voter heterogeneity across the district (c5), not homogeneity (c7)."
   },
   "c": {
    "check": {
-    "op": "assumes",
+    "op": "holds",
     "by": "C",
-    "claim": "c9"
+    "claim": "c10"
    },
-   "note": "Method C visits all stations and only samples proportionally to current eligible voters, so prior election data is not assumed or needed."
+   "note": "Method C surveys all polling stations without pre-selection, so it neither assumes nor derives that previous vote count data is essential."
   }
  }
 }

@@ -1,0 +1,509 @@
+{
+ "model": "mlx-community/Llama-3.2-3B-Instruct-4bit",
+ "adapter": "adapters_aspic/0000160_adapters.safetensors",
+ "shots": 0,
+ "max_tokens": 2700,
+ "records": [
+  {
+   "id": "2022_08",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 2258 (char 2257)",
+   "question_ok": false,
+   "seconds": 26.7,
+   "output": "{\"positions\": {\"Alice\": {\"thesis\": \"c2\"}, \"Bob\": {\"thesis\": \"c3\"}, \"Charlie\": {\"thesis\": \"c6\"}}, \"claims\": {\"c1\": {\"text\": \"Anyone who commits an act of physical abuse by assaulting a child or causing harm to his or her physical health and development shall be punished by imprisonment for not more than 5 years.\"}, \"c2\": {\"text\": \"The child, as the person to be protected, should be excluded from being the subject of the act in Articles 2 and 3, and the subject should be limited to 'adults' who are the guardians.\"}, \"c3\": {\"text\": \"The subject of the acts in Articles 2 and 3 should be retained as 'anyone' as in the current regulation.\"}, \"c4\": {\"text\": \"In relation to sexual acts, child victims cannot be treated in the same way as adult victims who possess sexual self-determination.\"}, \"c5\": {\"text\": \"The phrase 'causing sexual humiliation' from Article 3 should be deleted.\"}, \"c6\": {\"text\": \"Children should not be the subjects of sexual acts or abuse, and only adults who are the guardians should be the subjects of such acts.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"*\", \"kind\": \"axiom\"}, {\"claim\": \"c3\", \"by\": \"*\", \"kind\": \"axiom\"}, {\"claim\": \"c4\", \"by\": \"*\", \"kind\": \"axiom\"}, {\"claim\": \"c5\", \"by\": \"*\", \"kind\": \"axiom\"}, {\"claim\": \"c6\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Alice\", \"if\": [\"c1\", \"c3\", \"c4\"], \"then\": \"c2\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Bob\", \"if\": [\"c3\", \"c5\"], \"then\": \"c3\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"Charlie\", \"if\": [\"c4\", \"c5\"], \"then\": \"c6\", \"type\": \"defeasible\"}], \"contraries\": [[\"c2\", \"c6\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"ha2\", \"add\": {\"claims\": {\"ha1\": {\"text\": \"Recently, more minors are entering social relationships in which one minor is the guardian or supervisor of another minor.\"}, \"ha2\": {\"text\": \"A significant number of perpetrators of child abuse were themselves victims of child abuse as children, so it is impossible to dichotomously distinguish between victims and perpetrators of child abuse.\"}}, \"premises\": [{\"claim\": \"ha1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"ha1\", \"c3\"], \"then\": \"ha2\", \"type\": \"defeasible\"}], \"contraries\": [[\"ha2\", \"ha1\"]]}}}, \"b\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Bob\", \"claim\": \"hb1\", \"add\": {\"claims\": {\"hb1\": {\"text\": \"A significant number of perpetrators of child abuse were themselves victims of child abuse as children, so it is impossible to dichotomously distinguish between victims and perpetrators of child abuse.\"}}, \"hb2\": {\"text\": \"The current regulation allows minors to be the subjects of abuse, which contradicts the principle of protecting children.\"}}, \"premises\": [{\"claim\": \"hb1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"hb1\", \"c3\"], \"then\": \"hb2\", \"type\": \"defeasible\"}], \"contraries\": [[\"hb2\", \"hb1\"]]}}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Charlie\", \"claim\": \"hc1\", \"add\": {\"claims\": {\"hc1\": {\"text\": \"Recently, cases where minors make sexual requests to other minors, involving the filming of videos, are increasing. Experiences of responding to such requests without any sense of shame or discomfort critically influence the later development of negative self-identity or distorted sexual awareness.\"}, \"hc2\": {\"text\": \"Punishing sexual requests between minors as acts of abuse does not prevent such requests from being made, and may even encourage their repetition.\"}}, \"premises\": [{\"claim\": \"hc1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"hc1\", \"c6\"], \"then\": \"hc2\", \"type\": \"defeasible\"}], \"contraries\": [[\"hc2\", \"hc1\"]]}}}}}"
+  },
+  {
+   "id": "2022_12",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 3,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 2433 (char 2432)",
+   "question_ok": false,
+   "seconds": 29.1,
+   "output": "{\"positions\": {\"Alice\": {\"thesis\": \"c2\"}, \"Bob\": {\"thesis\": \"c5\"}, \"Charlie\": {\"thesis\": \"c10\"}}, \"claims\": {\"c1\": {\"text\": \"Country X's Criminal Act punishes those who steal another person's property as the crime of theft.\"}, \"c2\": {\"text\": \"Under the Criminal Act, property is irrelevant to whether the ownership and transfer of the object are lawful.\"}, \"c3\": {\"text\": \"Economic value refers to pure economic value, that is, monetary value.\"}, \"c4\": {\"text\": \"Property does not necessarily have to be lawfully owned or lawfully traded.\"}, \"c5\": {\"text\": \"As long as the owner's intention to possess is expressed—regardless of whether there is any monetary exchange value—such an object should be seen as property under the Criminal Act.\"}, \"c6\": {\"text\": \"For property to be recognized under the Criminal Act, it must have monetary exchange value.\"}, \"c7\": {\"text\": \"Lawful ownership and lawful transfer are necessary conditions for something to be property under the Criminal Act.\"}, \"c8\": {\"text\": \"Narcotics illegally owned by a drug dealer are not property under the Criminal Act.\"}, \"c9\": {\"text\": \"A fan letter cherished by a celebrity but not subject to transaction is not property under the Criminal Act.\"}, \"c10\": {\"text\": \"A fan letter cherished by a celebrity but not subject to transaction is property under the Criminal Act.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"*\", \"kind\": \"axiom\"}, {\"claim\": \"c3\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"Charlie\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Charlie\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Alice\", \"if\": [\"c3\"], \"then\": \"c2\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Bob\", \"if\": [\"c5\"], \"then\": \"c1\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"Charlie\", \"if\": [\"c6\", \"c7\"], \"then\": \"c8\", \"type\": \"defeasible\"}, {\"id\": \"r4\", \"by\": \"Charlie\", \"if\": [\"c8\"], \"then\": \"c9\", \"type\": \"defeasible\"}], \"contraries\": [[\"c8\", \"c10\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"ha2\", \"add\": {\"claims\": {\"ha1\": {\"text\": \"A drug dealer illegally owns narcotics.\"}, \"ha2\": {\"text\": \"The narcotics are not property under the Criminal Act.\"}}, \"premises\": [{\"claim\": \"ha1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"ha1\"], \"then\": \"ha2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"ha2\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Bob\", \"claim\": \"hb1\", \"add\": {\"claims\": {\"hb1\": {\"text\": \"Both the narcotics illegally owned by a drug dealer and a fan letter cherished by a celebrity but not subject to transaction are property under the Criminal Act.\"}, \"hb2\": {\"text\": \"The narcotics illegally owned by a drug dealer are not property under the Criminal Act.\"}, \"hb3\": {\"text\": \"A fan letter cherished by a celebrity but not subject to transaction is not property under the Criminal Act.\"}}, \"premises\": [{\"claim\": \"hb1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"hb1\"], \"then\": \"hb2\", \"type\": \"defeasible\"}, {\"id\": \"rb2\", \"by\": \"*\", \"if\": [\"hb2\"], \"then\": \"hb3\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"hb3\", \"rule\": \"rb1\"}], \"contraries\": [[\"hb2\", \"hb3\"]]}}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Charlie\", \"claim\": \"hc1\", \"add\": {\"claims\": {\"hc1\": {\"text\": \"A fan letter cherished by a celebrity but not subject to transaction is property under the Criminal Act.\"}, \"hc2\": {\"text\": \"Narcotics illegally owned by a drug dealer are not property under the Criminal Act.\"}}, \"hc3\": {\"text\": \"The ownership and transfer of the narcotics are not lawful.\"}}, \"premises\": [{\"claim\": \"hc2\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"hc2\"], \"then\": \"hc3\", \"type\": \"defeasible\"}, {\"id\": \"rc2\", \"by\": \"*\", \"if\": [\"hc3\"], \"then\": \"hc1\", \"type\": \"defeasible\"}]}}}}}"
+  },
+  {
+   "id": "2022_22",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 4,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 2689 (char 2688)",
+   "question_ok": false,
+   "seconds": 28.4,
+   "output": "{\"positions\": {\"Alice\": {\"thesis\": \"c2\"}, \"Bob\": {\"thesis\": \"c5\"}}, \"claims\": {\"c1\": {\"text\": \"Sentences containing taste predicates, such as 'delicious' or 'fun,' are called taste predicates.\"}, \"c2\": {\"text\": \"Gopchang is delicious.\"}, \"c3\": {\"text\": \"If Jiwoo, who finds gopchang delicious, says 'Gopchang is delicious,' Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\"}, \"c4\": {\"text\": \"If Youngho, who does not like gopchang, says the same sentence, Youngho's statement expresses the different proposition <Gopchang is delicious to Youngho>, which becomes a false assertion.\"}, \"c5\": {\"text\": \"When Jiwoo says 'Gopchang is delicious,' Youngho can respond by saying 'No, gopchang is not delicious!' and then the two would start to argue about it.\"}, \"c6\": {\"text\": \"If Alice's view is correct, then Jiwoo merely expresses the proposition <Gopchang is delicious to Jiwoo> and Youngho is expressing the denial of a different proposition, so they are not really engaging in a genuine dispute.\"}, \"c7\": {\"text\": \"In such situations, the two can have a real argument, which shows there is a serious problem with Alice's view.\"}, \"c8\": {\"text\": \"To resolve this, we should take the sentence 'Gopchang is delicious' to express the proposition <Gopchang is delicious>, regardless of who says it.\"}, \"c9\": {\"text\": \"Disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Bob\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Alice\", \"if\": [\"c3\", \"c4\"], \"then\": \"c8\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Bob\", \"if\": [\"c5\", \"c6\", \"c7\"], \"then\": \"c9\", \"type\": \"defeasible\"}], \"contraries\": [[\"c1\", \"c8\"], [\"c8\", \"c9\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"h2\", \"add\": {\"claims\": {\"h1\": {\"text\": \"People who enjoy gopchang all express the same proposition, but this proposition is different from the one expressed by statements 'Gopchang is delicious' made by people who do not enjoy gopchang.\"}, \"h2\": {\"text\": \"A proposition is not a genuine dispute if its truth value is not disputed by the other party.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h2\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"h4\", \"add\": {\"claims\": {\"h3\": {\"text\": \"If Youngho dislikes gopchang, then according to Alice, Youngho's statement 'Gopchang is delicious' cannot be true, but according to Bob, it can be true.\"}, \"h4\": {\"text\": \"Disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"contraries\": [[\"h4\", \"c9\"]]}}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Bob\", \"claim\": \"c9\", \"add\": {\"claims\": {\"h5\": {\"text\": \"Disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute.\"}, \"h6\": {\"text\": \"The debate between Alice and Bob is not a genuine dispute.\"}}, \"premises\": [{\"claim\": \"h5\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}], \"contraries\": [[\"h6\", \"c9\"]]}}}}}"
+  },
+  {
+   "id": "2022_36",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "2": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "3": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "4": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "5": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Extra data: line 1 column 4253 (char 4252)",
+   "question_ok": false,
+   "seconds": 40.0,
+   "output": "{\"positions\": {\"ⓐ\": {\"thesis\": \"c2\"}, \"ⓑ\": {\"thesis\": \"c3\"}, \"ⓒ\": {\"thesis\": \"c4\"}, \"ⓓ\": {\"thesis\": \"c5\"}, \"ⓔ\": {\"thesis\": \"c6\"}, \"ⓕ\": {\"thesis\": \"c7\"}, \"ⓖ\": {\"thesis\": \"c8\"}, \"ⓗ\": {\"thesis\": \"c9\"}}, \"claims\": {\"c1\": {\"text\": \"People often treat robots as if they were human.\"}, \"c2\": {\"text\": \"There are differences between East and West in such phenomena, and these differences appear to be the result of evolution through culture or cultural factors.\"}, \"c3\": {\"text\": \"When shown an Aibo robot dog, Korean participants were more likely than Western participants to answer that people and robots could become friends.\"}, \"c4\": {\"text\": \"When shown a scene of a child trying to break Aibo's tail, Korean participants gave a much more positive response than their Western counterparts.\"}, \"c5\": {\"text\": \"The phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners.\"}, \"c6\": {\"text\": \"According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself.\"}, \"c7\": {\"text\": \"According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject.\"}, \"c8\": {\"text\": \"People can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo.\"}, \"c9\": {\"text\": \"Cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"ⓔ\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"ⓔ\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"ⓖ\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"ⓖ\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"ⓐ\", \"if\": [\"c1\", \"c3\", \"c4\", \"c5\"], \"then\": \"c2\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"ⓐ\", \"if\": [\"c2\", \"c5\"], \"then\": \"c3\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"ⓐ\", \"if\": [\"c3\", \"c6\", \"c7\"], \"then\": \"c8\", \"type\": \"defeasible\"}, {\"id\": \"r4\", \"by\": \"ⓐ\", \"if\": [\"c8\"], \"then\": \"c9\", \"type\": \"defeasible\"}, {\"id\": \"r5\", \"by\": \"ⓐ\", \"if\": [\"c9\"], \"then\": \"c10\", \"type\": \"defeasible\"}, {\"id\": \"r6\", \"by\": \"ⓐ\", \"if\": [\"c10\"], \"then\": \"h1\", \"type\": \"defeasible\"}, {\"id\": \"h1\", \"by\": \"ⓐ\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}, {\"id\": \"h2\", \"by\": \"ⓐ\", \"if\": [\"h2\"], \"then\": \"h3\", \"type\": \"defeasible\"}, {\"id\": \"h3\", \"by\": \"ⓐ\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}, {\"id\": \"h4\", \"by\": \"ⓐ\", \"if\": [\"h4\"], \"then\": \"h5\", \"type\": \"defeasible\"}, {\"id\": \"h5\", \"by\": \"ⓐ\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}, {\"id\": \"h6\", \"by\": \"ⓐ\", \"if\": [\"h6\"], \"then\": \"h7\", \"type\": \"defeasible\"}, {\"id\": \"h7\", \"by\": \"ⓐ\", \"if\": [\"h7\"], \"then\": \"h8\", \"type\": \"defeasible\"}, {\"id\": \"h8\", \"by\": \"ⓐ\", \"if\": [\"h8\"], \"then\": \"h9\", \"type\": \"defeasible\"}, {\"id\": \"h9\", \"by\": \"ⓐ\", \"if\": [\"h9\"], \"then\": \"h10\", \"type\": \"defeasible\"}, {\"id\": \"h10\", \"by\": \"ⓐ\", \"if\": [\"h10\"], \"then\": \"h11\", \"type\": \"defeasible\"}], \"contraries\": [[\"h1\", \"h2\"], [\"h2\", \"h3\"], [\"h3\", \"h4\"], [\"h4\", \"h5\"], [\"h5\", \"h6\"], [\"h6\", \"h7\"], [\"h7\", \"h8\"], [\"h8\", \"h9\"], [\"h9\", \"h10\"]], \"undercuts\": [{\"claim\": \"h1\", \"rule\": \"r1\"}], \"statements\": {\"1\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h1\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h2\"}]}}, \"2\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h3\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h4\"}]}}, \"3\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h5\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h6\"}]}}, \"4\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h7\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h8\"}]}}, \"5\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h9\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h10\"}]}}, \"6\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"h11\"}]}}}}}"
+  },
+  {
+   "id": "2022_39",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "invalid translation: unknown position 'American researchers' in premise c1",
+   "question_ok": false,
+   "seconds": 29.9,
+   "output": "{\"positions\": {\"ⓐ\": {\"thesis\": \"c2\"}}, \"claims\": {\"c1\": {\"text\": \"A surgical procedure, which creates a bypass from the stomach directly to the small intestine, results in weight loss and improved blood sugar control.\"}, \"c2\": {\"text\": \"Incretin is a substance secreted by the small intestine when food is consumed, which signals the pancreas to secrete insulin.\"}, \"c3\": {\"text\": \"When incretin is properly secreted after a meal, blood sugar is well regulated by insulin.\"}, \"c4\": {\"text\": \"Rubino proposed that the improvement in blood sugar regulation after bariatric surgery is due to the existence of an 'anti-incretin' that interferes with the effect of incretin.\"}, \"c5\": {\"text\": \"Ingested food passes sequentially through three parts of the small intestine—the duodenum, jejunum, and ileum, before entering the large intestine.\"}, \"c6\": {\"text\": \"When food enters the duodenum, it is secreted into the jejunum, where it is further broken down and absorbed.\"}, \"c7\": {\"text\": \"Bypassing the duodenum may be effective in treating diabetes.\"}, \"c8\": {\"text\": \"Rubino's bariatric surgery that connected the stomach directly to the jejunum resulted in improved blood sugar without reduced body weight or food intake.\"}, \"c9\": {\"text\": \"The duodenum plays a crucial role in regulating blood sugar levels.\"}, \"c10\": {\"text\": \"Bypassing the duodenum disrupts the normal regulation of blood sugar levels.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"American researchers\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"Rubino\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"ⓐ\", \"if\": [\"c1\", \"c3\", \"c5\", \"c8\"], \"then\": \"c2\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"ⓐ\", \"if\": [\"c2\", \"c9\"], \"then\": \"c4\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"ⓐ\", \"if\": [\"c4\"], \"then\": \"c6\", \"type\": \"defeasible\"}, {\"id\": \"r4\", \"by\": \"ⓐ\", \"if\": [\"c6\"], \"then\": \"c7\", \"type\": \"defeasible\"}, {\"id\": \"r5\", \"by\": \"ⓐ\", \"if\": [\"c7\"], \"then\": \"c10\", \"type\": \"defeasible\"}], \"contraries\": [[\"c6\", \"c10\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"strengthens\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h1\": {\"text\": \"A substance secreted in the duodenum decreases insulin secretion induced by incretin.\"}, \"h2\": {\"text\": \"The duodenum plays a crucial role in regulating blood sugar levels.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h2\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"strengthens\", \"claim\": \"c8\", \"add\": {\"claims\": {\"h3\": {\"text\": \"A surgery where the stomach is removed and the esophagus is directly connected to the duodenum results in improved blood sugar.\"}, \"h4\": {\"text\": \"Bypassing the duodenum is an effective treatment for diabetes.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"contraries\": [[\"h4\", \"c10\"]]}}}, \"c\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c10\", \"add\": {\"claims\": {\"h5\": {\"text\": \"After Rubino's bariatric surgery, a second surgery is performed so that food passing into the jejunum is rerouted back to the duodenum, and the effect of blood sugar improvement disappears.\"}, \"h6\": {\"text\": \"Bypassing the jejunum is not an effective treatment for diabetes.\"}}, \"premises\": [{\"claim\": \"h5\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}], \"contraries\": [[\"h6\", \"c7\"]]}}}}}"
+  },
+  {
+   "id": "2023_20",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 3,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 2457 (char 2456)",
+   "question_ok": false,
+   "seconds": 30.9,
+   "output": "{\"positions\": {\"Alice\": {\"thesis\": \"c5\"}, \"Bob\": {\"thesis\": \"c8\"}}, \"claims\": {\"c1\": {\"text\": \"A lie is a statement made with the intention of making the other person believe a falsehood as if it were true.\"}, \"c2\": {\"text\": \"A misleading statement is a statement that is true but easily misunderstood by the listener.\"}, \"c3\": {\"text\": \"A misleading statement should not be morally less blameworthy just because it is true, compared to a lie.\"}, \"c4\": {\"text\": \"A lie can be made without the intention to deceive the other person.\"}, \"c5\": {\"text\": \"In both cases, A intends to make the listener believe that A is not a murderer.\"}, \"c6\": {\"text\": \"Both misleading statements and lies are equally wrong.\"}, \"c7\": {\"text\": \"Misleading statements are always wrong because they are intended to deceive the listener despite being true.\"}, \"c8\": {\"text\": \"Lies are not always wrong because the mere fact that what someone says turns out to be false is itself morally blameworthy.\"}, \"c9\": {\"text\": \"Scientists should not be said to be doing something wrong simply because some of their predictions later turn out to be false.\"}, \"c10\": {\"text\": \"If the scientist sincerely said something at the time, they cannot be morally blamed simply because it turns out to be false later.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c2\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"Bob\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Alice\", \"if\": [\"c1\"], \"then\": \"c3\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Alice\", \"if\": [\"c3\", \"c4\"], \"then\": \"c5\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"Bob\", \"if\": [\"c5\", \"c6\"], \"then\": \"c7\", \"type\": \"defeasible\"}, {\"id\": \"r4\", \"by\": \"Bob\", \"if\": [\"c7\", \"c8\"], \"then\": \"c10\", \"type\": \"defeasible\"}], \"contraries\": [[\"c3\", \"c8\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"ha2\", \"add\": {\"claims\": {\"ha1\": {\"text\": \"A lie is a statement made with the intention of making the other person believe a falsehood as if it were true.\"}, \"ha2\": {\"text\": \"A lie can be made without the intention to deceive the other person.\"}}, \"premises\": [{\"claim\": \"ha1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"ha1\"], \"then\": \"ha2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"ha2\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"hb1\", \"add\": {\"claims\": {\"hb1\": {\"text\": \"A misleading statement is a statement that is true but easily misunderstood by the listener.\"}, \"hb2\": {\"text\": \"A misleading statement should not be morally less blameworthy just because it is true, compared to a lie.\"}}, \"premises\": [{\"claim\": \"hb1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"hb1\"], \"then\": \"hb2\", \"type\": \"defeasible\"}], \"contraries\": [[\"hb2\", \"c3\"]], \"undercuts\": [{\"claim\": \"hb2\", \"rule\": \"rb1\"}]}}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"hc1\", \"add\": {\"claims\": {\"hc1\": {\"text\": \"Misleading statements and lies differ in their degree of moral wrongness.\"}}, \"premises\": [{\"claim\": \"hc1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"hc1\"], \"then\": \"hc2\", \"type\": \"defeasible\"}], \"contraries\": [[\"hc2\", \"c6\"]]}}}, \"d\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Bob\", \"claim\": \"hd1\", \"add\": {\"claims\": {\"hd1\": {\"text\": \"Misleading statements and lies differ in their degree of moral wrongness.\"}, \"hd2\": {\"text\": \"Both misleading statements and lies are equally wrong.\"}}, \"premises\": [{\"claim\": \"hd1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rd1\", \"by\": \"*\", \"if\": [\"hd1\"], \"then\": \"hd2\", \"type\": \"defeasible\"}], \"contraries\": [[\"hd2\", \"c6\"]]}}}}}"
+  },
+  {
+   "id": "2024_05",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 3,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "2": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "3": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "4": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "5": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 2885 (char 2884)",
+   "question_ok": false,
+   "seconds": 30.2,
+   "output": "{\"positions\": {\"A\": {\"thesis\": \"c1\"}, \"B\": {\"thesis\": \"c4\"}, \"C\": {\"thesis\": \"c7\"}}, \"claims\": {\"c1\": {\"text\": \"A contract is established by the autonomous agreement of the parties.\"}, \"c2\": {\"text\": \"The intention of the parties is inherently worthy of respect.\"}, \"c3\": {\"text\": \"The originally intended will should be respected over what was expressed.\"}, \"c4\": {\"text\": \"Autonomy should be protected by focusing on the utility it brings to the parties.\"}, \"c5\": {\"text\": \"A restriction on autonomy is justified if the absolute value of the cost to the parties caused by restricting autonomy is less than the absolute value of the utility gained by the parties.\"}, \"c6\": {\"text\": \"The mere fact that restriction of autonomy increases the utility of a third party (including the State or society) does not justify restricting autonomy.\"}, \"c7\": {\"text\": \"Autonomy should be protected by focusing on the utility it brings to society as a whole.\"}, \"c8\": {\"text\": \"If the absolute value of the cost to the parties caused by restricting autonomy is greater than the absolute value of the utility to the parties, restriction of autonomy is only permissible if the State compensates the parties, etc.\"}, \"c9\": {\"text\": \"To the extent of such compensation, the utility of the parties is considered to have increased.\"}, \"c10\": {\"text\": \"The sum of the cost and utility to the parties is always positive.\"}, \"c11\": {\"text\": \"The sum of the cost and utility to the parties can be negative.\"}, \"c12\": {\"text\": \"The parties' autonomy cannot be restricted.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c2\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"B\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"B\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"B\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"C\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"C\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"C\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"A\", \"if\": [\"c2\", \"c3\"], \"then\": \"c4\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"B\", \"if\": [\"c4\", \"c5\", \"c6\"], \"then\": \"c7\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"C\", \"if\": [\"c7\", \"c8\", \"c9\"], \"then\": \"c10\", \"type\": \"defeasible\"}, {\"id\": \"r4\", \"by\": \"C\", \"if\": [\"c10\"], \"then\": \"c12\", \"type\": \"defeasible\"}], \"contraries\": [[\"c1\", \"c11\"], [\"c4\", \"c12\"], [\"c7\", \"c12\"]], \"statements\": {\"1\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"A\", \"claim\": \"h2\", \"add\": {\"claims\": {\"h1\": {\"text\": \"One party unintentionally expresses intention ⓑ instead of the intended will ⓐ and the other party recognizes ⓑ as the intention.\"}, \"h2\": {\"text\": \"The originally intended will ⓐ should be respected.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"A\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}]}}}, \"2\": {\"check\": {\"op\": \"holds\", \"by\": \"B\", \"claim\": \"h5\", \"add\": {\"claims\": {\"h3\": {\"text\": \"When restricting the parties' autonomy is justified, the sum of the cost and utility to the parties is always positive.\"}, \"h4\": {\"text\": \"The sum of the cost and utility to the parties is not always positive.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"B\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h4\", \"rule\": \"rb1\"}]}}}, \"3\": {\"check\": {\"op\": \"holds\", \"by\": \"C\", \"claim\": \"h9\", \"add\": {\"claims\": {\"h6\": {\"text\": \"When restricting the parties' autonomy, there are cases where the sum of the cost and utility to the parties is negative.\"}, \"h7\": {\"text\": \"The parties' autonomy cannot be restricted.\"}}, \"premises\": [{\"claim\": \"h6\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"C\", \"if\": [\"h6\"], \"then\": \"h7\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h7\", \"rule\": \"rc1\"}]}}}}}"
+  },
+  {
+   "id": "2024_14",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "2": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "3": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "4": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "5": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "invalid translation: duplicate rule id r1",
+   "question_ok": false,
+   "seconds": 34.6,
+   "output": "{\"positions\": {\"A\": {\"thesis\": \"c2\"}}, \"claims\": {\"c1\": {\"text\": \"In public opinion formation, personal beliefs or emotions wield greater influence than the truth.\"}, \"c2\": {\"text\": \"Even in cases where the speaker is not responsible, responsibility does not always lie with the speaker.\"}, \"c3\": {\"text\": \"Alice's claim that there were many people gathered in the plaza is not blameworthy, it is merely a cognitive error.\"}, \"c4\": {\"text\": \"What is crucial for assigning responsibility is not a permissible level of negligence or cognitive error, but rather an active attitude of intentionally avoiding or refusing to acquire information.\"}, \"c5\": {\"text\": \"Someone who intentionally refuses even a very simple verification process and spreads fake news warrants responsibility.\"}, \"c6\": {\"text\": \"If an act that is not, in itself, subject to blame is not cognitive error, then ⓐ is weakened.\"}, \"c7\": {\"text\": \"If it is not always the case that responsibility is assigned to someone who believes in and spreads fake news, then ⓐ is weakened.\"}, \"c8\": {\"text\": \"If there are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame, then ⓐ is weakened.\"}, \"c9\": {\"text\": \"All false assertions made under normal observation conditions always stem from an active avoidance attitude.\"}, \"c10\": {\"text\": \"In situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"A\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"A\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"A\", \"if\": [\"c3\", \"c4\", \"c5\"], \"then\": \"c6\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"A\", \"if\": [\"c1\", \"c7\", \"c8\"], \"then\": \"c2\", \"type\": \"defeasible\"}], \"contraries\": [], \"statements\": {\"1\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c6\", \"add\": {\"claims\": {\"h1\": {\"text\": \"An act that is not, in itself, subject to blame is not cognitive error.\"}, \"h2\": {\"text\": \"Cognitive error is not an act that is subject to blame.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h2\", \"rule\": \"r1\"}]}}}, \"2\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h3\": {\"text\": \"It is not always the case that responsibility is assigned to someone who believes in and spreads fake news.\"}, \"h4\": {\"text\": \"Responsibility is not assigned to someone who believes in and spreads fake news.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r3\", \"by\": \"*\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h4\", \"rule\": \"r3\"}]}}}, \"3\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h5\": {\"text\": \"There are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame.\"}, \"h6\": {\"text\": \"Responsibility is not assigned to the agent of an act that is not, in itself, subject to blame.\"}}, \"premises\": [{\"claim\": \"h5\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r4\", \"by\": \"*\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h6\", \"rule\": \"r4\"}]}}}, \"4\": {\"check\": {\"op\": \"strengthens\", \"claim\": \"c10\", \"add\": {\"claims\": {\"h7\": {\"text\": \"All false assertions made under normal observation conditions always stem from an active avoidance attitude.\"}, \"h8\": {\"text\": \"A statement that is the result of an active avoidance attitude is a false assertion.\"}, \"h9\": {\"text\": \"If someone intentionally refuses even a very simple verification process and spreads fake news, they warrant responsibility.\"}}, \"premises\": [{\"claim\": \"h7\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r5\", \"by\": \"*\", \"if\": [\"h7\"], \"then\": \"h8\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h9\", \"rule\": \"r5\"}]}}}, \"5\": {\"check\": {\"op\": \"strengthens\", \"claim\": \"c10\", \"add\": {\"claims\": {\"h10\": {\"text\": \"In situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur.\"}, \"h11\": {\"text\": \"If it is impossible to check the truth, an act that is merely a cognitive error cannot occur.\"}}, \"premises\": [{\"claim\": \"h10\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r6\", \"by\": \"*\", \"if\": [\"h10\"], \"then\": \"h11\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h11\", \"rule\": \"r6\"}]}}}}}"
+  },
+  {
+   "id": "2024_17",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "invalid translation: unknown claim 'beauty.is_harmonious_totality' in a check",
+   "question_ok": false,
+   "seconds": 25.1,
+   "output": "{\"positions\": {\"ⓐ\": {\"thesis\": \"c1\"}, \"ⓒ\": {\"thesis\": \"c2\"}}, \"claims\": {\"c1\": {\"text\": \"Goodness has two dimensions: primary and secondary.\"}, \"c2\": {\"text\": \"Goodness is not what constitutes 'being,' but rather accompanies 'being'.\"}, \"c3\": {\"text\": \"A being lacks being if it lacks primary goodness, and it remains that being.\"}, \"c4\": {\"text\": \"If a human lacks humanity, it is no longer human.\"}, \"c5\": {\"text\": \"If a human exists as a human, regardless of physical abilities or virtues, the assertion that someone is 'more human' than others does not stand.\"}, \"c6\": {\"text\": \"Health is secondary goodness, not primary goodness, because even a sick person is still human.\"}, \"c7\": {\"text\": \"Health itself is a good property for humans.\"}, \"c8\": {\"text\": \"It is not the particular property itself that is good, but the overall goodness possessed by the being.\"}, \"c9\": {\"text\": \"When a being possesses a good property, it is because that property belongs to the being.\"}, \"c10\": {\"text\": \"When a being is delicious, it is because its various properties are well-harmonized, and it is difficult to claim that just one element is delicious.\"}, \"c11\": {\"text\": \"A being is not delicious because of a single pleasing quality, but because of the harmonious totality of its properties.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c10\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"ⓐ\", \"if\": [\"c3\", \"c4\", \"c6\", \"c7\"], \"then\": \"c5\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"ⓐ\", \"if\": [\"c5\", \"c8\", \"c9\"], \"then\": \"c10\", \"type\": \"defeasible\"}], \"contraries\": [[\"c1\", \"c2\"], [\"c2\", \"c3\"], [\"c2\", \"c4\"], [\"c2\", \"c6\"], [\"c2\", \"c8\"], [\"c2\", \"c10\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c1\"}, {\"op\": \"assumes\", \"by\": \"ⓐ\", \"claim\": \"c2\"}]}}, \"b\": {\"check\": {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"beauty.is_harmonious_totality\"}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c1\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c2\"}]}}, \"d\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c1\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c2\"}]}}, \"e\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c1\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c2\"}]}}, \"f\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c1\"}, {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c2\"}]}}}}"
+  },
+  {
+   "id": "2024_20",
+   "parsed": true,
+   "valid": true,
+   "pred": 2,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": false,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": true,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "question_ok": false,
+   "seconds": 23.1,
+   "output": "{\"positions\": {\"Alice\": {\"thesis\": \"c1\"}, \"Bob\": {\"thesis\": \"c5\"}}, \"claims\": {\"c1\": {\"text\": \"Humans interact with the world based on perception.\"}, \"c2\": {\"text\": \"Perception is determined only by the information delivered to the retina.\"}, \"c3\": {\"text\": \"If the retina only receives red and green signals, a brownish-yellow surface will be perceived as neutral yellow, and a greenish-yellow surface as neutral yellow.\"}, \"c4\": {\"text\": \"It is difficult to tell the difference between an unripe and a ripe banana.\"}, \"c5\": {\"text\": \"It is not necessary to know precisely at every moment whether a banana is unripe or fully ripe.\"}, \"c6\": {\"text\": \"There are more yellow bananas within our range of action.\"}, \"c7\": {\"text\": \"Supermarket shelves are full of yellow bananas.\"}, \"c8\": {\"text\": \"If you eat based on the perception of yellow, you'll end up eating ripe bananas.\"}, \"c9\": {\"text\": \"We don't need to know precisely at every moment whether it is unripe or fully ripe.\"}, \"c10\": {\"text\": \"We can distinguish between accurate representation and misrepresentation.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c2\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c9\", \"by\": \"Bob\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Alice\", \"if\": [\"c1\", \"c2\", \"c3\"], \"then\": \"c4\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Bob\", \"if\": [\"c4\", \"c5\", \"c6\", \"c7\"], \"then\": \"c8\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"Bob\", \"if\": [\"c8\"], \"then\": \"c10\", \"type\": \"defeasible\"}], \"contraries\": [[\"c4\", \"c10\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"weakens\", \"claim\": \"Alice\", \"add\": {\"claims\": {\"h1\": {\"text\": \"The perceiver can know which of the multiple objects producing the same perception most likely corresponds accurately to that perception.\"}, \"h2\": {\"text\": \"The perceiver cannot know which of the multiple objects producing the same perception most likely corresponds accurately to that perception.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h2\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"weakens\", \"claim\": \"Bob\", \"add\": {\"claims\": {\"h3\": {\"text\": \"Two circles of different sizes can be perceived as the same size depending on the size of the circles surrounding each.\"}, \"h4\": {\"text\": \"Two circles of different sizes cannot be perceived as the same size depending on the size of the circles surrounding each.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"h3\", \"c2\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"contraries\": [[\"h4\", \"c5\"]], \"undercuts\": [{\"claim\": \"c5\", \"rule\": \"rb1\"}]}}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Bob\", \"claim\": \"c10\"}, {\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"c10\"}]}}}}"
+  },
+  {
+   "id": "2024_27",
+   "parsed": true,
+   "valid": true,
+   "pred": 3,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": true,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": true,
+     "pred": false,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": true,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "question_ok": false,
+   "seconds": 24.4,
+   "output": "{\"positions\": {\"Hypothesis\": {\"thesis\": \"c2\"}}, \"claims\": {\"c1\": {\"text\": \"Jurors hesitate in returning a guilty verdict or a verdict in favor of the plaintiff.\"}, \"c2\": {\"text\": \"Even if evidence that does not explicitly present who is responsible is considered valid, its value as information is evaluated as low, and such information has less influence on the verdicts of jurors.\"}, \"c3\": {\"text\": \"There is a psychological difference for jurors between testimony such as 'There is an 80% probability that the defendant is responsible' and 'Based on evidence that has an 80% probability of being correct, the defendant is responsible'.\"}, \"c4\": {\"text\": \"In order to test the hypothesis, an experiment was conducted where mock jurors were presented with case summaries and asked to indicate the probability that B's bus hit the dog and to render a verdict on B.\"}, \"c5\": {\"text\": \"Group 1 was presented only with Investigator's Testimony X, while Group 2 was given both Testimonies X and Y.\"}, \"c6\": {\"text\": \"The value for 'subjective probability'—the probability the mock jurors believed B was responsible—was the same for both groups, and the 'plaintiff verdict rate'—the proportion of mock jurors in each group who concluded that B was responsible—was lower than the subjective probability in both groups.\"}, \"c7\": {\"text\": \"When additional testimony from a witness who saw a gray bus hitting Alice's dog was presented to both groups, the plaintiff verdict rate in Group 2 decreases significantly more than in Group 1.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Hypothesis\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"Hypothesis\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Hypothesis\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"Hypothesis\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"Hypothesis\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Hypothesis\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Hypothesis\", \"if\": [\"c1\", \"c3\", \"c4\", \"c5\", \"c6\", \"c7\"], \"then\": \"c2\", \"type\": \"defeasible\"}], \"contraries\": [], \"statements\": {\"a\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h1\": {\"text\": \"The plaintiff verdict rate in Group 1 is significantly lower than that in Group 2.\"}, \"h2\": {\"text\": \"There is a significant difference in the plaintiff verdict rate between Group 1 and Group 2.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"contraries\": [[\"h2\", \"c2\"]]}}}, \"b\": {\"check\": {\"op\": \"strengthens\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h3\": {\"text\": \"The difference between subjective probability and plaintiff verdict rate is significantly greater in Group 1 than in Group 2.\"}, \"h4\": {\"text\": \"There is a significant difference in the subjective probability and plaintiff verdict rate between Group 1 and Group 2.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"contraries\": [[\"h4\", \"c2\"]]}}}, \"c\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h5\": {\"text\": \"When additional testimony from a witness who saw a gray bus hitting Alice's dog was presented to both groups, the plaintiff verdict rate in Group 2 decreases significantly more than in Group 1.\"}, \"h6\": {\"text\": \"There is a significant difference in the plaintiff verdict rate between Group 2 and Group 1.\"}}, \"premises\": [{\"claim\": \"h5\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}], \"contraries\": [[\"h6\", \"c2\"]]}}}}}"
+  },
+  {
+   "id": "2025_02",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "question_ok": true,
+   "seconds": 21.8,
+   "output": "{\"positions\": {\"Opinion\": {\"thesis\": \"c7\"}}, \"claims\": {\"c1\": {\"text\": \"The current regulation – Article ○ (Appeal Request by the Perpetrating Student) – allows appeals for any measure imposed by the Autonomous Committee, while the proposed amendment allows appeals only for transfer or expulsion measures.\"}, \"c2\": {\"text\": \"The proposed amendment infringes upon the rights of parents who have the right to participate in the educational process of their underage children.\"}, \"c3\": {\"text\": \"The proposed amendment results in the unjust discrimination of other perpetrating students and their guardians who have received other measures.\"}, \"c4\": {\"text\": \"The current regulation should be maintained.\"}, \"c5\": {\"text\": \"Legal remedies are available by other means for measures for which appeals are not permitted.\"}, \"c6\": {\"text\": \"Perpetrating students who received other measures can seek legal remedies to mitigate the harm suffered by them.\"}, \"c7\": {\"text\": \"The proposed amendment does not infringe upon the rights of parents, and it provides an opportunity for all perpetrating students to appeal and grow into exemplary members of society.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Opinion\", \"kind\": \"ordinary\"}, {\"claim\": \"c2\", \"by\": \"Opinion\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"Opinion\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"*\", \"kind\": \"axiom\"}, {\"claim\": \"c6\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Opinion\", \"if\": [\"c1\", \"c2\", \"c3\"], \"then\": \"c4\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Opinion\", \"if\": [\"c4\"], \"then\": \"c7\", \"type\": \"defeasible\"}], \"contraries\": [], \"statements\": {\"a\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c6\", \"add\": {\"claims\": {\"h1\": {\"text\": \"Legal remedies are available by other means for measures for which appeals are not permitted.\"}, \"h2\": {\"text\": \"Perpetrating students who received other measures can seek legal remedies to mitigate the harm suffered by them.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"contraries\": [[\"h2\", \"c6\"]]}}}, \"b\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c7\", \"add\": {\"claims\": {\"h3\": {\"text\": \"The harm suffered by perpetrating students due to transfer or expulsion cannot be restored even if such measures are overturned in a subsequent lawsuit—unlike with other measures.\"}, \"h4\": {\"text\": \"Perpetrating students who received transfer or expulsion measures cannot be grown into exemplary members of society.\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"h3\"], \"then\": \"h4\", \"type\": \"defeasible\"}], \"contraries\": [[\"h4\", \"c7\"]]}}}, \"c\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c6\", \"add\": {\"claims\": {\"h5\": {\"text\": \"It is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal and thereby grow into exemplary members of society.\"}, \"h6\": {\"text\": \"The proposed amendment does not infringe upon the rights of parents, and it provides an opportunity for all perpetrating students to appeal and grow into exemplary members of society.\"}}, \"premises\": [{\"claim\": \"h5\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}], \"contraries\": [[\"h6\", \"c6\"]]}}}}}"
+  },
+  {
+   "id": "2025_25",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Extra data: line 1 column 1728 (char 1727)",
+   "question_ok": false,
+   "seconds": 14.3,
+   "output": "{\"positions\": {\"Alice\": {\"thesis\": \"c2\"}, \"Bob\": {\"thesis\": \"c5\"}, \"Charlie\": {\"thesis\": \"c8\"}}, \"claims\": {\"c1\": {\"text\": \"The artist created an artwork and sold it to an art museum.\"}, \"c2\": {\"text\": \"The artwork has only superficial meaning.\"}, \"c3\": {\"text\": \"Replacing the fluorescent light is based on the artist's approval.\"}, \"c4\": {\"text\": \"The artist's approval does not reflect his true intention.\"}, \"c5\": {\"text\": \"The artist's approval is not a change in an essential attribute of the work.\"}, \"c6\": {\"text\": \"The work's identity lies in the artist's true intention.\"}, \"c7\": {\"text\": \"Any subsequent act of approval cannot alter the work's identity.\"}, \"c8\": {\"text\": \"The work's meaning remains the same as before.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"Alice\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Bob\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"Charlie\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Charlie\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Alice\", \"if\": [\"c1\", \"c3\"], \"then\": \"c2\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Bob\", \"if\": [\"c4\"], \"then\": \"c5\", \"type\": \"defeasible\"}, {\"id\": \"r3\", \"by\": \"Charlie\", \"if\": [\"c6\", \"c7\"], \"then\": \"c8\", \"type\": \"defeasible\"}], \"contraries\": [[\"c2\", \"c8\"]], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"assumes\", \"by\": \"Alice\", \"claim\": \"c1\"}, {\"op\": \"holds\", \"by\": \"Alice\", \"claim\": \"c2\"}]}}, \"b\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"assumes\", \"by\": \"Bob\", \"claim\": \"c3\"}, {\"op\": \"holds\", \"by\": \"Bob\", \"claim\": \"c5\"}]}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"assumes\", \"by\": \"Charlie\", \"claim\": \"c6\"}, {\"op\": \"holds\", \"by\": \"Charlie\", \"claim\": \"c8\"}]}}}}}"
+  },
+  {
+   "id": "2025_29",
+   "parsed": true,
+   "valid": true,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": false,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": true,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "question_ok": false,
+   "seconds": 21.4,
+   "output": "{\"positions\": {\"ⓐ\": {\"thesis\": \"c2\"}}, \"claims\": {\"c1\": {\"text\": \"Women receive relatively fewer opportunities and lower evaluations compared to men, even when accounting for their actual abilities and achievements.\"}, \"c2\": {\"text\": \"In environments where women work separately from men, they display greater creativity in their creative expressions.\"}, \"c3\": {\"text\": \"If women are restricted in their opportunities to demonstrate creativity during team activities, or if their creative expressions themselves are undervalued, women will not be able to fully realize their capabilities within team activities.\"}, \"c4\": {\"text\": \"Women will display greater creativity in environments where they work separately from men rather than environments where they work together with men.\"}, \"c5\": {\"text\": \"In the experimental group, the female singer recorded her own part alone in the studio, listening to the recording of the male singer and the musicians, while the male singer recorded the song with the musicians.\"}, \"c6\": {\"text\": \"The experimental group received higher scores for creative expression than the control group.\"}, \"c7\": {\"text\": \"The control group received lower scores for creative expression than the experimental group.\"}, \"c8\": {\"text\": \"There was no difference in creative scores between men and women in both the control and experimental groups.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"ⓐ\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"ⓐ\", \"if\": [\"c1\", \"c3\", \"c4\", \"c5\"], \"then\": \"c6\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"ⓐ\", \"if\": [\"c6\", \"c7\"], \"then\": \"c8\", \"type\": \"defeasible\"}], \"contraries\": [], \"statements\": {\"a\": {\"check\": {\"op\": \"strengthens\", \"claim\": \"c6\", \"add\": {\"claims\": {\"h1\": {\"text\": \"The female singers' scores were higher in the experimental group than in the control group.\"}, \"h2\": {\"text\": \"The total score of all female singers was higher than that of all male singers.\"}, \"h3\": {\"text\": \"There was no difference in creative scores between men and women in both the control and experimental groups.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}, {\"id\": \"ra2\", \"by\": \"*\", \"if\": [\"h2\"], \"then\": \"h3\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h3\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"holds\", \"by\": \"ⓐ\", \"claim\": \"c8\"}}, \"c\": {\"check\": {\"op\": \"weakens\", \"claim\": \"c8\", \"add\": {\"claims\": {\"h4\": {\"text\": \"The female singers' scores in the control group were slightly lower than those of the male singers, but in the experimental group the female singers' scores were higher than those of the male singers.\"}, \"h5\": {\"text\": \"There was no difference in creative scores between men and women in both the control and experimental groups.\"}}, \"premises\": [{\"claim\": \"h4\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"h4\"], \"then\": \"h5\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h5\", \"rule\": \"rc1\"}]}}}}}"
+  },
+  {
+   "id": "2025_40",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 1 column 2287 (char 2286)",
+   "question_ok": false,
+   "seconds": 23.6,
+   "output": "{\"positions\": {\"Hormones\": {\"thesis\": \"c2\"}}, \"claims\": {\"c1\": {\"text\": \"Steroid hormones have low polarity and easily penetrate the cell membrane, whereas peptide hormones have high polarity and cannot penetrate the cell membrane.\"}, \"c2\": {\"text\": \"Br, a plant steroid hormone, is unable to penetrate the cell membrane easily.\"}, \"c3\": {\"text\": \"Animal steroid hormones penetrate the cell membrane easily.\"}, \"c4\": {\"text\": \"Peptide hormones bind to receptors present on the cell surface and activate intracellular signaling proteins through structural changes in these receptors.\"}, \"c5\": {\"text\": \"Br, like peptide hormones, utilizes cell surface receptors and intracellular signaling proteins.\"}, \"c6\": {\"text\": \"Mutant A has a defect only in the Br biosynthesis gene, mutant B has a defect only in the Br receptor gene, and mutant C has a defect only in the gene for the signaling protein that recognizes the structural change in the Br receptor.\"}, \"c7\": {\"text\": \"When Br was applied, the inhibited growth of A was not restored, but B's growth was restored.\"}, \"c8\": {\"text\": \"When Br was applied, the growth of C was not restored.\"}}, \"premises\": [{\"claim\": \"c1\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}, {\"claim\": \"c3\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}, {\"claim\": \"c4\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}, {\"claim\": \"c5\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}, {\"claim\": \"c6\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}, {\"claim\": \"c7\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}, {\"claim\": \"c8\", \"by\": \"Hormones\", \"kind\": \"ordinary\"}], \"rules\": [{\"id\": \"r1\", \"by\": \"Hormones\", \"if\": [\"c1\", \"c3\", \"c4\", \"c5\", \"c6\", \"c7\", \"c8\"], \"then\": \"c2\", \"type\": \"defeasible\"}, {\"id\": \"r2\", \"by\": \"Hormones\", \"if\": [\"c2\"], \"then\": \"c2\", \"type\": \"defeasible\"}], \"contraries\": [], \"statements\": {\"a\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Hormones\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h1\": {\"text\": \"The difference in membrane permeability between animal and plant steroid hormones is determined only by polarity.\"}, \"h2\": {\"text\": \"Br is more polar than animal steroid hormones.\"}}, \"premises\": [{\"claim\": \"h1\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"ra1\", \"by\": \"*\", \"if\": [\"h1\"], \"then\": \"h2\", \"type\": \"defeasible\"}], \"undercuts\": [{\"claim\": \"h2\", \"rule\": \"ra1\"}]}}}, \"b\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Hormones\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h3\": {\"text\": \"The experiment supports the hypothesis that 'A cannot synthesize Br, and B has a defect in the Br receptor.'\"}}, \"premises\": [{\"claim\": \"h3\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rb1\", \"by\": \"*\", \"if\": [\"h3\"], \"then\": \"c2\", \"type\": \"defeasible\"}], \"contraries\": [[\"h3\", \"c2\"]]}}}, \"c\": {\"check\": {\"op\": \"and\", \"args\": [{\"op\": \"holds\", \"by\": \"Hormones\", \"claim\": \"c2\", \"add\": {\"claims\": {\"h5\": {\"text\": \"After Br treatment, B and C will show similar phenotypes.\"}, \"h6\": {\"text\": \"B and C will show different phenotypes.\"}}, \"premises\": [{\"claim\": \"h5\", \"by\": \"*\", \"kind\": \"axiom\"}], \"rules\": [{\"id\": \"rc1\", \"by\": \"*\", \"if\": [\"h5\"], \"then\": \"h6\", \"type\": \"defeasible\"}], \"contraries\": [[\"h6\", \"c2\"]]}}}}}"
+  }
+ ]
+}

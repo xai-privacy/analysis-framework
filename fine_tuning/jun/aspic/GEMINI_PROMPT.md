@@ -1,5 +1,7 @@
 # Gemini prompt for drafting ASPIC+ translations
 
+**Superseded for the full set:** use `teacher.py` and `FINETUNE_GUIDE.md`, one question per chat, Gemini Flash at medium effort. This file records how the pilot rounds were run.
+
 All training translations come from Gemini, so the student learns from one teacher. The five translations in `translations_claude/` were written by Claude during the pilot. They are used only as the first worked examples and as a comparison, never as training data.
 
 Run everything from `fine_tuning/jun/aspic/` with the venv active (`source .venv/bin/activate`, see README.md). Below, `B` is the cleaned benchmark file and `S` is your split:
@@ -19,7 +21,7 @@ python make_gemini_batch.py --bench $B --split $S \
     --ids 2022_17 2021_37 2024_15 --out gemini_input_A.md
 ```
 
-In Gemini (Pro model), start a new chat, attach `gemini_input_A.md`, and paste the prompt below. Save the JSON array from the answer as `gemini_output_A.json`, then:
+In Gemini (Flash; the pilot used low effort), start a new chat, attach `gemini_input_A.md`, and paste the prompt below. Save the JSON array from the answer as `gemini_output_A.json`, then:
 
 ```bash
 python check_aspic.py --bench $B --split $S --save-matches translations gemini_output_A.json

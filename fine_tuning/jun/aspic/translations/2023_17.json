@@ -1,0 +1,220 @@
+{
+ "id": "2023_17",
+ "positions": {
+  "Ambiguity": {
+   "thesis": "c1",
+   "summary": "The connective '또는' ('or') is an ambiguous term whose literal meaning is inclusive in (1) and exclusive in (2)."
+  },
+  "Author": {
+   "thesis": "c7",
+   "summary": "The literal meaning of '또는' is only inclusive, and the exclusive meaning is conveyed as implicature, so '또는' is not ambiguous."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The Korean connective '또는' ('or') is an ambiguous term used to express two different types of meaning.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "In sentence (1), '또는' is used in an inclusive sense, which is true even if Cheolsu has both a laptop and a cell phone.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "In sentence (2), '또는' is used in an exclusive sense, which is false if both coffee and green tea are served as dessert.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The literal meaning of '또는' differs between sentence (1) and sentence (2).",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "The literal meaning of '또는' is only inclusive, and the exclusive meaning is conveyed as implicature.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "The connective '또는' is not an ambiguous term.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Unlike literal meaning, for implicature, listing a sentence expressing the negation of the implied content after the original sentence produces no logical contradiction; if a contradiction arises, it cannot be an implicature.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Listing 'Of course, we could also offer both' after sentence (2) does not result in any contradiction.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "The content <You cannot have both coffee and green tea as dessert> conveyed in sentence (2) is not literal meaning, but an implicature.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "In sentence (2), the content <it is possible to have both coffee and green tea as dessert> is not included in the literal meaning, but is conveyed as implicature.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "Ambiguity",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Ambiguity",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Author",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Author",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Ambiguity",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Ambiguity",
+   "if": [
+    "c4"
+   ],
+   "then": "c1",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Author",
+   "if": [
+    "c8",
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Author",
+   "if": [
+    "c10"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Author",
+   "if": [
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c1",
+   "c7"
+  ],
+  [
+   "c4",
+   "c10"
+  ],
+  [
+   "c6",
+   "c11"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "not",
+    "arg": {
+     "op": "weakens",
+     "claim": "Ambiguity",
+     "add": {
+      "claims": {
+       "h1": {
+        "text": "When p, q, r, and s are all true sentences, if the sentence 'p or q' is true but the sentence 'r or s' is false, then the 'or' used in the former and latter sentences represents different meanings.",
+        "source": "statement"
+       }
+      },
+      "premises": [
+       {
+        "claim": "h1",
+        "by": "*",
+        "kind": "axiom"
+       }
+      ]
+     }
+    }
+   },
+   "note": "The statement does not weaken or attack the ambiguity position; as the rationale notes, it is an underlying presupposition of that position."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Author",
+    "claim": "h3",
+    "add": {
+     "claims": {
+      "h2": {
+       "text": "Appending 'Cheolsu did not eat bread' after 'Cheolsu ate rice and bread' produces a logical contradiction.",
+       "source": "rationale"
+      },
+      "h3": {
+       "text": "When using 'Cheolsu ate rice and bread', the content <Cheolsu ate bread> cannot be conveyed as implicature.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "Author",
+       "if": [
+        "c8",
+        "h2"
+       ],
+       "then": "h3",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "By the author's implicature test (c8), because appending the negation produces a logical contradiction, the content cannot be an implicature."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "Author",
+    "claim": "c11"
+   },
+   "note": "Under the author's diagnosis, the inclusive meaning is the literal meaning rather than an implicature, so this claim cannot be derived by the author."
+  }
+ }
+}

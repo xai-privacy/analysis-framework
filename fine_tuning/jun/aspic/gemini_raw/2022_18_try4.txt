@@ -1,0 +1,253 @@
+{
+  "id": "2022_18",
+  "positions": {
+    "Bob": {
+      "thesis": "c5",
+      "summary": "Not studying is justified because it allows more test-takers to move up in rank and experience happiness."
+    },
+    "Alice": {
+      "thesis": "c11",
+      "summary": "Not studying is not justified, because not doing anything cannot cause others' happiness."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "If Bob does not study, more test-takers will move up in the rankings.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Test-takers are happy even if their rank goes up just a little.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "If Bob does not study, more test-takers will experience happiness.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Bob wants more people to experience happiness.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Not studying is justified.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "If Bob studies, more people get a lower score than his, compared to if he did not study.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "If people get a lower score than Bob, they lose a chance to experience happiness.",
+      "source": "rationale"
+    },
+    "c8": {
+      "text": "Bob's studying takes away other test-takers' chance to experience happiness.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Not studying cannot be the cause of other test-takers' happiness.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "The cause of other test-takers' happiness is that they studied.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "Not studying is not justified.",
+      "source": "rationale"
+    },
+    "c12": {
+      "text": "Not doing something cannot be the cause of anything else.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "Alice",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Bob",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c3",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c6",
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Alice",
+      "if": [
+        "c10"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": "Alice",
+      "if": [
+        "c9"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "rationale"
+    }
+  ],
+  "contraries": [
+    [
+      "c5",
+      "c11"
+    ],
+    [
+      "c3",
+      "c9"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "c5",
+        "add": {
+          "claims": {
+            "ha1": {
+              "text": "Not every means of attaining what one wants is justified just because one desires it.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "ha1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "ha1",
+              "rule": "r2"
+            }
+          ]
+        }
+      },
+      "note": "If desired ends do not automatically justify the means, the inference r2 from wanting others' happiness to not studying being justified is undercut, weakening Bob's argument."
+    },
+    "b": {
+      "check": {
+        "op": "holds",
+        "by": "*",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "hb1": {
+              "text": "Bob's score goes up when he studies as compared to not studying.",
+              "source": "statement"
+            },
+            "hb2": {
+              "text": "If Bob is in last place with a very low score, his score rising does not change other test-takers' ranks.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hb1",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "hb2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "hb1"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "hb2",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "The tempting inference rb1 from score increase to other test-takers moving up in rank is undercut by hb2: Bob could be in last place such that a score increase overtakes no one."
+    },
+    "c": {
+      "check": {
+        "op": "assumes",
+        "by": "Alice",
+        "claim": "c12"
+      },
+      "note": "Alice's argument does not assume the general principle that omissions can never be causes; her claim that not studying does not cause happiness does not require this general premise."
+    }
+  }
+}

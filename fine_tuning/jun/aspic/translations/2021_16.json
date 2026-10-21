@@ -1,0 +1,226 @@
+{
+ "id": "2021_16",
+ "positions": {
+  "Alice": {
+   "thesis": "c1",
+   "summary": "Elegance is not a property belonging to Chopin's nocturnes themselves, but merely a subjective impression."
+  },
+  "Bob": {
+   "thesis": "c4",
+   "summary": "Elegance is a genuine property belonging to Chopin's nocturnes themselves, perceived by those with appropriate musical sensitivity."
+  },
+  "Charlie": {
+   "thesis": "c7",
+   "summary": "Elegance is not a genuine property of the nocturnes themselves, but is perceived differently depending on shared group sensitivity."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Elegance is not a property belonging to Chopin's nocturnes themselves, but merely a subjective impression.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Chopin's nocturnes are elegant.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Anyone with an appropriate capacity for musical appreciation can recognize under normal conditions that Chopin's nocturnes are elegant.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Elegance is a genuine property belonging to Chopin's nocturnes themselves.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Only people with appropriate musical sensitivity can perceive the elegance of Chopin's nocturnes.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Only people belonging to a certain culture, who are used to a particular kind of music, regard Chopin's nocturnes as elegant.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Elegance is not a genuine property attributable to Chopin's nocturnes themselves.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "People react differently to Chopin's nocturnes because they belong to groups that share different kinds of musical sensitivity.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "A claim that a musical work has an aesthetic property can be accepted within a group sharing the relevant musical sensitivity.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Bob",
+   "if": [
+    "c3"
+   ],
+   "then": "c2",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c2",
+    "c5"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Charlie",
+   "if": [
+    "c6",
+    "c9"
+   ],
+   "then": "c2",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r4",
+   "by": "Charlie",
+   "if": [
+    "c6",
+    "c8"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c1",
+   "c4"
+  ],
+  [
+   "c4",
+   "c7"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "h2",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "The group of people who can perceive elegance could be larger or smaller depending on period and culture.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "The group of people who can perceive elegance cannot be larger or smaller depending on period and culture.",
+       "source": "rationale"
+      }
+     },
+     "contraries": [
+      [
+       "h1",
+       "h2"
+      ]
+     ]
+    }
+   },
+   "note": "Bob claims only that perceivers need appropriate sensitivity, which is compatible with group size varying by period/culture; Bob does not hold h2 (does not oppose h1)."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Charlie",
+    "claim": "h4",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "People who find Chopin's nocturnes boring may have a different kind of musical sensitivity.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "People who find Chopin's nocturnes boring cannot have a different kind of musical sensitivity.",
+       "source": "rationale"
+      }
+     },
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "Charlie",
+       "if": [
+        "c8"
+       ],
+       "then": "h3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h3",
+       "h4"
+      ]
+     ]
+    }
+   },
+   "note": "Charlie derives h3 from c8 (different reactions stem from different shared sensitivities), so Charlie agrees with h3 and does not hold its contrary h4."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c2"
+     },
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "c2"
+     }
+    ]
+   },
+   "note": "Both Bob and Charlie derive c2 (Chopin's nocturnes are elegant): Bob via r1 (appropriate appreciation recognizes it), Charlie via r3 (accepted by a group sharing that musical sensitivity)."
+  }
+ }
+}

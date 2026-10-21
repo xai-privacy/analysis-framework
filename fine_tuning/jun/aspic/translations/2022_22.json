@@ -1,0 +1,186 @@
+{
+ "id": "2022_22",
+ "positions": {
+  "Alice": {
+   "thesis": "c1",
+   "summary": "Taste predicate sentences contain a hidden variable 'to x' filled by the speaker, so different speakers express different propositions."
+  },
+  "Bob": {
+   "thesis": "c9",
+   "summary": "The sentence 'Gopchang is delicious' expresses the proposition <Gopchang is delicious> regardless of speaker, because genuine dispute requires disagreement over the same proposition."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The sentence 'Gopchang is delicious' always grammatically includes the hidden phrase 'to x', where 'x' is a variable whose value is filled by the speaker in a given context.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "If Jiwoo, who finds gopchang delicious, says 'Gopchang is delicious', the statement expresses <Gopchang is delicious to Jiwoo>, which is a true assertion.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "If Youngho, who does not like gopchang, says 'Gopchang is delicious', the statement expresses <Gopchang is delicious to Youngho>, which is a false assertion.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "If Youngho dislikes gopchang, Youngho's statement 'Gopchang is delicious' cannot be true.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "In situations where Jiwoo says 'Gopchang is delicious' and Youngho responds 'No, gopchang is not delicious!', the two can engage in a genuine dispute.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Disagreement about the truth value of the same proposition is a necessary condition for a debate to be a genuine dispute.",
+   "source": "rationale"
+  },
+  "c7": {
+   "text": "Under Alice's view, Jiwoo expresses <Gopchang is delicious to Jiwoo> and Youngho denies a different proposition, so they are not engaging in a genuine dispute.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "There is a serious problem with Alice's view.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "The sentence 'Gopchang is delicious' expresses the proposition <Gopchang is delicious>, regardless of who says it.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "If Youngho dislikes gopchang, Youngho's statement 'Gopchang is delicious' can be true.",
+   "source": "rationale"
+  },
+  "c11": {
+   "text": "Statements 'Gopchang is delicious' made by people who enjoy gopchang all express the same proposition, but this proposition is different from the one expressed by statements 'Gopchang is delicious' made by people who do not enjoy gopchang.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Bob",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c1",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c5",
+    "c7"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Bob",
+   "if": [
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c1",
+   "c9"
+  ],
+  [
+   "c4",
+   "c10"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Alice",
+    "claim": "c11"
+   },
+   "note": "According to Alice, statements made by people who enjoy gopchang all express the same proposition. Alice cannot derive this because each speaker fills 'x' individually."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "c4"
+     },
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c10"
+     }
+    ]
+   },
+   "note": "Alice derives that Youngho's statement cannot be true, while Bob derives that it can be true regardless of his taste."
+  },
+  "c": {
+   "check": {
+    "op": "assumes",
+    "by": "Bob",
+    "claim": "c6"
+   },
+   "note": "Bob assumes that disagreement about the truth value of the same proposition is a necessary condition for a genuine dispute."
+  }
+ }
+}

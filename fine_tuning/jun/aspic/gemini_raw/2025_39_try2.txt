@@ -1,0 +1,228 @@
+{
+  "id": "2025_39",
+  "positions": {
+    "ⓐ": {
+      "thesis": "c1",
+      "summary": "A species is a group of populations of individuals that are reproductively isolated from other groups and able to interbreed within the group."
+    },
+    "ⓑ": {
+      "thesis": "c5",
+      "summary": "Woo's Triangle Model: through natural hybridization between different species within Brassica, chromosomes of one species are added to another, resulting in a new species possessing chromosomes from both."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "A species is a group of populations of individuals that are reproductively isolated from other groups, and able to interbreed within the group.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Groups of organisms that are able to interbreed cannot be considered different species.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Chinese cabbage (n=10) and cabbage (n=9) can interbreed to create rapeseed (n=19).",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Chinese cabbage and cabbage cannot be considered different species.",
+      "source": "statement"
+    },
+    "c5": {
+      "text": "According to Woo's Triangle Model (ⓑ), through natural hybridization between two different species within Brassica, the chromosomes of one species are added to those of another species, resulting in a new species possessing chromosomes from both.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Chinese cabbage has n=10, cabbage has n=9, and black mustard has n=8.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "When black mustard and cabbage are hybridized, Ethiopian mustard is created.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Ethiopian mustard has chromosome number n=17, which is the sum of chromosomes from black mustard (n=8) and cabbage (n=9).",
+      "source": "rationale"
+    },
+    "c9": {
+      "text": "The number of chromosomes (n) in Ethiopian mustard is greater than the number of chromosomes (n) in black mustard.",
+      "source": "statement"
+    },
+    "c10": {
+      "text": "When Chinese cabbage and black mustard are hybridized, leaf mustard (n=18) is created as a new species possessing chromosomes from both.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "Black mustard and leaf mustard can be considered different species.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "ⓐ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "ⓐ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "ⓑ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c7",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c10",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "ⓐ",
+      "if": [
+        "c2",
+        "c3"
+      ],
+      "then": "c4",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "ⓑ",
+      "if": [
+        "c5",
+        "c6",
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "ⓑ",
+      "if": [
+        "c6",
+        "c8"
+      ],
+      "then": "c9",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "ⓑ",
+      "if": [
+        "c5",
+        "c10"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "undercuts": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "ⓑ",
+        "claim": "c9"
+      },
+      "note": "Ethiopian mustard has n=17 (8+9) according to ⓑ, which is greater than black mustard (n=8)."
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "ⓐ",
+            "claim": "c4"
+          },
+          {
+            "op": "holds",
+            "by": "ⓑ",
+            "claim": "c11"
+          }
+        ]
+      },
+      "note": "According to ⓐ, Chinese cabbage and cabbage interbreed so cannot be different species; according to ⓑ, leaf mustard is a new species synthesized from black mustard."
+    },
+    "c": {
+      "check": {
+        "op": "holds",
+        "by": "ⓑ",
+        "claim": "h3",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "A Maltese (n=39) and a Poodle (n=39) produce a Maltipoo (n=39) by hybridization.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "The Maltese and the Poodle are classified as the same species by ⓐ, and the chromosome number of the Maltipoo (n=39) is unchanged rather than the sum of both parents' chromosomes.",
+              "source": "statement"
+            },
+            "h3": {
+              "text": "The theory of species synthesis used in ⓑ classifies the Poodle and the Maltipoo as different species.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "ⓑ",
+              "if": [
+                "h1"
+              ],
+              "then": "h3",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [],
+          "undercuts": [
+            {
+              "claim": "h2",
+              "rule": "rc1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference rc1 (hybridization yields a new species under ⓑ) is undercut by h2: Maltese and Poodle are the same species by ⓐ and chromosome number is unchanged (n=39)."
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+ "id": "2025_26",
+ "positions": {
+  "Alice": {
+   "thesis": "c4",
+   "summary": "Patient A is in a minimally conscious state because A's SMA responded to imagined movement under the ⓐ hypothesis, while Patient B is not because B showed no SMA response."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "ⓐ The supplementary motor area (SMA) responds not only when a person actually moves their body but also when they imagine moving.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "When instructed to imagine curling and stretching both big toes, the SMA of Patient A showed a response.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "When instructed to imagine curling and stretching both big toes, there was no response in Patient B's SMA.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Patient A is in a minimally conscious state.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Patient B is not in a minimally conscious state.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c1",
+    "c2"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c1",
+    "c3"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c4",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "In the <Experiment>, the SMA of non-brain-injured participants responded in all three cases: actual movement, imagined toe movement, and imagined table tennis.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "c1",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "SMA activation across actual and imagined movements supports ⓐ via ra1, providing a new argument that reinforces Alice's conclusion about Patient A (c4)."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c5",
+    "add": {
+     "claims": {
+      "h2": {
+       "text": "In the <Experiment>, there was no SMA response when only movement imagery was instructed, unlike when actual movement was instructed.",
+       "source": "statement"
+      },
+      "h3": {
+       "text": "The SMA does not respond when a person merely imagines moving.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "h3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h3",
+       "c1"
+      ]
+     ]
+    }
+   },
+   "note": "Failure of SMA to respond to imagery undermines ⓐ (c1), which defeats Alice's argument for c5, weakening rather than reinforcing her conclusion about B."
+  },
+  "c": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c1",
+    "add": {
+     "claims": {
+      "h4": {
+       "text": "In the <Experiment>, there was no SMA response when instructed to imagine playing table tennis.",
+       "source": "statement"
+      },
+      "h5": {
+       "text": "The participant imagined someone else playing table tennis rather than their own movement.",
+       "source": "statement"
+      },
+      "h6": {
+       "text": "The SMA does not respond when a person imagines moving.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h4",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h4"
+       ],
+       "then": "h6",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h6",
+       "c1"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "h5",
+       "rule": "rc1"
+      }
+     ]
+    }
+   },
+   "note": "Imagining someone else (h5) undercuts the naive inference (rc1) that would weaken ⓐ, but neutralizing a challenge does not constitute positive evidence to reinforce ⓐ."
+  }
+ }
+}

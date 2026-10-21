@@ -1,0 +1,264 @@
+{
+  "id": "2025_02",
+  "positions": {
+    "Opinion": {
+      "thesis": "c7",
+      "summary": "The current regulation should be maintained because the proposed amendment infringes upon parents' rights to express opinions (ⓐ) and unjustly discriminates against students receiving other measures (ⓑ)."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Parents have the right to participate in the educational process of their underage children.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "When the school imposes a disadvantageous measure on a student, parents have the right to express their opinion on the matter.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "The proposed amendment allows appeals only in cases of transfer and expulsion measures.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "ⓐ The proposed amendment infringes upon parents' right to express opinions regarding disadvantageous measures.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "The proposed amendment permits appeals only to perpetrating students who have received transfer or expulsion measures.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "ⓑ The proposed amendment results in the unjust discrimination of other perpetrating students and their guardians who have received other measures.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The current regulation should be maintained.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Opinion",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Opinion",
+      "if": [
+        "c1"
+      ],
+      "then": "c2",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Opinion",
+      "if": [
+        "c2",
+        "c3"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Opinion",
+      "if": [
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Opinion",
+      "if": [
+        "c4",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c4",
+        "add": "other_remedies"
+      },
+      "note": "Alternative legal remedies provide an argument attacking c4, so c4 is weakened rather than strengthened."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c6",
+        "add": "unrestorable_harm"
+      },
+      "note": "Unrestorable harm provides a ground for reasonable differentiation, attacking c6."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "weakens",
+            "claim": "c4",
+            "add": "growth_responsibility"
+          },
+          {
+            "op": "strengthens",
+            "claim": "c6",
+            "add": "growth_responsibility"
+          }
+        ]
+      },
+      "note": "The responsibility for student growth provides further support for c4 and c6, so c4 is not weakened."
+    }
+  },
+  "hypotheticals": {
+    "other_remedies": {
+      "claims": {
+        "h1": {
+          "text": "Legal remedies are available by other means for measures for which appeals are not permitted.",
+          "source": "statement"
+        },
+        "h2": {
+          "text": "Parents can seek relief through other legal remedies, so the proposed amendment does not infringe upon their right to express opinions.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h1",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "ra1",
+          "by": "*",
+          "if": [
+            "h1"
+          ],
+          "then": "h2",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ],
+      "contraries": [
+        [
+          "h2",
+          "c4"
+        ]
+      ]
+    },
+    "unrestorable_harm": {
+      "claims": {
+        "h3": {
+          "text": "The harm suffered by perpetrating students due to transfer or expulsion cannot be restored even if overturned in a lawsuit, unlike with other measures.",
+          "source": "statement"
+        },
+        "h4": {
+          "text": "Allowing appeals only for transfer and expulsion measures is a reasonable differentiation, not unjust discrimination.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h3",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rb1",
+          "by": "*",
+          "if": [
+            "h3"
+          ],
+          "then": "h4",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ],
+      "contraries": [
+        [
+          "h4",
+          "c6"
+        ]
+      ]
+    },
+    "growth_responsibility": {
+      "claims": {
+        "h5": {
+          "text": "It is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal and thereby grow into exemplary members of society.",
+          "source": "statement"
+        },
+        "h6": {
+          "text": "All perpetrating students and their parents should be given an opportunity to appeal, so denying appeals for other measures infringes parents' rights and unjustly discriminates.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h5",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rc1",
+          "by": "*",
+          "if": [
+            "h5"
+          ],
+          "then": "h6",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rc2",
+          "by": "*",
+          "if": [
+            "h6"
+          ],
+          "then": "c4",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rc3",
+          "by": "*",
+          "if": [
+            "h6"
+          ],
+          "then": "c6",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ]
+    }
+  }
+}

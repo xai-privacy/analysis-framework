@@ -1,0 +1,233 @@
+{
+ "id": "2023_29",
+ "positions": {
+  "ⓐ": {
+   "thesis": "c2",
+   "summary": "The principal-agent problem arises for homeowners selling through real estate agents: agents induce quick sales at lower prices to save their own costs."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "When a principal cannot perfectly observe an agent's actions, the agent may maximize their own interests at the expense of the principal's interests (the principal-agent problem).",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The principal-agent problem arises for homeowners who sell their house through real estate agents.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Real estate agents effectively receive only about 1.5% commission on the sale price.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Obtaining a higher sale price requires keeping the property on the market longer and incurring extra costs for advertising and showings.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "For an additional $10,000 in sale price, the agent earns only an additional $150, which does not offset the extra costs of staying on the market longer.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Rather than paying extra costs for a small commission increase, the agent is incentivized to sell the house relatively quickly at a reasonable price.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Homeowners have far less information than agents regarding home value or sale likelihood, making them prone to accept the agent's suggestion to settle for a lower price.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "ⓐ",
+   "if": [
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "ⓐ",
+   "if": [
+    "c1",
+    "c6",
+    "c7"
+   ],
+   "then": "c2",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c2",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Agents leave their own properties on the market longer than those belonging to others.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "When selling their own properties, agents act as principals and hold out longer, showing that agents sell clients' homes quickly to serve their own interests.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "c2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "When selling their own homes, agents face no principal-agent conflict and keep them on the market longer; this supports the claim that quick sales of clients' homes stem from the principal-agent problem."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c2",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "Increasing the effective commission rate from 1.5% to 3.5% led to homes spending less time on the market.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "A higher commission rate increases the marginal gain from a higher price and should lengthen time on the market; shortening time on the market contradicts the principal-agent explanation.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h3",
+        "c4"
+       ],
+       "then": "h4",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h4",
+       "c2"
+      ]
+     ]
+    }
+   },
+   "note": "If ⓐ were correct, a higher commission rate would incentivize agents to keep homes on the market longer; the finding shows less time, conflicting with ⓐ rather than strengthening it."
+  },
+  "c": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c2",
+    "add": {
+     "claims": {
+      "h5": {
+       "text": "The development of information and communication technology, making housing price information easier and more accurate to obtain, has shortened the time homes spend on the market.",
+       "source": "statement"
+      },
+      "h6": {
+       "text": "Reduced information asymmetry enables homeowners to resist lower prices and keep homes on the market longer; shortening time on the market contradicts the principal-agent explanation.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h5",
+        "c7"
+       ],
+       "then": "h6",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h6",
+       "c2"
+      ]
+     ]
+    }
+   },
+   "note": "If information asymmetry diminishes, homeowners are less prone to accept quick, lower-price sales, so time on market should increase; shortening time on the market conflicts with ⓐ rather than strengthening it."
+  }
+ }
+}

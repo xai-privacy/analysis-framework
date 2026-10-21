@@ -1,0 +1,409 @@
+{
+ "id": "2025_05",
+ "positions": {
+  "A": {
+   "thesis": "c3",
+   "summary": "Contracts must be controlled to correct market failure caused by information asymmetry."
+  },
+  "B": {
+   "thesis": "c7",
+   "summary": "Contracts concluded in a state of power imbalance must be controlled to protect self-determination."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Information asymmetry causes market failure by unequally distributing relevant circumstances significant for the contract between parties.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The risk of qualitative deterioration of products resulting from market failure is borne entirely by the party with inferior information.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "In order to correct market failure caused by information asymmetry, contracts must be controlled.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Information asymmetry can be resolved simply by providing the relevant information to the counterparty.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Information already known by the other party or information such as market price is considered as having been provided.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "The right to self-determination in contracts is guaranteed only when the parties have equal bargaining power.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "If contracts are concluded in a state of power imbalance, only one party's self-determination is protected, so the contract must be controlled.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "If one party is a minor and the other is an adult, or if only one party is a state, the contract is concluded in a state of power imbalance.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "B",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "B",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c1",
+    "c2"
+   ],
+   "then": "c3",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "B",
+   "if": [
+    "c6",
+    "c8"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "hypotheticals": {
+  "case_a": {
+   "claims": {
+    "ha1": {
+     "text": "Alice is an adult and Bob is a minor who has graduated from college.",
+     "source": "statement"
+    },
+    "ha2": {
+     "text": "Alice hands over a manual containing all information about her property to Bob and enters into a sales contract with him.",
+     "source": "statement"
+    },
+    "ha3": {
+     "text": "All relevant information about the property has been provided to Bob, so information asymmetry is resolved.",
+     "source": "rationale"
+    },
+    "ha4": {
+     "text": "The contract between Alice and Bob is concluded in a state of power imbalance because Alice is an adult and Bob is a minor.",
+     "source": "rationale"
+    },
+    "ha5": {
+     "text": "The control of the sales contract between Alice and Bob is justified.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "ha1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "ha2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "ra1",
+     "by": "A",
+     "if": [
+      "ha2",
+      "c4"
+     ],
+     "then": "ha3",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "ra2",
+     "by": "B",
+     "if": [
+      "ha1",
+      "c8"
+     ],
+     "then": "ha4",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "ra3",
+     "by": "B",
+     "if": [
+      "ha4",
+      "c7"
+     ],
+     "then": "ha5",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ]
+  },
+  "case_b": {
+   "claims": {
+    "hb1": {
+     "text": "Charlie is a minor and David is an adult.",
+     "source": "statement"
+    },
+    "hb2": {
+     "text": "Charlie sells his bicycle at a price much lower than the market price to David, an adult stranger, through an online brokerage platform.",
+     "source": "statement"
+    },
+    "hb3": {
+     "text": "The contract between Charlie and David is concluded in a state of power imbalance because Charlie is a minor and David is an adult.",
+     "source": "rationale"
+    },
+    "hb4": {
+     "text": "There is information asymmetry between Charlie and David because the selling price is much lower than the market price.",
+     "source": "rationale"
+    },
+    "hb5": {
+     "text": "The control of the sales contract between Charlie and David is justified.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "hb1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "hb2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rb1",
+     "by": "A",
+     "if": [
+      "hb2"
+     ],
+     "then": "hb4",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rb2",
+     "by": "A",
+     "if": [
+      "hb4",
+      "c3"
+     ],
+     "then": "hb5",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rb3",
+     "by": "B",
+     "if": [
+      "hb1",
+      "c8"
+     ],
+     "then": "hb3",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rb4",
+     "by": "B",
+     "if": [
+      "hb3",
+      "c7"
+     ],
+     "then": "hb5",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ],
+   "undercuts": [
+    {
+     "claim": "c5",
+     "rule": "rb1"
+    }
+   ]
+  },
+  "case_c": {
+   "claims": {
+    "hc1": {
+     "text": "Eve is an adult and State X is a state.",
+     "source": "statement"
+    },
+    "hc2": {
+     "text": "Eve and State X both know all information regarding a certain piece of land and enter into a sales contract regarding that land.",
+     "source": "statement"
+    },
+    "hc3": {
+     "text": "All relevant information regarding the land is already known by both parties, so information asymmetry is resolved.",
+     "source": "rationale"
+    },
+    "hc4": {
+     "text": "The contract between Eve and State X is concluded in a state of power imbalance because only one party is a state.",
+     "source": "rationale"
+    },
+    "hc5": {
+     "text": "The control of the sales contract between Eve and State X is justified.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "hc1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "hc2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rc1",
+     "by": "A",
+     "if": [
+      "hc2",
+      "c5"
+     ],
+     "then": "hc3",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rc2",
+     "by": "B",
+     "if": [
+      "hc1",
+      "c8"
+     ],
+     "then": "hc4",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rc3",
+     "by": "B",
+     "if": [
+      "hc4",
+      "c7"
+     ],
+     "then": "hc5",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ]
+  }
+ },
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "A",
+       "claim": "ha5",
+       "add": "case_a"
+      }
+     },
+     {
+      "op": "holds",
+      "by": "B",
+      "claim": "ha5",
+      "add": "case_a"
+     }
+    ]
+   },
+   "note": "A does not justify control because providing all information resolves information asymmetry; B justifies control because Alice is an adult and Bob is a minor."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "A",
+      "claim": "hb5",
+      "add": "case_b"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "B",
+       "claim": "hb5",
+       "add": "case_b"
+      }
+     }
+    ]
+   },
+   "note": "Naive inference rb1 (selling below market price implies information asymmetry) is undercut by c5 (market price is considered provided). Meanwhile B justifies control because Charlie is a minor and David is an adult."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "A",
+       "claim": "hc5",
+       "add": "case_c"
+      }
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "B",
+       "claim": "hc5",
+       "add": "case_c"
+      }
+     }
+    ]
+   },
+   "note": "A does not justify control because both parties already know all information, but B does justify control because State X is a state."
+  }
+ }
+}

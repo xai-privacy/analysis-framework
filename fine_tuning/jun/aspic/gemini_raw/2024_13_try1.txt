@@ -1,0 +1,63 @@
+{
+  "id": "2024_13",
+  "positions": {
+    "A": {
+      "thesis": "c7",
+      "summary": "Principle P should be equally applicable to evaluate moral responsibility for killings in both Situation 1 and Situation 2."
+    },
+    "B": {
+      "thesis": "c10",
+      "summary": "War and daily life require distinct moral principles, so at least two principles are necessary to evaluate Bob and Dave."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In Situation 1, Bob follows Alice's instruction and shoots and kills the bank security officer.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "In Situation 2, Dave follows Charlie's order during battle and kills an enemy sniper.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "An act of killing occurred in both Situation 1 and Situation 2.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "There is no difference between Situation 1 and Situation 2 in that an act of killing has occurred.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "There is no reason that the principle for evaluating moral responsibility for murder should be different between Situation 1 and Situation 2.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Principle P: Any killing, command to kill, or execution of a killing that is not self-defense is morally impermissible, and there is moral responsibility for such an act.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "When evaluating moral responsibility for the killings committed by Bob in Situation 1 and Dave in Situation 2, principle P should be equally applicable.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Violence in war and violence in everyday life are clearly different.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "A special moral principle, distinct from the principle used to assess moral responsibility for murder in daily life, is required in war.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "In order to assess the moral responsibility for the actions of Bob in Situation 1 and Dave in Situation 2, at least two principles are necessary.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "To properly assess moral responsibility for killing in war, one should be able to apply a different moral principle than the one used in daily life.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "Dave bears moral responsibility for the killing in Situation 2 under principle P.",
+      "source": "statement"
+    }
+  },
+  "premises":

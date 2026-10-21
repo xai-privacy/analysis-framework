@@ -3,51 +3,57 @@
  "positions": {
   "ⓐ": {
    "thesis": "c1",
-   "summary": "Combustion occurs when oxygen in gaseous oxygen combines with a substance, while caloric escapes into the air, generating heat."
+   "summary": "Heat generated during combustion is produced when caloric in gaseous oxygen is released and escapes into the air as oxygen combines with the substance."
   }
  },
  "claims": {
   "c1": {
-   "text": "ⓐ In combustion, oxygen in gaseous oxygen combines with the burning substance, and caloric escapes into the air, generating heat.",
+   "text": "ⓐ In the process of combustion, the oxygen in gaseous oxygen combines with the burning substance to form a compound, but the caloric in gaseous oxygen does not combine with the substance and escapes into the air, thus generating heat.",
    "source": "passage"
   },
   "c2": {
-   "text": "Heat is a massless substance called caloric, and heat generation is the release of combined caloric.",
+   "text": "Heat is a massless substance called caloric, and the generation of heat is a process by which combined caloric is released.",
    "source": "passage"
   },
   "c3": {
-   "text": "Gaseous oxygen is a compound of oxygen and caloric.",
-   "source": "passage"
-  },
-  "c4": {
    "text": "Gases contain far more caloric than solids or liquids.",
    "source": "passage"
   },
+  "c4": {
+   "text": "Gaseous oxygen is a compound of oxygen and caloric.",
+   "source": "passage"
+  },
   "c5": {
-   "text": "Caloric is massless.",
+   "text": "Combustion of a substance is a process in which the substance combines with oxygen.",
    "source": "passage"
   }
  },
  "premises": [
   {
    "claim": "c2",
-   "by": "ⓐ",
+   "by": [
+    "ⓐ",
+    "*"
+   ],
    "kind": "ordinary"
   },
   {
    "claim": "c3",
-   "by": "ⓐ",
+   "by": [
+    "ⓐ",
+    "*"
+   ],
    "kind": "ordinary"
   },
   {
    "claim": "c4",
-   "by": "*",
-   "kind": "axiom"
+   "by": "ⓐ",
+   "kind": "ordinary"
   },
   {
    "claim": "c5",
-   "by": "*",
-   "kind": "axiom"
+   "by": "ⓐ",
+   "kind": "ordinary"
   }
  ],
  "rules": [
@@ -56,7 +62,9 @@
    "by": "ⓐ",
    "if": [
     "c2",
-    "c3"
+    "c3",
+    "c4",
+    "c5"
    ],
    "then": "c1",
    "type": "defeasible",
@@ -76,7 +84,7 @@
        "source": "statement"
       },
       "h2": {
-       "text": "Since the produced gas requires large amounts of caloric, little or no caloric escapes, so heat should not be generated under ⓐ.",
+       "text": "When a solid combusts to produce a gas, caloric from gaseous oxygen is absorbed into the gaseous product, so little or no caloric escapes into the air.",
        "source": "rationale"
       }
      },
@@ -92,23 +100,33 @@
        "id": "ra1",
        "by": "*",
        "if": [
+        "h1"
+       ],
+       "then": "c1",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "*",
+       "if": [
         "h1",
-        "c4"
+        "c3"
        ],
        "then": "h2",
        "type": "defeasible",
        "source": "rationale"
       }
      ],
-     "contraries": [
-      [
-       "h2",
-       "c1"
-      ]
+     "undercuts": [
+      {
+       "claim": "h2",
+       "rule": "ra1"
+      }
      ]
     }
    },
-   "note": "Solid-to-gas combustion consumes caloric rather than releasing it, attacking rather than strengthening ⓐ."
+   "note": "The tempting inference ra1 (that observing heat generation supports ⓐ) is undercut by ra2, because converting a solid to gas absorbs caloric rather than releasing it."
   },
   "b": {
    "check": {
@@ -117,11 +135,11 @@
     "add": {
      "claims": {
       "h3": {
-       "text": "Gunpowder containing oxygen compounds combusts explosively and releases massive heat without gaseous oxygen.",
+       "text": "Gunpowder contains solid oxygen compounds and can combust explosively and release massive heat even without gaseous oxygen.",
        "source": "statement"
       },
       "h4": {
-       "text": "Caloric in gaseous oxygen is not the source of heat generated during combustion.",
+       "text": "Heat generated during combustion is not caused by caloric escaping from gaseous oxygen.",
        "source": "rationale"
       }
      },
@@ -137,7 +155,8 @@
        "id": "rb1",
        "by": "*",
        "if": [
-        "h3"
+        "h3",
+        "c3"
        ],
        "then": "h4",
        "type": "defeasible",
@@ -152,7 +171,7 @@
      ]
     }
    },
-   "note": "Combustion releasing heat without gaseous oxygen undermines the claim that caloric from gaseous oxygen is the source of combustion heat."
+   "note": "Gunpowder combusts and releases heat without gaseous oxygen, providing an undefeated rebuttal against ⓐ."
   },
   "c": {
    "check": {
@@ -161,11 +180,11 @@
     "add": {
      "claims": {
       "h5": {
-       "text": "No matter how much heat released during combustion enters the air, the mass of air does not increase.",
+       "text": "No matter how much heat generated during combustion is released into the air, the mass of air does not increase.",
        "source": "statement"
       },
       "h6": {
-       "text": "If heat were a substance added to the air, air mass would increase.",
+       "text": "Caloric is not released into the air during combustion.",
        "source": "rationale"
       }
      },
@@ -196,13 +215,13 @@
      ],
      "undercuts": [
       {
-       "claim": "c5",
+       "claim": "c2",
        "rule": "rc1"
       }
      ]
     }
    },
-   "note": "The naive attack rc1 assumes caloric has mass, but since caloric is massless (c5), rc1 is undercut."
+   "note": "The tempting rebuttal rc1 is undercut by caloric being massless (c2), so the air not gaining mass does not weaken ⓐ."
   }
  }
 }

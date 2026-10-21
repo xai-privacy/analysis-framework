@@ -1,0 +1,374 @@
+{
+  "id": "2023_03",
+  "positions": {
+    "Alice": {
+      "thesis": "c3",
+      "summary": "Criminal procedure should pursue objective truth, requiring the judge to actively investigate and collect evidence when necessary."
+    },
+    "Bob": {
+      "thesis": "c7",
+      "summary": "Criminal procedure should pursue truth through fair procedure, with the judge acting as a neutral adjudicator while parties contest the truth."
+    },
+    "Charlie": {
+      "thesis": "c10",
+      "summary": "Criminal procedure should pursue objective truth through the parties' evidence, with the judge acting neutrally and supervising to prevent human rights violations."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The truth that should be pursued in criminal procedure is the substance of the case, that is, the objective truth.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "In order to discover objective truth, the judge's active involvement and investigative activities are necessary.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "If necessary for discovering the truth and there is no significant procedural violation, the judge can directly collect or investigate evidence without being restricted by the parties.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Objective truth can only be known by God, and a judicial conclusion is strictly no more than the judge's subjective truth.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "What should be pursued in criminal procedure is the truth through procedure, derived through a fair criminal procedure.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "The parties must be guaranteed a fair opportunity to contest the truth in court.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The judge should be a neutral third-party adjudicator who fairly and strictly applies procedure based on the parties' arguments and proof.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Criminal procedure should pursue objective truth, but its discovery should be entrusted entirely to the parties' submission and proof of evidence.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "It is undesirable for the judge to intervene directly and actively in discovering the truth.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Objective truth obtained through human rights violations cannot acquire legitimacy, and the judge must supervise and rectify human rights violations.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Charlie",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "Charlie",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c4",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Charlie",
+      "if": [
+        "c8"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c2",
+      "c9"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "ha3",
+            "add": "detention_revision"
+          },
+          {
+            "op": "holds",
+            "by": "Charlie",
+            "claim": "ha3",
+            "add": "detention_revision"
+          }
+        ]
+      },
+      "note": "Alice derives support for the revision (ha3) to maximize objective fact-finding. Charlie, prioritizing the prevention of severe net harm via human rights protections (c10), derives opposition (ha5) rather than support, so the check fails for Charlie."
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "hb1",
+            "add": "exclusionary_rule"
+          },
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "hb2",
+            "add": "exclusionary_rule"
+          }
+        ]
+      },
+      "note": "Bob holds the absolute exclusionary rule (hb1) to preserve procedural legitimacy. Alice derives the contrary (hb2), allowing evidence when procedural infractions are minor to prevent the loss of critical truth."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "hc1",
+            "add": "defendant_appearance"
+          },
+          {
+            "op": "holds",
+            "by": "Charlie",
+            "claim": "hc1",
+            "add": "defendant_appearance"
+          }
+        ]
+      },
+      "note": "Both Bob and Charlie hold that the trial cannot proceed without the defendant (hc1), as fair adversarial engagement and defense rights are necessary conditions for a sound outcome."
+    }
+  },
+  "hypotheticals": {
+    "detention_revision": {
+      "claims": {
+        "ha1": {
+          "text": "A proposed revision of the law removes the limit on the number of times the detention period can be extended for investigating a crime.",
+          "source": "statement"
+        },
+        "ha2": {
+          "text": "Removing the detention extension limit aids the investigation and discovery of objective truth.",
+          "source": "rationale"
+        },
+        "ha3": {
+          "text": "The proposed revision to remove the detention extension limit should be supported.",
+          "source": "statement"
+        },
+        "ha4": {
+          "text": "Removing the detention extension limit leads to human rights violations.",
+          "source": "rationale"
+        },
+        "ha5": {
+          "text": "The proposed revision to remove the detention extension limit should not be supported.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "ha1",
+          "by": "*",
+          "kind": "axiom"
+        },
+        {
+          "claim": "ha2",
+          "by": "*",
+          "kind": "axiom"
+        },
+        {
+          "claim": "ha4",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "ra1",
+          "by": "Alice",
+          "if": [
+            "c1",
+            "ha1",
+            "ha2"
+          ],
+          "then": "ha3",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "ra2",
+          "by": "Charlie",
+          "if": [
+            "c10",
+            "ha1",
+            "ha4"
+          ],
+          "then": "ha5",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ],
+      "contraries": [
+        [
+          "ha3",
+          "ha5"
+        ]
+      ]
+    },
+    "exclusionary_rule": {
+      "claims": {
+        "hb1": {
+          "text": "Evidence collected by violating legitimate procedures prescribed by law cannot be used as evidence of guilt without exception.",
+          "source": "statement"
+        },
+        "hb2": {
+          "text": "Evidence collected with procedural violations can be used as evidence of guilt if the violation is not significant and it is necessary for discovering the truth.",
+          "source": "rationale"
+        }
+      },
+      "rules": [
+        {
+          "id": "rb1",
+          "by": "Bob",
+          "if": [
+            "c5",
+            "c7"
+          ],
+          "then": "hb1",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rb2",
+          "by": "Alice",
+          "if": [
+            "c1",
+            "c3"
+          ],
+          "then": "hb2",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ],
+      "contraries": [
+        [
+          "hb1",
+          "hb2"
+        ]
+      ]
+    },
+    "defendant_appearance": {
+      "claims": {
+        "hc1": {
+          "text": "If the defendant does not appear in court, unless special rules apply, the trial cannot proceed.",
+          "source": "statement"
+        },
+        "hc2": {
+          "text": "If the defendant is absent, the defendant cannot be guaranteed a fair opportunity to contest the truth in court.",
+          "source": "rationale"
+        },
+        "hc3": {
+          "text": "If the defendant is absent, the discovery of truth cannot be entrusted entirely to the parties' submission and proof of evidence.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "hc2",
+          "by": "*",
+          "kind": "axiom"
+        },
+        {
+          "claim": "hc3",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rc1",
+          "by": "Bob",
+          "if": [
+            "c5",
+            "c6",
+            "hc2"
+          ],
+          "then": "hc1",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rc2",
+          "by": "Charlie",
+          "if": [
+            "c8",
+            "hc3"
+          ],
+          "then": "hc1",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ]
+    }
+  }
+}

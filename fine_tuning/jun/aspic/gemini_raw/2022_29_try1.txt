@@ -1,0 +1,242 @@
+{
+  "id": "2022_29",
+  "positions": {
+    "ⓐ": {
+      "thesis": "c2",
+      "summary": "The decline in crime in the United States is closely related to lead exposure, mediated by a 20-year time lag from childhood exposure."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Violent and property crime in the US entered a sharp declining trend from the early 1990s, continuing until 2020.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Claim ⓐ: The decline in crime in the United States is closely related to lead exposure.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "From post-WWII until the early 1970s, an increase in lead emissions from cars was followed by a rise in violent crime.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "After lead began to be removed from gasoline in the 1970s, violent crime subsequently decreased.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Rates of violent and property crime are highest in the late teens to early twenties.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "In children, unlike adolescents or adults, exposure to lead affects brain development and induces increased aggression and impulsivity, affecting future potential for criminal behavior.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The effect of childhood lead exposure on crime emerges with an approximately 20-year time lag when affected children reach their late teens or early twenties.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "ⓐ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "ⓐ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "*",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r2",
+      "by": "ⓐ",
+      "if": [
+        "c3",
+        "c4",
+        "c7"
+      ],
+      "then": "c2",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The average blood lead levels of American children aged 1–5 in 2000 had dropped to half the level of 1990.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "The drop in childhood lead levels in 2000 accounts for the continued crime decline through 2020 via the 20-year time lag.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c1",
+                "c7"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "ra2",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "The drop in childhood lead levels in 2000 explains the ongoing crime decline through 2020 via the 20-year lag, strengthening ⓐ."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The sharp decline in violent crime in the US began in the 1990s rather than the 1970s.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "The decline in crime in the United States is not closely related to lead exposure.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h4",
+              "c2"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c7",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "The naive inference rb1 (decline in 1990s rather than 1970s means lead was not the cause) is undercut by c7: the ~20-year time lag."
+    },
+    "c": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "Adolescents in the United States who committed crimes had four times the bone lead content of those who did not.",
+              "source": "statement"
+            },
+            "h6": {
+              "text": "There is a positive correlation between lead exposure and criminal behavior.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h5"
+              ],
+              "then": "h6",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "rc2",
+              "by": "*",
+              "if": [
+                "h6"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Higher bone lead content in adolescent offenders supports a positive correlation between lead exposure and criminal behavior, strengthening ⓐ."
+    }
+  }
+}

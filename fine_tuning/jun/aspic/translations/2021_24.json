@@ -1,0 +1,280 @@
+{
+ "id": "2021_24",
+ "positions": {
+  "Alice": {
+   "thesis": "c1",
+   "summary": "To understand human development, we must start from human nature, because biological characteristics explain intergroup differences and genetics explain individual IQ differences."
+  },
+  "Bob": {
+   "thesis": "c8",
+   "summary": "Humans can be shaped differently depending on culture or social environment, because humans are homogeneous and intergroup differences in IQ are negligible."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "In order to understand human development, we must start from human nature.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "There are clear differences between groups, and biological characteristics play a decisive role in explaining intergroup differences.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Differences in intelligence quotient between individuals are due to genetic factors.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Intelligence quotients among groups divided by race, gender, etc. show almost no difference.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The human species is homogeneous.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Insisting on intergroup differences based on biological criteria stems from a motivation to uphold unequal social hierarchies.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Social hierarchy only limits human variability.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Humans can be shaped differently depending on culture or social environment.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Bob",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2",
+    "c3"
+   ],
+   "then": "c1",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c4",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c7"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c1",
+   "c8"
+  ]
+ ],
+ "hypotheticals": {
+  "crime_rate_study": {
+   "claims": {
+    "h1": {
+     "text": "In every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25.",
+     "source": "statement"
+    },
+    "h2": {
+     "text": "Regardless of culture or social environment, biological characteristics such as sex and age decisively influence human behavior and development.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h1",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "ra1",
+     "by": "*",
+     "if": [
+      "h1"
+     ],
+     "then": "h2",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "ra2",
+     "by": "*",
+     "if": [
+      "h2"
+     ],
+     "then": "c1",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ]
+  },
+  "social_reforms_study": {
+   "claims": {
+    "h3": {
+     "text": "Various social reforms aimed at fairly developing the abilities of all members of society have failed.",
+     "source": "statement"
+    },
+    "h4": {
+     "text": "Social reforms are attempts to promote human development by changing culture or social environment.",
+     "source": "rationale"
+    },
+    "h5": {
+     "text": "Changing culture or social environment does not shape human development or abilities.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h3",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "h4",
+     "by": "*",
+     "kind": "ordinary"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rb1",
+     "by": "*",
+     "if": [
+      "h3",
+      "h4"
+     ],
+     "then": "h5",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ],
+   "contraries": [
+    [
+     "h5",
+     "c8"
+    ]
+   ]
+  },
+  "english_program_study": {
+   "claims": {
+    "h6": {
+     "text": "As a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement.",
+     "source": "statement"
+    },
+    "h7": {
+     "text": "Improving English education programs is a change in culture or social environment.",
+     "source": "rationale"
+    }
+   },
+   "premises": [
+    {
+     "claim": "h6",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "h7",
+     "by": "*",
+     "kind": "ordinary"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rc1",
+     "by": "*",
+     "if": [
+      "h6",
+      "h7"
+     ],
+     "then": "c8",
+     "type": "defeasible",
+     "source": "rationale"
+    }
+   ]
+  }
+ },
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "Alice",
+    "add": "crime_rate_study"
+   },
+   "note": "Consistent male youth crime rates across all societies support biological influence over culture, strengthening Alice rather than weakening her."
+  },
+  "b": {
+   "check": {
+    "op": "not",
+    "arg": {
+     "op": "strengthens",
+     "claim": "Bob",
+     "add": "social_reforms_study"
+    }
+   },
+   "note": "The failure of social reforms to develop abilities contradicts or attacks Bob's claim that environment shapes human development, so it does not strengthen Bob."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "strengthens",
+      "claim": "Alice",
+      "add": "english_program_study"
+     },
+     {
+      "op": "weakens",
+      "claim": "Bob",
+      "add": "english_program_study"
+     }
+    ]
+   },
+   "note": "Significant score improvements through educational program changes demonstrate human development via environmental intervention, which strengthens Bob and weakens Alice, making both conjuncts false."
+  }
+ }
+}

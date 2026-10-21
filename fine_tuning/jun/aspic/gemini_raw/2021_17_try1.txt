@@ -1,0 +1,126 @@
+{
+  "id": "2021_17",
+  "positions": {
+    "Alice": {
+      "thesis": "c2",
+      "summary": "To believe something on insufficient evidence is always wrong (ⓐ), because it leads society to gullibility and barbarism."
+    },
+    "Bob": {
+      "thesis": "c6",
+      "summary": "Clifford's belief in ⓐ is not based on sufficient evidence, because our attitude toward truth and error is grounded in sentiment rather than evidence."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "If people hold beliefs based on insufficient evidence, society becomes gullible, loses the habit of investigating evidence, and regresses to a state of barbarism.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "ⓐ To believe something on insufficient evidence is always, everywhere, and for anyone, wrong.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Pursuing truth ('Believe the truth!') and avoiding error ('Avoid error!') are two distinct rules.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Clifford prioritizes avoiding error over pursuing truth, recommending suspension of judgment rather than risking believing a falsehood on insufficient evidence.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Our attitude toward the obligations related to truth or error is grounded not in evidence but in sentiment.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Clifford's belief in ⓐ is not based on sufficient evidence.",
+      "source": "rationale"
+    },
+    "c7": {
+      "text": "Even a belief based on sufficient evidence can be mistaken.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Bob",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c1"
+      ],
+      "then": "c2",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "rationale"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "assumes",
+            "by": "Alice",
+            "claim": "c1"
+          },
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c2"
+          }
+        ]
+      },
+      "note": "Alice assumes that failing to follow ⓐ leads to barbarism (an undesirable consequence) and derives her conclusion ⓐ from it."
+    },
+    "b": {
+      "check": {
+        "op": "holds",
+        "by": "Bob",
+        "claim": "c6"
+      },
+      "note": "According to Bob, Clifford's stance ⓐ is grounded in sentiment rather than evidence, so it is not based on sufficient evidence."
+    },
+    "c": {
+      "check": {
+        "op": "assumes",
+        "by": "Bob",
+        "claim": "c7"
+      },
+      "note": "Bob's argument does not assume or require that beliefs based on sufficient evidence can be mistaken."
+    }
+  }
+}

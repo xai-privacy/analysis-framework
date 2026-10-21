@@ -1,0 +1,231 @@
+{
+  "id": "2023_02",
+  "positions": {
+    "Argument": {
+      "thesis": "c7",
+      "summary": "Articles 2 and 3 of Law A are justified because non-hearing dismissals and omitting reasons fall within the Court's discretion to prevent abuse and ensure swift proceedings."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Article 2 of Law A allows dismissing appeals without trial to prevent appeal abuse, ensure swift handling, and protect the right to trial for proper appeals.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Article 3 of Law A is justified because requiring reasons imposes unnecessary burdens and wastes time needed for cases that truly require trial.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Stating reasons in judgments is not an essential element of a judgment, but something the court may choose at its discretion.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The existence of the Supreme Court does not mean that every case must be guaranteed a trial by the Supreme Court.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Dismissing appeals without holding a trial under Article 2 is justified and within judicial discretion.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Omitting reasons in dismissal judgments under Article 3 is justified and within judicial discretion.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The procedures of the Supreme Court, including dismissing appeals without hearing and omitting reasons in judgments, fall within the Court's discretion and are justified.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Argument",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Argument",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Argument",
+      "if": [
+        "c1",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Argument",
+      "if": [
+        "c2",
+        "c3"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Argument",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "Argument",
+        "add": {
+          "claims": {
+            "ha1": {
+              "text": "The right to a trial is a right of claim demanding judicial action, imposing on the court the duty to respond to the claim and the duty to answer faithfully.",
+              "source": "statement"
+            },
+            "ha2": {
+              "text": "The court has a duty to hold a trial and a duty to state grounds even when dismissing an appeal, so neither holding a trial nor stating reasons is at the court's discretion.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "ha1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "ha1"
+              ],
+              "then": "ha2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "ha2",
+              "c7"
+            ]
+          ]
+        }
+      },
+      "note": "The court's obligations to hold a trial and state reasons contradict the claim that these matters fall within judicial discretion."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "Argument",
+        "add": {
+          "claims": {
+            "hb1": {
+              "text": "The right to a trial primarily guarantees procedural access, and judgment legitimacy requires the presentation of grounds.",
+              "source": "statement"
+            },
+            "hb2": {
+              "text": "Without holding a trial, procedural access is denied, and without stating reasons, a judgment lacks legitimacy, so stating reasons is essential and non-hearing dismissal is unjustified.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hb1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "hb1"
+              ],
+              "then": "hb2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "hb2",
+              "c7"
+            ]
+          ]
+        }
+      },
+      "note": "Procedural access requires holding a trial, and legitimacy demands stating grounds, directly attacking the justification of Articles 2 and 3."
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "Argument",
+        "add": {
+          "claims": {
+            "hc1": {
+              "text": "The Supreme Court's reasoning processes serve as de facto standards for public interpretation and normative evaluation of similar cases.",
+              "source": "statement"
+            },
+            "hc2": {
+              "text": "Omitting reasoning prevents the public from being guided by the Court's reasoning, undermining the public function of judgments and the justification for omitting reasons.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hc1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "hc1"
+              ],
+              "then": "hc2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "hc2",
+              "c6"
+            ]
+          ]
+        }
+      },
+      "note": "Attacking the justification of omitting reasons (c6) weakens the Argument's thesis (c7)."
+    }
+  }
+}

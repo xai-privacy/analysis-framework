@@ -1,0 +1,299 @@
+{
+ "id": "2023_21",
+ "positions": {
+  "Alice": {
+   "thesis": "c6",
+   "summary": "Alice hypothesizes that acknowledging an agent's mental state can influence an action in a deterministic world increases the likelihood of accepting compatibilism."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Determinism is the view that all events, including human mental states and actions, are completely determined by prior events.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Incompatibilism is the view that under determinism it is not possible to ascribe moral responsibility to an agent.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Compatibilism is the view that it is still possible to ascribe moral responsibility to someone even if determinism is accepted.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "If the agent's mental state is the cause of the action, the agent has influenced the action, which is sufficient for imposing moral responsibility.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "People advocate incompatibilism because they fail to grasp that an agent's mental state influencing an action is sufficient for moral responsibility.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "If, even in a deterministic world, one acknowledges that the agent's mental state can influence the occurrence of an action, the likelihood of accepting compatibilism increases.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "The scenario universe is deterministic: every event is determined to occur in exactly the same way each cycle.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Statement 1: Tom's decision to steal the ring influences his action of stealing the ring.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Statement 2: Tom is morally responsible for stealing the ring.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Disagreeing that mental state influences action does not entail denying moral responsibility under determinism, so it does not imply incompatibilism.",
+   "source": "rationale"
+  },
+  "c11": {
+   "text": "Strengthening the hypothesis requires comparing the rate of compatibilism when influence is acknowledged vs when it is not, which cannot be inferred merely from concordant cases while ignoring subjects who agree with Statement 1 but disagree with Statement 2.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c7",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c8",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c9",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c10",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c11",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Alice",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c4",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "status",
+      "claim": "h2",
+      "is": [
+       "IN"
+      ],
+      "add": {
+       "claims": {
+        "h1": {
+         "text": "A person disagrees with Statement 1 (denies that Tom's decision influences his action).",
+         "source": "statement"
+        },
+        "h2": {
+         "text": "The person is an incompatibilist.",
+         "source": "statement"
+        }
+       },
+       "premises": [
+        {
+         "claim": "h1",
+         "by": "*",
+         "kind": "axiom"
+        }
+       ],
+       "rules": [
+        {
+         "id": "ra1",
+         "by": "*",
+         "if": [
+          "h1"
+         ],
+         "then": "h2",
+         "type": "defeasible",
+         "source": "statement"
+        }
+       ],
+       "undercuts": [
+        {
+         "claim": "c10",
+         "rule": "ra1"
+        }
+       ]
+      }
+     },
+     {
+      "op": "status",
+      "claim": "h4",
+      "is": [
+       "IN"
+      ],
+      "add": {
+       "claims": {
+        "h3": {
+         "text": "A person agrees with Statement 2 (ascribes moral responsibility in a deterministic universe).",
+         "source": "statement"
+        },
+        "h4": {
+         "text": "The person is a compatibilist.",
+         "source": "statement"
+        }
+       },
+       "premises": [
+        {
+         "claim": "h3",
+         "by": "*",
+         "kind": "axiom"
+        }
+       ],
+       "rules": [
+        {
+         "id": "ra2",
+         "by": "*",
+         "if": [
+          "h3",
+          "c3",
+          "c7"
+         ],
+         "then": "h4",
+         "type": "strict",
+         "source": "passage"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "note": "The first conjunct fails because disagreeing with Statement 1 does not determine moral responsibility stance (undercut by c10), making h2 OUT; the second conjunct strictly follows from c3 and c7, making h4 IN."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c6",
+    "add": {
+     "claims": {
+      "h5": {
+       "text": "Far more experimental subjects agree with both Statement 1 and Statement 2 than agree with neither statement.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h5"
+       ],
+       "then": "c6",
+       "type": "defeasible",
+       "source": "statement"
+      }
+     ],
+     "undercuts": [
+      {
+       "claim": "c11",
+       "rule": "rb1"
+      }
+     ]
+    }
+   },
+   "note": "The naive inference that comparing concordant response counts strengthens the hypothesis (rb1) is undercut by c11, as it neglects discordant responses (agree S1, disagree S2) that weaken the hypothesis."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "c6",
+    "add": {
+     "claims": {
+      "h6": {
+       "text": "Among the 50 subjects who disagreed with Statement 2, almost all agreed with Statement 1; and among the 50 who agreed with Statement 2, almost all disagreed with Statement 1.",
+       "source": "statement"
+      },
+      "h7": {
+       "text": "Acknowledging that an agent's mental state influences action does not increase the likelihood of accepting compatibilism.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h6",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h6"
+       ],
+       "then": "h7",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h7",
+       "c6"
+      ]
+     ]
+    }
+   },
+   "note": "Nearly all who agreed with Statement 1 disagreed with Statement 2, providing empirical evidence directly contrary to Alice's hypothesis and thereby weakening it."
+  }
+ }
+}

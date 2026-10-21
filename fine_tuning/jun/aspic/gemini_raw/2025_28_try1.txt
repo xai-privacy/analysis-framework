@@ -1,0 +1,226 @@
+{
+  "id": "2025_28",
+  "positions": {
+    "A": {
+      "thesis": "c1",
+      "summary": "Hypothesis A: The memory rate for faces with negative expressions is higher than that for faces with neutral expressions."
+    },
+    "B": {
+      "thesis": "c2",
+      "summary": "Hypothesis B: The influence of expression congruence between the learning and test phases on memory rate is greater than the difference in memory rates between negative and neutral expressions."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The memory rate for faces with negative expressions is higher than that for faces with neutral expressions.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "The influence of expression congruence between the learning and test phases on memory rate is greater than the difference in memory rates between negative and neutral expressions.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "In Experiment 1, both groups were tested on memory using facial expressions identical to those shown during the learning phase.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In Experiment 2, all participants learned faces with negative expressions; in the test phase, one group was tested with negative expressions and the other with neutral expressions.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "A",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "B",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The results of Experiment 1 show that the memory rates of the two groups are similar.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "There is no difference in memory rates between faces with negative expressions and faces with neutral expressions.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c3"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h2",
+              "c1"
+            ]
+          ]
+        }
+      },
+      "note": "Exp 1 holds expression congruence constant; similar memory rates between negative and neutral groups undermine Hypothesis A."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The results of Experiment 2 show that the memory rates of the two groups are similar.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "There is no difference in memory rates between faces with negative expressions and faces with neutral expressions.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h4",
+              "c1"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c4",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference rb1 (similar rates in Exp 2 means no difference between emotional expressions) is undercut by c4: all participants learned negative faces, so Exp 2 manipulates expression congruence rather than learned expression type."
+    },
+    "c": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "The results of Experiment 1 show that the memory rates of the two groups are similar.",
+              "source": "statement"
+            },
+            "h6": {
+              "text": "The results of Experiment 2 show that the group tested with negative expressions has a higher memory rate than the group tested with neutral expressions.",
+              "source": "statement"
+            },
+            "h7": {
+              "text": "There is no difference in memory rates between faces with negative expressions and faces with neutral expressions.",
+              "source": "rationale"
+            },
+            "h8": {
+              "text": "Expression congruence between the learning and test phases has a positive effect on memory rate.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h6",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h5",
+                "c3"
+              ],
+              "then": "h7",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "rc2",
+              "by": "*",
+              "if": [
+                "h6",
+                "c4"
+              ],
+              "then": "h8",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "rc3",
+              "by": "*",
+              "if": [
+                "h7",
+                "h8"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Exp 1 shows zero effect of expression type, while Exp 2 shows a positive effect of expression congruence, together deriving that congruence has a greater effect than expression type."
+    }
+  }
+}

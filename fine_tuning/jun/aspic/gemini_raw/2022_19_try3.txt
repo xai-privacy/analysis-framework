@@ -1,0 +1,249 @@
+{
+  "id": "2022_19",
+  "positions": {
+    "Research team": {
+      "thesis": "c12",
+      "summary": "Regarding the objectivity of truth, the opinions of laypeople and philosophers are in accord."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "(Statement A) If a claim is true for someone, it is true for everyone.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "(Statement B) If everyone agrees with a claim, then the claim is true.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "(Statement C) If a claim is true, it represents a fact.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In both groups, the proportion of respondents who agreed with (C) exceeded 80%.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "For (B), the proportion of those who disagreed was much larger in both groups, but the agreement rate was higher among philosophers.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "83% of philosophers agreed with (A), whereas only slightly over 40% of laypeople did, with more laypeople disagreeing.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "[Interpretation 1] If it has been determined that a claim is true, its truth is objective.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "[Interpretation 2] If someone thinks a claim is true, everyone will agree with them.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Saying that the truth of a claim is objective means that its truth is not relative to each individual's perspective.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "(A) and (C) are statements that affirm the objectivity of truth, while (B) denies it.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "ⓐ The reason the proportion of agreement with (A) among laypeople was significantly lower than among philosophers is that philosophers tend to read (A) as [Interpretation 1], while laypeople tend to read it as [Interpretation 2].",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "ⓑ Regarding the objectivity of truth, the opinions of laypeople and philosophers are in accord.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c7",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c8",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c9",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c10",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Research team",
+      "if": [
+        "c6",
+        "c7",
+        "c8",
+        "c9"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Research team",
+      "if": [
+        "c4",
+        "c5",
+        "c10",
+        "c11"
+      ],
+      "then": "c12",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c11",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Additional research revealed that the vast majority of philosophers responded 'disagree' to [Interpretation 2].",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c6"
+              ],
+              "then": "c11",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Philosophers disagreeing with Interpretation 2 confirms they did not read (A) as Interpretation 2, strengthening ⓐ."
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c12",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "Additional research revealed that the vast majority of laypeople responded 'agree' to [Interpretation 1].",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h2",
+                "c7",
+                "c10"
+              ],
+              "then": "c12",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Laypeople agreeing with Interpretation 1 confirms they affirm the objectivity of truth, strengthening ⓑ."
+    },
+    "c": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c12",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The difference in agreement rates with (B) between laypeople and philosophers was due to some philosophers who actually disagreed with (B) mistakenly responding 'agree'.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h3",
+                "c5",
+                "c10"
+              ],
+              "then": "c12",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Correction of the mistaken agreement responses increases the actual disagreement rate with (B) among philosophers, making it even closer to laypeople and strengthening ⓑ."
+    }
+  }
+}

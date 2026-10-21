@@ -1,0 +1,338 @@
+{
+ "id": "2023_13",
+ "positions": {
+  "Alice": {
+   "thesis": "c3",
+   "summary": "Any act imposing risk on others is morally wrong in itself regardless of whether the risk materializes."
+  },
+  "Bob": {
+   "thesis": "c5",
+   "summary": "An act imposing pure risk can only be judged morally wrong if, had the person known about the risk, their autonomous choice of action could have been different."
+  },
+  "Charlie": {
+   "thesis": "c10",
+   "summary": "Limiting morally wrong acts of pure risk only to cases where autonomous choice could have differed is incorrect, as imposing pure risk on comatose persons or infants can also be wrong."
+  },
+  "Diane": {
+   "thesis": "c11",
+   "summary": "In cases of pure risk, an act should only be judged morally wrong when some kind of incidental harm has actually occurred."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Pure risk is risk that does not materialize.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Anyone exposed to a risk inevitably suffers some harm, even if unaware and the risk does not materialize.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "An act that imposes risk on others is in itself morally wrong regardless of whether the risk materializes.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "It is wrong to indiscriminately condemn acts that impose pure risk as morally wrong.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The only cases in which acts imposing pure risk can be judged morally wrong are those in which, had the person known about the risk, their autonomous choice of action could have been different.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Imposing pure risk that infringes another person's autonomy is morally wrong.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Imposing pure risk that infringes another person's autonomy is not morally wrong.",
+   "source": "rationale"
+  },
+  "c8": {
+   "text": "People in a coma or infants lack the capacity for autonomous choice, so there would be no change in their decisions.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Imposing pure risk on people who are in a coma or on infants can also be morally wrong.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "It is wrong to limit morally wrong acts imposing pure risk only to cases where autonomous choice could have been different.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "In cases of pure risk, an act should only be judged morally wrong when some kind of incidental harm has actually occurred.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Imposing pure risk on a person in a coma is an act that imposes pure risk on others.",
+   "source": "background"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c11",
+   "by": "Diane",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c12",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c2"
+   ],
+   "then": "c3",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c3",
+    "c12"
+   ],
+   "then": "c9",
+   "type": "strict",
+   "source": "rationale"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c5"
+   ],
+   "then": "c6",
+   "type": "strict",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Charlie",
+   "if": [
+    "c8",
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c10"
+  ],
+  [
+   "c6",
+   "c7"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "c9"
+     },
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "c9"
+     }
+    ]
+   },
+   "note": "Alice derives c9 from her universal thesis c3 and background fact c12; Charlie holds c9 directly as a premise."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "hb3",
+      "add": "bob_judges_wrong"
+     },
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "hb3",
+      "add": "bob_judges_wrong"
+     },
+     {
+      "op": "holds",
+      "by": "Diane",
+      "claim": "hd3",
+      "add": "diane_judges_wrong"
+     },
+     {
+      "op": "holds",
+      "by": "Alice",
+      "claim": "hd3",
+      "add": "diane_judges_wrong"
+     }
+    ]
+   },
+   "note": "Whenever Bob or Diane judges an act imposing pure risk to be morally wrong, Alice also judges it morally wrong because Alice condemns all acts imposing pure risk."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c6"
+     },
+     {
+      "op": "holds",
+      "by": "Charlie",
+      "claim": "c7"
+     }
+    ]
+   },
+   "note": "Bob holds c6 (infringing autonomy is morally wrong). Charlie does not hold c7 (that infringing autonomy is not morally wrong), as Charlie only objects to limiting moral wrongness exclusively to autonomy cases, not that infringing autonomy is acceptable. Thus they do not hold different opinions."
+  }
+ },
+ "hypotheticals": {
+  "bob_judges_wrong": {
+   "claims": {
+    "hb1": {
+     "text": "Act 1 imposes pure risk on a person whose autonomous choice of action could have differed had they known about the risk.",
+     "source": "statement"
+    },
+    "hb2": {
+     "text": "Act 1 is an act that imposes pure risk on others.",
+     "source": "background"
+    },
+    "hb3": {
+     "text": "Act 1 is morally wrong.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "hb1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "hb2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rb1",
+     "by": "Bob",
+     "if": [
+      "hb1",
+      "c5"
+     ],
+     "then": "hb3",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rb2",
+     "by": "Alice",
+     "if": [
+      "hb2",
+      "c3"
+     ],
+     "then": "hb3",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  },
+  "diane_judges_wrong": {
+   "claims": {
+    "hd1": {
+     "text": "Act 2 imposes pure risk on a person and incidental harm has actually occurred.",
+     "source": "statement"
+    },
+    "hd2": {
+     "text": "Act 2 is an act that imposes pure risk on others.",
+     "source": "background"
+    },
+    "hd3": {
+     "text": "Act 2 is morally wrong.",
+     "source": "statement"
+    }
+   },
+   "premises": [
+    {
+     "claim": "hd1",
+     "by": "*",
+     "kind": "axiom"
+    },
+    {
+     "claim": "hd2",
+     "by": "*",
+     "kind": "axiom"
+    }
+   ],
+   "rules": [
+    {
+     "id": "rd1",
+     "by": "Diane",
+     "if": [
+      "hd1",
+      "c11"
+     ],
+     "then": "hd3",
+     "type": "defeasible",
+     "source": "rationale"
+    },
+    {
+     "id": "rd2",
+     "by": "Alice",
+     "if": [
+      "hd2",
+      "c3"
+     ],
+     "then": "hd3",
+     "type": "strict",
+     "source": "rationale"
+    }
+   ]
+  }
+ }
+}

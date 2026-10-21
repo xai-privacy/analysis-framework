@@ -1,0 +1,261 @@
+{
+ "id": "2022_28",
+ "positions": {
+  "A": {
+   "thesis": "c2",
+   "summary": "It is the severity of the harm described in the VIS, not the presence of the VIS itself, that leads to heavier sentences."
+  },
+  "B": {
+   "thesis": "c5",
+   "summary": "Sentencing is influenced by both the harm described and the strong emotions expressed in the VIS, so the VIS itself induces a heavier sentence."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Sentences tend to be heavier when a VIS is submitted compared to when it is not.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "It is the severity of the harm described in the VIS, not the presence of the VIS itself, that leads to heavier sentences.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Victims who have suffered more serious harm are more likely to submit a VIS, whereas victims who have not suffered serious harm tend not to submit a VIS.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Judges and jurors are influenced by both the harm described in the VIS and the strong emotions expressed by the victim through the VIS.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The VIS itself induces a heavier sentence.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "In Method P, Group 1 receives a VIS describing emotional injury much more serious than generally expected, Group 2 receives a VIS describing emotional injury less serious than generally expected, and Group 3 receives no VIS.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "In Method Q, Group 1 sees a video of a serious VIS read in a highly emotional manner, Group 2 sees the same VIS read calmly, and Group 3 sees a less serious VIS read calmly.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "In Method P, the severity of harm mock jurors are exposed to is in the order of Group 1, Group 3, and Group 2.",
+   "source": "rationale"
+  },
+  "c9": {
+   "text": "In Method Q, Group 1 and Group 2 differ only in emotional expression, while Group 2 and Group 3 differ only in the severity of harm described.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "B",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c7",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c8",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c9",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c3"
+   ],
+   "then": "c2",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "B",
+   "if": [
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c2",
+   "c5"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "strengthens",
+    "claim": "A",
+    "add": {
+     "claims": {
+      "ha1": {
+       "text": "In Method P, the average sentence of Group 1 is significantly higher than that of Group 2, and the average sentence of Group 2 is significantly higher than that of Group 3.",
+       "source": "statement"
+      },
+      "ha2": {
+       "text": "The presence of the VIS itself leads to a heavier sentence regardless of the severity of the harm.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "ha1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "ha1",
+        "c8"
+       ],
+       "then": "ha2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "ha2",
+       "c2"
+      ]
+     ]
+    }
+   },
+   "note": "In P, harm severity is Group 1 > Group 3 > Group 2. Group 2 > Group 3 shows the VIS itself increases sentencing despite less severe harm, which contradicts View A."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "B",
+    "add": {
+     "claims": {
+      "hb1": {
+       "text": "In Method Q, the average sentence of Group 1 is significantly higher than that of Group 2, and the average sentence of Group 2 is significantly higher than that of Group 3.",
+       "source": "statement"
+      },
+      "hb2": {
+       "text": "Both the emotional expression of the victim and the severity of the harm described in the VIS influence sentencing.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hb1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "hb1",
+        "c9"
+       ],
+       "then": "hb2",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "rb2",
+       "by": "*",
+       "if": [
+        "hb2"
+       ],
+       "then": "c5",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Group 1 > Group 2 shows emotional expression affects sentencing, and Group 2 > Group 3 shows harm severity affects sentencing, together strengthening View B."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "A",
+    "add": {
+     "claims": {
+      "hc1": {
+       "text": "In Method Q, comparing only Group 1 and Group 2, there is no significant difference in the average sentence between the two groups.",
+       "source": "statement"
+      },
+      "hc2": {
+       "text": "Sentencing is not influenced by emotional expression in the VIS, but depends on the severity of the harm described.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "hc1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "hc1",
+        "c9"
+       ],
+       "then": "hc2",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "rc2",
+       "by": "*",
+       "if": [
+        "hc2"
+       ],
+       "then": "c2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "No difference between Group 1 and Group 2 shows emotional delivery does not affect sentencing when harm is identical, which supports View A rather than weakening it."
+  }
+ }
+}

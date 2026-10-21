@@ -1,0 +1,268 @@
+{
+ "id": "2024_19",
+ "positions": {
+  "Alice": {
+   "thesis": "c4",
+   "summary": "Alice's view that truth is relative to a single subject of discourse does not contradict the Law of Excluded Middle."
+  },
+  "Bob": {
+   "thesis": "c5",
+   "summary": "Accepting both Alice's view and the Law of Excluded Middle leads to a contradiction."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Every proposition concerns only one subject of discourse, and is true or false only relative to that subject.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "A proposition is not true in relation to any subject of discourse other than its own.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "According to the Law of Excluded Middle, for a proposition p concerning subject S, if p is not S-true, then p is S-false.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Alice's view that truth is relative to a single subject of discourse does not contradict the Law of Excluded Middle.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Accepting both Alice's view and the Law of Excluded Middle leads to a contradiction.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "The proposition 'Murder is wrong' (r) is an ethical proposition.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "The proposition r is not mathematically true.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "The proposition 'r is not mathematically true' belongs to the subject of ethics.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "The proposition 'r is not mathematically true' is ethically true.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "The proposition 'r is not mathematically true' is not mathematically true.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "According to the Law of Excluded Middle, for any proposition p and subject S, if 'p is not S-true' is not S-true, then p is S-true.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "The proposition r is mathematically true.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": [
+    "Alice",
+    "Bob"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": [
+    "Alice",
+    "Bob"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c11",
+   "by": "Bob",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c1",
+    "c3"
+   ],
+   "then": "c4",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c6",
+    "c2"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob",
+   "if": [
+    "c7",
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob",
+   "if": [
+    "c9",
+    "c2"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Bob",
+   "if": [
+    "c10",
+    "c11"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r6",
+   "by": "Bob",
+   "if": [
+    "c7",
+    "c12"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c4",
+   "c5"
+  ],
+  [
+   "c7",
+   "c12"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Alice",
+    "claim": "c3"
+   },
+   "note": "Alice accepts and holds the Law of Excluded Middle restricted to the domain S (if not S-true, then S-false)."
+  },
+  "b": {
+   "check": {
+    "op": "weakens",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "In 'it is not true that \"p is not true\"', the first 'true' and the second 'true' cannot be about the same subject of discourse.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "undercuts": [
+      {
+       "claim": "h1",
+       "rule": "r5"
+      }
+     ]
+    }
+   },
+   "note": "If the two truth predicates cannot share a subject, the double-negation step r5 (both mathematical) is undercut, weakening Bob's argument."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "Bob",
+    "add": {
+     "claims": {
+      "h2": {
+       "text": "The proposition 'r is not mathematically true' belongs to the subject of discourse of art rather than ethics.",
+       "source": "statement"
+      },
+      "h3": {
+       "text": "The proposition 'r is not mathematically true' is artistically true.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "Bob",
+       "if": [
+        "c7",
+        "h2"
+       ],
+       "then": "h3",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "rc2",
+       "by": "Bob",
+       "if": [
+        "h3",
+        "c2"
+       ],
+       "then": "c10",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Assuming 'r is not mathematically true' belongs to art, it is artistically true (rc1) and thus not mathematically true (rc2), deriving c10 and reaching Bob's conclusion as before."
+  }
+ }
+}

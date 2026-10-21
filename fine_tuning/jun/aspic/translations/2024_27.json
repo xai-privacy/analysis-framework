@@ -1,0 +1,199 @@
+{
+ "id": "2024_27",
+ "positions": {
+  "Hypothesis": {
+   "thesis": "c1",
+   "summary": "Evidence that does not explicitly present who is responsible has lower informational value and less influence on jurors' verdicts than explicit evidence."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Evidence that does not explicitly present who is responsible has lower informational value and less influence on jurors' verdicts than explicit evidence.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Testimony X is probabilistic evidence that does not explicitly present who is responsible.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Testimony Y explicitly identifies Company B as responsible.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Group 1 was presented only with Testimony X, while Group 2 was presented with both Testimonies X and Y.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The subjective probability that B was responsible was identical between Group 1 and Group 2.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "In both groups, the plaintiff verdict rate was lower than the subjective probability.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Hypothesis",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c5",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c6",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [],
+ "contraries": [],
+ "undercuts": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "Hypothesis",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "The plaintiff verdict rate in Group 1 is significantly lower than that in Group 2.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "c1",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Group 1's verdict rate being lower than Group 2's supports the hypothesis rather than weakening it; adding h1 provides a supporting rule rather than an attack, so weakens evaluates to false."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "Hypothesis",
+    "add": {
+     "claims": {
+      "h2": {
+       "text": "The difference between subjective probability and plaintiff verdict rate is significantly greater in Group 1 than in Group 2.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h2",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "c1",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "A significantly greater difference in Group 1 confirms the hypothesis's prediction, adding a new non-OUT argument for c1."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "Hypothesis",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "When testimony of a witness who saw a gray bus hit Alice's dog is additionally presented to both groups, the plaintiff verdict rate in Group 2 decreases significantly more than in Group 1.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "The greater decrease in plaintiff verdict rate in Group 2 is inconsistent with the Hypothesis.",
+       "source": "rationale"
+      },
+      "h5": {
+       "text": "Because Group 1's initial plaintiff verdict rate was already low under the Hypothesis while Group 2's was higher, Group 2 has more room to decrease upon contrary explicit evidence.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "ordinary"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h3"
+       ],
+       "then": "h4",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h4",
+       "c1"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "h5",
+       "rule": "rc1"
+      }
+     ]
+    }
+   },
+   "note": "Statement (c) asserts that h3 weakens the hypothesis via rc1, but rc1 is undercut by h5 (the floor/ceiling effect explained in the rationale)."
+  }
+ }
+}

@@ -1,0 +1,236 @@
+{
+  "id": "2024_20",
+  "positions": {
+    "Alice": {
+      "thesis": "c3",
+      "summary": "Distinguishing between accurate representation and misrepresentation is important because accurate perception of the external world was crucial in human evolution."
+    },
+    "Bob": {
+      "thesis": "c8",
+      "summary": "With perception alone, we cannot distinguish between accurate representation and misrepresentation, because multiple external objects can correspond to the same retinal perception."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Humans interact with the world based on perception, but sometimes perceive objects incorrectly.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "The ability to perceive in a way that accurately corresponds to the external world was important in human evolution.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Distinguishing between accurate representation and misrepresentation is important.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Some perceptions correspond accurately to external objects.",
+      "source": "statement"
+    },
+    "c5": {
+      "text": "Visual perception is determined only by the information delivered to the retina.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Multiple external objects can correspond to the same perception, so we cannot know which one is real.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "A brownish-yellow surface surrounded by red and a greenish-yellow surface surrounded by green are both perceived as neutral yellow, giving no way to know their actual colors.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "With perception alone, we cannot distinguish between accurate representation and misrepresentation.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Yellow bananas predominate within our action range, so eating based on the perception of yellow leads to eating ripe bananas.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Bob",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c2"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r2",
+      "by": "Alice",
+      "if": [
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c7"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Bob",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": "Bob",
+      "if": [
+        "c9"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "rationale"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "not",
+        "arg": {
+          "op": "weakens",
+          "claim": "Alice",
+          "add": {
+            "claims": {
+              "h1": {
+                "text": "The perceiver can know which of the multiple objects producing the same perception most likely corresponds accurately to that perception.",
+                "source": "statement"
+              },
+              "h2": {
+                "text": "The perceiver can distinguish between accurate representation and misrepresentation.",
+                "source": "rationale"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h1",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "rules": [
+              {
+                "id": "ra1",
+                "by": "*",
+                "if": [
+                  "h1"
+                ],
+                "then": "h2",
+                "type": "defeasible",
+                "source": "rationale"
+              }
+            ],
+            "contraries": [
+              [
+                "h2",
+                "c8"
+              ]
+            ]
+          }
+        }
+      },
+      "note": "Knowing the most likely object supports distinguishing accurate representation, attacking Bob (c8) rather than Alice (c3); thus Alice is not weakened."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "Bob",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "Two circles of different sizes can be perceived as the same size depending on the size of the circles surrounding each.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "c6",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "The circle illusion is analogous to Bob's color example and provides an additional argument for c6, supporting rather than weakening Bob."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "not",
+            "arg": {
+              "op": "holds",
+              "by": "Alice",
+              "claim": "c4"
+            }
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c4"
+          }
+        ]
+      },
+      "note": "Alice accepts c4 via the evolutionary importance of accurate perception (r1), making the first conjunct false."
+    }
+  }
+}

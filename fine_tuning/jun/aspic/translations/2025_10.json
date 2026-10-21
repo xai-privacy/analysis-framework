@@ -1,0 +1,291 @@
+{
+ "id": "2025_10",
+ "positions": {
+  "Q": {
+   "thesis": "c10",
+   "summary": "Company P's 'Buy 1 Get 1 Free' advertisement violated [the Regulation] because ⓐ it is deemed a discount sale, so indicating 15,000 won instead of 12,750 won violates Paragraph 1."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "From August 1 to August 31, 2023, product A was sold at the fixed price of 15,000 won.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "From September 1 to September 30, 2023, the price of product A changed continuously (14,500 won, 13,500 won, 11,000 won) without specifying a discount rate.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "From October 1, 2023, Company P advertised a 'Buy 1 Get 1 Free' promotion for product A, indicating the sale price of one unit as 15,000 won.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Regardless of the method of sale, consumers consider themselves purchasing at a 50% discount compared to the previous transaction price.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "ⓐ The 'Buy 1 Get 1 Free' promotion is deemed a discount sale.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Under Paragraph 1 of [the Regulation], if the price changed continuously during the preceding 30 days, the previous transaction price must be the lower of (i) the 30-day average price and (ii) the average of the lowest and highest prices.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "For the 30 days of September, the average price was 13,000 won, and the average of the lowest and highest prices was 12,750 won.",
+   "source": "rationale"
+  },
+  "c8": {
+   "text": "Under Paragraph 1 of [the Regulation], Company P should have indicated the previous transaction price as 12,750 won.",
+   "source": "rationale"
+  },
+  "c9": {
+   "text": "Company P should have indicated the sale price of product A as 13,000 won.",
+   "source": "statement"
+  },
+  "c10": {
+   "text": "Company P's 'Buy 1 Get 1 Free' advertisement violated [the Regulation].",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "Under Paragraph 2 of [the Regulation], where discount sales are conducted consecutively under different conditions, the previous transaction price during the 30 days prior to the first discount sale shall be stated.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Company P's act of indicating 15,000 won as the sale price in the 'Buy 1 Get 1 Free' promotion does not violate [the Regulation].",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "Q",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c7",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c11",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Q",
+   "if": [
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Q",
+   "if": [
+    "c5",
+    "c6",
+    "c7"
+   ],
+   "then": "c8",
+   "type": "strict",
+   "source": "rationale"
+  },
+  {
+   "id": "r3",
+   "by": "Q",
+   "if": [
+    "c5",
+    "c8",
+    "c3"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c8",
+   "c9"
+  ],
+  [
+   "c10",
+   "c12"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "c5",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Company P's act of indicating 15,000 won as the sale price is solely for the purpose of a giveaway because the discount rate was not directly stated.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "The 'Buy 1 Get 1 Free' promotion is a giveaway and not a discount sale.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c5"
+      ]
+     ]
+    }
+   },
+   "note": "If the event is interpreted as a giveaway rather than a discount sale, it directly attacks ⓐ (c5)."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Q",
+    "claim": "c9"
+   },
+   "note": "Under Paragraph 1, Q derives that Company P should have indicated 12,750 won (the lower of 13,000 and 12,750), not 13,000 won."
+  },
+  "c": {
+   "check": {
+    "op": "status",
+    "claim": "c10",
+    "is": [
+     "OUT"
+    ],
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "Sales involving discounts without indicating the discount rate are regarded as discount sales.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "Company P's sales in September 2023 were discount sales.",
+       "source": "rationale"
+      },
+      "h5": {
+       "text": "Company P conducted consecutive discount sales under different conditions.",
+       "source": "rationale"
+      },
+      "h6": {
+       "text": "Under Paragraph 2, the previous transaction price to be indicated for the 'Buy 1 Get 1 Free' promotion is 15,000 won.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      },
+      {
+       "claim": "c5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h3",
+        "c2"
+       ],
+       "then": "h4",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "rc2",
+       "by": "*",
+       "if": [
+        "h4",
+        "c5"
+       ],
+       "then": "h5",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "rc3",
+       "by": "*",
+       "if": [
+        "h5",
+        "c11",
+        "c1"
+       ],
+       "then": "h6",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "rc4",
+       "by": "*",
+       "if": [
+        "h6",
+        "c3"
+       ],
+       "then": "c12",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ],
+     "undercuts": [
+      {
+       "claim": "h5",
+       "rule": "r3"
+      }
+     ]
+    }
+   },
+   "note": "Under the hypothetical, Paragraph 2 overrides Paragraph 1 (undercutting r3), making 15,000 won the legally required price and denying the violation (c10 is OUT)."
+  }
+ }
+}

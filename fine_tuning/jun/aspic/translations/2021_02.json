@@ -1,0 +1,227 @@
+{
+ "id": "2021_02",
+ "positions": {
+  "Alice": {
+   "thesis": "c6",
+   "summary": "Obscene materials should be protected as copyrighted works, because the Copyright Act only requires creativity and recognition of a work should be value-neutral."
+  },
+  "Bob": {
+   "thesis": "c9",
+   "summary": "Obscene materials should not be protected as copyrighted works, because protecting the fruits of illegal conduct contradicts legal unity and fairness."
+  },
+  "Charlie": {
+   "thesis": "c12",
+   "summary": "Clearly socially harmful obscene materials should not be recognized as works, but other obscene materials should be recognized to minimize infringement on expression and property rights."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Country X's Criminal Act prohibits the production and distribution of obscene materials.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "The Copyright Act protects creative works expressing human thoughts or emotions as copyrighted works for the enhancement and development of culture and related industries.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The Copyright Act only requires creativity as a condition for a work, and does not demand morality.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "In order to encourage creation and promote cultural diversity, the recognition of a work should be value-neutral.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Creativity can be acknowledged for obscene forms of expression.",
+   "source": "rationale"
+  },
+  "c6": {
+   "text": "Obscene materials should be protected as copyrighted works under the Copyright Act.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Protecting obscene materials as copyrighted works grants rights to those who committed illegal acts, and recognizes property protection for the fruits of illegal conduct.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Recognizing property rights for the fruits of illegal conduct contradicts the principles of legal unity and fairness.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Obscene materials should not be protected as copyrighted works under the Copyright Act.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Clearly socially harmful obscene materials—such as child pornography or videos recording actual rape—should not be recognized as works.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "For other types of obscene materials, recognizing them as works helps minimize the infringement on freedom of expression and property rights.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Clearly socially harmful obscene materials should not be recognized as works, but other types of obscene materials should be recognized as works.",
+   "source": "passage"
+  },
+  "c13": {
+   "text": "Creativity cannot be acknowledged for obscene forms of expression.",
+   "source": "statement"
+  },
+  "c14": {
+   "text": "Even within the same era and region, the legal evaluation of obscenity may vary depending on the purpose, method, and audience of distribution.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c10",
+   "by": "Charlie",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c11",
+   "by": "Charlie",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice",
+   "if": [
+    "c3",
+    "c4",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Bob",
+   "if": [
+    "c1",
+    "c7",
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Charlie",
+   "if": [
+    "c10",
+    "c11"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c6",
+   "c9"
+  ],
+  [
+   "c5",
+   "c13"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "assumes",
+    "by": "Alice",
+    "claim": "c13"
+   },
+   "note": "Alice assumes that creativity CAN be acknowledged for obscene materials (c5), not that it cannot (c13)."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Bob",
+    "claim": "h2",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Murals painted in legally prohibited locations and works that incite the public in violation of the National Security Act are the fruits of illegal conduct.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Murals painted in legally prohibited locations and works that incite the public in violation of the National Security Act are not objects of protection under the Copyright Act.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "Bob",
+       "if": [
+        "h1",
+        "c8"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Applying Bob's principle of legality and fairness (c8), illegal murals and subversive works cannot be protected under the Copyright Act."
+  },
+  "c": {
+   "check": {
+    "op": "assumes",
+    "by": "Charlie",
+    "claim": "c14"
+   },
+   "note": "Charlie differentiates copyright protection by social harmfulness, not by varying the legal evaluation of obscenity across distribution factors."
+  }
+ }
+}

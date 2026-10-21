@@ -1,0 +1,149 @@
+{
+  "id": "2022_39",
+  "positions": {
+    "Rubino": {
+      "thesis": "c5",
+      "summary": "ⓐ The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Bariatric surgery creates a bypass from the stomach directly to the small intestine, improving blood sugar regulation within days rather than as a secondary effect of weight loss.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Incretin is secreted by the small intestine when food is consumed and signals the pancreas to secrete insulin, which regulates blood sugar.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Ingested food passes sequentially through the duodenum, jejunum, and ileum before entering the large intestine.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In mice, bariatric surgery connecting the stomach directly to the jejunum improves blood sugar without reducing body weight or food intake.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "ⓐ The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Bypassing the duodenum is effective in treating diabetes because it prevents an anti-incretin substance from interfering with incretin.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The improvement in blood sugar regulation after bariatric surgery is not due to a substance in the body interfering with incretin.",
+      "source": "rationale"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Rubino",
+      "if": [
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Rubino",
+      "if": [
+        "c4",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c5",
+      "c7"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c5",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "A substance secreted in the duodenum decreases insulin secretion induced by incretin.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "A substance in the body interferes with the effect of incretin, and bypassing the duodenum prevents its effect.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c2"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "ra2",
+              "by": "Rubino",
+              "if": [
+                "h2",
+                "c4"
+              ],
+              "then": "c5",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Finding an incretin-interfering substance in the duodenum directly supports the anti-incretin hypothesis ⓐ."
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c5",
+        "add": {
+          "claims": {
+            "h3": {

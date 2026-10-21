@@ -1,0 +1,217 @@
+{
+  "id": "2025_30",
+  "positions": {
+    "Hypothesis": {
+      "thesis": "c1",
+      "summary": "In elections where the impact on policy is greater, the relative influence of policy factors is greater than that of candidate characteristic factors."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In elections where the impact on policy is greater, the relative influence of policy factors is greater than that of candidate characteristic factors.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "ⓐ is the proportion of voters who, when an opposing party's candidate is superior in personal characteristics, vote for that superior candidate.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "A greater relative influence of policy factors over candidate characteristic factors results in a lower defection rate ⓐ (and vice versa).",
+      "source": "rationale"
+    },
+    "c4": {
+      "text": "In general, the president has a greater impact on policy than individual members of parliament.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Hypothesis",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "When presidential and parliamentary elections were held simultaneously, ⓐ was higher in the parliamentary election than in the presidential election.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "In simultaneous elections, the presidential election has a greater impact on policy than the parliamentary election.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "c4"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "ra2",
+              "by": "*",
+              "if": [
+                "h1",
+                "h2",
+                "c3"
+              ],
+              "then": "c1",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "From c4, the presidential election has greater policy impact than the parliamentary election; observing higher defection rate ⓐ in the parliamentary election confirms the hypothesis prediction and strengthens it."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "In the parliamentary election, ⓐ among progressive party supporters was lower when the president was from a conservative party compared to when the president was from a progressive party.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "The parliamentary election results conflict with the hypothesis.",
+              "source": "rationale"
+            },
+            "h5": {
+              "text": "Progressive party supporters perceive the parliamentary election as having a greater policy impact when the sitting president is from a conservative party than when from a progressive party.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h4",
+              "c1"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "h5",
+              "rule": "rb1"
+            }
+          ]
+        }
+      },
+      "note": "The naive inference rb1 (that lower defection ⓐ under an opposing president weakens the hypothesis) is undercut by h5: progressive voters perceive greater policy impact when the sitting president is from an opposing party, which actually aligns with the hypothesis."
+    },
+    "c": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c1",
+        "add": {
+          "claims": {
+            "h6": {
+              "text": "In the parliamentary election, ⓐ was lower when the majority party in parliament did not change compared to when it changed.",
+              "source": "statement"
+            },
+            "h7": {
+              "text": "When the majority party in parliament does not change, the parliamentary election has less impact on policy than when it changes.",
+              "source": "rationale"
+            },
+            "h8": {
+              "text": "In elections where the impact on policy is smaller, the relative influence of policy factors is greater than that of candidate characteristic factors.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h6",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h7",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h6",
+                "h7",
+                "c3"
+              ],
+              "then": "h8",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h8",
+              "c1"
+            ]
+          ]
+        }
+      },
+      "note": "When the majority does not change, policy impact is smaller; observing lower ⓐ indicates greater influence of policy factors, which contradicts the hypothesis (h8). Thus the observation conflicts with and weakens rather than strengthens the hypothesis."
+    }
+  }
+}

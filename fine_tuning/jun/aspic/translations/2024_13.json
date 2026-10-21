@@ -1,0 +1,259 @@
+{
+ "id": "2024_13",
+ "positions": {
+  "A": {
+   "thesis": "c7",
+   "summary": "Principle P should be equally applicable to evaluate moral responsibility for killings in both Situation 1 and Situation 2."
+  },
+  "B": {
+   "thesis": "c10",
+   "summary": "War and daily life require distinct moral principles, so at least two principles are necessary to evaluate Bob and Dave."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "In Situation 1, Bob follows Alice's instruction and shoots and kills the bank security officer.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "In Situation 2, Dave follows Charlie's order during battle and kills an enemy sniper.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "An act of killing occurred in both Situation 1 and Situation 2.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "There is no difference between Situation 1 and Situation 2 in that an act of killing has occurred.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "There is no reason that the principle for evaluating moral responsibility for murder should be different between Situation 1 and Situation 2.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Principle P: Any killing, command to kill, or execution of a killing that is not self-defense is morally impermissible, and there is moral responsibility for such an act.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "When evaluating moral responsibility for the killings committed by Bob in Situation 1 and Dave in Situation 2, principle P should be equally applicable.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Violence in war and violence in everyday life are clearly different.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "A special moral principle, distinct from the principle used to assess moral responsibility for murder in daily life, is required in war.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "In order to assess the moral responsibility for the actions of Bob in Situation 1 and Dave in Situation 2, at least two principles are necessary.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "To properly assess moral responsibility for killing in war, one should be able to apply a different moral principle than the one used in daily life.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Dave bears moral responsibility for the killing in Situation 2 under principle P.",
+   "source": "statement"
+  },
+  "c13": {
+   "text": "The conclusion that both Bob and Dave are morally responsible cannot be reached.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "B",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "A",
+   "if": [
+    "c3",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "A",
+   "if": [
+    "c5",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "B",
+   "if": [
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "B",
+   "if": [
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c7",
+   "c10"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "c7",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "According to principle P, Bob is morally responsible, but Dave is not.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Principle P is not equally applicable to Bob in Situation 1 and Dave in Situation 2.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c7"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "c6",
+       "rule": "ra1"
+      }
+     ]
+    }
+   },
+   "note": "Naive inference ra1 (different outcomes imply principle P is not equally applicable) is undercut by c6: principle P explicitly makes moral responsibility conditional on whether an act constitutes self-defense."
+  },
+  "b": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "A",
+      "claim": "c12",
+      "add": {
+       "claims": {
+        "h3": {
+         "text": "Dave's killing of the enemy sniper does not count as self-defense.",
+         "source": "statement"
+        }
+       },
+       "premises": [
+        {
+         "claim": "h3",
+         "by": "*",
+         "kind": "axiom"
+        }
+       ],
+       "rules": [
+        {
+         "id": "rb1",
+         "by": "A",
+         "if": [
+          "c2",
+          "c6",
+          "h3"
+         ],
+         "then": "c12",
+         "type": "strict",
+         "source": "passage"
+        }
+       ]
+      }
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "A",
+       "claim": "c12"
+      }
+     }
+    ]
+   },
+   "note": "Under principle P, Dave is held morally responsible only if non-self-defense is proven; without this factual input, A cannot derive responsibility."
+  },
+  "c": {
+   "check": {
+    "op": "holds",
+    "by": "B",
+    "claim": "c13"
+   },
+   "note": "According to B, at least two principles are required, but B does not assert that the conclusion holding both Bob and Dave morally responsible cannot be reached."
+  }
+ }
+}

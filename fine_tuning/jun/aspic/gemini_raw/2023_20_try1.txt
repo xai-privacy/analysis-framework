@@ -1,0 +1,219 @@
+{
+  "id": "2023_20",
+  "positions": {
+    "Alice": {
+      "thesis": "c6",
+      "summary": "Misleading statements and lies are equally wrong because both involve the intention to make the listener believe a falsehood."
+    },
+    "Bob": {
+      "thesis": "c7",
+      "summary": "Misleading statements are always wrong, but lies are not always wrong, and lies do not necessarily require an intention to deceive."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "A lie is a statement made with the intention of making the listener believe a falsehood as if it were true.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "A misleading statement is a statement that is true but easily misunderstood by the listener.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "A lie can be made even without the intention to deceive the other person.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "A brazen insistence that one is innocent when everyone knows the truth is a lie told without the intention to deceive.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Both lies and misleading statements can involve the intention to make the listener believe a falsehood.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Misleading statements and lies are equally wrong.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Misleading statements are always wrong, but lies are not always wrong.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Scientists whose sincere predictions later turn out to be false are not morally blameworthy.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "There can be statements that are true but still morally blameworthy.",
+      "source": "statement"
+    },
+    "c10": {
+      "text": "Misleading statements and lies differ in their degree of moral wrongness.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": [
+        "Alice",
+        "Bob"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Bob",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Bob",
+      "if": [
+        "c4"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Alice",
+      "if": [
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c8"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Alice",
+      "if": [
+        "c2",
+        "c6"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r5",
+      "by": "Bob",
+      "if": [
+        "c2",
+        "c7"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "rationale"
+    },
+    {
+      "id": "r6",
+      "by": "Bob",
+      "if": [
+        "c7"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "rationale"
+    }
+  ],
+  "contraries": [
+    [
+      "c1",
+      "c3"
+    ],
+    [
+      "c6",
+      "c7"
+    ],
+    [
+      "c6",
+      "c10"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c1"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c3"
+          }
+        ]
+      },
+      "note": "Alice agrees that lying requires deceptive intent (c1); Bob disagrees by arguing that a lie can occur without deceptive intent (c3)."
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c9"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c9"
+          }
+        ]
+      },
+      "note": "Both agree that misleading statements are true (c2) and can be morally blameworthy (c6 for Alice, c7 for Bob), deriving c9."
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c10"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c10"
+          }
+        ]
+      },
+      "note": "Alice explicitly argues that lies and misleading statements are equally wrong (c6, contrary to c10), so she does not hold c10."
+    }
+  }
+}

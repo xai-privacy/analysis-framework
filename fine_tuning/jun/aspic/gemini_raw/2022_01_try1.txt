@@ -1,0 +1,31 @@
+{
+  "id": "2022_01",
+  "positions": {
+    "Passage": {
+      "thesis": "c6",
+      "summary": "Neuroscience finding the causes of behavior in the brain cannot justify a fundamental change in legal responsibility and punishment, because the law requires only a minimum capacity for rational action, which people generally possess."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The law assumes that people generally have the ability to make rational choices.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "To be exempt from legal responsibility, it must be proven that the defendant lacks the capacity for rational action.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "The capacity for rational action refers to the ability to act in ways that achieve one's desires based on one's own beliefs.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The law is not concerned with whether people possess metaphysical free will, but only whether they meet the minimum standard of rationality.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Neuroscience has not shown that people in general do not meet the minimum standard of rationality.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Neuroscience finding the causes of behavior in the brain cannot justify a fundamental change in the practice of holding people

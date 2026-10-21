@@ -1,0 +1,225 @@
+{
+ "id": "2022_31",
+ "positions": {
+  "ⓐ": {
+   "thesis": "c2",
+   "summary": "Pure Altruism Hypothesis: donors determine the total donation needed by the recipient and reduce their own donation dollar-for-dollar when others donate."
+  },
+  "ⓑ": {
+   "thesis": "c3",
+   "summary": "Impure Altruism Hypothesis: emotional utility from the act of donating itself plays an important role, leading to incomplete crowd-out."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Donors consider both their own utility from personal consumption and the utility of the recipient of the donation.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "ⓐ Under the Pure Altruism Hypothesis, the donor first determines the total donation needed by the recipient and reduces their donation by the exact amount received from other donors.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "ⓑ Under the Impure Altruism Hypothesis, emotional utility obtained from the act of donating itself plays an important role in donation behavior.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The Impure Altruism Hypothesis considers the donor's consumption utility, the recipient's utility, and the donor's own emotional utility from donating.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "In Situations A–D, participant income is 40 and charity donations are 4, 10, 28, 34; in Situations E–F, participant income is 46 and charity donations are 4, 28.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "ⓐ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "ⓑ",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "ⓐ",
+   "if": [
+    "c1"
+   ],
+   "then": "c2",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "ⓑ",
+   "if": [
+    "c4"
+   ],
+   "then": "c3",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c2",
+   "c3"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "strengthens",
+    "claim": "ⓑ",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "For most participants, b = e − 6.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Total donation to the recipient in Situation B (b + 10) and Situation E (e + 4) is identical.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1",
+        "c5"
+       ],
+       "then": "h2",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "c2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "b = e − 6 means total donation in B (b + 10) equals that in E (e + 4), providing evidence for ⓐ (dollar-for-dollar adjustment) rather than ⓑ."
+  },
+  "b": {
+   "check": {
+    "op": "strengthens",
+    "claim": "ⓐ",
+    "add": {
+     "claims": {
+      "h3": {
+       "text": "For most participants, e − a < f − c.",
+       "source": "statement"
+      },
+      "h4": {
+       "text": "The observation e − a < f − c (i.e., e − f < a − c) contradicts ⓐ's prediction that e − f = a − c = 24 under equal incomes.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h3",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h3",
+        "c5"
+       ],
+       "then": "h4",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h4",
+       "c2"
+      ]
+     ]
+    }
+   },
+   "note": "Under ⓐ, e − f = a − c = 24, which requires e − a = f − c; observing e − a < f − c contradicts ⓐ, thus weakening rather than strengthening it."
+  },
+  "c": {
+   "check": {
+    "op": "strengthens",
+    "claim": "ⓑ",
+    "add": {
+     "claims": {
+      "h5": {
+       "text": "For most participants, 0 < a − 30 < b − 24 < c − 6 < d.",
+       "source": "statement"
+      },
+      "h6": {
+       "text": "Total donations strictly increase as the charity donation increases (34 < a + 4 < b + 10 < c + 28 < d + 34), demonstrating incomplete crowd-out.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h5",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h5",
+        "c5"
+       ],
+       "then": "h6",
+       "type": "strict",
+       "source": "rationale"
+      },
+      {
+       "id": "rc2",
+       "by": "*",
+       "if": [
+        "h6"
+       ],
+       "then": "c3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Adding 34 across terms yields 34 < a + 4 < b + 10 < c + 28 < d + 34; incomplete crowd-out provides empirical evidence for emotional utility from giving (ⓑ)."
+  }
+ }
+}

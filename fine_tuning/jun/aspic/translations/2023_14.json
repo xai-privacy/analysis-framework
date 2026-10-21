@@ -1,0 +1,249 @@
+{
+ "id": "2023_14",
+ "positions": {
+  "Alice": {
+   "thesis": "c7",
+   "summary": "Any desire that no longer exists (past or future) cannot be beneficial to that person, so dead people cannot be benefited or harmed."
+  },
+  "Bob": {
+   "thesis": "c4",
+   "summary": "It is beneficial to someone to have their desires satisfied, regardless of whether they are alive or dead."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "It is not physically possible to harm a dead person.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "A dead person cannot be benefited or harmed.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The daughter's action fulfills a past desire her mother had in life that no longer exists.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "It is beneficial to someone to have their desires satisfied, regardless of whether they are alive or dead.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "The daughter's action is beneficial to her deceased mother.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "The daughter's action is not beneficial or harmful to her deceased mother.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Any desire that no longer exists, whether past or future, cannot be beneficial to that person, whenever it might be fulfilled.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "What benefits or harms a person is related to satisfying that person's desires.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "The son, who currently has no desire for money, agrees with his parents' prediction that he will want money in the future, and judges that what he should do now is to obtain the license.",
+   "source": "passage"
+  },
+  "c10": {
+   "text": "Damaging a corpse is an act that harms the deceased party.",
+   "source": "statement"
+  },
+  "c11": {
+   "text": "Damaging a corpse is not an act that harms the deceased party.",
+   "source": "rationale"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "Bob",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c7",
+   "by": "Alice",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": [
+    "Alice",
+    "Bob"
+   ],
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c9",
+   "by": "*",
+   "kind": "axiom"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Bob",
+   "if": [
+    "c3",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice",
+   "if": [
+    "c3",
+    "c7"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Alice",
+   "if": [
+    "c1"
+   ],
+   "then": "c11",
+   "type": "strict",
+   "source": "rationale"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c6"
+  ],
+  [
+   "c10",
+   "c11"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "Alice",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Agreeing with the parents' prediction and deciding that what he should do now is to obtain the license is acknowledged as reasonable.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Satisfying a future desire that does not currently exist can be beneficial to that person.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1",
+        "c9"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c7"
+      ]
+     ]
+    }
+   },
+   "note": "If the son's decision is reasonable, satisfying a future non-existent desire can be beneficial, weakening Alice's thesis c7."
+  },
+  "b": {
+   "check": {
+    "op": "or",
+    "args": [
+     {
+      "op": "and",
+      "args": [
+       {
+        "op": "holds",
+        "by": "Alice",
+        "claim": "c10"
+       },
+       {
+        "op": "holds",
+        "by": "Bob",
+        "claim": "c10"
+       }
+      ]
+     },
+     {
+      "op": "and",
+      "args": [
+       {
+        "op": "holds",
+        "by": "Alice",
+        "claim": "c11"
+       },
+       {
+        "op": "holds",
+        "by": "Bob",
+        "claim": "c11"
+       }
+      ]
+     }
+    ]
+   },
+   "note": "Tests whether Alice and Bob share the view that damaging a corpse harms the deceased (c10) or that it does not (c11)."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob",
+      "claim": "c8"
+     },
+     {
+      "op": "not",
+      "arg": {
+       "op": "holds",
+       "by": "Alice",
+       "claim": "c8"
+      }
+     }
+    ]
+   },
+   "note": "Bob argues that benefit/harm relates to desire satisfaction, but Alice does not agree."
+  }
+ }
+}

@@ -1,0 +1,330 @@
+{
+  "id": "2022_36",
+  "positions": {
+    "Author": {
+      "thesis": "c1",
+      "summary": "Differences between East and West in treating robots as human appear to be the result of cultural selection through Mohist and Confucian traditions."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Differences between East and West in treating robots as if they were human appear to be the result of cultural selection.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "When shown an Aibo wagging its tail and spinning, Korean participants were more likely than Westerners to answer that people and robots could become friends.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "When shown a child trying to break Aibo's tail, Korean participants were much more likely than Westerners to morally instruct the child not to bully Aibo.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in an inherent principle within the judging subject.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Applying Mohist and Confucianist theory, people can consider Aibo a friend when it brings joy, and treat it as a subject of moral consideration when feeling sympathy for it.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Research findings suggest that across Korean society, cultural selection has taken place through Mohism and Confucianism, partially determining the social aspects of Korean emotions and morality.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c2",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Author",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Author",
+      "if": [
+        "c2",
+        "c3"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Author",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Author",
+      "if": [
+        "c4",
+        "c7",
+        "c8"
+      ],
+      "then": "c1",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "undercuts": [],
+  "statements": {
+    "1": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Author",
+            "claim": "c1"
+          },
+          {
+            "op": "holds",
+            "by": "Author",
+            "claim": "c4"
+          },
+          {
+            "op": "holds",
+            "by": "Author",
+            "claim": "c7"
+          },
+          {
+            "op": "assumes",
+            "by": "Author",
+            "claim": "c8"
+          }
+        ]
+      },
+      "note": "G1 correctly represents the derivation structure: c4 and c7 are derived sub-arguments, c8 is an unargued premise, and c1 is the main conclusion derived from c4, c7, and c8."
+    },
+    "2": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h1",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The research findings on cultural selection in Korea (h) are the main conclusion derived from a, d, and g.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "h is a proposition about a particular research finding and is not the main claim running throughout the passage.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r2_1",
+              "by": "Author",
+              "if": [
+                "c1",
+                "c4",
+                "c7"
+              ],
+              "then": "h1",
+              "type": "defeasible",
+              "source": "statement"
+            }
+          ],
+          "contraries": [],
+          "undercuts": [
+            {
+              "claim": "h2",
+              "rule": "r2_1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference r2_1 (deriving h as the main thesis from a, d, g) is undercut by h2: h is an empirical research finding premise, not the passage thesis."
+    },
+    "3": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h3",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "The research findings on cultural selection in Korea (h) are derived from the robot applications of Mohist and Confucian theory (g).",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "g and h are independent: g is a theoretical proposition about philosophical doctrines, whereas h is an empirical finding about historical cultural selection.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r3_1",
+              "by": "Author",
+              "if": [
+                "c7"
+              ],
+              "then": "h3",
+              "type": "defeasible",
+              "source": "statement"
+            }
+          ],
+          "contraries": [],
+          "undercuts": [
+            {
+              "claim": "h4",
+              "rule": "r3_1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference r3_1 (deriving h from g) is undercut by h4: g and h are independent claims across philosophical vs. empirical domains."
+    },
+    "4": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h5",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "The research findings on cultural selection in Korea (h) are the main conclusion derived from a and d.",
+              "source": "statement"
+            },
+            "h6": {
+              "text": "h is a proposition about a particular research finding and is not the main claim derived from a and d.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h6",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r4_1",
+              "by": "Author",
+              "if": [
+                "c1",
+                "c4"
+              ],
+              "then": "h5",
+              "type": "defeasible",
+              "source": "statement"
+            }
+          ],
+          "contraries": [],
+          "undercuts": [
+            {
+              "claim": "h6",
+              "rule": "r4_1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference r4_1 (deriving h from a and d) is undercut by h6: h is a research finding premise, not a conclusion derived from a and d."
+    },
+    "5": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h7",
+        "add": {
+          "claims": {
+            "h7": {
+              "text": "The research findings on cultural selection in Korea (h) are derived from b, c, d, e, f, and g.",
+              "source": "statement"
+            },
+            "h8": {
+              "text": "h cannot be derived from any of b through g because it is an independent research finding.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h8",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "r5_1",
+              "by": "Author",
+              "if": [
+                "c2",
+                "c3",
+                "c4",
+                "c5",
+                "c6",
+                "c7"
+              ],
+              "then": "h7",
+              "type": "defeasible",
+              "source": "statement"
+            }
+          ],
+          "contraries": [],
+          "undercuts": [
+            {
+              "claim": "h8",
+              "rule": "r5_1"
+            }
+          ]
+        }
+      },
+      "note": "Naive inference r5_1 (deriving h from all preceding propositions b through g) is undercut by h8: h cannot be derived from any of b through g."
+    }
+  }
+}

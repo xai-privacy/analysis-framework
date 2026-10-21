@@ -1,0 +1,289 @@
+{
+  "id": "2025_17",
+  "positions": {
+    "Author": {
+      "thesis": "c7",
+      "summary": "It is impossible to determine what the rational choice is in this bet, because whether a choice is regretful endlessly oscillates."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In the bet, only if the participant makes a regretful choice between $1 and $10 will an additional $100 be awarded.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Choosing the option that yields more money is considered the rational choice, for which there will be no regret; any other choice is a regretful one.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "At first glance, giving up $10 to take $1 would be a regretful choice, so the $100 would be awarded.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The rational choice in this bet (ⓐ) appears to be selecting $1.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "If $1 is chosen, receiving the $100 makes it non-regretful, causing the $100 not to be paid, oscillating endlessly.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "If $10 is chosen, not receiving the $100 makes it regretful, so the $100 should be paid, also oscillating endlessly.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "It is impossible to say what the rational choice is in this bet.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "The participant in this bet intends at point 0 to regret at point 2 the choice made at point 1.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "The intention from point 0 to point 2 (ⓑ) and the regret looking back from point 2 to point 1 lead to a paradoxical outcome.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "For both choosing $1 and choosing $10 in this bet, the intention at ⓑ is the same: to bring about regret at the subsequent point.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Author",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Author",
+      "if": [
+        "c3"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Author",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Author",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Author",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": "Author",
+      "if": [
+        "c8"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r6",
+      "by": "Author",
+      "if": [
+        "c8"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c4",
+      "c7"
+    ]
+  ],
+  "undercuts": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "status",
+        "claim": "h2",
+        "is": [
+          "IN"
+        ],
+        "add": "award_regardless"
+      },
+      "note": "Naive inference ra1 (guaranteed bonus makes regret impossible) is undercut by h3: choosing $1 yields $101 vs $110, so choosing $1 is still a regretful choice."
+    },
+    "b": {
+      "check": {
+        "op": "status",
+        "claim": "h6",
+        "is": [
+          "IN"
+        ],
+        "add": "award_if_no_regret"
+      },
+      "note": "Under the rule change, choosing $10 stably yields $110 without regret, so ⓐ (the rational choice) is to choose $10."
+    },
+    "c": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "c10"
+      },
+      "note": "The author holds that whether $1 or $10 is selected, the intention at ⓑ (point 0 to point 2) is to bring about regret at point 2."
+    }
+  },
+  "hypotheticals": {
+    "award_regardless": {
+      "claims": {
+        "h1": {
+          "text": "The additional $100 is awarded no matter which choice between $1 and $10 the participant makes.",
+          "source": "statement"
+        },
+        "h2": {
+          "text": "Making a regretful choice becomes impossible.",
+          "source": "statement"
+        },
+        "h3": {
+          "text": "Choosing $1 yields less total money ($101) than choosing $10 ($110), so choosing $1 is a regretful choice.",
+          "source": "rationale"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h1",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "ra1",
+          "by": "*",
+          "if": [
+            "h1"
+          ],
+          "then": "h2",
+          "type": "defeasible",
+          "source": "statement"
+        },
+        {
+          "id": "ra2",
+          "by": "*",
+          "if": [
+            "h1",
+            "c2"
+          ],
+          "then": "h3",
+          "type": "strict",
+          "source": "rationale"
+        }
+      ],
+      "contraries": [
+        [
+          "h2",
+          "h3"
+        ]
+      ],
+      "undercuts": [
+        {
+          "claim": "h3",
+          "rule": "ra1"
+        }
+      ]
+    },
+    "award_if_no_regret": {
+      "claims": {
+        "h4": {
+          "text": "The additional $100 is awarded only if the participant does not regret their choice.",
+          "source": "statement"
+        },
+        "h5": {
+          "text": "Choosing $10 yields more money ($110) without regret, while choosing $1 yields less money ($1) with regret, so the evaluation does not oscillate.",
+          "source": "rationale"
+        },
+        "h6": {
+          "text": "The rational choice in this bet (ⓐ) is to choose $10.",
+          "source": "statement"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h4",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rb1",
+          "by": "*",
+          "if": [
+            "h4",
+            "c2"
+          ],
+          "then": "h5",
+          "type": "defeasible",
+          "source": "rationale"
+        },
+        {
+          "id": "rb2",
+          "by": "*",
+          "if": [
+            "h5"
+          ],
+          "then": "h6",
+          "type": "defeasible",
+          "source": "rationale"
+        }
+      ],
+      "contraries": [
+        [
+          "c7",
+          "h6"
+        ]
+      ]
+    }
+  }
+}

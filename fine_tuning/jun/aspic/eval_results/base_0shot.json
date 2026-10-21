@@ -1,0 +1,509 @@
+{
+ "model": "mlx-community/Llama-3.2-3B-Instruct-4bit",
+ "adapter": null,
+ "shots": 0,
+ "max_tokens": 2700,
+ "records": [
+  {
+   "id": "2022_08",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "AttributeError: 'list' object has no attribute 'values'",
+   "question_ok": false,
+   "seconds": 19.3,
+   "output": "{\n  \"positions\": [\n    \"Alice\",\n    \"Bob\",\n    \"Charlie\"\n  ],\n  \"claims\": [\n    {\n      \"text\": \"Crimes of child abuse are distinct from general violent crimes in that the guardian, who has a duty of care, inflicts harm upon the person to be protected.\",\n      \"opponent\": \"Bob\"\n    },\n    {\n      \"text\": \"The subject of the acts in Articles 2 and 3 should be limited to “adults” who are the guardians.\",\n      \"opponent\": \"Charlie\"\n    },\n    {\n      \"text\": \"The subject of the acts in Articles 2 and 3 should be retained as “anyone” as in the current regulation.\",\n      \"opponent\": \"Alice\"\n    },\n    {\n      \"text\": \"It is reasonable to delete the phrase “causing sexual humiliation” from Article 3.\",\n      \"opponent\": \"Charlie\"\n    }\n  ],\n  \"premises\": [\n    {\n      \"text\": \"The guardian, who has a duty of care, inflicts harm upon the person to be protected.\",\n      \"supporter\": \"Alice\"\n    },\n    {\n      \"text\": \"The guardian, who has a duty of care, inflicts harm upon the person to be protected.\",\n      \"supporter\": \"Bob\"\n    },\n    {\n      \"text\": \"A significant number of perpetrators of child abuse were themselves victims of child abuse as children.\",\n      \"supporter\": \"Bob\"\n    },\n    {\n      \"text\": \"Experiences of responding to such requests without any sense of shame or discomfort critically influence the later development of negative self-identity or distorted sexual awareness.\",\n      \"supporter\": \"Charlie\"\n    }\n  ],\n  \"rules\": [\n    {\n      \"text\": \"Anyone who commits an act of physical abuse by assaulting a child or causing harm to his or her physical health and development shall be punished by imprisonment for not more than 5 years.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"Anyone who commits an act of sexual abuse causing sexual humiliation to a child shall be punished by imprisonment for not more than 6 years.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"The subject of the acts in Articles 2 and 3 should be limited to “adults” who are the guardians.\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"text\": \"The subject of the acts in Articles 2 and 3 should be retained as “anyone” as in the current regulation.\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"text\": \"It is reasonable to delete the phrase “causing sexual humiliation” from Article 3.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    {\n      \"text\": \"The [Regulation] aims to thoroughly punish the perpetrators of abuse and thereby provide strong protection for children, who are the victims of various abusive acts.\",\n      \"opponent\": \"Alice\"\n    },\n    {\n      \"text\": \"The [Regulation] aims to thoroughly punish the perpetrators of abuse and thereby provide strong protection for children, who are the victims of various abusive acts.\",\n      \"opponent\": \"Bob\"\n    }\n  ],\n  \"undercuts\": [\n    {\n      \"text\": \"A significant number of perpetrators of child abuse were themselves victims of child abuse as children.\",\n      \"opponent\": \"Alice\"\n    },\n    {\n      \"text\": \"A significant number of perpetrators of child abuse were themselves victims of child abuse as children.\",\n      \"opponent\": \"Bob\"\n    }\n  ],\n  \"hypotheticals\": [\n    {\n      \"text\": \"If the guardian, who has a duty of care, inflicts harm upon the person to be protected, then the child, as the person to be protected, should be excluded from being the subject of the act.\",\n      \"supporter\": \"Alice\"\n    },\n    {\n      \"text\": \"If the guardian, who has a duty of care, inflicts harm upon the person to be protected, then the child, as the person to be protected, should be excluded from being the subject of the act.\",\n      \"supporter\": \"Bob\"\n    }\n  ],\n  \"statements\": [\n    {\n      \"text\": \"The research finding that “recently, more minors are entering social relationships in which one minor is the guardian or supervisor of another minor” supports Alice’s opinion.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"The research finding that “a significant number of perpetrators of child abuse were themselves victims of child abuse as children, so it is impossible to dichotomously distinguish between victims and perpetrators of child abuse” supports Bob’s opinion.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"The research finding that “recently, cases where minors make sexual requests to other minors, involving the filming of videos, are increasing. Experiences of responding to such requests without any sense of shame or discomfort critically influence the later development of negative self-identity or distorted sexual awareness. Therefore, the need to punish sexual requests between minors as acts of abuse is great”—this research finding supports both Bob and Charlie’s opinions.\",\n      \"check\": \"or\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2022_12",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 3,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 104; 2 is required",
+   "question_ok": false,
+   "seconds": 13.6,
+   "output": "{\n  \"positions\": [\n    \"Alice: Property refers to an object with economic value, and economic value means pure economic value, that is, monetary value.\",\n    \"Bob: Property does not necessarily have to be lawfully owned or lawfully traded.\",\n    \"Charlie: For 'economic value' to be recognized, there must be monetary exchange value, but it's a necessary, not a sufficient, condition.\"\n  ],\n  \"claims\": [\n    \"Alice: The Criminal Act should not consider the ownership and transfer of an object with economic value.\",\n    \"Bob: An object with economic value should be seen as property under the Criminal Act, regardless of whether there is any monetary exchange value.\",\n    \"Charlie: For an object to be property under the Criminal Act, it must have monetary exchange value and its ownership and transfer must be lawful.\"\n  ],\n  \"premises\": [\n    \"Alice: If an object has economic value, it is property under the Criminal Act.\",\n    \"Bob: If an object has economic value, it is property under the Criminal Act, regardless of whether there is any monetary exchange value.\",\n    \"Charlie: If an object has monetary exchange value, it is property under the Criminal Act, but its ownership and transfer must be lawful.\"\n  ],\n  \"rules\": [\n    {\n      \"rule\": \"If an object has economic value, it is property under the Criminal Act.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If an object has economic value, it is property under the Criminal Act, regardless of whether there is any monetary exchange value.\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"rule\": \"If an object has monetary exchange value, it is property under the Criminal Act, but its ownership and transfer must be lawful.\",\n      \"type\": \"strict\"\n    }\n  ],\n  \"contraries\": [\n    \"If an object does not have economic value, it is not property under the Criminal Act.\",\n    \"If an object does not have economic value, it is not property under the Criminal Act, regardless of whether there is any monetary exchange value.\",\n    \"If an object does not have monetary exchange value, it is not property under the Criminal Act, but its ownership and transfer must be lawful.\"\n  ],\n  \"undercuts\": [\n    \"If an object's ownership and transfer are not lawful, it is not property under the Criminal Act.\",\n    \"If an object's ownership and transfer are not lawful, it is not property under the Criminal Act, regardless of whether there is any monetary exchange value.\",\n    \"If an object's ownership and transfer are not lawful, it is not property under the Criminal Act, but it must have monetary exchange value.\"\n  ],\n  \"hypotheticals\": [\n    \"If an object has economic value, then it is property under the Criminal Act.\",\n    \"If an object has economic value, then it is property under the Criminal Act, regardless of whether there is any monetary exchange value.\",\n    \"If an object has monetary exchange value, then it is property under the Criminal Act, but its ownership and transfer must be lawful.\"\n  ],\n  \"statements\": [\n    {\n      \"statement\": \"Alice regards narcotics illegally owned by a drug dealer—which are prohibited by law from being owned—as property under the Criminal Act.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"statement\": \"Bob regards both the narcotics illegally owned by a drug dealer and a fan letter cherished by a celebrity but not subject to transaction as property under the Criminal Act.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"statement\": \"Charlie regards a fan letter cherished by a celebrity but not subject to transaction as property under the Criminal Act, but does not regard narcotics illegally owned by a drug dealer as property under the Criminal Act.\",\n      \"check\": \"status\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2022_22",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 4,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 137; 2 is required",
+   "question_ok": false,
+   "seconds": 22.2,
+   "output": "{\n  \"positions\": [\n    \"Alice: The sentence 'Gopchang is delicious' always grammatically includes the hidden phrase 'to x'.\",\n    \"Bob: Disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute.\"\n  ],\n  \"claims\": [\n    \"Alice claims that the sentence 'Gopchang is delicious' expresses the proposition <Gopchang is delicious to x>, regardless of who says it.\",\n    \"Bob claims that disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute.\"\n  ],\n  \"premises\": [\n    \"If Jiwoo says 'Gopchang is delicious', Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n    \"If Youngho says 'Gopchang is delicious', Youngho's statement expresses the proposition <Gopchang is delicious to Youngho>, which is a false assertion.\",\n    \"If Jiwoo says 'Gopchang is delicious', Youngho can respond by saying 'No, gopchang is not delicious!' and then the two would start to argue about it.\"\n  ],\n  \"rules\": [\n    {\n      \"name\": \"Rule 1\",\n      \"text\": \"If x enjoys gopchang, then <Gopchang is delicious to x>.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"name\": \"Rule 2\",\n      \"text\": \"If x does not enjoy gopchang, then <Gopchang is not delicious to x>.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"name\": \"Rule 3\",\n      \"text\": \"If x enjoys gopchang, then <Gopchang is delicious to x>.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"If Youngho says 'Gopchang is delicious', then Youngho's statement expresses the proposition <Gopchang is delicious to Youngho>, which is a false assertion.\",\n    \"If Jiwoo says 'Gopchang is delicious', then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\"\n  ],\n  \"undercuts\": [\n    \"If Jiwoo says 'Gopchang is delicious', then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n    \"If Youngho says 'Gopchang is delicious', then Youngho's statement expresses the proposition <Gopchang is delicious to Youngho>, which is a false assertion.\"\n  ],\n  \"hypotheticals\": [\n    \"If Jiwoo enjoys gopchang, then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n    \"If Youngho does not enjoy gopchang, then Youngho's statement expresses the proposition <Gopchang is not delicious to Youngho>, which is a true assertion.\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"Alice claims that the sentence 'Gopchang is delicious' expresses the proposition <Gopchang is delicious to x>, regardless of who says it.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Bob claims that disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"If Jiwoo enjoys gopchang, then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"If Youngho says 'Gopchang is delicious', then Youngho's statement expresses the proposition <Gopchang is delicious to Youngho>, which is a false assertion.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"If Jiwoo enjoys gopchang, then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"If Youngho does not enjoy gopchang, then Youngho's statement expresses the proposition <Gopchang is not delicious to Youngho>, which is a true assertion.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"If Jiwoo says 'Gopchang is delicious', then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"If Youngho says 'Gopchang is delicious', then Youngho's statement expresses the proposition <Gopchang is delicious to Youngho>, which is a false assertion.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"If Jiwoo enjoys gopchang, then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"If Youngho does not enjoy gopchang, then Youngho's statement expresses the proposition <Gopchang is not delicious to Youngho>, which is a true assertion.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"If Jiwoo says 'Gopchang is delicious', then Jiwoo's statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is a true assertion.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"If Youngho says 'Gopchang is delicious', then Youngho's statement expresses the proposition <Gopchang is delicious to Youngho>, which is a false assertion.\",\n      \"check\": \"weakens\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2022_36",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "2": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "3": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "4": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "5": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 47; 2 is required",
+   "question_ok": false,
+   "seconds": 39.5,
+   "output": "{\n  \"positions\": [\n    \"People often treat robots as if they were human\",\n    \"There are differences between East and West in such phenomena\",\n    \"These differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection\",\n    \"According to one study, when participants were shown an Aibo robot dog wagging its tail and spinning around in response to a person’s actions\",\n    \"Korean participants were more likely than Western participants to answer that people and robots could become friends\",\n    \"When participants were shown a scene in which a child tries to break Aibo’s tail and were asked whether they would morally instruct the child not to bully Aibo\",\n    \"Korean participants again gave a much more positive response than their Western counterparts\",\n    \"This suggests that the phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners\",\n    \"According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself\",\n    \"According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject\",\n    \"If we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo\",\n    \"There are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined\"\n  ],\n  \"claims\": [\n    \"People often treat robots as if they were human\",\n    \"There are differences between East and West in such phenomena\",\n    \"These differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection\",\n    \"Korean participants were more likely than Western participants to answer that people and robots could become friends\",\n    \"Korean participants again gave a much more positive response than their Western counterparts\",\n    \"This suggests that the phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners\",\n    \"According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself\",\n    \"According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject\",\n    \"If we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo\",\n    \"There are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined\"\n  ],\n  \"premises\": [\n    \"People often treat robots as if they were human\",\n    \"There are differences between East and West in such phenomena\",\n    \"These differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection\",\n    \"Korean participants were more likely than Western participants to answer that people and robots could become friends\",\n    \"Korean participants again gave a much more positive response than their Western counterparts\",\n    \"This suggests that the phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners\",\n    \"According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself\",\n    \"According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject\",\n    \"If we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo\",\n    \"There are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined\"\n  ],\n  \"rules\": [\n    {\n      \"rule\": \"If people treat robots as if they were human, then they are more likely to consider them friends\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If people consider robots as friends, then they are more likely to treat them as subjects of moral consideration\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If people judge that an object will bring real benefit to themselves, then they can consider it a friend\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If people feel sympathy for an object, then they can consider it a subject of moral consideration\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If people consider robots as friends, then they are more likely to treat them as subjects of moral consideration\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"People do not treat robots as if they were human\",\n    \"There are no differences between East and West in such phenomena\",\n    \"These differences do not appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection\",\n    \"Western participants are more likely than Korean participants to answer that people and robots could not become friends\",\n    \"Western participants give a less positive response than Korean participants when asked whether they would morally instruct a child not to bully Aibo\",\n    \"The phenomenon of treating robots as if they were human is weaker among Koreans than among Westerners\",\n    \"According to the Epicurean school, emotions like friendship can arise when one judges that the object will not bring real benefit to oneself\",\n    \"According to the Skeptical school, the basis for moral judgment lies in some inherent principle within the judging subject rather than in the emotional relationship with the object\",\n    \"If we apply Epicurean and Skeptical theory to the relationship between people and robots, people cannot consider Aibo a friend when they judge that Aibo brings them joy, and cannot treat Aibo as a subject of moral consideration when they feel sympathy for Aibo\",\n    \"There are research findings suggesting that, across Korean society, cultural selection has not taken place through the traditions of Epicureanism and Skepticism, and as a result, the social aspects of general Korean emotions and morality have not been partially determined\"\n  ],\n  \"undercuts\": [\n    \"People often treat robots as if they were human\",\n    \"There are differences between East and West in such phenomena\",\n    \"These differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection\",\n    \"Korean participants were more likely than Western participants to answer that people and robots could become friends\",\n    \"Korean participants again gave a much more positive response than their Western counterparts\",\n    \"This suggests that the phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners\",\n    \"According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself\",\n    \"According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject\",\n    \"If we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo\",\n    \"There are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined\"\n  ],\n  \"hypotheticals\": [\n    \"If people treat robots as if they were human, then they are more likely to consider them friends\",\n    \"If people consider robots as friends, then they are more likely to treat them as subjects of moral consideration\",\n    \"If people judge that an object will bring real benefit to themselves, then they can consider it a friend\",\n    \"If people feel sympathy for an object, then they can consider it a subject of moral consideration\",\n    \"If people consider robots as friends, then they are more likely to treat them as subjects of moral consideration\"\n  ],\n  \"statements\": [\n    {\n      \"statement\": \"People often treat robots as if they were human\",\n      \"check\": \"holds\"\n    },\n    {\n      \"statement\": \"There are differences between East and West in such phenomena\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"statement\": \"These differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection\",\n      \"check\": \"status\"\n    },\n    {\n      \"statement\": \"Korean participants were more likely than Western participants to answer that people and robots could become friends\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"statement\": \"Korean participants again gave a much more positive response than their Western counterparts\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"statement\": \"This suggests that the phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"statement\": \"According to the Mohist school, emotions like friendship can only arise when one judges that the object will bring real benefit to oneself\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"statement\": \"According to the Confucianist school, the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"statement\": \"If we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"statement\": \"There are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined\",\n      \"check\": \"weakens\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2022_39",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 161; 2 is required",
+   "question_ok": false,
+   "seconds": 14.7,
+   "output": "{\n  \"positions\": [\n    \"The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin.\",\n    \"Bypassing the duodenum may be effective in treating diabetes and inferred the possible existence of 'anti-incretin' that interferes with the effect of incretin.\"\n  ],\n  \"claims\": [\n    \"The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin.\",\n    \"Bypassing the duodenum may be effective in treating diabetes and inferred the possible existence of 'anti-incretin' that interferes with the effect of incretin.\"\n  ],\n  \"premises\": [\n    \"Incretin is a substance secreted by the small intestine when food is consumed, which signals the pancreas to secrete insulin.\",\n    \"Ingested food passes sequentially through three parts of the small intestine—the duodenum, jejunum, and ileum—before entering the large intestine.\",\n    \"Rubino performed bariatric surgery that connected the stomach directly to the jejunum, and observed an improvement in blood sugar without reduced body weight or food intake.\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"If a substance secreted in the duodenum decreases insulin secretion induced by incretin, then ⓐ is strengthened.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If a surgery where the stomach is removed and the esophagus is directly connected to the duodenum results in improved blood sugar, then ⓐ is strengthened.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If after Rubino's bariatric surgery, a second surgery is performed so that food passing into the jejunum is rerouted back to the duodenum, and the effect of blood sugar improvement disappears, then ⓐ is weakened.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin.\",\n    \"Bypassing the duodenum may be effective in treating diabetes and inferred the possible existence of 'anti-incretin' that interferes with the effect of incretin.\"\n  ],\n  \"undercuts\": [\n    \"If a substance secreted in the duodenum decreases insulin secretion induced by incretin, then ⓐ is strengthened.\",\n    \"If a surgery where the stomach is removed and the esophagus is directly connected to the duodenum results in improved blood sugar, then ⓐ is strengthened.\",\n    \"If after Rubino's bariatric surgery, a second surgery is performed so that food passing into the jejunum is rerouted back to the duodenum, and the effect of blood sugar improvement disappears, then ⓐ is weakened.\"\n  ],\n  \"hypotheticals\": [\n    \"Bypassing the duodenum may be effective in treating diabetes and inferred the possible existence of 'anti-incretin' that interferes with the effect of incretin.\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"If a substance secreted in the duodenum decreases insulin secretion induced by incretin, then ⓐ is strengthened.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"If a surgery where the stomach is removed and the esophagus is directly connected to the duodenum results in improved blood sugar, then ⓐ is strengthened.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"If after Rubino's bariatric surgery, a second surgery is performed so that food passing into the jejunum is rerouted back to the duodenum, and the effect of blood sugar improvement disappears, then ⓐ is weakened.\",\n      \"check\": \"weakens\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2023_20",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 3,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 94; 2 is required",
+   "question_ok": false,
+   "seconds": 18.6,
+   "output": "{\n  \"positions\": [\n    \"Alice: A lie is a statement made with the intention of making the other person believe a falsehood as if it were true.\",\n    \"Bob: Not necessarily. That’s because a lie can be made even without the intention to deceive the other person.\"\n  ],\n  \"claims\": [\n    \"A misleading statement is morally less blameworthy just because it is true, compared to a lie.\",\n    \"A lie can be made even without the intention to deceive the other person.\"\n  ],\n  \"premises\": [\n    \"A statement that is true but easily misunderstood by the listener is called a “misleading statement”.\",\n    \"A lie can be made even without the intention to deceive the other person.\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"A statement is morally blameworthy if it is intended to deceive the listener.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"A statement is morally blameworthy if it is false.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"A misleading statement is morally less blameworthy just because it is true.\",\n    \"A lie is morally less blameworthy just because it is true.\"\n  ],\n  \"undercuts\": [\n    \"A misleading statement is morally less blameworthy just because it is true, compared to a lie.\",\n    \"A lie can be made even without the intention to deceive the other person.\"\n  ],\n  \"hypotheticals\": [\n    \"If the mere fact that what someone says turns out to be false is itself morally blameworthy, then scientists would have to be said to be doing something wrong, since some of their predictions later turn out to be false.\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"Alice: A lie is a statement made with the intention of making the other person believe a falsehood as if it were true.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Bob: Not necessarily. That’s because a lie can be made even without the intention to deceive the other person.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"Alice: Let's compare the case where A, who actually killed B, lies by saying “I did not kill B”, and the case where A makes a misleading statement by saying “I risked my life to save B twice”.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"Bob: While misleading statements are always wrong in that they are intended to deceive the listener despite being true, lies are not always so.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"Alice: I think misleading statements and lies are equally wrong.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Bob: If the mere fact that what someone says turns out to be false is itself morally blameworthy, then scientists would have to be said to be doing something wrong, since some of their predictions later turn out to be false.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"Alice: Let's compare the case where A, who actually killed B, lies by saying “I did not kill B”, and the case where A makes a misleading statement by saying “I risked my life to save B twice”.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"Bob: While misleading statements are always wrong in that they are intended to deceive the listener despite being true, lies are not always so.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"Alice: I think misleading statements and lies are equally wrong.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Bob: If the mere fact that what someone says turns out to be false is itself morally blameworthy, then scientists would have to be said to be doing something wrong, since some of their predictions later turn out to be false.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"Alice: Let's compare the case where A, who actually killed B, lies by saying “I did not kill B”, and the case where A makes a misleading statement by saying “I risked my life to save B twice”.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"Bob: While misleading statements are always wrong in that they are intended to deceive the listener despite being true, lies are not always so.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"Alice: I think misleading statements and lies are equally wrong.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Bob: If the mere fact that what someone says turns out to be false is itself morally blameworthy, then scientists would have to be said to be doing something wrong, since some of their predictions later turn out to be false.\",\n      \"check\": \"assumes\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2024_05",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 3,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "2": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "3": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "4": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "5": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 40; 2 is required",
+   "question_ok": false,
+   "seconds": 10.3,
+   "output": "{\n  \"positions\": [\n    \"Autonomy of parties should be protected\",\n    \"Autonomy of parties should be restricted when utility is maximized\",\n    \"Autonomy of parties should be restricted when utility to society is maximized\"\n  ],\n  \"claims\": [\n    \"Autonomy is inherently worthy of respect\",\n    \"Restricting autonomy increases utility\",\n    \"Restricting autonomy increases utility to society\"\n  ],\n  \"premises\": [\n    \"Autonomy is a fundamental value\",\n    \"Utility is a fundamental value\",\n    \"Society's well-being is a fundamental value\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"Restricting autonomy is justified only when the cost is greater than the utility\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"Restricting autonomy is justified only when the cost is greater than the utility\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"Autonomy should not be protected\",\n    \"Utility should not be maximized\",\n    \"Society's well-being should not be maximized\"\n  ],\n  \"undercuts\": [\n    \"Restricting autonomy increases autonomy\",\n    \"Restricting autonomy increases autonomy to society\"\n  ],\n  \"hypotheticals\": [\n    \"If autonomy is restricted, then the cost is greater than the utility\",\n    \"If autonomy is restricted, then the cost is greater than the utility to society\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"Even if one party unintentionally expresses intention instead of the intended will, the originally intended will should be respected.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"When restricting the parties' autonomy is justified, the sum of the cost and utility to the parties is always positive.\",\n      \"check\": \"not\"\n    },\n    {\n      \"text\": \"When restricting the parties' autonomy, there are cases where the sum of the cost and utility to the parties is negative.\",\n      \"check\": \"not\"\n    },\n    {\n      \"text\": \"Even if the sum of the cost and utility to the parties caused by restricting the parties' autonomy is positive, there are cases when the parties' autonomy cannot be restricted.\",\n      \"check\": \"not\"\n    },\n    {\n      \"text\": \"If the Basic Regulatory Act of Country X provides that 'the parties' autonomy may only be restricted if the total utility produced for society as a whole exceeds the costs generated by restricting autonomy,' then this is based on C rather than B.\",\n      \"check\": \"assumes\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2024_14",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "2": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "3": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "4": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "5": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 44; 2 is required",
+   "question_ok": false,
+   "seconds": 12.7,
+   "output": "```\n{\n  \"positions\": [\n    \"Alice claims there are many people gathered in the plaza.\",\n    \"Alice's observation felt clear to her.\",\n    \"Alice did not take the simple step of going down to the ground floor to check the facts.\"\n  ],\n  \"claims\": [\n    \"There are many people gathered in the plaza.\",\n    \"Alice's observation felt clear to her.\",\n    \"Alice did not take the simple step of going down to the ground floor to check the facts.\"\n  ],\n  \"premises\": [\n    \"Responsibility is assigned to the agent only in cases where the act itself is subject to blame.\",\n    \"Alice's act of claiming 'there are many people gathered in the plaza' is, in itself, not blameworthy.\",\n    \"Alice's assertion is merely a cognitive error.\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"If an act is not subject to blame, then responsibility is not assigned.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If an act is a cognitive error, then responsibility is not assigned.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If an agent intentionally avoids or refuses to acquire information, then responsibility is assigned.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"If an act is subject to blame, then responsibility is assigned.\",\n    \"If an act is not a cognitive error, then responsibility is assigned.\",\n    \"If an agent does not intentionally avoid or refuse to acquire information, then responsibility is not assigned.\"\n  ],\n  \"undercuts\": [\n    \"If an act is not subject to blame, then responsibility is not assigned.\",\n    \"If an act is a cognitive error, then responsibility is not assigned.\",\n    \"If an agent does not intentionally avoid or refuse to acquire information, then responsibility is not assigned.\"\n  ],\n  \"hypotheticals\": [\n    \"If an agent intentionally avoids or refuses to acquire information, then responsibility is assigned.\",\n    \"If an agent does not intentionally avoid or refuse to acquire information, then responsibility is not assigned.\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"Alice claims there are many people gathered in the plaza.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Alice's observation felt clear to her.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"Alice did not take the simple step of going down to the ground floor to check the facts.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"Responsibility is assigned to the agent only in cases where the act itself is subject to blame.\",\n      \"check\": \"status\"\n    },\n    {\n      \"text\": \"Alice's act of claiming 'there are many people gathered in the plaza' is, in itself, not blameworthy.\",\n      \"check\": \"not\"\n    },\n    {\n      \"text\": \"Alice's assertion is merely a cognitive error.\",\n      \"check\": \"not\"\n    },\n    {\n      \"text\": \"If an agent intentionally avoids or refuses to acquire information, then responsibility is assigned.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"If an agent does not intentionally avoid or refuse to acquire information, then responsibility is not assigned.\",\n      \"check\": \"not\"\n    }\n  ]\n}\n```"
+  },
+  {
+   "id": "2024_17",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 28; 2 is required",
+   "question_ok": false,
+   "seconds": 12.7,
+   "output": "{\n  \"positions\": [\n    \"Primary goodness\",\n    \"Secondary goodness\",\n    \"The first type of secondary goodness\",\n    \"The second type of secondary goodness\"\n  ],\n  \"claims\": [\n    \"Goodness has two dimensions.\",\n    \"Primary goodness refers to the essential perfection that a being possesses.\",\n    \"Secondary goodness refers to the relationship between a subject and the accidental properties it possesses.\",\n    \"The first type of secondary goodness refers to the suitability in which a property, in and of itself, contributes to the perfection of the being it belongs to.\",\n    \"The second type of secondary goodness refers to the goodness that is found in a being when a certain property belongs to it.\"\n  ],\n  \"premises\": [\n    \"If a being lacks primary goodness, it can no longer be that being.\",\n    \"If a human lacks humanity, they are no longer human.\",\n    \"Health is not a primary goodness to a human, but a secondary one, because even a sick person is still human.\",\n    \"If health is good for a human, then health itself is a good property for humans.\",\n    \"A particular food is delicious because its salinity, acidity, texture, and so on are well-harmonized.\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"If a being possesses primary goodness, then it is not private.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If a being possesses secondary goodness, then it is not private.\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"text\": \"If a being possesses the first type of secondary goodness, then it is suitable.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If a being possesses the second type of secondary goodness, then it is good.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"Evil is not the privation of goodness.\",\n    \"Beauty is not the harmonious totality of size, shape, color, etc. that the object possesses.\"\n  ],\n  \"undercuts\": [\n    \"If something is always good for someone, then it is not good for someone.\",\n    \"If something is not always good for someone, then it is not good for someone.\"\n  ],\n  \"hypotheticals\": [\n    \"If a being lacks primary goodness, then it is no longer that being.\",\n    \"If a human lacks humanity, then they are no longer human.\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"If evil is the privation of goodness, then evil is ⓐ.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"In the statement, \\\"If an object is beautiful, its beauty is the harmonious totality of size, shape, color, etc. that the object possesses,\\\" beauty is ⓒ.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"If something is always good for someone, then it is ⓐ, and if not, it is ⓑ or ⓒ.\",\n      \"check\": \"weakens\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2024_20",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 373; 2 is required",
+   "question_ok": false,
+   "seconds": 25.3,
+   "output": "{\n  \"positions\": [\n    \"Alice\",\n    \"Bob\"\n  ],\n  \"claims\": [\n    \"Alice: Humans interact with the world based on perception. However, sometimes humans perceive objects incorrectly. The ability to perceive in a way that accurately corresponds to the external world was important in human evolution, as it can make a difference in actual behavior. That's why distinguishing between accurate representation and misrepresentation is important.\",\n    \"Bob: With perception alone, we cannot distinguish between accurate representation and misrepresentation. Visual perception is determined only by the information delivered to the retina. At this time, there may be multiple external objects corresponding to the same perception, but we cannot know which one is the real one.\",\n    \"Alice: So, what you're saying is that it's difficult to tell the difference between an unripe and a ripe banana, right? If I can't know what I'm seeing, I can't pick and eat a ripe banana. This would be a disadvantage for humans in the course of evolution.\",\n    \"Bob: Of course, it would be nice to be able to identify and eat only ripe ones. However, we don't need to know precisely at every moment whether it is unripe or fully ripe. There are more yellow bananas within our range of action. Supermarket shelves are full of yellow bananas. So if you eat based on the perception of yellow, you'll end up eating ripe bananas.\"\n  ],\n  \"premises\": [\n    \"Perception is based on information delivered to the retina.\",\n    \"There may be multiple external objects corresponding to the same perception.\",\n    \"We can't know which object is the real one without more information.\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"If a perception is based on accurate information, then it corresponds to an external object.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If a perception is based on inaccurate information, then it does not correspond to an external object.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If there are multiple external objects corresponding to the same perception, then we cannot know which one is the real one.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If we can't know which object is the real one, then we can't pick and eat a ripe banana.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If there are more yellow bananas within our range of action, then eating based on the perception of yellow will end up eating ripe bananas.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If we don't need to know precisely at every moment whether it is unripe or fully ripe, then eating based on the perception of yellow is acceptable.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"Bob: With perception alone, we can distinguish between accurate representation and misrepresentation.\",\n    \"Bob: Visual perception is determined only by the information delivered to the retina.\"\n  ],\n  \"undercuts\": [\n    \"Bob: With perception alone, we cannot distinguish between accurate representation and misrepresentation. Visual perception is determined only by the information delivered to the retina. At this time, there may be multiple external objects corresponding to the same perception, but we cannot know which one is the real one.\"\n  ],\n  \"hypotheticals\": [\n    \"If I can't know what I'm seeing, I can't pick and eat a ripe banana.\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"Alice: Humans interact with the world based on perception. However, sometimes humans perceive objects incorrectly. The ability to perceive in a way that accurately corresponds to the external world was important in human evolution, as it can make a difference in actual behavior. That's why distinguishing between accurate representation and misrepresentation is important.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"Bob: With perception alone, we cannot distinguish between accurate representation and misrepresentation. Visual perception is determined only by the information delivered to the retina. At this time, there may be multiple external objects corresponding to the same perception, but we cannot know which one is the real one.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"Alice: So, what you're saying is that it's difficult to tell the difference between an unripe and a ripe banana, right? If I can't know what I'm seeing, I can't pick and eat a ripe banana. This would be a disadvantage for humans in the course of evolution.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"Bob: Of course, it would be nice to be able to identify and eat only ripe ones. However, we don't need to know precisely at every moment whether it is unripe or fully ripe. There are more yellow bananas within our range of action. Supermarket shelves are full of yellow bananas. So if you eat based on the perception of yellow, you'll end up eating ripe bananas.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"(a) Even if the perceiver can know which of the multiple objects producing the same perception most likely corresponds accurately to that perception, Alice's claim is not weakened.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"(b) If two circles of different sizes can be perceived as the same size depending on the size of the circles surrounding each, then Bob's claim is weakened.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"text\": \"(c) Regarding the statement 'Some perceptions correspond accurately to external objects,' Alice does not agree but Bob does.\",\n      \"check\": \"status\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2024_27",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 41; 2 is required",
+   "question_ok": false,
+   "seconds": 14.5,
+   "output": "```\n{\n  \"positions\": [\n    \"The defendant is responsible for the case\",\n    \"The defendant is not responsible for the case\",\n    \"The plaintiff is not responsible for the case\",\n    \"The plaintiff is responsible for the case\"\n  ],\n  \"claims\": [\n    \"The defendant is responsible for the case\",\n    \"The defendant is not responsible for the case\",\n    \"The plaintiff is not responsible for the case\",\n    \"The plaintiff is responsible for the case\"\n  ],\n  \"premises\": [\n    \"The probability of the defendant being responsible is high\",\n    \"The probability of the defendant being responsible is low\",\n    \"The probability of the plaintiff being responsible is high\",\n    \"The probability of the plaintiff being responsible is low\"\n  ],\n  \"rules\": [\n    {\n      \"text\": \"If the probability of the defendant being responsible is high, then the defendant is responsible\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If the probability of the defendant being responsible is low, then the defendant is not responsible\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If the probability of the plaintiff being responsible is high, then the plaintiff is responsible\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If the probability of the plaintiff being responsible is low, then the plaintiff is not responsible\",\n      \"type\": \"strict\"\n    },\n    {\n      \"text\": \"If the probability of the defendant being responsible is high, then the plaintiff verdict rate is high\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"text\": \"If the probability of the defendant being responsible is low, then the plaintiff verdict rate is low\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"text\": \"If the probability of the plaintiff being responsible is high, then the plaintiff verdict rate is high\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"text\": \"If the probability of the plaintiff being responsible is low, then the plaintiff verdict rate is low\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"The defendant is not responsible for the case\",\n    \"The plaintiff is not responsible for the case\"\n  ],\n  \"undercuts\": [\n    \"The probability of the defendant being responsible is low\",\n    \"The probability of the plaintiff being responsible is low\"\n  ],\n  \"hypotheticals\": [\n    \"If the probability of the defendant being responsible is high, then the defendant is responsible\",\n    \"If the probability of the defendant being responsible is low, then the defendant is not responsible\",\n    \"If the probability of the plaintiff being responsible is high, then the plaintiff is responsible\",\n    \"If the probability of the plaintiff being responsible is low, then the plaintiff is not responsible\"\n  ],\n  \"statements\": [\n    {\n      \"text\": \"If the plaintiff verdict rate in Group 1 is significantly lower than that in Group 2, the <hypothesis> is weakened.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"text\": \"If the difference between subjective probability and plaintiff verdict rate is significantly greater in Group 1 than in Group 2, the <hypothesis> is strengthened.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"text\": \"If, when testimony from a witness who saw a gray bus hitting Alice’s dog is additionally presented to both groups, the plaintiff verdict rate in Group 2 decreases significantly more than in Group 1, the <hypothesis> is weakened.\",\n      \"check\": \"weakens\"\n    }\n  ]\n}\n```"
+  },
+  {
+   "id": "2025_02",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 64; 2 is required",
+   "question_ok": false,
+   "seconds": 10.3,
+   "output": "{\n  \"positions\": [\n    \"Parents have the right to participate in the educational process of their underage children.\",\n    \"The proposed amendment infringes upon such rights of the parents.\"\n  ],\n  \"claims\": [\n    \"The proposed amendment infringes upon the rights of the parents.\",\n    \"The proposed amendment results in the unjust discrimination of other perpetrating students and their guardians.\"\n  ],\n  \"premises\": [\n    \"The proposed amendment permits appeals only to perpetrating students who have received transfer or expulsion measures.\",\n    \"The proposed amendment allows appeals only in cases of transfer and expulsion.\"\n  ],\n  \"rules\": [\n    {\n      \"rule\": \"If a student has an objection to a measure, they may file an appeal.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a student has an objection to a transfer or expulsion measure, they may file an appeal.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a student has an objection to a measure, they may file an appeal within 15 days.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a student has an objection to a transfer or expulsion measure, they may file an appeal within 15 days.\",\n      \"type\": \"strict\"\n    }\n  ],\n  \"contraries\": [\n    \"The proposed amendment does not infringe upon the rights of the parents.\",\n    \"The proposed amendment does not result in the unjust discrimination of other perpetrating students and their guardians.\"\n  ],\n  \"undercuts\": [\n    \"The proposed amendment does not infringe upon the rights of the parents.\",\n    \"The proposed amendment does not result in the unjust discrimination of other perpetrating students and their guardians.\"\n  ],\n  \"hypotheticals\": [\n    \"If the proposed amendment were to be passed, would it infringe upon the rights of the parents?\",\n    \"If the proposed amendment were to be passed, would it result in the unjust discrimination of other perpetrating students and their guardians?\"\n  ],\n  \"statements\": [\n    {\n      \"statement\": \"If legal remedies are available by other means for measures for which appeals are not permitted, ⓐ is mitigated.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"statement\": \"If the harm suffered by perpetrating students due to transfer or expulsion cannot be restored even if such measures are overturned in a subsequent lawsuit—unlike with other measures—then ⓑ is weakened.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"statement\": \"If it is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal and thereby grow into exemplary members of society, then ⓐ is weakened and ⓑ is strengthened.\",\n      \"check\": \"or\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2025_25",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 67; 2 is required",
+   "question_ok": false,
+   "seconds": 18.1,
+   "output": "{\n  \"positions\": [\n    \"Alice: The change in the fluorescent light does not alter the identity of the work.\",\n    \"Bob: The artist's approval of the change does not reflect the artist's true intention.\",\n    \"Charlie: The work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity.\"\n  ],\n  \"claims\": [\n    \"The change in the fluorescent light alters the meaning of the work.\",\n    \"The artist's approval of the change reflects the artist's true intention.\",\n    \"The work's identity remains the same even if the physical attribute has changed.\"\n  ],\n  \"premises\": [\n    \"The work's identity is tied to its physical attributes.\",\n    \"The artist's approval of the change is based on the museum's pressure.\",\n    \"The work was complete at the moment it was made public.\"\n  ],\n  \"rules\": [\n    {\n      \"position\": \"Alice\",\n      \"claim\": \"The change in the fluorescent light alters the meaning of the work.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"position\": \"Bob\",\n      \"claim\": \"The artist's approval of the change does not reflect the artist's true intention.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"position\": \"Charlie\",\n      \"claim\": \"The work's identity remains the same even if the physical attribute has changed.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"position\": \"Alice\",\n      \"claim\": \"The change in the fluorescent light alters the meaning of the work.\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"position\": \"Bob\",\n      \"claim\": \"The artist's approval of the change does not reflect the artist's true intention.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"Alice: The change in the fluorescent light does not alter the identity of the work.\",\n    \"Bob: The artist's approval of the change does not reflect the artist's true intention.\",\n    \"Charlie: The work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity.\"\n  ],\n  \"undercuts\": [\n    \"Alice: The change in the fluorescent light does not alter the identity of the work.\",\n    \"Bob: The artist's approval of the change does not reflect the artist's true intention.\",\n    \"Charlie: The work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity.\"\n  ],\n  \"hypotheticals\": [\n    \"If the museum secretly replaced the fluorescent light of ⓐ with a new one without the creator's knowledge, both Bob and Charlie agree that the meaning of ⓐ could change.\"\n  ],\n  \"statements\": [\n    {\n      \"position\": \"Alice\",\n      \"claim\": \"The change in the fluorescent light alters the meaning of the work.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"position\": \"Bob\",\n      \"claim\": \"The artist's approval of the change does not reflect the artist's true intention.\",\n      \"check\": \"assumes\"\n    },\n    {\n      \"position\": \"Charlie\",\n      \"claim\": \"The work's identity remains the same even if the physical attribute has changed.\",\n      \"check\": \"status\"\n    },\n    {\n      \"position\": \"Alice\",\n      \"claim\": \"The change in the fluorescent light alters the meaning of the work.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"position\": \"Bob\",\n      \"claim\": \"The artist's approval of the change does not reflect the artist's true intention.\",\n      \"check\": \"weakens\"\n    },\n    {\n      \"position\": \"Charlie\",\n      \"claim\": \"The work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity.\",\n      \"check\": \"holds\"\n    },\n    {\n      \"position\": \"Alice\",\n      \"claim\": \"The change in the fluorescent light alters the meaning of the work.\",\n      \"check\": \"or\"\n    },\n    {\n      \"position\": \"Bob\",\n      \"claim\": \"The artist's approval of the change does not reflect the artist's true intention.\",\n      \"check\": \"or\"\n    },\n    {\n      \"position\": \"Charlie\",\n      \"claim\": \"The work's identity remains the same even if the physical attribute has changed.\",\n      \"check\": \"or\"\n    },\n    {\n      \"position\": \"Alice\",\n      \"claim\": \"The change in the fluorescent light alters the meaning of the work.\",\n      \"check\": \"not\"\n    },\n    {\n      \"position\": \"Bob\",\n      \"claim\": \"The artist's approval of the change does not reflect the artist's true intention.\",\n      \"check\": \"not\"\n    },\n    {\n      \"position\": \"Charlie\",\n      \"claim\": \"The work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity.\",\n      \"check\": \"not\"\n    }\n  ]\n}"
+  },
+  {
+   "id": "2025_29",
+   "parsed": true,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "ValueError: dictionary update sequence element #0 has length 149; 2 is required",
+   "question_ok": false,
+   "seconds": 12.0,
+   "output": "```\n{\n  \"positions\": [\n    \"male singers\",\n    \"female singers\",\n    \"musicians\",\n    \"panel of experts\"\n  ],\n  \"claims\": [\n    \"Women will display greater creativity in environments where they work separately from men rather than environments where they work together with men.\",\n    \"The female singers' scores were higher in the experimental group than in the control group.\",\n    \"The total score of all female singers was higher than that of all male singers.\",\n    \"The female singers' scores in the control group were slightly lower than those of the male singers, but in the experimental group the female singers' scores were higher than those of the male singers.\"\n  ],\n  \"premises\": [\n    \"Women face structural barriers to creativity in team settings.\",\n    \"Women's creative expressions are undervalued when working with men.\",\n    \"Women's creative expressions are more valued when working separately from men.\",\n    \"The panel of experts evaluated the creative expression of the male and female singers by scoring them.\"\n  ],\n  \"rules\": [\n    {\n      \"rule\": \"If women's creative expressions are undervalued when working with men, then women's scores will be lower than men's scores.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If women's creative expressions are more valued when working separately from men, then women's scores will be higher than men's scores.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If women's creative expressions are undervalued when working with men, then women's scores will be lower than men's scores.\",\n      \"type\": \"defeasible\"\n    },\n    {\n      \"rule\": \"If women's creative expressions are more valued when working separately from men, then women's scores will be higher than men's scores.\",\n      \"type\": \"defeasible\"\n    }\n  ],\n  \"contraries\": [\n    \"Men will display greater creativity in environments where they work separately from women rather than environments where they work together with women.\",\n    \"The female singers' scores were lower in the experimental group than in the control group.\",\n    \"The total score of all male singers was higher than that of all female singers.\",\n    \"The female singers' scores in the control group were higher than those of the male singers, but in the experimental group the female singers' scores were lower than those of the male singers.\"\n  ],\n  \"undercuts\": [\n    \"The panel of experts did not evaluate the creative expression of the male and female singers by scoring them.\",\n    \"The female singers' scores were not compared to the male singers' scores.\"\n  ],\n  \"hypotheticals\": [\n    \"If women's creative expressions are undervalued when working with men, then women's scores will be lower than men's scores.\",\n    \"If women's creative expressions are more valued when working separately from men, then women's scores will be higher than men's scores.\"\n  ],\n  \"statements\": [\n    {\n      \"holds\": \"a\",\n      \"assumes\": \"None\",\n      \"status\": \"None\",\n      \"weakens\": \"c\",\n      \"strengthens\": \"None\",\n      \"and\": \"None\",\n      \"or\": \"None\",\n      \"not\": \"None\"\n    }\n  ]\n}\n```"
+  },
+  {
+   "id": "2025_40",
+   "parsed": false,
+   "valid": false,
+   "pred": null,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    },
+    "b": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": null,
+     "ok": false,
+     "type": "structure"
+    }
+   },
+   "error": "JSONDecodeError: Expecting ',' delimiter: line 256 column 6 (char 12536)",
+   "question_ok": false,
+   "seconds": 46.5,
+   "output": "{\n  \"positions\": [\n    \"steroid hormones\",\n    \"peptide hormones\",\n    \"cell membrane\",\n    \"receptors\",\n    \"intracellular signaling proteins\",\n    \"Br\",\n    \"Arabidopsis mutants\",\n    \"wild type\"\n  ],\n  \"claims\": [\n    \"Most steroid hormones have low polarity and easily penetrate the cell membrane to act directly as signaling molecules inside the cell.\",\n    \"Most peptide hormones have high polarity and cannot penetrate the cell membrane.\",\n    \"Peptide hormones that cannot penetrate the cell membrane bind to receptors present on the cell surface and use a mechanism that activates intracellular signaling proteins through structural changes in these receptors.\",\n    \"Animal steroid hormones penetrate the cell membrane easily, but the plant steroid hormone brassinolide (Br), which promotes plant growth, is known to be unable to penetrate the cell membrane easily, despite there being no significant difference between the cell membranes of animal cells and plant cells.\",\n    \"Among Arabidopsis mutants, mutant A with a defect only in the Br biosynthesis gene and mutant B with a defect only in the Br receptor gene were isolated.\",\n    \"Both showed a growth-inhibited phenotype compared to the wild type.\",\n    \"When Br was applied, the inhibited growth of A was not restored, but B’s growth was restored.\",\n    \"A mutant C, which exhibited a growth-inhibited phenotype due solely to a mutation in the gene for the signaling protein that recognizes the structural change in the Br receptor, was also selected, and the phenotypic change after Br treatment was observed.\"\n  ],\n  \"premises\": [\n    \"Most steroid hormones have low polarity and easily penetrate the cell membrane to act directly as signaling molecules inside the cell.\",\n    \"Most peptide hormones have high polarity and cannot penetrate the cell membrane.\",\n    \"Peptide hormones that cannot penetrate the cell membrane bind to receptors present on the cell surface and use a mechanism that activates intracellular signaling proteins through structural changes in these receptors.\",\n    \"Animal steroid hormones penetrate the cell membrane easily, but the plant steroid hormone brassinolide (Br), which promotes plant growth, is known to be unable to penetrate the cell membrane easily, despite there being no significant difference between the cell membranes of animal cells and plant cells.\"\n  ],\n  \"rules\": [\n    {\n      \"rule\": \"If a hormone cannot penetrate the cell membrane, it binds to receptors present on the cell surface.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone binds to receptors present on the cell surface, it activates intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone binds to receptors present on the cell surface, it will activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to bind to receptors present on the cell surface, it will not activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone binds to receptors present on the cell surface, it will activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to bind to receptors present on the cell surface, it will not activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone binds to receptors present on the cell surface, it will activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to bind to receptors present on the cell surface, it will not activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone binds to receptors present on the cell surface, it will activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to bind to receptors present on the cell surface, it will not activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins through structural changes in these receptors.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone binds to receptors present on the cell surface, it will activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to bind to receptors present on the cell surface, it will not activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is unable to penetrate the cell membrane, it will not be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n    {\n      \"rule\": \"If a hormone is able to penetrate the cell membrane, it will be able to activate intracellular signaling proteins.\",\n      \"type\": \"strict\"\n    },\n   "
+  }
+ ]
+}

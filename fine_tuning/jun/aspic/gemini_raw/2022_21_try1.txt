@@ -1,0 +1,199 @@
+{
+  "id": "2022_21",
+  "positions": {
+    "Author": {
+      "thesis": "c5",
+      "summary": "In all works of fiction, the name 'Napoleon' (and any historical name) does not refer to the real person."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In an extreme fictional work where Napoleon appears as an Americano bearing no resemblance to the real person, 'Napoleon' does not refer to the real person.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "In at least certain works of fiction, the name 'Napoleon' does not refer to the actual person.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Either (1) in some fiction 'Napoleon' refers to the real person and in some it does not, or (2) in all fiction 'Napoleon' does not refer to the real person.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Considering simplicity and unity, unless there is a serious problem with (2), we should adopt (2) over (1).",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "In all works of fiction, a name like 'Napoleon' does not refer to the real person.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "In War and Peace, the fictional character Napoleon has features similar to the real historical Napoleon, but the name refers to the fictional character, not the real person.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "If a name 'N' used in someone's writing refers to a real person, then that writing is not a work of fiction.",
+      "source": "statement"
+    },
+    "c8": {
+      "text": "If a character's name used in a work of fiction does not refer to a real person, then that character and the real person share no similarities whatsoever.",
+      "source": "statement"
+    },
+    "c9": {
+      "text": "A character in fiction can bear similarities to a real person while its name does not refer to the real person.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Author",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Author",
+      "if": [
+        "c1"
+      ],
+      "then": "c2",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Author",
+      "if": [
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Author",
+      "if": [
+        "c5"
+      ],
+      "then": "c7",
+      "type": "strict",
+      "source": "rationale"
+    },
+    {
+      "id": "r4",
+      "by": "Author",
+      "if": [
+        "c6"
+      ],
+      "then": "c9",
+      "type": "strict",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c8",
+      "c9"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "c7"
+      },
+      "note": "Follows by contraposition from the author's general thesis c5 that in any fiction, the name does not refer to the real person."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "c5",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "There is no problem at all with the view that every instance of 'Napoleon' used in any fictional work refers to the real person.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "The view that 'Napoleon' refers to the real person in all fiction is an equally simple and unified alternative, defeating the premise c1 that it fails in extreme fiction and the inference to c5 based on simplicity.",
+              "source": "rationale"
+            },
+            "h3": {
+              "text": "It is not the case that in all works of fiction, the name 'Napoleon' does not refer to the real person.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h1"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "rationale"
+            },
+            {
+              "id": "rb2",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "h3",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "h3",
+              "c5"
+            ],
+            [
+              "h1",
+              "c1"
+            ]
+          ]
+        }
+      },
+      "note": "If referring to the real person in all fiction has no problem, it directly attacks c1 and rebuts c5."
+    },
+    "c": {
+      "check": {
+        "op": "assumes",
+        "by": "Author",
+        "claim": "c8"
+      },
+      "note": "The passage does not assume c8; rather, c6/c9 directly contradicts c8."
+    }
+  }
+}

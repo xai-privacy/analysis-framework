@@ -1,0 +1,110 @@
+time,id,try,result,truth,gold,detail,teacher
+2026-10-19T04:41:05,2021_02,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T04:44:40,2021_34,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T04:45:13,2021_28,1,ERROR,,a=F b=T c=T,"could not read the JSON (Expecting ',' delimiter: line 156 column 12 (char 4429))",gemini-flash-medium
+2026-10-19T04:45:16,2021_28,2,ERROR,,a=F b=T c=T,"could not read the JSON (Expecting ',' delimiter: line 220 column 16 (char 6311))",gemini-flash-medium
+2026-10-19T04:45:33,2022_01,1,ERROR,,a=T b=F c=F,"could not read the JSON (Expecting ',' delimiter: line 29 column 6 (char 1227))",gemini-flash-medium
+2026-10-19T04:45:47,2022_01,2,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T04:45:57,2021_28,3,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T04:46:03,2021_24,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T04:46:09,2021_17,1,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T04:46:13,2021_37,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T04:46:26,2021_35,1,MATCH,a=T b=F c=T,a=T b=F c=T,,gemini-flash-medium
+2026-10-19T04:46:34,2021_25,1,MATCH,1=T 2=T 3=T 4=T 5=F,1=T 2=T 3=T 4=T 5=F,,gemini-flash-medium
+2026-10-19T04:46:45,2021_14,1,ERROR,,a=T b=F c=F,invalid translation: unknown claim 'h6' in a check,gemini-flash-medium
+2026-10-19T04:47:43,2021_16,1,WRONG,a=T b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T04:47:56,2022_16,1,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T04:47:59,2022_17,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T04:48:26,2022_19,1,ERROR,,a=T b=T c=T,"could not read the JSON (Expecting ',' delimiter: line 53 column 6 (char 2043))",gemini-flash-medium
+2026-10-19T04:48:28,2022_19,2,ERROR,,a=T b=T c=T,"could not read the JSON (Expecting ',' delimiter: line 139 column 19 (char 3422))",gemini-flash-medium
+2026-10-19T04:48:34,2022_19,3,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T04:48:40,2022_21,1,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T04:48:43,2022_26,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T04:49:55,2022_05,1,WRONG,a=F b=T c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T04:50:05,2021_03,1,MATCH,1=T 2=T 3=F 4=T 5=T,1=T 2=T 3=F 4=T 5=T,,gemini-flash-medium
+2026-10-19T04:50:51,2021_16,2,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T04:51:50,2021_14,2,WRONG,a=T b=F c=T,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T04:52:04,2023_02,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T04:52:48,2022_28,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T04:53:28,2021_14,3,ERROR,,a=T b=F c=F,"could not read the JSON (Expecting ',' delimiter: line 318 column 12 (char 7720))",gemini-flash-medium
+2026-10-19T04:55:19,2022_29,1,MATCH,a=T b=F c=T,a=T b=F c=T,,gemini-flash-medium
+2026-10-19T04:55:27,2023_03,1,WRONG,a=T b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T04:55:34,2023_06,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T04:55:39,2023_09,1,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T04:55:44,2023_22,1,MATCH,1=T 2=T 3=F 4=T 5=T,1=T 2=T 3=F 4=T 5=T,,gemini-flash-medium
+2026-10-19T04:55:58,2022_31,1,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T04:56:04,2023_21,1,ERROR,,a=F b=F c=T,invalid translation: unknown position '*' in holds,gemini-flash-medium
+2026-10-19T04:56:09,2023_23,1,ERROR,,1=F 2=F 3=F 4=F 5=T,"could not read the JSON (Expecting ',' delimiter: line 322 column 6 (char 7673))",gemini-flash-medium
+2026-10-19T04:56:18,2023_23,2,MATCH,1=F 2=F 3=F 4=F 5=T,1=F 2=F 3=F 4=F 5=T,,gemini-flash-medium
+2026-10-19T04:57:15,2023_03,2,ERROR,,a=F b=T c=T,"could not read the JSON (Expecting ',' delimiter: line 41 column 6 (char 1791))",gemini-flash-medium
+2026-10-19T04:57:30,2023_03,3,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T04:57:39,2023_11,1,ERROR,,a=T b=F c=T,invalid translation: unknown position '*' in holds,gemini-flash-medium
+2026-10-19T04:57:45,2023_14,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T04:57:50,2023_17,1,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T04:57:52,2023_18,1,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T04:57:55,2023_21,2,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T04:58:57,2023_13,1,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T04:59:00,2023_25,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:02:23,2022_18,3,UNRESOLVED,a=T b=? c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:02:48,2023_11,2,MATCH,a=T b=F c=T,a=T b=F c=T,,gemini-flash-medium
+2026-10-19T05:02:52,2023_26,1,WRONG,a=F b=F c=T,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:02:59,2023_28,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:03:01,2023_29,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:03:08,2024_22,1,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T05:03:40,2024_13,1,ERROR,,a=F b=T c=F,"could not read the JSON (Expecting ',' delimiter: line 62 column 4 (char 2565))",gemini-flash-medium
+2026-10-19T05:03:51,2024_13,2,UNRESOLVED,a=F b=T c=T,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T05:04:02,2024_18,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T05:04:11,2022_08,1,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T05:04:28,2023_35,1,WRONG,a=T b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T05:04:47,2024_19,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T05:05:09,2024_15,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T05:05:12,2024_28,1,MATCH,a=T b=F c=T,a=T b=F c=T,,gemini-flash-medium
+2026-10-19T05:05:23,2025_01,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:05:28,2025_28,1,MATCH,a=T b=F c=T,a=T b=F c=T,,gemini-flash-medium
+2026-10-19T05:05:44,2025_26,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:05:56,2024_13,3,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T05:06:02,2025_24,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T05:06:05,2025_23,1,MATCH,a=T b=T c=T,a=T b=T c=T,,gemini-flash-medium
+2026-10-19T05:10:50,2025_30,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:10:53,2025_39,1,WRONG,a=T b=T c=T,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T05:11:02,2023_26,2,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:11:08,2023_27,1,MATCH,a=F b=F c=T,a=F b=F c=T,,gemini-flash-medium
+2026-10-19T05:11:11,2023_35,2,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T05:11:14,2024_37,1,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T05:11:20,2025_05,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T05:11:40,2025_10,1,MATCH,a=T b=F c=T,a=T b=F c=T,,gemini-flash-medium
+2026-10-19T05:11:43,2025_17,1,UNRESOLVED,a=F b=F c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T13:30:35,2024_27,1,WRONG,a=T b=F c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:31:08,2022_39,1,ERROR,,a=T b=F c=F,"could not read the JSON (Expecting ',' delimiter: line 142 column 6 (char 3881))",gemini-flash-medium
+2026-10-19T13:31:15,2022_39,2,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:31:19,2024_14,1,MATCH,1=T 2=F 3=F 4=F 5=F,1=T 2=F 3=F 4=F 5=F,,gemini-flash-medium
+2026-10-19T13:31:28,2024_20,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:31:34,2022_03,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:31:40,2022_05,2,WRONG,a=F b=T c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:31:46,2022_12,1,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T13:31:59,2023_20,1,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T13:32:13,2021_14,4,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:32:34,2025_17,2,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T13:32:36,2025_39,2,WRONG,a=T b=T c=T,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T13:32:41,2022_22,1,WRONG,a=T b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T13:32:52,2025_25,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:32:55,2025_29,1,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:33:10,2024_05,1,UNRESOLVED,1=T 2=T 3=T 4=T 5=T,1=T 2=T 3=F 4=T 5=T,,gemini-flash-medium
+2026-10-19T13:33:18,2025_02,1,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:33:39,2024_27,2,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:34:21,2022_22,2,MATCH,a=F b=T c=T,a=F b=T c=T,,gemini-flash-medium
+2026-10-19T13:34:25,2024_17,1,WRONG,a=T b=T c=T,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:35:34,2025_40,1,WRONG,a=T b=T c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:36:04,2024_05,2,MATCH,1=T 2=T 3=F 4=T 5=T,1=T 2=T 3=F 4=T 5=T,,gemini-flash-medium
+2026-10-19T13:36:47,2022_05,3,ERROR,,a=T b=F c=F,"could not read the JSON (Expecting ',' delimiter: line 190 column 6 (char 5384))",gemini-flash-medium
+2026-10-19T13:38:12,2022_05,4,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:39:09,2025_39,3,MATCH,a=T b=T c=F,a=T b=T c=F,,gemini-flash-medium
+2026-10-19T13:39:16,2022_36,2,UNRESOLVED,1=? 2=? 3=? 4=? 5=?,1=T 2=F 3=F 4=F 5=F,,gemini-flash-medium
+2026-10-19T13:39:31,2024_17,2,WRONG,a=T b=T c=T,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:39:41,2025_40,2,WRONG,a=T b=T c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:47:01,2025_40,3,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium
+2026-10-19T13:47:04,2024_17,3,MATCH,a=F b=T c=F,a=F b=T c=F,,gemini-flash-medium
+2026-10-19T13:49:31,2022_36,2,UNRESOLVED,1=T 2=T 3=T 4=T 5=T,1=T 2=F 3=F 4=F 5=F,,gemini-flash-medium
+2026-10-19T13:53:41,2022_18,2,ERROR,,a=T b=F c=F,invalid translation: unknown position '*' in holds,gemini-flash-medium
+2026-10-19T13:53:56,2022_36,3,MATCH,1=T 2=F 3=F 4=F 5=F,1=T 2=F 3=F 4=F 5=F,,gemini-flash-medium
+2026-10-19T14:05:01,2022_18,3,MATCH,a=T b=F c=F,a=T b=F c=F,,gemini-flash-medium

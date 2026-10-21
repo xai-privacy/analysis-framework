@@ -1,0 +1,236 @@
+{
+ "2022_08": {
+  "a": {
+   "type": "weakens/strengthens",
+   "text": "(a). The research finding that “recently, more minors are entering social relationships in which one minor is the guardian or supervisor of another minor” supports Alice’s opinion."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b). The research finding that “a significant number of perpetrators of child abuse were themselves victims of child abuse as children, so it is impossible to dichotomously distinguish between victims and perpetrators of child abuse” supports Bob’s opinion."
+  },
+  "c": {
+   "type": "weakens/strengthens",
+   "text": "(c). The research finding that “recently, cases where minors make sexual requests to other minors, involving the filming of videos, are increasing. Experiences of responding to such requests without any sense of shame or discomfort critically influence the later development of negative self-identity or distorted sexual awareness. Therefore, the need to punish sexual requests between minors as acts of abuse is great”—this research finding supports both Bob and Charlie’s opinions."
+  }
+ },
+ "2022_12": {
+  "a": {
+   "type": "structure",
+   "text": "(a) Alice regards narcotics illegally owned by a drug dealer—which are prohibited by law from being owned—as property under the Criminal Act."
+  },
+  "b": {
+   "type": "structure",
+   "text": "(b) Bob regards both the narcotics illegally owned by a drug dealer and a fan letter cherished by a celebrity but not subject to transaction as property under the Criminal Act."
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) Charlie regards a fan letter cherished by a celebrity but not subject to transaction as property under the Criminal Act, but does not regard narcotics illegally owned by a drug dealer as property under the Criminal Act."
+  }
+ },
+ "2022_22": {
+  "a": {
+   "type": "structure",
+   "text": "(a) According to Alice, the statements “Gopchang is delicious” made by people who enjoy gopchang all express the same proposition, but this proposition is different from the one expressed by statements “Gopchang is delicious” made by people who do not enjoy gopchang."
+  },
+  "b": {
+   "type": "structure",
+   "text": "(b) If Youngho dislikes gopchang, then according to Alice, Youngho’s statement “Gopchang is delicious” cannot be true, but according to Bob, it can be true."
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) Bob’s argument assumes that disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute."
+  }
+ },
+ "2022_36": {
+  "1": {
+   "type": "structure",
+   "text": "① digraph G1 { b -> d; c -> d; e -> g; f -> g; d -> a; g -> a; h -> a; }"
+  },
+  "2": {
+   "type": "structure",
+   "text": "② digraph G2 { b -> d; c -> d; e -> g; f -> g; d -> h; g -> h; a -> h; }"
+  },
+  "3": {
+   "type": "structure",
+   "text": "③ digraph G3 { b -> d; c -> d; e -> g; f -> g; d -> a; g -> h; h -> a; }"
+  },
+  "4": {
+   "type": "structure",
+   "text": "④ digraph G4 { b -> d; c -> d; e -> g; f -> g; g -> a; d -> h; a -> h; }"
+  },
+  "5": {
+   "type": "structure",
+   "text": "⑤ digraph G5 { b -> h; c -> h; d -> h; e -> h; f -> h; g -> h; h -> a; }"
+  }
+ },
+ "2022_39": {
+  "a": {
+   "type": "weakens/strengthens",
+   "text": "(a) If a substance secreted in the duodenum decreases insulin secretion induced by incretin, then ⓐ is strengthened."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b) If a surgery where the stomach is removed and the esophagus is directly connected to the duodenum results in improved blood sugar, then ⓐ is strengthened."
+  },
+  "c": {
+   "type": "weakens/strengthens",
+   "text": "(c) If after Rubino's bariatric surgery, a second surgery is performed so that food passing into the jejunum is rerouted back to the duodenum, and the effect of blood sugar improvement disappears, then ⓐ is weakened."
+  }
+ },
+ "2023_20": {
+  "a": {
+   "type": "structure",
+   "text": "(a) Alice agrees that a lie must have the intention to deceive the other person, but Bob disagrees."
+  },
+  "b": {
+   "type": "structure",
+   "text": "(b) Alice and Bob both agree that there can be statements that are true but still morally blameworthy."
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) Alice and Bob agree that misleading statements and lies differ in their degree of moral wrongness."
+  }
+ },
+ "2024_05": {
+  "1": {
+   "type": "structure",
+   "text": "① According to A, even if one party unintentionally expresses intention ⓑ instead of the intended will ⓐ and the other party recognizes ⓑ as the intention, the originally intended will ⓐ should be respected."
+  },
+  "2": {
+   "type": "structure",
+   "text": "② According to B, when restricting the parties’ autonomy is justified, the sum of the cost (-) and utility (+) to the parties is always positive (+)."
+  },
+  "3": {
+   "type": "structure",
+   "text": "③ According to C, when restricting the parties’ autonomy, there are cases where the sum of the cost (-) and utility (+) to the parties is negative (-)."
+  },
+  "4": {
+   "type": "structure",
+   "text": "④ According to both A and C, even if the sum of the cost (-) and utility (+) to the parties caused by restricting the parties’ autonomy is positive (+), there are cases when the parties’ autonomy cannot be restricted."
+  },
+  "5": {
+   "type": "structure",
+   "text": "⑤ If the Basic Regulatory Act of Country X provides that “the parties’ autonomy may only be restricted if the total utility produced for society as a whole exceeds the costs generated by restricting autonomy,” then this is based on C rather than B."
+  }
+ },
+ "2024_14": {
+  "1": {
+   "type": "weakens/strengthens",
+   "text": "① If an act that is not, in itself, subject to blame is not cognitive error, then ⓐ is weakened."
+  },
+  "2": {
+   "type": "weakens/strengthens",
+   "text": "② If it is not always the case that responsibility is assigned to someone who believes in and spreads fake news, then ⓐ is weakened."
+  },
+  "3": {
+   "type": "weakens/strengthens",
+   "text": "③ If there are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame, then ⓐ is weakened."
+  },
+  "4": {
+   "type": "weakens/strengthens",
+   "text": "④ If all false assertions made under normal observation conditions always stem from an active avoidance attitude, then ⓐ is strengthened."
+  },
+  "5": {
+   "type": "weakens/strengthens",
+   "text": "⑤ If in situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur, then ⓐ is strengthened."
+  }
+ },
+ "2024_17": {
+  "a": {
+   "type": "structure",
+   "text": "(a) If evil is the privation of goodness, then evil is ⓐ."
+  },
+  "b": {
+   "type": "structure",
+   "text": "(b) In the statement, \"If an object is beautiful, its beauty is the harmonious totality of size, shape, color, etc. that the object possesses,\" beauty is ⓒ."
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) If something is always good for someone, then it is ⓐ, and if not, it is ⓑ or ⓒ."
+  }
+ },
+ "2024_20": {
+  "a": {
+   "type": "weakens/strengthens",
+   "text": "(a) Even if the perceiver can know which of the multiple objects producing the same perception most likely corresponds accurately to that perception, Alice's claim is not weakened."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b) If two circles of different sizes can be perceived as the same size depending on the size of the circles surrounding each, then Bob's claim is weakened."
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) Regarding the statement \"Some perceptions correspond accurately to external objects,\" Alice does not agree but Bob does."
+  }
+ },
+ "2024_27": {
+  "a": {
+   "type": "weakens/strengthens",
+   "text": "(a) If the plaintiff verdict rate in Group 1 is significantly lower than that in Group 2, the <hypothesis> is weakened."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b) If the difference between subjective probability and plaintiff verdict rate is significantly greater in Group 1 than in Group 2, the <hypothesis> is strengthened."
+  },
+  "c": {
+   "type": "weakens/strengthens",
+   "text": "(c) If, when testimony from a witness who saw a gray bus hitting Alice’s dog is additionally presented to both groups, the plaintiff verdict rate in Group 2 decreases significantly more than in Group 1, the <hypothesis> is weakened."
+  }
+ },
+ "2025_02": {
+  "a": {
+   "type": "weakens/strengthens",
+   "text": "(a) If legal remedies are available by other means for measures for which appeals are not permitted, ⓐ is mitigated."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b) If the harm suffered by perpetrating students due to transfer or expulsion cannot be restored even if such measures are overturned in a subsequent lawsuit—unlike with other measures—then ⓑ is weakened."
+  },
+  "c": {
+   "type": "weakens/strengthens",
+   "text": "(c) If it is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal and thereby grow into exemplary members of society, then ⓐ is weakened and ⓑ is strengthened."
+  }
+ },
+ "2025_25": {
+  "a": {
+   "type": "structure",
+   "text": "(a) According to Alice, a change in some physical attribute of the work can alter its meaning."
+  },
+  "b": {
+   "type": "structure",
+   "text": "(b) According to Charlie, an act of approval by the creator after the fact has the same effect as the physical act of making the work at the time of creation."
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) If the museum secretly replaced the fluorescent light of ⓐ with a new one without the creator's knowledge, both Bob and Charlie agree that the meaning of ⓐ could change."
+  }
+ },
+ "2025_29": {
+  "a": {
+   "type": "weakens/strengthens",
+   "text": "(a) If the female singers’ scores were higher in the experimental group than in the control group, ⓐ is supported."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b) If the total score of all female singers was higher than that of all male singers, ⓐ is supported."
+  },
+  "c": {
+   "type": "weakens/strengthens",
+   "text": "(c) If the female singers’ scores in the control group were slightly lower than those of the male singers, but in the experimental group the female singers’ scores were higher than those of the male singers, ⓐ is weakened."
+  }
+ },
+ "2025_40": {
+  "a": {
+   "type": "structure",
+   "text": "(a) If the difference in membrane permeability between animal and plant steroid hormones is determined only by polarity, Br would be more polar than animal steroid hormones."
+  },
+  "b": {
+   "type": "weakens/strengthens",
+   "text": "(b) <Experiment> supports the hypothesis that “A cannot synthesize Br, and B has a defect in the Br receptor.”"
+  },
+  "c": {
+   "type": "structure",
+   "text": "(c) After Br treatment, B and C will show similar phenotypes."
+  }
+ }
+}

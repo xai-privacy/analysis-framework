@@ -1,0 +1,342 @@
+{
+ "id": "2023_23",
+ "positions": {
+  "Theory A": {
+   "thesis": "c1",
+   "summary": "Pleasure is a sensation that we like, and pain is an unpleasant sensation that we dislike."
+  },
+  "Theory B": {
+   "thesis": "c2",
+   "summary": "Pleasure arises when abilities and conditions match the object and the subject performs excellently, regardless of sensation."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Pleasure is a sensation that we like, while pain is an unpleasant sensation that we dislike.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Pleasure arises when abilities and conditions match the object and the subject performs excellently, while pain arises when they do not match.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Alice, Bob, and Charlie are exceptional mathematicians who solved a long-standing mathematical problem.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Alice prepared long and systematically, focused her efforts, and experienced solving the problem as truly pleasurable.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Bob felt an exhilarating moment of pleasure upon solving the problem, but the pain during confusion outweighed it.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Bob feels more pleasure when solving many easy problems that do not require concentration.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Charlie views mathematics as just a job done out of duty, felt pain wrestling with difficult problems, became good at mathematics, and solved the problem through focused effort.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Bob experienced pleasure when solving the difficult problem.",
+   "source": "rationale"
+  },
+  "c9": {
+   "text": "Bob did not experience pleasure when solving difficult problems.",
+   "source": "statement"
+  },
+  "c10": {
+   "text": "Charlie did not experience pleasure when solving difficult problems.",
+   "source": "statement"
+  },
+  "c11": {
+   "text": "Alice's experience of solving the problem is a pleasurable experience.",
+   "source": "rationale"
+  },
+  "c12": {
+   "text": "Solving easy problems that do not require concentration does not match an exceptional mathematician's ability.",
+   "source": "rationale"
+  },
+  "c13": {
+   "text": "Bob's experience of solving easy problems is not a pleasurable experience.",
+   "source": "rationale"
+  },
+  "c14": {
+   "text": "The pleasure Bob feels when solving easy problems is no less than the pleasure Alice experienced.",
+   "source": "statement"
+  },
+  "c15": {
+   "text": "The pain Bob recounts while solving the difficult problem is considered pleasure.",
+   "source": "statement"
+  },
+  "c16": {
+   "text": "The pain Bob recounts while solving the difficult problem is pain and not considered pleasure.",
+   "source": "rationale"
+  },
+  "c17": {
+   "text": "Bob's experience of solving easy problems was pleasurable.",
+   "source": "statement"
+  },
+  "c18": {
+   "text": "Mathematics is not pleasurable for Charlie.",
+   "source": "statement"
+  },
+  "c19": {
+   "text": "Mathematics is a pleasurable activity for Charlie.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Theory A",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Theory B",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c5",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c6",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c7",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c12",
+   "by": "Theory B",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Theory A",
+   "if": [
+    "c1",
+    "c5"
+   ],
+   "then": "c8",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Theory A",
+   "if": [
+    "c1",
+    "c7"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Theory A",
+   "if": [
+    "c1",
+    "c5"
+   ],
+   "then": "c16",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Theory A",
+   "if": [
+    "c1",
+    "c6"
+   ],
+   "then": "c17",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Theory A",
+   "if": [
+    "c1",
+    "c7"
+   ],
+   "then": "c18",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r6",
+   "by": "Theory B",
+   "if": [
+    "c2",
+    "c3",
+    "c4"
+   ],
+   "then": "c11",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r7",
+   "by": "Theory B",
+   "if": [
+    "c2",
+    "c3",
+    "c12"
+   ],
+   "then": "c13",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r8",
+   "by": "Theory B",
+   "if": [
+    "c2",
+    "c3",
+    "c5"
+   ],
+   "then": "c15",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r9",
+   "by": "Theory B",
+   "if": [
+    "c2",
+    "c3",
+    "c7"
+   ],
+   "then": "c19",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c8",
+   "c9"
+  ],
+  [
+   "c13",
+   "c14"
+  ],
+  [
+   "c13",
+   "c17"
+  ],
+  [
+   "c15",
+   "c16"
+  ],
+  [
+   "c18",
+   "c19"
+  ]
+ ],
+ "statements": {
+  "1": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Theory A",
+      "claim": "c9"
+     },
+     {
+      "op": "holds",
+      "by": "Theory A",
+      "claim": "c10"
+     }
+    ]
+   },
+   "note": "Theory A derives that Charlie felt no pleasure (c10 via r2), but derives that Bob felt exhilarating pleasure upon solving (c8 via r1), which is contrary to c9."
+  },
+  "2": {
+   "check": {
+    "op": "holds",
+    "by": "Theory B",
+    "claim": "c14"
+   },
+   "note": "Under Theory B, Alice's experience is pleasure (c11), but Bob solving easy problems does not match his ability and is not pleasure (c13, contrary to c14)."
+  },
+  "3": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Theory A",
+      "claim": "c15"
+     },
+     {
+      "op": "holds",
+      "by": "Theory B",
+      "claim": "c15"
+     }
+    ]
+   },
+   "note": "Theory B considers Bob's arduous problem-solving experience to be pleasure (c15 via r8), but Theory A considers the pain he felt to be pain and not pleasure (c16 via r3, contrary to c15)."
+  },
+  "4": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Theory A",
+      "claim": "c17"
+     },
+     {
+      "op": "holds",
+      "by": "Theory B",
+      "claim": "c17"
+     }
+    ]
+   },
+   "note": "Theory A holds that Bob's solving easy problems was pleasurable (c17 via r4), but Theory B derives that it was not pleasurable (c13 via r7, contrary to c17)."
+  },
+  "5": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Theory A",
+      "claim": "c18"
+     },
+     {
+      "op": "holds",
+      "by": "Theory B",
+      "claim": "c19"
+     }
+    ]
+   },
+   "note": "Under Theory A, mathematics is not pleasurable for Charlie (c18 via r5). Under Theory B, mathematics is pleasurable for Charlie because he worked hard, became good, and solved the problem with focused effort (c19 via r9)."
+  }
+ }
+}

@@ -1,0 +1,291 @@
+{
+  "id": "2021_28",
+  "positions": {
+    "Alice": {
+      "thesis": "c5",
+      "summary": "The Cool Summer Policy will reduce electricity supply stability because generation facilities must meet peak hourly demand."
+    },
+    "Bob": {
+      "thesis": "c8",
+      "summary": "Switching to a flat rate system (1,600 won base, 180 won/kWh) is better to lower the summer electricity bill burden for most households."
+    },
+    "Charlie": {
+      "thesis": "c11",
+      "summary": "The Cool Summer Policy should be modified to apply only to vulnerable groups to focus welfare on them."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Country X's progressive billing system has Tier 1 up to 200 kWh (base 900 won, 90 won/kWh), Tier 2 200–400 kWh (base 1,600 won, 180 won/kWh), and Tier 3 over 400 kWh (base 7,300 won, 280 won/kWh).",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "The Cool Summer Policy adjusts the tiers to up to 300 kWh, 300–450 kWh, and over 450 kWh, maintaining the same rate structure in each tier.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "In order to ensure a stable electricity supply, power generation facilities must be able to meet the peak hourly electricity demand.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "The Cool Summer Policy lowers electricity rates, increasing summer electricity consumption and peak hourly demand.",
+      "source": "rationale"
+    },
+    "c5": {
+      "text": "The introduction of the Cool Summer Policy will reduce the stability of electricity supply.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Air conditioning is a necessity, not a luxury.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Switching to a flat rate system (base 1,600 won, 180 won/kWh) will lower the summer electricity bill burden for most households compared to the Cool Summer Policy.",
+      "source": "rationale"
+    },
+    "c8": {
+      "text": "To lower the summer electricity bill burden for most households, it would be better to switch from the Cool Summer Policy to a flat rate system with a base charge of 1,600 won and a per kWh rate of 180 won.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "It is better to focus on welfare for vulnerable groups rather than all households.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "The Cool Summer Policy provides welfare benefits to vulnerable groups.",
+      "source": "rationale"
+    },
+    "c11": {
+      "text": "The Cool Summer Policy should be modified so that it applies only to vulnerable groups.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Charlie",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "Charlie",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c3",
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c6",
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Charlie",
+      "if": [
+        "c9",
+        "c10"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "Alice",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Peak hourly electricity consumption in Country X occurs in summer.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "Because peak hourly electricity consumption occurs in summer, increased summer electricity consumption directly increases peak hourly demand, reducing supply stability.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "Alice",
+              "if": [
+                "h1",
+                "c3",
+                "c4"
+              ],
+              "then": "c5",
+              "type": "defeasible",
+              "source": "rationale"
+            }
+          ]
+        }
+      },
+      "note": "Peak hourly demand occurring in summer supports Alice's argument that summer consumption drives peak demand, so it does not weaken her argument."
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "Bob",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "Most households consume 400–450 kWh per month.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "For households consuming 400–450 kWh per month, the summer electricity bill under the Cool Summer Policy (46,600–55,600 won) is lower than under Bob's flat rate system (73,600–82,600 won).",
+              "source": "rationale"
+            },
+            "h5": {
+              "text": "Switching to Bob's flat rate system does not lower the summer electricity bill burden for most households compared to the Cool Summer Policy.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3",
+                "h4"
+              ],
+              "then": "h5",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "c7",
+              "h5"
+            ]
+          ]
+        }
+      },
+      "note": "Data showing most households consume 400–450 kWh undermines Bob's premise that the flat rate reduces the bill burden compared to the Cool Summer Policy."
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "Charlie",
+        "add": {
+          "claims": {
+            "h6": {
+              "text": "Most vulnerable individuals, such as elderly people living alone, use less than 200 kWh per month.",
+              "source": "statement"
+            },
+            "h7": {
+              "text": "The Cool Summer Policy provides no rate discount or bill reduction for monthly electricity usage of 200 kWh or less compared to the original system.",
+              "source": "rationale"
+            },
+            "h8": {
+              "text": "The Cool Summer Policy provides no welfare benefits to most vulnerable individuals.",
+              "source": "rationale"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h6",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h7",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h6",
+                "h7"
+              ],
+                "then": "h8",
+              "type": "strict",
+              "source": "rationale"
+            }
+          ],
+          "contraries": [
+            [
+              "c10",
+              "h8"
+            ]
+          ]
+        }
+      },
+      "note": "Because usage under 200 kWh receives no discount under the Cool Summer Policy, data showing vulnerable individuals use less than 200 kWh undermines Charlie's premise that targeting the policy to them provides welfare benefits."
+    }
+  }
+}

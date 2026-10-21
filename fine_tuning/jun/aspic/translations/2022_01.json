@@ -1,0 +1,231 @@
+{
+ "id": "2022_01",
+ "positions": {
+  "Passage": {
+   "thesis": "c6",
+   "summary": "Neuroscience finding the causes of behavior in the brain cannot justify a fundamental change in legal responsibility and punishment, because the law requires only a minimum capacity for rational action, which people generally possess."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "The law assumes that people generally have the ability to make rational choices.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "To be exempt from legal responsibility, it must be proven that the defendant lacks the capacity for rational action.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "The capacity for rational action refers to the ability to act in ways that achieve one's desires based on one's own beliefs.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "The law is not concerned with whether people possess metaphysical free will, but only whether they meet the minimum standard of rationality.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Neuroscience has not shown that people in general do not meet the minimum standard of rationality.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "Neuroscience finding the causes of behavior in the brain cannot justify a fundamental change in the practice of holding people legally responsible and punishing them.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Passage",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Passage",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Passage",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Passage",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c5",
+   "by": "Passage",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Passage",
+   "if": [
+    "c1",
+    "c2",
+    "c4",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "weakens",
+    "claim": "c6",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "Human beliefs or desires play no role in causing behavior.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Humans lack the capacity for rational action.",
+       "source": "rationale"
+      },
+      "h3": {
+       "text": "Neuroscience can justify a fundamental change in the practice of legal responsibility and punishment.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "*",
+       "if": [
+        "h1",
+        "c3"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "*",
+       "if": [
+        "h2"
+       ],
+       "then": "h3",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h2",
+       "c1"
+      ],
+      [
+       "h3",
+       "c6"
+      ]
+     ]
+    }
+   },
+   "note": "If beliefs/desires cause no behavior, rational action is impossible, undermining premise c1 and rebutting c6."
+  },
+  "b": {
+   "check": {
+    "op": "weakens",
+    "claim": "c6",
+    "add": {
+     "claims": {
+      "h4": {
+       "text": "The capacity for rational action in humans arises from biological properties of evolved brains.",
+       "source": "statement"
+      },
+      "h5": {
+       "text": "Neuroscience can justify a fundamental change in the practice of legal responsibility and punishment.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h4",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rb1",
+       "by": "*",
+       "if": [
+        "h4"
+       ],
+       "then": "h5",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h5",
+       "c6"
+      ]
+     ],
+     "undercuts": [
+      {
+       "claim": "c4",
+       "rule": "rb1"
+      }
+     ]
+    }
+   },
+   "note": "The naive inference rb1 (biological origin of rational action negates responsibility) is undercut by c4: the law does not require metaphysical free will, only the capacity for rational action."
+  },
+  "c": {
+   "check": {
+    "op": "strengthens",
+    "claim": "c6",
+    "add": {
+     "claims": {
+      "h6": {
+       "text": "A large proportion of people who committed crimes share common neural mechanisms that cause criminal behavior.",
+       "source": "statement"
+      },
+      "h7": {
+       "text": "Many offenders may lack the capacity for rational action at the time of the crime.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h6",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h6"
+       ],
+       "then": "h7",
+       "type": "defeasible",
+       "source": "rationale"
+      }
+     ]
+    }
+   },
+   "note": "Common neural mechanisms among offenders do not provide an argument for c6, and may instead support exemptions under c2; therefore, c6 is not strengthened."
+  }
+ }
+}

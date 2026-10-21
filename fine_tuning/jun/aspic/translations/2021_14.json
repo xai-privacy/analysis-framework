@@ -1,0 +1,413 @@
+{
+ "id": "2021_14",
+ "positions": {
+  "Alice1": {
+   "thesis": "c7",
+   "summary": "<Theory> has unreasonable consequences because refraining from an action counts as an act that harms someone."
+  },
+  "Bob1": {
+   "thesis": "c10",
+   "summary": "Doing nothing cannot be considered an act, so <Theory> does not imply that refraining from giving money caused harm."
+  },
+  "Alice2": {
+   "thesis": "c14",
+   "summary": "Excluding omissions from being acts leads to unreasonable consequences, as not rescuing a drowning child clearly harmed the child."
+  },
+  "Bob2": {
+   "thesis": "c16",
+   "summary": "An omission resulting from a deliberate decision is an act, so not rescuing the child is an act that caused harm, preserving <Theory>."
+  },
+  "Alice3": {
+   "thesis": "c22",
+   "summary": "Treating deliberate omissions as acts still leads to unreasonable consequences, as keeping an intended gift does not seem to harm the recipient."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "Under <Theory>, for an act to cause harm to someone means that, if the act had not occurred, that person would have been in a better state.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "Under <Theory>, for an act to benefit someone means that, if the act had not occurred, that person would have been in a worse state.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "Alice chose not to give 50,000 won to a friend; had she given it, the friend would have been in a better state.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "Alice1 assumes that doing nothing, such as choosing not to give 50,000 won, is considered an act.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "Alice's not giving 50,000 won to her friend harmed her friend.",
+   "source": "passage"
+  },
+  "c6": {
+   "text": "It is unreasonable that not giving 50,000 won harmed the friend.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "<Theory> leads to unreasonable consequences.",
+   "source": "passage"
+  },
+  "c8": {
+   "text": "Doing nothing, like simply not giving 50,000 won, cannot be considered an act.",
+   "source": "passage"
+  },
+  "c9": {
+   "text": "Alice's not giving 50,000 won is not an act and did not harm the friend under <Theory>.",
+   "source": "rationale"
+  },
+  "c10": {
+   "text": "<Theory> does not imply that not giving 50,000 won harmed the friend.",
+   "source": "passage"
+  },
+  "c11": {
+   "text": "A person had the ability to rescue a struggling child but chose not to, resulting in drowning; had they rescued the child, the child would have been in a better state.",
+   "source": "passage"
+  },
+  "c12": {
+   "text": "Under Bob1's view of an act, not saving the child is not an act and thus did not harm the child.",
+   "source": "rationale"
+  },
+  "c13": {
+   "text": "Not saving the child caused harm to the child.",
+   "source": "passage"
+  },
+  "c14": {
+   "text": "Excluding omissions from being acts leads to unreasonable consequences.",
+   "source": "passage"
+  },
+  "c15": {
+   "text": "An omission that is the result of a deliberate decision should be considered an act.",
+   "source": "passage"
+  },
+  "c16": {
+   "text": "The choice not to save the child was the result of a deliberate decision, so it is an act that caused harm to the child.",
+   "source": "passage"
+  },
+  "c17": {
+   "text": "A bought a gift intended for B, but deliberately decided to keep it instead of giving it to B.",
+   "source": "passage"
+  },
+  "c18": {
+   "text": "Had A given the gift to B, B would have been in a better state.",
+   "source": "rationale"
+  },
+  "c19": {
+   "text": "A's not giving the gift to B was the result of a deliberate decision, so it is an act.",
+   "source": "passage"
+  },
+  "c20": {
+   "text": "A's not giving the gift to B caused harm to B.",
+   "source": "statement"
+  },
+  "c21": {
+   "text": "A's not giving the gift to B did not cause harm to B.",
+   "source": "passage"
+  },
+  "c22": {
+   "text": "Treating deliberate omissions as acts leads to unreasonable consequences.",
+   "source": "passage"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c2",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c3",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c4",
+   "by": "Alice1",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c6",
+   "by": "Alice1",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c8",
+   "by": "Bob1",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c11",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c13",
+   "by": "Alice2",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c15",
+   "by": "Bob2",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c17",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c18",
+   "by": "*",
+   "kind": "axiom"
+  },
+  {
+   "claim": "c21",
+   "by": "Alice3",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Alice1",
+   "if": [
+    "c1",
+    "c3",
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r2",
+   "by": "Alice1",
+   "if": [
+    "c5",
+    "c6"
+   ],
+   "then": "c7",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r3",
+   "by": "Bob1",
+   "if": [
+    "c1",
+    "c8"
+   ],
+   "then": "c9",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r4",
+   "by": "Bob1",
+   "if": [
+    "c9"
+   ],
+   "then": "c10",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r5",
+   "by": "Alice2",
+   "if": [
+    "c8",
+    "c11"
+   ],
+   "then": "c12",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r6",
+   "by": "Alice2",
+   "if": [
+    "c12",
+    "c13"
+   ],
+   "then": "c14",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r7",
+   "by": "Bob2",
+   "if": [
+    "c11",
+    "c15"
+   ],
+   "then": "c16",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r8",
+   "by": "Bob2",
+   "if": [
+    "c1",
+    "c11",
+    "c16"
+   ],
+   "then": "c13",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r9",
+   "by": "Bob2",
+   "if": [
+    "c15",
+    "c17"
+   ],
+   "then": "c19",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r10",
+   "by": "Bob2",
+   "if": [
+    "c1",
+    "c18",
+    "c19"
+   ],
+   "then": "c20",
+   "type": "defeasible",
+   "source": "passage"
+  },
+  {
+   "id": "r11",
+   "by": "Alice3",
+   "if": [
+    "c20",
+    "c21"
+   ],
+   "then": "c22",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c9"
+  ],
+  [
+   "c12",
+   "c13"
+  ],
+  [
+   "c20",
+   "c21"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Alice1",
+    "claim": "h3",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "I could have punched my friend and broken their nose but did not do so; had I punched them, they would have been in a worse state.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Not punching my friend is an act.",
+       "source": "statement"
+      },
+      "h3": {
+       "text": "By not punching my friend, I performed an act that benefited my friend.",
+       "source": "statement"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "ra1",
+       "by": "Alice1",
+       "if": [
+        "h1",
+        "c4"
+       ],
+       "then": "h2",
+       "type": "defeasible",
+       "source": "rationale"
+      },
+      {
+       "id": "ra2",
+       "by": "Alice1",
+       "if": [
+        "c2",
+        "h1",
+        "h2"
+       ],
+       "then": "h3",
+       "type": "defeasible",
+       "source": "statement"
+      }
+     ]
+    }
+   },
+   "note": "Under Alice1's assumption that omissions are acts (c4) and Theory's definition of benefit (c2), refraining from breaking a friend's nose is an act that benefited the friend."
+  },
+  "b": {
+   "check": {
+    "op": "not",
+    "arg": {
+     "op": "and",
+     "args": [
+      {
+       "op": "holds",
+       "by": "Alice2",
+       "claim": "c13"
+      },
+      {
+       "op": "holds",
+       "by": "Bob2",
+       "claim": "c13"
+      }
+     ]
+    }
+   },
+   "note": "Checks whether Alice2 and Bob2 differ on c13 (not rescuing harmed the child). Both hold c13, so the conjunction is true and its negation is false."
+  },
+  "c": {
+   "check": {
+    "op": "and",
+    "args": [
+     {
+      "op": "holds",
+      "by": "Bob2",
+      "claim": "c20"
+     },
+     {
+      "op": "holds",
+      "by": "Bob2",
+      "claim": "c21"
+     }
+    ]
+   },
+   "note": "Asserting c20 makes Bob's position inconsistent only if Bob's position also holds c21 (contrary of c20). Bob's rules derive c20 and do not derive c21, so Bob remains consistent."
+  }
+ }
+}

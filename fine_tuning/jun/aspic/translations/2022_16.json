@@ -1,0 +1,158 @@
+{
+ "id": "2022_16",
+ "positions": {
+  "Socrates": {
+   "thesis": "c6",
+   "summary": "Making a false judgment is impossible, because whether one knows or does not know the objects of judgment, one cannot make a false judgment."
+  }
+ },
+ "claims": {
+  "c1": {
+   "text": "For any object, one either knows it or does not know it, and one cannot both know and not know it at the same time.",
+   "source": "passage"
+  },
+  "c2": {
+   "text": "If one knows both 'a' and 'b', one cannot make a false judgment such as 'a is b'.",
+   "source": "passage"
+  },
+  "c3": {
+   "text": "If one knows neither 'a' nor 'b', one cannot make a false judgment such as 'a is b'.",
+   "source": "passage"
+  },
+  "c4": {
+   "text": "One never considers what one knows to be what one does not know, nor what one does not know to be what one knows.",
+   "source": "passage"
+  },
+  "c5": {
+   "text": "If one knows only 'a' and does not know 'b', one cannot make a judgment such as 'a is b'.",
+   "source": "rationale"
+  },
+  "c6": {
+   "text": "Making a false judgment is impossible.",
+   "source": "passage"
+  },
+  "c7": {
+   "text": "Even if one knows only 'a' and does not know 'b', one can still make a true judgment such as 'a is b'.",
+   "source": "statement"
+  }
+ },
+ "premises": [
+  {
+   "claim": "c1",
+   "by": "Socrates",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c2",
+   "by": "Socrates",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c3",
+   "by": "Socrates",
+   "kind": "ordinary"
+  },
+  {
+   "claim": "c4",
+   "by": "Socrates",
+   "kind": "ordinary"
+  }
+ ],
+ "rules": [
+  {
+   "id": "r1",
+   "by": "Socrates",
+   "if": [
+    "c4"
+   ],
+   "then": "c5",
+   "type": "defeasible",
+   "source": "rationale"
+  },
+  {
+   "id": "r2",
+   "by": "Socrates",
+   "if": [
+    "c1",
+    "c2",
+    "c3",
+    "c5"
+   ],
+   "then": "c6",
+   "type": "defeasible",
+   "source": "passage"
+  }
+ ],
+ "contraries": [
+  [
+   "c5",
+   "c7"
+  ]
+ ],
+ "statements": {
+  "a": {
+   "check": {
+    "op": "holds",
+    "by": "Socrates",
+    "claim": "c7"
+   },
+   "note": "According to Socrates, one cannot judge about what one does not know, so Socrates does not hold that one can make a true judgment knowing only 'a'."
+  },
+  "b": {
+   "check": {
+    "op": "holds",
+    "by": "Socrates",
+    "claim": "c3"
+   },
+   "note": "In Socrates' fourth statement, he asserts that knowing neither prevents one from reaching a judgment such as 'a is b'."
+  },
+  "c": {
+   "check": {
+    "op": "weakens",
+    "claim": "Socrates",
+    "add": {
+     "claims": {
+      "h1": {
+       "text": "It is actually possible to make a false judgment such as 'a is b' while knowing both 'a' and 'b'.",
+       "source": "statement"
+      },
+      "h2": {
+       "text": "Making a false judgment is possible.",
+       "source": "rationale"
+      }
+     },
+     "premises": [
+      {
+       "claim": "h1",
+       "by": "*",
+       "kind": "axiom"
+      }
+     ],
+     "rules": [
+      {
+       "id": "rc1",
+       "by": "*",
+       "if": [
+        "h1"
+       ],
+       "then": "h2",
+       "type": "strict",
+       "source": "rationale"
+      }
+     ],
+     "contraries": [
+      [
+       "h1",
+       "c2"
+      ],
+      [
+       "h2",
+       "c6"
+      ]
+     ]
+    }
+   },
+   "note": "If a false judgment while knowing both is possible, Socrates' premise c2 is undermined and thesis c6 is rebutted, weakening his argument."
+  }
+ }
+}

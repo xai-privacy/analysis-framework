@@ -1,0 +1,41 @@
+{
+  "id": "2023_03",
+  "positions": {
+    "Alice": {
+      "thesis": "c3",
+      "summary": "Criminal procedure should pursue objective truth, requiring the judge to actively investigate and collect evidence when necessary."
+    },
+    "Bob": {
+      "thesis": "c7",
+      "summary": "Criminal procedure should pursue truth through fair procedure, with the judge acting as a neutral adjudicator while parties contest the truth."
+    },
+    "Charlie": {
+      "thesis": "c10",
+      "summary": "Criminal procedure should pursue objective truth through the parties' evidence, with the judge acting neutrally and supervising to prevent human rights violations."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The truth that should be pursued in criminal procedure is the substance of the case, that is, the objective truth.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "In order to discover objective truth, the judge's active involvement and investigative activities are necessary.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "If necessary for discovering the truth and there is no significant procedural violation, the judge can directly collect or investigate evidence without being restricted by the parties.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Objective truth can only be known by God, and a judicial conclusion is strictly no more than the judge's subjective truth.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "What should be pursued in criminal procedure is the truth through procedure, derived through a fair criminal procedure.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "The parties must be guaranteed a fair opportunity to contest the truth in court.",
+      "source": "passage"
+    },
