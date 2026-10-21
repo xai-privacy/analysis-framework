@@ -97,26 +97,26 @@ sudo reboot
 ```
 
 Accept the `meta-llama/Llama-3.2-3B-Instruct` license on Hugging Face before
-authenticating. Log back into the same directory again. Then fine-tune for 180 steps, evaluating and saving every 20:
+authenticating. Log back into the same directory again. Then fine-tune for 60 steps, evaluating and saving every 10:
 
 ```bash
 python train_chameleon.py \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--train-data data/train.jsonl \
-	--valid-data data/valid.jsonl \
-	--split data/split.json \
-	--output-dir adapters_chameleon \
-	--max-steps 180 \
-	--eval-steps 20 \
-	--learning-rate 1e-4 \
-	--max-seq-length 4096
+  --model meta-llama/Llama-3.2-3B-Instruct \
+  --train-data data/train.jsonl \
+  --valid-data data/valid.jsonl \
+  --split data/split.json \
+  --output-dir adapters_chameleon_60step \
+  --max-steps 60 \
+  --eval-steps 10 \
+  --learning-rate 1e-4 \
+  --max-seq-length 4096
 ```
 
 Plot training loss, validation loss, learning rate, and epoch after training:
 
 ```bash
 python plot_training_metrics.py \
-	--trainer-state adapters_chameleon/trainer_state.json
+	--trainer-state adapters_chameleon_60step/trainer_state.json
 ```
 
 Optionally evaluate the base model and the trained adapter on validation data:
@@ -129,6 +129,9 @@ python evaluate_chameleon.py \
 
 python evaluate_chameleon.py \
 	--model meta-llama/Llama-3.2-3B-Instruct \
-	--adapter-path adapters_chameleon \
+	--adapter-path adapters_chameleon_60step \
+  --format-hint \
 	--out results/finetuned.json
 ```
+
+Please note that the output directory name will change according to the number of steps.
