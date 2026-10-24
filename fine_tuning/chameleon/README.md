@@ -1,4 +1,4 @@
-# Chameleon KVM instance
+# Set up and run fine-tuning with Chameleon KVM instance
 
 We perform fine-tuning using [Chameleon](https://www.chameleoncloud.org/) cloud instances. If you do not have a Chameleon account, contact @SebastianZimmeck.
 
