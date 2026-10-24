@@ -25,7 +25,7 @@ source ft_venv/bin/activate
 
 For the Fish shell use `source ft_venv/bin/activate.fish`. (To stop the virtual environment run `deactivate`.)
 
-Install `python-chi` and `chameleon-blazarclient` and load the OAuth app-credentials file from within the same directory:
+Install `python-chi` and `chameleon-blazarclient` and place the OAuth app-credentials file in the same directory:
 
 ```bash
 pip install python-chi
@@ -33,7 +33,7 @@ pip install chameleon-blazarclient
 source app-cred-python-chi-kvm-openrc.sh
 ```
 
-The SSH private key, `my-chi-key.pem`, is needed to log in after launching an instance. Place them in the same directory as the OAuth app-credentials file. The OAuth app-credentials file, `app-cred-python-chi-kvm-openrc.sh`, is needed for OAuth login in to Chameleon and using a bare metal server. If you do not have these files, contact @SebastianZimmeck.
+The SSH private key, `my-chi-key.pem`, is needed to log in after launching an instance. Place the file in the same directory as the OAuth app-credentials, `app-cred-python-chi-kvm-openrc.sh`, file. The OAuth app-credentials file is needed for OAuth login into Chameleon and using a bare metal server. If you do not have these files, contact @SebastianZimmeck.
 
 ## 2. Reserve a lease
 
