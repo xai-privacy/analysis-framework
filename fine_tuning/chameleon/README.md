@@ -1,23 +1,41 @@
 # Chameleon KVM instance
 
-These scripts use the `chi` Python client with the `KVM@TACC` site. We already have Security Groups configured in KVM to allow SSH connections. We also have the SSH key pair generated and OAuth credentials shared privately.
+We perform fine-tuning using [Chameleon](https://www.chameleoncloud.org/) cloud instances. If you do not have a Chameleon account, contact @SebastianZimmeck.
+
+The scripts in this folder use the `chi` Python client with the `KVM@TACC` site. We already have Security Groups configured in KVM to allow SSH connections. We also have the SSH key pair generated and OAuth credentials shared privately.
 
 **KVM@TACC requires a lease.** GPU flavors (such as `g1.h100.vgpu.1g.12gb`) cannot be booted on demand. You first reserve a lease for the flavor, wait for it to become `ACTIVE`, and then launch the instance against that lease. The workflow is:
 
-1. Reserve a lease with [`chameleon_reserve_lease.py`](chameleon_reserve_lease.py)
-2. Wait until the lease status is `ACTIVE`
-3. Launch the instance with [`launch_server.py`](launch_server.py), passing the lease name
+1. Preliminary setup
+2. Reserve a lease with [`chameleon_reserve_lease.py`](chameleon_reserve_lease.py)
+3. Wait until the lease status is `ACTIVE`
+4. Launch the instance with [`launch_server.py`](launch_server.py), passing the lease name
+5. Run fine-tuning
 
-## Setup
+Instructions are tested for macOS.
 
-Install `python-chi` and load the OAuth app-credentials file (shared privately) in every new shell:
+## 1. Preliminary setup
+
+We recommend to first create a Python virtual environment:
+
+```bash
+python3 -m venv ft_venv
+source ft_venv/bin/activate
+```
+
+For the Fish shell use `source ft_venv/bin/activate.fish`. (To stop the virtual environment run `deactivate`.)
+
+Install `python-chi` and `chameleon-blazarclient` and load the OAuth app-credentials file from within the same directory:
 
 ```bash
 pip install python-chi
-source <app-cred-file-path>
+pip install chameleon-blazarclient
+source app-cred-python-chi-kvm-openrc.sh
 ```
 
-## Step 1: Reserve a lease
+The SSH private key, `my-chi-key.pem`, is needed to log in after launching an instance. Place them in the same directory as the OAuth app-credentials file. The OAuth app-credentials file, `app-cred-python-chi-kvm-openrc.sh`, is needed for OAuth login in to Chameleon and using a bare metal server. If you do not have these files, contact @SebastianZimmeck.
+
+## 2. Reserve a lease
 
 From this directory, run:
 
@@ -29,11 +47,11 @@ The script reserves one `g1.h100.vgpu.1g.12gb` flavor (`flavor:instance` resourc
 
 If lease creation fails, the error is printed by `python-chi` and the script exits with `Lease creation failed`. Do not re-run the script after a successful creation, or you will create a duplicate lease.
 
-## Step 2: Wait for the lease to become ACTIVE
+## 3. Wait for the lease to become ACTIVE
 
-A new lease starts in `PENDING` and usually becomes `ACTIVE` within a minute or two. Check the status in the Chameleon Horizon dashboard for `KVM@TACC` (Reservations > Leases). Do not continue until the status is `ACTIVE`; `launch_server.py` exits if the lease is in any other state.
+A new lease starts in `PENDING` and usually becomes `ACTIVE` within a minute or two. Check the status in the Chameleon Horizon dashboard for `KVM@TACC` at <https://kvm.tacc.chameleoncloud.org> under Reservations > Leases. Do not continue until the status is `ACTIVE`; `launch_server.py` exits if the lease is in any other state.
 
-## Step 3: Launch an instance
+## 4. Launch an instance
 
 Pass the lease name to the launch script:
 
@@ -43,22 +61,35 @@ python3 launch_server.py trinav-xai-lease
 
 The script looks up the lease by name, checks that it is `ACTIVE`, picks its active reservation (for flavor reservations, the reservation ID is the flavor ID), creates a server with that flavor, waits for it to become active, and associates a floating IP. Its `key_name` (`my-chi-key`) must match the name of your Chameleon SSH key pair. The GPU-based instances take a few seconds to start up and be ready to connect.
 
-Once it prints the floating IP, connect with:
+You can find the floating IP at <https://kvm.tacc.chameleoncloud.org> under Network > Floating IPs. Connect with:
 
 ```bash
-ssh -i <private key path> cc@<floating-ip>
+ssh -i my-chi-key.pem cc@<floating-ip>
 ```
 
-Keep the private key secure and do not commit or share it. If the host key verification fails, use ssh with StrictHostKeyChecking=no or delete the offending key in the ssh config file and reconnect. Use option vv with SSH for more debugging information.
+If asked whether you are sure you want to continue connecting, select yes.
 
-## Lease lifetime and cleanup
+If the permissions of your key file are too open, change them with:
+
+```bash
+chmod 600 my-chi-key.pem
+```
+
+Keep the private key secure and do not commit or share it.
+
+If the host key verification fails, use ssh with StrictHostKeyChecking=no or delete the offending key in the ssh config file and reconnect. Use option `vv` with SSH for more debugging information.
+
+## 5. Run fine-tuning
+
+### 5.1 Lease lifetime and cleanup
 
 - The lease is time-limited (6 hours by default). When it ends, the instance is terminated and anything stored on it is lost. Copy adapters, logs, and results off the VM before the lease expires.
 - Launch the instance soon after the lease becomes active so you use as much of the window as possible.
-- If you finish early, delete the server and the lease in Horizon so the reserved capacity and SUs are released.
-- To use the GPU again after a lease ends, repeat from Step 1.
+- If you finish early, delete the instance and the lease in Horizon so the reserved capacity and SUs are released.
+  You can do so at <https://kvm.tacc.chameleoncloud.org> under Compute > Instances > Delete Instances.
+- To use the GPU again after a lease ends, repeat from step 2 above.
 
-## A Fine-Tuning Example
+### 5.2 A fine-tuning example
 
 A LEET-Arg fine-tuning example is below. It uses the prepared 58/15
 train/validation split and the CUDA QLoRA scripts in `fine_tuning/trinav/`.
@@ -68,10 +99,10 @@ If the transfer has not completed, run these commands from the local
 
 ```bash
 ssh -o StrictHostKeyChecking=no -i my-chi-key.pem \
-	cc@<public IP> 'mkdir -p ~/xai'
+ cc@<public IP> 'mkdir -p ~/xai'
 
 scp -o StrictHostKeyChecking=no -i my-chi-key.pem -r trinav \
-	cc@<public IP>:~/xai/
+  cc@<public IP>:~/xai/
 ```
 
 Connect to the VM and verify that the folder arrived:
@@ -116,22 +147,22 @@ Plot training loss, validation loss, learning rate, and epoch after training:
 
 ```bash
 python plot_training_metrics.py \
-	--trainer-state adapters_chameleon_60step/trainer_state.json
+  --trainer-state adapters_chameleon_60step/trainer_state.json
 ```
 
 Optionally evaluate the base model and the trained adapter on validation data:
 
 ```bash
 python evaluate_chameleon.py \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--format-hint \
-	--out results/base_hint.json
+  --model meta-llama/Llama-3.2-3B-Instruct \
+  --format-hint \
+  --out results/base_hint.json
 
 python evaluate_chameleon.py \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--adapter-path adapters_chameleon_60step \
+  --model meta-llama/Llama-3.2-3B-Instruct \
+  --adapter-path adapters_chameleon_60step \
   --format-hint \
-	--out results/finetuned.json
+  --out results/finetuned.json
 ```
 
 Please note that the output directory name will change according to the number of steps.
