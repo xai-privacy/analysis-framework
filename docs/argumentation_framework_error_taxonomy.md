@@ -1,5 +1,18 @@
 # Argumentation Framework Error Taxonomy
 
+Based on analysis of model runs on the following question IDs
+
+- 2021_02
+- 2021_14
+- 2021_16
+- 2021_17
+- 2021_24
+- 2025_25
+- 2025_29
+- 2025_30
+- 2025_39
+- 2025_40
+
 ## 1. Argument Extraction
 
 ## 2. Attack Classification
@@ -75,13 +88,13 @@ Charlie distinguishes between different types of obscene materials based on thei
 
 Reasoning Bypass / CoT Degeneration: the model's Chain-of-Thought space was entirely consumed by formatting mechanics, prompt parsing, or meta-instructions without performing any substantive legal or logical analysis.
 
-<think> Okay, let's tackle this problem. The user wants me to figure out which of the statements a, b, c are correct based on the given options. The question is asking which of the statements in are correct as an analysis of the passage provided. The options are a, b, c, etc., but since the choices are labeled ①, ②, etc., but the user mentioned to pick from , but the user says not to repeat statements and answer only in the specified format. Wait, the user provided choices as ① (a), ② (b), etc., but the user says to pick the most appropriate option from the choices given. Wait, actually looking back, the user says "Select the most appropriate option from to answer the . ...
+\<think\> Okay, let's tackle this problem. The user wants me to figure out which of the statements a, b, c are correct based on the given options. The question is asking which of the statements in are correct as an analysis of the passage provided. The options are a, b, c, etc., but since the choices are labeled ①, ②, etc., but the user mentioned to pick from , but the user says not to repeat statements and answer only in the specified format. Wait, the user provided choices as ① (a), ② (b), etc., but the user says to pick the most appropriate option from the choices given. Wait, actually looking back, the user says "Select the most appropriate option from to answer the . ...
 
 ---
 
 1. Primary Category: Task-Structure Misinterpretation / Choice-Statement Conflation (Meta-Level / Task Error)Definition: The model fails to grasp the multi-tier structure of the prompt (evaluating intermediate statements $a, b, c$ first, then mapping them to options $①–⑤$). Instead, it treats the options ($①, ②, ③...$) as individual items to be analyzed independently.In this example: The model attempts to evaluate "Answer-①", "Answer-②", etc., as if each choice contained a distinct argument, completely missing that Option ② is simply the selection tag for statement (b).
 
-"original_question": "The roles of nature and culture in human development are a matter of debate, with opinions divided as follows.<Opinions>Alice: I believe that in order to understand human development, we must start from human nature. This is because there are clear differences between groups, and especially biological characteristics play a decisive role in explaining intergroup differences. In addition, many researchers have proven that differences in intelligence quotient between individuals are due to genetic factors.Bob: The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community. Because the human species is so homogeneous, I think that insisting on intergroup differences based on biological criteria stems from a misguided motivation to uphold unequal social hierarchies. Social hierarchy only limits human variability; humans can be shaped differently depending on culture or social environment. <question> Which of the following in <Statements> properly evaluates the <Opinions>? <statements> (a) Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.(b) Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.(c) Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument. <choices> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
+"original_question": "The roles of nature and culture in human development are a matter of debate, with opinions divided as follows. \<Opinions\>Alice: I believe that in order to understand human development, we must start from human nature. This is because there are clear differences between groups, and especially biological characteristics play a decisive role in explaining intergroup differences. In addition, many researchers have proven that differences in intelligence quotient between individuals are due to genetic factors.Bob: The fact that intelligence quotients among groups divided by race, gender, etc. show almost no difference is an undeniable fact accepted in the scientific community. Because the human species is so homogeneous, I think that insisting on intergroup differences based on biological criteria stems from a misguided motivation to uphold unequal social hierarchies. Social hierarchy only limits human variability; humans can be shaped differently depending on culture or social environment. \<question\> Which of the following in \<Statements\> properly evaluates the \<Opinions\>? \<statements\> (a) Research results indicating that in every society throughout history, crime rates have been overwhelmingly higher in a particular group—males between the ages of 15 and 25—weaken Alice's argument.(b) Research results that various social reforms aimed at fairly developing the abilities of all members of society have failed do not strengthen Bob's argument.(c) Research results showing that, as a result of improving English education programs, the English test scores of most elementary school students increased significantly compared to before the improvement, strengthen Alice's argument and weaken Bob's argument. \<choices\> ① (a) ② (b) ③ (a), (c) ④ (b), (c) ⑤ (a), (b), (c)",
 
 Model answer:
 

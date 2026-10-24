@@ -48,5 +48,5 @@ def sanitize_and_fix_jsonl(file_path):
 
 # Repair data directory
 data_dir = Path("./data")
-for filename in ["train.jsonl", "valid.jsonl", "test.jsonl"]:
+for filename in ["train_arg_framework_structure.jsonl"]:
     sanitize_and_fix_jsonl(data_dir / filename)
