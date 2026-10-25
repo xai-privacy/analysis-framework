@@ -101,7 +101,7 @@ nvidia-smi
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-Start the Ollama server in a terminal and leave it running:
+Interrupt the process if it stalls after creating the user. Start the Ollama server in a terminal and leave it running:
 
 ```bash
 ollama serve
