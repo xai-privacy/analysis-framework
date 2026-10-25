@@ -91,6 +91,53 @@ For local directories, the model configuration lookup falls back to the default 
 
 ## LEET-Arg Benchmark
 
+### Running questions with Ollama
+
+On your Chameleon GPU instance, install Ollama for Linux using its official installer and check
+that the NVIDIA GPU is available:
+
+```bash
+nvidia-smi
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Start the Ollama server in a terminal and leave it running:
+
+```bash
+ollama serve
+```
+
+In a second terminal on the same instance, download the model and run the script from the
+repository root:
+
+```bash
+ollama pull llama3.2:3b
+python3 run_ollama_questions.py
+```
+
+If the installer has already started Ollama as a system service, you can use that server instead
+of starting a second `ollama serve` process.
+
+The script reads the cleaned LEET-Arg JSON file by default, prepends the requested answer-format
+prompt to every question, and submits them to Ollama one at a time. It limits each response to
+3,000 generated tokens and writes a Markdown file named for each question ID in
+`testing/baseline/`. Each file includes the original question, the answer choice and its supplied
+explanation, and the model response. Existing files with matching IDs are replaced when rerunning
+the script.
+
+Use `--input`, `--output-dir`, `--model`, or `--url` to override the defaults. For example, to test
+one question from a different JSON file, specify that file and use a temporary output directory:
+
+```bash
+python3 run_ollama_questions.py \
+  --input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+  --output-dir /tmp/ollama-question-test
+```
+
+When the Python script runs on a different machine from Ollama, use an SSH tunnel rather than
+exposing Ollama's unauthenticated API port publicly. For example, with SSH local port forwarding
+from your workstation, leave the script's default `--url http://localhost:11434`.
+
 ### Test setup
 
 For each benchmark question, the model receives only:
