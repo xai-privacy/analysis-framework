@@ -1,0 +1,384 @@
+{
+  "summary": {
+    "model": "meta-llama/Llama-3.2-3B-Instruct",
+    "adapter_path": "adapters_chameleon_60step",
+    "format_hint": true,
+    "data": "/home/cc/xai/trinav/data/valid.jsonl",
+    "n_questions": 15,
+    "n_statements": 51,
+    "parse_rate": 0.5333333333333333,
+    "statement_accuracy": 0.29411764705882354,
+    "question_accuracy": 0.06666666666666667
+  },
+  "records": [
+    {
+      "id": "2022_08",
+      "gold_answer": 2,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": null
+        },
+        "(c)": {
+          "gold": true,
+          "pred": null
+        }
+      },
+      "seconds": 11.3,
+      "output": "Statement (a)\nReasoning: (a) Alice’s opinion is that the child should be excluded from being the subject of the act in Articles 2 and 3, and the subject should be limited to “adults” who are the guardians. Therefore, if minors are entering social relationships in which one minor is the guardian or supervisor of another minor, it is reasonable to exclude minors from the subject of the acts in Articles 2 and 3. Thus, the research finding that “recently, more minors are entering social relationships in which one minor is the guardian or supervisor of another minor” supports Alice’s opinion.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2022_12",
+      "gold_answer": 3,
+      "pred_answer": 4,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": false
+        },
+        "(b)": {
+          "gold": true,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": true
+        }
+      },
+      "seconds": 29.8,
+      "output": "Summary: The Criminal Act punishes theft, and the meaning of “property” under the Criminal Act is the subject of the debate. The Criminal Act does not explicitly define what property is, so the meaning of “property” is a matter of interpretation. The three debaters have different interpretations of what property is under the Criminal Act.\n\nStatement (a)\nReasoning: (a) Alice thinks that “property” refers to an “object with economic value,” and that “economic value” means pure economic value, that is, monetary value. Therefore, she regards narcotics illegally owned by a drug dealer—which are prohibited by law from being owned—as not property under the Criminal Act. Thus, (a) is not a correct analysis.\nVerdict: INCORRECT\n\nStatement (b)\nReasoning: (b) Bob agrees with Alice that property does not necessarily have to be lawfully owned or lawfully traded. However, he thinks that as long as the owner’s intention to possess is expressed—regardless of whether there is any monetary exchange value—such an object should be seen as property under the Criminal Act. Therefore, Bob regards both the narcotics illegally owned by a drug dealer and a fan letter cherished by a celebrity but not subject to transaction as property under the Criminal Act. Thus, (b) is a correct analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) Charlie thinks that for “economic value,” a conceptual element of property, to be recognized, there must be monetary exchange value. However, he believes this is a necessary, not a sufficient, condition. Therefore, he regards a fan letter cherished by a celebrity but not subject to transaction as property under the Criminal Act. However, he does not regard narcotics illegally owned by a drug dealer as property under the Criminal Act, because he believes that for something to be property under the Criminal Act, not only must it have monetary exchange value, but its ownership and transfer must also be lawful. Thus, (c) is a correct analysis.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2022_22",
+      "gold_answer": 4,
+      "pred_answer": 5,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": true
+        },
+        "(c)": {
+          "gold": true,
+          "pred": true
+        }
+      },
+      "seconds": 35.8,
+      "output": "Statement (a)\nReasoning: (a) According to Alice, the proposition expressed by “Gopchang is delicious” is the proposition <Gopchang is delicious to x>, where x is the speaker. Therefore, if Jiwoo says “Gopchang is delicious,” Jiwoo’s statement expresses the proposition <Gopchang is delicious to Jiwoo>, which is true. On the other hand, if Youngho says “Gopchang is delicious,” Youngho’s statement expresses the proposition <Gopchang is delicious to Youngho>, which is false. Therefore, according to Alice, the proposition expressed by “Gopchang is delicious” is <Gopchang is delicious to Jiwoo>, which is true, and the proposition expressed by “Gopchang is delicious” is <Gopchang is delicious to Youngho>, which is false. Thus, according to Alice, the proposition expressed by “Gopchang is delicious” is different for people who enjoy gopchang and those who do not. Therefore, (a) is a correct analysis.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) According to Alice, if Youngho says “Gopchang is delicious,” Youngho’s statement expresses the proposition <Gopchang is delicious to Youngho>, which is false. Therefore, according to Alice, Youngho’s statement “Gopchang is delicious” cannot be true. On the other hand, according to Bob, Youngho’s statement “Gopchang is delicious” can be true, regardless of whether Youngho enjoys gopchang or not. Therefore, (b) is a correct analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) Bob’s argument is as follows: If Alice’s view is correct, then Jiwoo’s statement “Gopchang is delicious” expresses the proposition <Gopchang is delicious to Jiwoo>, which is true, and Youngho’s statement “Gopchang is delicious” expresses the proposition <Gopchang is delicious to Youngho>, which is false. However, in such a situation, Jiwoo and Youngho can have a real argument, which shows that Alice’s view is not correct. Therefore, Bob’s argument is that if Alice’s view is correct, then there is a problem with the situation in which Jiwoo and Youngho can have a real argument. In other words, Bob’s argument is that disagreement about the truth value of the same proposition is a necessary condition for their debate to be a genuine dispute. Therefore, (c) is a correct analysis.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2022_36",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "①": {
+          "gold": true,
+          "pred": null
+        },
+        "②": {
+          "gold": false,
+          "pred": null
+        },
+        "③": {
+          "gold": false,
+          "pred": null
+        },
+        "④": {
+          "gold": false,
+          "pred": null
+        },
+        "⑤": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 83.3,
+      "output": "Summary: The passage discusses the differences in how people treat robots in East and West, and how these differences are the result of cultural selection. The passage also discusses the Mohist and Confucianist schools of thought, and how they can be applied to the relationship between people and robots. The passage concludes that cultural selection has taken place through the traditions of Mohism and Confucianism, and that this has partially determined the social aspects of general Korean emotions and morality.\n\nStatement (a)\nReasoning: (a) The passage states that people often treat robots as if they were human, but there are differences between East and West in such phenomena, and these differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection. Therefore, (a) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) The passage states that when participants were shown a scene in which a child tries to break Aibo’s tail and were asked whether they would morally instruct the child not to bully Aibo, Korean participants again gave a much more positive response than their Western counterparts. This suggests that the phenomenon of treating robots as if they were human is stronger among Koreans than among Westerners. Therefore, (b) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) The passage states that if we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo. This suggests that the Mohist and Confucianist schools of thought can be applied to the relationship between people and robots. Therefore, (c) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (d)\nReasoning: (d) The passage states that there are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined. This suggests that cultural selection has taken place through the traditions of Mohism and Confucianism. Therefore, (d) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (e)\nReasoning: (e) The passage states that the Mohist school holds that emotions like friendship can only arise when one judges that the object will bring real benefit to oneself. The Confucianist school holds that the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject. Therefore, (e) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (f)\nReasoning: (f) The passage states that if we apply Mohist and Confucianist theory to the relationship between people and robots, people can consider Aibo a friend when they judge that Aibo brings them joy, and can treat Aibo as a subject of moral consideration when they feel sympathy for Aibo. This suggests that the Mohist and Confucianist schools of thought can be applied to the relationship between people and robots. Therefore, (f) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (g)\nReasoning: (g) The passage states that there are research findings suggesting that, across Korean society, cultural selection has taken place through the traditions of Mohism and Confucianism, and as a result, the social aspects of general Korean emotions and morality have been partially determined. This suggests that cultural selection has taken place through the traditions of Mohism and Confucianism. Therefore, (g) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (h)\nReasoning: (h) The passage states that the Mohist school holds that emotions like friendship can only arise when one judges that the object will bring real benefit to oneself. The Confucianist school holds that the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject. Therefore, (h) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (i)\nReasoning: (i) The passage states that the Mohist school holds that emotions like friendship can only arise when one judges that the object will bring real benefit to oneself. The Confucianist school holds that the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject. Therefore, (i) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (j)\nReasoning: (j) The passage states that the Mohist school holds that emotions like friendship can only arise when one judges that the object will bring real benefit to oneself. The Confucianist school holds that the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject. Therefore, (j) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (k)\nReasoning: (k) The passage states that the Mohist school holds that emotions like friendship can only arise when one judges that the object will bring real benefit to oneself. The Confucianist school holds that the basis for moral judgment lies in the emotional relationship with the object rather than in some inherent principle within the judging subject. Therefore, (k) is a correct analysis of the structure of the argument.\nVerdict: CORRECT\n\nStatement (l)\nReasoning: (l) The passage states that the Moh"
+    },
+    {
+      "id": "2022_39",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 5.6,
+      "output": "Statement (a)\nReasoning: (a) If a substance secreted in the duodenum decreases insulin secretion induced by incretin, then ⓐ is strengthened. This is because the passage states that “ⓐ The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin.” Therefore, if a substance secreted in the duodenum decreases insulin secretion induced by incretin, then ⓐ is strengthened.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2023_20",
+      "gold_answer": 3,
+      "pred_answer": 3,
+      "question_correct": true,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 10.2,
+      "output": "Summary: The passage is a debate between Alice and Bob on the moral status of lies and misleading statements. Alice argues that both are equally wrong because they both involve the intention to make the listener believe a falsehood. Bob argues that lies are not always wrong, and that the mere fact that a statement turns out to be false is not morally blameworthy.\n\nStatement (a)\nReasoning: (a) Alice agrees that a lie must have the intention to deceive the other person, but Bob does not. Therefore, (a) is a correct analysis.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) Alice and Bob both agree that there can be statements that are true but still morally blameworthy. Therefore, (b) is a correct analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) Alice and Bob disagree on the degree of moral wrongness of misleading statements and lies. Therefore, (c) is not a correct analysis.\nVerdict: INCORRECT"
+    },
+    {
+      "id": "2024_05",
+      "gold_answer": 3,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "①": {
+          "gold": true,
+          "pred": null
+        },
+        "②": {
+          "gold": true,
+          "pred": null
+        },
+        "③": {
+          "gold": false,
+          "pred": null
+        },
+        "④": {
+          "gold": true,
+          "pred": null
+        },
+        "⑤": {
+          "gold": true,
+          "pred": null
+        }
+      },
+      "seconds": 59.6,
+      "output": "Statement (a)\nReasoning: (a) According to A, the value of autonomy itself is the value that lies in autonomy, and the value of autonomy is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Thus, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of autonomy itself is the value that lies in the parties’ autonomy. Therefore, the value of"
+    },
+    {
+      "id": "2024_14",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "①": {
+          "gold": true,
+          "pred": null
+        },
+        "②": {
+          "gold": false,
+          "pred": null
+        },
+        "③": {
+          "gold": false,
+          "pred": null
+        },
+        "④": {
+          "gold": false,
+          "pred": null
+        },
+        "⑤": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 4.7,
+      "output": "Statement (a)\nReasoning: (a) According to A, the key to assigning responsibility is not the level of negligence or cognitive error, but rather the agent's attitude toward acquiring information. If an act is not subject to blame, it is not a cognitive error. Therefore, if an act is not, in itself, subject to blame, it is not a cognitive error. Thus, (a) is a correct evaluation.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2024_17",
+      "gold_answer": 2,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 4.1,
+      "output": "Statement (a)\nReasoning: (a) The passage states that \"goodness\" has two dimensions, primary and secondary. Primary goodness is the essential perfection of a being, and secondary goodness is the relationship between a subject and its accidental properties. If evil is the privation of goodness, then evil is the privation of primary goodness, which is ⓐ.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2024_20",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 9.1,
+      "output": "Statement (a)\nReasoning: (a) Even if the perceiver can know which of the multiple objects producing the same perception most likely corresponds accurately to that perception, Alice's claim that distinguishing between accurate representation and misrepresentation is important is not weakened. Therefore, (a) is an appropriate analysis.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) If two circles of different sizes can be perceived as the same size depending on the size of the circles surrounding each, then Bob's claim that we can identify ripe bananas by perceiving their color is weakened. Therefore, (b) is an appropriate analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) The statement \"Some perceptions correspond accurately to external objects\" is not a claim made by either Alice or Bob. Therefore, (c) is not an appropriate analysis.\nVerdict: INCORRECT"
+    },
+    {
+      "id": "2024_27",
+      "gold_answer": 2,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 3.7,
+      "output": "Statement (a)\nReasoning: (a) If the plaintiff verdict rate in Group 1 is significantly lower than that in Group 2, it means that the effect of the additional information (testimony Y) on the plaintiff verdict rate is greater in Group 1 than in Group 2. Therefore, the hypothesis is weakened.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_02",
+      "gold_answer": 1,
+      "pred_answer": 5,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": true
+        }
+      },
+      "seconds": 19.4,
+      "output": "Statement (a)\nReasoning: (a) If legal remedies are available by other means for measures for which appeals are not permitted, ⓐ is mitigated. This is because ⓐ is the claim that the parents' right to participate in the educational process of their underage children is infringed upon by the current regulation. If legal remedies are available by other means, the infringement of this right is mitigated. Therefore, (a) is a correct analysis.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) If the harm suffered by perpetrating students due to transfer or expulsion cannot be restored even if such measures are overturned in a subsequent lawsuit—unlike with other measures—then ⓑ is weakened. This is because ⓑ is the claim that the proposed amendment results in unjust discrimination of other perpetrating students and their guardians. If the harm suffered by perpetrating students due to transfer or expulsion cannot be restored, the discrimination is weakened. Therefore, (b) is a correct analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) If it is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal and thereby grow into exemplary members of society, then ⓐ is weakened and ⓑ is strengthened. This is because ⓐ is the claim that the proposed amendment infringes upon the parents' right to participate in the educational process of their underage children. If it is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal, the infringement of this right is weakened. Furthermore, ⓑ is the claim that the proposed amendment results in unjust discrimination of other perpetrating students and their guardians. If it is the responsibility of schools and society to ensure that all perpetrating students are given the opportunity to appeal, the discrimination is strengthened. Therefore, (c) is a correct analysis.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_25",
+      "gold_answer": 1,
+      "pred_answer": 3,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 19.7,
+      "output": "Summary: The artist created the artwork \"ⓐ Two Types of Permanence\" by placing an artificial flower inside a transparent acrylic box and installing a fluorescent light. The artist instructed the museum to keep the work connected to power, but to leave the light when it fails. The museum suggested replacing the light with a new one, and the artist eventually agreed. The debate centers on whether the artist's approval of the replacement changes the work's identity and meaning.\n\nStatement (a)\nReasoning: (a) Alice argues that the artist's approval of the replacement is based on the museum's pressure, and that this approval does not reflect the artist's true intention. Therefore, according to Alice, a change in some physical attribute of the work can alter its meaning. Thus, (a) is a correct analysis.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) Charlie argues that the work was complete at the time of its creation, and that any subsequent act of approval cannot alter its identity. Therefore, according to Charlie, an act of approval by the creator after the fact has the same effect as the physical act of making the work at the time of creation. Thus, (b) is a correct analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) Bob argues that the artist's approval of the replacement is based on the museum's pressure, and that this approval does not reflect the artist's true intention. Therefore, according to Bob, if the museum secretly replaced the fluorescent light without the creator's knowledge, the meaning of ⓐ could change. Charlie, on the other hand, argues that the work was complete at the time of its creation, and that any subsequent act of approval cannot alter its identity. Therefore, according to Charlie, if the museum secretly replaced the fluorescent light without the creator's knowledge, the meaning of ⓐ would not change. Thus, (c) is not a correct analysis.\nVerdict: INCORRECT"
+    },
+    {
+      "id": "2025_29",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": false
+        },
+        "(c)": {
+          "gold": false,
+          "pred": true
+        }
+      },
+      "seconds": 19.9,
+      "output": "Statement (a)\nReasoning: (a) In the experimental group, the female singers recorded their parts alone, while in the control group, they recorded their parts together with the male singers. Therefore, if the female singers’ scores were higher in the experimental group than in the control group, it would mean that the female singers were able to display greater creativity in the experimental group than in the control group. This would support the claim that women will display greater creativity in environments where they work separately from men rather than environments where they work together with men. Thus, (a) is a correct evaluation.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: (b) The total score of all female singers is the sum of the scores of the 40 female singers. The total score of all male singers is the sum of the scores of the 40 male singers. If the total score of all female singers was higher than that of all male singers, it would mean that the female singers scored higher than the male singers overall. However, the claim that women will display greater creativity in environments where they work separately from men rather than environments where they work together with men does not necessarily follow from this. Therefore, (b) is not a correct evaluation.\nVerdict: INCORRECT\n\nStatement (c)\nReasoning: (c) In the control group, the female singers recorded their parts together with the male singers. In the experimental group, the female singers recorded their parts alone. If the female singers’ scores in the control group were slightly lower than those of the male singers, but in the experimental group the female singers’ scores were higher than those of the male singers, it would mean that the female singers were able to display greater creativity in the experimental group than in the control group. This would weaken the claim that women will display greater creativity in environments where they work separately from men rather than environments where they work together with men. Thus, (c) is a correct evaluation.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_40",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": false
+        },
+        "(b)": {
+          "gold": false,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 11.7,
+      "output": "Statement (a)\nReasoning: (a) If the difference in membrane permeability between animal and plant steroid hormones is determined only by polarity, then Br, which is more polar than animal steroid hormones, would be less permeable to the cell membrane. Therefore, (a) is not a correct analysis.\nVerdict: INCORRECT\n\nStatement (b)\nReasoning: (b) <Experiment> shows that A, which has a defect only in the Br biosynthesis gene, does not respond to Br, and B, which has a defect only in the Br receptor gene, responds to Br. Therefore, <Experiment> supports the hypothesis that “A cannot synthesize Br, and B has a defect in the Br receptor.” (b) is a correct analysis.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: (c) B and C have different defects: B has a defect in the Br receptor gene, and C has a defect in the signaling protein that recognizes the structural change in the Br receptor. Therefore, B and C will show different phenotypes after Br treatment. (c) is not a correct analysis.\nVerdict: INCORRECT"
+    }
+  ]
+}
