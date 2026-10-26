@@ -1,0 +1,384 @@
+{
+  "summary": {
+    "model": "meta-llama/Llama-3.2-3B-Instruct",
+    "adapter_path": null,
+    "format_hint": true,
+    "data": "/home/cc/xai/trinav/data/valid.jsonl",
+    "n_questions": 15,
+    "n_statements": 51,
+    "parse_rate": 0.3333333333333333,
+    "statement_accuracy": 0.2549019607843137,
+    "question_accuracy": 0.06666666666666667
+  },
+  "records": [
+    {
+      "id": "2022_08",
+      "gold_answer": 2,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": false
+        },
+        "(b)": {
+          "gold": false,
+          "pred": null
+        },
+        "(c)": {
+          "gold": true,
+          "pred": null
+        }
+      },
+      "seconds": 5.6,
+      "output": "Statement (a)\nReasoning: The statement claims that a research finding supports Alice's opinion, but the finding itself does not address the issue of who can be the subject of the acts in Articles 2 and 3. It only discusses the increasing social relationships between minors, which is irrelevant to the question of who can be the subject of the acts.\nVerdict: INCORRECT"
+    },
+    {
+      "id": "2022_12",
+      "gold_answer": 3,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 6.9,
+      "output": "Statement (a)\nReasoning: Alice's statement implies that she considers \"property\" to be an object with economic value, regardless of its lawful ownership or transfer. She does not explicitly mention the need for monetary exchange value or lawful ownership. Therefore, if the narcotics are owned by a drug dealer, which is prohibited by law, Alice would likely consider them \"property\" under the Criminal Act, as they possess economic value (i.e., the value of the prohibited substance) even if their ownership is not lawful.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2022_22",
+      "gold_answer": 4,
+      "pred_answer": 5,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": true
+        },
+        "(c)": {
+          "gold": true,
+          "pred": true
+        }
+      },
+      "seconds": 17.4,
+      "output": "Statement (a)\nReasoning: Alice claims that statements made by people who enjoy gopchang express the same proposition, but this proposition is different from the one expressed by statements made by people who do not enjoy gopchang. This is because, according to Alice, the hidden phrase \"to x\" is filled by the speaker in a given context, and the proposition is <Gopchang is delicious to x>. Therefore, if x is a person who enjoys gopchang, the proposition is true, but if x is a person who does not enjoy gopchang, the proposition is false.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: According to Alice, if Youngho dislikes gopchang, then Youngho's statement \"Gopchang is delicious\" cannot be true because it would express the proposition <Gopchang is delicious to Youngho>, which is false. However, according to Bob, it can be true because it would express the proposition <Gopchang is delicious>, which is a different proposition. This shows that Alice's view is incorrect, and Bob's view is correct.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: Bob's argument is that disagreement about the truth value of the same proposition is not a necessary condition for their debate to be a genuine dispute. Instead, he argues that the two can have a real argument even if they are expressing the same proposition, as seen in the example where Jiwoo and Youngho argue about the proposition <Gopchang is delicious>. This shows that Bob's view is correct, and Alice's view is incorrect.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2022_36",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "①": {
+          "gold": true,
+          "pred": null
+        },
+        "②": {
+          "gold": false,
+          "pred": null
+        },
+        "③": {
+          "gold": false,
+          "pred": null
+        },
+        "④": {
+          "gold": false,
+          "pred": null
+        },
+        "⑤": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 1.7,
+      "output": "Statement (a)\nReasoning: The argument begins by noting that people often treat robots as if they were human, but there are differences between East and West in such phenomena, and these differences appear to be the result of evolution through culture or cultural factors—in other words, through cultural selection.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2022_39",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 3.1,
+      "output": "Statement (a)\nReasoning: This statement is evaluating the hypothesis proposed by Rubino. To strengthen the hypothesis, we need to consider the role of the duodenum in incretin secretion. If a substance secreted in the duodenum decreases insulin secretion induced by incretin, it would imply that bypassing the duodenum could lead to improved blood sugar regulation. This would support Rubino's hypothesis that the improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin. \n\nVerdict: CORRECT"
+    },
+    {
+      "id": "2023_20",
+      "gold_answer": 3,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": false
+        },
+        "(b)": {
+          "gold": true,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 3.3,
+      "output": "Statement (a)\nReasoning: Alice states that a lie must have the intention to deceive the other person, and Bob disagrees with this premise.\nVerdict: INCORRECT\n\nStatement (b)\nReasoning: Alice and Bob both agree that there can be statements that are true but still morally blameworthy, as evidenced by Bob's counterexample of a scientist making a true but potentially misleading statement.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: Alice and Bob do not agree on the degree of moral wrongness between misleading statements and lies; in fact, they have differing views on the matter.\nVerdict: INCORRECT"
+    },
+    {
+      "id": "2024_05",
+      "gold_answer": 3,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "①": {
+          "gold": true,
+          "pred": null
+        },
+        "②": {
+          "gold": true,
+          "pred": null
+        },
+        "③": {
+          "gold": false,
+          "pred": null
+        },
+        "④": {
+          "gold": true,
+          "pred": null
+        },
+        "⑤": {
+          "gold": true,
+          "pred": null
+        }
+      },
+      "seconds": 1.6,
+      "output": "Statement (a)\nReasoning: This statement is a general definition of contract law, emphasizing the importance of recognizing and respecting the autonomy of the parties involved in a contract. It sets the stage for the subsequent discussion on when the autonomy of the parties can be restricted.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2024_14",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "①": {
+          "gold": true,
+          "pred": null
+        },
+        "②": {
+          "gold": false,
+          "pred": null
+        },
+        "③": {
+          "gold": false,
+          "pred": null
+        },
+        "④": {
+          "gold": false,
+          "pred": null
+        },
+        "⑤": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 3.2,
+      "output": "Statement (a)\nReasoning: The statement provides a counterintuitive perspective on responsibility, suggesting that it is not solely assigned to the agent when the act itself is not blameworthy. Instead, responsibility is tied to an active attitude of intentionally avoiding or refusing to acquire information. The example of Alice and the human-shaped mannequins illustrates this point, where Alice's claim is not blameworthy, but her attitude of confidence and lack of verification is deemed responsible. The statement implies that responsibility is not solely based on the agent's cognitive error, but also on their attitude towards seeking truth.\n\nVerdict: CORRECT"
+    },
+    {
+      "id": "2024_17",
+      "gold_answer": 2,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 2.1,
+      "output": "Statement (a)\nReasoning: The passage defines primary goodness as the essential perfection of a being, implying that if a being lacks primary goodness, it ceases to be that being. It also states that evil is the privation of goodness. Therefore, if evil is the privation of goodness, then evil must be the negation of primary goodness, which is ⓐ.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2024_20",
+      "gold_answer": 1,
+      "pred_answer": 1,
+      "question_correct": true,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": false
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 5.2,
+      "output": "Statement (a)\nReasoning: This statement suggests that even if the perceiver can accurately determine which object corresponds to the perception, it wouldn't necessarily strengthen Alice's claim. The claim is about the importance of distinguishing between accurate and inaccurate representations, not just about being able to identify the correct object.\nVerdict: CORRECT\n\nStatement (b)\nReasoning: This statement suggests that if two circles of different sizes can be perceived as the same size depending on the size of the surrounding circles, it would weaken Bob's claim. However, Bob's claim is about the ability to identify ripe bananas based on their yellow color, not about the size of circles. This statement is irrelevant to the debate.\nVerdict: INCORRECT\n\nStatement (c)\nReasoning: This statement suggests that Bob agrees with the statement \"Some perceptions correspond accurately to external objects,\" which is a fundamental premise of the debate. However, Alice does not agree with this statement, as she argues that distinguishing between accurate and inaccurate representations is important.\nVerdict: INCORRECT"
+    },
+    {
+      "id": "2024_27",
+      "gold_answer": 2,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 2.8,
+      "output": "Statement (a)\nReasoning: The hypothesis suggests that jurors are less influenced by probabilistic evidence when it does not explicitly state who is responsible. If the plaintiff verdict rate in Group 1 is significantly lower than that in Group 2, it implies that the jurors in Group 1 were more influenced by the probabilistic evidence (testimony X) than those in Group 2, who also received the same probabilistic evidence. This suggests that the hypothesis is weakened, as it is not supported by the data.\n\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_02",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": false,
+          "pred": true
+        },
+        "(b)": {
+          "gold": true,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 3.0,
+      "output": "Statement (a)\nReasoning: The opinion suggests that the proposed amendment restricts the appeal rights of perpetrating students who have received measures other than transfer or expulsion. However, the analysis states that if legal remedies are available by other means for measures for which appeals are not permitted, the harm suffered by perpetrating students due to transfer or expulsion cannot be restored, which would weaken the argument that ⓑ is weakened. This implies that ⓐ is mitigated, as the harm suffered by perpetrating students is not entirely mitigated by the lack of appeal rights.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_25",
+      "gold_answer": 1,
+      "pred_answer": 5,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": true
+        }
+      },
+      "seconds": 5.7,
+      "output": "Statement (a)\nReasoning: Alice argues that a change in some physical attribute of the work can alter its meaning. She claims that the replacement of the fluorescent light changes the work's superficial meaning, but does not alter its identity. This implies that a change in a physical attribute can impact the work's meaning, making this statement correct.\n\nVerdict: CORRECT\n\nStatement (b)\nReasoning: Charlie suggests that the work was complete at the moment it was made public, and any subsequent act of approval cannot alter its identity. This implies that the meaning of the work is tied to its creation, and any changes after that do not affect its identity. This statement is correct.\n\nVerdict: CORRECT\n\nStatement (c)\nReasoning: Bob argues that the artist's approval of the replacement is not reflective of the artist's true intention. Charlie agrees that the work was complete at the time of creation, and any subsequent act of approval cannot alter its identity. Therefore, both Bob and Charlie agree that the meaning of the work could change if the museum secretly replaced the fluorescent light without the creator's knowledge. This statement is correct.\n\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_29",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": false,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": true
+        },
+        "(b)": {
+          "gold": false,
+          "pred": null
+        },
+        "(c)": {
+          "gold": false,
+          "pred": null
+        }
+      },
+      "seconds": 3.0,
+      "output": "Statement (a)\nReasoning: This statement suggests that if the female singers' scores were higher in the experimental group than in the control group, it would support the claim that women will display greater creativity in environments where they work separately from men rather than environments where they work together with men. This is because the experimental group allows the female singers to work separately from the male singers, potentially allowing them to express their creativity more freely. If their scores are higher in this group, it would indicate that they are able to capitalize on this advantage and demonstrate greater creativity.\nVerdict: CORRECT"
+    },
+    {
+      "id": "2025_40",
+      "gold_answer": 1,
+      "pred_answer": null,
+      "question_correct": false,
+      "parsed_all": true,
+      "statements": {
+        "(a)": {
+          "gold": true,
+          "pred": false
+        },
+        "(b)": {
+          "gold": false,
+          "pred": true
+        },
+        "(c)": {
+          "gold": false,
+          "pred": false
+        }
+      },
+      "seconds": 7.3,
+      "output": "Statement (a)\nReasoning: The passage states that most steroid hormones have low polarity and easily penetrate the cell membrane, whereas Br has a significant difference in membrane permeability despite its low polarity. This implies that the difference in membrane permeability is not solely determined by polarity, but rather by other factors. Therefore, statement (a) is incorrect because it assumes that Br's low polarity is the sole reason for its inability to penetrate the cell membrane.\nVerdict: INCORRECT\n\nStatement (b)\nReasoning: The passage states that mutant B, which has a defect only in the Br receptor gene, shows a restored growth phenotype after Br treatment, whereas mutant A, which has a defect only in the Br biosynthesis gene, does not. This suggests that Br's mechanism of action involves binding to cell surface receptors, and that the Br receptor is essential for Br's signaling activity. Therefore, statement (b) is correct.\nVerdict: CORRECT\n\nStatement (c)\nReasoning: The passage states that mutant B, which has a defect only in the Br receptor gene, shows a restored growth phenotype after Br treatment, whereas mutant C, which has a defect only in the signaling protein that recognizes the structural change in the Br receptor, does not. This suggests that the Br receptor is essential for Br's signaling activity, but that the signaling protein is not. Therefore, statement (c) is incorrect because it assumes that B and C will show similar phenotypes.\nVerdict: INCORRECT"
+    }
+  ]
+}
