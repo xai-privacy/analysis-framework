@@ -7,7 +7,99 @@ It has two parts:
 1. **Pilot (Oct 15, 2026):** can LEET-Arg questions be written in this format so that the solver reproduces the gold answer?
 2. **Fine-tuning run (Oct 19 to 20, 2026):** can Llama 3.2 3B Instruct learn to write the format from the raw question? To reproduce it, follow `FINETUNE_GUIDE.md`.
 
-**Result:** fine-tuning improved the format a little and did not improve the reasoning. Details are in [Fine-tuning run](#fine-tuning-run).
+**Result:** fine-tuning improved the format a little and did not improve statement accuracy. Reasoning quality is not measured yet. Details are in [Fine-tuning run](#fine-tuning-run).
+
+## Summary in plain words
+
+### The idea
+
+The small model does not answer the question. It only writes down the argument structure of the passage: who argues what, from which premises, with which rules. A solver then computes whether each statement is true or false. The model does the reading, and the solver does the logic.
+
+### The pipeline and where each number comes from
+
+```
+LEET-Arg question (passage + question + statements, without the ① to ⑤ choices)
+        │
+        ▼
+Fine-tuned Llama 3.2 3B
+        │
+        ▼
+ASPIC+ translation (JSON) ────────────►  [1] Format: can the solver read it?
+        │
+        ▼
+Solver (check_aspic.py, PyArg)
+        │
+        ▼
+True/False for each statement ────────►  [2] Statement accuracy: does it match the gold label?
+        │
+        ▼
+Answer ① to ⑤ ────────────────────────►  [3] Question accuracy: does it match the gold answer?
+
+Not measured yet:                         [4] Reasoning quality: is the structure itself a correct reading of the passage?
+```
+
+[2] is the same metric as in Trinav’s baseline. The difference is only how the True/False is produced: his model writes it directly, here the solver computes it from the model’s structure.
+
+### What an ASPIC+ translation looks like
+
+One JSON object per question. It lists:
+
+- **positions:** the speakers (for example Alice and Bob) and the main claim of each
+- **claims:** every sentence the argument uses, with an ID (`c1`, `c2`, ...)
+- **premises and rules:** what each speaker starts from, and which claims follow from which (“if c5 then c6”)
+- **contraries and undercuts:** which claims conflict, and which facts block a rule
+- **statements:** for each statement (a), (b), (c), a check that the solver can run, for example “B can argue c7, and A cannot”
+
+The translation never says whether a statement is correct. Example from question 2022_17, statement (a) “Unlike A, B argues that evil is a privation”:
+
+```json
+{"op": "and", "args": [
+  {"op": "holds", "by": "B", "claim": "c7"},
+  {"op": "not", "arg": {"op": "holds", "by": "A", "claim": "c7"}}
+]}
+```
+
+The solver builds B’s and A’s arguments from their premises and rules and checks whether each one can reach c7 (“Evil is a privation”). The full format is in `ASPIC_FORMAT.md`.
+
+### How the training data was made
+
+1. Gemini translated each question into this format. It saw the question and the expert rationale.
+2. The solver checked each translation. A translation was kept only if the solver got the gold answer from it. Otherwise Gemini got feedback and tried again.
+3. All 73 non-test questions passed (58 for training, 15 for validation). The 16 final test questions were never translated, trained on or evaluated.
+
+At test time the model sees only the question, not the rationale.
+
+### Loss is not accuracy
+
+- **Training and validation loss** measure how closely the model copies Gemini’s JSON, token by token. They say nothing about whether the statements come out right. The solver never runs during training.
+- **Accuracy** comes from running the solver on what the model writes, after training.
+
+The two disagree here. Validation loss was lowest at iteration 60 (0.288) and went up to 0.407 at iteration 240. But iteration 240 gave the best solver results. So checkpoints were chosen by running the solver, not by loss.
+
+### Results of the best checkpoint
+
+Run 1, iteration 240, on the 15 validation questions (51 statements). All numbers are after the bracket repair described under [Evaluation](#evaluation).
+
+| Metric | Question it answers | Fine-tuned | Reference |
+|---|---|---|---|
+| [1] Format | Can the solver read the translation? | 9/15 | Base model with one example: 5/15 |
+| [2] Statement accuracy, valid only | Among the 31 statements in readable translations, how many True/False are right? | 19/31 | Calling every statement false: 16/31 |
+| [2] Statement accuracy, all | Same, but unreadable translations count as wrong | 19/51 | Calling every statement false: 30/51 |
+| [3] Question accuracy | Is the ① to ⑤ answer right? | 3/15 | Always answering ①: 8/15 |
+| [4] Reasoning quality | Is the structure a correct reading? | not measured | |
+
+The two versions of [2] follow the reporting rule from the Oct 22 meeting: one counts only parsable outputs, the other counts unparsable outputs as wrong.
+
+**In short:** the format improved a little. When the solver can read the output, it gets about as many statements right as calling every statement false. Reasoning quality is not measured yet.
+
+### Why statement accuracy is not reasoning quality
+
+Two validation questions from the same checkpoint:
+
+- **2022_12: all three statements right, and the answer is right, but the structure is weak.** For (a) and (b), the model adds as a premise the same sentence it then tries to prove, so the check is trivially true. For (c), the rule it wrote proves a different claim than the one being checked, so the check is false. The gold labels are T, T, F, so all three match. The answers are right, the reasoning behind them is not.
+- **2022_22: the JSON is valid and the solver runs, but all three statements are wrong.** One rule says “if c1 then c1”, and the check for (c) is “Bob holds c2 and Bob does not hold c2”, which is always false.
+
+So statement accuracy alone can overstate (2022_12) or simply miss (2022_22) what the model understood. This is why [4] needs its own metric. The plan is to base it on the paper Pooyan shared on Oct 19 (“Evaluating Legal Reasoning Traces with Legal Issue Tree Rubrics”, ACL 2026), once the format is reliable.
 
 ## Files
 
@@ -82,7 +174,7 @@ The training loss was 0.027 at iteration 240, so the model had nearly memorized 
 |---|---|
 | Valid | The output is JSON that the solver can use: every claim, rule and position it mentions is defined, and every statement has a check |
 | Statements | Statements whose computed true/false matches the gold label, out of all 51. Statements of invalid translations count as wrong |
-| In valid: model | Statements right, counting only questions with a valid translation (after the bracket repair). This measures the reasoning, separately from the format |
+| In valid: model | Statements right, counting only questions with a valid translation (after the bracket repair). This measures statement accuracy without the format failures. It does not measure reasoning quality |
 | In valid: “all false” | What calling every statement false gets on exactly the same statements. The fair reference for the column before |
 | Questions | Computed answer ① to ⑤ equals the gold answer |
 
@@ -90,7 +182,7 @@ The training loss was 0.027 at iteration 240, so the model had nearly memorized 
 
 ### Results
 
-| Model | Valid | Valid after repair | Statements | In valid: model | In valid: “all false” | Questions |
+| Model | Valid | Valid after repair | Statements (before repair) | In valid: model (after repair) | In valid: “all false” (after repair) | Questions (before repair) |
 |---|---|---|---|---|---|---|
 | Base, 0-shot | 0/15 | 0/15 | 0/51 | | | 0/15 |
 | Base, 1-shot | 3/15 | 5/15 | 5/51 | 8/15 | 9/15 | 0/15 |
@@ -104,16 +196,16 @@ For reference, on these 15 questions, always answering ① gets 8/15 questions, 
 
 ### What the results show
 
-1. **The format improved a little.** The base model with one example wrote a valid translation for 3 of 15 questions; the best checkpoint wrote 7.
-2. **The reasoning did not improve.** When a translation is valid, the model's statements are right about as often as calling every statement false on the same statements. Across checkpoints the model is between 3 statements above and 3 below that rule, and the base model is 1 below. With 9 to 31 statements per row, a difference of 3 is within chance.
-3. **Training longer made it worse.** At 480 iterations only 2 of 15 translations were valid. The late errors look like memorization: rules that use claim IDs never defined for this question, positions that are not in the passage (“Jurors”, “Experiment”, “American researchers”), and an invented check operation (“mitigates”).
-4. **The same setup gave different results.** Run 2 repeated run 1's data, settings and seed, but at iteration 240 it wrote 4 valid translations instead of 7. The two training logs are identical through iteration 40 and then diverge (128,687 vs 129,297 trained tokens at iteration 120). In mlx-lm's trainer, batches are shuffled with numpy's global random state, and every validation pass draws from it too, so validating every 20 vs every 40 iterations changed the order of the second pass over the data. Re-evaluating run 1's checkpoint 240 gave identical numbers, so the evaluation is deterministic and the difference comes from training order alone.
-5. **The failure types change over training.** Early checkpoints get stuck repeating claims or statements until the token limit. Middle ones lose count of brackets inside deeply nested `add` blocks. Late ones make the memorization errors in point 3.
+1. **Format improved a little, statement accuracy did not** (see the [summary](#summary-in-plain-words)). This holds for every checkpoint: among valid translations, the model is between 3 statements above and 3 below calling every statement false, and the base model is 1 below. With 9 to 31 statements per row, a difference of 3 is within chance.
+2. **Training longer made it worse.** At 480 iterations only 2 of 15 translations were valid. The late errors look like memorization: rules that use claim IDs never defined for this question, positions that are not in the passage (“Jurors”, “Experiment”, “American researchers”), and an invented check operation (“mitigates”).
+3. **The same setup gave different results.** Run 2 repeated run 1's data, settings and seed, but at iteration 240 it wrote 4 valid translations instead of 7. The two training logs are identical through iteration 40 and then diverge (128,687 vs 129,297 trained tokens at iteration 120). In mlx-lm's trainer, batches are shuffled with numpy's global random state, and every validation pass draws from it too, so validating every 20 vs every 40 iterations changed the order of the second pass over the data. Re-evaluating run 1's checkpoint 240 gave identical numbers, so the evaluation is deterministic and the difference comes from training order alone.
+4. **The failure types change over training.** Early checkpoints get stuck repeating claims or statements until the token limit. Middle ones lose count of brackets inside deeply nested `add` blocks. Late ones make the memorization errors in point 2.
 
 ### Limitations
 
 - 15 validation questions is a small sample, and the checkpoint was chosen on the same questions, so its score is slightly optimistic.
 - The final test set has not been run.
+- Reasoning quality is not measured. All accuracy numbers here are True/False per statement or ① to ⑤ per question.
 - The training data comes from one teacher model and contains only translations that reproduce the gold answer.
 - ASPIC+ has no support relation, so “strengthens” statements are expressed indirectly (see pilot observation 2).
 - The model was trained and evaluated on LEET-Arg only.
