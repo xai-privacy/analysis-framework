@@ -1,6 +1,27 @@
-# LEET-Arg (cleaned)
+# Benchmarks
 
-## 1. Files
+## 1. barexam_qa
+
+`barexam_qa_qa.csv` is an unmodified copy of the qa.csv file of the [barexam_qa](https://huggingface.co/datasets/reglab/barexam_qa/tree/main/data/qa) benchmark. The data of test.csv, train.csv, and validation.csv (all available in the barexam_qa benchmark repo, but not included here) seem to be all contained in qa.csv. Per the [barexam_qa readme](https://huggingface.co/datasets/reglab/barexam_qa), the benchmark was created by linking multistate bar exam multiple-choice questions with supporting gold passages from primary sources (caselaw) and secondary sources (online resources, textbooks, etc.). The gold passages were annotated by a law student, simulating a legal research workflow.
+
+Each example in `barexam_qa_qa.csv` consists of a question, multiple-choice answers, an answer label, and a gold passage (passage ID) label. The benchmark contains 1,195 examples.
+
+The labels have the following meaning:
+
+- idx: unique example ID (string)
+- prompt: the question prompt (context before the question, can be shared between questions)
+- question: the question
+- choice_a: answer choice A text
+- choice_b: answer choice B text
+- choice_c: answer choice C text
+- choice_d: answer choice D text
+- answer: A, B, C, or D
+- gold_passage: gold passage text
+- gold_idx: passage ID of gold passage (matches with passage ID in passages)
+
+## 2. LEET-Arg
+
+### 2.1 Files
 
 - `LEET_Arg_Questions_cleaned.json` is a cleaned copy of the LEET-Arg benchmark (Park and Park, [When
   correct is not enough](https://doi.org/10.1016/j.knosys.2026.116625), upstream repo:
@@ -9,7 +30,7 @@
 - `LEET_Arg_Model_Responses.json` in this directory holds per-model responses keyed by the same
   `id`/`year`/`problem_idx` and is out of scope here
 
-## 2. Contents
+### 2.2 Contents
 
 93 records, 301 statement units (upstream has 97 / 315 — see "Changes applied" for why). Each record
 has: `id`, `year`, `problem_idx`, `objective`, `domain`, `category`, `answer`, `original_question`,
@@ -22,9 +43,9 @@ has: `id`, `year`, `problem_idx`, `objective`, `domain`, `category`, `answer`, `
   2025_39, 2025_40.
 - Answer distribution: 1:24, 2:24, 3:19, 4:12, 5:14 (majority-class baseline 24/93).
 
-## 3. Changes applied
+### 2.3 Changes applied
 
-### 3.1 `LEET_Arg_Questions_cleaned.json`
+#### 2.3.1 `LEET_Arg_Questions_cleaned.json`
 
 Produced by `tools/clean_leet_arg.py`, plus manual edits. `original_rationale`, `answer`, and all
 metadata fields are byte-identical to upstream; everything below touches `statements` and/or
@@ -46,7 +67,7 @@ metadata fields are byte-identical to upstream; everything below touches `statem
 
 See [issue #14](https://github.com/xai-privacy/analysis-framework/issues/14) for the full cleaning discussion.
 
-### 3.2 `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`
+#### 2.3.2 `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`
 
 The changes in `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json` relate to the `original_rationale` field, which we broke down in sub-fields. For example, we reformatted:
 
@@ -94,3 +115,9 @@ The changes mostly relate to form and not substance. Though, a few changes are n
 - We fixed some formatting that was not uniform in the original `original_rationale`, e.g., we changed "(a)." to "(a)".
 
 See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for further details.
+
+## 3.MBE-exam-questions
+
+### 3.1 Files
+
+`MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
