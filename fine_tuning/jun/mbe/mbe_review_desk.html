@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MBE Review Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+body{margin:0}
+/* Layout: a review desk. Record list rail on the left, one exam item on an answer-sheet card on the right. */
+:root{
+  --bg:#e9edf1; --panel:#f7f9fb; --card:#ffffff; --rail:#dfe5eb;
+  --ink:#16202b; --ink2:#46535f; --ink3:#7a8794; --line:#cfd7df; --line2:#e3e8ed;
+  --accent:#24508f; --accent-soft:#e3ebf6; --bubble:#c2552d; --bubble-soft:#f6e3da;
+  --crit:#a7261c; --crit-bg:#f8e1de; --warn:#8a5a00; --warn-bg:#f7ecd2; --info:#3f5f7a; --info-bg:#e2eaf1; --ok:#1d6b4a; --ok-bg:#dcefe5;
+  --ins:#d5ecdc; --del:#f5d7d3; --ws:#f1c9a8;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Source Serif 4","Iowan Old Style",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12171d; --panel:#171e25; --card:#1c242c; --rail:#151b21;
+  --ink:#e4e9ee; --ink2:#a9b5c0; --ink3:#78858f; --line:#2c3640; --line2:#242d36;
+  --accent:#8db2ea; --accent-soft:#1f2f45; --bubble:#ec8a63; --bubble-soft:#3a2419;
+  --crit:#f0897f; --crit-bg:#3b1d1a; --warn:#e6bd69; --warn-bg:#352a12; --info:#9fbbd3; --info-bg:#1f2b37; --ok:#7fcfa6; --ok-bg:#16301f;
+  --ins:#1f3d2a; --del:#4a2421; --ws:#5a3a1f; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#12171d; --panel:#171e25; --card:#1c242c; --rail:#151b21;
+  --ink:#e4e9ee; --ink2:#a9b5c0; --ink3:#78858f; --line:#2c3640; --line2:#242d36;
+  --accent:#8db2ea; --accent-soft:#1f2f45; --bubble:#ec8a63; --bubble-soft:#3a2419;
+  --crit:#f0897f; --crit-bg:#3b1d1a; --warn:#e6bd69; --warn-bg:#352a12; --info:#9fbbd3; --info-bg:#1f2b37; --ok:#7fcfa6; --ok-bg:#16301f;
+  --ins:#1f3d2a; --del:#4a2421; --ws:#5a3a1f; color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+
+#app{display:grid;grid-template-columns:340px minmax(0,1fr);height:100%;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+#rail{background:var(--rail);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;min-width:0}
+#main{overflow:auto;min-width:0}
+.mainInner{max-width:1120px;margin:0 auto;padding-block:22px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
+
+/* rail */
+.railHead{padding:16px 16px 12px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.brand h1{font-family:var(--serif);font-weight:600;font-size:20px;margin:0;letter-spacing:.005em}
+.brand .src{font-family:var(--mono);font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em}
+.row{display:flex;gap:8px;align-items:center}
+input[type=search],select{width:100%;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
+.label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);font-weight:600}
+.chips{display:flex;flex-direction:column;gap:3px}
+.chip{width:100%;border:1px solid var(--line);background:var(--card);border-radius:5px;padding:3px 9px;font-size:12.5px;cursor:pointer;display:flex;gap:7px;align-items:center;text-align:left;white-space:nowrap}
+.chip .t{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.chip .c{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.chip[aria-pressed=true] .c{color:inherit;opacity:.7}
+.chip .dot{width:7px;height:7px;border-radius:50%}
+.sev-crit{--sev:var(--crit);--sevbg:var(--crit-bg)} .sev-warn{--sev:var(--warn);--sevbg:var(--warn-bg)} .sev-info{--sev:var(--info);--sevbg:var(--info-bg)}
+.dot{background:var(--sev)}
+.listMeta{padding:8px 16px;font-size:12px;color:var(--ink2);display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}
+#list{overflow:auto;flex:1;min-height:0}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;padding:8px 16px;border-bottom:1px solid var(--line2);cursor:pointer;align-items:center}
+.item:hover{background:var(--panel)}
+.item[aria-current=true]{background:var(--card);box-shadow:inset 3px 0 0 var(--accent)}
+.item .id{font-family:var(--mono);font-size:11.5px;color:var(--ink2);min-width:84px}
+.item .snip{font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .marks{display:flex;gap:3px}
+.item .marks .dot{width:7px;height:7px;border-radius:50%}
+.st{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;padding:0 5px}
+.st-ok{background:var(--ok-bg);color:var(--ok)} .st-issue{background:var(--crit-bg);color:var(--crit)} .st-unsure{background:var(--warn-bg);color:var(--warn)}
+
+/* main */
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.crumbs{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.crumbs .dom{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);font-weight:600}
+.crumbs h2{margin:0;font-family:var(--serif);font-size:26px;font-weight:600}
+.crumbs .pos{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:6px;padding:6px 11px;cursor:pointer}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.flagRow{display:flex;flex-wrap:wrap;gap:6px}
+.flag{display:inline-flex;gap:6px;align-items:center;font-size:12px;padding:3px 9px;border-radius:4px;background:var(--sevbg);color:var(--sev);font-weight:500}
+
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.qtext{font-family:var(--serif);font-size:17px;line-height:1.6;max-width:72ch;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.qtext .wsmark{background:var(--ws);border-radius:2px}
+.opts{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.opt{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start;font-family:var(--serif);font-size:15.5px;line-height:1.5}
+.bub{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ink3);display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink2);margin-top:1px}
+.opt.key .bub{background:var(--bubble);border-color:var(--bubble);color:var(--card)}
+.opt.key .otext{background:var(--bubble-soft);border-radius:4px;box-shadow:0 0 0 4px var(--bubble-soft)}
+.opt .alt{font-family:var(--sans);font-size:12px;color:var(--warn);margin-left:6px}
+.wsToggle{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)}
+
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);display:flex;justify-content:space-between;gap:8px}
+.panel h3 .k{font-family:var(--mono);text-transform:none;letter-spacing:0;color:var(--ink3);font-weight:400}
+.prose{font-size:14px;line-height:1.6;max-width:68ch;overflow-wrap:anywhere}
+.irac{display:flex;flex-direction:column;gap:10px}
+.irac dt{font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.irac dd{margin:2px 0 0;font-size:14px;line-height:1.55}
+.letter{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:0 3px;font-weight:600}
+.empty{color:var(--ink3);font-style:italic}
+
+.related{display:flex;flex-direction:column;gap:12px}
+.rel{border:1px solid var(--line);border-radius:6px;background:var(--card);padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.rel .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.rel a{color:var(--accent);font-family:var(--mono);font-size:12.5px;text-decoration:none;cursor:pointer}
+.rel a:hover{text-decoration:underline}
+.ansTag{font-family:var(--mono);font-size:12px;padding:1px 7px;border-radius:999px;border:1px solid var(--line)}
+.ansTag.diff{background:var(--crit-bg);color:var(--crit);border-color:transparent}
+.ansTag.same{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.diff{font-family:var(--serif);font-size:14px;line-height:1.55;overflow-wrap:anywhere}
+.diff ins{background:var(--ins);text-decoration:none;border-radius:2px}
+.diff del{background:var(--del);text-decoration:line-through;border-radius:2px}
+.muted{color:var(--ink3);font-size:12.5px}
+
+.review{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 14px;align-items:start}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:6px 12px;cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true][data-s=ok]{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.seg button[aria-pressed=true][data-s=issue]{background:var(--crit-bg);color:var(--crit);font-weight:600}
+.seg button[aria-pressed=true][data-s=unsure]{background:var(--warn-bg);color:var(--warn);font-weight:600}
+textarea{width:100%;min-height:62px;resize:vertical;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+.saveNote{font-size:12px;color:var(--ink3)}
+
+.qm{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;border:1px solid currentColor;font-size:10px;font-weight:600;line-height:1;opacity:.55;cursor:help;flex:none}
+.qm:hover,.qm:focus-visible{opacity:1}
+#tip{position:fixed;z-index:50;max-width:280px;background:var(--ink);color:var(--card);font-size:12px;line-height:1.45;padding:8px 10px;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.18);pointer-events:none}
+#tip b{display:block;font-weight:600;margin-bottom:2px}
+.railFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 16px;padding-bottom:max(10px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--rail);position:relative}
+.railFoot .btn{font-size:12.5px;padding:5px 10px}
+.keys{font-size:12px;color:var(--ink2)}
+.keys summary{cursor:pointer}
+.keys p{position:absolute;right:16px;bottom:calc(100% + 6px);margin:0;max-width:300px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:9px 11px;box-shadow:0 6px 18px rgba(0,0,0,.12);line-height:1.9;z-index:2}
+kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;background:var(--card)}
+
+.dsRow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px}
+.dsText{display:flex;flex-direction:column;min-width:0}
+.dsName{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dsMeta{font-size:11px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.btn.small{font-size:12px;padding:4px 9px;white-space:nowrap}
+.chip:disabled{opacity:.45;cursor:not-allowed}
+.flagDD{position:relative}
+.ddBtn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px;cursor:pointer;text-align:left}
+.ddBtn:hover{border-color:var(--ink3)}
+.ddBtn[aria-expanded=true]{border-color:var(--accent)}
+.ddBtn #flagBtnText{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ddBtn.active #flagBtnText{font-weight:600}
+.caret{color:var(--ink3);font-size:11px}
+.ddPanel{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:30;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.16);padding:8px;display:flex;flex-direction:column;gap:6px;max-height:min(70vh,520px);overflow:auto}
+.ddHead{display:flex;justify-content:space-between;align-items:center;padding:2px 4px}
+.linkBtn{border:0;background:none;color:var(--accent);cursor:pointer;font-size:12px;padding:2px 4px}
+.ddNote{margin:2px 4px 0;font-size:11.5px;color:var(--ink3)}
+.ddPanel .chip{border-color:transparent;background:transparent;padding:5px 6px}
+.ddPanel .chip:hover:not(:disabled){background:var(--panel)}
+.ddPanel .chip[aria-pressed=true]{background:var(--accent-soft);color:var(--ink);border-color:transparent}
+.ddPanel .chip[aria-pressed=true] .c{color:var(--ink2);opacity:1}
+.cb{width:14px;height:14px;border:1.5px solid var(--ink3);border-radius:3px;flex:none;display:grid;place-items:center;font-size:10px;line-height:1;color:var(--card)}
+.chip[aria-pressed=true] .cb{background:var(--accent);border-color:var(--accent)}
+.chip[aria-pressed=true] .cb::after{content:"✓"}
+.boot{padding:40px 0;color:var(--ink2)}
+.boot .err{color:var(--crit)}
+.work{display:flex;flex-direction:column;gap:16px}
+.rawView{border-top:1px solid var(--line2);padding-top:12px}
+.rawView summary{cursor:pointer;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)}
+.rawView summary .muted{text-transform:none;letter-spacing:0;font-weight:400;font-family:var(--mono);font-size:11.5px;margin-left:6px}
+.rawTabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 8px}
+.rawTabs [data-t]{border:1px solid var(--line);background:var(--card);border-radius:5px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.rawTabs [data-t][aria-pressed=true]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.rawTabs [data-t]:disabled{opacity:.45;cursor:not-allowed}
+.rawTabs #copyRaw{margin-left:auto}
+.rawPre{margin:0;max-height:420px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-family:var(--mono);font-size:12px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;tab-size:2}
+.overlay{position:fixed;inset:0;z-index:40;background:rgba(10,16,24,.45);display:grid;place-items:center;padding:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.dlg{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;width:min(560px,100%);max-height:100%;overflow:auto;padding:20px 22px;display:flex;flex-direction:column;gap:16px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.dlg.drop{outline:2px dashed var(--accent);outline-offset:-8px}
+.dlg h2{margin:0;font-family:var(--serif);font-size:21px}
+.ldSec{display:flex;flex-direction:column;gap:8px}
+.ldSec p{margin:0;font-size:12.5px;line-height:1.5}
+.ldList{display:flex;flex-direction:column;gap:6px}
+.ldItem{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:9px 11px;cursor:pointer}
+.ldItem:hover{border-color:var(--accent)}
+.fileRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fileBtn{position:relative;font-size:12.5px}
+.fileBtn:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.fname{font-family:var(--mono);font-size:12px;color:var(--ink2);min-width:0;overflow-wrap:anywhere}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.ldStatus{margin:0;font-size:12.5px;color:var(--ink2)}
+.urlRow{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:500}
+.urlRow input{font-family:var(--mono);font-size:12px;font-weight:400;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0;width:100%}
+.ldStatus.err{color:var(--crit)}
+#tip i{opacity:.8}
+@media (max-width:860px){
+  #app{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);height:auto;min-height:100%}
+  #rail{border-right:0;border-bottom:1px solid var(--line)}
+  #list{max-height:38vh}
+  #main{overflow:visible}
+  .cols{grid-template-columns:1fr}
+  .sheet{padding:16px}
+  .railHead{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<div id="app">
+  <aside id="rail" aria-label="Records">
+    <div class="railHead">
+      <div class="brand"><h1>MBE Review Desk</h1></div>
+      <div class="dsRow">
+        <div class="dsText"><span class="dsName" id="dsName">Loading…</span><span class="dsMeta" id="dsMeta"></span></div>
+        <button class="btn small" id="dsOpen" type="button">Load data</button>
+      </div>
+      <input id="q" type="search" placeholder="Search text or ID (e.g. torts-12)" aria-label="Search">
+      <div class="row">
+        <select id="dom" aria-label="Domain"></select>
+        <select id="rv" aria-label="Review status">
+          <option value="">All review states</option>
+          <option value="none">Not reviewed</option>
+          <option value="ok">OK</option><option value="issue">Issue</option><option value="unsure">Unsure</option>
+        </select>
+      </div>
+      <div class="flagDD" id="flagDD">
+        <button type="button" class="ddBtn" id="flagBtn" aria-haspopup="true" aria-expanded="false" aria-controls="flagPanel"><span id="flagBtnText">Flags: all records</span><span class="caret" aria-hidden="true">▾</span></button>
+        <div class="ddPanel" id="flagPanel" hidden>
+          <div class="ddHead"><span class="label">Show records with any of</span><button type="button" class="linkBtn" id="flagClear">Clear</button></div>
+          <div class="chips" id="flagChips"></div>
+          <p class="ddNote">Automatic checks; they include false positives.</p>
+        </div>
+      </div>
+    </div>
+    <div class="listMeta"><span id="count" class="num"></span><span id="revCount" class="num"></span></div>
+    <div id="list" role="listbox" aria-label="Filtered records"></div>
+    <div class="railFoot">
+      <button class="btn" id="copyReview" type="button">Copy review notes (JSON)</button>
+      <details class="keys"><summary>Keyboard</summary>
+        <p><kbd>J</kbd>/<kbd>K</kbd> next/previous · <kbd>/</kbd> search · <kbd>1</kbd> OK · <kbd>2</kbd> Issue · <kbd>3</kbd> Unsure · <kbd>W</kbd> whitespace</p>
+      </details>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div class="mainInner">
+      <div class="boot" id="boot"><p>Loading…</p></div>
+      <div class="work" id="work" hidden>
+      <div class="topbar">
+        <div class="crumbs"><span class="dom" id="rDom"></span><h2 id="rTitle"></h2><span class="pos num" id="rPos"></span></div>
+        <div class="row"><button class="btn" id="prev" type="button">← Prev</button><button class="btn" id="next" type="button">Next →</button></div>
+      </div>
+      <div class="flagRow" id="rFlags"></div>
+
+      <section class="sheet" aria-label="Question">
+        <div class="row" style="justify-content:space-between;flex-wrap:wrap">
+          <div class="label">Question · filled bubble = answer key</div>
+          <label class="wsToggle"><input type="checkbox" id="showWs"> Show leading, trailing and double spaces</label>
+        </div>
+        <p class="qtext" id="rQ"></p>
+        <ol class="opts" id="rOpts"></ol>
+        <details class="rawView" id="rawView">
+          <summary>Raw data <span class="muted" id="rawWhere"></span></summary>
+          <div class="rawTabs">
+            <button type="button" data-t="q" aria-pressed="true">Questions file</button>
+            <button type="button" data-t="r" id="rawTabR" aria-pressed="false">Human-explanation file</button>
+            <button class="btn small" id="copyRaw" type="button">Copy</button>
+          </div>
+          <pre class="rawPre" id="rawPre"></pre>
+        </details>
+      </section>
+
+      <section class="panel" aria-label="Review">
+        <h3>Your review <span class="k" id="saveState"></span></h3>
+        <div class="review">
+          <div class="seg" role="group" aria-label="Review status">
+            <button type="button" data-s="ok" aria-pressed="false">OK</button>
+            <button type="button" data-s="issue" aria-pressed="false">Issue</button>
+            <button type="button" data-s="unsure" aria-pressed="false">Unsure</button>
+          </div>
+          <textarea id="note" placeholder="What is wrong, and what fix do you propose? Saved when you pause typing."></textarea>
+        </div>
+      </section>
+
+      <div class="cols">
+        <section class="panel" aria-label="Human explanation">
+          <h3>Human explanation <span class="k" id="rawMeta"></span></h3>
+          <div class="prose" id="rRaw"></div>
+        </section>
+        <section class="panel" aria-label="IRAC explanation">
+          <h3>IRAC rewrite <span class="k">distilled file · written to match the key</span></h3>
+          <dl class="irac" id="rIrac"></dl>
+        </section>
+      </div>
+
+      <section class="panel" id="relPanel" aria-label="Related records">
+        <h3>Related records <span class="k">differences shown against this record</span></h3>
+        <div class="related" id="rRel"></div>
+      </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="overlay" id="loader" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="ldTitle">
+    <h2 id="ldTitle">Load data</h2>
+    <section class="ldSec">
+      <div class="label">Built-in datasets</div>
+      <div id="ldBuiltin" class="ldList"></div>
+    </section>
+    <section class="ldSec">
+      <div class="label">From your computer</div>
+      <div class="fileRow">
+        <label class="btn fileBtn"><input type="file" id="fQ" accept=".json,application/json" class="sr">Choose questions file</label>
+        <span class="fname" id="fQname">No file chosen</span>
+      </div>
+      <div class="fileRow">
+        <label class="btn fileBtn"><input type="file" id="fR" accept=".json,application/json" class="sr">Choose human-explanation file</label>
+        <span class="fname" id="fRname">No file chosen</span>
+      </div>
+      <p class="muted">The questions file uses the distilled format: a JSON list of records with domain, question_number, question, options (optionA to optionD), correct_answer and explanation. The human-explanation file is optional and uses the raw format; without it, the explanation checks are skipped. You can also drop both files on this box. Files are read in your browser and not uploaded.</p>
+      <p class="muted">Review notes are matched by record ID (domain and question number), so they carry over to a cleaned file that keeps the same numbers.</p>
+      <div><button class="btn primary" id="ldLocal" type="button" disabled>Load and check</button></div>
+    </section>
+    <section class="ldSec">
+      <div class="label">From a link</div>
+      <label class="urlRow" for="uQ">Questions file link<input type="url" id="uQ" placeholder="https://github.com/…/blob/main/benchmarks/….json" autocomplete="off" spellcheck="false"></label>
+      <label class="urlRow" for="uR">Human-explanation file link <span class="muted">(optional)</span><input type="url" id="uR" placeholder="https://huggingface.co/datasets/…/raw_dataset.json" autocomplete="off" spellcheck="false"></label>
+      <label class="urlRow" for="uTok">GitHub token <span class="muted">(only for private repositories; kept in this tab only, never saved)</span><input type="password" id="uTok" autocomplete="off" spellcheck="false"></label>
+      <p class="muted">GitHub and Hugging Face page links are turned into direct file links. Links only work in the downloaded copy of this page opened in your own browser; inside claude.ai the page is not allowed to reach other sites.</p>
+      <div><button class="btn primary" id="ldLinks" type="button">Fetch and check</button></div>
+    </section>
+    <p class="ldStatus" id="ldStatus" aria-live="polite"></p>
+    <div class="row" style="justify-content:flex-end"><button class="btn" id="ldClose" type="button">Close</button></div>
+  </div>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+<script>
+// MBE quality checks, run in the page on whatever dataset is loaded.
+// Mirrors build_mbe_viewer_data.py so the built-in dataset gives the same flags.
+function analyzeMBE(distilled, raw, bqaRows) {
+  const STOP = new Set("the a an of to and or in on for by with that this is was were be been his her he she it its as at from not no any which would should could their they them than but if have has had will may can".split(" "));
+  const norm = s => String(s == null ? "" : s).replace(/\s+/g, " ").trim().toLowerCase();
+  const slug = d => String(d).toLowerCase().replace(/_/g, "-").replace(/[^a-z0-9-]/g, "-");
+  const toks = s => new Set((String(s).toLowerCase().match(/[a-z]{4,}/g) || []).filter(w => !STOP.has(w)));
+  const L = ["A", "B", "C", "D"];
+  const IRAC = ["Legal_Concept", "Fact_Analysis", "Rule_Application", "Legal_Conclusion"];
+
+  function optList(r) {
+    const o = r.options;
+    if (Array.isArray(o)) return o.map(String);
+    if (o && typeof o === "object") return L.map(k => o["option" + k] ?? o[k] ?? "").map(String);
+    return ["", "", "", ""];
+  }
+  function explText(e) {
+    if (e == null) return "";
+    if (typeof e === "string") return e;
+    if (typeof e === "object") return Object.values(e).map(String).join(" ");
+    return String(e);
+  }
+
+  // ---------- unique ids ----------
+  const seen = new Map();
+  const recs = distilled.map((r, i) => {
+    const base = `${slug(r.domain)}-${r.question_number}`;
+    const c = (seen.get(base) || 0) + 1; seen.set(base, c);
+    const ex = r.explanation;
+    const x = ex && typeof ex === "object" && !Array.isArray(ex)
+      ? (IRAC.every(k => k in ex) ? IRAC.map(k => String(ex[k])) : Object.entries(ex).map(([k, v]) => `${k}: ${v}`))
+      : null;
+    return {
+      u: c === 1 ? base : `${base}-dup${c}`, base, d: String(r.domain), n: r.question_number,
+      q: String(r.question ?? ""), o: optList(r), a: String(r.correct_answer ?? ""),
+      x, xs: x ? null : explText(ex), src: r, r: null, rsrc: null, f: [], dup: [], near: [], set: [], i,
+    };
+  });
+  const idx = Object.fromEntries(recs.map(r => [r.u, r]));
+  const flag = (rec, f) => { if (!rec.f.includes(f)) rec.f.push(f); };
+
+  // ---------- raw matching: same domain + number + question text ----------
+  const haveRaw = Array.isArray(raw) && raw.length > 0;
+  if (haveRaw) {
+    const byKey = new Map();
+    raw.forEach(r => { const k = `${r.domain}|${r.question_number}|${norm(r.question)}`; if (!byKey.has(k)) byKey.set(k, r); });
+    recs.forEach(rec => {
+      const m = byKey.get(`${rec.d}|${rec.n}|${norm(rec.q)}`);
+      if (m) {
+        rec.rsrc = m;
+        rec.r = { e: explText(m.explanation), a: String(m.correct_answer ?? "") };
+        const ro = optList(m); if (ro.some((x, k) => x !== rec.o[k])) rec.r.o = ro;
+      }
+    });
+  }
+
+  // ---------- simple record checks ----------
+  const clash = new Set([...seen].filter(([, v]) => v > 1).map(([k]) => k));
+  recs.forEach(rec => {
+    if (clash.has(rec.base)) flag(rec, "idclash");
+    if (haveRaw && !rec.r) flag(rec, "noraw");
+    const q = rec.q;
+    if (q !== q.trim() || q.includes("  ")) flag(rec, "ws");
+    if (/^\s*\d+\s*\./.test(q)) flag(rec, "numprefix");
+    if (!L.includes(rec.a)) flag(rec, "badkey");
+    if (rec.o.some(o => !o.trim())) flag(rec, "badopts");
+    const concl = rec.x ? rec.x[rec.x.length - 1] : rec.xs;
+    if (!/\b[A-D]\b/.test(concl || "")) flag(rec, "noletter");
+  });
+
+  // ---------- duplicates, near-duplicates, shared fact patterns ----------
+  const normp = s => (String(s).toLowerCase().replace(/(?<=\d),(?=\d{3})/g, "").match(/[a-z0-9]+/g) || []);
+  const QW = recs.map(r => normp(r.q));
+  const OW = recs.map(r => normp(r.o.join(" ")));
+  const shingles = (w, k) => { const s = new Set(); const n = Math.max(1, w.length - k + 1); for (let i = 0; i < n; i++) s.add(w.slice(i, i + k).join(" ")); return s; };
+  const S = QW.map(w => shingles(w, 5));
+  const inv = new Map();
+  S.forEach((s, i) => s.forEach(t => { let v = inv.get(t); if (!v) inv.set(t, v = []); v.push(i); }));
+
+  // difflib.SequenceMatcher (autojunk=False) ratio and longest match, on word arrays
+  function b2jOf(b) { const m = new Map(); b.forEach((w, j) => { let v = m.get(w); if (!v) m.set(w, v = []); v.push(j); }); return m; }
+  function longest(a, b2j, alo, ahi, blo, bhi) {
+    let bi = alo, bj = blo, bs = 0, j2len = new Map();
+    for (let i = alo; i < ahi; i++) {
+      const nj = new Map(), js = b2j.get(a[i]) || [];
+      for (const j of js) { if (j < blo) continue; if (j >= bhi) break; const k = (j2len.get(j - 1) || 0) + 1; nj.set(j, k); if (k > bs) { bi = i - k + 1; bj = j - k + 1; bs = k; } }
+      j2len = nj;
+    }
+    return [bi, bj, bs];
+  }
+  function matched(a, b) {
+    const b2j = b2jOf(b); let total = 0; const q = [[0, a.length, 0, b.length]];
+    while (q.length) { const [alo, ahi, blo, bhi] = q.pop(); const [i, j, k] = longest(a, b2j, alo, ahi, blo, bhi);
+      if (k) { total += k; if (alo < i && blo < j) q.push([alo, i, blo, j]); if (i + k < ahi && j + k < bhi) q.push([i + k, ahi, j + k, bhi]); } }
+    return total;
+  }
+  const same = (a, b) => a.length === b.length && a.every((w, i) => w === b[i]);
+  const ratio = (a, b) => same(a, b) ? 1 : (a.length + b.length ? 2 * matched(a, b) / (a.length + b.length) : 1);
+
+  const pairs = [];
+  for (let i = 0; i < recs.length; i++) {
+    const cand = new Map();
+    S[i].forEach(t => (inv.get(t) || []).forEach(j => { if (j > i) cand.set(j, (cand.get(j) || 0) + 1); }));
+    for (const [j, c] of cand) {
+      const a = recs[i], b = recs[j];
+      if (a.d !== b.d) continue;
+      if (c / Math.min(S[i].size, S[j].size) < 0.5) continue;
+      const qs = ratio(QW[i], QW[j]), os = ratio(OW[i], OW[j]);
+      let kind = null;
+      if (qs === 1 && os === 1) kind = "dup";
+      else if (qs >= 0.9 && os >= 0.9) kind = "near";
+      else if (longest(QW[i], b2jOf(QW[j]), 0, QW[i].length, 0, QW[j].length)[2] >= 30) kind = "set";
+      if (!kind) continue;
+      pairs.push([kind, a.u, b.u]);
+      for (const [x, y] of [[a, b], [b, a]]) {
+        x[kind].push(y.u);
+        flag(x, { dup: "dup", near: "neardup", set: "set" }[kind]);
+        if ((kind === "dup" || kind === "near") && a.a !== b.a) flag(x, "keyconflict");
+      }
+    }
+  }
+
+  // ---------- human-explanation checks (need the raw file) ----------
+  if (haveRaw) {
+    recs.forEach(rec => {
+      if (!rec.r) return;
+      const letters = new Set();
+      for (const m of rec.r.e.matchAll(/\b([A-D]) is (?:the )?correct\b|\banswer is ([A-D])\b/g)) letters.add(m[1] || m[2]);
+      if (letters.size && !letters.has(rec.a)) { flag(rec, "rawkey"); rec.rawkey = [...letters].sort(); }
+    });
+    const score = (qrec, e) => { const qt = toks(qrec.q + " " + qrec.o.join(" ")), et = toks(e); let k = 0; et.forEach(w => { if (qt.has(w)) k++; }); return k / Math.max(1, et.size); };
+    recs.forEach((rec, i) => {
+      if (!rec.r) return;
+      const own = score(rec, rec.r.e); rec.ov = Math.round(own * 100) / 100;
+      let best = 0, bj = -1;
+      for (let j = Math.max(0, i - 3); j < Math.min(recs.length, i + 4); j++) { if (j === i) continue; const s = score(recs[j], rec.r.e); if (s > best) { best = s; bj = j; } }
+      if (best > own + 0.15 && best > 0.3 && bj >= 0) { flag(rec, "shift"); rec.fits = recs[bj].u; }
+      else if (own < 0.15) flag(rec, "lowfit");
+    });
+  }
+
+  // ---------- overlap with barexam_qa ----------
+  if (Array.isArray(bqaRows) && bqaRows.length) {
+    const sh8 = s => { const w = norm(s).match(/[a-z0-9]+/g) || []; const out = new Set(); const n = Math.max(1, w.length - 7); for (let i = 0; i < n; i++) out.add(w.slice(i, i + 8).join(" ")); return out; };
+    const binv = new Map();
+    bqaRows.forEach((r, i) => sh8((r.prompt || "") + " " + (r.question || "")).forEach(t => { let v = binv.get(t); if (!v) binv.set(t, v = []); v.push(i); }));
+    recs.forEach(rec => {
+      const s = sh8(rec.q), c = new Map(); let mx = 0;
+      s.forEach(t => (binv.get(t) || []).forEach(j => { const v = (c.get(j) || 0) + 1; c.set(j, v); if (v > mx) mx = v; }));
+      if (mx / s.size >= 0.5) flag(rec, "bqa");
+    });
+  }
+
+  recs.forEach(rec => ["dup", "near", "set"].forEach(k => { rec[k] = [...new Set(rec[k])].sort((p, q) => idx[p].i - idx[q].i); }));
+  return { recs, pairs, haveRaw, haveBqa: Array.isArray(bqaRows) && bqaRows.length > 0 };
+}
+
+// Minimal RFC 4180 CSV parser (quoted fields, embedded commas/newlines/quotes).
+function parseCSV(text) {
+  const rows = []; let row = [], f = "", i = 0, q = false;
+  while (i < text.length) {
+    const ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { f += '"'; i += 2; continue; } q = false; i++; continue; } f += ch; i++; continue; }
+    if (ch === '"') { q = true; i++; continue; }
+    if (ch === ",") { row.push(f); f = ""; i++; continue; }
+    if (ch === "\r") { i++; continue; }
+    if (ch === "\n") { row.push(f); rows.push(row); row = []; f = ""; i++; continue; }
+    f += ch; i++;
+  }
+  if (f.length || row.length) { row.push(f); rows.push(row); }
+  const head = rows.shift() || [];
+  return rows.filter(r => r.length > 1).map(r => Object.fromEntries(head.map((h, k) => [h, r[k]])));
+}
+
+
+</script>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DOMNAME = {Civil_procedure:'Civil Procedure',Constitutional_law:'Constitutional Law',Contracts:'Contracts',Criminal_law:'Criminal Law',Evidence:'Evidence',Property:'Property',Torts:'Torts'};
+const SHORT = {Civil_procedure:'CivPro',Constitutional_law:'ConLaw',Contracts:'Contracts',Criminal_law:'CrimLaw',Evidence:'Evidence',Property:'Property',Torts:'Torts'};
+const domName = d => DOMNAME[d] || String(d).replace(/_/g, ' ');
+const domShort = d => SHORT[d] || String(d).slice(0, 8);
+const FLAGS = {
+  keyconflict:{t:'Answer key conflict',s:'crit',h:'Same question and options as another record, but a different answer key.'},
+  shift:{t:'Explanation fits a nearby question',s:'crit',h:'The human explanation matches a neighbouring question better than this one. Possible off-by-one shift.',raw:1},
+  rawkey:{t:'Explanation names another answer',s:'crit',h:'The human explanation says a different letter is correct.',raw:1},
+  badkey:{t:'Missing or invalid answer key',s:'crit',h:'correct_answer is not one of A, B, C or D.'},
+  badopts:{t:'Empty option',s:'crit',h:'At least one of the four options is empty or missing.'},
+  idclash:{t:'Duplicate ID',s:'warn',h:'Two records share the same domain and question number.'},
+  numprefix:{t:'Number inside question text',s:'warn',h:'The question starts with a stray question number.'},
+  dup:{t:'Exact duplicate',s:'warn',h:'Same question and options as another record, ignoring punctuation and spacing.'},
+  neardup:{t:'Near duplicate or variant',s:'warn',h:'At least 90% the same words in question and options. Includes typo-level copies and versions with changed facts or amounts; check the diff.'},
+  noraw:{t:'No human explanation',s:'warn',h:'The human-explanation file has no record with the same domain, number and question.',raw:1},
+  lowfit:{t:'Explanation barely matches',s:'warn',h:'Few words of the human explanation appear in the question. Check by eye.',raw:1},
+  noletter:{t:'Conclusion names no letter',s:'info',h:'The explanation’s conclusion never states A, B, C or D.'},
+  set:{t:'Shares a fact pattern',s:'info',h:'Shares a passage of 30+ words with another record but asks something different. Usually fine.'},
+  ws:{t:'Whitespace',s:'info',h:'Leading, trailing or double spaces in the question text.'},
+  bqa:{t:'Also in barexam_qa',s:'info',h:'The question also appears in barexam_qa_qa.csv.',bqa:1}
+};
+const ORDER = Object.keys(FLAGS);
+const BUILTIN = [
+  {id:'original', name:'Original (HolySaint/MBE-exam-questions)',
+   q:['embed:mbe-distilled', 'data/mbe_distilled.json', 'https://huggingface.co/datasets/HolySaint/MBE-exam-questions/resolve/main/distilled_dataset.json'],
+   r:['embed:mbe-raw', 'data/mbe_raw.json', 'https://huggingface.co/datasets/HolySaint/MBE-exam-questions/resolve/main/raw_dataset.json'],
+   note:'Same files as benchmarks/ in analysis-framework.'}
+];
+// prompt + question of every barexam_qa example (from benchmarks/barexam_qa_qa.csv), used only for the overlap check
+const BQA_SOURCES = [['embed:bqa-questions', 'json'], ['data/barexam_qa_questions.json', 'json'], ['https://huggingface.co/datasets/reglab/barexam_qa/resolve/main/data/qa/qa.csv', 'csv']];
+
+let DATA = [], BY = {}, INFO = {haveRaw:false, haveBqa:false}, COUNTS = {}, DS = {name:''};
+let BQA = null;
+const state = {flags:new Set(), dom:'', rv:'', q:'', cur:0, ws:false, rawTab:'q', rawOpen:false};
+
+// ---------- review storage: shared db when available, browser storage otherwise ----------
+const reviews = {};
+let db = null, store = 'browser';
+function lsGet(){ try { return JSON.parse(localStorage.getItem('mbe-review') || '{}'); } catch(e){ return {}; } }
+function lsSet(){ try { localStorage.setItem('mbe-review', JSON.stringify(reviews)); } catch(e){} }
+Object.assign(reviews, lsGet());
+const pending = {};
+async function save(u){
+  const r = reviews[u], rec = BY[u];
+  lsSet();
+  if (!db) { setSave('Saved in this browser'); return; }
+  if (pending[u]) { pending[u].again = true; return; }
+  pending[u] = {again:false};
+  try {
+    const ref = db.collection('reviews').doc(u);
+    if (r && (r.s || r.note)) await ref.set({s:r.s||'', note:r.note||'', at:new Date().toISOString(), d:rec ? rec.d : '', n:rec ? rec.n : '', dataset:DS.name});
+    else await ref.delete();
+    setSave('Saved');
+  } catch(e){ setSave(e && e.code === 'invalid_argument' ? 'Read-only: not saved' : 'Not saved, try again'); }
+  const again = pending[u].again; delete pending[u];
+  if (again) save(u);
+}
+function setSave(t){ $('saveState').textContent = t; }
+(async () => {
+  try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch(e){ db = null; }
+  if (!db) return;
+  store = 'db';
+  const t = setTimeout(() => setSave('Shared notes not reachable yet'), 10000);
+  db.collection('reviews').onSnapshot(snap => {
+    if (!snap.metadata.fromCache) clearTimeout(t);
+    snap.docChanges().forEach(ch => {
+      const id = ch.doc.id;
+      if (ch.type === 'removed') { delete reviews[id]; return; }
+      if (pending[id]) return;
+      const d = ch.doc.data(); reviews[id] = {s:d.s||'', note:d.note||''};
+    });
+    lsSet(); if (DATA.length) { renderList(); paintReview(); }
+  }, () => { clearTimeout(t); setSave('Shared notes unavailable; saving in this browser'); db = null; });
+})();
+
+// ---------- "?" tooltips ----------
+const tip = $('tip');
+function showTip(el){
+  const f = FLAGS[el.dataset.tip]; if (!f) return;
+  const off = (f.raw && !INFO.haveRaw) ? '<i>Not checked: load a human-explanation file to run it.</i>' : '';
+  tip.innerHTML = `<b>${f.t}</b>${esc(f.h)}${off ? '<br>' + off : ''}`; tip.hidden = false;
+  const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = Math.min(Math.max(8, r.left + r.width/2 - w/2), window.innerWidth - w - 8);
+  let y = r.bottom + 8; if (y + h > window.innerHeight - 8) y = r.top - h - 8;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+function hideTip(){ tip.hidden = true; }
+document.addEventListener('mouseover', e => { const q = e.target.closest('.qm'); if (q) showTip(q); });
+document.addEventListener('mouseout', e => { if (e.target.closest('.qm')) hideTip(); });
+document.addEventListener('focusin', e => { const q = e.target.closest('.qm'); if (q) showTip(q); });
+document.addEventListener('focusout', e => { if (e.target.closest('.qm')) hideTip(); });
+document.addEventListener('click', e => {
+  const q = e.target.closest('.qm');
+  if (q) { e.preventDefault(); e.stopPropagation(); if (tip.hidden) showTip(q); else hideTip(); }
+  else hideTip();
+}, true);
+['scroll','resize'].forEach(ev => window.addEventListener(ev, hideTip, true));
+
+// ---------- filters and list ----------
+let view = [];
+function buildFilters(){
+  const doms = [...new Set(DATA.map(r => r.d))];
+  if (!doms.includes(state.dom)) state.dom = '';
+  $('dom').innerHTML = '<option value="">All domains</option>' + doms.map(d => `<option value="${esc(d)}"${d===state.dom?' selected':''}>${esc(domName(d))} (${DATA.filter(r=>r.d===d).length})</option>`).join('');
+  $('flagChips').innerHTML = ORDER.map(f => {
+    const off = (FLAGS[f].raw && !INFO.haveRaw) || (FLAGS[f].bqa && !INFO.haveBqa);
+    if (off) state.flags.delete(f);
+    return `<button type="button" class="chip sev-${FLAGS[f].s}" data-f="${f}" aria-pressed="${state.flags.has(f)}"${off?' disabled':''}><span class="cb"></span><span class="dot"></span><span class="t">${FLAGS[f].t}</span><span class="qm" data-tip="${f}" tabindex="0" aria-label="What is this?">?</span><span class="c">${off ? '–' : COUNTS[f].toLocaleString()}</span></button>`;
+  }).join('');
+  paintFlagBtn();
+}
+function paintFlagBtn(){
+  const sel = ORDER.filter(f => state.flags.has(f));
+  $('flagBtnText').textContent = !sel.length ? 'Flags: all records' : sel.length === 1 ? `Flag: ${FLAGS[sel[0]].t}` : `Flags: ${sel.length} selected`;
+  $('flagBtn').classList.toggle('active', sel.length > 0);
+  $('flagClear').hidden = !sel.length;
+}
+function setFlagPanel(open){ $('flagPanel').hidden = !open; $('flagBtn').setAttribute('aria-expanded', String(open)); }
+function filtered(){
+  const q = state.q.trim().toLowerCase();
+  return DATA.filter(r => {
+    if (state.dom && r.d !== state.dom) return false;
+    if (state.flags.size && !r.f.some(f => state.flags.has(f))) return false;
+    if (state.rv) { const s = (reviews[r.u]||{}).s || ''; if (state.rv === 'none' ? s : s !== state.rv) return false; }
+    if (q) { if (!(r.u.includes(q) || r.q.toLowerCase().includes(q) || r.o.some(o => o.toLowerCase().includes(q)))) return false; }
+    return true;
+  });
+}
+function sevDots(r){
+  return ['crit','warn','info'].filter(s => r.f.some(f => FLAGS[f].s === s)).map(s => `<span class="dot sev-${s}"></span>`).join('');
+}
+function renderList(){
+  view = filtered();
+  const cur = DATA[state.cur];
+  $('count').textContent = `${view.length.toLocaleString()} of ${DATA.length.toLocaleString()} records`;
+  $('revCount').textContent = `${DATA.filter(r => (reviews[r.u]||{}).s).length} reviewed`;
+  $('list').innerHTML = view.length ? view.map(r => {
+    const s = (reviews[r.u]||{}).s;
+    return `<div class="item" role="option" data-u="${esc(r.u)}" aria-current="${r === cur}"><span class="id">${esc(domShort(r.d))} ${esc(r.n)}${r.u.includes('-dup')?'b':''}</span><span class="snip">${esc(r.q.trim().slice(0,90))}</span><span class="marks">${s?`<span class="st st-${s}">${s}</span>`:sevDots(r)}</span></div>`;
+  }).join('') : '<p class="muted" style="padding:12px 16px">No records match these filters.</p>';
+}
+
+// ---------- one record ----------
+function wsMark(s){
+  if (!state.ws) return esc(s);
+  return esc(s).replace(/^ +| +$|  +/g, m => `<span class="wsmark" title="${m.length} space(s)">${'·'.repeat(m.length)}</span>`);
+}
+function markLetters(s){ return esc(s).replace(/\b(option |choice |answer |\()([A-D])\b/gi, (m,p,l) => `${p}<span class="letter">${l}</span>`); }
+function words(s){ return s.trim().split(/\s+/); }
+function wdiff(a, b){
+  const A = words(a), B = words(b), n = A.length, m = B.length;
+  if (n*m > 400000) return esc(b);
+  const dp = Array.from({length:n+1}, () => new Uint16Array(m+1));
+  for (let i=n-1;i>=0;i--) for (let j=m-1;j>=0;j--) dp[i][j] = A[i]===B[j] ? dp[i+1][j+1]+1 : Math.max(dp[i+1][j], dp[i][j+1]);
+  const out=[]; let i=0,j=0;
+  while(i<n&&j<m){ if(A[i]===B[j]){out.push(esc(B[j]));i++;j++;} else if(dp[i+1][j]>=dp[i][j+1]){out.push(`<del>${esc(A[i])}</del>`);i++;} else {out.push(`<ins>${esc(B[j])}</ins>`);j++;} }
+  while(i<n) out.push(`<del>${esc(A[i++])}</del>`); while(j<m) out.push(`<ins>${esc(B[j++])}</ins>`);
+  return out.join(' ');
+}
+function relBlock(r, other, kind){
+  const o = BY[other]; if (!o) return '';
+  const sameKey = o.a === r.a, info = kind==='set' || kind==='fits';
+  const optsChanged = o.o.some((x,k) => x !== r.o[k]);
+  const optHtml = optsChanged ? `<div class="muted">Options differ: ${o.o.map((x,k)=> x!==r.o[k] ? `<div class="diff">${'ABCD'[k]}. ${wdiff(r.o[k], x)}</div>` : '').join('')}</div>` : '<div class="muted">Options identical.</div>';
+  const label = {dup:'Exact duplicate', near:'Near duplicate or variant', set:'Same fact pattern', fits:'Explanation seems to belong here'}[kind];
+  return `<div class="rel"><div class="head"><span><a data-go="${esc(o.u)}">${esc(o.u)}</a> <span class="muted">· ${label}</span></span><span class="ansTag ${info?'':(sameKey?'same':'diff')}">key ${esc(o.a)}${info?'':(sameKey?' · same':' · differs')}</span></div><div class="diff">${wdiff(r.q, o.q)}</div>${info?'':optHtml}</div>`;
+}
+function paintReview(){
+  const r = DATA[state.cur]; if (!r) return; const v = reviews[r.u] || {};
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(v.s === b.dataset.s)));
+  if (document.activeElement !== $('note')) $('note').value = v.note || '';
+}
+function paintRaw(){
+  const r = DATA[state.cur]; if (!r) return;
+  document.querySelectorAll('.rawTabs [data-t]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.t === state.rawTab)));
+  $('rawTabR').disabled = !INFO.haveRaw;
+  const obj = state.rawTab === 'r' ? r.rsrc : r.src;
+  $('rawPre').textContent = obj ? JSON.stringify(obj, null, 2) : (INFO.haveRaw ? 'No matching record in the human-explanation file.' : 'No human-explanation file loaded.');
+  $('rawWhere').textContent = state.rawTab === 'r' ? (INFO.rawName || '') : (INFO.qName || '');
+}
+function render(){
+  const r = DATA[state.cur]; if (!r) return;
+  $('rDom').textContent = domName(r.d);
+  $('rTitle').textContent = `Question ${r.n}` + (r.u.includes('-dup') ? ' (second copy)' : '');
+  const k = view.indexOf(r);
+  $('rPos').textContent = k >= 0 ? `${k+1} / ${view.length} in filter · ${r.u}` : `not in current filter · ${r.u}`;
+  $('rFlags').innerHTML = r.f.length ? ORDER.filter(f => r.f.includes(f)).map(f => {
+    let extra = '';
+    if (f==='rawkey' && r.rawkey) extra = `: says ${r.rawkey.join('/')}`;
+    if (f==='shift' && r.fits) extra = `: ${r.fits}`;
+    return `<span class="flag sev-${FLAGS[f].s}">${FLAGS[f].t}${esc(extra)}<span class="qm" data-tip="${f}" tabindex="0" aria-label="What is this?">?</span></span>`;
+  }).join('') : '<span class="muted">No automatic flags.</span>';
+  $('rQ').innerHTML = wsMark(r.q);
+  $('rOpts').innerHTML = r.o.map((o,i) => {
+    const L = 'ABCD'[i];
+    const alt = r.r && r.r.o && r.r.o[i] !== o ? `<span class="alt">raw file: ${esc(r.r.o[i])}</span>` : '';
+    return `<li class="opt ${r.a===L?'key':''}"><span class="bub" aria-label="${r.a===L?'answer key ':''}${L}">${L}</span><span><span class="otext">${esc(o.replace(/^[A-D]\.\s*/,''))}</span>${alt}</span></li>`;
+  }).join('');
+  paintRaw();
+  if (r.r) {
+    $('rawMeta').textContent = `raw key ${r.r.a}` + (typeof r.ov==='number' ? ` · word match ${Math.round(r.ov*100)}%` : '');
+    $('rRaw').innerHTML = esc(r.r.e.trim()).replace(/\b([A-D])( is (?:the )?(?:in)?correct)/g, '<span class="letter">$1</span>$2');
+  } else {
+    $('rawMeta').textContent = '';
+    $('rRaw').innerHTML = `<span class="empty">${INFO.haveRaw ? 'No record in the human-explanation file.' : 'No human-explanation file loaded.'}</span>`;
+  }
+  const LB = ['Legal concept','Fact analysis','Rule application','Legal conclusion'];
+  $('rIrac').innerHTML = r.x
+    ? r.x.map((x,i) => `<div><dt>${r.x.length===4 ? LB[i] : 'Field ' + (i+1)}</dt><dd>${i===r.x.length-1?markLetters(x):esc(x)}</dd></div>`).join('')
+    : `<div><dt>Explanation (single text)</dt><dd>${markLetters(r.xs || '')}</dd></div>`;
+  const rel = [];
+  (r.dup||[]).forEach(u => rel.push(relBlock(r,u,'dup')));
+  (r.near||[]).forEach(u => rel.push(relBlock(r,u,'near')));
+  if (r.fits) rel.push(relBlock(r, r.fits, 'fits'));
+  (r.set||[]).forEach(u => rel.push(relBlock(r,u,'set')));
+  $('relPanel').hidden = !rel.length;
+  $('rRel').innerHTML = rel.join('');
+  paintReview(); setSave(store==='db' ? 'Shared notes' : 'Saved in this browser');
+  document.querySelectorAll('.item').forEach(el => el.setAttribute('aria-current', String(el.dataset.u === r.u)));
+  const el = document.querySelector(`.item[data-u="${(window.CSS && CSS.escape) ? CSS.escape(r.u) : r.u}"]`); if (el && el.scrollIntoView) el.scrollIntoView({block:'nearest'});
+}
+function go(u, mode){
+  if (!BY[u]) return;
+  state.cur = BY[u].i; render(); $('main').scrollTop = 0;
+  if (location.hash.slice(1) === u) return;
+  try {
+    if (mode === 'replace') history.replaceState(null, '', '#' + u);
+    else if (mode !== 'none') location.hash = u;
+  } catch(e){}
+}
+function step(d){
+  if (!view.length) return;
+  let k = view.indexOf(DATA[state.cur]);
+  k = k < 0 ? 0 : Math.min(view.length-1, Math.max(0, k+d));
+  go(view[k].u);
+}
+
+// ---------- loading datasets ----------
+function setBoot(msg, isErr){ $('boot').hidden = !msg; $('boot').innerHTML = msg ? `<p class="${isErr?'err':''}">${msg}</p>` : ''; $('work').hidden = !!msg; }
+async function fetchText(url, headers){
+  let res;
+  try { res = await fetch(url, headers ? {headers} : undefined); }
+  catch(e){ const err = new Error(`the browser could not fetch ${url}`); err.blocked = true; err.offline = navigator.onLine === false; throw err; }
+  if (!res.ok) { const err = new Error(`${url} answered ${res.status}`); err.status = res.status; throw err; }
+  return res.text();
+}
+// try each source in order (published copy, then online copy)
+// the downloaded copy carries the original data inside the file (embed:<id>), so it works without a network
+function embedded(u){
+  if (!u.startsWith('embed:')) return null;
+  const el = document.getElementById(u.slice(6));
+  return el ? el.textContent : null;
+}
+async function fetchFirst(urls){
+  let last = new Error('no source available');
+  // a page opened from disk (file://) cannot read neighbouring files, so skip those
+  const list = [].concat(urls).filter(u => u.startsWith('embed:') || !(location.protocol === 'file:' && !/^https?:/.test(u)));
+  for (const u of list) { const e = embedded(u); if (e) return {text: e, url: 'built into this file'}; }
+  for (const u of list) { try { return {text: await fetchText(u), url: u}; } catch(e){ last = e; } }
+  throw last;
+}
+async function ensureBqa(){
+  if (BQA) return BQA;
+  for (const [u, kind] of BQA_SOURCES.filter(([u]) => u.startsWith('embed:') || !(location.protocol === 'file:' && !/^https?:/.test(u)))) {
+    try { const txt = embedded(u) ?? (u.startsWith('embed:') ? null : await fetchText(u)); if (txt == null) continue; BQA = kind === 'csv' ? parseCSV(txt) : JSON.parse(txt); return BQA; } catch(e){}
+  }
+  BQA = []; return BQA;
+}
+// turn a page link into a direct file link; GitHub links with a token go through the GitHub API (private repos)
+function resolveLink(raw, token){
+  const u = raw.trim();
+  let m = u.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)\/(?:blob|raw)\/([^/]+)\/(.+)$/) || u.match(/^https?:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/(?:refs\/heads\/)?([^/]+)\/(.+)$/);
+  if (m) {
+    const [, o, r, ref, path] = m;
+    if (token) return {url:`https://api.github.com/repos/${o}/${r}/contents/${path}?ref=${encodeURIComponent(ref)}`, headers:{Authorization:`Bearer ${token}`, Accept:'application/vnd.github.raw'}};
+    return {url:`https://raw.githubusercontent.com/${o}/${r}/${ref}/${path}`};
+  }
+  m = u.match(/^https?:\/\/huggingface\.co\/datasets\/([^/]+\/[^/]+)\/blob\/(.+)$/);
+  if (m) return {url:`https://huggingface.co/datasets/${m[1]}/resolve/${m[2]}`};
+  return {url:u};
+}
+function linkError(e, link){
+  if (e.offline) return `The browser reports no internet connection, so ${link} was never requested. If you are online, check that the Network tab in Chrome DevTools is not set to “Offline”.`;
+  if (e.blocked) return `The browser blocked or could not reach ${link}. Inside claude.ai, links to other sites are always blocked: download this page and open it in your own browser. Outside claude.ai, the site has to allow cross-site requests (GitHub and Hugging Face do).`;
+  if (e.status === 404 && /github/.test(link)) return `GitHub answered 404 for ${link}. For a private repository, add a GitHub token below.`;
+  if (e.status === 401 || e.status === 403) return `${link} refused access (${e.status}). Check the token and that it can read this repository.`;
+  if (e instanceof SyntaxError) return `${link} is not valid JSON: ${e.message}`;
+  return e.message;
+}
+function validate(list, label){
+  if (!Array.isArray(list)) throw new Error(`${label}: expected a JSON list of records, found ${typeof list === 'object' ? 'an object' : typeof list}.`);
+  if (!list.length) throw new Error(`${label}: the list is empty.`);
+  const bad = [];
+  list.forEach((r, i) => {
+    const miss = ['domain','question_number','question','options','correct_answer'].filter(k => !r || r[k] === undefined || r[k] === null);
+    if (miss.length) bad.push(`record ${i + 1} has no ${miss.join(', ')}`);
+  });
+  if (bad.length) throw new Error(`${label}: ${bad.length} record${bad.length>1?'s':''} missing fields (${bad.slice(0,3).join('; ')}${bad.length>3?'; …':''}).`);
+}
+async function runAnalysis(qList, rList, meta){
+  const bqa = await ensureBqa();
+  await new Promise(r => setTimeout(r, 30));
+  const t0 = performance.now();
+  const out = analyzeMBE(qList, rList, bqa);
+  DATA = out.recs; BY = Object.fromEntries(DATA.map(r => [r.u, r]));
+  INFO = {haveRaw:out.haveRaw, haveBqa:out.haveBqa, qName:meta.qName, rawName:meta.rawName};
+  COUNTS = {}; ORDER.forEach(f => COUNTS[f] = DATA.filter(r => r.f.includes(f)).length);
+  DS = {name:meta.name};
+  $('dsName').textContent = meta.name;
+  const from = /^https?:/.test(meta.qName || '') ? 'live from ' + new URL(meta.qName).hostname : meta.local ? 'from your computer' : 'copy published with this page';
+  $('dsMeta').textContent = `${DATA.length.toLocaleString()} records · ${from}${out.haveRaw ? '' : ' · no human explanations'}`;
+  $('dsName').title = [meta.qName, meta.rawName].filter(Boolean).join('\n');
+  buildFilters(); renderList(); setBoot('');
+  const h = location.hash.slice(1);
+  go(BY[h] ? h : ((view.find(r => r.f.includes('keyconflict')) || view[0] || DATA[0]).u), 'replace');
+}
+async function loadBuiltin(b){
+  setBoot(`Loading ${esc(b.name)}…`);
+  try {
+    const [qf, rf] = await Promise.all([fetchFirst(b.q), b.r ? fetchFirst(b.r) : null]);
+    const q = JSON.parse(qf.text), r = rf ? JSON.parse(rf.text) : null;
+    validate(q, 'Questions file');
+    setBoot(`Checking ${q.length.toLocaleString()} records…`);
+    await runAnalysis(q, r, {name:b.name, qName:qf.url, rawName:rf ? rf.url : ''});
+    return true;
+  } catch(e){
+    const why = e.offline ? 'the browser reports no internet connection (if you are online, check that the Network tab in DevTools is not set to “Offline”)' : e.message;
+    setBoot(`Could not load ${esc(b.name)}: ${esc(why)}. <button class="btn" type="button" id="bootRetry">Try again</button>`, true);
+    const btn = $('bootRetry'); if (btn) btn.onclick = () => loadBuiltin(b);
+    return false;
+  }
+}
+function readFile(file){ return new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = () => rej(new Error(`could not read ${file.name}`)); fr.readAsText(file); }); }
+const picked = {q:null, r:null};
+function paintPicked(){
+  $('fQname').textContent = picked.q ? picked.q.name : 'No file chosen';
+  $('fRname').textContent = picked.r ? picked.r.name : 'No file chosen';
+  $('ldLocal').disabled = !picked.q;
+}
+async function loadLocal(){
+  const st = $('ldStatus'); st.className = 'ldStatus'; st.textContent = 'Reading files…';
+  try {
+    const q = JSON.parse(await readFile(picked.q));
+    validate(q, picked.q.name);
+    let r = null;
+    if (picked.r) { r = JSON.parse(await readFile(picked.r)); validate(r, picked.r.name); }
+    closeLoader();
+    setBoot(`Checking ${q.length.toLocaleString()} records…`);
+    await runAnalysis(q, r, {name:picked.q.name, qName:picked.q.name, rawName:picked.r ? picked.r.name : '', local:true});
+  } catch(e){
+    st.className = 'ldStatus err';
+    st.textContent = e instanceof SyntaxError ? `That file is not valid JSON: ${e.message}` : e.message;
+  }
+}
+async function loadLinks(){
+  const st = $('ldStatus'); st.className = 'ldStatus';
+  const qLink = $('uQ').value.trim(), rLink = $('uR').value.trim(), token = $('uTok').value.trim();
+  if (!qLink) { st.className = 'ldStatus err'; st.textContent = 'Paste a link to the questions file first.'; return; }
+  st.textContent = 'Fetching…';
+  let cur = qLink;
+  try {
+    const qs = resolveLink(qLink, token);
+    const q = JSON.parse(await fetchText(qs.url, qs.headers)); validate(q, qLink);
+    let r = null;
+    if (rLink) { cur = rLink; const rs = resolveLink(rLink, token); r = JSON.parse(await fetchText(rs.url, rs.headers)); validate(r, rLink); }
+    closeLoader();
+    const name = decodeURIComponent(qLink.split('?')[0].split('/').pop()) || qLink;
+    setBoot(`Checking ${q.length.toLocaleString()} records…`);
+    await runAnalysis(q, r, {name, qName:qLink, rawName:rLink});
+  } catch(e){ st.className = 'ldStatus err'; st.textContent = linkError(e, cur); }
+}
+function openLoader(){
+  $('ldBuiltin').innerHTML = BUILTIN.map(b => `<button type="button" class="ldItem" data-b="${b.id}"><b>${esc(b.name)}</b><span class="muted">${esc(b.note)}</span></button>`).join('');
+  $('ldStatus').textContent = ''; paintPicked(); $('loader').hidden = false; $('ldClose').focus();
+}
+function closeLoader(){ $('loader').hidden = true; }
+
+// ---------- events ----------
+let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value; renderList(); render(); }, 150); });
+$('dom').addEventListener('change', e => { state.dom = e.target.value; renderList(); if (view.length) go(view[0].u); });
+$('rv').addEventListener('change', e => { state.rv = e.target.value; renderList(); if (view.length) go(view[0].u); });
+function toggleFlag(f){
+  if (state.flags.has(f)) state.flags.delete(f); else state.flags.add(f);
+  document.querySelectorAll('#flagChips .chip').forEach(c => c.setAttribute('aria-pressed', String(state.flags.has(c.dataset.f))));
+  paintFlagBtn();
+  renderList(); if (view.length) go(view[0].u); else render();
+}
+$('flagChips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c && !c.disabled) toggleFlag(c.dataset.f); });
+$('flagBtn').addEventListener('click', () => setFlagPanel($('flagPanel').hidden));
+$('flagClear').addEventListener('click', () => {
+  state.flags.clear();
+  document.querySelectorAll('#flagChips .chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+  paintFlagBtn(); renderList(); if (view.length) go(view[0].u);
+});
+document.addEventListener('click', e => { if (!$('flagPanel').hidden && !e.target.closest('#flagDD')) setFlagPanel(false); });
+$('list').addEventListener('click', e => { const it = e.target.closest('.item'); if (it) go(it.dataset.u); });
+$('rRel').addEventListener('click', e => { const a = e.target.closest('[data-go]'); if (a) go(a.dataset.go); });
+$('prev').addEventListener('click', () => step(-1));
+$('next').addEventListener('click', () => step(1));
+$('showWs').addEventListener('change', e => { state.ws = e.target.checked; render(); });
+document.querySelector('.rawTabs').addEventListener('click', e => { const b = e.target.closest('[data-t]'); if (b && !b.disabled) { state.rawTab = b.dataset.t; paintRaw(); } });
+$('copyRaw').addEventListener('click', async () => {
+  const b = $('copyRaw'), text = $('rawPre').textContent;
+  try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; }
+  catch(e){ const sel = window.getSelection(), rg = document.createRange(); rg.selectNodeContents($('rawPre')); sel.removeAllRanges(); sel.addRange(rg); b.textContent = 'Selected: press Ctrl/Cmd+C'; }
+  setTimeout(() => b.textContent = 'Copy', 2000);
+});
+function setStatus(s){
+  const r = DATA[state.cur]; if (!r) return;
+  const v = reviews[r.u] || (reviews[r.u] = {s:'',note:''});
+  v.s = v.s === s ? '' : s; renderList(); render(); save(r.u);
+}
+document.querySelector('.seg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setStatus(b.dataset.s); });
+let nt; $('note').addEventListener('input', e => {
+  const r = DATA[state.cur]; if (!r) return;
+  const v = reviews[r.u] || (reviews[r.u] = {s:'',note:''});
+  v.note = e.target.value; setSave('Typing…'); clearTimeout(nt); nt = setTimeout(() => save(r.u), 700);
+});
+$('copyReview').addEventListener('click', async () => {
+  const out = Object.entries(reviews).filter(([u,v]) => v && (v.s || v.note)).map(([u,v]) => ({id:u, domain:BY[u]?.d, question_number:BY[u]?.n, status:v.s, note:v.note, flags:BY[u]?.f}));
+  const text = JSON.stringify(out, null, 2);
+  const b = $('copyReview');
+  try { await navigator.clipboard.writeText(text); b.textContent = `Copied ${out.length} notes`; }
+  catch(e){ const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); b.textContent = `Copied ${out.length} notes`;}catch(_){ b.textContent = 'Copy failed'; } ta.remove(); }
+  setTimeout(() => b.textContent = 'Copy review notes (JSON)', 2200);
+});
+$('dsOpen').addEventListener('click', openLoader);
+$('ldClose').addEventListener('click', closeLoader);
+$('loader').addEventListener('click', e => { if (e.target === $('loader')) closeLoader(); });
+$('ldBuiltin').addEventListener('click', async e => { const b = e.target.closest('[data-b]'); if (!b) return; closeLoader(); await loadBuiltin(BUILTIN.find(x => x.id === b.dataset.b)); });
+$('fQ').addEventListener('change', e => { picked.q = e.target.files[0] || null; paintPicked(); });
+$('fR').addEventListener('change', e => { picked.r = e.target.files[0] || null; paintPicked(); });
+$('ldLocal').addEventListener('click', loadLocal);
+$('ldLinks').addEventListener('click', loadLinks);
+const dlg = document.querySelector('.dlg');
+['dragenter','dragover'].forEach(ev => dlg.addEventListener(ev, e => { e.preventDefault(); dlg.classList.add('drop'); }));
+['dragleave','drop'].forEach(ev => dlg.addEventListener(ev, e => { e.preventDefault(); if (ev === 'dragleave' && dlg.contains(e.relatedTarget)) return; dlg.classList.remove('drop'); }));
+dlg.addEventListener('drop', e => {
+  const files = [...(e.dataTransfer && e.dataTransfer.files || [])].filter(f => /\.json$/i.test(f.name));
+  files.forEach(f => { if (/raw/i.test(f.name) && files.length > 1) picked.r = f; else if (!picked.q || files.length === 1) picked.q = f; else picked.r = f; });
+  paintPicked();
+});
+document.addEventListener('keydown', e => {
+  if (!$('loader').hidden) { if (e.key === 'Escape') closeLoader(); return; }
+  if (!$('flagPanel').hidden && e.key === 'Escape') { setFlagPanel(false); $('flagBtn').focus(); return; }
+  if (e.target.matches('input,textarea,select')) { if (e.key === 'Escape') e.target.blur(); return; }
+  if (e.metaKey || e.ctrlKey || e.altKey || !DATA.length) return;
+  const k = e.key.toLowerCase();
+  if (k === 'j') { step(1); e.preventDefault(); }
+  else if (k === 'k') { step(-1); e.preventDefault(); }
+  else if (k === '/') { $('q').focus(); e.preventDefault(); }
+  else if (k === '1') setStatus('ok'); else if (k === '2') setStatus('issue'); else if (k === '3') setStatus('unsure');
+  else if (k === 'w') { $('showWs').checked = !$('showWs').checked; state.ws = $('showWs').checked; render(); }
+});
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (BY[h] && DATA[state.cur] && DATA[state.cur].u !== h) go(h, 'none'); });
+
+loadBuiltin(BUILTIN[0]);
+})();
+
+</script>
+
+</body>
+</html>
