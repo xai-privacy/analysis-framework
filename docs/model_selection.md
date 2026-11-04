@@ -1,10 +1,10 @@
 # Model Selection Report: Reasoning-Error Taxonomy on LEETArg and MBE
 
-Prepared 2026-10-31
+Prepared 2026-10-31 (section 9 added 2026-11-04)
 
 ## 1. Purpose
 
-This report justifies the model set for a taxonomy of reasoning mistakes that small open-weight models and a frontier model, make on two benchmarks, **LEETArg** and **MBE**. It explains, for each model, why it fits the available hardware and why it is informative for these benchmarks.
+This report justifies the model set for a taxonomy of reasoning mistakes that small open-weight models and a frontier model, make on two benchmarks, **LEETArg** and **MBE**. It explains, for each model, why it fits the available hardware and why it is informative for these benchmarks. We will try to use gpt-oss-120gb but revert to 20b if the former model does not fit within the capacity of the hardware we have access to.
 
 **Selected models**
 
@@ -14,7 +14,7 @@ This report justifies the model set for a taxonomy of reasoning mistakes that sm
 | 2 | DeepSeek-R1-Distill-Llama-8B | DeepSeek | 8B dense | Open weights |
 | 3 | Qwen3-8B | Alibaba | 8B dense | Open weights |
 | 4 | Mistral-Small (24B) | Mistral AI | 24B dense | Open weights |
-| 5 | gpt-oss-20b/gpt-oss-120b | OpenAI | 21B / 117B MoE (about 3.6B / 5.1B active) | Open weights |
+| 5 | gpt-oss-20b or gpt-oss-120b | OpenAI | 21B / 117B MoE (about 3.6B / 5.1B active) | Open weights |
 | 6 | Claude Sonnet 5.5 (`claude-sonnet-5-5`) | Anthropic | Not disclosed | Closed, API only |
 
 
@@ -114,7 +114,28 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 4. Pin the vLLM version, `max_model_len`, sampling parameters, and seeds, and log them with each result file.
 5. Hand-validate a stratified sample of error labels and report annotator agreement.
 
-## 8. References
+## 8. Release dates, training cutoffs, and dataset provenance
+
+### 8.1 Models
+
+| Model | Release date | Training-data / knowledge cutoff |
+|---|---|---|---|
+| Llama-3.2-3B-Instruct | Sep 25, 2024 | Dec 2023 |
+| DeepSeek-R1-Distill-Llama-8B | Jan 20, 2025 | **Not sure.** |
+| Qwen3-8B | Apr 28, 2025 | **Not sure.** |
+| Mistral-Small-24B-Instruct-2501 | Jan 30, 2025 | Oct 2023 |
+| gpt-oss-20b and gpt-oss-120b | Aug 5, 2025 | Jun 2024 |
+| Claude Sonnet 5.5 | Sep 28, 2026 | Jun 2026 |
+
+### 8.2 Datasets
+
+| Dataset | Source | Publication date | Date range of underlying questions |
+|---|---|---|---|
+| LEET-Arg | GitHub | 2026 | LEET exams 2021-2025 |
+| MBE | Hugging Face | April 2025 | **Not recorded.** |
+| barexam_qa | Hugging Face | May 2025 | **Not recorded.** |
+
+## 9. References
 
 - Bommarito & Katz (2022). GPT Takes the Bar Exam. arXiv.
 - Katz et al. (2024). GPT-4 passes the bar exam. Philosophical Transactions of the Royal Society A.
