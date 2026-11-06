@@ -177,3 +177,155 @@ Evaluation reports parse rate, statement accuracy, and question accuracy, and
 resumes after interruption. It refuses to evaluate any final-test question.
 If CUDA, `bitsandbytes`, or model access is unavailable, fix the Chameleon
 instance setup before starting a full run.
+
+## Upload the Adapter to Hugging Face
+
+The training output is a PEFT adapter, not a standalone copy of the base model.
+Upload the adapter configuration and weights; the base model is still loaded
+separately when you evaluate or run the adapter. Keep the Hugging Face repo
+private unless you intentionally want to publish it. Do not put access tokens in
+the script or README.
+
+On the VM, log in and run this from the directory containing the adapter:
+
+```bash
+hf auth login
+python - <<'PY'
+from pathlib import Path
+from huggingface_hub import HfApi
+
+adapter_dir = Path("adapters_chameleon")
+repo_id = "YOUR_HF_USERNAME/leetarg-llama32-lora"
+config = adapter_dir / "adapter_config.json"
+weights = next((adapter_dir / name for name in (
+	"adapter_model.safetensors", "adapter_model.bin"
+) if (adapter_dir / name).is_file()), None)
+
+if not config.is_file() or weights is None:
+	raise SystemExit(f"Adapter config/weights not found in {adapter_dir}")
+
+api = HfApi()
+api.create_repo(repo_id=repo_id, repo_type="model", private=True, exist_ok=True)
+for path in (config, weights):
+	api.upload_file(
+		path_or_fileobj=str(path),
+		path_in_repo=path.name,
+		repo_id=repo_id,
+		repo_type="model",
+	)
+print(f"Uploaded adapter to https://huggingface.co/{repo_id}")
+PY
+```
+
+Replace `YOUR_HF_USERNAME` with your Hugging Face account or organization. The
+base model weights are not uploaded. Preserve the adapter locally and copy it
+off the VM before the lease ends.
+
+## Run a Test Set with a Hugging Face Model
+
+`run_hf_questions.py` tests a JSON array of LEET-Arg question records with
+either a base Hugging Face model or a PEFT adapter. The input must include
+`id`, `original_question`, `statements`, and `answer` for each question. Use
+`--test-ids` to select the held-out IDs from a full benchmark file. The runner
+refuses any ID listed in `data/split.json` as train or validation data.
+
+From the repository root, test a base model:
+
+```bash
+python fine_tuning/trinav/run_hf_questions.py \
+	--input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--test-ids testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
+	--split fine_tuning/trinav/data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--run-name llama32-base
+```
+
+Test the fine-tuned adapter with the same base model and prompt format:
+
+```bash
+python fine_tuning/trinav/run_hf_questions.py \
+	--input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--test-ids testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
+	--split fine_tuning/trinav/data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--adapter-path fine_tuning/trinav/adapters_chameleon \
+	--run-name llama32-adapter-180
+```
+
+To load the uploaded adapter instead, log in to Hugging Face on the machine
+running the test and pass its repo ID as `--adapter-path`:
+
+```bash
+python fine_tuning/trinav/run_hf_questions.py \
+	--input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--test-ids testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
+	--split fine_tuning/trinav/data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--adapter-path YOUR_HF_USERNAME/leetarg-llama32-lora \
+	--run-name llama32-adapter-hf
+```
+
+By default, each run is saved under
+`testing/baseline/huggingface/<run-name>/`: one Markdown file per question,
+`results.json` with statement/question metrics, and `run.json` with settings.
+The repository's final-test file contains IDs only. To run on the Chameleon VM,
+also copy `benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`
+and `testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json` into
+`~/xai/trinav/data/`, then use `--input
+data/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`, `--test-ids
+data/LEET_Arg_Questions_Test_Set.json`, `--adapter-path adapters_chameleon`,
+and `--output-root testing/baseline/huggingface`. The model argument always
+names the base model; `--adapter-path` adds the fine-tuned adapter on top.
+
+### Chameleon: Baseline Then Uploaded Adapter
+
+First, from the repository root on your local machine, copy the full benchmark
+and final-test ID list to the VM. Set the IP and key path for your instance:
+
+```bash
+scp -i <private-key.pem> \
+	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	cc@<public-ip>:~/xai/trinav/data/
+scp -i <private-key.pem> \
+	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
+	cc@<public-ip>:~/xai/trinav/data/
+```
+
+On the VM, run the base model first. This establishes the baseline on the same
+held-out questions and with the same statement-level prompt used for the
+adapter. No `--format-hint` is added in either run.
+
+```bash
+cd ~/xai/trinav
+source .venv/bin/activate
+hf auth login
+
+python run_hf_questions.py \
+	--input data/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--test-ids data/LEET_Arg_Questions_Test_Set.json \
+	--split data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--run-name llama32-base \
+	--output-root testing/baseline/huggingface
+```
+
+After training and uploading the adapter using the section above, run it on the
+same test IDs. Replace the placeholder with your Hugging Face username or
+organization. You must have access to both the gated base model and the adapter
+repo from the VM.
+
+```bash
+python run_hf_questions.py \
+	--input data/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--test-ids data/LEET_Arg_Questions_Test_Set.json \
+	--split data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--adapter-path YOUR_HF_USERNAME/leetarg-llama32-lora \
+	--run-name llama32-adapter-hf \
+	--output-root testing/baseline/huggingface
+```
+
+The two runs are written to separate directories under
+`testing/baseline/huggingface/`. Compare their `results.json` summaries and
+question Markdown files. Keep this final test set untouched while selecting
+training steps or adapters; use the validation set for those decisions.
