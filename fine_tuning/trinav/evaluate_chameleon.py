@@ -65,7 +65,11 @@ def save_results(path: Path, args, records):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument(
+        "--model",
+        default=DEFAULT_MODEL,
+        help="Base model Hugging Face ID (e.g. meta-llama/Llama-3.2-3B-Instruct, microsoft/Phi-4-mini-instruct)",
+    )
     parser.add_argument("--adapter-path", type=Path)
     parser.add_argument("--data", type=Path, default=DATA_DIR / "valid.jsonl")
     parser.add_argument("--max-tokens", type=int, default=1200)
@@ -131,17 +135,23 @@ def main():
             return_tensors="pt",
             return_dict=True,
         )
-        device = torch.device("cuda", torch.cuda.current_device())
+        # Determine device dynamically to support CUDA, MPS, or CPU fallback
+        device = getattr(model, "device", None)
+        if device is None:
+            device = torch.device(
+                "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+            )
         inputs = {key: value.to(device) for key, value in inputs.items()}
         prompt_length = inputs["input_ids"].shape[1]
 
+        pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
         start = time.time()
         with torch.inference_mode():
             generated = model.generate(
                 **inputs,
                 max_new_tokens=args.max_tokens,
                 do_sample=False,
-                pad_token_id=tokenizer.pad_token_id,
+                pad_token_id=pad_id,
             )
         output = tokenizer.decode(
             generated[0, prompt_length:], skip_special_tokens=True

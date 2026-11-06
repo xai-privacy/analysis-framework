@@ -1,6 +1,7 @@
 import chi
 import chi.lease
 import chi.server
+from datetime import datetime, timedelta
 
 chi.use_site("KVM@TACC")
 
@@ -8,7 +9,7 @@ reservations = [{
     "resource_type": "flavor:instance",   # was virtual:instance
     "flavor_id": chi.server.get_flavor_id("g1.h100.vgpu.1g.12gb"),
     "amount": 1,
-    "affinity": None,                     # matches the "-" in your earlier leases
+    "affinity": None,
 }]
 
 start_date, end_date = chi.lease.lease_duration(hours=6)

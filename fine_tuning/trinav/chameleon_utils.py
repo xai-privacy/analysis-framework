@@ -86,6 +86,45 @@ def validate_data_split(train_rows, valid_rows, split_path: Path):
     return split
 
 
+def get_lora_target_modules(model) -> list[str]:
+    """Dynamically determine appropriate LoRA target linear modules based on model architecture.
+
+    Supports:
+    - Phi-3, Phi-4, Phi-4-mini (fused qkv_proj and gate_up_proj with o_proj and down_proj)
+    - LLaMA, Mistral, Qwen (split attention projections q, k, v, o and MLP gate, up, down)
+    - Fallback: available linear projection layers detected in the model
+    """
+    # Extract the short names of all parameter-bearing leaf modules
+    leaf_modules = {
+        name.split(".")[-1]
+        for name, mod in model.named_modules()
+        if hasattr(mod, "weight")
+    }
+
+    # 1. Phi-3 / Phi-4 / Phi-4-mini family (fused attention and MLP projections)
+    if "qkv_proj" in leaf_modules or "gate_up_proj" in leaf_modules:
+        phi_targets = [
+            m for m in ["qkv_proj", "o_proj", "gate_up_proj", "down_proj"]
+            if m in leaf_modules
+        ]
+        if phi_targets:
+            return phi_targets
+
+    # 2. LLaMA / Mistral / Qwen family (split attention and MLP projections)
+    llama_targets = [
+        m for m in [
+            "q_proj", "k_proj", "v_proj", "o_proj",
+            "gate_proj", "up_proj", "down_proj",
+        ]
+        if m in leaf_modules
+    ]
+    if llama_targets:
+        return llama_targets
+
+    # 3. Fallback: return standard projection names
+    return ["q_proj", "v_proj"]
+
+
 def load_cuda_model(model_id: str, adapter_path: str | None = None):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -145,6 +184,7 @@ __all__ = [
     "DATA_DIR",
     "HERE",
     "REPO",
+    "get_lora_target_modules",
     "load_cuda_model",
     "parse_verdicts",
     "read_jsonl",

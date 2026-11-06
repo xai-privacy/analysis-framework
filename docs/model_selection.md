@@ -119,7 +119,7 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 ### 8.1 Models
 
 | Model | Release date | Training-data / knowledge cutoff |
-|---|---|---|---|
+|---|---|---|
 | Llama-3.2-3B-Instruct | Sep 25, 2024 | Dec 2023 |
 | DeepSeek-R1-Distill-Llama-8B | Jan 20, 2025 | **Not sure.** |
 | Qwen3-8B | Apr 28, 2025 | **Not sure.** |

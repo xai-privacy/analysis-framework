@@ -13,6 +13,7 @@ try:
     from .chameleon_utils import (
         DATA_DIR,
         HERE,
+        get_lora_target_modules,
         load_cuda_model,
         read_jsonl,
         validate_data_split,
@@ -21,6 +22,7 @@ except ImportError:
     from chameleon_utils import (
         DATA_DIR,
         HERE,
+        get_lora_target_modules,
         load_cuda_model,
         read_jsonl,
         validate_data_split,
@@ -108,11 +110,21 @@ class MaskedChatDataset(Dataset):
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", default=DEFAULT_MODEL)
+    # Supports LLaMA, Phi-4 (e.g. microsoft/Phi-4-mini-instruct), or other HF causal LMs
+    parser.add_argument(
+        "--model",
+        default=DEFAULT_MODEL,
+        help="Base model Hugging Face ID (e.g. meta-llama/Llama-3.2-3B-Instruct, microsoft/Phi-4-mini-instruct)",
+    )
     parser.add_argument("--train-data", type=Path, default=DATA_DIR / "train.jsonl")
     parser.add_argument("--valid-data", type=Path, default=DATA_DIR / "valid.jsonl")
     parser.add_argument("--split", type=Path, default=DATA_DIR / "split.json")
-    parser.add_argument("--output-dir", type=Path, default=HERE / "adapters_chameleon")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Output directory for adapters (defaults to adapters_<model_name>)",
+    )
     parser.add_argument("--max-steps", type=int, default=180)
     parser.add_argument("--eval-steps", type=int, default=20)
     parser.add_argument("--learning-rate", type=float, default=1e-4)
@@ -141,18 +153,28 @@ def main():
     model = prepare_model_for_kbit_training(
         model, use_gradient_checkpointing=True
     )
+
+    # Detect appropriate LoRA target modules based on model architecture
+    # (e.g., fused qkv_proj/gate_up_proj for Phi-3/Phi-4, vs split q_proj/gate_proj for LLaMA)
+    target_modules = get_lora_target_modules(model)
+    print(f"Applying LoRA to target modules: {target_modules}")
+
     model = get_peft_model(model, LoraConfig(
         r=8,
         lora_alpha=20,
         lora_dropout=0.0,
         bias="none",
         task_type="CAUSAL_LM",
-        target_modules=[
-            "q_proj", "k_proj", "v_proj", "o_proj",
-            "gate_proj", "up_proj", "down_proj",
-        ],
+        target_modules=target_modules,
     ))
     model.print_trainable_parameters()
+
+    # Determine output directory based on model name if not specified
+    if args.output_dir is None:
+        if "phi" in args.model.lower():
+            args.output_dir = HERE / "adapters_phi4"
+        else:
+            args.output_dir = HERE / "adapters_chameleon"
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     training_args = TrainingArguments(

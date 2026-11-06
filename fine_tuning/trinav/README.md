@@ -104,6 +104,39 @@ python train_chameleon.py \
 	--max-seq-length 4096
 ```
 
+### Fine-Tuning with Microsoft Phi-4 (or Phi-4-mini)
+
+To fine-tune with `microsoft/Phi-4-mini-instruct`, pass `--model microsoft/Phi-4-mini-instruct`. The training script automatically detects Phi-4's fused projection architecture (`qkv_proj`, `o_proj`, `gate_up_proj`, `down_proj`) and applies LoRA to those layers, saving to `adapters_phi4/` by default:
+
+```bash
+python train_chameleon.py \
+	--model microsoft/Phi-4-mini-instruct \
+	--train-data data/train.jsonl \
+	--valid-data data/valid.jsonl \
+	--split data/split.json \
+	--output-dir adapters_phi4 \
+	--max-steps 180 \
+	--eval-steps 20 \
+	--learning-rate 1e-4 \
+	--max-seq-length 4096
+```
+
+Evaluate the base Phi-4 model and fine-tuned Phi-4 adapter:
+
+```bash
+# Evaluate base model with format hint
+python evaluate_chameleon.py \
+	--model microsoft/Phi-4-mini-instruct \
+	--format-hint \
+	--out results/phi4_base_hint.json
+
+# Evaluate fine-tuned adapter
+python evaluate_chameleon.py \
+	--model microsoft/Phi-4-mini-instruct \
+	--adapter-path adapters_phi4 \
+	--out results/phi4_finetuned.json
+```
+
 The script evaluates validation loss every 20 steps, keeps the best checkpoint,
 and writes the final adapter to `adapters_chameleon/`. It uses batch size 1,
 LoRA rank 8, and a constant learning rate. If an example exceeds the configured

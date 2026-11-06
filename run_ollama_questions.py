@@ -12,10 +12,12 @@ from typing import Any, Dict, List
 
 
 ROOT = Path(__file__).resolve().parent
+# The cleaned LEET-Arg question dataset is located under benchmarks/
 DEFAULT_QUESTIONS = (
-    ROOT / "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json"
+    ROOT / "benchmarks" / "LEET_Arg_Questions_cleaned_and_rationale_by_statement.json"
 )
-DEFAULT_OUTPUT_DIR = ROOT / "baseline"
+# Output markdown baseline responses are stored under testing/baseline/
+DEFAULT_OUTPUT_DIR = ROOT / "testing" / "baseline"
 MAX_OUTPUT_TOKENS = 3000
 QUESTION_PROMPT = (
     "Solve the problem and provide explanations for your solution. Select the most appropriate "
@@ -106,17 +108,18 @@ def write_question(
 ) -> Path:
     question_id = question["id"]
     output_path = output_dir / f"{question_id}.md"
+
+    # Fetch model response before writing to disk so timeouts or connection errors
+    # do not leave half-written, response-less files behind.
+    response = call_ollama(url, model, question["original_question"], timeout)
+
     content = (
         f"# Question {question_id}\n\n"
         f"## Original Question\n\n{question['original_question'].strip()}\n\n"
         f"## Original Answer\n\n{render_original_answer(question)}\n\n"
-        "## LLM Response\n\n"
+        f"## LLM Response\n\n{response}\n"
     )
     output_path.write_text(content, encoding="utf-8")
-
-    response = call_ollama(url, model, question["original_question"], timeout)
-    with output_path.open("a", encoding="utf-8") as handle:
-        handle.write(response + "\n")
     return output_path
 
 
