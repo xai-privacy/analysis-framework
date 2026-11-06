@@ -1,0 +1,1213 @@
+[
+  {
+    "id": "constitutional-law-65",
+    "domain": "Constitutional_law",
+    "question_number": 65,
+    "status": "ok",
+    "note": "Keep. Same question as constitutional-law-228-dup2 with a different key; that copy is dropped.",
+    "flags": [
+      "ws",
+      "neardup",
+      "keyconflict",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-228-dup2",
+    "domain": "Constitutional_law",
+    "question_number": 228,
+    "status": "issue",
+    "note": "Drop. Its human explanation belongs to constitutional-law-228, not to this question. It is also a duplicate of constitutional-law-65 with a different answer key.",
+    "flags": [
+      "idclash",
+      "ws",
+      "numprefix",
+      "neardup",
+      "keyconflict",
+      "shift",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-228",
+    "domain": "Constitutional_law",
+    "question_number": 228,
+    "status": "ok",
+    "note": "Keep. The ID conflict is resolved by removing constitutional-law-228-dup2. (Later removed as an exact duplicate of constitutional-law-60; see the cleaning log.)",
+    "flags": [
+      "idclash",
+      "ws",
+      "dup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "contracts-20",
+    "domain": "Contracts",
+    "question_number": 20,
+    "status": "issue",
+    "note": "Drop. The human explanation does not match this question.",
+    "flags": [
+      "ws",
+      "set",
+      "dup",
+      "keyconflict",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "constitutional-law-225",
+    "domain": "Constitutional_law",
+    "question_number": 225,
+    "status": "issue",
+    "note": "Drop. The human explanation does not match this question.",
+    "flags": [
+      "ws",
+      "dup",
+      "keyconflict",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-66",
+    "domain": "Constitutional_law",
+    "question_number": 66,
+    "status": "ok",
+    "note": "Keep. Same question as constitutional-law-225 with a different key; that copy is dropped.",
+    "flags": [
+      "ws",
+      "dup",
+      "keyconflict",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-226",
+    "domain": "Constitutional_law",
+    "question_number": 226,
+    "status": "issue",
+    "note": "Drop. Neither the human explanation nor the IRAC explanation matches this question.",
+    "flags": [
+      "ws",
+      "dup",
+      "keyconflict",
+      "shift"
+    ]
+  },
+  {
+    "id": "constitutional-law-223",
+    "domain": "Constitutional_law",
+    "question_number": 223,
+    "status": "issue",
+    "note": "Drop. The human explanation does not match this question, and the IRAC reasoning is doubtful.",
+    "flags": [
+      "ws",
+      "noletter",
+      "set",
+      "neardup",
+      "shift",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-18",
+    "domain": "Constitutional_law",
+    "question_number": 18,
+    "status": "ok",
+    "note": "Keep. Near duplicate of constitutional-law-223, which is dropped.",
+    "flags": [
+      "ws",
+      "set",
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "contracts-324",
+    "domain": "Contracts",
+    "question_number": 324,
+    "status": "ok",
+    "note": "Keep. Same question as contracts-20 with a different key; that copy is dropped.",
+    "flags": [
+      "set",
+      "dup",
+      "keyconflict"
+    ]
+  },
+  {
+    "id": "constitutional-law-249",
+    "domain": "Constitutional_law",
+    "question_number": 249,
+    "status": "ok",
+    "note": "Keep. Same question as constitutional-law-226 with a different key; that copy is dropped.",
+    "flags": [
+      "noletter",
+      "dup",
+      "keyconflict"
+    ]
+  },
+  {
+    "id": "criminal-law-9",
+    "domain": "Criminal_law",
+    "question_number": 9,
+    "status": "ok",
+    "note": "Keep. Flagged as a possible shifted explanation, but the human explanation fits this question.",
+    "flags": [
+      "ws",
+      "set",
+      "dup",
+      "shift"
+    ]
+  },
+  {
+    "id": "criminal-law-17",
+    "domain": "Criminal_law",
+    "question_number": 17,
+    "status": "ok",
+    "note": "Keep. Flagged as a possible shifted explanation, but the human explanation fits this question.",
+    "flags": [
+      "ws",
+      "shift",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-147",
+    "domain": "Criminal_law",
+    "question_number": 147,
+    "status": "ok",
+    "note": "Keep. Flagged as a possible shifted explanation, but the human explanation fits this question.",
+    "flags": [
+      "ws",
+      "shift",
+      "bqa"
+    ]
+  },
+  {
+    "id": "contracts-2",
+    "domain": "Contracts",
+    "question_number": 2,
+    "status": "ok",
+    "note": "Keep. Flagged as a possible shifted explanation, but the human explanation fits this question.",
+    "flags": [
+      "ws",
+      "set",
+      "shift"
+    ]
+  },
+  {
+    "id": "constitutional-law-159",
+    "domain": "Constitutional_law",
+    "question_number": 159,
+    "status": "ok",
+    "note": "Keep. Key unverified: the human explanation does not match this question, but the IRAC explanation is fine.",
+    "flags": [
+      "ws",
+      "shift"
+    ]
+  },
+  {
+    "id": "evidence-19",
+    "domain": "Evidence",
+    "question_number": 19,
+    "status": "ok",
+    "note": "Keep. The human explanation is wrong, but the IRAC explanation is fine. (Later removed as an exact duplicate of evidence-226, which has the correct human explanation; see the cleaning log.)",
+    "flags": [
+      "ws",
+      "dup",
+      "rawkey"
+    ]
+  },
+  {
+    "id": "constitutional-law-217",
+    "domain": "Constitutional_law",
+    "question_number": 217,
+    "status": "issue",
+    "note": "Key changed from A to B. The human explanation is correct and supports B. The IRAC reasoning also supports B, but its last sentence named option A. Needs legal review by Sebastian.",
+    "flags": [
+      "ws",
+      "rawkey"
+    ]
+  },
+  {
+    "id": "criminal-law-256",
+    "domain": "Criminal_law",
+    "question_number": 256,
+    "status": "issue",
+    "note": "Drop. Near duplicate of criminal-law-103.",
+    "flags": [
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-103",
+    "domain": "Criminal_law",
+    "question_number": 103,
+    "status": "ok",
+    "note": "Keep. Near duplicate of criminal-law-256, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-274",
+    "domain": "Criminal_law",
+    "question_number": 274,
+    "status": "ok",
+    "note": "Keep. Near duplicate of criminal-law-133, which is dropped.",
+    "flags": [
+      "neardup",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-133",
+    "domain": "Criminal_law",
+    "question_number": 133,
+    "status": "issue",
+    "note": "Drop. Near duplicate of criminal-law-274.",
+    "flags": [
+      "ws",
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-238",
+    "domain": "Criminal_law",
+    "question_number": 238,
+    "status": "issue",
+    "note": "Drop. Near duplicate of criminal-law-161.",
+    "flags": [
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-161",
+    "domain": "Criminal_law",
+    "question_number": 161,
+    "status": "ok",
+    "note": "Keep. Near duplicate of criminal-law-238, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-233",
+    "domain": "Criminal_law",
+    "question_number": 233,
+    "status": "issue",
+    "note": "Drop. Near duplicate of criminal-law-191.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "criminal-law-191",
+    "domain": "Criminal_law",
+    "question_number": 191,
+    "status": "ok",
+    "note": "Keep. Near duplicate of criminal-law-233, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "criminal-law-264",
+    "domain": "Criminal_law",
+    "question_number": 264,
+    "status": "issue",
+    "note": "Drop. Near duplicate of criminal-law-196; this copy has a typo.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "criminal-law-196",
+    "domain": "Criminal_law",
+    "question_number": 196,
+    "status": "ok",
+    "note": "Keep. Near duplicate of criminal-law-264, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "criminal-law-232",
+    "domain": "Criminal_law",
+    "question_number": 232,
+    "status": "ok",
+    "note": "Keep. Near duplicate of criminal-law-203, which is dropped.",
+    "flags": [
+      "noletter",
+      "neardup"
+    ]
+  },
+  {
+    "id": "criminal-law-203",
+    "domain": "Criminal_law",
+    "question_number": 203,
+    "status": "issue",
+    "note": "Drop. Near duplicate of criminal-law-232.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-253",
+    "domain": "Evidence",
+    "question_number": 253,
+    "status": "ok",
+    "note": "Keep. Near duplicate of evidence-48, which is dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-48",
+    "domain": "Evidence",
+    "question_number": 48,
+    "status": "issue",
+    "note": "Drop. Near duplicate of evidence-253.",
+    "flags": [
+      "ws",
+      "noletter",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-255",
+    "domain": "Evidence",
+    "question_number": 255,
+    "status": "issue",
+    "note": "Drop. Near duplicate of evidence-238.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-158",
+    "domain": "Evidence",
+    "question_number": 158,
+    "status": "issue",
+    "note": "Drop. Duplicate of evidence-238, with worse punctuation.",
+    "flags": [
+      "ws",
+      "dup",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-238",
+    "domain": "Evidence",
+    "question_number": 238,
+    "status": "ok",
+    "note": "Keep. Its duplicates evidence-158 and evidence-255 are dropped.",
+    "flags": [
+      "ws",
+      "dup",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-297",
+    "domain": "Contracts",
+    "question_number": 297,
+    "status": "issue",
+    "note": "Drop. Near duplicate of contracts-70.",
+    "flags": [
+      "noletter",
+      "set",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-70",
+    "domain": "Contracts",
+    "question_number": 70,
+    "status": "ok",
+    "note": "Keep. Near duplicate of contracts-297, which is dropped.",
+    "flags": [
+      "ws",
+      "noletter",
+      "set",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-107",
+    "domain": "Contracts",
+    "question_number": 107,
+    "status": "ok",
+    "note": "Keep. Near duplicate of contracts-115, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-115",
+    "domain": "Contracts",
+    "question_number": 115,
+    "status": "issue",
+    "note": "Drop. Near duplicate of contracts-107.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-151",
+    "domain": "Contracts",
+    "question_number": 151,
+    "status": "ok",
+    "note": "Keep. Near duplicate of contracts-248, which is dropped.",
+    "flags": [
+      "ws",
+      "set",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-248",
+    "domain": "Contracts",
+    "question_number": 248,
+    "status": "issue",
+    "note": "Drop. Near duplicate of contracts-151.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-160",
+    "domain": "Contracts",
+    "question_number": 160,
+    "status": "issue",
+    "note": "Drop. Near duplicate of contracts-294.",
+    "flags": [
+      "ws",
+      "set",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-294",
+    "domain": "Contracts",
+    "question_number": 294,
+    "status": "ok",
+    "note": "Keep. Near duplicate of contracts-160, which is dropped.",
+    "flags": [
+      "neardup",
+      "set"
+    ]
+  },
+  {
+    "id": "evidence-184",
+    "domain": "Evidence",
+    "question_number": 184,
+    "status": "issue",
+    "note": "Drop. Near duplicate of evidence-247.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-247",
+    "domain": "Evidence",
+    "question_number": 247,
+    "status": "ok",
+    "note": "Keep. Near duplicate of evidence-184, which is dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-186",
+    "domain": "Evidence",
+    "question_number": 186,
+    "status": "issue",
+    "note": "Drop. Near duplicate of evidence-266.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-266",
+    "domain": "Evidence",
+    "question_number": 266,
+    "status": "ok",
+    "note": "Keep. Near duplicate of evidence-186, which is dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-193",
+    "domain": "Evidence",
+    "question_number": 193,
+    "status": "issue",
+    "note": "Drop. Near duplicate of evidence-272.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-272",
+    "domain": "Evidence",
+    "question_number": 272,
+    "status": "ok",
+    "note": "Keep. Near duplicate of evidence-193, which is dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-205",
+    "domain": "Evidence",
+    "question_number": 205,
+    "status": "ok",
+    "note": "Keep. Its duplicates evidence-257 and evidence-260 are dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "evidence-257",
+    "domain": "Evidence",
+    "question_number": 257,
+    "status": "issue",
+    "note": "Drop. Duplicate of evidence-205.",
+    "flags": [
+      "neardup",
+      "dup"
+    ]
+  },
+  {
+    "id": "evidence-260",
+    "domain": "Evidence",
+    "question_number": 260,
+    "status": "issue",
+    "note": "Drop. Duplicate of evidence-205.",
+    "flags": [
+      "neardup",
+      "dup"
+    ]
+  },
+  {
+    "id": "contracts-162",
+    "domain": "Contracts",
+    "question_number": 162,
+    "status": "issue",
+    "note": "Drop. Near duplicate of contracts-325.",
+    "flags": [
+      "ws",
+      "set",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-325",
+    "domain": "Contracts",
+    "question_number": 325,
+    "status": "ok",
+    "note": "Keep. Near duplicate of contracts-162, which is dropped.",
+    "flags": [
+      "neardup",
+      "set"
+    ]
+  },
+  {
+    "id": "contracts-249",
+    "domain": "Contracts",
+    "question_number": 249,
+    "status": "ok",
+    "note": "Keep. Same question as contracts-317 with different dollar amounts; treated as a duplicate, and contracts-317 is dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "contracts-317",
+    "domain": "Contracts",
+    "question_number": 317,
+    "status": "issue",
+    "note": "Drop. Same question as contracts-249 with different dollar amounts.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "constitutional-law-16",
+    "domain": "Constitutional_law",
+    "question_number": 16,
+    "status": "issue",
+    "note": "Drop. Near duplicate of constitutional-law-245.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "constitutional-law-245",
+    "domain": "Constitutional_law",
+    "question_number": 245,
+    "status": "ok",
+    "note": "Keep. Near duplicate of constitutional-law-16, which is dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "constitutional-law-82",
+    "domain": "Constitutional_law",
+    "question_number": 82,
+    "status": "ok",
+    "note": "Keep. Near duplicate of constitutional-law-110, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-110",
+    "domain": "Constitutional_law",
+    "question_number": 110,
+    "status": "issue",
+    "note": "Drop. Near duplicate of constitutional-law-82.",
+    "flags": [
+      "ws",
+      "neardup",
+      "bqa"
+    ]
+  },
+  {
+    "id": "property-92",
+    "domain": "Property",
+    "question_number": 92,
+    "status": "issue",
+    "note": "Drop. Near duplicate of property-258.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-258",
+    "domain": "Property",
+    "question_number": 258,
+    "status": "ok",
+    "note": "Keep. Near duplicate of property-92, which is dropped.",
+    "flags": [
+      "noletter",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-101",
+    "domain": "Property",
+    "question_number": 101,
+    "status": "issue",
+    "note": "Drop. Near duplicate of property-254.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-254",
+    "domain": "Property",
+    "question_number": 254,
+    "status": "ok",
+    "note": "Keep. Near duplicate of property-101, which is dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-257",
+    "domain": "Property",
+    "question_number": 257,
+    "status": "issue",
+    "note": "Drop. Near duplicate of property-237.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-237",
+    "domain": "Property",
+    "question_number": 237,
+    "status": "ok",
+    "note": "Keep. Near duplicate of property-257, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-259",
+    "domain": "Property",
+    "question_number": 259,
+    "status": "issue",
+    "note": "Drop. Near duplicate of property-112.",
+    "flags": [
+      "noletter",
+      "neardup",
+      "set",
+      "bqa"
+    ]
+  },
+  {
+    "id": "property-112",
+    "domain": "Property",
+    "question_number": 112,
+    "status": "ok",
+    "note": "Keep. Near duplicate of property-259, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup",
+      "set",
+      "bqa"
+    ]
+  },
+  {
+    "id": "property-117",
+    "domain": "Property",
+    "question_number": 117,
+    "status": "issue",
+    "note": "Drop. Near duplicate of property-208.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-208",
+    "domain": "Property",
+    "question_number": 208,
+    "status": "ok",
+    "note": "Keep. Near duplicate of property-117, which is dropped.",
+    "flags": [
+      "ws",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-264",
+    "domain": "Property",
+    "question_number": 264,
+    "status": "ok",
+    "note": "Keep. Its duplicates property-164 and property-225 are dropped.",
+    "flags": [
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-164",
+    "domain": "Property",
+    "question_number": 164,
+    "status": "issue",
+    "note": "Drop. Duplicate of property-264.",
+    "flags": [
+      "ws",
+      "noletter",
+      "dup",
+      "neardup"
+    ]
+  },
+  {
+    "id": "property-225",
+    "domain": "Property",
+    "question_number": 225,
+    "status": "issue",
+    "note": "Drop. Duplicate of property-264.",
+    "flags": [
+      "ws",
+      "dup",
+      "neardup"
+    ]
+  },
+  {
+    "id": "criminal-law-25",
+    "domain": "Criminal_law",
+    "question_number": 25,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini. (Later removed as an exact duplicate of criminal-law-24, which has a human explanation; see the cleaning log.)",
+    "flags": [
+      "noraw",
+      "ws",
+      "dup"
+    ]
+  },
+  {
+    "id": "criminal-law-69",
+    "domain": "Criminal_law",
+    "question_number": 69,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-90",
+    "domain": "Criminal_law",
+    "question_number": 90,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws",
+      "set",
+      "bqa"
+    ]
+  },
+  {
+    "id": "evidence-10",
+    "domain": "Evidence",
+    "question_number": 10,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws"
+    ]
+  },
+  {
+    "id": "contracts-77",
+    "domain": "Contracts",
+    "question_number": 77,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws",
+      "set"
+    ]
+  },
+  {
+    "id": "contracts-240",
+    "domain": "Contracts",
+    "question_number": 240,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws"
+    ]
+  },
+  {
+    "id": "contracts-258",
+    "domain": "Contracts",
+    "question_number": 258,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws"
+    ]
+  },
+  {
+    "id": "property-38",
+    "domain": "Property",
+    "question_number": 38,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws"
+    ]
+  },
+  {
+    "id": "property-136",
+    "domain": "Property",
+    "question_number": 136,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws"
+    ]
+  },
+  {
+    "id": "property-251",
+    "domain": "Property",
+    "question_number": 251,
+    "status": "ok",
+    "note": "Keep. No human explanation in the raw file; the IRAC explanation was reviewed and checked with Gemini.",
+    "flags": [
+      "noraw",
+      "ws"
+    ]
+  },
+  {
+    "id": "constitutional-law-224",
+    "domain": "Constitutional_law",
+    "question_number": 224,
+    "status": "issue",
+    "note": "Drop. The IRAC explanation is wrong.",
+    "flags": [
+      "ws",
+      "set",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "torts-7",
+    "domain": "Torts",
+    "question_number": 7,
+    "status": "issue",
+    "note": "Drop. The IRAC explanation is wrong.",
+    "flags": [
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-60",
+    "domain": "Criminal_law",
+    "question_number": 60,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "dup",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "criminal-law-123",
+    "domain": "Criminal_law",
+    "question_number": 123,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "criminal-law-211",
+    "domain": "Criminal_law",
+    "question_number": 211,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "noletter",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "evidence-188",
+    "domain": "Evidence",
+    "question_number": 188,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "noletter",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "contracts-60",
+    "domain": "Contracts",
+    "question_number": 60,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "contracts-76",
+    "domain": "Contracts",
+    "question_number": 76,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "contracts-199",
+    "domain": "Contracts",
+    "question_number": 199,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "contracts-269",
+    "domain": "Contracts",
+    "question_number": 269,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "constitutional-law-38",
+    "domain": "Constitutional_law",
+    "question_number": 38,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "set",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-95",
+    "domain": "Constitutional_law",
+    "question_number": 95,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "constitutional-law-96",
+    "domain": "Constitutional_law",
+    "question_number": 96,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "property-25",
+    "domain": "Property",
+    "question_number": 25,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question. (Later removed as an exact duplicate of property-263; see the cleaning log.)",
+    "flags": [
+      "ws",
+      "dup",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "property-70",
+    "domain": "Property",
+    "question_number": 70,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "property-148",
+    "domain": "Property",
+    "question_number": 148,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "set",
+      "dup",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "property-184",
+    "domain": "Property",
+    "question_number": 184,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question. (Later removed as an exact duplicate of property-148; see the cleaning log.)",
+    "flags": [
+      "ws",
+      "dup",
+      "set",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "property-227",
+    "domain": "Property",
+    "question_number": 227,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "ws",
+      "lowfit",
+      "bqa"
+    ]
+  },
+  {
+    "id": "torts-1",
+    "domain": "Torts",
+    "question_number": 1,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "lowfit"
+    ]
+  },
+  {
+    "id": "torts-56",
+    "domain": "Torts",
+    "question_number": 56,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question.",
+    "flags": [
+      "noletter",
+      "lowfit"
+    ]
+  },
+  {
+    "id": "criminal-law-270",
+    "domain": "Criminal_law",
+    "question_number": 270,
+    "status": "ok",
+    "note": "Keep. The human explanation fits this question. (Later removed as an exact duplicate of criminal-law-27; see the cleaning log.)",
+    "flags": [
+      "dup",
+      "lowfit",
+      "bqa"
+    ]
+  }
+]

@@ -1,0 +1,7124 @@
+{
+ "input": 1512,
+ "output": 1280,
+ "summary": {
+  "drop (duplicate)": 196,
+  "drop (manual review)": 36,
+  "fix whitespace": 1103,
+  "change key": 1
+ },
+ "changes": [
+  {
+   "id": "criminal-law-25",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-24",
+   "reason": "kept the copy that has a human explanation"
+  },
+  {
+   "id": "criminal-law-119",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-265",
+   "reason": "kept the better-fitting explanation (26% vs 19%)"
+  },
+  {
+   "id": "criminal-law-133",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of criminal-law-274."
+  },
+  {
+   "id": "criminal-law-203",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of criminal-law-232."
+  },
+  {
+   "id": "criminal-law-221",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-9",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-222",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-86",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-223",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-129",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-224",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-151",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-225",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-157",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-226",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-177",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-227",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-180",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-228",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-181",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-229",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-185",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-230",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-202",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-231",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-209",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-6",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-5",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-19",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-226",
+   "reason": "same question; evidence-19 human explanation contains text from another question, evidence-226 has the clean version (fit 59% vs 28%)"
+  },
+  {
+   "id": "evidence-48",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of evidence-253."
+  },
+  {
+   "id": "evidence-109",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-267",
+   "reason": "kept the better-fitting explanation (33% vs 24%)"
+  },
+  {
+   "id": "evidence-158",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Duplicate of evidence-238, with worse punctuation."
+  },
+  {
+   "id": "evidence-184",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of evidence-247."
+  },
+  {
+   "id": "evidence-186",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of evidence-266."
+  },
+  {
+   "id": "evidence-193",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of evidence-272."
+  },
+  {
+   "id": "evidence-218",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-279",
+   "reason": "kept the better-fitting explanation (27% vs 22%, 22%)"
+  },
+  {
+   "id": "evidence-225",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-7",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-227",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-24",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-228",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-26",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-229",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-30",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-230",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-46",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-231",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-66",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-232",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-101",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-233",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-108",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-234",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-110",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-235",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-113",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-236",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-116",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-237",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-124",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-240",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-200",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-241",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-217",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-242",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-279",
+   "reason": "kept the better-fitting explanation (27% vs 22%, 22%)"
+  },
+  {
+   "id": "evidence-243",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-223",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-15",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-299",
+   "reason": "kept the better-fitting explanation (31% vs 18%)"
+  },
+  {
+   "id": "contracts-20",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. The human explanation does not match this question."
+  },
+  {
+   "id": "contracts-38",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-290",
+   "reason": "kept the better-fitting explanation (24% vs 17%)"
+  },
+  {
+   "id": "contracts-51",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-327",
+   "reason": "kept the better-fitting explanation (28% vs 15%)"
+  },
+  {
+   "id": "contracts-90",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-321",
+   "reason": "kept the better-fitting explanation (36% vs 30%)"
+  },
+  {
+   "id": "contracts-115",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of contracts-107."
+  },
+  {
+   "id": "contracts-160",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of contracts-294."
+  },
+  {
+   "id": "contracts-162",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of contracts-325."
+  },
+  {
+   "id": "contracts-246",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-320",
+   "reason": "kept the better-fitting explanation (29% vs 20%)"
+  },
+  {
+   "id": "contracts-248",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of contracts-151."
+  },
+  {
+   "id": "contracts-270",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-44",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-271",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-48",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-273",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-55",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-274",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-63",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-276",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-86",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-278",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-96",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-280",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-109",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-282",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-121",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-16",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of constitutional-law-245."
+  },
+  {
+   "id": "constitutional-law-110",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of constitutional-law-82."
+  },
+  {
+   "id": "constitutional-law-223",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. The human explanation does not match this question, and the IRAC reasoning is doubtful."
+  },
+  {
+   "id": "constitutional-law-224",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. The IRAC explanation is wrong."
+  },
+  {
+   "id": "constitutional-law-225",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. The human explanation does not match this question."
+  },
+  {
+   "id": "constitutional-law-226",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Neither the human explanation nor the IRAC explanation matches this question."
+  },
+  {
+   "id": "constitutional-law-227",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-42",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-228",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-60",
+   "reason": "identical explanations; kept lower question number (constitutional-law-228-dup2 already dropped by review)"
+  },
+  {
+   "id": "constitutional-law-228-dup2",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Its human explanation belongs to constitutional-law-228, not to this question. It is also a duplicate of constitutional-law-65 with a different answer key."
+  },
+  {
+   "id": "constitutional-law-230",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-74",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-231",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-134",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-232",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-137",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-233",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-177",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-234",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-205",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-235",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-206",
+   "reason": "kept the better-fitting explanation (45% vs 25%)"
+  },
+  {
+   "id": "property-25",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-263",
+   "reason": "kept the better-fitting explanation (23% vs 13%)"
+  },
+  {
+   "id": "property-92",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of property-258."
+  },
+  {
+   "id": "property-100",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-262",
+   "reason": "kept the better-fitting explanation (33% vs 25%)"
+  },
+  {
+   "id": "property-101",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of property-254."
+  },
+  {
+   "id": "property-103",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-260",
+   "reason": "kept the better-fitting explanation (30% vs 23%)"
+  },
+  {
+   "id": "property-117",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of property-208."
+  },
+  {
+   "id": "property-164",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Duplicate of property-264."
+  },
+  {
+   "id": "property-165",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-265",
+   "reason": "kept the better-fitting explanation (31% vs 24%, 24%)"
+  },
+  {
+   "id": "property-173",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-145",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-177",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-146",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-178",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-147",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-184",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-148",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-190",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-149",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-193",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-150",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-194",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-151",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-199",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-152",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-200",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-153",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-203",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-154",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-204",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-155",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-209",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-156",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-212",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-157",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-214",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-158",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-217",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-159",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-218",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-160",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-222",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-161",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-223",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-162",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-224",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-163",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-225",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Duplicate of property-264."
+  },
+  {
+   "id": "property-229",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-265",
+   "reason": "kept the better-fitting explanation (31% vs 24%, 24%)"
+  },
+  {
+   "id": "property-232",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-143",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-235",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-234",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-238",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-166",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-239",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-167",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-240",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-168",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-243",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-169",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-244",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-170",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "property-250",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-171",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-26",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-20",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-33",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-32",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-36",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-29",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-37",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-27",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-54",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-42",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-55",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-40",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-71",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-65",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-72",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-58",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-82",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-78",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-84",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-77",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "civil-procedure-85",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "civil-procedure-76",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "torts-7",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. The IRAC explanation is wrong."
+  },
+  {
+   "id": "torts-9",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "torts-3",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "torts-43",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "torts-23",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "torts-57",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "torts-51",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "torts-67",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "torts-66",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-236",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-94",
+   "reason": "kept the better-fitting explanation (43% vs 31%)"
+  },
+  {
+   "id": "constitutional-law-237",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-100",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-238",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-35",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-239",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-2",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-241",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-198",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-242",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-212",
+   "reason": "kept the better-fitting explanation (33% vs 26%)"
+  },
+  {
+   "id": "constitutional-law-243",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-68",
+   "reason": "kept the better-fitting explanation (44% vs 33%)"
+  },
+  {
+   "id": "constitutional-law-244",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-42",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-246",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-83",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-247",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-33",
+   "reason": "kept the better-fitting explanation (42% vs 32%)"
+  },
+  {
+   "id": "constitutional-law-248",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-23",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "constitutional-law-250",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "constitutional-law-85",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-233",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of criminal-law-191."
+  },
+  {
+   "id": "criminal-law-234",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-216",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-235",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-89",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-236",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-95",
+   "reason": "kept the better-fitting explanation (36% vs 22%)"
+  },
+  {
+   "id": "criminal-law-237",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-169",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-238",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of criminal-law-161."
+  },
+  {
+   "id": "criminal-law-240",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-106",
+   "reason": "kept the better-fitting explanation (55% vs 36%)"
+  },
+  {
+   "id": "criminal-law-242",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-165",
+   "reason": "kept the better-fitting explanation (42% vs 28%)"
+  },
+  {
+   "id": "criminal-law-243",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-89",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-244",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-23",
+   "reason": "kept the better-fitting explanation (56% vs 45%)"
+  },
+  {
+   "id": "criminal-law-245",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-71",
+   "reason": "kept the better-fitting explanation (47% vs 38%)"
+  },
+  {
+   "id": "criminal-law-246",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-121",
+   "reason": "kept the better-fitting explanation (52% vs 38%)"
+  },
+  {
+   "id": "criminal-law-247",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-212",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-248",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-116",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-249",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-113",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-250",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-60",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-252",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-78",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-253",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-148",
+   "reason": "kept the better-fitting explanation (46% vs 38%)"
+  },
+  {
+   "id": "criminal-law-254",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-99",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-256",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of criminal-law-103."
+  },
+  {
+   "id": "criminal-law-257",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-102",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-259",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-87",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-260",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-40",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-261",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-72",
+   "reason": "kept the better-fitting explanation (46% vs 32%)"
+  },
+  {
+   "id": "criminal-law-263",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-85",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-264",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of criminal-law-196; this copy has a typo."
+  },
+  {
+   "id": "criminal-law-266",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-85",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "criminal-law-267",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-141",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-269",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-124",
+   "reason": "kept the better-fitting explanation (44% vs 21%)"
+  },
+  {
+   "id": "criminal-law-270",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-27",
+   "reason": "kept the better-fitting explanation (25% vs 13%)"
+  },
+  {
+   "id": "criminal-law-271",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-187",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-272",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-215",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "criminal-law-273",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "criminal-law-10",
+   "reason": "kept the better-fitting explanation (32% vs 24%)"
+  },
+  {
+   "id": "evidence-244",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-106",
+   "reason": "kept the better-fitting explanation (58% vs 34%)"
+  },
+  {
+   "id": "evidence-245",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-14",
+   "reason": "kept the better-fitting explanation (41% vs 26%)"
+  },
+  {
+   "id": "evidence-246",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-141",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-248",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-148",
+   "reason": "kept the better-fitting explanation (45% vs 36%)"
+  },
+  {
+   "id": "evidence-249",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-42",
+   "reason": "kept the better-fitting explanation (52% vs 38%, 38%)"
+  },
+  {
+   "id": "evidence-250",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-96",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-251",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-141",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-252",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-42",
+   "reason": "kept the better-fitting explanation (52% vs 38%, 38%)"
+  },
+  {
+   "id": "evidence-254",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-108",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-255",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of evidence-238."
+  },
+  {
+   "id": "evidence-256",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-23",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-257",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Duplicate of evidence-205."
+  },
+  {
+   "id": "evidence-258",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-117",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-259",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-97",
+   "reason": "kept the better-fitting explanation (41% vs 31%)"
+  },
+  {
+   "id": "evidence-260",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Duplicate of evidence-205."
+  },
+  {
+   "id": "evidence-261",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-189",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-262",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-211",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-263",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-99",
+   "reason": "kept the better-fitting explanation (31% vs 25%, 25%)"
+  },
+  {
+   "id": "evidence-264",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-138",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-265",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-99",
+   "reason": "kept the better-fitting explanation (31% vs 25%, 25%)"
+  },
+  {
+   "id": "evidence-268",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-83",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-269",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-62",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-270",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-95",
+   "reason": "kept the better-fitting explanation (75% vs 45%)"
+  },
+  {
+   "id": "evidence-271",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-171",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-274",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-9",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-275",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-116",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "evidence-277",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-32",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "evidence-278",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "evidence-18",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "property-255",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-74",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "property-256",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-11",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "property-257",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of property-237."
+  },
+  {
+   "id": "property-259",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of property-112."
+  },
+  {
+   "id": "property-261",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "property-197",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-289",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-152",
+   "reason": "kept the better-fitting explanation (41% vs 34%)"
+  },
+  {
+   "id": "contracts-291",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-83",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-292",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-185",
+   "reason": "kept the better-fitting explanation (44% vs 38%)"
+  },
+  {
+   "id": "contracts-293",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-179",
+   "reason": "kept the better-fitting explanation (64% vs 52%)"
+  },
+  {
+   "id": "contracts-295",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-58",
+   "reason": "kept the better-fitting explanation (49% vs 36%)"
+  },
+  {
+   "id": "contracts-296",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-59",
+   "reason": "kept the better-fitting explanation (29% vs 19%)"
+  },
+  {
+   "id": "contracts-297",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Near duplicate of contracts-70."
+  },
+  {
+   "id": "contracts-298",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-69",
+   "reason": "kept the better-fitting explanation (43% vs 27%)"
+  },
+  {
+   "id": "contracts-300",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-144",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-302",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-62",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-303",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-89",
+   "reason": "kept the better-fitting explanation (67% vs 23%)"
+  },
+  {
+   "id": "contracts-304",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-24",
+   "reason": "kept the better-fitting explanation (48% vs 20%)"
+  },
+  {
+   "id": "contracts-305",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-28",
+   "reason": "kept the better-fitting explanation (46% vs 36%)"
+  },
+  {
+   "id": "contracts-306",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-141",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-307",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-116",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-308",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-159",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-309",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-166",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-310",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-48",
+   "reason": "identical explanations; kept lower question number"
+  },
+  {
+   "id": "contracts-311",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-133",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-312",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-164",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-313",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-211",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-315",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-193",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-317",
+   "action": "drop",
+   "source": "manual review",
+   "reason": "Drop. Same question as contracts-249 with different dollar amounts."
+  },
+  {
+   "id": "contracts-318",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-42",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-319",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-194",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-322",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-86",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-323",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-41",
+   "reason": "both explanations fit; kept lower question number"
+  },
+  {
+   "id": "contracts-326",
+   "action": "drop",
+   "source": "duplicate",
+   "kept_copy": "contracts-207",
+   "reason": "kept the better-fitting explanation (37% vs 31%)"
+  },
+  {
+   "id": "criminal-law-1",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-2",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-3",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-4",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-5",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-6",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-7",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-8",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-9",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-10",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-11",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-12",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-13",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-14",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-15",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-16",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-17",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-18",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-19",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-20",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-21",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-22",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-23",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-24",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-27",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-28",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-29",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-30",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-31",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-32",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-33",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-34",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-35",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-36",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-37",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-38",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-39",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-40",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-41",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-42",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-43",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-44",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-46",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-47",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-48",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-49",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-50",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-51",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-52",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-53",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-54",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-55",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-56",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-57",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-58",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-59",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-60",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-61",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-62",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-63",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-64",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-65",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-66",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-67",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-68",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-69",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-70",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-71",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-72",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-73",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-74",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-75",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-76",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-77",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-78",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-79",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-80",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-81",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-82",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-83",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-84",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-85",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-86",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-87",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-88",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-89",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-90",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-91",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-92",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-93",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-94",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-95",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-96",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-97",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-98",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-99",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-100",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-101",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-102",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-103",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-104",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-105",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-106",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-107",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-108",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-109",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-110",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-111",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-112",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-113",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-114",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-115",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-116",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-117",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-118",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-120",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-121",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-122",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-123",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-124",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-125",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-126",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-127",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-128",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-129",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-130",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-131",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-132",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-134",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-135",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-136",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-137",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-138",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-139",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-140",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-141",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-142",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-143",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-144",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-146",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-147",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-148",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-150",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-151",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-152",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-153",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-154",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-155",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-156",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-157",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-158",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-159",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-160",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-161",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-162",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-163",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-164",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-165",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-166",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-167",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-168",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-169",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-170",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-171",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-172",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-173",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-174",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-175",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-176",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-177",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-178",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-179",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-180",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-181",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-182",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-183",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-184",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-185",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-186",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-187",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-188",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-189",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-190",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-191",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-192",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-193",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-194",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-195",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-196",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-197",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-198",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-199",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-200",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-201",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-202",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-204",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-205",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-206",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-207",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-208",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-209",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-210",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-211",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-212",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-213",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-214",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-215",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-216",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-217",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-218",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-219",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "criminal-law-220",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-1",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-2",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-3",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-4",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-5",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-7",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-8",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-9",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-10",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-11",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-12",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-13",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-14",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-15",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-16",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-17",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-18",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-20",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-21",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-22",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-23",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-24",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-25",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-26",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-27",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-28",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-29",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-30",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-31",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-32",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-33",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-34",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-35",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-36",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-37",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-38",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-39",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-40",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-41",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-42",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-43",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-44",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-45",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-46",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-47",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-49",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-50",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-51",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-52",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-53",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-54",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-55",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-56",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-57",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-58",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-59",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-60",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-61",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-62",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-63",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-64",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-65",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-66",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-67",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-68",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-69",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-70",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-71",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-72",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-73",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-74",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-75",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-76",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-77",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-78",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-79",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-80",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-81",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-82",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-83",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-84",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-85",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-86",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-87",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-88",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-89",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-90",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-91",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-92",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-93",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-94",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-95",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-96",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-97",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-98",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-99",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-100",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-101",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-102",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-103",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-104",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-105",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-106",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-107",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-108",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-110",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-111",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-112",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-113",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-114",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-115",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-116",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-117",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-118",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-119",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-120",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-121",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-123",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-124",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-125",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-126",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-127",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-128",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-129",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-130",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-131",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-132",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-133",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-134",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-135",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-136",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-137",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-138",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-139",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-140",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-141",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-142",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-143",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-144",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-145",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-146",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-147",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-148",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-149",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-150",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-151",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-152",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-153",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-155",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-156",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-159",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-160",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-161",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-162",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-163",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-164",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-165",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-166",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-167",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-168",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-169",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-170",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-171",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-172",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-173",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-174",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-175",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-176",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-177",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-178",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-179",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-180",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-181",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-182",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-183",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-185",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-187",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-188",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-189",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-191",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-192",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-194",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-196",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-197",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-198",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-199",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-200",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-201",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-202",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-203",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-204",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-205",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-206",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-207",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-209",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-210",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-211",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-212",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-213",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-214",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-215",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-216",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-217",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-219",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-220",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-221",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-222",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-223",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-224",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-226",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "evidence-238",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-1",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-2",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-3",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-4",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-5",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-6",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-7",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-8",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-9",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-10",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-11",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-12",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-13",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-14",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-16",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-17",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-18",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-19",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-21",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-22",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-23",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-24",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-25",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-26",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-27",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-28",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-29",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-30",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-31",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-32",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-33",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-34",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-35",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-36",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-37",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-39",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-40",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-41",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-42",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-43",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-44",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-46",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-47",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-48",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-49",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-50",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-52",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-53",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-54",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-55",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-56",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-57",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-58",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-59",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-60",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-61",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-62",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-63",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-64",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-65",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-66",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-67",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-68",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-69",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-70",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-71",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-72",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-73",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-74",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-75",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-76",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-77",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-78",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-79",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-80",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-81",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-82",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-83",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-84",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-85",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-86",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-87",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-88",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-89",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-91",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-92",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-93",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-94",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-95",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-96",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-97",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-98",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-99",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-100",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-101",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-102",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-103",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-105",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-106",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-107",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-108",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-109",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-110",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-111",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-112",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-113",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-114",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-116",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-117",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-118",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-119",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-120",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-121",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-122",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-123",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-124",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-125",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-126",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-127",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-128",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-129",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-130",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-131",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-132",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-133",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-134",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-135",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-136",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-137",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-138",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-139",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-140",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-141",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-142",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-143",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-144",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-145",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-146",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-147",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-148",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-149",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-151",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-152",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-153",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-154",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-155",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-156",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-157",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-158",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-159",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-161",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-163",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-164",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-165",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-166",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-167",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-168",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-169",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-170",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-171",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-172",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-173",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-174",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-175",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-176",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-177",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-178",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-179",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-180",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-181",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-182",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-183",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-184",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-185",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-186",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-187",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-188",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-189",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-190",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-191",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-192",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-193",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-194",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-195",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-196",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-197",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-198",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-199",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-200",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-201",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-202",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-203",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-204",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-205",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-206",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-207",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-209",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-210",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-211",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-212",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-213",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-215",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-216",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-217",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-218",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-219",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-220",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-222",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-223",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-224",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-225",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-226",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-227",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-228",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-229",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-230",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-231",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-232",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-233",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-234",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-235",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-236",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-237",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-238",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-239",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-240",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-241",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-242",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-243",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-244",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-245",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-247",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-249",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-250",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-251",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-252",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-253",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-254",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-255",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-256",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-257",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-258",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-259",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-260",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-261",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-262",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-263",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-264",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-265",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-266",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-267",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-268",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-269",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-272",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-275",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-279",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-281",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-283",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-284",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-285",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-286",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "contracts-287",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-1",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-2",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-3",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-4",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-5",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-6",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-7",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-8",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-9",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-10",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-11",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-12",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-13",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-14",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-17",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-18",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-19",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-20",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-21",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-22",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-23",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-24",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-25",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-26",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-27",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-28",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-29",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-30",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-31",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-32",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-33",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-35",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-36",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-37",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-38",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-39",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-40",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-41",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-42",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-43",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-44",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-45",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-46",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-47",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-48",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-49",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-50",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-51",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-52",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-53",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-54",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-55",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-56",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-57",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-58",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-59",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-60",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-61",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-62",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-63",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-64",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-65",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-66",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-67",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-68",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-69",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-70",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-71",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-72",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-73",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-74",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-75",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-76",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-77",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-78",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-80",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-81",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-82",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-83",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-84",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-85",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-86",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-87",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-88",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-89",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-90",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-91",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-92",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-93",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-94",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-95",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-96",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-97",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-98",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-99",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-100",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-101",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-102",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-103",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-104",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-105",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-106",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-107",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-109",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-111",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-112",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-113",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-114",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-115",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-117",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-119",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-120",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-121",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-122",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-123",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-125",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-126",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-127",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-128",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-129",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-130",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-131",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-132",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-133",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-134",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-135",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-136",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-137",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-138",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-139",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-140",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-141",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-143",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-144",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-145",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-146",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-147",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-148",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-149",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-150",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-151",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-152",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-153",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-154",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-155",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-156",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-157",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-158",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-159",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-160",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-161",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-162",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-163",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-164",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-165",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-166",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-167",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-168",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-169",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-170",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-171",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-172",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-173",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-174",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-176",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-177",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-178",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-179",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-180",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-181",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-182",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-183",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-184",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-185",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-186",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-187",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-188",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-189",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-190",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-191",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-192",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-193",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-195",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-196",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-197",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-198",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-199",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-200",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-201",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-202",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-203",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-204",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-205",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-206",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-207",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-208",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-209",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-210",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-211",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-212",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-213",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-214",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-215",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-216",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-217",
+   "action": "change key",
+   "from": "A",
+   "to": "B",
+   "reason": "Human explanation says B is correct; the IRAC reasoning (state acted as a market participant) also matches option B, only its last words named A.",
+   "also_changed": "IRAC Legal_Conclusion: 'supporting option A.' -> 'supporting option B.'",
+   "review": "Sebastian (legal)"
+  },
+  {
+   "id": "constitutional-law-217",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-218",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-219",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-220",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-221",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "constitutional-law-222",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-1",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-2",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-3",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-4",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-5",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-6",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-7",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-8",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-9",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-10",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-11",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-13",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-14",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-15",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-16",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-17",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-18",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-19",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-20",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-21",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-22",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-23",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-24",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-26",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-27",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-28",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-29",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-30",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-32",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-33",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-35",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-36",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-37",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-38",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-39",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-40",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-41",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-42",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-43",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-44",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-45",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-46",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-47",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-48",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-49",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-50",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-51",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-52",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-53",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-54",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-55",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-56",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-57",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-58",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-60",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-61",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-62",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-63",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-64",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-65",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-66",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-67",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-68",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-69",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-70",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-71",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-72",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-73",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-74",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-75",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-76",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-77",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-78",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-79",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-80",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-81",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-82",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-83",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-84",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-85",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-86",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-87",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-88",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-89",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-90",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-91",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-93",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-94",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-95",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-96",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-97",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-98",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-99",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-102",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-104",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-105",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-106",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-107",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-108",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-109",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-110",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-111",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-112",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-113",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-114",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-115",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-116",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-118",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-119",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-120",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-121",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-122",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-123",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-124",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-125",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-126",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-127",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-128",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-129",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-130",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-131",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-132",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-133",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-134",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-135",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-136",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-137",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-138",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-139",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-140",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-141",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-142",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-143",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-144",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-145",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-146",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-147",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-148",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-149",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-150",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-151",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-152",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-153",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-154",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-155",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-156",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-157",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-158",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-159",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-160",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-161",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-162",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-163",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-166",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-167",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-168",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-169",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-170",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-171",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-172",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-174",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-175",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-176",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-179",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-180",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-181",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-182",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-183",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-185",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-186",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-187",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-188",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-189",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-191",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-192",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-195",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-196",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-197",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-198",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-201",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-202",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-205",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-206",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-207",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-208",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-210",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-211",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-213",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-215",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-216",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-219",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-220",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-221",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-226",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-227",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-228",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-230",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-231",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-233",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-234",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-236",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-237",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-241",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-242",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-245",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-251",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-252",
+   "action": "fix whitespace",
+   "field": "question"
+  },
+  {
+   "id": "property-253",
+   "action": "fix whitespace",
+   "field": "question"
+  }
+ ]
+}

@@ -1,0 +1,982 @@
+[
+ {
+  "id": "civil-procedure-26",
+  "keep": "civil-procedure-20",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-33",
+  "keep": "civil-procedure-32",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-36",
+  "keep": "civil-procedure-29",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-37",
+  "keep": "civil-procedure-27",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-54",
+  "keep": "civil-procedure-42",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-55",
+  "keep": "civil-procedure-40",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-71",
+  "keep": "civil-procedure-65",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-72",
+  "keep": "civil-procedure-58",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-82",
+  "keep": "civil-procedure-78",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-84",
+  "keep": "civil-procedure-77",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "civil-procedure-85",
+  "keep": "civil-procedure-76",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-227",
+  "keep": "constitutional-law-42",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-230",
+  "keep": "constitutional-law-74",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-231",
+  "keep": "constitutional-law-134",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-232",
+  "keep": "constitutional-law-137",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-233",
+  "keep": "constitutional-law-177",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-234",
+  "keep": "constitutional-law-205",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-235",
+  "keep": "constitutional-law-206",
+  "reason": "kept the better-fitting explanation (45% vs 25%)"
+ },
+ {
+  "id": "constitutional-law-236",
+  "keep": "constitutional-law-94",
+  "reason": "kept the better-fitting explanation (43% vs 31%)"
+ },
+ {
+  "id": "constitutional-law-237",
+  "keep": "constitutional-law-100",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-238",
+  "keep": "constitutional-law-35",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-239",
+  "keep": "constitutional-law-2",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-241",
+  "keep": "constitutional-law-198",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-242",
+  "keep": "constitutional-law-212",
+  "reason": "kept the better-fitting explanation (33% vs 26%)"
+ },
+ {
+  "id": "constitutional-law-243",
+  "keep": "constitutional-law-68",
+  "reason": "kept the better-fitting explanation (44% vs 33%)"
+ },
+ {
+  "id": "constitutional-law-244",
+  "keep": "constitutional-law-42",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-246",
+  "keep": "constitutional-law-83",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-247",
+  "keep": "constitutional-law-33",
+  "reason": "kept the better-fitting explanation (42% vs 32%)"
+ },
+ {
+  "id": "constitutional-law-248",
+  "keep": "constitutional-law-23",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "constitutional-law-250",
+  "keep": "constitutional-law-85",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-15",
+  "keep": "contracts-299",
+  "reason": "kept the better-fitting explanation (31% vs 18%)"
+ },
+ {
+  "id": "contracts-38",
+  "keep": "contracts-290",
+  "reason": "kept the better-fitting explanation (24% vs 17%)"
+ },
+ {
+  "id": "contracts-51",
+  "keep": "contracts-327",
+  "reason": "kept the better-fitting explanation (28% vs 15%)"
+ },
+ {
+  "id": "contracts-90",
+  "keep": "contracts-321",
+  "reason": "kept the better-fitting explanation (36% vs 30%)"
+ },
+ {
+  "id": "contracts-246",
+  "keep": "contracts-320",
+  "reason": "kept the better-fitting explanation (29% vs 20%)"
+ },
+ {
+  "id": "contracts-270",
+  "keep": "contracts-44",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-271",
+  "keep": "contracts-48",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-273",
+  "keep": "contracts-55",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-274",
+  "keep": "contracts-63",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-276",
+  "keep": "contracts-86",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-278",
+  "keep": "contracts-96",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-280",
+  "keep": "contracts-109",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-282",
+  "keep": "contracts-121",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-289",
+  "keep": "contracts-152",
+  "reason": "kept the better-fitting explanation (41% vs 34%)"
+ },
+ {
+  "id": "contracts-291",
+  "keep": "contracts-83",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-292",
+  "keep": "contracts-185",
+  "reason": "kept the better-fitting explanation (44% vs 38%)"
+ },
+ {
+  "id": "contracts-293",
+  "keep": "contracts-179",
+  "reason": "kept the better-fitting explanation (64% vs 52%)"
+ },
+ {
+  "id": "contracts-295",
+  "keep": "contracts-58",
+  "reason": "kept the better-fitting explanation (49% vs 36%)"
+ },
+ {
+  "id": "contracts-296",
+  "keep": "contracts-59",
+  "reason": "kept the better-fitting explanation (29% vs 19%)"
+ },
+ {
+  "id": "contracts-298",
+  "keep": "contracts-69",
+  "reason": "kept the better-fitting explanation (43% vs 27%)"
+ },
+ {
+  "id": "contracts-300",
+  "keep": "contracts-144",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-302",
+  "keep": "contracts-62",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-303",
+  "keep": "contracts-89",
+  "reason": "kept the better-fitting explanation (67% vs 23%)"
+ },
+ {
+  "id": "contracts-304",
+  "keep": "contracts-24",
+  "reason": "kept the better-fitting explanation (48% vs 20%)"
+ },
+ {
+  "id": "contracts-305",
+  "keep": "contracts-28",
+  "reason": "kept the better-fitting explanation (46% vs 36%)"
+ },
+ {
+  "id": "contracts-306",
+  "keep": "contracts-141",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-307",
+  "keep": "contracts-116",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-308",
+  "keep": "contracts-159",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-309",
+  "keep": "contracts-166",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-310",
+  "keep": "contracts-48",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "contracts-311",
+  "keep": "contracts-133",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-312",
+  "keep": "contracts-164",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-313",
+  "keep": "contracts-211",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-315",
+  "keep": "contracts-193",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-318",
+  "keep": "contracts-42",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-319",
+  "keep": "contracts-194",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-322",
+  "keep": "contracts-86",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-323",
+  "keep": "contracts-41",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "contracts-326",
+  "keep": "contracts-207",
+  "reason": "kept the better-fitting explanation (37% vs 31%)"
+ },
+ {
+  "id": "criminal-law-25",
+  "keep": "criminal-law-24",
+  "reason": "kept the copy that has a human explanation"
+ },
+ {
+  "id": "criminal-law-119",
+  "keep": "criminal-law-265",
+  "reason": "kept the better-fitting explanation (26% vs 19%)"
+ },
+ {
+  "id": "criminal-law-221",
+  "keep": "criminal-law-9",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-222",
+  "keep": "criminal-law-86",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-223",
+  "keep": "criminal-law-129",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-224",
+  "keep": "criminal-law-151",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-225",
+  "keep": "criminal-law-157",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-226",
+  "keep": "criminal-law-177",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-227",
+  "keep": "criminal-law-180",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-228",
+  "keep": "criminal-law-181",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-229",
+  "keep": "criminal-law-185",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-230",
+  "keep": "criminal-law-202",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-231",
+  "keep": "criminal-law-209",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-234",
+  "keep": "criminal-law-216",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-235",
+  "keep": "criminal-law-89",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-236",
+  "keep": "criminal-law-95",
+  "reason": "kept the better-fitting explanation (36% vs 22%)"
+ },
+ {
+  "id": "criminal-law-237",
+  "keep": "criminal-law-169",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-240",
+  "keep": "criminal-law-106",
+  "reason": "kept the better-fitting explanation (55% vs 36%)"
+ },
+ {
+  "id": "criminal-law-242",
+  "keep": "criminal-law-165",
+  "reason": "kept the better-fitting explanation (42% vs 28%)"
+ },
+ {
+  "id": "criminal-law-243",
+  "keep": "criminal-law-89",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-244",
+  "keep": "criminal-law-23",
+  "reason": "kept the better-fitting explanation (56% vs 45%)"
+ },
+ {
+  "id": "criminal-law-245",
+  "keep": "criminal-law-71",
+  "reason": "kept the better-fitting explanation (47% vs 38%)"
+ },
+ {
+  "id": "criminal-law-246",
+  "keep": "criminal-law-121",
+  "reason": "kept the better-fitting explanation (52% vs 38%)"
+ },
+ {
+  "id": "criminal-law-247",
+  "keep": "criminal-law-212",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-248",
+  "keep": "criminal-law-116",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-249",
+  "keep": "criminal-law-113",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-250",
+  "keep": "criminal-law-60",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-252",
+  "keep": "criminal-law-78",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-253",
+  "keep": "criminal-law-148",
+  "reason": "kept the better-fitting explanation (46% vs 38%)"
+ },
+ {
+  "id": "criminal-law-254",
+  "keep": "criminal-law-99",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-257",
+  "keep": "criminal-law-102",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-259",
+  "keep": "criminal-law-87",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-260",
+  "keep": "criminal-law-40",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-261",
+  "keep": "criminal-law-72",
+  "reason": "kept the better-fitting explanation (46% vs 32%)"
+ },
+ {
+  "id": "criminal-law-263",
+  "keep": "criminal-law-85",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-266",
+  "keep": "criminal-law-85",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "criminal-law-267",
+  "keep": "criminal-law-141",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-269",
+  "keep": "criminal-law-124",
+  "reason": "kept the better-fitting explanation (44% vs 21%)"
+ },
+ {
+  "id": "criminal-law-270",
+  "keep": "criminal-law-27",
+  "reason": "kept the better-fitting explanation (25% vs 13%)"
+ },
+ {
+  "id": "criminal-law-271",
+  "keep": "criminal-law-187",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-272",
+  "keep": "criminal-law-215",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "criminal-law-273",
+  "keep": "criminal-law-10",
+  "reason": "kept the better-fitting explanation (32% vs 24%)"
+ },
+ {
+  "id": "evidence-6",
+  "keep": "evidence-5",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-109",
+  "keep": "evidence-267",
+  "reason": "kept the better-fitting explanation (33% vs 24%)"
+ },
+ {
+  "id": "evidence-218",
+  "keep": "evidence-279",
+  "reason": "kept the better-fitting explanation (27% vs 22%, 22%)"
+ },
+ {
+  "id": "evidence-225",
+  "keep": "evidence-7",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-227",
+  "keep": "evidence-24",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-228",
+  "keep": "evidence-26",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-229",
+  "keep": "evidence-30",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-230",
+  "keep": "evidence-46",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-231",
+  "keep": "evidence-66",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-232",
+  "keep": "evidence-101",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-233",
+  "keep": "evidence-108",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-234",
+  "keep": "evidence-110",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-235",
+  "keep": "evidence-113",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-236",
+  "keep": "evidence-116",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-237",
+  "keep": "evidence-124",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-240",
+  "keep": "evidence-200",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-241",
+  "keep": "evidence-217",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-242",
+  "keep": "evidence-279",
+  "reason": "kept the better-fitting explanation (27% vs 22%, 22%)"
+ },
+ {
+  "id": "evidence-243",
+  "keep": "evidence-223",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-244",
+  "keep": "evidence-106",
+  "reason": "kept the better-fitting explanation (58% vs 34%)"
+ },
+ {
+  "id": "evidence-245",
+  "keep": "evidence-14",
+  "reason": "kept the better-fitting explanation (41% vs 26%)"
+ },
+ {
+  "id": "evidence-246",
+  "keep": "evidence-141",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-248",
+  "keep": "evidence-148",
+  "reason": "kept the better-fitting explanation (45% vs 36%)"
+ },
+ {
+  "id": "evidence-249",
+  "keep": "evidence-42",
+  "reason": "kept the better-fitting explanation (52% vs 38%, 38%)"
+ },
+ {
+  "id": "evidence-250",
+  "keep": "evidence-96",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-251",
+  "keep": "evidence-141",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-252",
+  "keep": "evidence-42",
+  "reason": "kept the better-fitting explanation (52% vs 38%, 38%)"
+ },
+ {
+  "id": "evidence-254",
+  "keep": "evidence-108",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-256",
+  "keep": "evidence-23",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-258",
+  "keep": "evidence-117",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-259",
+  "keep": "evidence-97",
+  "reason": "kept the better-fitting explanation (41% vs 31%)"
+ },
+ {
+  "id": "evidence-261",
+  "keep": "evidence-189",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-262",
+  "keep": "evidence-211",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-263",
+  "keep": "evidence-99",
+  "reason": "kept the better-fitting explanation (31% vs 25%, 25%)"
+ },
+ {
+  "id": "evidence-264",
+  "keep": "evidence-138",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-265",
+  "keep": "evidence-99",
+  "reason": "kept the better-fitting explanation (31% vs 25%, 25%)"
+ },
+ {
+  "id": "evidence-268",
+  "keep": "evidence-83",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-269",
+  "keep": "evidence-62",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-270",
+  "keep": "evidence-95",
+  "reason": "kept the better-fitting explanation (75% vs 45%)"
+ },
+ {
+  "id": "evidence-271",
+  "keep": "evidence-171",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-274",
+  "keep": "evidence-9",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-275",
+  "keep": "evidence-116",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-277",
+  "keep": "evidence-32",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "evidence-278",
+  "keep": "evidence-18",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "property-25",
+  "keep": "property-263",
+  "reason": "kept the better-fitting explanation (23% vs 13%)"
+ },
+ {
+  "id": "property-100",
+  "keep": "property-262",
+  "reason": "kept the better-fitting explanation (33% vs 25%)"
+ },
+ {
+  "id": "property-103",
+  "keep": "property-260",
+  "reason": "kept the better-fitting explanation (30% vs 23%)"
+ },
+ {
+  "id": "property-165",
+  "keep": "property-265",
+  "reason": "kept the better-fitting explanation (31% vs 24%, 24%)"
+ },
+ {
+  "id": "property-173",
+  "keep": "property-145",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-177",
+  "keep": "property-146",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-178",
+  "keep": "property-147",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-184",
+  "keep": "property-148",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-190",
+  "keep": "property-149",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-193",
+  "keep": "property-150",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-194",
+  "keep": "property-151",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-199",
+  "keep": "property-152",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-200",
+  "keep": "property-153",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-203",
+  "keep": "property-154",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-204",
+  "keep": "property-155",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-209",
+  "keep": "property-156",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-212",
+  "keep": "property-157",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-214",
+  "keep": "property-158",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-217",
+  "keep": "property-159",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-218",
+  "keep": "property-160",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-222",
+  "keep": "property-161",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-223",
+  "keep": "property-162",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-224",
+  "keep": "property-163",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-229",
+  "keep": "property-265",
+  "reason": "kept the better-fitting explanation (31% vs 24%, 24%)"
+ },
+ {
+  "id": "property-232",
+  "keep": "property-143",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-235",
+  "keep": "property-234",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-238",
+  "keep": "property-166",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-239",
+  "keep": "property-167",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-240",
+  "keep": "property-168",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-243",
+  "keep": "property-169",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-244",
+  "keep": "property-170",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-250",
+  "keep": "property-171",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "property-255",
+  "keep": "property-74",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "property-256",
+  "keep": "property-11",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "property-261",
+  "keep": "property-197",
+  "reason": "both explanations fit; kept lower question number"
+ },
+ {
+  "id": "torts-9",
+  "keep": "torts-3",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "torts-43",
+  "keep": "torts-23",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "torts-57",
+  "keep": "torts-51",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "torts-67",
+  "keep": "torts-66",
+  "reason": "identical explanations; kept lower question number"
+ },
+ {
+  "id": "evidence-19",
+  "keep": "evidence-226",
+  "reason": "same question; evidence-19 human explanation contains text from another question, evidence-226 has the clean version (fit 59% vs 28%)"
+ },
+ {
+  "id": "constitutional-law-228",
+  "keep": "constitutional-law-60",
+  "reason": "identical explanations; kept lower question number (constitutional-law-228-dup2 already dropped by review)"
+ }
+]
