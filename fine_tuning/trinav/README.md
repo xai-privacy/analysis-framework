@@ -329,3 +329,45 @@ The two runs are written to separate directories under
 `testing/baseline/huggingface/`. Compare their `results.json` summaries and
 question Markdown files. Keep this final test set untouched while selecting
 training steps or adapters; use the validation set for those decisions.
+
+## MBE Fine-Tuning Dataset
+
+The MBE split is kept separate under `fine_tuning/trinav/mbe/data/`. It uses
+`benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json` (1,280
+questions), reserves 30 questions for testing, and splits the remaining 1,250
+at the same approximate 58:15 train/validation ratio as LEET-Arg. With seed 42,
+the result is 993 training and 257 validation questions. Allocation is
+stratified by legal domain.
+
+Each train/validation line is a chat example: the user message contains the
+question and four choices, and the assistant target contains the answer letter
+and the source IRAC explanation. Test lines contain only system/user messages;
+their gold answer and explanation are stored separately in `evaluation` and
+never appear in the model-facing messages.
+
+Regenerate the split from the repository root:
+
+```bash
+python fine_tuning/trinav/mbe/prepare_mbe_data.py
+```
+
+The script writes `train.jsonl`, `valid.jsonl`, `test.jsonl`, `split.json`, and
+ID lists under `fine_tuning/trinav/mbe/data/`. The same trainer can fine-tune on
+the MBE chat data by pointing it at the MBE train, validation, and split files:
+
+```bash
+python fine_tuning/trinav/train_chameleon.py \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--train-data fine_tuning/trinav/mbe/data/train.jsonl \
+	--valid-data fine_tuning/trinav/mbe/data/valid.jsonl \
+	--split fine_tuning/trinav/mbe/data/split.json \
+	--output-dir fine_tuning/trinav/mbe/adapters_llama32 \
+	--max-steps 180 \
+	--eval-steps 20 \
+	--learning-rate 1e-4 \
+	--max-seq-length 4096
+```
+
+To train on Chameleon, copy the `mbe/` folder to the VM as well as the shared
+trainer scripts. Use paths relative to `~/xai/trinav`, for example `mbe/data/`
+and `mbe/adapters_llama32/`. Keep `test.jsonl` out of training and validation.

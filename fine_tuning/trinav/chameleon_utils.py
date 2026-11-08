@@ -78,10 +78,18 @@ def validate_data_split(train_rows, valid_rows, split_path: Path):
                    for m in messages):
             raise ValueError(f"{row['id']}: message content cannot be blank")
         evaluation = row.get("evaluation")
-        if not isinstance(evaluation, dict) or not isinstance(
-            evaluation.get("gold_verdicts"), dict
-        ) or not isinstance(evaluation.get("answer_verdicts"), dict):
+        if not isinstance(evaluation, dict):
             raise ValueError(f"{row['id']}: missing evaluation metadata; regenerate data")
+        has_leet_labels = (
+            isinstance(evaluation.get("gold_verdicts"), dict)
+            and isinstance(evaluation.get("answer_verdicts"), dict)
+        )
+        has_mbe_labels = (
+            evaluation.get("gold_answer") in {"A", "B", "C", "D"}
+            and isinstance(evaluation.get("gold_explanation"), dict)
+        )
+        if not (has_leet_labels or has_mbe_labels):
+            raise ValueError(f"{row['id']}: unsupported or incomplete evaluation metadata")
 
     return split
 
