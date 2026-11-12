@@ -10,8 +10,8 @@ This report justifies the model set for a taxonomy of reasoning mistakes that sm
 
 | # | Model | Organization | Parameters | Access |
 |---|---|---|---|---|
-| 1 | Llama-3.2-3B-Instruct | Meta | 3B dense | Open weights |
-| 2 | DeepSeek-R1-Distill-Llama-8B | DeepSeek | 8B dense | Open weights |
+| 1 | Qwen/Qwen3-0.6B | Alibaba | 0.6B dense | Open weights |
+| 2 | Llama-3.2-3B-Instruct | Meta | 3B dense | Open weights |
 | 3 | Qwen3-8B | Alibaba | 8B dense | Open weights |
 | 4 | Mistral-Small (24B) | Mistral AI | 24B dense | Open weights |
 | 5 | gpt-oss-20b or gpt-oss-120b | OpenAI | 21B / 117B MoE (about 3.6B / 5.1B active) | Open weights |
@@ -24,7 +24,7 @@ This report justifies the model set for a taxonomy of reasoning mistakes that sm
 
 | Flavor | GPU memory | Role in this study |
 |---|---|---|
-| `g1.h100.vgpu.1g.12gb` | 12 GB | Prompt and parser development, debugging, Llama-3.2-3B runs |
+| `g1.h100.vgpu.1g.12gb` | 12 GB | Prompt and parser development, debugging, Llama-3.2-3B and Qwen3-0.6B runs |
 | `g1.h100.pci.1` | 80 GB | Main evaluation of every open model, LoRA experiments up to about 8B |
 | `g1.h100.pci.4` | 4 x 80 GB | Parallel evaluation (one vLLM server per GPU), or tensor parallelism for gpt-oss-120b if more KV headroom is needed |
 
@@ -40,19 +40,18 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 
 ## 4. Why each model is relevant
 
-### 4.1 Llama-3.2-3B-Instruct (Meta)
+### 4.1 Qwen3-0.6B (Alibaba)
+
+- **Hardware:** about 1.2 GB in bf16; fits comfortably on `g1.h100.vgpu.1g.12gb` as well as `pci.1`.
+- **Benchmarks:** supports both thinking (`enable_thinking=True`) and non-thinking (`enable_thinking=False`) modes using the exact same architecture, tokenizer, and training cutoff as `Qwen3-8B`.
+- **Taxonomy value:** anchors the sub-1B end of the scale axis. Expected to be the primary source of format, instruction-following, and degenerate repetition-loop failures, while testing whether test-time chain-of-thought helps or harms accuracy at 0.6B.
+- **Practical notes:** follow the Qwen3 model card sampling settings (avoid greedy decoding in thinking mode), apply a moderate `presence_penalty` (e.g., `1.0–1.5`), and cap `max_tokens` (4k–8k) so repetition loops terminate cleanly as token-budget failures.
+
+### 4.2 Llama-3.2-3B-Instruct (Meta)
 
 - **Hardware:** fits all three flavors in bf16.
 - **Benchmarks:** it is the model your existing adapter was trained on, so base-versus-adapter comparison is possible with the identical prompt. It also anchors the small end of the scale axis.
 - **Taxonomy value:** expected to produce the most format and control failures, which makes it the main source for the format-failure branch.
-
-### 4.2 DeepSeek-R1-Distill-Llama-8B (DeepSeek)
-
-- **Hardware:** about 16 GB in bf16, comfortably on `pci.1`. Needs a large output budget (8-16k tokens), which shrinks batch size.
-- **Benchmarks:** long chain-of-thought gives a different error profile than direct-answer models, with more room for self-correction and for over-reasoning.
-- **Taxonomy value:** shows which errors reasoning removes and which it introduces, such as reversing a correct intermediate conclusion or failing to terminate inside the token budget.
-- **Practical notes:** follow the model card's recommended sampling settings (temperature around 0.6), use no system prompt, and strip the reasoning block before parsing. Keep the full trace for annotation.
-- **Confound:** this model is a Llama-3.1-8B derivative, while the baseline is Llama-3.2-3B. Differences from model 1 mix scale, version, and reasoning distillation. If you need a clean distillation comparison, add Llama-3.1-8B-Instruct as a control (about 16 GB, cheap).
 
 ### 4.3 Qwen3-8B (Alibaba)
 
@@ -85,19 +84,19 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 
 | Axis | Coverage | Clean comparison? |
 |---|---|---|
-| Scale (dense) | 3B, 8B, 24B | Partly; each size is a different family |
+| Scale (dense) | 0.6B, 3B, 8B, 24B | Partly; each size is a different family |
 | Scale (within family) | gpt-oss-20b to 120b | Yes, but MoE with small active parameters |
 | Reasoning | Qwen3 thinking on/off; gpt-oss effort levels | Yes |
-| Reasoning (distillation) | R1-Distill-Llama-8B vs Llama | Only with a Llama-3.1-8B control |
-| Family | Meta, DeepSeek, Alibaba, Mistral, OpenAI, Anthropic | Confounded with scale |
+| Family | Meta, Alibaba, Mistral, OpenAI, Anthropic | Confounded with scale |
 | Open vs closed | Sonnet 5.5 | Single data point |
 
 ## 6. Suggested evaluation conditions
 
 | Condition | Flavor | Precision | Notes |
 |---|---|---|---|
+| Qwen3-0.6B (thinking) | `vgpu` or `pci.1` | bf16 | Model-card sampling, presence penalty, 4-8k token cap |
+| Qwen3-0.6B (non-thinking) | `vgpu` or `pci.1` | bf16 | Model-card sampling |
 | Llama-3.2-3B base | `vgpu` or `pci.1` | bf16 | Also run the adapter for comparison |
-| R1-Distill-Llama-8B | `pci.1` | bf16 | 8-16k output tokens |
 | Qwen3-8B (thinking) | `pci.1` | bf16 | Model-card sampling for thinking mode |
 | Qwen3-8B (non-thinking) | `pci.1` | bf16 | Model-card sampling for non-thinking mode |
 | Mistral-Small 24B | `pci.1` | bf16 | Pin checkpoint |
@@ -111,7 +110,7 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 1. Give every model the same prompt, with explicit statement counts and labels in the gold format (including ①-⑤ items).
 2. Report parse rate and parsed-only accuracy separately from overall accuracy, and include an always-CORRECT baseline.
 3. Constrain the final verdict where the engine allows it, and strip reasoning traces before parsing while keeping them for annotation.
-4. Pin the vLLM version, `max_model_len`, sampling parameters, and seeds, and log them with each result file.
+4. Pin the vLLM version, `max_model_len`, `max_tokens` caps, sampling parameters (including `presence_penalty`), and seeds, and log them with each result file.
 5. Hand-validate a stratified sample of error labels and report annotator agreement.
 
 ## 8. Release dates, training cutoffs, and dataset provenance
@@ -120,8 +119,9 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 
 | Model | Release date | Training-data / knowledge cutoff |
 |---|---|---|
+| Qwen3-0.6B | Apr 28, 2025 | Mar 2025 |
 | Llama-3.2-3B-Instruct | Sep 25, 2024 | Dec 2023 |
-| DeepSeek-R1-Distill-Llama-8B | Jan 20, 2025 | **Not sure.** |
+| Qwen/Qwen3-0.6B | Jan 20, 2025 | **Not sure.** |
 | Qwen3-8B | Apr 28, 2025 | **Not sure.** |
 | Mistral-Small-24B-Instruct-2501 | Jan 30, 2025 | Oct 2023 |
 | gpt-oss-20b and gpt-oss-120b | Aug 5, 2025 | Jun 2024 |
@@ -150,5 +150,5 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 - https://huggingface.co/openai/gpt-oss-120b
 - https://huggingface.co/openai/gpt-oss-20b
 - https://huggingface.co/Qwen/Qwen3-8B
-- https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B
 - https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct
+- https://huggingface.co/Qwen/Qwen3-0.6B
