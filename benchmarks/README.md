@@ -103,3 +103,10 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 
 - `MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
 - `MBE-exam-questions_distilled_dataset_cleaned.json` is based on `MBE-exam-questions_distilled_dataset.json` with duplicates removed and other fixes. [Issue 32](https://github.com/xai-privacy/analysis-framework/issues/32) describes details.
+
+## 3. LegalBench
+
+### 3.1 Files
+
+- `LegalBench_legal_reasoning_causality_test.tsv` and `LegalBench_legal_reasoning_causality_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench's [legal reasoning causality task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/legal_reasoning_causality).
+- `LegalBench_privacy_policy_entailment_test.tsv` and `LegalBench_privacy_policy_entailment_train.tsv`are the original `train.tsv` and `test.tsv` files from LegalBench's [privacy policy entailment task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/privacy_policy_entailment).
