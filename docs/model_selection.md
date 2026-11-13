@@ -1,42 +1,45 @@
-# Model Selection Report: Reasoning-Error Taxonomy on LEETArg and MBE
+# Model Selection Report: Reasoning-Error Taxonomy on LEET_Arg, MBE, and LegalBench
 
 Prepared 2026-10-31 (section 9 added 2026-11-04)
 
 ## 1. Purpose
 
-This report justifies the model set for a taxonomy of reasoning mistakes that small open-weight models and a frontier model, make on two benchmarks, **LEETArg** and **MBE**. It explains, for each model, why it fits the available hardware and why it is informative for these benchmarks. We will try to use gpt-oss-120gb but revert to 20b if the former model does not fit within the capacity of the hardware we have access to.
+This report justifies the model set for a taxonomy of reasoning mistakes that small open-weight models and a frontier model, make on two benchmarks, **LEET_Arg** and **MBE**. It explains, for each model, why it fits the available hardware and why it is informative for these benchmarks. We will try to use gpt-oss-120gb but revert to 20b if the former model does not fit within the capacity of the hardware we have access to.
 
 **Selected models**
 
-| # | Model | Organization | Parameters | Access |
-|---|---|---|---|---|
-| 1 | Qwen/Qwen3-0.6B | Alibaba | 0.6B dense | Open weights |
-| 2 | Llama-3.2-3B-Instruct | Meta | 3B dense | Open weights |
-| 3 | Qwen3-8B | Alibaba | 8B dense | Open weights |
-| 4 | Mistral-Small (24B) | Mistral AI | 24B dense | Open weights |
-| 5 | gpt-oss-20b or gpt-oss-120b | OpenAI | 21B / 117B MoE (about 3.6B / 5.1B active) | Open weights |
-| 6 | Claude Sonnet 5.5 (`claude-sonnet-5-5`) | Anthropic | Not disclosed | Closed, API only |
-
+| #   | Model                                   | Organization | Parameters                                | Access           |
+| --- | --------------------------------------- | ------------ | ----------------------------------------- | ---------------- |
+| 1   | Qwen/Qwen3-0.6B                         | Alibaba      | 0.6B dense                                | Open weights     |
+| 2   | Llama-3.2-3B-Instruct                   | Meta         | 3B dense                                  | Open weights     |
+| 3   | Qwen3-8B                                | Alibaba      | 8B dense                                  | Open weights     |
+| 4   | Mistral-Small (24B)                     | Mistral AI   | 24B dense                                 | Open weights     |
+| 5   | gpt-oss-20b or gpt-oss-120b             | OpenAI       | 21B / 117B MoE (about 3.6B / 5.1B active) | Open weights     |
+| 6   | Claude Sonnet 5.5 (`claude-sonnet-5-5`) | Anthropic    | Not disclosed                             | Closed, API only |
 
 ## 2. Hardware fit
 
 ### 2.1 Available flavors
 
-| Flavor | GPU memory | Role in this study |
-|---|---|---|
-| `g1.h100.vgpu.1g.12gb` | 12 GB | Prompt and parser development, debugging, Llama-3.2-3B and Qwen3-0.6B runs |
-| `g1.h100.pci.1` | 80 GB | Main evaluation of every open model, LoRA experiments up to about 8B |
-| `g1.h100.pci.4` | 4 x 80 GB | Parallel evaluation (one vLLM server per GPU), or tensor parallelism for gpt-oss-120b if more KV headroom is needed |
+| Flavor                 | GPU memory | Role in this study                                                                                                  |
+| ---------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------- |
+| `g1.h100.vgpu.1g.12gb` | 12 GB      | Prompt and parser development, debugging, Llama-3.2-3B and Qwen3-0.6B runs                                          |
+| `g1.h100.pci.1`        | 80 GB      | Main evaluation of every open model, LoRA experiments up to about 8B                                                |
+| `g1.h100.pci.4`        | 4 x 80 GB  | Parallel evaluation (one vLLM server per GPU), or tensor parallelism for gpt-oss-120b if more KV headroom is needed |
 
 ## 3. Benchmark relevance
 
-### 3.1 MBE
+### 3.1 MBE-exam-questions
 
 The Multistate Bar Exam is a four-option multiple-choice test of US legal reasoning. Each item is a short fact pattern plus a question that requires recalling the right rule and applying it to the facts, across subjects such as torts, contracts, evidence, constitutional law, criminal law and procedure, real property, and civil procedure.
 
-### 3.2 LEETArg
+### 3.2 LEET_Arg
 
 Items contain a passage (often a dialogue between named speakers or a short argument), several labeled statements, a per-statement correct/incorrect judgment, and a question-level answer option determined by which statements are correct. Statement sets are either (a)-(c) or ①-⑤.
+
+### 3.3 LegalBench
+
+LegalBench consists of multiple benchmarks, of which we use the legal reasoning causality and privacy policy entailment benchmarks.
 
 ## 4. Why each model is relevant
 
@@ -57,7 +60,7 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 
 - **Hardware:** about 16 GB in bf16 on `pci.1`.
 - **Benchmarks:** one set of weights supports a thinking mode and a non-thinking mode (Qwen3 Technical Report, arXiv 2025), so thinking on versus off is the cleanest reasoning comparison in the study. Qwen3 also has broad multilingual coverage, relevant to LEET's Korean origin.
-- **Taxonomy value:** isolates the effect of reasoning from the effect of the model.
+- **Taxonomy value:** isolates the effect of reasoning from the effect of the model. We deliberately include two Qwen models as they are more customizable in terms of thinking and reasoning chains compared to other models.
 - **Practical notes:** the model card recommends different sampling settings per mode and advises against greedy decoding in thinking mode, so the two conditions will not share identical decoding parameters. Report this.
 
 ### 4.4 Mistral-Small, 24B (Mistral AI)
@@ -82,28 +85,28 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 
 ## 5. Axis coverage and confounds
 
-| Axis | Coverage | Clean comparison? |
-|---|---|---|
-| Scale (dense) | 0.6B, 3B, 8B, 24B | Partly; each size is a different family |
-| Scale (within family) | gpt-oss-20b to 120b | Yes, but MoE with small active parameters |
-| Reasoning | Qwen3 thinking on/off; gpt-oss effort levels | Yes |
-| Family | Meta, Alibaba, Mistral, OpenAI, Anthropic | Confounded with scale |
-| Open vs closed | Sonnet 5.5 | Single data point |
+| Axis                  | Coverage                                     | Clean comparison?                         |
+| --------------------- | -------------------------------------------- | ----------------------------------------- |
+| Scale (dense)         | 0.6B, 3B, 8B, 24B                            | Partly; each size is a different family   |
+| Scale (within family) | gpt-oss-20b to 120b                          | Yes, but MoE with small active parameters |
+| Reasoning             | Qwen3 thinking on/off; gpt-oss effort levels | Yes                                       |
+| Family                | Meta, Alibaba, Mistral, OpenAI, Anthropic    | Confounded with scale                     |
+| Open vs closed        | Sonnet 5.5                                   | Single data point                         |
 
 ## 6. Suggested evaluation conditions
 
-| Condition | Flavor | Precision | Notes |
-|---|---|---|---|
-| Qwen3-0.6B (thinking) | `vgpu` or `pci.1` | bf16 | Model-card sampling, presence penalty, 4-8k token cap |
-| Qwen3-0.6B (non-thinking) | `vgpu` or `pci.1` | bf16 | Model-card sampling |
-| Llama-3.2-3B base | `vgpu` or `pci.1` | bf16 | Also run the adapter for comparison |
-| Qwen3-8B (thinking) | `pci.1` | bf16 | Model-card sampling for thinking mode |
-| Qwen3-8B (non-thinking) | `pci.1` | bf16 | Model-card sampling for non-thinking mode |
-| Mistral-Small 24B | `pci.1` | bf16 | Pin checkpoint |
-| gpt-oss-20b (low/high effort) | `pci.1` | MXFP4 | At minimum low and high |
-| gpt-oss-120b (low/high effort) | `pci.1` (or `pci.4` TP) | MXFP4 | Small batch size |
-| Claude Sonnet 5.5 | API | n/a | Fixed temperature, logged settings |
-| Optional: OLMo 2 7B Instruct | `pci.1` | bf16 | Multi-lingual coverage |
+| Condition                      | Flavor                  | Precision | Notes                                                 |
+| ------------------------------ | ----------------------- | --------- | ----------------------------------------------------- |
+| Qwen3-0.6B (thinking)          | `vgpu` or `pci.1`       | bf16      | Model-card sampling, presence penalty, 4-8k token cap |
+| Qwen3-0.6B (non-thinking)      | `vgpu` or `pci.1`       | bf16      | Model-card sampling                                   |
+| Llama-3.2-3B base              | `vgpu` or `pci.1`       | bf16      | Also run the adapter for comparison                   |
+| Qwen3-8B (thinking)            | `pci.1`                 | bf16      | Model-card sampling for thinking mode                 |
+| Qwen3-8B (non-thinking)        | `pci.1`                 | bf16      | Model-card sampling for non-thinking mode             |
+| Mistral-Small 24B              | `pci.1`                 | bf16      | Pin checkpoint                                        |
+| gpt-oss-20b (low/high effort)  | `pci.1`                 | MXFP4     | At minimum low and high                               |
+| gpt-oss-120b (low/high effort) | `pci.1` (or `pci.4` TP) | MXFP4     | Small batch size                                      |
+| Claude Sonnet 5.5              | API                     | n/a       | Fixed temperature, logged settings                    |
+| Optional: OLMo 2 7B Instruct   | `pci.1`                 | bf16      | Multi-lingual coverage                                |
 
 ## 7. Protocol recommendations
 
@@ -117,23 +120,23 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 
 ### 8.1 Models
 
-| Model | Release date | Training-data / knowledge cutoff |
-|---|---|---|
-| Qwen3-0.6B | Apr 28, 2025 | Mar 2025 |
-| Llama-3.2-3B-Instruct | Sep 25, 2024 | Dec 2023 |
-| Qwen/Qwen3-0.6B | Jan 20, 2025 | **Not sure.** |
-| Qwen3-8B | Apr 28, 2025 | **Not sure.** |
-| Mistral-Small-24B-Instruct-2501 | Jan 30, 2025 | Oct 2023 |
-| gpt-oss-20b and gpt-oss-120b | Aug 5, 2025 | Jun 2024 |
-| Claude Sonnet 5.5 | Sep 28, 2026 | Jun 2026 |
+| Model                           | Release date | Training-data / knowledge cutoff |
+| ------------------------------- | ------------ | -------------------------------- |
+| Qwen3-0.6B                      | Apr 28, 2025 | Mar 2025                         |
+| Llama-3.2-3B-Instruct           | Sep 25, 2024 | Dec 2023                         |
+| Qwen/Qwen3-0.6B                 | Jan 20, 2025 | **Not sure.**                    |
+| Qwen3-8B                        | Apr 28, 2025 | **Not sure.**                    |
+| Mistral-Small-24B-Instruct-2501 | Jan 30, 2025 | Oct 2023                         |
+| gpt-oss-20b and gpt-oss-120b    | Aug 5, 2025  | Jun 2024                         |
+| Claude Sonnet 5.5               | Sep 28, 2026 | Jun 2026                         |
 
 ### 8.2 Datasets
 
-| Dataset | Source | Publication date | Date range of underlying questions |
-|---|---|---|---|
-| LEET-Arg | GitHub | 2026 | LEET exams 2021-2025 |
-| MBE | Hugging Face | April 2025 | **Not recorded.** |
-| barexam_qa | Hugging Face | May 2025 | **Not recorded.** |
+| Dataset    | Source       | Publication date | Date range of underlying questions |
+| ---------- | ------------ | ---------------- | ---------------------------------- |
+| LEET_Arg   | GitHub       | 2026             | LEET exams 2021-2025               |
+| MBE        | Hugging Face | April 2025       | **Not recorded.**                  |
+| barexam_qa | Hugging Face | May 2025         | **Not recorded.**                  |
 
 ## 9. References
 
@@ -146,9 +149,9 @@ Items contain a passage (often a dialogue between named speakers or a short argu
 - Dettmers & Zettlemoyer (2023). The case for 4-bit precision: k-bit inference scaling laws. ICML.
 - Panickssery, Bowman & Feng (2024). LLM evaluators recognize and favor their own generations. NeurIPS.
 - Guha et al. (2023). LegalBench. NeurIPS Datasets and Benchmarks.
-- https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501
-- https://huggingface.co/openai/gpt-oss-120b
-- https://huggingface.co/openai/gpt-oss-20b
-- https://huggingface.co/Qwen/Qwen3-8B
-- https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct
-- https://huggingface.co/Qwen/Qwen3-0.6B
+- <https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501>
+- <https://huggingface.co/openai/gpt-oss-120b>
+- <https://huggingface.co/openai/gpt-oss-20b>
+- <https://huggingface.co/Qwen/Qwen3-8B>
+- <https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct>
+- <https://huggingface.co/Qwen/Qwen3-0.6B>
