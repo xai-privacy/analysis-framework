@@ -1,5 +1,6 @@
-# Install a CUDA-enabled PyTorch build supplied/recommended by the Chameleon image.
-# This file intentionally does not install or replace torch.
+# Pin the CUDA 12.6 build for the Chameleon Tesla P100 (compute capability 6.0).
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.14.1+cu126
 transformers>=4.50,<6
 peft>=0.14,<1
 accelerate>=1.2,<2
