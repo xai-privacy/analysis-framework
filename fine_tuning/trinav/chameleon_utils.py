@@ -1,4 +1,4 @@
-"""Shared Chameleon/CUDA helpers for Trinav LEET-Arg experiments."""
+"""Shared Colab/CUDA helpers for Trinav LEET-Arg experiments."""
 
 from __future__ import annotations
 
@@ -145,45 +145,38 @@ def load_cuda_model(model_id: str, adapter_path: str | None = None):
             "copy) as the compatible base; this is not the identical 4-bit checkpoint."
         )
 
-    has_gpu = torch.cuda.is_available()
+    if not torch.cuda.is_available():
+        raise RuntimeError(
+            "CUDA GPU not detected. In Colab, select Runtime > Change runtime type > GPU."
+        )
 
     tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
 
-    if has_gpu:
-        compute_dtype = (
-            torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-        )
-        quantization = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_compute_dtype=compute_dtype,
-        )
-        model = AutoModelForCausalLM.from_pretrained(
-            model_id,
-            quantization_config=quantization,
-            torch_dtype=compute_dtype,
-            device_map={"": torch.cuda.current_device()},
-            low_cpu_mem_usage=True,
-        )
-    else:
-        print("WARNING: CUDA GPU not detected. Falling back to CPU.")
-        compute_dtype = torch.float32
-        model = AutoModelForCausalLM.from_pretrained(
-            model_id,
-            torch_dtype=compute_dtype,
-            device_map="cpu",
-            low_cpu_mem_usage=True,
-        )
+    compute_dtype = (
+        torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    )
+    quantization = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True,
+        bnb_4bit_compute_dtype=compute_dtype,
+    )
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        quantization_config=quantization,
+        torch_dtype=compute_dtype,
+        device_map={"": torch.cuda.current_device()},
+        low_cpu_mem_usage=True,
+    )
 
     if adapter_path:
         from peft import PeftModel
 
         model = PeftModel.from_pretrained(model, adapter_path)
-        
+
     model.config.pad_token_id = tokenizer.pad_token_id
     return model, tokenizer, compute_dtype
 

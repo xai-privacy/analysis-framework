@@ -53,9 +53,7 @@ ssh -i ../my-chi-key.pem cc@<public-ip> 'mkdir -p ~/xai'
 scp -i ../my-chi-key.pem -r ../trinav cc@<public-ip>:~/xai/
 ```
 
-Log in, create the environment, and install the pinned dependencies. The
-requirements pin PyTorch to the CUDA 12.6 wheel with P100 (`sm_60`) support, so
-the incompatible image-provided PyTorch build is replaced inside this venv:
+Log in, create the environment, and install the pinned dependencies:
 
 ```bash
 ssh -i ../my-chi-key.pem cc@<public-ip>
@@ -97,6 +95,11 @@ baseline for comparison with the adapter. The runner refuses to evaluate
 training or validation IDs. Do not use final-test results to choose training
 steps or adapters; use validation results for those decisions.
 
+You can optionally provide a global system prompt from a UTF-8 text file with
+`--prompt path/to/prompt.txt`. The prompt is sent before each question. If
+`--prompt` is omitted or given an empty path, no system prompt is sent. The
+separate `--format-hint` option can still add its output-format instructions.
+
 ```bash
 cd ~/xai/trinav
 source .venv/bin/activate
@@ -111,7 +114,7 @@ python run_hf_questions.py \
 
 ### 2. Fine-tuning
 
-Train for 180 steps, evaluating and saving every 20 steps. Validation loss is
+Train for 60 steps, evaluating and saving every 15 steps. Validation loss is
 used during training to select the best checkpoint. The final adapter is saved
 to `adapters_chameleon/`.
 
@@ -122,15 +125,17 @@ python train_chameleon.py \
 	--valid-data data/valid.jsonl \
 	--split data/split.json \
 	--output-dir adapters_chameleon \
-	--max-steps 180 \
-	--eval-steps 20 \
+	--max-steps 60 \
+	--checkpoint-steps 15 \
 	--learning-rate 1e-4 \
 	--max-seq-length 4096
 ```
 
 The trainer uses batch size 1, LoRA rank 8, and a constant learning rate. If an
 example exceeds the sequence length, it stops with that example's ID rather
-than truncating the rationale. To plot the training and validation metrics:
+than truncating the rationale. After training completes, `trainer_state.json`
+is saved under the output directory. To plot the metrics for the command above
+on Chameleon:
 
 ```bash
 python plot_training_metrics.py \
@@ -244,7 +249,7 @@ python fine_tuning/trinav/train_chameleon.py \
 	--split fine_tuning/trinav/mbe/data/split.json \
 	--output-dir fine_tuning/trinav/mbe/adapters_llama32 \
 	--max-steps 180 \
-	--eval-steps 20 \
+	--checkpoint-steps 20 \
 	--learning-rate 1e-4 \
 	--max-seq-length 4096
 ```
@@ -252,3 +257,93 @@ python fine_tuning/trinav/train_chameleon.py \
 To train on Chameleon, copy the `mbe/` folder to the VM as well as the shared
 trainer scripts. Use paths relative to `~/xai/trinav`, for example `mbe/data/`
 and `mbe/adapters_llama32/`. Keep `test.jsonl` out of training and validation.
+
+### Run the MBE workflow on Chameleon
+
+The commands below assume the Chameleon VM, `.venv`, and Hugging Face access
+were set up as described above. From the repository root on your local machine,
+copy the MBE data, evaluator, shared trainer files, and source benchmark to the
+VM. Replace the key and IP with your own:
+
+```bash
+ssh -i <private-key.pem> cc@<public-ip> \
+	'mkdir -p ~/xai/trinav/benchmarks'
+scp -i <private-key.pem> -r fine_tuning/trinav/mbe \
+	cc@<public-ip>:~/xai/trinav/
+scp -i <private-key.pem> \
+	fine_tuning/trinav/run_hf_mbe.py \
+	fine_tuning/trinav/chameleon_utils.py \
+	fine_tuning/trinav/train_chameleon.py \
+	cc@<public-ip>:~/xai/trinav/
+scp -i <private-key.pem> \
+	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
+	cc@<public-ip>:~/xai/trinav/benchmarks/
+```
+
+Log in to the VM, activate the environment, and prepare the split:
+
+```bash
+ssh -i <private-key.pem> cc@<public-ip>
+cd ~/xai/trinav
+source .venv/bin/activate
+python mbe/prepare_mbe_data.py \
+	--source benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
+	--out mbe/data
+```
+
+Run the base model on the held-out test questions before fine-tuning:
+
+```bash
+python run_hf_mbe.py \
+	--input mbe/data/test.jsonl \
+	--split mbe/data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--run-name mbe-llama32-base \
+	--output-root testing/baseline/huggingface/mbe \
+	--format-hint
+```
+
+You can optionally add a UTF-8 system prompt file to either evaluation command:
+`--prompt path/to/prompt.txt`. Its contents are appended to the MBE system
+instructions before each question, and the prompt path and SHA-256 are recorded
+in `run.json`. Use the same prompt and `--format-hint` setting for baseline and
+adapter comparisons. If your prompt specifies its own answer format, omit
+`--format-hint`. For example, add this option to either evaluation command:
+
+```bash
+--prompt path/to/prompt.txt
+```
+
+Fine-tune on the training data, using validation loss to select the adapter:
+
+```bash
+python train_chameleon.py \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--train-data mbe/data/train.jsonl \
+	--valid-data mbe/data/valid.jsonl \
+	--split mbe/data/split.json \
+	--output-dir mbe/adapters_llama32 \
+	--max-steps 60 \
+	--checkpoint-steps 15 \
+	--learning-rate 1e-4 \
+	--max-seq-length 4096
+```
+
+Evaluate the saved adapter on the same held-out test questions:
+
+```bash
+python run_hf_mbe.py \
+	--input mbe/data/test.jsonl \
+	--split mbe/data/split.json \
+	--model meta-llama/Llama-3.2-3B-Instruct \
+	--adapter-path mbe/adapters_llama32 \
+	--run-name mbe-llama32-adapter \
+	--output-root testing/baseline/huggingface/mbe \
+	--format-hint
+```
+
+Both runs save `results.json`, `run.json`, and one Markdown file per question
+under `testing/baseline/huggingface/mbe/<run-name>/`. The evaluator checks that
+the test IDs match `split.json` and refuses to score training or validation
+questions. Use validation results to choose training settings; do not use the
+held-out test results for checkpoint selection.

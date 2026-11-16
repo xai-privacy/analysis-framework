@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -18,11 +19,6 @@ try:
 except ImportError:
     from chameleon_utils import HERE, load_cuda_model, parse_verdicts
 
-SYSTEM_PROMPT = (
-    "You are an expert legal reasoning auditor. Analyze the debate provided, "
-    "extract the core premises and inference rules for each statement, and "
-    "declare a final verdict (CORRECT or INCORRECT)."
-)
 FORMAT_HINT = (
     "\n\nAnswer in exactly this format, one block per statement, using the "
     "statement's own label:\n\nStatement (a)\nReasoning: <your reasoning>\n"
@@ -90,6 +86,16 @@ def build_user_prompt(question: dict[str, Any]) -> str:
     passage = re.sub(r"(?<=[.!?”\"’)])\s*(?=[A-Z][a-z]+\d?:\s)", "\n", passage)
     statements = "\n".join(text.strip() for text in question["statements"].values())
     return f"{passage}\n\n<question> {stem}\n<statements>\n{statements}"
+
+
+def build_messages(
+    question: dict[str, Any], system_prompt: str
+) -> list[dict[str, str]]:
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": build_user_prompt(question)})
+    return messages
 
 
 def statement_label(text: str):
@@ -243,6 +249,7 @@ def main() -> int:
     parser.add_argument("--split", type=Path, default=HERE / "data" / "split.json")
     parser.add_argument("--model", default="meta-llama/Llama-3.2-3B-Instruct")
     parser.add_argument("--adapter-path", type=Path, help="PEFT adapter; omit to test the base model")
+    parser.add_argument("--prompt", help="optional file containing a system prompt")
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--run-name")
     parser.add_argument("--max-tokens", type=int, default=1200)
@@ -253,6 +260,8 @@ def main() -> int:
 
     if args.max_tokens < 1:
         parser.error("--max-tokens must be positive")
+    prompt_path = Path(args.prompt) if args.prompt else None
+    prompt_text = prompt_path.read_text(encoding="utf-8") if prompt_path else ""
     questions = load_questions(args.input)
     if args.test_ids:
         requested_ids = load_test_ids(args.test_ids)
@@ -284,6 +293,10 @@ def main() -> int:
         "adapter_path": adapter_path,
         "input": str(args.input.resolve()),
         "split": str(args.split.resolve()),
+        "prompt": str(prompt_path.resolve()) if prompt_path else None,
+        "prompt_sha256": hashlib.sha256(
+            prompt_text.encode("utf-8")
+        ).hexdigest(),
         "format_hint": args.format_hint,
         "max_tokens": args.max_tokens,
     }
@@ -321,11 +334,8 @@ def main() -> int:
         qid = question["id"]
         if qid in done:
             continue
-        system_prompt = SYSTEM_PROMPT + (FORMAT_HINT if args.format_hint else "")
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": build_user_prompt(question)},
-        ]
+        system_prompt = prompt_text + (FORMAT_HINT if args.format_hint else "")
+        messages = build_messages(question, system_prompt)
         inputs = tokenizer.apply_chat_template(
             messages,
             tokenize=True,

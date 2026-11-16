@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""QLoRA fine-tuning for the Trinav LEET-Arg rationale dataset on CUDA."""
+"""QLoRA fine-tuning for the Trinav LEET-Arg rationale dataset on Colab CUDA."""
 
 from __future__ import annotations
 
@@ -126,17 +126,30 @@ def parse_args():
         help="Output directory for adapters (defaults to adapters_<model_name>)",
     )
     parser.add_argument("--max-steps", type=int, default=180)
-    parser.add_argument("--eval-steps", type=int, default=20)
+    parser.add_argument(
+        "--checkpoint-steps",
+        "--eval-steps",
+        dest="checkpoint_steps",
+        type=int,
+        default=20,
+        help=(
+            "evaluate and save a resumable checkpoint every N steps "
+            "(--eval-steps is a compatibility alias)"
+        ),
+    )
+    parser.add_argument("--logging-steps", type=int, default=10)
     parser.add_argument("--learning-rate", type=float, default=1e-4)
     parser.add_argument("--max-seq-length", type=int, default=4096)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--resume-from-checkpoint", default=None,
+                        help="checkpoint path, or 'latest' to resume the newest one")
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    if args.max_steps < 1 or args.eval_steps < 1:
-        raise SystemExit("--max-steps and --eval-steps must be positive")
+    if args.max_steps < 1 or args.checkpoint_steps < 1 or args.logging_steps < 1:
+        raise SystemExit("step counts must be positive")
 
     train_rows = read_jsonl(args.train_data)
     valid_rows = read_jsonl(args.valid_data)
@@ -144,7 +157,12 @@ def main():
 
     model, tokenizer, compute_dtype = load_cuda_model(args.model)
     from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-    from transformers import DataCollatorForSeq2Seq, Trainer, TrainingArguments
+    from transformers import (
+        DataCollatorForSeq2Seq,
+        Trainer,
+        TrainerCallback,
+        TrainingArguments,
+    )
 
     train_dataset = MaskedChatDataset(train_rows, tokenizer, args.max_seq_length)
     valid_dataset = MaskedChatDataset(valid_rows, tokenizer, args.max_seq_length)
@@ -188,14 +206,16 @@ def main():
         warmup_steps=0,
         weight_decay=0.0,
         eval_strategy="steps",
-        eval_steps=args.eval_steps,
+        eval_steps=args.checkpoint_steps,
         save_strategy="steps",
-        save_steps=args.eval_steps,
-        save_total_limit=3,
+        save_steps=args.checkpoint_steps,
+        save_total_limit=None,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
-        logging_steps=10,
+        logging_strategy="steps",
+        logging_steps=args.logging_steps,
+        logging_first_step=True,
         optim="paged_adamw_8bit",
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
@@ -221,11 +241,31 @@ def main():
         processing_class=tokenizer,
     )
 
+    class LiveMetricsCallback(TrainerCallback):
+        def on_log(self, training_args, state, control, logs=None, **kwargs):
+            if logs:
+                values = " ".join(
+                    f"{key}={value:.6g}" if isinstance(value, float)
+                    else f"{key}={value}"
+                    for key, value in sorted(logs.items())
+                )
+                print(f"[metrics step={state.global_step}] {values}", flush=True)
+
+    trainer.add_callback(LiveMetricsCallback())
+
     print(
         f"Training {len(train_dataset)} examples; validating on {len(valid_dataset)}; "
         f"CUDA dtype={compute_dtype}; max_steps={args.max_steps}"
     )
-    trainer.train()
+    resume_path = args.resume_from_checkpoint
+    if resume_path == "latest":
+        from transformers.trainer_utils import get_last_checkpoint
+
+        resume_path = get_last_checkpoint(str(args.output_dir))
+        if resume_path is None:
+            raise SystemExit(f"No checkpoint found in {args.output_dir}")
+        print(f"Resuming from {resume_path}")
+    trainer.train(resume_from_checkpoint=resume_path)
     trainer.save_state()
     trainer.save_model(str(args.output_dir))
     tokenizer.save_pretrained(args.output_dir)

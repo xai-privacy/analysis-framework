@@ -14,7 +14,11 @@ def main():
     parser.add_argument(
         "--trainer-state",
         type=Path,
-        default=Path(__file__).resolve().parent / "adapters_chameleon" / "trainer_state.json",
+        default=(
+            Path(__file__).resolve().parent
+            / "adapters_chameleon"
+            / "trainer_state.json"
+        ),
     )
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
