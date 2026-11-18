@@ -49,14 +49,14 @@ From `analysis-framework/fine_tuning/chameleon` on your local machine, upload
 the Trinav folder. Replace the key and IP with your own:
 
 ```bash
-ssh -i ../my-chi-key.pem cc@<public-ip> 'mkdir -p ~/xai'
-scp -i ../my-chi-key.pem -r ../trinav cc@<public-ip>:~/xai/
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 'mkdir -p ~/xai'
+scp -i fine_tuning/karimm_lease1.pem -r ../trinav cc@129.114.108.3:~/xai/
 ```
 
 Log in, create the environment, and install the pinned dependencies:
 
 ```bash
-ssh -i ../my-chi-key.pem cc@<public-ip>
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3
 cd ~/xai/trinav
 nvidia-smi
 python3 -m venv --system-site-packages .venv
@@ -81,17 +81,17 @@ adapter test also needs its final-test ID list. From the repository root on
 your local machine, copy them once:
 
 ```bash
-ssh -i <private-key.pem> cc@<public-ip> \
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
 	'mkdir -p ~/xai/trinav/benchmarks'
-scp -i <private-key.pem> \
+scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
-	cc@<public-ip>:~/xai/trinav/benchmarks/
-scp -i <private-key.pem> \
+	cc@129.114.108.3:~/xai/trinav/benchmarks/
+scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	cc@<public-ip>:~/xai/trinav/benchmarks/
-scp -i <private-key.pem> \
+	cc@129.114.108.3:~/xai/trinav/benchmarks/
+scp -i fine_tuning/karimm_lease1.pem \
 	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
-	cc@<public-ip>:~/xai/trinav/data/
+	cc@129.114.108.3:~/xai/trinav/data/
 ```
 
 ### 1. Baseline testing
@@ -117,6 +117,8 @@ You can optionally provide a global system prompt from a UTF-8 text file with
 `--prompt path/to/prompt.txt`. The prompt is sent before each question. If
 `--prompt` is omitted or given an empty path, no system prompt is sent. The
 separate `--format-hint` option can still add its output-format instructions.
+For per-statement verdicts that the evaluator can parse, use the provided
+`baseline-prompt.md` and `--format-hint` together:
 
 ```bash
 python run_hf_questions.py \
@@ -124,6 +126,8 @@ python run_hf_questions.py \
 	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--split data/split.json \
 	--all-data \
+	--prompt baseline-prompt.md \
+	--format-hint \
 	--model meta-llama/Llama-3.2-3B-Instruct \
 	--run-name llama32-base \
 	--output-root testing/baseline/huggingface
@@ -240,6 +244,17 @@ command from setup. If PyTorch reports `sm_60` support but bitsandbytes still
 fails, capture the error along with the GPU name, `torch.__version__`,
 `torch.version.cuda`, and bitsandbytes version.
 
+#### Troubleshooting chat-template errors
+
+If `tokenizer.apply_chat_template` reports that Jinja2 must be at least 3.1.6,
+upgrade it in the active environment:
+
+```bash
+python -m pip install -U "jinja2>=3.1.6,<4"
+```
+
+Jinja2 is also pinned in `requirements-chameleon.txt` for new installations.
+
 ## MBE Fine-Tuning Dataset
 
 The MBE split is kept separate under `fine_tuning/trinav/mbe/data/`. It uses
@@ -290,21 +305,22 @@ copy the MBE data, evaluator, shared trainer files, and source benchmark to the
 VM. Replace the key and IP with your own:
 
 ```bash
-ssh -i <private-key.pem> cc@<public-ip> \
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
 	'mkdir -p ~/xai/trinav/benchmarks'
-scp -i <private-key.pem> -r fine_tuning/trinav/mbe \
-	cc@<public-ip>:~/xai/trinav/
-scp -i <private-key.pem> \
+scp -i fine_tuning/karimm_lease1.pem -r fine_tuning/trinav/mbe \
+	cc@129.114.108.3:~/xai/trinav/
+scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/run_hf_mbe.py \
+	fine_tuning/trinav/mbe-baseline-prompt.md \
 	fine_tuning/trinav/chameleon_utils.py \
 	fine_tuning/trinav/train_chameleon.py \
-	cc@<public-ip>:~/xai/trinav/
+	cc@129.114.108.3:~/xai/trinav/
 ```
 
 Log in to the VM, activate the environment, and prepare the split:
 
 ```bash
-ssh -i <private-key.pem> cc@<public-ip>
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3
 cd ~/xai/trinav
 source .venv/bin/activate
 python mbe/prepare_mbe_data.py \
@@ -332,11 +348,18 @@ python run_hf_mbe.py \
 The MBE evaluator adds no system prompt unless `--prompt` is provided. An
 explicit `--format-hint` adds answer-format instructions; use the same prompt
 and hint settings when comparing baseline and adapter runs. The prompt path and
-SHA-256 are recorded in `run.json`. For example:
+SHA-256 are recorded in `run.json`. The optional
+`mbe-baseline-prompt.md` asks for the answer format recognized by the evaluator;
+pass it with `--prompt mbe-baseline-prompt.md` and omit `--format-hint` to avoid
+repeating the format instruction. For example:
 
 ```bash
---prompt path/to/prompt.txt
+--prompt mbe-baseline-prompt.md
 ```
+
+The current baseline input omits the answer options. A letter may therefore be
+parseable but cannot be reliably mapped to the correct option unless its
+letter-to-answer mapping is inferable from the question itself.
 
 Fine-tune on the training data, using validation loss to select the adapter:
 
