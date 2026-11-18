@@ -12,12 +12,10 @@ import time
 from pathlib import Path
 from typing import Any
 
-import torch
-
 try:
-    from .chameleon_utils import HERE, load_cuda_model, parse_verdicts
+    from .chameleon_utils import HERE, load_cuda_model, parse_verdicts, read_jsonl
 except ImportError:
-    from chameleon_utils import HERE, load_cuda_model, parse_verdicts
+    from chameleon_utils import HERE, load_cuda_model, parse_verdicts, read_jsonl
 
 FORMAT_HINT = (
     "\n\nAnswer in exactly this format, one block per statement, using the "
@@ -65,6 +63,27 @@ def load_questions(path: Path) -> list[dict[str, Any]]:
     return questions
 
 
+def load_baseline_questions(path: Path) -> list[dict[str, str]]:
+    rows = read_jsonl(path)
+    if not rows:
+        raise ValueError(f"No baseline questions found in {path}")
+    seen = set()
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"id", "question"}:
+            raise ValueError("Every baseline line must contain only id and question")
+        qid = row["id"]
+        if not isinstance(qid, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", qid):
+            raise ValueError(f"Baseline question has an invalid or missing id: {qid!r}")
+        if qid in seen:
+            raise ValueError(f"Duplicate baseline question id: {qid}")
+        seen.add(qid)
+        if not isinstance(row["question"], str) or not row["question"].strip():
+            raise ValueError(f"{qid}: baseline question cannot be blank")
+        if "<choices>" in row["question"]:
+            raise ValueError(f"{qid}: baseline question contains the choices section")
+    return rows
+
+
 def split_question(question: dict[str, Any]):
     text = question["original_question"]
     _, _, choices = text.partition("<choices>")
@@ -89,12 +108,12 @@ def build_user_prompt(question: dict[str, Any]) -> str:
 
 
 def build_messages(
-    question: dict[str, Any], system_prompt: str
+    question: str, system_prompt: str
 ) -> list[dict[str, str]]:
     messages = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
-    messages.append({"role": "user", "content": build_user_prompt(question)})
+    messages.append({"role": "user", "content": question})
     return messages
 
 
@@ -240,11 +259,19 @@ def write_question_markdown(output_dir: Path, question: dict[str, Any], record: 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, required=True, help="JSON test questions file")
+    parser.add_argument(
+        "--input", type=Path, required=True,
+        help="full source JSON or question-only JSONL baseline input",
+    )
     parser.add_argument(
         "--test-ids",
         type=Path,
         help="optional JSON list of IDs/records to select from --input",
+    )
+    parser.add_argument(
+        "--gold-data",
+        type=Path,
+        help="full source benchmark JSON used for scoring --all-data questions",
     )
     parser.add_argument("--split", type=Path, default=HERE / "data" / "split.json")
     parser.add_argument("--model", default="meta-llama/Llama-3.2-3B-Instruct")
@@ -255,6 +282,11 @@ def main() -> int:
     parser.add_argument("--max-tokens", type=int, default=1200)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--format-hint", action="store_true")
+    parser.add_argument(
+        "--all-data",
+        action="store_true",
+        help="evaluate the complete source dataset; base-model baselines only",
+    )
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 
@@ -262,22 +294,57 @@ def main() -> int:
         parser.error("--max-tokens must be positive")
     prompt_path = Path(args.prompt) if args.prompt else None
     prompt_text = prompt_path.read_text(encoding="utf-8") if prompt_path else ""
-    questions = load_questions(args.input)
-    if args.test_ids:
-        requested_ids = load_test_ids(args.test_ids)
-        questions_by_id = {question["id"]: question for question in questions}
-        missing = sorted(set(requested_ids) - set(questions_by_id))
-        if missing:
-            raise SystemExit(f"Test IDs missing from --input: {missing}")
-        questions = [questions_by_id[qid] for qid in requested_ids]
-
-    train_ids, valid_ids = read_split(args.split)
-    overlap = {question["id"] for question in questions} & (train_ids | valid_ids)
-    if overlap:
-        raise SystemExit(
-            "Refusing to evaluate questions used for training or validation: "
-            + ", ".join(sorted(overlap))
+    if args.all_data:
+        if args.adapter_path or args.test_ids:
+            parser.error("--all-data is only for full base-model baseline runs")
+        if not args.gold_data:
+            parser.error("--gold-data is required with --all-data")
+        prompt_rows = load_baseline_questions(args.input)
+        gold_questions = load_questions(args.gold_data)
+        gold_by_id = {question["id"]: question for question in gold_questions}
+        prompt_ids = {row["id"] for row in prompt_rows}
+        if prompt_ids != set(gold_by_id):
+            raise SystemExit(
+                "Baseline questions do not match --gold-data; "
+                f"missing IDs: {sorted(set(gold_by_id) - prompt_ids)[:10]}, "
+                f"unexpected IDs: {sorted(prompt_ids - set(gold_by_id))[:10]}"
+            )
+        with args.split.open("r", encoding="utf-8") as handle:
+            split = json.load(handle)
+        expected_count = split.get("source_count")
+        if expected_count is not None and len(prompt_rows) != expected_count:
+            raise SystemExit(
+                f"--all-data expected {expected_count} source questions, "
+                f"found {len(prompt_rows)}"
+            )
+        questions = [
+            (row["question"], gold_by_id[row["id"]]) for row in prompt_rows
+        ]
+    else:
+        if args.gold_data:
+            parser.error("--gold-data is only used with --all-data")
+        source_questions = load_questions(args.input)
+        if args.test_ids:
+            requested_ids = load_test_ids(args.test_ids)
+            questions_by_id = {
+                question["id"]: question for question in source_questions
+            }
+            missing = sorted(set(requested_ids) - set(questions_by_id))
+            if missing:
+                raise SystemExit(f"Test IDs missing from --input: {missing}")
+            source_questions = [questions_by_id[qid] for qid in requested_ids]
+        train_ids, valid_ids = read_split(args.split)
+        overlap = {question["id"] for question in source_questions} & (
+            train_ids | valid_ids
         )
+        if overlap:
+            raise SystemExit(
+                "Refusing to evaluate questions used for training or validation: "
+                + ", ".join(sorted(overlap))
+            )
+        questions = [
+            (build_user_prompt(question), question) for question in source_questions
+        ]
     if args.limit is not None:
         if args.limit < 1:
             parser.error("--limit must be positive")
@@ -293,12 +360,14 @@ def main() -> int:
         "adapter_path": adapter_path,
         "input": str(args.input.resolve()),
         "split": str(args.split.resolve()),
+        "gold_data": str(args.gold_data.resolve()) if args.gold_data else None,
         "prompt": str(prompt_path.resolve()) if prompt_path else None,
         "prompt_sha256": hashlib.sha256(
             prompt_text.encode("utf-8")
         ).hexdigest(),
         "format_hint": args.format_hint,
         "max_tokens": args.max_tokens,
+        "all_data": args.all_data,
     }
     manifest_path = output_dir / "run.json"
     if manifest_path.exists():
@@ -312,7 +381,7 @@ def main() -> int:
 
     results_path = output_dir / "results.json"
     records = []
-    wanted_ids = {question["id"] for question in questions}
+    wanted_ids = {gold_question["id"] for _, gold_question in questions}
     if results_path.exists() and not args.overwrite:
         previous = json.loads(results_path.read_text(encoding="utf-8"))
         records = [
@@ -322,6 +391,8 @@ def main() -> int:
         print(f"Resuming with {len(records)} completed questions")
     done = {record["id"] for record in records}
 
+    import torch
+
     model, tokenizer, _ = load_cuda_model(args.model, adapter_path)
     model.eval()
     device = getattr(model, "device", torch.device("cuda" if torch.cuda.is_available() else "cpu"))
@@ -330,12 +401,13 @@ def main() -> int:
         f"Running {len(questions)} questions with {args.model} "
         f"({adapter_path or 'base model'}); output: {output_dir}"
     )
-    for index, question in enumerate(questions, 1):
+    for index, (question_text, gold_question) in enumerate(questions, 1):
+        question = gold_question
         qid = question["id"]
         if qid in done:
             continue
         system_prompt = prompt_text + (FORMAT_HINT if args.format_hint else "")
-        messages = build_messages(question, system_prompt)
+        messages = build_messages(question_text, system_prompt)
         inputs = tokenizer.apply_chat_template(
             messages,
             tokenize=True,

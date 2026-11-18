@@ -76,13 +76,19 @@ PY
 hf auth login
 ```
 
-The final test runner needs the benchmark questions and final-test ID list on
-the VM. From the repository root on your local machine, copy them once:
+The baseline runners need both source benchmarks on the VM. The LEET-Arg
+adapter test also needs its final-test ID list. From the repository root on
+your local machine, copy them once:
 
 ```bash
+ssh -i <private-key.pem> cc@<public-ip> \
+	'mkdir -p ~/xai/trinav/benchmarks'
 scp -i <private-key.pem> \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
-	cc@<public-ip>:~/xai/trinav/data/
+	cc@<public-ip>:~/xai/trinav/benchmarks/
+scp -i <private-key.pem> \
+	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
+	cc@<public-ip>:~/xai/trinav/benchmarks/
 scp -i <private-key.pem> \
 	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
 	cc@<public-ip>:~/xai/trinav/data/
@@ -90,10 +96,22 @@ scp -i <private-key.pem> \
 
 ### 1. Baseline testing
 
-Run the base model first on the held-out final test IDs. This records the
-baseline for comparison with the adapter. The runner refuses to evaluate
-training or validation IDs. Do not use final-test results to choose training
-steps or adapters; use validation results for those decisions.
+Baseline inputs use the same JSONL format for both datasets: each line contains
+only an ID and the question text. LEET-Arg questions include the situation,
+question, and statements, but not the `<choices>` section. MBE questions omit
+the answer options. Gold answers and rationales remain in the separate source
+benchmarks used for scoring and are not passed to the model.
+
+Skip regeneration if these files are already present. To recreate them:
+```bash
+cd ~/xai/trinav
+source .venv/bin/activate
+python prepare_baseline_data.py \
+	--leetarg-source benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--mbe-source benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json
+```
+
+Run the base model over the complete LEET-Arg source dataset:
 
 You can optionally provide a global system prompt from a UTF-8 text file with
 `--prompt path/to/prompt.txt`. The prompt is sent before each question. If
@@ -101,16 +119,22 @@ You can optionally provide a global system prompt from a UTF-8 text file with
 separate `--format-hint` option can still add its output-format instructions.
 
 ```bash
-cd ~/xai/trinav
-source .venv/bin/activate
 python run_hf_questions.py \
-	--input data/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
-	--test-ids data/LEET_Arg_Questions_Test_Set.json \
+	--input data/baseline.jsonl \
+	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--split data/split.json \
+	--all-data \
 	--model meta-llama/Llama-3.2-3B-Instruct \
 	--run-name llama32-base \
 	--output-root testing/baseline/huggingface
 ```
+
+The evaluator sends only the `question` field from the JSONL file, plus a
+system prompt if supplied with `--prompt`. The `--all-data` option is for
+base-model baseline runs only. It requires the complete question file and uses
+the separate `--gold-data` file only for scoring. Omit it for final-test adapter
+evaluation. Do not use final-test results to choose training steps or adapters;
+use validation results for those decisions.
 
 ### 2. Fine-tuning
 
@@ -275,9 +299,6 @@ scp -i <private-key.pem> \
 	fine_tuning/trinav/chameleon_utils.py \
 	fine_tuning/trinav/train_chameleon.py \
 	cc@<public-ip>:~/xai/trinav/
-scp -i <private-key.pem> \
-	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	cc@<public-ip>:~/xai/trinav/benchmarks/
 ```
 
 Log in to the VM, activate the environment, and prepare the split:
@@ -291,24 +312,27 @@ python mbe/prepare_mbe_data.py \
 	--out mbe/data
 ```
 
-Run the base model on the held-out test questions before fine-tuning:
+Run the base model on the full MBE dataset before fine-tuning. The baseline
+input created by `prepare_baseline_data.py` contains only IDs and question
+text, with no system prompt, answer choices, answers, or rationales. The source
+benchmark is read separately for scoring. Supply your own system prompt with
+`--prompt` if desired; no system prompt is added by default.
 
 ```bash
 python run_hf_mbe.py \
-	--input mbe/data/test.jsonl \
+	--input mbe/data/baseline.jsonl \
+	--gold-data benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	--split mbe/data/split.json \
+	--all-data \
 	--model meta-llama/Llama-3.2-3B-Instruct \
 	--run-name mbe-llama32-base \
-	--output-root testing/baseline/huggingface/mbe \
-	--format-hint
+	--output-root testing/baseline/huggingface/mbe
 ```
 
-You can optionally add a UTF-8 system prompt file to either evaluation command:
-`--prompt path/to/prompt.txt`. Its contents are appended to the MBE system
-instructions before each question, and the prompt path and SHA-256 are recorded
-in `run.json`. Use the same prompt and `--format-hint` setting for baseline and
-adapter comparisons. If your prompt specifies its own answer format, omit
-`--format-hint`. For example, add this option to either evaluation command:
+The MBE evaluator adds no system prompt unless `--prompt` is provided. An
+explicit `--format-hint` adds answer-format instructions; use the same prompt
+and hint settings when comparing baseline and adapter runs. The prompt path and
+SHA-256 are recorded in `run.json`. For example:
 
 ```bash
 --prompt path/to/prompt.txt
@@ -329,17 +353,50 @@ python train_chameleon.py \
 	--max-seq-length 4096
 ```
 
-Evaluate the saved adapter on the same held-out test questions:
+Upload the resulting PEFT adapter to Hugging Face. This uploads the adapter
+configuration and weights; the base model is still loaded separately during
+evaluation. Replace `YOUR_HF_USERNAME` with your account or organization:
+
+```bash
+hf auth login
+python - <<'PY'
+from pathlib import Path
+from huggingface_hub import HfApi
+
+adapter_dir = Path("mbe/adapters_llama32")
+repo_id = "YOUR_HF_USERNAME/mbe-llama32-lora"
+config = adapter_dir / "adapter_config.json"
+weights = next((adapter_dir / name for name in (
+    "adapter_model.safetensors", "adapter_model.bin"
+) if (adapter_dir / name).is_file()), None)
+
+if not config.is_file() or weights is None:
+    raise SystemExit(f"Adapter config/weights not found in {adapter_dir}")
+
+api = HfApi()
+api.create_repo(repo_id=repo_id, repo_type="model", private=True, exist_ok=True)
+for path in (config, weights):
+    api.upload_file(
+        path_or_fileobj=str(path),
+        path_in_repo=path.name,
+        repo_id=repo_id,
+        repo_type="model",
+    )
+print(f"Uploaded adapter to https://huggingface.co/{repo_id}")
+PY
+```
+
+Evaluate the uploaded adapter on the same held-out test questions. You need
+Hugging Face access to both the gated base model and the adapter repository:
 
 ```bash
 python run_hf_mbe.py \
 	--input mbe/data/test.jsonl \
 	--split mbe/data/split.json \
 	--model meta-llama/Llama-3.2-3B-Instruct \
-	--adapter-path mbe/adapters_llama32 \
-	--run-name mbe-llama32-adapter \
-	--output-root testing/baseline/huggingface/mbe \
-	--format-hint
+	--adapter-path YOUR_HF_USERNAME/mbe-llama32-lora \
+	--run-name mbe-llama32-adapter-hf \
+	--output-root testing/baseline/huggingface/mbe
 ```
 
 Both runs save `results.json`, `run.json`, and one Markdown file per question
