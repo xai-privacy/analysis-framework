@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LegalBench Review Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+body{margin:0}
+/* Layout: the same review desk as the MBE one. Record list rail on the left; on the right, each text field
+   of one record shown twice, as it is in the source TSV and as clean_legalbench.py writes it. */
+:root{
+  --bg:#e9edf1; --panel:#f7f9fb; --card:#ffffff; --rail:#dfe5eb;
+  --ink:#16202b; --ink2:#46535f; --ink3:#7a8794; --line:#cfd7df; --line2:#e3e8ed;
+  --accent:#24508f; --accent-soft:#e3ebf6;
+  --crit:#a7261c; --crit-bg:#f8e1de; --warn:#8a5a00; --warn-bg:#f7ecd2; --info:#3f5f7a; --info-bg:#e2eaf1; --ok:#1d6b4a; --ok-bg:#dcefe5;
+  --ins:#cfe9d7; --del:#f5d3ce; --ws:#f1c9a8;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Source Serif 4","Iowan Old Style",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12171d; --panel:#171e25; --card:#1c242c; --rail:#151b21;
+  --ink:#e4e9ee; --ink2:#a9b5c0; --ink3:#78858f; --line:#2c3640; --line2:#242d36;
+  --accent:#8db2ea; --accent-soft:#1f2f45;
+  --crit:#f0897f; --crit-bg:#3b1d1a; --warn:#e6bd69; --warn-bg:#352a12; --info:#9fbbd3; --info-bg:#1f2b37; --ok:#7fcfa6; --ok-bg:#16301f;
+  --ins:#1f3d2a; --del:#4a2421; --ws:#5a3a1f; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#12171d; --panel:#171e25; --card:#1c242c; --rail:#151b21;
+  --ink:#e4e9ee; --ink2:#a9b5c0; --ink3:#78858f; --line:#2c3640; --line2:#242d36;
+  --accent:#8db2ea; --accent-soft:#1f2f45;
+  --crit:#f0897f; --crit-bg:#3b1d1a; --warn:#e6bd69; --warn-bg:#352a12; --info:#9fbbd3; --info-bg:#1f2b37; --ok:#7fcfa6; --ok-bg:#16301f;
+  --ins:#1f3d2a; --del:#4a2421; --ws:#5a3a1f; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+#app{display:grid;grid-template-columns:340px minmax(0,1fr);height:100%;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+#rail{background:var(--rail);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;min-width:0}
+#main{overflow:auto;min-width:0}
+.mainInner{max-width:1240px;margin:0 auto;padding-block:22px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
+
+/* rail */
+.railHead{padding:16px 16px 12px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
+.brand h1{font-family:var(--serif);font-weight:600;font-size:20px;margin:0;letter-spacing:.005em}
+.row{display:flex;gap:8px;align-items:center}
+input[type=search],select{width:100%;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
+.label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);font-weight:600}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card)}
+.tabs button{border:0;background:transparent;padding:7px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:0;text-align:left;border-right:1px solid var(--line)}
+.tabs button:last-child{border-right:0}
+.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.tabs button[aria-pressed=true]{background:var(--ink);color:var(--card)}
+.tabs button[aria-pressed=true] .n{color:inherit;opacity:.75}
+.dsRow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px}
+.dsText{display:flex;flex-direction:column;min-width:0}
+.dsName{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dsMeta{font-size:11px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:6px;padding:6px 11px;cursor:pointer}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.btn.small{font-size:12px;padding:4px 9px;white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.flagDD{position:relative}
+.ddBtn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:7px 9px;cursor:pointer;text-align:left}
+.ddBtn:hover{border-color:var(--ink3)}
+.ddBtn[aria-expanded=true]{border-color:var(--accent)}
+.ddBtn #flagBtnText{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ddBtn.active #flagBtnText{font-weight:600}
+.caret{color:var(--ink3);font-size:11px}
+.ddPanel{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:30;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.16);padding:8px;display:flex;flex-direction:column;gap:6px;max-height:min(70vh,560px);overflow:auto}
+.ddHead{display:flex;justify-content:space-between;align-items:center;padding:2px 4px}
+.linkBtn{border:0;background:none;color:var(--accent);cursor:pointer;font-size:12px;padding:2px 4px}
+.ddNote{margin:2px 4px 0;font-size:11.5px;color:var(--ink3)}
+.chips{display:flex;flex-direction:column;gap:2px}
+.chip{width:100%;border:1px solid transparent;background:transparent;border-radius:5px;padding:5px 6px;font-size:12.5px;cursor:pointer;display:flex;gap:7px;align-items:center;text-align:left;white-space:nowrap}
+.chip:hover:not(:disabled){background:var(--panel)}
+.chip .t{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.chip .c{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink3);font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
+.chip[aria-pressed=true]{background:var(--accent-soft)}
+.chip:disabled{opacity:.45;cursor:not-allowed}
+.cb{width:14px;height:14px;border:1.5px solid var(--ink3);border-radius:3px;flex:none;display:grid;place-items:center;font-size:10px;line-height:1;color:var(--card)}
+.chip[aria-pressed=true] .cb{background:var(--accent);border-color:var(--accent)}
+.chip[aria-pressed=true] .cb::after{content:"✓"}
+.grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);font-weight:600;padding:6px 6px 2px}
+.listMeta{padding:8px 16px;font-size:12px;color:var(--ink2);display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}
+#list{overflow:auto;flex:1;min-height:0}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;padding:8px 16px;border-bottom:1px solid var(--line2);cursor:pointer;align-items:center}
+.item:hover{background:var(--panel)}
+.item[aria-current=true]{background:var(--card);box-shadow:inset 3px 0 0 var(--accent)}
+.item .id{font-family:var(--mono);font-size:11.5px;color:var(--ink2);min-width:74px;line-height:1.3}
+.item .id small{display:block;color:var(--ink3);font-size:10.5px}
+.item .snip{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item.drop .snip{color:var(--ink3);text-decoration:line-through}
+.item .marks{display:flex;gap:3px;align-items:center}
+.mk{font-family:var(--mono);font-size:10px;padding:0 4px;border-radius:3px;background:var(--info-bg);color:var(--info)}
+.mk.drop{background:var(--crit-bg);color:var(--crit)}
+.st{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;padding:0 5px}
+.st-ok{background:var(--ok-bg);color:var(--ok)} .st-issue{background:var(--crit-bg);color:var(--crit)} .st-unsure{background:var(--warn-bg);color:var(--warn)}
+.railFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 16px;padding-bottom:max(10px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--rail);position:relative}
+.railFoot .btn{font-size:12.5px;padding:5px 10px}
+.keys{font-size:12px;color:var(--ink2)}
+.keys summary{cursor:pointer}
+.keys p{position:absolute;right:16px;bottom:calc(100% + 6px);margin:0;max-width:300px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:9px 11px;box-shadow:0 6px 18px rgba(0,0,0,.12);line-height:1.9;z-index:2}
+kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;background:var(--card)}
+
+/* main */
+.sumBar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:12.5px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.sumBar b{color:var(--ink);font-variant-numeric:tabular-nums}
+.check{display:inline-flex;gap:6px;align-items:center;padding:2px 8px;border-radius:4px;font-weight:500}
+.check.ok{background:var(--ok-bg);color:var(--ok)} .check.warn{background:var(--warn-bg);color:var(--warn)}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.crumbs{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.crumbs .dom{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);font-weight:600}
+.crumbs h2{margin:0;font-family:var(--serif);font-size:26px;font-weight:600}
+.crumbs .pos{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.flagRow{display:flex;flex-wrap:wrap;gap:6px}
+.flag{display:inline-flex;gap:6px;align-items:center;font-size:12px;padding:3px 9px;border-radius:4px;background:var(--info-bg);color:var(--info);font-weight:500}
+.flag.ans{background:var(--card);color:var(--ink);border:1px solid var(--line);font-family:var(--mono)}
+.flag.shot{background:var(--warn-bg);color:var(--warn)}
+.flag.drop{background:var(--crit-bg);color:var(--crit)}
+.flag.none{background:var(--ok-bg);color:var(--ok)}
+.notice{background:var(--crit-bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:13.5px;display:flex;flex-direction:column;gap:6px}
+.notice.shot{background:var(--warn-bg)}
+.notice a{color:var(--accent);cursor:pointer;text-decoration:underline}
+
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.sheetHead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sheetHead h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2)}
+.opts{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink2)}
+.opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.col{min-width:0;display:flex;flex-direction:column;gap:6px}
+.col .cap{display:flex;justify-content:space-between;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);font-weight:600}
+.col .cap .k{font-family:var(--mono);text-transform:none;letter-spacing:0;font-weight:400}
+.txt{font-family:var(--serif);font-size:15px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:12px 14px;max-height:70vh;overflow:auto}
+.txt del{background:var(--del);text-decoration:line-through;text-decoration-color:var(--crit);border-radius:2px}
+.txt ins{background:var(--ins);text-decoration:none;border-radius:2px}
+.txt .sym{font-family:var(--mono);font-size:.78em;color:var(--warn);background:var(--ws);border-radius:2px;padding:0 1px}
+.txt .lig{box-shadow:0 1.5px 0 var(--warn)}
+.txt .gap{display:inline-block;font-family:var(--sans);font-size:11.5px;color:var(--ink3);background:var(--card);border:1px dashed var(--line);border-radius:999px;padding:0 8px;margin:2px 0}
+.txt.none{color:var(--ink3);font-style:italic;font-family:var(--sans);font-size:13px}
+.exact{border-top:1px solid var(--line2);padding-top:10px}
+.exact summary{cursor:pointer;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)}
+.exact pre{margin:8px 0 0;max-height:340px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-family:var(--mono);font-size:12px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink2)}
+.legend span{display:inline-flex;gap:5px;align-items:center}
+.legend del,.legend ins,.legend .sym{font-family:var(--serif);border-radius:2px;padding:0 3px}
+.legend del{background:var(--del)} .legend ins{background:var(--ins);text-decoration:none}
+.legend .sym{font-family:var(--mono);font-size:11px;color:var(--warn);background:var(--ws)}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);display:flex;justify-content:space-between;gap:8px}
+.panel h3 .k{font-family:var(--mono);text-transform:none;letter-spacing:0;color:var(--ink3);font-weight:400}
+.review{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 14px;align-items:start}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:6px 12px;cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true][data-s=ok]{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.seg button[aria-pressed=true][data-s=issue]{background:var(--crit-bg);color:var(--crit);font-weight:600}
+.seg button[aria-pressed=true][data-s=unsure]{background:var(--warn-bg);color:var(--warn);font-weight:600}
+textarea{width:100%;min-height:62px;resize:vertical;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+.muted{color:var(--ink3);font-size:12.5px}
+.boot{padding:40px 0;color:var(--ink2)}
+.boot .err{color:var(--crit)}
+.work{display:flex;flex-direction:column;gap:16px}
+
+.overlay{position:fixed;inset:0;z-index:40;background:rgba(10,16,24,.45);display:grid;place-items:center;padding:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.dlg{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;width:min(580px,100%);max-height:100%;overflow:auto;padding:20px 22px;display:flex;flex-direction:column;gap:16px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.dlg.drop{outline:2px dashed var(--accent);outline-offset:-8px}
+.dlg h2{margin:0;font-family:var(--serif);font-size:21px}
+.ldSec{display:flex;flex-direction:column;gap:8px}
+.ldSec p{margin:0;font-size:12.5px;line-height:1.5}
+.ldItem{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:9px 11px;cursor:pointer}
+.ldItem:hover{border-color:var(--accent)}
+.fileGrid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;align-items:center}
+.fileGrid .fn{font-size:12.5px}
+.fileGrid .fn small{display:block;font-family:var(--mono);font-size:11px;color:var(--ink3);overflow-wrap:anywhere}
+.fileBtn{position:relative;font-size:12.5px}
+.fileBtn:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.ldStatus{margin:0;font-size:12.5px;color:var(--ink2)}
+.ldStatus.err{color:var(--crit)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--card);font-size:12.5px;padding:7px 12px;border-radius:6px;z-index:60}
+@media (max-width:900px){
+  #app{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);height:auto;min-height:100%}
+  #rail{border-right:0;border-bottom:1px solid var(--line)}
+  #list{max-height:38vh}
+  #main{overflow:visible}
+  .cols{grid-template-columns:1fr}
+  .sheet{padding:14px}
+  .review{grid-template-columns:1fr}
+  .railHead{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <aside id="rail" aria-label="Records">
+    <div class="railHead">
+      <div class="brand"><h1>LegalBench Review Desk</h1></div>
+      <div class="tabs" role="group" aria-label="Benchmark">
+        <button type="button" id="tab_legal_reasoning_causality" data-task="legal_reasoning_causality" aria-pressed="true">Causality <span class="n" id="tabN_legal_reasoning_causality">–</span></button>
+        <button type="button" id="tab_privacy_policy_entailment" data-task="privacy_policy_entailment" aria-pressed="false">Privacy policy <span class="n" id="tabN_privacy_policy_entailment">–</span></button>
+      </div>
+      <div class="dsRow">
+        <div class="dsText"><span class="dsName" id="dsName">Loading…</span><span class="dsMeta" id="dsMeta"></span></div>
+        <button class="btn small" id="dsOpen" type="button">Load data</button>
+      </div>
+      <input id="q" type="search" placeholder="Search text, or a row like test:29" aria-label="Search">
+      <div class="row">
+        <select id="show" aria-label="Which records">
+          <option value="changed">Changed or dropped</option>
+          <option value="all">All records</option>
+          <option value="unchanged">Unchanged only</option>
+        </select>
+        <select id="rv" aria-label="Review status">
+          <option value="">All review states</option>
+          <option value="none">Not reviewed</option>
+          <option value="ok">OK</option><option value="issue">Issue</option><option value="unsure">Unsure</option>
+        </select>
+      </div>
+      <div class="flagDD" id="flagDD">
+        <button type="button" class="ddBtn" id="flagBtn" aria-haspopup="true" aria-expanded="false" aria-controls="flagPanel"><span id="flagBtnText">Fixes: any</span><span class="caret" aria-hidden="true">▾</span></button>
+        <div class="ddPanel" id="flagPanel" hidden>
+          <div class="ddHead"><span class="label">Show records with any of</span><button type="button" class="linkBtn" id="flagClear">Clear</button></div>
+          <div class="chips" id="flagChips"></div>
+          <p class="ddNote">Counts are records, after duplicates were dropped, the same way cleaning_log.json counts them.</p>
+        </div>
+      </div>
+    </div>
+    <div class="listMeta"><span id="count" class="num"></span><span id="revCount" class="num"></span></div>
+    <div id="list" role="listbox" aria-label="Filtered records"></div>
+    <div class="railFoot">
+      <button class="btn" id="copyReview" type="button">Copy review notes (JSON)</button>
+      <details class="keys"><summary>Keyboard</summary>
+        <p><kbd>J</kbd>/<kbd>K</kbd> next/previous · <kbd>/</kbd> search · <kbd>1</kbd> OK · <kbd>2</kbd> Issue · <kbd>3</kbd> Unsure · <kbd>C</kbd> changes only</p>
+      </details>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div class="mainInner">
+      <div class="sumBar" id="sumBar" hidden></div>
+      <div class="boot" id="boot"><p>Loading the LegalBench files…</p></div>
+      <div class="work" id="work" hidden>
+        <div class="topbar">
+          <div class="crumbs"><span class="dom" id="rDom"></span><h2 id="rTitle"></h2><span class="pos num" id="rPos"></span></div>
+          <div class="row"><button class="btn" id="prev" type="button">← Prev</button><button class="btn" id="next" type="button">Next →</button></div>
+        </div>
+        <div class="flagRow" id="rFlags"></div>
+        <div id="rNotice"></div>
+        <div class="legend" aria-label="How to read the texts">
+          <span><del>removed</del></span><span><ins>added</ins></span>
+          <span><span class="sym">·</span> space</span><span><span class="sym">↵</span> line break</span>
+          <span><span class="sym">⍽</span> non-breaking space</span><span><span class="sym">U+200E</span> invisible character</span>
+          <span><span style="box-shadow:0 1.5px 0 var(--warn)">ﬁ</span> ligature character</span>
+        </div>
+        <div id="rFields" class="work"></div>
+        <section class="panel" aria-label="Review">
+          <h3>Your review <span class="k" id="saveState"></span></h3>
+          <div class="review">
+            <div class="seg" role="group" aria-label="Review status">
+              <button type="button" data-s="ok" aria-pressed="false">OK</button>
+              <button type="button" data-s="issue" aria-pressed="false">Issue</button>
+              <button type="button" data-s="unsure" aria-pressed="false">Unsure</button>
+            </div>
+            <textarea id="note" placeholder="What looks wrong, and what should the cleaning do instead? Saved in this browser when you pause typing."></textarea>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="overlay" id="loader" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="ldTitle">
+    <h2 id="ldTitle">Load data</h2>
+    <section class="ldSec">
+      <div class="label">Online</div>
+      <div id="ldSources" class="ldSec"></div>
+      <p class="muted">The page loads the four TSVs from Hugging Face when it opens. If that fails, for example when you are offline, pick the files from your computer below.</p>
+    </section>
+    <section class="ldSec">
+      <div class="label">From your computer</div>
+      <div class="fileGrid" id="fileGrid"></div>
+      <p class="muted">Pick the train.tsv and test.tsv of a task (from Hugging Face or benchmarks/ in analysis-framework). You can also drop the files on this box; files named like LegalBench_privacy_policy_entailment_test.tsv go to the right slot by themselves. Files are read in your browser and not uploaded.</p>
+      <div><button class="btn primary" id="ldLocal" type="button" disabled>Load and clean</button></div>
+    </section>
+    <p class="ldStatus" id="ldStatus" aria-live="polite"></p>
+    <div class="row" style="justify-content:flex-end"><button class="btn" id="ldClose" type="button">Close</button></div>
+  </div>
+</div>
+<div id="toast" role="status" hidden></div>
+
+<script>
+// ==== CORE (start): the same steps as clean_legalbench.py; gives byte-identical output to the script.
+const TASKS = {
+  legal_reasoning_causality: {name: 'Legal reasoning causality', content: ['text'], labels: ['Yes', 'No'],
+    cols: ['answer', 'text'], expect: {train: 4, test: 55, kept: 58}},
+  privacy_policy_entailment: {name: 'Privacy policy entailment', content: ['text', 'description'], labels: ['Correct', 'Incorrect'],
+    cols: ['text', 'description', 'answer'], expect: {train: 8, test: 4335, kept: 4341}},
+};
+const SPLITS = ['train', 'test'];
+
+// Python's \b, \d and str.strip() are Unicode-aware; these match them.
+const PYWS = '\\t\\n\\x0b\\x0c\\r\\x1c-\\x1f \\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000';
+const RE_STRIP = new RegExp(`^[${PYWS}]+|[${PYWS}]+$`, 'g');
+const RE_WSRUN = new RegExp(`[${PYWS}]+`, 'g');
+const pyStrip = s => s.replace(RE_STRIP, '');
+
+const RE = {
+  nbsp: / /g,
+  invisible: /[​-‏﻿]/g,
+  wbr: /<wbr\s*\/?>/gi,
+  link: /<a(?![\p{L}\p{N}_])[^>]*>([\s\S]*?)<\/a>/giu,
+  page: /[ \t]*\[\*+\p{Nd}+\][ \t]*/gu,
+  head: /(?<![\p{L}\p{N}_])HN\p{Nd}+(?![\p{L}\p{N}_])[ \t]*/gu,
+  byby: /(?<![\p{L}\p{N}_])by by(?![\p{L}\p{N}_])/gu,
+};
+
+// id, name used in cleaning_log.json, label shown here. Same order as clean_field() in the script.
+const FIXES = [
+  ['nbsp', 'whitespace: non-breaking space -> space', 'Non-breaking space → space'],
+  ['invisible', 'whitespace: removed invisible characters', 'Removed invisible characters'],
+  ['wbr', 'html: removed <wbr> tags', 'HTML: removed <wbr> tags'],
+  ['link', 'html: replaced <a> link with its link text', 'HTML: <a> link → its link text'],
+  ['lig_fi', 'ligature: ﬁ -> fi', 'Ligature ﬁ → fi'],
+  ['lig_fl', 'ligature: ﬂ -> fl', 'Ligature ﬂ → fl'],
+  ['page', 'removed page markers like [*27]', 'Removed page markers like [*27]'],
+  ['head', 'removed headnote markers like HN26', 'Removed headnote markers like HN26'],
+  ['byby', "description: 'by by' -> 'by'", 'Description: “by by” → “by”'],
+  ['collapse', 'whitespace: collapsed repeated spaces', 'Collapsed repeated spaces'],
+  ['nlspace', 'whitespace: removed spaces around line breaks', 'Removed spaces around line breaks'],
+  ['strip', 'whitespace: stripped start/end', 'Removed spaces and line breaks at start/end'],
+];
+const FIX_LABEL = Object.fromEntries(FIXES.map(f => [f[0], f[2]]));
+
+function cleanField(field, s) {
+  const fixes = [];
+  const step = (id, next) => { if (next !== s) { fixes.push(id); s = next; } };
+  step('nbsp', s.replace(RE.nbsp, ' '));
+  step('invisible', s.replace(RE.invisible, ''));
+  step('wbr', s.replace(RE.wbr, ''));
+  step('link', s.replace(RE.link, '$1'));
+  step('lig_fi', s.split('ﬁ').join('fi'));
+  step('lig_fl', s.split('ﬂ').join('fl'));
+  step('page', s.replace(RE.page, ' '));
+  step('head', s.replace(RE.head, ''));
+  if (field === 'description') step('byby', s.replace(RE.byby, 'by'));
+  step('collapse', s.replace(/ {2,}/g, ' '));
+  step('nlspace', s.replace(/ *\n */g, '\n'));
+  step('strip', pyStrip(s));
+  return [s, fixes];
+}
+
+// Python's csv module with delimiter="\t" (quoted fields, "" inside quotes, line breaks inside quotes).
+function parseTSV(text) {
+  const rows = []; let row = [], f = '', st = 'rec';
+  const endRow = () => { rows.push(row); row = []; st = 'rec'; };
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    const nl = c === '\n' || c === '\r';
+    if (nl && c === '\r' && text[i + 1] === '\n' && st !== 'q') i++;
+    switch (st) {
+      case 'rec': if (nl) { rows.push([]); break; } st = 'start'; // falls through
+      case 'start':
+        if (c === '"') st = 'q';
+        else if (c === '\t') row.push('');
+        else if (nl) { row.push(''); endRow(); }
+        else { f = c; st = 'f'; }
+        break;
+      case 'f':
+        if (c === '\t') { row.push(f); f = ''; st = 'start'; }
+        else if (nl) { row.push(f); f = ''; endRow(); }
+        else f += c;
+        break;
+      case 'q':
+        if (c === '"') st = 'qq'; else f += c;
+        break;
+      case 'qq':
+        if (c === '"') { f += '"'; st = 'q'; }
+        else if (c === '\t') { row.push(f); f = ''; st = 'start'; }
+        else if (nl) { row.push(f); f = ''; endRow(); }
+        else { f += c; st = 'f'; }
+        break;
+    }
+  }
+  if (st === 'q') throw new Error('the file ends inside a quoted field');
+  if (st !== 'rec') { row.push(f); rows.push(row); }
+  const head = rows.shift() || [];
+  return rows.filter(r => r.length).map(r => {
+    if (r.length > head.length) throw new Error(`row with extra columns at index ${r[0]}`);
+    return Object.fromEntries(head.map((h, j) => [h, j < r.length ? r[j] : null]));
+  });
+}
+
+// texts: {train: "...tsv text...", test: "..."}; returns every source row with its fate, the output and the log.
+function processTask(task, texts) {
+  const cfg = TASKS[task], fields = cfg.content;
+  const log = {input_rows: {}, dropped_duplicates: [], conflicting_duplicates: [], unexpected_labels: [], empty_rows: []};
+  const merged = [];
+  for (const split of SPLITS) {
+    const rows = parseTSV(texts[split]);
+    log.input_rows[split] = rows.length;
+    rows.forEach((r, i) => { if (r.index !== String(i)) throw new Error(`${split}.tsv: the index column is not 0..${rows.length - 1}`); });
+    for (const r of rows) {
+      for (const col of cfg.cols) if (r[col] == null) throw new Error(`${split}.tsv has no column "${col}"`);
+      const rec = {split, oi: Number(r.index), raw: {}, clean: {}, fixes: {}, rawAnswer: r.answer, answer: pyStrip(r.answer), fate: 'kept'};
+      for (const fld of fields) { rec.raw[fld] = r[fld]; [rec.clean[fld], rec.fixes[fld]] = cleanField(fld, r[fld]); }
+      merged.push(rec);
+    }
+  }
+  const ref = r => `${r.split}:${r.oi}`;
+  const kept = [], seen = new Map();
+  for (const rec of merged) {
+    if (fields.some(fld => !rec.clean[fld]) || !rec.answer) { rec.fate = 'empty'; log.empty_rows.push(ref(rec)); continue; }
+    if (!cfg.labels.includes(rec.answer)) log.unexpected_labels.push({row: ref(rec), answer: rec.answer});
+    const k = fields.map(fld => pyStrip(rec.clean[fld].replace(RE_WSRUN, ' ')).toLowerCase()).join('\u0001');
+    if (seen.has(k)) {
+      const first = seen.get(k);
+      if (first.answer === rec.answer) {
+        const same = fields.every(fld => first.clean[fld] === rec.clean[fld]);
+        rec.fate = 'dropped'; rec.dupOf = first; rec.dupMatch = same ? 'identical after cleaning' : 'differs only in case/whitespace';
+        (first.twins = first.twins || []).push(rec);
+        log.dropped_duplicates.push({dropped: ref(rec), kept: ref(first), match: rec.dupMatch});
+        continue;
+      }
+      rec.conflict = first;
+      log.conflicting_duplicates.push({rows: [ref(first), ref(rec)], answers: [first.answer, rec.answer]});
+    } else seen.set(k, rec);
+    kept.push(rec);
+  }
+  const out = kept.map((rec, i) => {
+    rec.out = i;
+    const o = {index: i};
+    for (const col of cfg.cols) o[col] = col === 'answer' ? rec.answer : rec.clean[col];
+    o.original_split = rec.split; o.original_index = rec.oi;
+    return o;
+  });
+  return {merged, out, log};
+}
+// ==== CORE (end)
+
+if (typeof window !== 'undefined') {
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const fmt = n => n.toLocaleString('en-US');
+
+const SOURCES = [
+  {id: 'hf', name: 'Hugging Face, nguha/legalbench', sub: 'huggingface.co/datasets/nguha/legalbench/data/<task>/<split>.tsv',
+   url: (t, s) => `https://huggingface.co/datasets/nguha/legalbench/resolve/main/data/${t}/${s}.tsv`},
+];
+const SHORT = {legal_reasoning_causality: 'Causality', privacy_policy_entailment: 'Privacy policy'};
+
+let DATA = {};           // task -> {merged, out, log, source}
+const state = {task: 'legal_reasoning_causality', show: 'changed', rv: '', q: '', flags: new Set(), cur: {}, only: true, hideWs: false};
+let VIEW = [];
+
+// ---------- review notes, kept in this browser ----------
+let reviews = {};
+try { reviews = JSON.parse(localStorage.getItem('legalbench-review') || '{}'); } catch (e) { reviews = {}; }
+const rkey = r => `${state.task}:${r.split}:${r.oi}`;
+function saveReviews(msg) {
+  try { localStorage.setItem('legalbench-review', JSON.stringify(reviews)); $('saveState').textContent = msg || 'Saved in this browser'; }
+  catch (e) { $('saveState').textContent = 'This browser is not keeping notes; copy them before you close the page'; }
+}
+let toastT;
+function toast(t) { const el = $('toast'); el.textContent = t; el.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { el.hidden = true; }, 2600); }
+
+// ---------- per-record facts ----------
+function recFixes(r) { const s = new Set(); Object.values(r.fixes).forEach(l => l.forEach(f => s.add(f))); return [...s]; }
+function tags(r) {
+  const t = new Set(recFixes(r));
+  if (r.fate === 'dropped') t.add('dropped');
+  if (r.twins) t.add('kept_twin');
+  if (r.split === 'train') t.add('fewshot');
+  if (r.fate === 'kept' && Object.values(r.clean).some(v => v.includes('\n'))) t.add('para');
+  if (r.fate !== 'dropped' && !recFixes(r).length) t.add('unchanged');
+  return t;
+}
+const EXTRA = {
+  dropped: 'Dropped as a duplicate', kept_twin: 'Kept, has a dropped duplicate', fewshot: 'Train row (LegalBench few-shot example)',
+  para: 'Paragraph breaks kept in text', unchanged: 'No change',
+};
+const SHORTMK = {nbsp: 'nbsp', invisible: 'U+200x', wbr: 'html', link: 'html', lig_fi: 'ﬁ', lig_fl: 'ﬂ', page: '[*n]', head: 'HN', byby: 'by by',
+  collapse: 'ws', nlspace: 'ws', strip: 'ws'};
+
+// ---------- loading ----------
+async function fetchText(url) {
+  let res;
+  try { res = await fetch(url, {cache: 'no-store'}); }
+  catch (e) { const err = new Error(`the browser could not reach ${url}`); err.blocked = true; throw err; }
+  if (!res.ok) throw new Error(`${url} answered ${res.status}`);
+  return res.text();
+}
+async function fromSource(src) {
+  const out = {};
+  await Promise.all(Object.keys(TASKS).map(async t => {
+    const [train, test] = await Promise.all(SPLITS.map(s => fetchText(src.url(t, s))));
+    out[t] = {train, test};
+  }));
+  return out;
+}
+function ingest(texts, sourceName) {
+  for (const [t, tx] of Object.entries(texts)) {
+    const res = processTask(t, tx);
+    res.source = sourceName;
+    DATA[t] = res;
+  }
+  for (const t of Object.keys(TASKS)) $('tabN_' + t).textContent = DATA[t] ? fmt(DATA[t].out.length) : '–';
+  if (!DATA[state.task]) state.task = Object.keys(DATA)[0];
+  setTask(state.task, true);
+}
+async function autoLoad() {
+  let last;
+  for (const src of SOURCES) {
+    try { setBoot(`Loading from ${esc(src.name)}…`); ingest(await fromSource(src), src.name); return; }
+    catch (e) { last = e; }
+  }
+  setBoot(`Could not load the files (${esc(last ? last.message : 'no source')}). Choose <b>Load data</b> to pick the four TSVs from your computer.`, true);
+  openLoader();
+}
+function setBoot(msg, isErr) { $('boot').hidden = !msg; $('boot').innerHTML = msg ? `<p class="${isErr ? 'err' : ''}">${msg}</p>` : ''; $('work').hidden = !!msg; }
+
+// ---------- filters and list ----------
+function filtered() {
+  const d = DATA[state.task]; if (!d) return [];
+  const q = state.q.trim().toLowerCase();
+  return d.merged.filter(r => {
+    const tg = tags(r);
+    if (state.show === 'changed' && !(recFixes(r).length || r.fate === 'dropped')) return false;
+    if (state.show === 'unchanged' && !tg.has('unchanged')) return false;
+    if (state.flags.size && ![...state.flags].some(f => tg.has(f))) return false;
+    const rv = reviews[rkey(r)];
+    if (state.rv === 'none' && rv && rv.s) return false;
+    if (state.rv && state.rv !== 'none' && !(rv && rv.s === state.rv)) return false;
+    if (q) {
+      const id = `${r.split}:${r.oi}`;
+      if (/^(train|test):\d+$/.test(q)) return id === q;
+      if (/^#?\d+$/.test(q)) return r.out === Number(q.replace('#', ''));
+      const hay = Object.values(r.raw).join(' ').toLowerCase() + ' ' + Object.values(r.clean).join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+function buildChips() {
+  const d = DATA[state.task]; const counts = {};
+  d.merged.forEach(r => tags(r).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  const chip = (id, label) => `<button type="button" class="chip" data-f="${id}" aria-pressed="${state.flags.has(id)}" ${counts[id] ? '' : 'disabled'}><span class="cb"></span><span class="t">${esc(label)}</span><span class="c">${fmt(counts[id] || 0)}</span></button>`;
+  $('flagChips').innerHTML = '<div class="grp">Fixes</div>' +
+    FIXES.filter(f => counts[f[0]]).map(f => chip(f[0], f[2])).join('') +
+    '<div class="grp">Other</div>' + ['dropped', 'kept_twin', 'fewshot', 'para', 'unchanged'].map(k => chip(k, EXTRA[k])).join('');
+  $('flagChips').querySelectorAll('.chip').forEach(b => b.onclick = () => {
+    const f = b.dataset.f; state.flags.has(f) ? state.flags.delete(f) : state.flags.add(f); paintFlagBtn(); buildChips(); refresh();
+  });
+}
+function paintFlagBtn() {
+  const n = state.flags.size;
+  $('flagBtnText').textContent = n === 0 ? 'Fixes: any' : n === 1 ? (FIX_LABEL[[...state.flags][0]] || EXTRA[[...state.flags][0]]) : `${n} filters`;
+  $('flagBtn').classList.toggle('active', n > 0);
+}
+function renderList() {
+  const cur = state.cur[state.task];
+  $('list').innerHTML = VIEW.map(r => {
+    const rv = reviews[rkey(r)];
+    const mk = [...new Set(recFixes(r).map(f => SHORTMK[f]))].map(m => `<span class="mk">${esc(m)}</span>`).join('');
+    const snip = (Object.values(r.clean)[0] || '').slice(0, 120);
+    return `<div class="item ${r.fate === 'dropped' ? 'drop' : ''}" role="option" data-k="${r.split}:${r.oi}" aria-current="${cur === r}">
+      <span class="id">${r.fate === 'dropped' ? 'dropped' : '#' + r.out}<small>${r.split}:${r.oi}</small></span>
+      <span class="snip">${esc(snip)}</span>
+      <span class="marks">${r.fate === 'dropped' ? '<span class="mk drop">dup</span>' : mk}${rv && rv.s ? `<span class="st st-${rv.s}">${rv.s}</span>` : ''}</span></div>`;
+  }).join('') || '<p class="muted" style="padding:12px 16px">No records match.</p>';
+  $('list').querySelectorAll('.item').forEach(el => el.onclick = () => go(el.dataset.k));
+  $('count').textContent = `${fmt(VIEW.length)} shown`;
+  const d = DATA[state.task]; const n = d ? d.merged.filter(r => (reviews[rkey(r)] || {}).s).length : 0;
+  $('revCount').textContent = n ? `${fmt(n)} reviewed` : '';
+}
+function refresh(keep) {
+  VIEW = filtered();
+  const cur = state.cur[state.task];
+  if (!keep || !VIEW.includes(cur)) state.cur[state.task] = VIEW[0] || null;
+  renderList(); render();
+}
+
+// ---------- diff (Myers, on tokens that keep every space and line break) ----------
+const TOK = /<[^>]*>|\[\*+\d+\]|[​-‏﻿]| |\n|\t| +|[^\s<\[​-‏﻿]+|[\s\S]/gu;
+const tokenize = s => s.match(TOK) || [];
+function diff(a, b) {
+  let pre = 0; while (pre < a.length && pre < b.length && a[pre] === b[pre]) pre++;
+  let suf = 0; while (suf < a.length - pre && suf < b.length - pre && a[a.length - 1 - suf] === b[b.length - 1 - suf]) suf++;
+  const A = a.slice(pre, a.length - suf), B = b.slice(pre, b.length - suf);
+  const N = A.length, M = B.length, MAX = N + M, off = MAX + 1;
+  let mid = null;
+  if (MAX && Math.min(N, M) && MAX < 60000) {
+    const v = new Int32Array(2 * MAX + 3), trace = [];
+    outer: for (let d = 0; d <= MAX; d++) {
+      if (d * v.length > 4e7) break; // too different to diff word by word: show all of it as replaced
+      trace.push(v.slice());
+      for (let k = -d; k <= d; k += 2) {
+        let x = (k === -d || (k !== d && v[off + k - 1] < v[off + k + 1])) ? v[off + k + 1] : v[off + k - 1] + 1;
+        let y = x - k;
+        while (x < N && y < M && A[x] === B[y]) { x++; y++; }
+        v[off + k] = x;
+        if (x >= N && y >= M) {
+          const ops = []; let X = N, Y = M;
+          for (let D = d; D >= 0; D--) {
+            const vv = trace[D], kk = X - Y;
+            const pk = (kk === -D || (kk !== D && vv[off + kk - 1] < vv[off + kk + 1])) ? kk + 1 : kk - 1;
+            const px = D === 0 ? 0 : vv[off + pk], py = D === 0 ? 0 : px - pk;
+            while (X > px && Y > py) { ops.push(['=', A[X - 1]]); X--; Y--; }
+            if (D > 0) { if (X === px) ops.push(['+', B[Y - 1]]); else ops.push(['-', A[X - 1]]); X = px; Y = py; }
+          }
+          mid = ops.reverse(); break outer;
+        }
+      }
+    }
+  }
+  if (!mid) mid = [...A.map(t => ['-', t]), ...B.map(t => ['+', t])];
+  return [...a.slice(0, pre).map(t => ['=', t]), ...mid, ...a.slice(a.length - suf).map(t => ['=', t])];
+}
+function showTok(t, changed) {
+  if (t === ' ') return '<span class="sym" title="non-breaking space (U+00A0)">⍽</span>';
+  if (/^[​-‏﻿]$/.test(t)) return `<span class="sym" title="invisible character">U+${t.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}</span>`;
+  if (t === '\n') return changed ? '<span class="sym">↵</span>\n' : '\n';
+  if (t === '\t') return '<span class="sym">→</span>';
+  if (/^ +$/.test(t)) return changed ? `<span class="sym">${'·'.repeat(t.length)}</span>` : t;
+  return esc(t).replace(/[ﬁﬂ]/g, m => `<span class="lig" title="ligature character U+${m.codePointAt(0).toString(16).toUpperCase()}">${m}</span>`);
+}
+// side '-' renders the old text, side '+' the new one. With "changes only", long unchanged stretches fold.
+function renderSide(ops, side, only) {
+  const keep = ops.filter(o => o[0] === '=' || o[0] === side);
+  const CTX = 30;
+  const runs = []; // [kind, tokens]
+  for (const [k, t] of keep) { const kind = k === '=' ? '=' : 'x'; if (runs.length && runs[runs.length - 1][0] === kind) runs[runs.length - 1][1].push(t); else runs.push([kind, [t]]); }
+  const tag = side === '-' ? 'del' : 'ins';
+  const anyChange = runs.some(r => r[0] === 'x');
+  return runs.map(([kind, toks], i) => {
+    if (kind === 'x') return `<${tag}>${toks.map(t => showTok(t, true)).join('')}</${tag}>`;
+    if (!only || !anyChange || toks.length <= CTX * 2 + 6) return toks.map(t => showTok(t, false)).join('');
+    const first = i === 0, last = i === runs.length - 1;
+    const head = first ? [] : toks.slice(0, CTX), tail = last ? [] : toks.slice(-CTX);
+    const hidden = toks.slice(head.length, toks.length - tail.length);
+    const words = hidden.filter(t => /\S/.test(t) && t !== ' ').length;
+    return head.map(t => showTok(t, false)).join('') + `<span class="gap">${fmt(words)} unchanged words</span>` + tail.map(t => showTok(t, false)).join('');
+  }).join('');
+}
+const visible = s => JSON.stringify(s).replace(/[ ​-‏﻿ﬁﬂ]/g, c => '\\u' + c.codePointAt(0).toString(16).padStart(4, '0'));
+
+// ---------- record view ----------
+const FIELD_NAME = {text: 'text', description: 'description'};
+function sumBar() {
+  const d = DATA[state.task], cfg = TASKS[state.task]; if (!d) { $('sumBar').hidden = true; return; }
+  const L = d.log, merged = L.input_rows.train + L.input_rows.test;
+  const same = L.input_rows.train === cfg.expect.train && L.input_rows.test === cfg.expect.test && d.out.length === cfg.expect.kept;
+  const changed = d.merged.filter(r => r.fate === 'kept' && recFixes(r).length).length;
+  const odd = [];
+  if (L.conflicting_duplicates.length) odd.push(`${L.conflicting_duplicates.length} duplicate pairs with different answers (kept)`);
+  if (L.unexpected_labels.length) odd.push(`${L.unexpected_labels.length} unexpected answers`);
+  if (L.empty_rows.length) odd.push(`${L.empty_rows.length} empty rows dropped`);
+  $('sumBar').hidden = false;
+  $('sumBar').innerHTML = `<span>${esc(cfg.name)}: train <b>${fmt(L.input_rows.train)}</b> + test <b>${fmt(L.input_rows.test)}</b> = <b>${fmt(merged)}</b> rows</span>
+    <span>→ <b>${fmt(d.out.length)}</b> records, <b>${fmt(L.dropped_duplicates.length)}</b> duplicates dropped, <b>${fmt(changed)}</b> records changed</span>
+    ${odd.length ? `<span class="check warn">${esc(odd.join('; '))}</span>` : ''}
+    <span class="check ${same ? 'ok' : 'warn'}">${same ? '✓ Same counts as the files clean_legalbench.py wrote'
+      : `Counts differ from clean_legalbench.py's run on the repo files (train ${cfg.expect.train}, test ${cfg.expect.test}, ${cfg.expect.kept} records)`}</span>`;
+}
+function render() {
+  sumBar();
+  const r = state.cur[state.task];
+  if (!DATA[state.task]) return;
+  if (!r) { setBoot('No records match these filters.'); return; }
+  setBoot('');
+  const cfg = TASKS[state.task];
+  $('rDom').textContent = cfg.name;
+  $('rTitle').textContent = r.fate === 'dropped' ? 'Dropped row' : `Record ${r.out}`;
+  const pos = VIEW.indexOf(r);
+  $('rPos').textContent = `from ${r.split}.tsv row ${r.oi} · ${fmt(pos + 1)} of ${fmt(VIEW.length)} shown`;
+  const fx = recFixes(r);
+  $('rFlags').innerHTML = `<span class="flag ans">answer: ${esc(r.answer)}</span>` +
+    (r.split === 'train' ? '<span class="flag shot">LegalBench few-shot example</span>' : '') +
+    (r.fate === 'dropped' ? '<span class="flag drop">dropped as a duplicate</span>' : '') +
+    fx.map(f => `<span class="flag">${esc(FIX_LABEL[f])}</span>`).join('') +
+    (!fx.length && r.fate !== 'dropped' ? '<span class="flag none">no change</span>' : '');
+  let notice = '';
+  const link = (x, txt) => `<a data-go="${x.split}:${x.oi}">${esc(txt)}</a>`;
+  if (r.fate === 'dropped') notice += `<div class="notice"><b>Not in the output.</b><span>After cleaning, this row is the same as ${link(r.dupOf, `Record ${r.dupOf.out} (${r.dupOf.split} row ${r.dupOf.oi})`)} (${esc(r.dupMatch)}), with the same answer, so the first one was kept. The comparison with the kept record is at the bottom.</span></div>`;
+  if (r.twins) notice += `<div class="notice"><b>Has a dropped duplicate.</b><span>${r.twins.map(t => link(t, `${t.split} row ${t.oi}`)).join(', ')} was dropped because it matched this record.</span></div>`;
+  if (r.conflict) notice += `<div class="notice"><b>Same text as ${link(r.conflict, `${r.conflict.split} row ${r.conflict.oi}`)} but a different answer.</b><span>Both were kept.</span></div>`;
+  if (r.split === 'train') notice += `<div class="notice shot"><b>This train row is one of the solved examples in LegalBench's base_prompt.txt.</b><span>If the one-shot condition uses it as the example, do not also score it. Filter on original_split.</span></div>`;
+  $('rNotice').innerHTML = notice;
+  $('rNotice').querySelectorAll('[data-go]').forEach(a => a.onclick = () => { if (!VIEW.find(x => `${x.split}:${x.oi}` === a.dataset.go)) { state.show = 'all'; $('show').value = 'all'; state.flags.clear(); paintFlagBtn(); buildChips(); VIEW = filtered(); } go(a.dataset.go); });
+
+  const opts = `<div class="opts"><label><input type="checkbox" class="onlyBox" ${state.only ? 'checked' : ''}> Changes only</label></div>`;
+  let html = cfg.content.map(fld => {
+    const ops = diff(tokenize(r.raw[fld]), tokenize(r.clean[fld]));
+    const ch = r.fixes[fld];
+    const after = r.fate === 'dropped' ? `<div class="txt none">Not written to the output (duplicate).</div>` : `<div class="txt">${renderSide(ops, '+', state.only)}</div>`;
+    return `<section class="sheet" aria-label="${fld}">
+      <div class="sheetHead"><h3>${FIELD_NAME[fld]} <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:400">${ch.length ? ch.map(f => esc(FIX_LABEL[f])).join(' · ') : 'unchanged'}</span></h3>${opts}</div>
+      <div class="cols">
+        <div class="col"><div class="cap">Before <span class="k">${r.split}.tsv · ${fmt(r.raw[fld].length)} chars</span></div><div class="txt">${renderSide(ops, '-', state.only)}</div></div>
+        <div class="col"><div class="cap">After <span class="k">cleaned JSON · ${fmt(r.clean[fld].length)} chars</span></div>${after}</div>
+      </div>
+      <details class="exact"><summary>Exact values</summary><pre>before: ${esc(visible(r.raw[fld]))}\n\nafter:  ${esc(visible(r.clean[fld]))}</pre></details>
+    </section>`;
+  }).join('');
+  if (r.fate === 'dropped') {
+    const k = r.dupOf;
+    html += `<section class="sheet" aria-label="Compared with the kept record">
+      <div class="sheetHead"><h3>Compared with the kept record, after cleaning</h3></div>
+      ${cfg.content.map(fld => { const ops = diff(tokenize(k.clean[fld]), tokenize(r.clean[fld])); return `<div class="cols">
+        <div class="col"><div class="cap">${fld}: kept, Record ${k.out} <span class="k">${k.split} row ${k.oi}</span></div><div class="txt">${renderSide(ops, '-', true)}</div></div>
+        <div class="col"><div class="cap">${fld}: dropped <span class="k">${r.split} row ${r.oi}</span></div><div class="txt">${renderSide(ops, '+', true)}</div></div></div>`; }).join('')}
+    </section>`;
+  } else {
+    const o = DATA[state.task].out[r.out];
+    html += `<details class="exact sheet"><summary>Output record as written to the JSON file</summary><pre>${esc(JSON.stringify(o, null, 4))}</pre></details>`;
+  }
+  $('rFields').innerHTML = html;
+  $('rFields').querySelectorAll('.onlyBox').forEach(b => b.onchange = () => { state.only = b.checked; render(); });
+  const rv = reviews[rkey(r)] || {};
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(rv.s === b.dataset.s)));
+  $('note').value = rv.note || '';
+  $('saveState').textContent = '';
+  const el = $('list').querySelector(`[data-k="${r.split}:${r.oi}"]`);
+  $('list').querySelectorAll('.item').forEach(x => x.setAttribute('aria-current', String(x === el)));
+  if (el) el.scrollIntoView({block: 'nearest'});
+}
+function go(k) {
+  const r = DATA[state.task].merged.find(x => `${x.split}:${x.oi}` === k);
+  if (!r) return;
+  state.cur[state.task] = r; render(); $('main').scrollTop = 0;
+}
+function step(dlt) {
+  const i = VIEW.indexOf(state.cur[state.task]); const n = VIEW[i + dlt];
+  if (n) { state.cur[state.task] = n; render(); }
+}
+function setTask(t, first) {
+  state.task = t;
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.task === t)));
+  const d = DATA[t];
+  $('dsName').textContent = d ? d.source : 'Not loaded';
+  $('dsMeta').textContent = d ? `${TASKS[t].name} · train + test, cleaned in this page` : '';
+  state.flags.clear(); paintFlagBtn();
+  if (d) { buildChips(); refresh(true); } else { renderList(); setBoot(`${esc(TASKS[t].name)} is not loaded. Choose <b>Load data</b>.`); }
+}
+
+// ---------- review controls ----------
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => setReview(b.dataset.s));
+function setReview(s) {
+  const r = state.cur[state.task]; if (!r) return;
+  const k = rkey(r), cur = reviews[k] || {};
+  const next = {s: cur.s === s ? '' : s, note: cur.note || ''};
+  if (!next.s && !next.note) delete reviews[k]; else reviews[k] = next;
+  saveReviews(); render(); renderList();
+}
+let noteT;
+$('note').oninput = () => {
+  clearTimeout(noteT);
+  noteT = setTimeout(() => {
+    const r = state.cur[state.task]; if (!r) return;
+    const k = rkey(r), cur = reviews[k] || {s: ''};
+    const note = $('note').value;
+    if (!cur.s && !note) delete reviews[k]; else reviews[k] = {s: cur.s || '', note};
+    saveReviews(); renderList();
+  }, 500);
+};
+$('copyReview').onclick = () => {
+  const rows = [];
+  for (const [k, v] of Object.entries(reviews)) {
+    const [task, split, oi] = k.split(':');
+    const d = DATA[task]; const r = d && d.merged.find(x => x.split === split && x.oi === Number(oi));
+    rows.push({task, original_split: split, original_index: Number(oi), index: r && r.fate !== 'dropped' ? r.out : null, status: v.s || null, note: v.note || ''});
+  }
+  rows.sort((a, b) => (a.task + a.original_split).localeCompare(b.task + b.original_split) || a.original_index - b.original_index);
+  const txt = JSON.stringify(rows, null, 2);
+  const done = () => toast(rows.length ? `Copied ${rows.length} review notes` : 'No review notes yet');
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => fallbackCopy(txt, done)); else fallbackCopy(txt, done);
+};
+function fallbackCopy(txt, done) {
+  const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+  let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+  ta.remove(); ok ? done() : toast('Copy was blocked by this browser');
+}
+
+// ---------- rail controls ----------
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => setTask(b.dataset.task));
+$('show').onchange = e => { state.show = e.target.value; refresh(); };
+$('rv').onchange = e => { state.rv = e.target.value; refresh(); };
+let qT; $('q').oninput = e => { clearTimeout(qT); qT = setTimeout(() => { state.q = e.target.value; refresh(); }, 180); };
+$('prev').onclick = () => step(-1); $('next').onclick = () => step(1);
+$('flagBtn').onclick = () => { const open = $('flagPanel').hidden; $('flagPanel').hidden = !open; $('flagBtn').setAttribute('aria-expanded', String(open)); };
+$('flagClear').onclick = () => { state.flags.clear(); paintFlagBtn(); buildChips(); refresh(); };
+document.addEventListener('click', e => { if (!$('flagDD').contains(e.target)) { $('flagPanel').hidden = true; $('flagBtn').setAttribute('aria-expanded', 'false'); } });
+document.addEventListener('keydown', e => {
+  if (!$('loader').hidden) { if (e.key === 'Escape') closeLoader(); return; }
+  if (e.target.matches('input,textarea,select')) { if (e.key === 'Escape') e.target.blur(); return; }
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === 'j') step(1); else if (k === 'k') step(-1);
+  else if (k === '/') { e.preventDefault(); $('q').focus(); }
+  else if (k === '1') setReview('ok'); else if (k === '2') setReview('issue'); else if (k === '3') setReview('unsure');
+  else if (k === 'c') { state.only = !state.only; render(); }
+});
+
+// ---------- loader dialog ----------
+const picked = {};
+const SLOTS = [];
+for (const t of Object.keys(TASKS)) for (const s of SPLITS) SLOTS.push([t, s]);
+$('ldSources').innerHTML = SOURCES.map(s => `<button type="button" class="ldItem" data-src="${s.id}"><b>${esc(s.name)}</b><span class="muted">${esc(s.sub)}</span></button>`).join('');
+$('ldSources').querySelectorAll('[data-src]').forEach(b => b.onclick = async () => {
+  const src = SOURCES.find(s => s.id === b.dataset.src);
+  setStatus(`Loading from ${src.name}…`);
+  try { ingest(await fromSource(src), src.name); closeLoader(); toast(`Loaded from ${src.name}`); }
+  catch (e) { setStatus(`Could not load from ${src.name}: ${e.message}.`, true); }
+});
+$('fileGrid').innerHTML = SLOTS.map(([t, s]) => `<span class="fn">${SHORT[t]} · ${s}.tsv<small id="pn_${t}_${s}">No file chosen</small></span>
+  <label class="btn fileBtn"><input type="file" class="sr" id="pf_${t}_${s}" accept=".tsv,.txt,text/tab-separated-values">Choose</label>`).join('');
+SLOTS.forEach(([t, s]) => { $(`pf_${t}_${s}`).onchange = e => { if (e.target.files[0]) pick(t, s, e.target.files[0]); }; });
+function pick(t, s, file) { picked[`${t}:${s}`] = file; $(`pn_${t}_${s}`).textContent = file.name; paintPicked(); }
+function paintPicked() { $('ldLocal').disabled = !Object.keys(TASKS).some(t => SPLITS.every(s => picked[`${t}:${s}`])); }
+const readFile = f => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = () => rej(new Error(`could not read ${f.name}`)); fr.readAsText(f); });
+$('ldLocal').onclick = async () => {
+  try {
+    const texts = {};
+    for (const t of Object.keys(TASKS)) if (SPLITS.every(s => picked[`${t}:${s}`])) {
+      texts[t] = {}; for (const s of SPLITS) texts[t][s] = (await readFile(picked[`${t}:${s}`])).replace(/^﻿/, '');
+    }
+    ingest(texts, 'Files from your computer'); closeLoader(); toast('Loaded your files');
+  } catch (e) { setStatus(`Could not use these files: ${e.message}.`, true); }
+};
+const dlg = document.querySelector('.dlg');
+dlg.addEventListener('dragover', e => { e.preventDefault(); dlg.classList.add('drop'); });
+dlg.addEventListener('dragleave', () => dlg.classList.remove('drop'));
+dlg.addEventListener('drop', e => {
+  e.preventDefault(); dlg.classList.remove('drop');
+  const miss = [];
+  for (const f of e.dataTransfer.files) {
+    const n = f.name.toLowerCase();
+    const t = n.includes('causality') ? 'legal_reasoning_causality' : n.includes('privacy') ? 'privacy_policy_entailment' : null;
+    const s = /train/.test(n) ? 'train' : /test/.test(n) ? 'test' : null;
+    if (t && s) pick(t, s, f); else miss.push(f.name);
+  }
+  setStatus(miss.length ? `Could not tell which slot these go in, so use Choose for them: ${miss.join(', ')}` : '', !!miss.length);
+});
+function setStatus(t, err) { $('ldStatus').textContent = t; $('ldStatus').classList.toggle('err', !!err); }
+function openLoader() { $('loader').hidden = false; setStatus(''); }
+function closeLoader() { $('loader').hidden = true; }
+$('dsOpen').onclick = openLoader; $('ldClose').onclick = closeLoader;
+$('loader').onclick = e => { if (e.target === $('loader')) closeLoader(); };
+
+autoLoad();
+}
+if (typeof module !== 'undefined') module.exports = {TASKS, parseTSV, cleanField, processTask};
+</script>
+</body>
+</html>

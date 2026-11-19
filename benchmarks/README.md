@@ -108,5 +108,50 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 
 ### 3.1 Files
 
-- `LegalBench_legal_reasoning_causality_test.tsv` and `LegalBench_legal_reasoning_causality_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench's [legal reasoning causality task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/legal_reasoning_causality).
-- `LegalBench_privacy_policy_entailment_test.tsv` and `LegalBench_privacy_policy_entailment_train.tsv`are the original `train.tsv` and `test.tsv` files from LegalBench's [privacy policy entailment task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/privacy_policy_entailment).
+- `LegalBench_legal_reasoning_causality_test.tsv` and `LegalBench_legal_reasoning_causality_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [legal reasoning causality task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/legal_reasoning_causality).
+- `LegalBench_privacy_policy_entailment_test.tsv` and `LegalBench_privacy_policy_entailment_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [privacy policy entailment task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/privacy_policy_entailment).
+- `LegalBench_legal_reasoning_causality_cleaned.json` and `LegalBench_privacy_policy_entailment_cleaned.json` merge the train and test files of each task into one file, renumber `index` from 0, and clean the text. They are made by `fine_tuning/jun/legalbench/clean_legalbench.py`. See [issue #33](https://github.com/xai-privacy/analysis-framework/issues/33).
+
+### 3.2 Contents
+
+Each record has the TSV columns in TSV order, with `index` renumbered across the merged file (train rows first), plus `original_split` and `original_index`, which point back to the source row:
+
+- causality: `index`, `answer`, `text`, `original_split`, `original_index`
+- privacy policy entailment: `index`, `text`, `description`, `answer`, `original_split`, `original_index`
+
+| Benchmark | Train | Test | Merged | After cleaning | Labels |
+|---|---|---|---|---|---|
+| legal_reasoning_causality | 4 | 55 | 59 | 58 | Yes 32, No 26 |
+| privacy_policy_entailment | 8 | 4,335 | 4,343 | 4,341 | Correct 3,743, Incorrect 598 |
+
+### 3.3 Changes applied
+
+Answers were never changed. Counts are records changed, after duplicates were dropped. `fine_tuning/jun/legalbench/legalbench_cleaning_log.json` lists the indices for every change, and `fine_tuning/jun/legalbench/legalbench_review_desk.html` shows each record before and after cleaning.
+
+Causality (`text`):
+
+- Removed court-reporter page markers such as `[*27]` or `[**6]` (54 records). They mark where a page starts in the printed reporter volume.
+- Removed legal-database headnote markers such as `HN26` (13 records). They point to editor-written summaries that are not part of the excerpts.
+- Whitespace: removed spaces and line breaks at the start or end (20), collapsed repeated spaces (1), and removed spaces around line breaks (1). Paragraph breaks inside the text are kept (16 records).
+
+Privacy policy entailment:
+
+- `description` typo: “by by ad networks” became “by ad networks” (907 records, from 27 of the 57 description sentences).
+- `text`, HTML: in 3 records, `<a href="...">http://www.google.com/privacy_<wbr />ads.html</a>` became `http://www.google.com/privacy_ads.html`.
+- `text`, PDF ligature characters `ﬁ` and `ﬂ` became `fi` and `fl` (6 records).
+- `text`, whitespace: non-breaking spaces became normal spaces (11), and invisible characters such as U+200E were removed (18).
+
+Duplicates dropped (each had the same answer as the record that was kept):
+
+- causality test 29 = test 4 (only a trailing line break differed).
+- privacy test 1004 = test 1001 (only “you” vs “You” at the start differed).
+- privacy test 2565 = test 579 (only a `ﬁ` ligature in “identiﬁcation” differed, so the two became identical after the ligature fix).
+
+Every output record was compared word by word with its source TSV row; the only differences are the ones listed above. The review desk runs the same cleaning in the browser and gives byte-identical output.
+
+### 3.4 Notes for experiments
+
+- **Train rows are LegalBench’s few-shot examples.** Each task’s `base_prompt.txt` in the [LegalBench repo](https://github.com/HazyResearch/legalbench) is an instruction, a fixed set of solved examples and a slot for the excerpt being evaluated. The solved examples are the train rows (4 for causality, 8 for privacy policy entailment, which are 4 clauses with 2 descriptions each), in the same order and with the same answers. If a one-shot prompt uses one of these rows as its example, that row should not also be scored. Filter on `original_split`.
+- **No instruction field.** The TSVs have no question text, because LegalBench keeps the instruction in `base_prompt.txt`. Our prompt has to supply it (issue #34).
+- **Upstream size.** LegalBench’s task README says 4,385 samples for privacy policy entailment, but the files here have 4,343 rows. These files have not been compared with the current Hugging Face download yet.
+- **Left as in the source:** 7 privacy records (copies of the same Google AdSense clause) write the URL as `http://www.google.com/ privacy_ads.html`, with a space. That is how the policy text was extracted, so it was kept.
