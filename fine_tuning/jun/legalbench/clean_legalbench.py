@@ -19,17 +19,16 @@ For each task (legal_reasoning_causality, privacy_policy_entailment):
      Rows whose duplicates disagree on the answer are kept and flagged.
   4. Reindex from 0. Output columns are the TSV columns in TSV order, plus
      original_split and original_index pointing back to the source row.
-  5. Write one JSON file per task and a cleaning log, verify every output
-     record against its source TSV row, and write a seeded random sample
-     (100 per task, or all if fewer) for a manual spot check.
+  5. Write one JSON file per task and a cleaning log, and verify every output
+     record against its source TSV row.
 
 Usage:
   python3 clean_legalbench.py --in-dir <repo>/benchmarks --out-dir <out> [--log-dir <dir>]
 From the repository root, the files in the repo were made with:
   python3 fine_tuning/jun/legalbench/clean_legalbench.py --in-dir benchmarks \
       --out-dir benchmarks --log-dir fine_tuning/jun/legalbench
-The cleaned JSON files go to --out-dir; legalbench_cleaning_log.json and the
-spot_check_*.md files go to --log-dir (default: --out-dir).
+The cleaned JSON files go to --out-dir; legalbench_cleaning_log.json goes to
+--log-dir (default: --out-dir).
 legalbench_review_desk.html shows the same cleaning record by record, before and after.
 The script is deterministic: same inputs give byte-identical outputs.
 Only the Python standard library is used.
@@ -39,7 +38,6 @@ import argparse
 import csv
 import difflib
 import json
-import random
 import re
 import sys
 from collections import Counter, defaultdict
@@ -61,8 +59,6 @@ TASKS = {
 }
 
 SPLITS = ["train", "test"]
-SAMPLE_SIZE = 100
-SEED = 33  # issue number, fixed so the spot-check sample is reproducible
 
 NBSP = "\u00a0"
 INVISIBLE = re.compile("[\u200b-\u200f\ufeff]")
@@ -256,30 +252,11 @@ def verify(task, cfg, in_dir, out_path):
     return data, errors
 
 
-def write_spot_check(task, cfg, data, out_dir):
-    rng = random.Random(SEED)
-    n = min(SAMPLE_SIZE, len(data))
-    sample = sorted(rng.sample(range(len(data)), n))
-    lines = [f"# Spot check: LegalBench {task}", "",
-             f"{n} of {len(data)} records, random seed {SEED}. For each, compare against the source TSV row "
-             f"named in `original_split` / `original_index` and tick the box.", ""]
-    for i in sample:
-        o = data[i]
-        lines.append(f"## [ ] index {i} (source: {o['original_split']}.tsv index {o['original_index']}) "
-                     f"answer: {o['answer']}")
-        for f in cfg["content_fields"]:
-            lines += ["", f"**{f}:**", "", "> " + o[f].replace("\n", "\n> ")]
-        lines.append("")
-    path = out_dir / f"spot_check_{task}.md"
-    path.write_text("\n".join(lines), encoding="utf-8")
-    return path, sample
-
-
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--in-dir", type=Path, required=True, help="folder with the four LegalBench TSVs")
     ap.add_argument("--out-dir", type=Path, required=True, help="where the cleaned JSON files go")
-    ap.add_argument("--log-dir", type=Path, help="where the log and spot checks go (default: --out-dir)")
+    ap.add_argument("--log-dir", type=Path, help="where the log goes (default: --out-dir)")
     args = ap.parse_args()
     args.log_dir = args.log_dir or args.out_dir
     args.out_dir.mkdir(parents=True, exist_ok=True)
@@ -289,9 +266,7 @@ def main():
     for task, cfg in TASKS.items():
         out_path, log = process_task(task, cfg, args.in_dir, args.out_dir)
         data, errors = verify(task, cfg, args.in_dir, out_path)
-        spot_path, sample = write_spot_check(task, cfg, data, args.log_dir)
         log["verification_errors"] = errors
-        log["spot_check_sample_indices"] = sample
         logs[task] = log
         ok &= not errors
         print(f"{task}: train {log['input_rows']['train']} + test {log['input_rows']['test']} "
@@ -305,7 +280,7 @@ def main():
     (args.log_dir / "legalbench_cleaning_log.json").write_text(
         json.dumps(logs, ensure_ascii=False, indent=4) + "\n", encoding="utf-8")
     print("wrote the cleaned JSON files to", args.out_dir)
-    print("wrote legalbench_cleaning_log.json and spot_check_*.md to", args.log_dir)
+    print("wrote legalbench_cleaning_log.json to", args.log_dir)
     sys.exit(0 if ok else 1)
 
 
