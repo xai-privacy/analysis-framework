@@ -90,26 +90,21 @@ scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 scp -i fine_tuning/karimm_lease1.pem \
+	benchmarks/baseline-leet.jsonl benchmarks/baseline-mbe.jsonl \
+	cc@129.114.108.3:~/xai/trinav/benchmarks/
+scp -i fine_tuning/karimm_lease1.pem \
 	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
 	cc@129.114.108.3:~/xai/trinav/data/
 ```
 
 ### 1. Baseline testing
 
-Baseline inputs use the same JSONL format for both datasets: each line contains
-only an ID and the question text. LEET-Arg questions include the situation,
-question, and statements, but not the `<choices>` section. MBE questions omit
-the answer options. Gold answers and rationales remain in the separate source
-benchmarks used for scoring and are not passed to the model.
-
-Skip regeneration if these files are already present. To recreate them:
-```bash
-cd ~/xai/trinav
-source .venv/bin/activate
-python prepare_baseline_data.py \
-	--leetarg-source benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
-	--mbe-source benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json
-```
+Baseline inputs use the same JSONL format for both datasets and are stored in
+`benchmarks/`: each line contains only an ID and question text. LEET-Arg
+questions include the situation, question, and statements, but not the
+`<choices>` section. MBE questions omit the answer options. Gold answers and
+rationales remain in the separate source benchmarks used for scoring and are
+not passed to the model.
 
 Run the base model over the complete LEET-Arg source dataset:
 
@@ -122,7 +117,7 @@ For per-statement verdicts that the evaluator can parse, use the provided
 
 ```bash
 python run_hf_questions.py \
-	--input data/baseline.jsonl \
+	--input benchmarks/baseline-leet.jsonl \
 	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--split data/split.json \
 	--all-data \
@@ -315,6 +310,10 @@ scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/chameleon_utils.py \
 	fine_tuning/trinav/train_chameleon.py \
 	cc@129.114.108.3:~/xai/trinav/
+scp -i fine_tuning/karimm_lease1.pem \
+	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
+	benchmarks/baseline-mbe.jsonl \
+	cc@129.114.108.3:~/xai/trinav/benchmarks/
 ```
 
 Log in to the VM, activate the environment, and prepare the split:
@@ -329,14 +328,14 @@ python mbe/prepare_mbe_data.py \
 ```
 
 Run the base model on the full MBE dataset before fine-tuning. The baseline
-input created by `prepare_baseline_data.py` contains only IDs and question
-text, with no system prompt, answer choices, answers, or rationales. The source
+input at `benchmarks/baseline-mbe.jsonl` contains only IDs and question text,
+with no system prompt, answer choices, answers, or rationales. The source
 benchmark is read separately for scoring. Supply your own system prompt with
 `--prompt` if desired; no system prompt is added by default.
 
 ```bash
 python run_hf_mbe.py \
-	--input mbe/data/baseline.jsonl \
+	--input benchmarks/baseline-mbe.jsonl \
 	--gold-data benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	--split mbe/data/split.json \
 	--all-data \
