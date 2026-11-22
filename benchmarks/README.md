@@ -8,6 +8,7 @@
   correct is not enough](https://doi.org/10.1016/j.knosys.2026.116625), upstream repo:
   `lit-ai-lab/leet_arg_dataset_v1`, file: `LEET_Arg_Questions.json`. sha256: `f52a9a8f0405192a53990e56eef04ae0fd0d474f049ac6e721255332f8fc3cea`).
 - `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json` is based on `LEET_Arg_Questions_cleaned.json` with additional breakdowns of rationales for individual statements.
+- `LEET_Arg_Baseline.jsonl` contains the 94 question-only baseline records used for full-dataset inference. Each line has only `id` and `question`; the answer choices and gold rationales are excluded.
 - `LEET_Arg_Model_Responses.json` in this directory holds per-model responses keyed by the same
   `id`/`year`/`problem_idx` and is out of scope here.
 
@@ -103,6 +104,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 
 - `MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
 - `MBE-exam-questions_distilled_dataset_cleaned.json` is based on `MBE-exam-questions_distilled_dataset.json` with duplicates removed and other fixes. [Issue 32](https://github.com/xai-privacy/analysis-framework/issues/32) describes details.
+- `MBE-exam-questions-baseline.jsonl` contains the 1,280 question-only baseline records used for full-dataset inference. Each line has only `id` and `question`; the answer choices, gold answers, and rationales are excluded.
 
 ## 3. LegalBench
 

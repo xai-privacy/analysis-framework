@@ -80,10 +80,14 @@ def main() -> None:
         default=REPO / "benchmarks" / "MBE-exam-questions_distilled_dataset_cleaned.json",
     )
     parser.add_argument(
-        "--leetarg-output", type=Path, default=HERE / "data" / "baseline.jsonl"
+        "--leetarg-output",
+        type=Path,
+        default=REPO / "benchmarks" / "LEET_Arg_Baseline.jsonl",
     )
     parser.add_argument(
-        "--mbe-output", type=Path, default=HERE / "mbe" / "data" / "baseline.jsonl"
+        "--mbe-output",
+        type=Path,
+        default=REPO / "benchmarks" / "MBE-exam-questions-baseline.jsonl",
     )
     args = parser.parse_args()
 

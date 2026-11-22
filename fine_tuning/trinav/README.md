@@ -90,7 +90,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 scp -i fine_tuning/karimm_lease1.pem \
-	benchmarks/baseline-leet.jsonl benchmarks/baseline-mbe.jsonl \
+	benchmarks/LEET_Arg_Baseline.jsonl benchmarks/MBE-exam-questions-baseline.jsonl \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 scp -i fine_tuning/karimm_lease1.pem \
 	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
@@ -117,7 +117,7 @@ For per-statement verdicts that the evaluator can parse, use the provided
 
 ```bash
 python run_hf_questions.py \
-	--input benchmarks/baseline-leet.jsonl \
+	--input benchmarks/LEET_Arg_Baseline.jsonl \
 	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--split data/split.json \
 	--all-data \
@@ -312,7 +312,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	cc@129.114.108.3:~/xai/trinav/
 scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	benchmarks/baseline-mbe.jsonl \
+	benchmarks/MBE-exam-questions-baseline.jsonl \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 ```
 
@@ -328,14 +328,14 @@ python mbe/prepare_mbe_data.py \
 ```
 
 Run the base model on the full MBE dataset before fine-tuning. The baseline
-input at `benchmarks/baseline-mbe.jsonl` contains only IDs and question text,
+input at `benchmarks/MBE-exam-questions-baseline.jsonl` contains only IDs and question text,
 with no system prompt, answer choices, answers, or rationales. The source
 benchmark is read separately for scoring. Supply your own system prompt with
 `--prompt` if desired; no system prompt is added by default.
 
 ```bash
 python run_hf_mbe.py \
-	--input benchmarks/baseline-mbe.jsonl \
+	--input benchmarks/MBE-exam-questions-baseline.jsonl \
 	--gold-data benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	--split mbe/data/split.json \
 	--all-data \
