@@ -302,7 +302,7 @@ and `mbe/adapters_qwen3/`. Keep `test.jsonl` out of training and validation.
 The commands below assume the Chameleon VM, `.venv`, and Hugging Face access
 were set up as described above. From the repository root on your local machine,
 copy the MBE data, evaluator, shared trainer files, and source benchmark to the
-VM. Replace the key and IP with your own:
+VM. Replace the key and IP with your own (SKIP IF DONE DURING SETUP):
 
 ```bash
 ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
@@ -431,3 +431,18 @@ under `testing/baseline/huggingface/mbe/<run-name>/`. The evaluator checks that
 the test IDs match `split.json` and refuses to score training or validation
 questions. Use validation results to choose training settings; do not use the
 held-out test results for checkpoint selection.
+
+### Accelerating Parallel Testing with `CUDA_VISIBLE_DEVICES`
+
+On multi-GPU machines, running multiple test jobs without device isolation causes them to default to GPU `0`, leading to resource contention or CUDA Out-Of-Memory (OOM) errors while leaving secondary GPUs idle. Check this using `nvidia-smi` if any GPU is idle.
+
+You can use the `CUDA_VISIBLE_DEVICES` environment variable to restrict each process to a specific GPU and run independent test runs in parallel:
+
+```bash
+# Terminal 1: Pin first run to GPU 0
+export CUDA_VISIBLE_DEVICES=0
+python <command>
+
+# Terminal 2: Pin second run to GPU 1
+export CUDA_VISIBLE_DEVICES=1
+python <command>
