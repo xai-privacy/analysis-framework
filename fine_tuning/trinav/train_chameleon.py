@@ -28,9 +28,8 @@ except ImportError:
         validate_data_split,
     )
 
-# This CUDA workflow uses the compatible
-# original Hugging Face model weights and must not be described as identical.
-DEFAULT_MODEL = "meta-llama/Llama-3.2-3B-Instruct"
+# This CUDA workflow uses original Hugging Face model weights.
+DEFAULT_MODEL = "Qwen/Qwen3-4B"
 
 
 class MaskedChatDataset(Dataset):
@@ -110,11 +109,11 @@ class MaskedChatDataset(Dataset):
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
-    # Supports LLaMA, Phi-4 (e.g. microsoft/Phi-4-mini-instruct), or other HF causal LMs
+    # Supports Qwen, Llama, Phi-4 (e.g. microsoft/Phi-4-mini-instruct), or other HF causal LMs
     parser.add_argument(
         "--model",
         default=DEFAULT_MODEL,
-        help="Base model Hugging Face ID (e.g. meta-llama/Llama-3.2-3B-Instruct, microsoft/Phi-4-mini-instruct)",
+        help="Base model Hugging Face ID (e.g. Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct)",
     )
     parser.add_argument("--train-data", type=Path, default=DATA_DIR / "train.jsonl")
     parser.add_argument("--valid-data", type=Path, default=DATA_DIR / "valid.jsonl")

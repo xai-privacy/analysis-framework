@@ -68,7 +68,7 @@ def main():
     parser.add_argument(
         "--model",
         default=DEFAULT_MODEL,
-        help="Base model Hugging Face ID (e.g. meta-llama/Llama-3.2-3B-Instruct, microsoft/Phi-4-mini-instruct)",
+        help="Base model Hugging Face ID (e.g. Qwen/Qwen3-4B, microsoft/Phi-4-mini-instruct)",
     )
     parser.add_argument("--adapter-path", type=Path)
     parser.add_argument("--data", type=Path, default=DATA_DIR / "valid.jsonl")

@@ -32,16 +32,14 @@ validation results.
 
 Run this workflow on your Chameleon Tesla P100 (compute capability 6.0), not
 in the local WSL environment. It uses NF4 4-bit base-model weights and LoRA
-adapters. Jun's original checkpoint,
-`mlx-community/Llama-3.2-3B-Instruct-4bit`, is MLX-format and cannot be loaded
-by this Transformers/bitsandbytes CUDA workflow. The commands below use the
-original `meta-llama/Llama-3.2-3B-Instruct` weights, quantized to NF4 at load
-time; these are the same model family, but not the exact same quantized
-checkpoint.
+adapters. The commands below use the original `Qwen/Qwen3-4B` weights, quantized to NF4
+at load time. This replaces Jun's earlier MLX-format
+`mlx-community/Llama-3.2-3B-Instruct-4bit` checkpoint, which cannot be loaded
+by this Transformers/bitsandbytes CUDA workflow.
 
-Accept Meta's model license on Hugging Face before starting. The model is
-downloaded by Transformers when a run starts; no model weights need to be copied
-to the VM.
+Authenticate with Hugging Face before starting if the environment or model
+requires it. The model is downloaded by Transformers when a run starts; no
+model weights need to be copied to the VM.
 
 ### Set up the Chameleon VM
 
@@ -50,7 +48,7 @@ the Trinav folder. Replace the key and IP with your own:
 
 ```bash
 ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 'mkdir -p ~/xai'
-scp -i fine_tuning/karimm_lease1.pem -r ../trinav cc@129.114.108.3:~/xai/
+scp -i fine_tuning/karimm_lease1.pem -r fine_tuning/trinav/ cc@129.114.108.3:~/xai/
 ```
 
 Log in, create the environment, and install the pinned dependencies:
@@ -78,7 +76,7 @@ hf auth login
 
 The baseline runners need both source benchmarks on the VM. The LEET-Arg
 adapter test also needs its final-test ID list. From the repository root on
-your local machine, copy them once:
+your local machine, copy them once (DO NOT DO THIS IF THE FILES EXIST IN THE VM!!!):
 
 ```bash
 ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
@@ -97,7 +95,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	cc@129.114.108.3:~/xai/trinav/data/
 ```
 
-### 1. Baseline testing
+### 1. Baseline and CoT testing
 
 Baseline inputs use the same JSONL format for both datasets and are stored in
 `benchmarks/`: each line contains only an ID and question text. LEET-Arg
@@ -110,10 +108,11 @@ Run the base model over the complete LEET-Arg source dataset:
 
 You can optionally provide a global system prompt from a UTF-8 text file with
 `--prompt path/to/prompt.txt`. The prompt is sent before each question. If
-`--prompt` is omitted or given an empty path, no system prompt is sent. The
+both `--prompt` and `--prompt-type` are omitted, no system prompt is sent. The
 separate `--format-hint` option can still add its output-format instructions.
 For per-statement verdicts that the evaluator can parse, use the provided
-`baseline-prompt.md` and `--format-hint` together:
+baseline prompt type and `--format-hint` together. Use `--prompt-type cot` to
+select the structured reasoning prompt instead:
 
 ```bash
 python run_hf_questions.py \
@@ -121,15 +120,21 @@ python run_hf_questions.py \
 	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--split data/split.json \
 	--all-data \
-	--prompt baseline-prompt.md \
+	--prompt-type baseline \
 	--format-hint \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--run-name llama32-base \
+	--model Qwen/Qwen3-4B \
+	--run-name qwen3-base \
 	--output-root testing/baseline/huggingface
 ```
 
+For a CoT run, replace `--prompt-type baseline` with `--prompt-type cot` and change the run name to qwen3-cot to put the results in a separate directory.
+The matching system prompt is loaded automatically. The available types are
+`baseline` and `cot`; use `--prompt path/to/file.md` instead if you need a
+custom prompt. `--prompt` and `--prompt-type` cannot be used together.
+
 The evaluator sends only the `question` field from the JSONL file, plus a
-system prompt if supplied with `--prompt`. The `--all-data` option is for
+system prompt selected by `--prompt-type` or supplied with `--prompt`. The
+`--all-data` option is for
 base-model baseline runs only. It requires the complete question file and uses
 the separate `--gold-data` file only for scoring. Omit it for final-test adapter
 evaluation. Do not use final-test results to choose training steps or adapters;
@@ -143,7 +148,7 @@ to `adapters_chameleon/`.
 
 ```bash
 python train_chameleon.py \
-	--model meta-llama/Llama-3.2-3B-Instruct \
+	--model Qwen/Qwen3-4B \
 	--train-data data/train.jsonl \
 	--valid-data data/valid.jsonl \
 	--split data/split.json \
@@ -183,7 +188,7 @@ from pathlib import Path
 from huggingface_hub import HfApi
 
 adapter_dir = Path("adapters_chameleon")
-repo_id = "YOUR_HF_USERNAME/leetarg-llama32-lora"
+repo_id = "YOUR_HF_USERNAME/leetarg-qwen3-lora"
 config = adapter_dir / "adapter_config.json"
 weights = next((adapter_dir / name for name in (
     "adapter_model.safetensors", "adapter_model.bin"
@@ -218,9 +223,9 @@ python run_hf_questions.py \
 	--input data/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--test-ids data/LEET_Arg_Questions_Test_Set.json \
 	--split data/split.json \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--adapter-path YOUR_HF_USERNAME/leetarg-llama32-lora \
-	--run-name llama32-adapter-hf \
+	--model Qwen/Qwen3-4B \
+	--adapter-path YOUR_HF_USERNAME/leetarg-qwen3-lora \
+	--run-name qwen3-adapter-hf \
 	--output-root testing/baseline/huggingface
 ```
 
@@ -250,7 +255,7 @@ python -m pip install -U "jinja2>=3.1.6,<4"
 
 Jinja2 is also pinned in `requirements-chameleon.txt` for new installations.
 
-## MBE Fine-Tuning Dataset
+## MBE Dataset
 
 The MBE split is kept separate under `fine_tuning/trinav/mbe/data/`. It uses
 `benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json` (1,280
@@ -265,7 +270,7 @@ and the source IRAC explanation. Test lines contain only system/user messages;
 their gold answer and explanation are stored separately in `evaluation` and
 never appear in the model-facing messages.
 
-Regenerate the split from the repository root:
+Regenerate the split from the repository root (SKIP IF THIS EXISTS!):
 
 ```bash
 python fine_tuning/trinav/mbe/prepare_mbe_data.py
@@ -277,11 +282,11 @@ the MBE chat data by pointing it at the MBE train, validation, and split files:
 
 ```bash
 python fine_tuning/trinav/train_chameleon.py \
-	--model meta-llama/Llama-3.2-3B-Instruct \
+	--model Qwen/Qwen3-4B \
 	--train-data fine_tuning/trinav/mbe/data/train.jsonl \
 	--valid-data fine_tuning/trinav/mbe/data/valid.jsonl \
 	--split fine_tuning/trinav/mbe/data/split.json \
-	--output-dir fine_tuning/trinav/mbe/adapters_llama32 \
+	--output-dir fine_tuning/trinav/mbe/adapters_qwen3 \
 	--max-steps 180 \
 	--checkpoint-steps 20 \
 	--learning-rate 1e-4 \
@@ -290,7 +295,7 @@ python fine_tuning/trinav/train_chameleon.py \
 
 To train on Chameleon, copy the `mbe/` folder to the VM as well as the shared
 trainer scripts. Use paths relative to `~/xai/trinav`, for example `mbe/data/`
-and `mbe/adapters_llama32/`. Keep `test.jsonl` out of training and validation.
+and `mbe/adapters_qwen3/`. Keep `test.jsonl` out of training and validation.
 
 ### Run the MBE workflow on Chameleon
 
@@ -306,7 +311,9 @@ scp -i fine_tuning/karimm_lease1.pem -r fine_tuning/trinav/mbe \
 	cc@129.114.108.3:~/xai/trinav/
 scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/run_hf_mbe.py \
+	fine_tuning/trinav/prompt_selector.py \
 	fine_tuning/trinav/mbe-baseline-prompt.md \
+	fine_tuning/trinav/mbe-cot-prompt.md \
 	fine_tuning/trinav/chameleon_utils.py \
 	fine_tuning/trinav/train_chameleon.py \
 	cc@129.114.108.3:~/xai/trinav/
@@ -331,7 +338,8 @@ Run the base model on the full MBE dataset before fine-tuning. The baseline
 input at `benchmarks/MBE-exam-questions-baseline.jsonl` contains only IDs and question text,
 with no system prompt, answer choices, answers, or rationales. The source
 benchmark is read separately for scoring. Supply your own system prompt with
-`--prompt` if desired; no system prompt is added by default.
+`--prompt` or select one with `--prompt-type`; no system prompt is added by
+default if neither option is supplied.
 
 ```bash
 python run_hf_mbe.py \
@@ -339,22 +347,19 @@ python run_hf_mbe.py \
 	--gold-data benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	--split mbe/data/split.json \
 	--all-data \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--run-name mbe-llama32-base \
+	--prompt-type baseline \
+	--model Qwen/Qwen3-4B \
+	--run-name mbe-qwen3-base \
 	--output-root testing/baseline/huggingface/mbe
 ```
 
-The MBE evaluator adds no system prompt unless `--prompt` is provided. An
-explicit `--format-hint` adds answer-format instructions; use the same prompt
-and hint settings when comparing baseline and adapter runs. The prompt path and
-SHA-256 are recorded in `run.json`. The optional
-`mbe-baseline-prompt.md` asks for the answer format recognized by the evaluator;
-pass it with `--prompt mbe-baseline-prompt.md` and omit `--format-hint` to avoid
-repeating the format instruction. For example:
-
-```bash
---prompt mbe-baseline-prompt.md
-```
+Choose the MBE prompt with `--prompt-type baseline` or `--prompt-type cot` and choose a separate run name to add the results in a different directory.
+The evaluator loads the corresponding system prompt file automatically; use
+`--prompt path/to/file.md` for a custom prompt instead. Do not pass both prompt
+options. An explicit `--format-hint` adds answer-format instructions; use the
+same prompt type and hint settings when comparing runs. The selected prompt
+type, path, and SHA-256 are recorded in `run.json`. For example, replace
+`--prompt-type baseline` with `--prompt-type cot` for an MBE CoT run.
 
 The current baseline input omits the answer options. A letter may therefore be
 parseable but cannot be reliably mapped to the correct option unless its
@@ -364,11 +369,11 @@ Fine-tune on the training data, using validation loss to select the adapter:
 
 ```bash
 python train_chameleon.py \
-	--model meta-llama/Llama-3.2-3B-Instruct \
+	--model Qwen/Qwen3-4B \
 	--train-data mbe/data/train.jsonl \
 	--valid-data mbe/data/valid.jsonl \
 	--split mbe/data/split.json \
-	--output-dir mbe/adapters_llama32 \
+	--output-dir mbe/adapters_qwen3 \
 	--max-steps 60 \
 	--checkpoint-steps 15 \
 	--learning-rate 1e-4 \
@@ -385,8 +390,8 @@ python - <<'PY'
 from pathlib import Path
 from huggingface_hub import HfApi
 
-adapter_dir = Path("mbe/adapters_llama32")
-repo_id = "YOUR_HF_USERNAME/mbe-llama32-lora"
+adapter_dir = Path("mbe/adapters_qwen3")
+repo_id = "YOUR_HF_USERNAME/mbe-qwen3-lora"
 config = adapter_dir / "adapter_config.json"
 weights = next((adapter_dir / name for name in (
     "adapter_model.safetensors", "adapter_model.bin"
@@ -415,9 +420,9 @@ Hugging Face access to both the gated base model and the adapter repository:
 python run_hf_mbe.py \
 	--input mbe/data/test.jsonl \
 	--split mbe/data/split.json \
-	--model meta-llama/Llama-3.2-3B-Instruct \
-	--adapter-path YOUR_HF_USERNAME/mbe-llama32-lora \
-	--run-name mbe-llama32-adapter-hf \
+	--model Qwen/Qwen3-4B \
+	--adapter-path YOUR_HF_USERNAME/mbe-qwen3-lora \
+	--run-name mbe-qwen3-adapter-hf \
 	--output-root testing/baseline/huggingface/mbe
 ```
 

@@ -14,8 +14,10 @@ from typing import Any
 
 try:
     from .chameleon_utils import HERE, load_cuda_model, parse_verdicts, read_jsonl
+    from .prompt_selector import resolve_prompt
 except ImportError:
     from chameleon_utils import HERE, load_cuda_model, parse_verdicts, read_jsonl
+    from prompt_selector import resolve_prompt
 
 FORMAT_HINT = (
     "\n\nAnswer in exactly this format, one block per statement, using the "
@@ -274,9 +276,14 @@ def main() -> int:
         help="full source benchmark JSON used for scoring --all-data questions",
     )
     parser.add_argument("--split", type=Path, default=HERE / "data" / "split.json")
-    parser.add_argument("--model", default="meta-llama/Llama-3.2-3B-Instruct")
+    parser.add_argument("--model", default="Qwen/Qwen3-4B")
     parser.add_argument("--adapter-path", type=Path, help="PEFT adapter; omit to test the base model")
     parser.add_argument("--prompt", help="optional file containing a system prompt")
+    parser.add_argument(
+        "--prompt-type",
+        choices=("baseline", "cot"),
+        help="select the built-in system prompt for this evaluation type",
+    )
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--run-name")
     parser.add_argument("--max-tokens", type=int, default=1200)
@@ -292,7 +299,13 @@ def main() -> int:
 
     if args.max_tokens < 1:
         parser.error("--max-tokens must be positive")
-    prompt_path = Path(args.prompt) if args.prompt else None
+    if args.prompt and args.prompt_type:
+        parser.error("use either --prompt or --prompt-type, not both")
+    prompt_path = (
+        Path(args.prompt) if args.prompt
+        else resolve_prompt("leetarg", args.prompt_type) if args.prompt_type
+        else None
+    )
     prompt_text = prompt_path.read_text(encoding="utf-8") if prompt_path else ""
     if args.all_data:
         if args.adapter_path or args.test_ids:
@@ -362,6 +375,7 @@ def main() -> int:
         "split": str(args.split.resolve()),
         "gold_data": str(args.gold_data.resolve()) if args.gold_data else None,
         "prompt": str(prompt_path.resolve()) if prompt_path else None,
+        "prompt_type": args.prompt_type,
         "prompt_sha256": hashlib.sha256(
             prompt_text.encode("utf-8")
         ).hexdigest(),
