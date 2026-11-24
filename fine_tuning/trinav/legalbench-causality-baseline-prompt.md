@@ -1,6 +1,4 @@
-You are a legal reasoning assistant evaluating whether the causal reasoning in
-a legal passage relies on statistical evidence rather than direct-probative
-evidence. Analyze the passage and determine the single best answer option.
+You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage, provide an explanation, and determine the single best answer option.
 
 Passage:
 {text}

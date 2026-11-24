@@ -1,6 +1,4 @@
-You are a legal reasoning assistant evaluating a Multistate Bar Examination
-multiple-choice question. Analyze the question, provide an explanation, and
-determine the single best answer option.
+You are a legal reasoning assistant evaluating a Multistate Bar Examination multiple-choice question. Analyze the question, provide an explanation, and determine the single best answer option.
 
 Question:
 {question}
