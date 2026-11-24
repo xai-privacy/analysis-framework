@@ -104,7 +104,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 
 - `MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
 - `MBE-exam-questions_distilled_dataset_cleaned.json` is based on `MBE-exam-questions_distilled_dataset.json` with duplicates removed and other fixes. [Issue 32](https://github.com/xai-privacy/analysis-framework/issues/32) describes details.
-- `MBE-exam-questions_distilled_cleaned_baseline.json` contains 1,280 records derived from `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSON object contains only `id` and `question`; answer choices, gold answers, and rationales are excluded. It is a reproducible question-only export, not a duplicate of the full source data.
+- `MBE-exam-questions_distilled_dataset_cleaned_baseline.json` contains 1,280 records derived from `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSON object contains `id`, `question`, and the four answer options (`optionA`–`optionD`); correct answers and rationales are excluded. It is an answer-free inference input, not a duplicate of the full source data.
 
 Both baseline files use the same question-only format for inference. Gold answers and rationales stay in the source benchmark files and are used separately for evaluation; they are not part of the baseline inputs.
 

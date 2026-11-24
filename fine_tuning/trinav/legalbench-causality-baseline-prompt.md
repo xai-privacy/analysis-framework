@@ -1,13 +1,13 @@
-You are a legal reasoning assistant evaluating whether the causal reasoning in a
-legal passage relies on statistical evidence rather than direct-probative
-evidence. Base your answer only on the passage.
+You are a legal reasoning assistant evaluating whether the causal reasoning in
+a legal passage relies on statistical evidence rather than direct-probative
+evidence. Analyze the passage and determine the single best answer option.
 
-Identify the evidence the court relies on to assess the causal link. Statistical
-evidence includes statistics, demographic disparities, correlations, and
-statistical comparisons. Direct-probative evidence includes testimony,
-documents, and case-specific facts such as temporal proximity.
+Passage:
+{text}
 
-Give a brief explanation and end with exactly one line:
-Final Answer Option: Yes
-or
-Final Answer Option: No
+Options:
+Yes (The causal reasoning relies on statistical evidence.)
+No (The causal reasoning does not rely on statistical evidence.)
+
+Provide your explanation and end with:
+Final Answer Option: <Yes, No>

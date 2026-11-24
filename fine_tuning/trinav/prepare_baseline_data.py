@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare full-dataset baseline inputs without exposing answer choices."""
+"""Prepare full-dataset baseline inputs without exposing gold answers or rationales."""
 
 from __future__ import annotations
 
@@ -24,11 +24,11 @@ def read_json(path: Path) -> Any:
         return json.load(handle)
 
 
-def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+def write_json(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as handle:
-        for row in rows:
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+        json.dump(rows, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
 
 
 def prepare_leetarg(source_path: Path, output_path: Path) -> int:
@@ -39,7 +39,7 @@ def prepare_leetarg(source_path: Path, output_path: Path) -> int:
         if "<choices>" in prompt:
             raise ValueError(f"{question['id']}: baseline prompt contains choices")
         rows.append({"id": question["id"], "question": prompt})
-    write_jsonl(output_path, rows)
+    write_json(output_path, rows)
     return len(rows)
 
 
@@ -61,9 +61,13 @@ def prepare_mbe(source_path: Path, output_path: Path) -> int:
         rows.append({
             "id": qid,
             "question": question["question"].strip(),
+            **{
+                key: question["options"][key].strip()
+                for key in prepare_mbe_data.OPTION_KEYS
+            },
         })
 
-    write_jsonl(output_path, rows)
+    write_json(output_path, rows)
     return len(rows)
 
 
@@ -82,12 +86,12 @@ def main() -> None:
     parser.add_argument(
         "--leetarg-output",
         type=Path,
-        default=REPO / "benchmarks" / "LEET_Arg_Baseline.jsonl",
+        default=REPO / "benchmarks" / "LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json",
     )
     parser.add_argument(
         "--mbe-output",
         type=Path,
-        default=REPO / "benchmarks" / "MBE-exam-questions-baseline.jsonl",
+        default=REPO / "benchmarks" / "MBE-exam-questions_distilled_dataset_cleaned_baseline.json",
     )
     args = parser.parse_args()
 

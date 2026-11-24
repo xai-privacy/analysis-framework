@@ -162,10 +162,6 @@ def make_record(question: dict[str, Any], include_answer: bool):
         "domain": question["domain"],
         "question_number": int(question["question_number"]),
         "messages": messages,
-        "evaluation": {
-            "gold_answer": str(question["correct_answer"]).strip().upper(),
-            "gold_explanation": question["explanation"],
-        },
     }
 
 

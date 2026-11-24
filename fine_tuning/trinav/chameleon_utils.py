@@ -10,22 +10,6 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 DATA_DIR = HERE / "data"
 
-HEADER_RE = re.compile(r"^\W*Statement\s*(\(\w\)|[①②③④⑤])", re.M)
-VERDICT_WORD_RE = re.compile(r"Verdict\W*(INCORRECT|CORRECT)", re.I)
-
-
-def parse_verdicts(output: str):
-    """Read verdicts from the per-statement format used by Jun's run."""
-    verdicts = {}
-    headers = list(HEADER_RE.finditer(output))
-    for header, following in zip(headers, headers[1:] + [None]):
-        block = output[header.end():following.start() if following else len(output)]
-        match = VERDICT_WORD_RE.search(block)
-        if match and header.group(1) not in verdicts:
-            verdicts[header.group(1)] = match.group(1).upper() == "CORRECT"
-    return verdicts
-
-
 def read_jsonl(path: Path):
     rows = []
     with path.open("r", encoding="utf-8") as handle:
@@ -49,6 +33,37 @@ def read_json_or_jsonl(path: Path):
     if not isinstance(rows, list):
         raise ValueError(f"Expected a JSON array in {path}")
     return rows
+
+
+def render_prompt(template: str, values: dict[str, str]) -> str:
+    try:
+        rendered = template.format_map(values)
+    except KeyError as error:
+        raise ValueError(f"Missing prompt value for placeholder {{{error.args[0]}}}") from error
+    return rendered
+
+
+def write_question_markdown(
+    output_dir: Path, question_id: str, prompt: str, response: str
+) -> None:
+    longest_fence = max(
+        (
+            len(match)
+            for text in (prompt, response)
+            for match in re.findall(r"`+", text)
+        ),
+        default=2,
+    )
+    fence = "`" * max(3, longest_fence + 1)
+    content = (
+        f"# Question {question_id}\n\n"
+        f"## Exact prompt received by the model\n\n{fence}text\n"
+        f"{prompt}\n{fence}\n\n"
+        f"## Model response\n\n{fence}text\n{response}\n{fence}\n"
+    )
+    temporary = output_dir / f"{question_id}.md.tmp"
+    temporary.write_text(content, encoding="utf-8")
+    temporary.replace(output_dir / f"{question_id}.md")
 
 
 def validate_data_split(train_rows, valid_rows, split_path: Path):
@@ -89,22 +104,6 @@ def validate_data_split(train_rows, valid_rows, split_path: Path):
         if not all(isinstance(m.get("content"), str) and m["content"].strip()
                    for m in messages):
             raise ValueError(f"{row['id']}: message content cannot be blank")
-        evaluation = row.get("evaluation")
-        if not isinstance(evaluation, dict):
-            raise ValueError(f"{row['id']}: missing evaluation metadata; regenerate data")
-        has_leet_labels = (
-            isinstance(evaluation.get("gold_verdicts"), dict)
-            and isinstance(evaluation.get("answer_verdicts"), dict)
-        )
-        has_mbe_labels = (
-            evaluation.get("gold_answer") in {"A", "B", "C", "D"}
-            and isinstance(evaluation.get("gold_explanation"), dict)
-        )
-        has_legalbench_labels = evaluation.get("gold_answer") in {
-            "Yes", "No", "Correct", "Incorrect"
-        }
-        if not (has_leet_labels or has_mbe_labels or has_legalbench_labels):
-            raise ValueError(f"{row['id']}: unsupported or incomplete evaluation metadata")
 
     return split
 
@@ -202,8 +201,9 @@ __all__ = [
     "REPO",
     "get_lora_target_modules",
     "load_cuda_model",
-    "parse_verdicts",
     "read_json_or_jsonl",
     "read_jsonl",
+    "render_prompt",
     "validate_data_split",
+    "write_question_markdown",
 ]

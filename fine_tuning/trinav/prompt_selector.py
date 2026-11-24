@@ -8,7 +8,7 @@ HERE = Path(__file__).resolve().parent
 
 PROMPTS = {
     "leetarg": {
-        "baseline": HERE / "baseline-prompt.md",
+        "baseline": HERE / "leetarg-baseline-prompt.md",
         "cot": HERE / "leetarg-cot-prompt.md",
     },
     "mbe": {
@@ -22,12 +22,6 @@ PROMPTS = {
     "legalbench_privacy": {
         "baseline": HERE / "legalbench-privacy-baseline-prompt.md",
         "cot": HERE / "legalbench-privacy-cot-prompt.md",
-    },
-    "legalbench_causality_finetune": {
-        "baseline": HERE / "legalbench-causality-finetune-prompt.md",
-    },
-    "legalbench_privacy_finetune": {
-        "baseline": HERE / "legalbench-privacy-finetune-prompt.md",
     },
 }
 

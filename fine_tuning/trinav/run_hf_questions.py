@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""Run LEET-Arg test questions with a Hugging Face base model or PEFT adapter."""
+"""Run LEET-Arg questions with a Hugging Face base model or PEFT adapter."""
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import sys
-import time
 from pathlib import Path
 from typing import Any
 
@@ -16,26 +14,27 @@ try:
     from .chameleon_utils import (
         HERE,
         load_cuda_model,
-        parse_verdicts,
         read_json_or_jsonl,
+        render_prompt,
+        write_question_markdown,
     )
     from .prompt_selector import resolve_prompt
 except ImportError:
     from chameleon_utils import (
         HERE,
         load_cuda_model,
-        parse_verdicts,
         read_json_or_jsonl,
+        render_prompt,
+        write_question_markdown,
     )
     from prompt_selector import resolve_prompt
 
 FORMAT_HINT = (
-    "\n\nAnswer in exactly this format, one block per statement, using the "
-    "statement's own label:\n\nStatement (a)\nReasoning: <your reasoning>\n"
-    "Verdict: CORRECT or INCORRECT"
+    "\n\nProvide your explanation and end with exactly one line:\n"
+    "Final Answer Option(s): <label(s) of the correct statement(s) or "
+    "choice(s), exactly as shown in the passage>"
 )
-CIRCLED = "①②③④⑤"
-NEGATIVE_STEM = re.compile(r"\bNOT\b|cannot be included", re.I)
+ID_PATTERN = re.compile(r"[A-Za-z0-9_-]+")
 
 
 def find_repo_root() -> Path:
@@ -50,57 +49,47 @@ DEFAULT_SPLIT = HERE / "data" / "split.json"
 DEFAULT_OUTPUT_ROOT = REPO / "testing" / "baseline" / "huggingface"
 
 
-def load_questions(path: Path) -> list[dict[str, Any]]:
-    with path.open("r", encoding="utf-8") as handle:
-        questions = json.load(handle)
-    if not isinstance(questions, list):
-        raise ValueError(f"Expected a JSON array in {path}")
-
+def load_questions(
+    path: Path, baseline_only: bool = False
+) -> list[dict[str, str]]:
+    rows = read_json_or_jsonl(path)
+    if not rows:
+        raise ValueError(f"No questions found in {path}")
+    questions = []
     seen = set()
-    for index, question in enumerate(questions):
-        if not isinstance(question, dict):
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
             raise ValueError(f"Question at index {index} is not a JSON object")
-        qid = question.get("id")
-        if not isinstance(qid, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", qid):
+        qid = row.get("id")
+        if not isinstance(qid, str) or not ID_PATTERN.fullmatch(qid):
             raise ValueError(f"Question at index {index} has an invalid or missing id")
         if qid in seen:
             raise ValueError(f"Duplicate question id: {qid}")
         seen.add(qid)
-        if not isinstance(question.get("original_question"), str):
-            raise ValueError(f"Question {qid} has no string original_question")
-        if not isinstance(question.get("statements"), dict) or not question["statements"]:
-            raise ValueError(f"Question {qid} has no statement mapping")
-        if "answer" not in question:
-            raise ValueError(f"Question {qid} has no gold answer")
+
+        if baseline_only and set(row) != {"id", "question"}:
+            raise ValueError(
+                f"{qid}: baseline record must contain only id and question"
+            )
+        question = row.get("question")
+        if not isinstance(question, str):
+            original = row.get("original_question")
+            statements = row.get("statements")
+            if not isinstance(original, str) or not isinstance(statements, dict):
+                raise ValueError(f"{qid}: expected a question string")
+            question = build_user_prompt(original, statements)
+        if not question.strip():
+            raise ValueError(f"{qid}: question cannot be blank")
+        questions.append({"id": qid, "question": question})
     return questions
 
 
-def load_baseline_questions(path: Path) -> list[dict[str, str]]:
-    rows = read_json_or_jsonl(path)
-    if not rows:
-        raise ValueError(f"No baseline questions found in {path}")
-    seen = set()
-    for row in rows:
-        if not isinstance(row, dict) or set(row) != {"id", "question"}:
-            raise ValueError("Every baseline line must contain only id and question")
-        qid = row["id"]
-        if not isinstance(qid, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", qid):
-            raise ValueError(f"Baseline question has an invalid or missing id: {qid!r}")
-        if qid in seen:
-            raise ValueError(f"Duplicate baseline question id: {qid}")
-        seen.add(qid)
-        if not isinstance(row["question"], str) or not row["question"].strip():
-            raise ValueError(f"{qid}: baseline question cannot be blank")
-        if "<choices>" in row["question"]:
-            raise ValueError(f"{qid}: baseline question contains the choices section")
-    return rows
-
-
-def split_question(question: dict[str, Any]):
-    text = question["original_question"]
-    _, _, choices = text.partition("<choices>")
-    first_statement = next(iter(question["statements"].values())).strip()
-    cut = text.find(first_statement[:30], max(text.find("<question>"), 0))
+def build_user_prompt(original: str, statements: dict[str, Any]) -> str:
+    text = original
+    first_statement = next(iter(statements.values()), "")
+    if not isinstance(first_statement, str) or not first_statement.strip():
+        raise ValueError("Source question has no statement text")
+    cut = text.find(first_statement.strip()[:30], max(text.find("<question>"), 0))
     head = text[:cut] if cut > 0 else text.split("<choices>")[0]
     head = re.sub(r"(\s*<(statements|choices)>\s*)+$", "", head.rstrip())
     if "<question>" in head:
@@ -109,89 +98,16 @@ def split_question(question: dict[str, Any]):
         end = head.rfind("?")
         start = max(head.rfind(".", 0, end), head.rfind(">", 0, end)) + 1
         passage, stem = head[:start], head[start:]
-    return passage.strip(), stem.replace("<choices>", "Options").strip(), choices.strip()
-
-
-def build_user_prompt(question: dict[str, Any]) -> str:
-    passage, stem, _ = split_question(question)
     passage = re.sub(r"(?<=[.!?”\"’)])\s*(?=[A-Z][a-z]+\d?:\s)", "\n", passage)
-    statements = "\n".join(text.strip() for text in question["statements"].values())
-    return f"{passage}\n\n<question> {stem}\n<statements>\n{statements}"
-
-
-def build_messages(
-    question: str, system_prompt: str
-) -> list[dict[str, str]]:
-    messages = []
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
-    messages.append({"role": "user", "content": question})
-    return messages
-
-
-def statement_label(text: str):
-    match = re.match(r"\s*(\(\w\)|[①②③④⑤])", text)
-    return match.group(1) if match else None
-
-
-def parse_choices(question: dict[str, Any]) -> dict[int, str]:
-    _, _, choices = split_question(question)
-    parts = re.split(r"([①②③④⑤])", choices)
-    return {
-        CIRCLED.index(parts[index]) + 1: parts[index + 1].strip().rstrip(".").strip()
-        for index in range(1, len(parts), 2)
-    }
-
-
-def is_combination(question: dict[str, Any]) -> bool:
-    labels = [statement_label(text) for text in question["statements"].values()]
-    if not all(label and label.startswith("(") for label in labels):
-        return False
-    return all(
-        re.fullmatch(r"(\(\w\)[,\s]*(and\s*)?)+", value)
-        for value in parse_choices(question).values()
+    statements_text = "\n".join(
+        statement.strip()
+        for statement in statements.values()
+        if isinstance(statement, str)
     )
-
-
-def is_negative(question: dict[str, Any]) -> bool:
-    _, stem, _ = split_question(question)
-    return bool(NEGATIVE_STEM.search(stem))
-
-
-def gold_verdicts(question: dict[str, Any]) -> dict[str, bool]:
-    labels = [statement_label(text) for text in question["statements"].values()]
-    answer = int(question["answer"])
-    negative = is_negative(question)
-    if is_combination(question):
-        selected = set(re.findall(r"\(\w\)", parse_choices(question)[answer]))
-        picked = [label in selected for label in labels]
-    else:
-        picked = [index + 1 == answer for index in range(len(labels))]
-    return {label: (selected != negative) for label, selected in zip(labels, picked)}
-
-
-def answer_from_verdicts(question: dict[str, Any], verdicts: dict[str, bool]):
-    labels = [statement_label(text) for text in question["statements"].values()]
-    negative = is_negative(question)
-    if is_combination(question):
-        wanted = {label for label in labels if verdicts.get(label) is (not negative)}
-        for number, option in parse_choices(question).items():
-            if set(re.findall(r"\(\w\)", option)) == wanted:
-                return number
-        return None
-    matches = [
-        index + 1 for index, label in enumerate(labels)
-        if verdicts.get(label) is (not negative)
-    ]
-    return matches[0] if len(matches) == 1 else None
-
-
-def read_split(path: Path):
-    with path.open("r", encoding="utf-8") as handle:
-        split = json.load(handle)
-    train_ids = set(map(str, split.get("train", split.get("train_ids", []))))
-    valid_ids = set(map(str, split.get("valid", split.get("valid_ids", []))))
-    return train_ids, valid_ids
+    return (
+        f"{passage.strip()}\n\n<question> {stem.strip()}\n<statements>\n"
+        f"{statements_text}"
+    )
 
 
 def load_test_ids(path: Path) -> list[str]:
@@ -207,93 +123,41 @@ def load_test_ids(path: Path) -> list[str]:
     return ids
 
 
-def sanitize(value: str) -> str:
-    return re.sub(r"[^A-Za-z0-9_.-]+", "_", value).strip("_.-") or "run"
+def read_split(path: Path) -> tuple[set[str], set[str]]:
+    with path.open("r", encoding="utf-8") as handle:
+        split = json.load(handle)
+    train_ids = set(map(str, split.get("train", split.get("train_ids", []))))
+    valid_ids = set(map(str, split.get("valid", split.get("valid_ids", []))))
+    return train_ids, valid_ids
 
 
-def score_records(records: list[dict[str, Any]]) -> dict[str, Any]:
-    statement_rows = [
-        statement for record in records for statement in record["statements"].values()
-    ]
-    total_statements = len(statement_rows)
-    return {
-        "n_questions": len(records),
-        "n_statements": total_statements,
-        "parse_rate": sum(record["parsed_all"] for record in records) / max(len(records), 1),
-        "statement_accuracy": sum(
-            row["gold"] == row["pred"] for row in statement_rows
-        ) / max(total_statements, 1),
-        "question_accuracy": sum(record["question_correct"] for record in records)
-        / max(len(records), 1),
-    }
+def build_messages(question: str, system_prompt: str) -> list[dict[str, str]]:
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": question})
+    return messages
 
 
-def write_results(output_dir: Path, metadata: dict[str, Any], records: list[dict[str, Any]]):
-    summary = {**metadata, **score_records(records)}
-    temporary = output_dir / "results.json.tmp"
+def save_results(path: Path, records: dict[str, dict[str, str]]) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(
-        json.dumps({"summary": summary, "records": records}, ensure_ascii=False, indent=2),
+        json.dumps(records, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    temporary.replace(output_dir / "results.json")
-    return summary
-
-
-def write_question_markdown(output_dir: Path, question: dict[str, Any], record: dict[str, Any]):
-    qid = question["id"]
-    statements = "\n".join(
-        f"- {label}: gold={'CORRECT' if item['gold'] else 'INCORRECT'}, "
-        f"predicted={('CORRECT' if item['pred'] else 'INCORRECT') if item['pred'] is not None else 'UNPARSED'}"
-        for label, item in record["statements"].items()
-    )
-    original_rationale = question.get("original_rationale")
-    gold_rationale = ""
-    if isinstance(original_rationale, dict):
-        answer_rationale = original_rationale.get("answer")
-        if isinstance(answer_rationale, str) and answer_rationale.strip():
-            gold_rationale = f"\n\n{answer_rationale.strip()}"
-    content = (
-        f"# Question {qid}\n\n"
-        f"## Model run\n\n"
-        f"- Model: `{record['model']}`\n"
-        f"- Adapter: `{record['adapter_path'] or 'base model'}`\n\n"
-        f"## Original question\n\n{question['original_question'].strip()}\n\n"
-        f"## Gold answer\n\n{question['answer']}{gold_rationale}\n\n"
-        f"## Scores\n\n"
-        f"- Predicted answer: {record['pred_answer']}\n"
-        f"- All statements parsed: {record['parsed_all']}\n"
-        f"- Question correct: {record['question_correct']}\n"
-        f"- Statement verdicts:\n{statements}\n\n"
-        f"## Model response\n\n{record['output']}\n"
-    )
-    (output_dir / f"{qid}.md").write_text(content, encoding="utf-8")
+    temporary.replace(path)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--input", type=Path, required=True,
-        help="full source JSON or question-only JSONL baseline input",
-    )
-    parser.add_argument(
-        "--test-ids",
-        type=Path,
-        help="optional JSON list of IDs/records to select from --input",
-    )
-    parser.add_argument(
-        "--gold-data",
-        type=Path,
-        help="full source benchmark JSON used for scoring --all-data questions",
-    )
-    parser.add_argument("--split", type=Path, default=HERE / "data" / "split.json")
+    parser.add_argument("--input", type=Path, required=True)
+    parser.add_argument("--test-ids", type=Path)
+    parser.add_argument("--split", type=Path, default=DEFAULT_SPLIT)
     parser.add_argument("--model", default="Qwen/Qwen3-4B")
-    parser.add_argument("--adapter-path", type=Path, help="PEFT adapter; omit to test the base model")
-    parser.add_argument("--prompt", help="optional file containing a system prompt")
-    parser.add_argument(
-        "--prompt-type",
-        choices=("baseline", "cot"),
-        help="select the built-in system prompt for this evaluation type",
-    )
+    parser.add_argument("--adapter-path", type=Path)
+    prompt_group = parser.add_mutually_exclusive_group()
+    prompt_group.add_argument("--prompt", type=Path)
+    prompt_group.add_argument("--prompt-type", choices=("baseline", "cot"))
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--run-name")
     parser.add_argument("--max-tokens", type=int, default=1200)
@@ -302,136 +166,91 @@ def main() -> int:
     parser.add_argument(
         "--all-data",
         action="store_true",
-        help="evaluate the complete source dataset; base-model baselines only",
+        help="run a complete baseline JSON dataset; base model only",
     )
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 
     if args.max_tokens < 1:
         parser.error("--max-tokens must be positive")
-    if args.prompt and args.prompt_type:
-        parser.error("use either --prompt or --prompt-type, not both")
-    prompt_path = (
-        Path(args.prompt) if args.prompt
-        else resolve_prompt("leetarg", args.prompt_type) if args.prompt_type
-        else None
-    )
-    prompt_text = prompt_path.read_text(encoding="utf-8") if prompt_path else ""
+    if args.limit is not None and args.limit < 1:
+        parser.error("--limit must be positive")
+    if args.all_data and (args.adapter_path or args.test_ids):
+        parser.error("--all-data is only for full base-model baseline runs")
+
+    questions = load_questions(args.input, baseline_only=args.all_data)
     if args.all_data:
-        if args.adapter_path or args.test_ids:
-            parser.error("--all-data is only for full base-model baseline runs")
-        if not args.gold_data:
-            parser.error("--gold-data is required with --all-data")
-        prompt_rows = load_baseline_questions(args.input)
-        gold_questions = load_questions(args.gold_data)
-        gold_by_id = {question["id"]: question for question in gold_questions}
-        prompt_ids = {row["id"] for row in prompt_rows}
-        if prompt_ids != set(gold_by_id):
-            raise SystemExit(
-                "Baseline questions do not match --gold-data; "
-                f"missing IDs: {sorted(set(gold_by_id) - prompt_ids)[:10]}, "
-                f"unexpected IDs: {sorted(prompt_ids - set(gold_by_id))[:10]}"
-            )
+        if args.input.suffix != ".json":
+            parser.error("--all-data requires a JSON baseline file")
         with args.split.open("r", encoding="utf-8") as handle:
             split = json.load(handle)
         expected_count = split.get("source_count")
-        if expected_count is not None and len(prompt_rows) != expected_count:
-            raise SystemExit(
-                f"--all-data expected {expected_count} source questions, "
-                f"found {len(prompt_rows)}"
+        if expected_count is not None and len(questions) != expected_count:
+            raise ValueError(
+                f"--all-data expected {expected_count} questions, found {len(questions)}"
             )
-        questions = [
-            (row["question"], gold_by_id[row["id"]]) for row in prompt_rows
-        ]
     else:
-        if args.gold_data:
-            parser.error("--gold-data is only used with --all-data")
-        source_questions = load_questions(args.input)
         if args.test_ids:
             requested_ids = load_test_ids(args.test_ids)
-            questions_by_id = {
-                question["id"]: question for question in source_questions
-            }
+            questions_by_id = {row["id"]: row for row in questions}
             missing = sorted(set(requested_ids) - set(questions_by_id))
             if missing:
-                raise SystemExit(f"Test IDs missing from --input: {missing}")
-            source_questions = [questions_by_id[qid] for qid in requested_ids]
+                raise ValueError(f"Test IDs missing from --input: {missing}")
+            questions = [questions_by_id[qid] for qid in requested_ids]
+
         train_ids, valid_ids = read_split(args.split)
-        overlap = {question["id"] for question in source_questions} & (
-            train_ids | valid_ids
-        )
+        overlap = {row["id"] for row in questions} & (train_ids | valid_ids)
         if overlap:
-            raise SystemExit(
+            raise ValueError(
                 "Refusing to evaluate questions used for training or validation: "
                 + ", ".join(sorted(overlap))
             )
-        questions = [
-            (build_user_prompt(question), question) for question in source_questions
-        ]
+
     if args.limit is not None:
-        if args.limit < 1:
-            parser.error("--limit must be positive")
         questions = questions[:args.limit]
+
+    prompt_path = args.prompt or (
+        resolve_prompt("leetarg", args.prompt_type) if args.prompt_type else None
+    )
+    prompt_text = prompt_path.read_text(encoding="utf-8") if prompt_path else ""
+    if prompt_path and not prompt_text.strip():
+        raise ValueError(f"Prompt is empty: {prompt_path}")
 
     adapter_path = str(args.adapter_path) if args.adapter_path else None
     adapter_tag = args.adapter_path.name if args.adapter_path else "base"
-    run_name = args.run_name or f"{sanitize(args.model)}__{sanitize(adapter_tag)}"
-    output_dir = args.output_root / sanitize(run_name)
+    run_name = args.run_name or f"{args.model.replace('/', '_')}__{adapter_tag}"
+    output_dir = args.output_root / re.sub(r"[^A-Za-z0-9_.-]+", "_", run_name)
     output_dir.mkdir(parents=True, exist_ok=True)
-    metadata = {
-        "model": args.model,
-        "adapter_path": adapter_path,
-        "input": str(args.input.resolve()),
-        "split": str(args.split.resolve()),
-        "gold_data": str(args.gold_data.resolve()) if args.gold_data else None,
-        "prompt": str(prompt_path.resolve()) if prompt_path else None,
-        "prompt_type": args.prompt_type,
-        "prompt_sha256": hashlib.sha256(
-            prompt_text.encode("utf-8")
-        ).hexdigest(),
-        "format_hint": args.format_hint,
-        "max_tokens": args.max_tokens,
-        "all_data": args.all_data,
-    }
-    manifest_path = output_dir / "run.json"
-    if manifest_path.exists():
-        previous_metadata = json.loads(manifest_path.read_text(encoding="utf-8"))
-        if previous_metadata != metadata and not args.overwrite:
-            raise SystemExit(
-                f"{output_dir} contains a different run. Choose another --run-name "
-                "or pass --overwrite."
-            )
-    manifest_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
-
     results_path = output_dir / "results.json"
-    records = []
-    wanted_ids = {gold_question["id"] for _, gold_question in questions}
     if results_path.exists() and not args.overwrite:
-        previous = json.loads(results_path.read_text(encoding="utf-8"))
-        records = [
-            record for record in previous.get("records", [])
-            if record.get("id") in wanted_ids
-        ]
-        print(f"Resuming with {len(records)} completed questions")
-    done = {record["id"] for record in records}
+        raise SystemExit(f"{results_path} exists; choose another --run-name or pass --overwrite")
 
     import torch
 
     model, tokenizer, _ = load_cuda_model(args.model, adapter_path)
     model.eval()
-    device = getattr(model, "device", torch.device("cuda" if torch.cuda.is_available() else "cpu"))
-
-    print(
-        f"Running {len(questions)} questions with {args.model} "
-        f"({adapter_path or 'base model'}); output: {output_dir}"
+    device = getattr(
+        model, "device", torch.device("cuda" if torch.cuda.is_available() else "cpu")
     )
-    for index, (question_text, gold_question) in enumerate(questions, 1):
-        question = gold_question
-        qid = question["id"]
-        if qid in done:
-            continue
-        system_prompt = prompt_text + (FORMAT_HINT if args.format_hint else "")
-        messages = build_messages(question_text, system_prompt)
+    records: dict[str, dict[str, str]] = {}
+
+    for index, row in enumerate(questions, 1):
+        qid = row["id"]
+        print(f"[{index}/{len(questions)}] Processing question {qid}", flush=True)
+        question = row["question"]
+        system_prompt = prompt_text
+        if "{question}" in prompt_text:
+            question = render_prompt(prompt_text, {"question": question})
+            system_prompt = ""
+        if args.format_hint:
+            if system_prompt:
+                system_prompt += FORMAT_HINT
+            else:
+                question += FORMAT_HINT
+        messages = build_messages(question, system_prompt)
+        rendered_prompt = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
         inputs = tokenizer.apply_chat_template(
             messages,
             tokenize=True,
@@ -441,7 +260,6 @@ def main() -> int:
         )
         inputs = {key: value.to(device) for key, value in inputs.items()}
         prompt_length = inputs["input_ids"].shape[1]
-        start = time.time()
         with torch.inference_mode():
             generated = model.generate(
                 **inputs,
@@ -449,43 +267,14 @@ def main() -> int:
                 do_sample=False,
                 pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id,
             )
-        output = tokenizer.decode(
-            generated[0, prompt_length:], skip_special_tokens=True
-        ).strip()
-
-        gold = gold_verdicts(question)
-        predicted = parse_verdicts(output)
-        parsed_all = all(label in predicted for label in gold)
-        predicted_answer = answer_from_verdicts(question, predicted) if parsed_all else None
-        gold_answer = int(question["answer"])
-        record = {
-            "id": qid,
-            "model": args.model,
-            "adapter_path": adapter_path,
-            "gold_answer": gold_answer,
-            "pred_answer": predicted_answer,
-            "question_correct": predicted_answer == gold_answer,
-            "parsed_all": parsed_all,
-            "statements": {
-                label: {"gold": verdict, "pred": predicted.get(label)}
-                for label, verdict in gold.items()
-            },
-            "seconds": round(time.time() - start, 2),
-            "output": output,
-        }
-        records.append(record)
-        write_question_markdown(output_dir, question, record)
-        write_results(output_dir, metadata, records)
-        statement_hits = sum(
-            item["gold"] == item["pred"] for item in record["statements"].values()
+        response = tokenizer.decode(
+            generated[0, prompt_length:],
+            skip_special_tokens=True,
+            clean_up_tokenization_spaces=False,
         )
-        print(
-            f"[{index}/{len(questions)}] {qid}: statements {statement_hits}/{len(gold)}, "
-            f"answer {predicted_answer} (gold {gold_answer}), {record['seconds']}s",
-            flush=True,
-        )
-
-    print(json.dumps(write_results(output_dir, metadata, records), indent=2))
+        records[qid] = {"prompt": rendered_prompt, "response": response}
+        save_results(results_path, records)
+        write_question_markdown(output_dir, qid, rendered_prompt, response)
     return 0
 
 

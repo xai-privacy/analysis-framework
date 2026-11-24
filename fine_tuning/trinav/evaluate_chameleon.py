@@ -1,32 +1,19 @@
 #!/usr/bin/env python3
-"""Evaluate a base or QLoRA-adapted model on Trinav's validation split."""
+"""Run a base or QLoRA-adapted model on Trinav's validation split."""
 
 from __future__ import annotations
 
 import argparse
 import json
-import time
 from pathlib import Path
 
 import torch
 
 try:
-    from .chameleon_utils import (
-        DATA_DIR,
-        HERE,
-        load_cuda_model,
-        parse_verdicts,
-        read_jsonl,
-    )
+    from .chameleon_utils import DATA_DIR, load_cuda_model, read_jsonl
     from .train_chameleon import DEFAULT_MODEL
 except ImportError:
-    from chameleon_utils import (
-        DATA_DIR,
-        HERE,
-        load_cuda_model,
-        parse_verdicts,
-        read_jsonl,
-    )
+    from chameleon_utils import DATA_DIR, load_cuda_model, read_jsonl
     from train_chameleon import DEFAULT_MODEL
 
 FORMAT_HINT = (
@@ -36,34 +23,23 @@ FORMAT_HINT = (
 )
 
 
-def save_results(path: Path, args, records):
-    statements = [value for row in records for value in row["statements"].values()]
-    count = len(records)
-    summary = {
-        "model": args.model,
-        "adapter_path": str(args.adapter_path) if args.adapter_path else None,
-        "format_hint": args.format_hint,
-        "data": str(args.data),
-        "n_questions": count,
-        "n_statements": len(statements),
-        "parse_rate": sum(row["parsed_all"] for row in records) / max(count, 1),
-        "statement_accuracy": sum(
-            value["gold"] == value["pred"] for value in statements
-        ) / max(len(statements), 1),
-        "question_accuracy": sum(row["question_correct"] for row in records)
-        / max(count, 1),
-    }
+def save_results(path: Path, records: dict[str, dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(
-        json.dumps({"summary": summary, "records": records}, indent=2, ensure_ascii=False),
+        json.dumps(records, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     temporary.replace(path)
-    return summary
 
 
-def main():
+def print_exchange(qid: str, prompt: str, response: str) -> None:
+    print(f"\n===== {qid} | MODEL INPUT =====\n{prompt}")
+    print(f"\n===== {qid} | MODEL RESPONSE =====")
+    print(response, end="" if response.endswith("\n") else "\n", flush=True)
+
+
+def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--model",
@@ -76,11 +52,22 @@ def main():
     parser.add_argument("--limit", type=int)
     parser.add_argument("--format-hint", action="store_true")
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 
+    if args.max_tokens < 1:
+        parser.error("--max-tokens must be positive")
+    if args.limit is not None and args.limit < 1:
+        parser.error("--limit must be positive")
+    if args.out.exists() and not args.overwrite:
+        parser.error(f"{args.out} exists; choose another --out or pass --overwrite")
+
     rows = read_jsonl(args.data)
+    if not rows:
+        raise ValueError(f"No validation rows found in {args.data}")
     if args.limit is not None:
         rows = rows[:args.limit]
+
     test_ids = set()
     split_path = DATA_DIR / "split.json"
     if split_path.is_file():
@@ -94,40 +81,48 @@ def main():
     leaked = test_ids & {str(row["id"]) for row in rows}
     if leaked:
         raise SystemExit(f"Refusing to evaluate final-test IDs: {sorted(leaked)}")
-    if any(not isinstance(row.get("evaluation"), dict) for row in rows):
-        raise SystemExit("Evaluation metadata missing; regenerate train/valid data first")
+
+    for row in rows:
+        messages = row.get("messages")
+        if (
+            not isinstance(messages, list)
+            or [message.get("role") for message in messages] != [
+                "system", "user", "assistant"
+            ]
+            or any(
+                not isinstance(message.get("content"), str)
+                or not message["content"].strip()
+                for message in messages
+            )
+        ):
+            raise ValueError(f"{row.get('id')}: expected complete training messages")
 
     model, tokenizer, _ = load_cuda_model(
         args.model,
         str(args.adapter_path) if args.adapter_path else None,
     )
     model.eval()
-    metadata = {
-        "model": args.model,
-        "adapter_path": str(args.adapter_path) if args.adapter_path else None,
-        "format_hint": args.format_hint,
-    }
+    device = getattr(
+        model,
+        "device",
+        torch.device(
+            "cuda"
+            if torch.cuda.is_available()
+            else "mps"
+            if torch.backends.mps.is_available()
+            else "cpu"
+        ),
+    )
+    records: dict[str, dict[str, str]] = {}
 
-    records = []
-    if args.out.exists():
-        previous = json.loads(args.out.read_text(encoding="utf-8"))
-        old_summary = previous.get("summary", {})
-        if not all(old_summary.get(key) == value for key, value in metadata.items()):
-            raise SystemExit(f"{args.out} contains results for a different model or prompt")
-        wanted = {str(row["id"]) for row in rows}
-        records = [row for row in previous.get("records", []) if str(row["id"]) in wanted]
-        if records:
-            print(f"Resuming with {len(records)} completed questions")
-    done = {str(row["id"]) for row in records}
-
-    for index, row in enumerate(rows, 1):
+    for row in rows:
         qid = str(row["id"])
-        if qid in done:
-            continue
         messages = [dict(message) for message in row["messages"][:2]]
         if args.format_hint:
             messages[0]["content"] += FORMAT_HINT
-
+        rendered_prompt = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
         inputs = tokenizer.apply_chat_template(
             messages,
             tokenize=True,
@@ -135,17 +130,13 @@ def main():
             return_tensors="pt",
             return_dict=True,
         )
-        # Determine device dynamically to support CUDA, MPS, or CPU fallback
-        device = getattr(model, "device", None)
-        if device is None:
-            device = torch.device(
-                "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-            )
         inputs = {key: value.to(device) for key, value in inputs.items()}
         prompt_length = inputs["input_ids"].shape[1]
-
-        pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
-        start = time.time()
+        pad_id = (
+            tokenizer.pad_token_id
+            if tokenizer.pad_token_id is not None
+            else tokenizer.eos_token_id
+        )
         with torch.inference_mode():
             generated = model.generate(
                 **inputs,
@@ -153,48 +144,15 @@ def main():
                 do_sample=False,
                 pad_token_id=pad_id,
             )
-        output = tokenizer.decode(
-            generated[0, prompt_length:], skip_special_tokens=True
-        ).strip()
-
-        evaluation = row["evaluation"]
-        gold = evaluation["gold_verdicts"]
-        predicted = parse_verdicts(output)
-        parsed_all = all(label in predicted for label in gold)
-        matched_answers = [
-            int(answer)
-            for answer, answer_verdicts in evaluation["answer_verdicts"].items()
-            if all(predicted.get(label) is verdict for label, verdict in answer_verdicts.items())
-            and len(predicted) == len(answer_verdicts)
-        ] if parsed_all else []
-        predicted_answer = matched_answers[0] if len(matched_answers) == 1 else None
-        gold_answer = int(evaluation["gold_answer"])
-        record = {
-            "id": qid,
-            "gold_answer": gold_answer,
-            "pred_answer": predicted_answer,
-            "question_correct": predicted_answer == gold_answer,
-            "parsed_all": parsed_all,
-            "statements": {
-                label: {"gold": verdict, "pred": predicted.get(label)}
-                for label, verdict in gold.items()
-            },
-            "seconds": round(time.time() - start, 1),
-            "output": output,
-        }
-        records.append(record)
-        save_results(args.out, args, records)
-        statement_hits = sum(
-            value["gold"] == value["pred"] for value in record["statements"].values()
+        response = tokenizer.decode(
+            generated[0, prompt_length:],
+            skip_special_tokens=True,
+            clean_up_tokenization_spaces=False,
         )
-        print(
-            f"[{index}/{len(rows)}] {qid}: statements "
-            f"{statement_hits}/{len(gold)}, answer {predicted_answer} "
-            f"(gold {gold_answer}), {record['seconds']}s",
-            flush=True,
-        )
-
-    print(json.dumps(save_results(args.out, args, records), indent=2))
+        records[qid] = {"prompt": rendered_prompt, "response": response}
+        save_results(args.out, records)
+        print_exchange(qid, rendered_prompt, response)
+    return 0
 
 
 if __name__ == "__main__":

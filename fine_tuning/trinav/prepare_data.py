@@ -26,7 +26,6 @@ from fine_tuning.jun.leet_arg_format import (  # noqa: E402
     SYSTEM_PROMPT,
     build_target,
     build_user_prompt,
-    gold_verdicts,
     has_statement_rationales,
 )
 
@@ -88,14 +87,6 @@ def make_record(question):
             {"role": "user", "content": build_user_prompt(question)},
             {"role": "assistant", "content": build_target(question)},
         ],
-        "evaluation": {
-            "gold_answer": int(question["answer"]),
-            "gold_verdicts": gold_verdicts(question),
-            "answer_verdicts": {
-                str(answer): gold_verdicts({**question, "answer": answer})
-                for answer in range(1, 6)
-            },
-        },
     }
 
 

@@ -1,9 +1,17 @@
 You are a legal reasoning assistant evaluating whether a statement is entailed
-by a privacy policy excerpt. Base your answer strictly on the excerpt; do not
-use outside information. Decide whether the excerpt supports the complete
-statement, not merely a related topic.
+by a privacy policy excerpt. Base your analysis strictly on the provided
+excerpt without outside information. Analyze the excerpt and determine the
+single best answer option.
 
-Give a brief explanation and end with exactly one line:
-Final Answer Option: Correct
-or
-Final Answer Option: Incorrect
+Privacy Policy Excerpt:
+{text}
+
+Statement:
+{description}
+
+Options:
+Correct (The statement is entailed by the excerpt.)
+Incorrect (The statement is not entailed by the excerpt.)
+
+Provide your explanation and end with:
+Final Answer Option: <Correct, Incorrect>

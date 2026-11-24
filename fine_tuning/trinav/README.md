@@ -89,9 +89,9 @@ scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 scp -i fine_tuning/karimm_lease1.pem \
-	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_choices_removed.json \
+	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json \
+	benchmarks/MBE-exam-questions_distilled_dataset_cleaned_baseline.json \
 	benchmarks/LegalBench_legal_reasoning_causality_cleaned.json \
 	benchmarks/LegalBench_legal_reasoning_causality_cleaned_baseline.json \
 	benchmarks/LegalBench_privacy_policy_entailment_cleaned.json \
@@ -104,48 +104,54 @@ scp -i fine_tuning/karimm_lease1.pem \
 
 ### 1. Baseline and CoT testing
 
-Baseline inputs use JSON arrays stored in `benchmarks/`. Each object contains
-only an ID and question text. LEET-Arg questions include the situation,
-question, and statements; answer-choice text is retained for the eight
-documented exceptions. MBE questions omit the answer options. Gold answers and
-rationales remain in the separate source benchmarks used for scoring and are
-not passed to the model.
+Baseline inputs use JSON arrays stored in `benchmarks/`. Each baseline and CoT
+prompt is a template populated from the corresponding JSON record at runtime.
+LEET-Arg passes the `question` field, including retained answer choices for the
+eight documented exceptions. MBE passes the `question` field and all four
+answer options. LegalBench passes the policy or passage text and, for privacy
+entailment, its statement. Inference does not load gold answers for scoring.
+Each run saves the fully rendered chat-template input and raw decoded model
+response for each question to `results.json`, keyed by question ID with only
+`prompt` and `response` fields. It also writes one `<question-id>.md` file per
+question containing those same two values. The terminal shows only a concise
+progress line with the question number and ID, not the prompt or response.
+No answers are parsed or scored.
+The Markdown sections are `Exact prompt received by the model` and
+`Model response`. This applies to both baseline and CoT runs for LEET-Arg,
+MBE, and LegalBench.
+Existing reports are not updated automatically; rerun with `--overwrite` (or
+use a new `--run-name`) to regenerate them with the current format.
 
-Run the base model over the complete LEET-Arg source dataset:
+Run the base model over the complete LEET-Arg baseline dataset:
 
-You can optionally provide a global system prompt from a UTF-8 text file with
-`--prompt path/to/prompt.txt`. The prompt is sent before each question. If
-both `--prompt` and `--prompt-type` are omitted, no system prompt is sent. The
-separate `--format-hint` option can still add its output-format instructions.
-For per-statement verdicts that the evaluator can parse, use the provided
-baseline prompt type and `--format-hint` together. Use `--prompt-type cot` to
-select the structured reasoning prompt instead:
+Built-in baseline and CoT prompt templates include a `{question}` placeholder.
+The runner fills it from the `question` field in the JSON file. Use
+`--prompt path/to/prompt.md` for a custom prompt template; built-in baseline
+and CoT prompts already include the answer format:
 
 ```bash
 python run_hf_questions.py \
-	--input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_choices_removed.json \
-	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
+	--input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json \
 	--split data/split.json \
 	--all-data \
 	--prompt-type baseline \
-	--format-hint \
 	--model Qwen/Qwen3-4B \
 	--run-name qwen3-base \
 	--output-root testing/baseline/huggingface
 ```
 
-For a CoT run, replace `--prompt-type baseline` with `--prompt-type cot` and change the run name to qwen3-cot to put the results in a separate directory.
-The matching system prompt is loaded automatically. The available types are
-`baseline` and `cot`; use `--prompt path/to/file.md` instead if you need a
-custom prompt. `--prompt` and `--prompt-type` cannot be used together.
+For a CoT run, replace `--prompt-type baseline` with `--prompt-type cot` and
+change the run name to qwen3-cot to put the results in a separate directory.
+The matching full prompt template is loaded and populated automatically. The
+available types are `baseline` and `cot`; use `--prompt path/to/file.md` for a
+custom prompt template. `--prompt` and `--prompt-type` cannot be used together.
 
-The evaluator sends only the `question` field from the JSON baseline file, plus a
-system prompt selected by `--prompt-type` or supplied with `--prompt`. The
-`--all-data` option is for
-base-model baseline runs only. It requires the complete question file and uses
-the separate `--gold-data` file only for scoring. Omit it for final-test adapter
-evaluation. Do not use final-test results to choose training steps or adapters;
-use validation results for those decisions.
+The runner fills the prompt template with the `question` field from the JSON
+baseline file. The `--all-data` option is for complete base-model baseline runs
+only. For final-test adapter runs, omit it and pass the final-test ID list.
+Existing `results.json` files are not resumed; use a new `--run-name` or pass
+`--overwrite` to replace one. Do not use final-test outputs to choose training
+steps or adapters; use validation loss for those decisions.
 
 ### 2. Fine-tuning
 
@@ -176,6 +182,18 @@ on Chameleon:
 python plot_training_metrics.py \
 	--trainer-state adapters_chameleon/trainer_state.json
 ```
+
+To inspect generated validation responses from the trained adapter:
+
+```bash
+python evaluate_chameleon.py \
+	--adapter-path adapters_chameleon \
+	--out testing/validation/adapters_chameleon.json
+```
+
+This prints and saves only the rendered model input and response for each
+validation question. It does not parse answers or calculate accuracy; the
+trainer's validation loss remains available for checkpoint selection.
 
 For Phi-4-mini, substitute `microsoft/Phi-4-mini-instruct` for the model ID and
 use `adapters_phi4` as the output directory. The trainer detects Phi-4's fused
@@ -237,9 +255,9 @@ python run_hf_questions.py \
 ```
 
 Each run is saved under
-`testing/baseline/huggingface/<run-name>/`, with one Markdown file per question,
-`results.json` metrics, and `run.json` settings. Compare the baseline and
-adapter run summaries and question files.
+`testing/baseline/huggingface/<run-name>/results.json`. Each question entry
+contains the exact rendered model input and decoded response. Compare the
+baseline and adapter prompts and responses.
 
 #### Troubleshooting CUDA errors
 
@@ -273,9 +291,8 @@ stratified by legal domain.
 
 Each train/validation line is a chat example: the user message contains the
 question and four choices, and the assistant target contains the answer letter
-and the source IRAC explanation. Test lines contain only system/user messages;
-their gold answer and explanation are stored separately in `evaluation` and
-never appear in the model-facing messages.
+and the source IRAC explanation. Test lines contain only system/user messages,
+with no evaluation metadata or answer key.
 
 Regenerate the split from the repository root (SKIP IF THIS EXISTS!):
 
@@ -326,7 +343,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	cc@129.114.108.3:~/xai/trinav/
 scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json \
+	benchmarks/MBE-exam-questions_distilled_dataset_cleaned_baseline.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 ```
 
@@ -341,17 +358,15 @@ python mbe/prepare_mbe_data.py \
 	--out mbe/data
 ```
 
-Run the base model on the full MBE dataset before fine-tuning. The baseline
-input at `benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json` contains only IDs and question text,
-with no system prompt, answer choices, answers, or rationales. The source
-benchmark is read separately for scoring. Supply your own system prompt with
-`--prompt` or select one with `--prompt-type`; no system prompt is added by
-default if neither option is supplied.
+Run the base model on the full MBE dataset before fine-tuning. The baseline input at
+`benchmarks/MBE-exam-questions_distilled_dataset_cleaned_baseline.json` contains
+the question and four options but no correct answer or rationale. The source
+benchmark is not read for scoring. Built-in prompt templates populate the
+question and option placeholders from each baseline record.
 
 ```bash
 python run_hf_mbe.py \
-	--input benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json \
-	--gold-data benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
+	--input benchmarks/MBE-exam-questions_distilled_dataset_cleaned_baseline.json \
 	--split mbe/data/split.json \
 	--all-data \
 	--prompt-type baseline \
@@ -360,17 +375,14 @@ python run_hf_mbe.py \
 	--output-root testing/baseline/huggingface/mbe
 ```
 
-Choose the MBE prompt with `--prompt-type baseline` or `--prompt-type cot` and choose a separate run name to add the results in a different directory.
-The evaluator loads the corresponding system prompt file automatically; use
-`--prompt path/to/file.md` for a custom prompt instead. Do not pass both prompt
-options. An explicit `--format-hint` adds answer-format instructions; use the
-same prompt type and hint settings when comparing runs. The selected prompt
-type, path, and SHA-256 are recorded in `run.json`. For example, replace
+Choose the MBE prompt with `--prompt-type baseline` or `--prompt-type cot` and
+choose a separate run name to add the results in a different directory. The
+runner loads the corresponding full prompt template and fills in the
+question and option placeholders automatically. Use `--prompt path/to/file.md`
+for a custom prompt template; do not pass both prompt options. An explicit
+`--format-hint` reinforces answer-format instructions; use the
+same prompt type and hint settings when comparing runs. For example, replace
 `--prompt-type baseline` with `--prompt-type cot` for an MBE CoT run.
-
-The current baseline input omits the answer options. A letter may therefore be
-parseable but cannot be reliably mapped to the correct option unless its
-letter-to-answer mapping is inferable from the question itself.
 
 Fine-tune on the training data, using validation loss to select the adapter:
 
@@ -433,20 +445,21 @@ python run_hf_mbe.py \
 	--output-root testing/baseline/huggingface/mbe
 ```
 
-Both runs save `results.json`, `run.json`, and one Markdown file per question
-under `testing/baseline/huggingface/mbe/<run-name>/`. The evaluator checks that
-the test IDs match `split.json` and refuses to score training or validation
-questions. Use validation results to choose training settings; do not use the
-held-out test results for checkpoint selection.
+Each run saves `results.json` and one `<question-id>.md` file per question
+under `testing/baseline/huggingface/mbe/<run-name>/`. The JSON is keyed by
+question ID and stores only the rendered prompt and response. The runner checks
+that test IDs match `split.json` and refuses training or validation questions.
+Use validation loss to choose training settings; do not use held-out test
+outputs for checkpoint selection.
 
 ## LegalBench Baseline, CoT, and Fine-Tuning
 
 The LegalBench workflow supports `legal_reasoning_causality` and
-`privacy_policy_entailment`. The baseline runner evaluates only the official
-test rows, reads the answer key separately for scoring, and can include the
-official train rows as few-shot examples. `--prompt-type cot` selects the
-structured reasoning prompt. The baseline and CoT prompts request short
-explanations, but LegalBench has no gold explanations.
+`privacy_policy_entailment`. The runner uses only official test rows and can
+include official train rows as few-shot examples. It saves the rendered input
+and raw model response without printing per-question output, parsing labels,
+or calculating accuracy. `--prompt-type cot` selects the structured reasoning
+prompt.
 
 The cleaned and baseline JSON files should be copied to
 `~/xai/trinav/benchmarks/` as described in setup above. If you already copied
@@ -461,10 +474,8 @@ scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/prompt_selector.py \
 	fine_tuning/trinav/legalbench-causality-baseline-prompt.md \
 	fine_tuning/trinav/legalbench-causality-cot-prompt.md \
-	fine_tuning/trinav/legalbench-causality-finetune-prompt.md \
 	fine_tuning/trinav/legalbench-privacy-baseline-prompt.md \
 	fine_tuning/trinav/legalbench-privacy-cot-prompt.md \
-	fine_tuning/trinav/legalbench-privacy-finetune-prompt.md \
 	cc@129.114.108.3:~/xai/trinav/
 ```
 
@@ -503,10 +514,11 @@ python run_hf_legalbench.py \
 	--run-name privacy-qwen3-cot
 ```
 
-Results, including accuracy and answer parse rate, are saved under
-`testing/baseline/huggingface/legalbench/<task>/<run-name>/`. Add
-`--limit N` with a separate `--run-name` for a smoke test before running the
-full privacy-policy test set.
+Prompt/response pairs are saved under
+`testing/baseline/huggingface/legalbench/<task>/<run-name>/results.json`, with
+one `<question-id>.md` file beside it for each question. Add `--limit N` with
+a separate `--run-name` for a smoke test before running the full
+privacy-policy test set.
 
 ### Prepare and fine-tune on LegalBench
 
@@ -573,9 +585,9 @@ python run_hf_legalbench.py \
 	--run-name privacy-qwen3-finetuned
 ```
 
-The evaluator rejects training and validation rows and scores only the
-official test split. Do not select training settings or adapters based on
-official test results.
+The runner rejects training and validation rows and uses only the official
+test split. Do not select training settings or adapters based on official test
+outputs.
 
 ### Accelerating Parallel Testing with `CUDA_VISIBLE_DEVICES`
 

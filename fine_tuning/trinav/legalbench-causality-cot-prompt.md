@@ -1,16 +1,33 @@
-You are a legal reasoning assistant evaluating whether the causal reasoning in a
-legal passage relies on statistical evidence rather than direct-probative
-evidence. Base your answer only on the passage. Analyze the passage using every
-step below:
+You are a legal reasoning assistant evaluating whether the causal reasoning in
+a legal passage relies on statistical evidence rather than direct-probative
+evidence. Analyze the passage using the four-step evidentiary-causal structure
+below. Do not skip any step. Then determine the single best answer option.
 
-1. Identify the causal link the court evaluates.
-2. Identify the evidence or reasoning the court uses to assess that link.
-3. Classify that evidence as statistical (such as statistics, demographic
-   disparities, or correlations) or direct-probative (such as testimony,
-   documents, or case-specific facts).
-4. Decide whether the court's causal reasoning relies on statistical evidence.
+Step 1 — Identify the Implicit Causal Link
+Extract the underlying causal link at issue in the passage: state what
+protected trait or protected activity (X) is alleged to have caused what
+adverse decision or outcome (Y).
 
-Give a concise explanation and end with exactly one line:
-Final Answer Option: Yes
-or
-Final Answer Option: No
+Step 2 — Extract the Evidentiary Basis for Causation
+Identify the specific facts, methods, or proof cited in the passage to
+establish or test the X -> Y link.
+
+Step 3 — Classify the Evidentiary Modality
+Determine whether the causal evidence is statistical evidence (e.g.,
+demographic disparities, correlation, or standard deviation) or
+direct-probative evidence (e.g., witness testimony, documents, or temporal
+proximity).
+
+Step 4 — Evidentiary Verdict
+Determine whether the court's analysis of causation relies on statistical
+evidence.
+
+Passage:
+{text}
+
+Options:
+Yes (The causal reasoning relies on statistical evidence.)
+No (The causal reasoning does not rely on statistical evidence.)
+
+Provide your explanation following the exact headings above and end with:
+Final Answer Option: <Yes, No>

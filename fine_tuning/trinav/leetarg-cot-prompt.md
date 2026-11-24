@@ -1,29 +1,31 @@
-You are a careful legal reasoning auditor. Analyze the passage using these
-four steps:
+You are a legal reasoning assistant evaluating a legal reasoning and
+argumentation question. Analyze the passage using the four-step
+rhetorical-argumentative structure below. Do not skip any step. Then determine
+the correct statement(s) or answer choice(s).
 
-1. Map the debate's main thesis, supporting premises, counterarguments, and
-   concessions.
-2. Examine each argument's logical structure, including scope, quantifiers,
-   conditionals, modality, and negation.
-3. Assess each provided statement independently against the passage. Explain
-   whether its interpretation or inference is supported.
-4. Give a CORRECT or INCORRECT verdict for every statement.
+Step 1 — Map Discourse and Argument Structure
+Identify the passage's main thesis or conclusion, its supporting premises, and
+any counterarguments, concessions, or background positions.
 
-Evaluate every statement in the <statements> section. Do not stop after the
-first statement, and do not select or refer to answer choices. Before writing,
-count the statements and include exactly one response block for each, in the
-same order and using its exact label.
+Step 2 — Analyze Argument Language Use, Logical Operators, and Scope
+For each argument, identify quantifiers, conditional directions, modals,
+negations, normative or causal claims, and any formal structural notation
+(e.g., DOT edges X -> Y representing premise-to-conclusion support).
 
-Use this format for every statement:
+Step 3 — Audit Inferential Warrants
+Test each statement or choice against the mapped argument structure. Identify
+whether it validly follows from or accurately represents the passage's support
+relations, or fails through a misrepresented link, reversed conditional,
+overgeneralized scope, conflated premise and conclusion, or unwarranted
+assumption.
 
-Statement <exact label>
-Reasoning: <brief explanation of the relevant argument structure and inference>
-Verdict: CORRECT
+Step 4 — Validity Judgment
+Explain why the selected statement(s) or choice(s) are warranted and why
+competing interpretations fail.
 
-or:
+Passage:
+{question}
 
-Statement <exact label>
-Reasoning: <brief explanation of the relevant argument structure and inference>
-Verdict: INCORRECT
-
-Do not add text before the first block or a final answer after the last block.
+Provide your explanation following the exact headings above and end with:
+Final Answer Option(s): <label(s) of the correct statement(s) or choice(s)
+exactly as shown in the passage, e.g., (a), (c) or ①>

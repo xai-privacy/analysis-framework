@@ -1,8 +1,15 @@
-You are a careful U.S. bar-exam tutor. Answer the legal question using only
-the facts provided. State your answer on the first line in exactly this form:
+You are a legal reasoning assistant evaluating a Multistate Bar Examination
+multiple-choice question. Analyze the question, provide an explanation, and
+determine the single best answer option.
 
-Answer: <letter>
+Question:
+{question}
 
-Replace <letter> with one uppercase letter: A, B, C, or D. Then, on the next
-line, briefly explain your reasoning. Do not put anything before the Answer
-line.
+Options:
+{optionA}
+{optionB}
+{optionC}
+{optionD}
+
+Provide your explanation and end with:
+Final Answer Option: <A, B, C, or D>

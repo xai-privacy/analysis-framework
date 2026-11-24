@@ -10,27 +10,29 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-try:
-    from .prompt_selector import resolve_prompt
-except ImportError:
-    from prompt_selector import resolve_prompt
-
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 
 TASKS = {
     "legal_reasoning_causality": {
-        "benchmark": "legalbench_causality",
-        "finetune_prompt": "legalbench_causality_finetune",
         "source": REPO / "benchmarks" / "LegalBench_legal_reasoning_causality_cleaned.json",
         "answer_labels": {"Yes", "No"},
     },
     "privacy_policy_entailment": {
-        "benchmark": "legalbench_privacy",
-        "finetune_prompt": "legalbench_privacy_finetune",
         "source": REPO / "benchmarks" / "LegalBench_privacy_policy_entailment_cleaned.json",
         "answer_labels": {"Correct", "Incorrect"},
     },
+}
+
+SYSTEM_PROMPTS = {
+    "legal_reasoning_causality": (
+        "Determine whether the legal passage's causal reasoning relies on "
+        "statistical evidence. Answer Yes or No."
+    ),
+    "privacy_policy_entailment": (
+        "Determine whether the statement is entailed by the privacy policy "
+        "excerpt. Base your answer only on the excerpt. Answer Correct or Incorrect."
+    ),
 }
 
 
@@ -72,7 +74,6 @@ def make_record(
                 "content": f"Final Answer Option: {answer}",
             },
         ],
-        "evaluation": {"gold_answer": answer},
     }
 
 
@@ -149,10 +150,7 @@ def prepare_data(
     if not train_rows or not valid_rows or not test_rows:
         raise ValueError("Expected nonempty train, validation, and official test splits")
 
-    prompt_path = resolve_prompt(config["finetune_prompt"], "baseline")
-    system_prompt = prompt_path.read_text(encoding="utf-8").strip()
-    if not system_prompt:
-        raise ValueError(f"Baseline prompt is empty: {prompt_path}")
+    system_prompt = SYSTEM_PROMPTS[task]
 
     train_records = [make_record(task, row, system_prompt) for row in train_rows]
     valid_records = [make_record(task, row, system_prompt) for row in valid_rows]
