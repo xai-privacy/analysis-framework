@@ -87,8 +87,6 @@ ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
 	'mkdir -p ~/xai/trinav/benchmarks'
 scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
-	cc@129.114.108.3:~/xai/trinav/benchmarks/
-scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned_baseline.json \
@@ -97,9 +95,6 @@ scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LegalBench_privacy_policy_entailment_cleaned.json \
 	benchmarks/LegalBench_privacy_policy_entailment_cleaned_baseline.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
-scp -i fine_tuning/karimm_lease1.pem \
-	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
-	cc@129.114.108.3:~/xai/trinav/data/
 ```
 
 ### 1. Baseline and CoT testing
@@ -455,16 +450,20 @@ outputs for checkpoint selection.
 ## LegalBench Baseline, CoT, and Fine-Tuning
 
 The LegalBench workflow supports `legal_reasoning_causality` and
-`privacy_policy_entailment`. The runner uses only official test rows and can
-include official train rows as few-shot examples. It saves the rendered input
-and raw model response without printing per-question output, parsing labels,
-or calculating accuracy. `--prompt-type cot` selects the structured reasoning
-prompt.
+`privacy_policy_entailment`. Base-model baseline and CoT runs process all rows
+in index order starting at question 0, ignoring the `original_split` field.
+Fine-tuned adapter runs continue to use only official test rows. The runner
+saves the rendered input and raw model response without printing per-question
+output, parsing labels, or calculating accuracy. `--prompt-type cot` selects
+the structured reasoning prompt.
 
 The cleaned and baseline JSON files should be copied to
 `~/xai/trinav/benchmarks/` as described in setup above. If you already copied
 them, skip that step. If you are updating an existing VM with this workflow,
 also copy the new scripts and prompt files:
+
+The LegalBench runner and preparation script locate the `benchmarks/` folder
+either in the repository checkout or directly under `~/xai/trinav/` on the VM.
 
 ```bash
 scp -i fine_tuning/karimm_lease1.pem \
@@ -479,46 +478,41 @@ scp -i fine_tuning/karimm_lease1.pem \
 	cc@129.114.108.3:~/xai/trinav/
 ```
 
-Run baseline and CoT evaluations on the official test rows. The `--few-shot`
-option adds the official training examples to the system prompt, matching
-LegalBench's supplied examples. Omit it for zero-shot runs. Use distinct run
-names so the results are saved separately:
+Run baseline and CoT inference on all rows, in index order starting at question
+0. Training/test split labels are ignored. These runs record prompts and
+responses only and do not calculate metrics. Use distinct run names so the
+results are saved separately:
 
 ```bash
 python run_hf_legalbench.py \
 	--task legal_reasoning_causality \
 	--prompt-type baseline \
-	--few-shot \
 	--model Qwen/Qwen3-4B \
 	--run-name causality-qwen3-baseline
 
 python run_hf_legalbench.py \
 	--task legal_reasoning_causality \
 	--prompt-type cot \
-	--few-shot \
 	--model Qwen/Qwen3-4B \
 	--run-name causality-qwen3-cot
 
 python run_hf_legalbench.py \
 	--task privacy_policy_entailment \
 	--prompt-type baseline \
-	--few-shot \
 	--model Qwen/Qwen3-4B \
 	--run-name privacy-qwen3-baseline
 
 python run_hf_legalbench.py \
 	--task privacy_policy_entailment \
 	--prompt-type cot \
-	--few-shot \
 	--model Qwen/Qwen3-4B \
 	--run-name privacy-qwen3-cot
 ```
 
-Prompt/response pairs are saved under
+Prompt/response pairs for every input row are saved under
 `testing/baseline/huggingface/legalbench/<task>/<run-name>/results.json`, with
 one `<question-id>.md` file beside it for each question. Add `--limit N` with
-a separate `--run-name` for a smoke test before running the full
-privacy-policy test set.
+a separate `--run-name` for a smoke test before running all rows.
 
 ### Prepare and fine-tune on LegalBench
 
@@ -564,14 +558,14 @@ python train_chameleon.py \
 	--max-seq-length 4096
 ```
 
-Evaluate an adapter on the official test rows, using the same prompt type and
-few-shot setting as the corresponding base-model run:
+Inspect adapter responses on the official test rows, using the same prompt
+type as the corresponding base-model run. The optional `--few-shot` flag adds
+official training examples to each test prompt:
 
 ```bash
 python run_hf_legalbench.py \
 	--task legal_reasoning_causality \
 	--prompt-type baseline \
-	--few-shot \
 	--model Qwen/Qwen3-4B \
 	--adapter-path legalbench/adapters_causality \
 	--run-name causality-qwen3-finetuned
@@ -579,15 +573,13 @@ python run_hf_legalbench.py \
 python run_hf_legalbench.py \
 	--task privacy_policy_entailment \
 	--prompt-type baseline \
-	--few-shot \
 	--model Qwen/Qwen3-4B \
 	--adapter-path legalbench/adapters_privacy \
 	--run-name privacy-qwen3-finetuned
 ```
 
-The runner rejects training and validation rows and uses only the official
-test split. Do not select training settings or adapters based on official test
-outputs.
+The adapter runner uses only the official test rows. Outputs are for
+prompt/response inspection only, not checkpoint selection.
 
 ### Accelerating Parallel Testing with `CUDA_VISIBLE_DEVICES`
 

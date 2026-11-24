@@ -7,7 +7,16 @@ import re
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[1]
+
+
+def find_repo_root(start: Path = HERE) -> Path:
+    for candidate in (start, *start.parents):
+        if (candidate / "benchmarks").is_dir():
+            return candidate
+    return HERE
+
+
+REPO = find_repo_root()
 DATA_DIR = HERE / "data"
 
 def read_jsonl(path: Path):
@@ -200,6 +209,7 @@ __all__ = [
     "HERE",
     "REPO",
     "get_lora_target_modules",
+    "find_repo_root",
     "load_cuda_model",
     "read_json_or_jsonl",
     "read_jsonl",

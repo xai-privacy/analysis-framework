@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a base model or QLoRA adapter on LegalBench test rows."""
+"""Run a base model or QLoRA adapter on LegalBench rows."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from typing import Any
 
 try:
     from .chameleon_utils import (
-        HERE,
+        REPO,
         load_cuda_model,
         render_prompt,
         write_question_markdown,
@@ -20,14 +20,13 @@ try:
     from .prompt_selector import resolve_prompt
 except ImportError:
     from chameleon_utils import (
-        HERE,
+        REPO,
         load_cuda_model,
         render_prompt,
         write_question_markdown,
     )
     from prompt_selector import resolve_prompt
 
-REPO = HERE.parents[1]
 DEFAULT_OUTPUT_ROOT = REPO / "testing" / "baseline" / "huggingface" / "legalbench"
 TASKS = {
     "legal_reasoning_causality": {
@@ -35,14 +34,14 @@ TASKS = {
         "input": REPO / "benchmarks" / "LegalBench_legal_reasoning_causality_cleaned_baseline.json",
         "source": REPO / "benchmarks" / "LegalBench_legal_reasoning_causality_cleaned.json",
         "labels": {"Yes", "No"},
-        "fields": {"index", "text", "original_split"},
+        "fields": {"index", "text"},
     },
     "privacy_policy_entailment": {
         "benchmark": "legalbench_privacy",
         "input": REPO / "benchmarks" / "LegalBench_privacy_policy_entailment_cleaned_baseline.json",
         "source": REPO / "benchmarks" / "LegalBench_privacy_policy_entailment_cleaned.json",
         "labels": {"Correct", "Incorrect"},
-        "fields": {"index", "text", "description", "original_split"},
+        "fields": {"index", "text", "description"},
     },
 }
 
@@ -71,7 +70,9 @@ def format_question(task: str, row: dict[str, Any]) -> str:
     )
 
 
-def load_inputs(task: str, input_path: Path) -> list[dict[str, Any]]:
+def load_inputs(
+    task: str, input_path: Path, include_all: bool = True
+) -> list[dict[str, Any]]:
     config = TASKS[task]
     input_rows = read_json_array(input_path)
     input_by_id = {}
@@ -79,33 +80,43 @@ def load_inputs(task: str, input_path: Path) -> list[dict[str, Any]]:
         qid = row_id(row)
         if qid in input_by_id:
             raise ValueError(f"Duplicate LegalBench baseline index: {qid}")
-        if set(row) != config["fields"]:
+        actual_fields = set(row)
+        missing_fields = config["fields"] - actual_fields
+        unexpected_fields = actual_fields - config["fields"] - {"original_split"}
+        if missing_fields or unexpected_fields:
             raise ValueError(
-                f"{qid}: baseline record must contain exactly "
-                f"{sorted(config['fields'])}"
+                f"{qid}: baseline record has missing fields "
+                f"{sorted(missing_fields)} or unexpected fields "
+                f"{sorted(unexpected_fields)}"
             )
-        if row["original_split"] not in {"train", "test"}:
-            raise ValueError(f"{qid}: invalid original_split")
-        if row["original_split"] == "test":
+        if include_all:
             input_by_id[qid] = row
+        elif row.get("original_split") == "test":
+            input_by_id[qid] = row
+        elif row.get("original_split") != "train":
+            raise ValueError(f"{qid}: invalid or missing original_split")
 
     if not input_by_id:
-        raise ValueError(f"No official test rows found in {input_path}")
-    return list(input_by_id.values())
+        description = "LegalBench rows" if include_all else "official test rows"
+        raise ValueError(f"No {description} found in {input_path}")
+    return sorted(input_by_id.values(), key=lambda row: row["index"])
 
 
 def build_system_prompt(
     task: str,
     few_shot_rows: list[dict[str, Any]],
+    exclude_index: str | None = None,
 ) -> str:
-    if not few_shot_rows:
-        return ""
     examples = []
     for row in few_shot_rows:
+        if exclude_index is not None and row_id(row) == exclude_index:
+            continue
         examples.append(
             f"{format_question(task, row)}\n\n"
             f"Final Answer Option: {row['answer']}"
         )
+    if not examples:
+        return ""
     return (
         "Use these official LegalBench training examples as demonstrations. "
         "Answer the new item using the task instructions provided with it.\n\n"
@@ -139,12 +150,12 @@ def main() -> int:
     parser.add_argument(
         "--few-shot",
         action="store_true",
-        help="add official LegalBench training examples to the system prompt",
+        help="add official training examples to adapter test-run prompts",
     )
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--run-name")
     parser.add_argument("--max-tokens", type=int, default=768)
-    parser.add_argument("--limit", type=int)
+    parser.add_argument("--limit", type=int, help="run only the first N rows")
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 
@@ -152,6 +163,10 @@ def main() -> int:
         parser.error("--max-tokens must be positive")
     if args.limit is not None and args.limit < 1:
         parser.error("--limit must be positive")
+    if args.few_shot and not args.adapter_path:
+        parser.error("--few-shot is only available for adapter test runs")
+    if args.few_shot_data and not args.few_shot:
+        parser.error("--few-shot-data requires --few-shot")
 
     task_config = TASKS[args.task]
     input_path = args.input or task_config["input"]
@@ -165,9 +180,9 @@ def main() -> int:
     if not prompt_text.strip():
         raise ValueError(f"Prompt is empty: {prompt_path}")
 
-    test_rows = load_inputs(args.task, input_path)
+    rows = load_inputs(args.task, input_path, include_all=not args.adapter_path)
     if args.limit is not None:
-        test_rows = test_rows[:args.limit]
+        rows = rows[:args.limit]
 
     few_shot_rows = []
     if args.few_shot:
@@ -182,10 +197,7 @@ def main() -> int:
                 few_shot_rows.append(row)
         if not few_shot_rows:
             raise ValueError(f"No official training rows found in {source_path}")
-    elif args.few_shot_data:
-        parser.error("--few-shot-data requires --few-shot")
 
-    system_prompt = build_system_prompt(args.task, few_shot_rows)
     has_template_fields = "{text}" in prompt_text
     if not has_template_fields and not args.prompt:
         raise ValueError(f"Built-in prompt has no dataset placeholders: {prompt_path}")
@@ -208,9 +220,10 @@ def main() -> int:
     )
     records: dict[str, dict[str, str]] = {}
 
-    for index, row in enumerate(test_rows, 1):
+    for index, row in enumerate(rows, 1):
         qid = row_id(row)
-        print(f"[{index}/{len(test_rows)}] Processing question {qid}", flush=True)
+        print(f"[{index}/{len(rows)}] Processing question {qid}", flush=True)
+        system_prompt = build_system_prompt(args.task, few_shot_rows, qid)
         if has_template_fields:
             user_prompt = render_prompt(
                 prompt_text,

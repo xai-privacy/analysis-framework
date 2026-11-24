@@ -10,8 +10,10 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[1]
+try:
+    from .chameleon_utils import HERE, REPO
+except ImportError:
+    from chameleon_utils import HERE, REPO
 
 TASKS = {
     "legal_reasoning_causality": {
