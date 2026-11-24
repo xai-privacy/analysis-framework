@@ -10,4 +10,4 @@ Options:
 {optionD}
 
 Provide your explanation and end with:
-Final Answer Option: <A, B, C, or D>
+Final Answer Option: <A, B, C, D>
