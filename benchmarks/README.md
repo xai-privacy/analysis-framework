@@ -8,7 +8,7 @@
   correct is not enough](https://doi.org/10.1016/j.knosys.2026.116625), upstream repo:
   `lit-ai-lab/leet_arg_dataset_v1`, file: `LEET_Arg_Questions.json`. sha256: `f52a9a8f0405192a53990e56eef04ae0fd0d474f049ac6e721255332f8fc3cea`).
 - `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json` is based on `LEET_Arg_Questions_cleaned.json` with additional breakdowns of rationales for individual statements.
-- `LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json` contains 94 baseline records generated from `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`. Each JSON object contains only `id` and `question`; gold rationales are excluded. The question retains answer-choice text for 2021_03, 2021_25, 2022_36, 2023_19, 2024_05, 2024_14, 2024_25, and 2025_21.
+- `LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json` is based on `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`. Each JSON object contains only `id` and `original_question`. In particular, `original_rationale`s are excluded. For most questions the last sentence with the answer \<choices\> is removed. Only questions 2021_03, 2021_25, 2022_36, 2023_19, 2024_05, 2024_14, 2024_25, and 2025_21 retains the answer \<choices\> sentence.
 - `LEET_Arg_Model_Responses.json` in this directory holds per-model responses keyed by the same
   `id`/`year`/`problem_idx` and is out of scope here.
 
@@ -129,10 +129,10 @@ The baseline files retain the task inputs and `index`, plus `original_split` for
 - causality baseline: `index`, `text`, `original_split`
 - privacy policy entailment baseline: `index`, `text`, `description`, `original_split`
 
-| Benchmark | Train | Test | Merged | After cleaning | Labels |
-|---|---|---|---|---|---|
-| legal_reasoning_causality | 4 | 55 | 59 | 58 | Yes 32, No 26 |
-| privacy_policy_entailment | 8 | 4,335 | 4,343 | 4,341 | Correct 3,743, Incorrect 598 |
+| Benchmark                 | Train | Test  | Merged | After cleaning | Labels                       |
+| ------------------------- | ----- | ----- | ------ | -------------- | ---------------------------- |
+| legal_reasoning_causality | 4     | 55    | 59     | 58             | Yes 32, No 26                |
+| privacy_policy_entailment | 8     | 4,335 | 4,343  | 4,341          | Correct 3,743, Incorrect 598 |
 
 ### 3.3 Changes applied
 
