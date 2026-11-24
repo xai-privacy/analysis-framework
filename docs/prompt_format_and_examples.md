@@ -17,13 +17,13 @@ This setup allows for symmetric single-variable ablations: Condition 1 serves as
 You are a legal reasoning assistant evaluating a Multistate Bar Examination multiple-choice question. Analyze the question, provide an explanation, and determine the single best answer option.
 
 Question:
-{question from MBE-exam-questions_distilled_dataset_cleaned}
+{question from MBE-exam-questions_distilled_dataset_cleaned_baseline}
 
 Options:
-{optionA from MBE-exam-questions_distilled_dataset_cleaned}
-{optionB from MBE-exam-questions_distilled_dataset_cleaned}
-{optionC from MBE-exam-questions_distilled_dataset_cleaned}
-{optionD from MBE-exam-questions_distilled_dataset_cleaned}
+{optionA from MBE-exam-questions_distilled_dataset_cleaned_baseline}
+{optionB from MBE-exam-questions_distilled_dataset_cleaned_baseline}
+{optionC from MBE-exam-questions_distilled_dataset_cleaned_baseline}
+{optionD from MBE-exam-questions_distilled_dataset_cleaned_baseline}
 
 Provide your explanation and end with:
 Final Answer Option: <A, B, C, D>
@@ -65,13 +65,13 @@ Step 4 — Conclusion
 Explain why the correct option follows from your element-by-element analysis and why each remaining option fails.
 
 Question:
-{question from MBE-exam-questions_distilled_dataset_cleaned}
+{question from MBE-exam-questions_distilled_dataset_cleaned_baseline}
 
 Options:
-{optionA from MBE-exam-questions_distilled_dataset_cleaned}
-{optionB from MBE-exam-questions_distilled_dataset_cleaned}
-{optionC from MBE-exam-questions_distilled_dataset_cleaned}
-{optionD from MBE-exam-questions_distilled_dataset_cleaned}
+{optionA from MBE-exam-questions_distilled_dataset_cleaned_baseline}
+{optionB from MBE-exam-questions_distilled_dataset_cleaned_baseline}
+{optionC from MBE-exam-questions_distilled_dataset_cleaned_baseline}
+{optionD from MBE-exam-questions_distilled_dataset_cleaned_baseline}
 
 Provide your explanation following the exact headings above and end with:
 Final Answer Option: <A, B, C, D>
@@ -119,10 +119,10 @@ Prompt format is the same as under 1.1.1.
 You are a legal reasoning assistant evaluating whether a statement is entailed by a privacy policy excerpt. Base your analysis strictly on the provided excerpt without outside information. Analyze the excerpt, provide an explanation, and determine the single best answer option.
 
 Privacy Policy Excerpt:
-{text from LegalBench_privacy_policy_entailment_cleaned}
+{text from LegalBench_privacy_policy_entailment_cleaned_baseline}
 
 Statement:
-{description from LegalBench_privacy_policy_entailment_cleaned}
+{description from LegalBench_privacy_policy_entailment_cleaned_baseline}
 
 Options:
 Correct (The statement is entailed by the excerpt.)
@@ -169,10 +169,10 @@ Step 4 — Strict Entailment Verification
 Determine whether each component of the statement and, thus, the statement as a whole, is entailed by the extracted policy text after accounting for the qualifiers identified in Step 3.
 
 Privacy Policy Excerpt:
-{text from LegalBench_privacy_policy_entailment_cleaned}
+{text from LegalBench_privacy_policy_entailment_cleaned_baseline}
 
 Statement:
-{description from LegalBench_privacy_policy_entailment_cleaned}
+{description from LegalBench_privacy_policy_entailment_cleaned_baseline}
 
 Options:
 Correct (The statement is entailed by the excerpt.)
@@ -225,7 +225,7 @@ Prompt format is the same as under 2.1.1.
 You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage, provide an explanation, and determine the single best answer option.
 
 Passage:
-{text from LegalBench_legal_reasoning_causality_cleaned}
+{text from LegalBench_legal_reasoning_causality_cleaned_baseline}
 
 Options:
 Yes (The causal reasoning relies on statistical evidence.)
@@ -269,7 +269,7 @@ Step 4 — Evidentiary Verdict
 Determine whether the court's analysis of causation relies on statistical evidence.
 
 Passage:
-{text from LegalBench_legal_reasoning_causality_cleaned}
+{text from LegalBench_legal_reasoning_causality_cleaned_baseline}
 
 Options:
 Yes (The causal reasoning relies on statistical evidence.)
@@ -310,7 +310,7 @@ Final Answer Option: <Yes, No>
 
 Prompt format is the same as under 3.1.1.
 
-## 4. LEET-Arg: Logic, Discourse, and Argumentation
+## 4. LEET_Arg: Logic, Discourse, and Argumentation
 
 ### 4.1 Unstructured Baseline
 
@@ -319,7 +319,7 @@ Prompt format is the same as under 3.1.1.
 You are a legal reasoning assistant evaluating a legal reasoning and argumentation passage. Analyze the passage, provide an explanation, and determine the correct statement(s)/choice(s).
 
 Passage:
-{original_question from LEET_Arg_Questions_cleaned_and_rationale_by_statement with last sentence, <choices>, removed unless for questions 2021_03, 2021_25, 2022_36, 2023_19, 2024_05, 2024_14, 2024_25, 2025_21}
+{original_question from LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline}
 
 Provide your explanation and end with:
 Final Answer Option(s): <Label(s) of correct statement(s)/choice(s) as shown in the passage, e.g., (a), (c) or ①, comma-separated if multiple>
@@ -355,7 +355,7 @@ Step 4 — Validity Judgment
 State why the correct statement(s)/choice(s) are warranted by the passage's argument structure and why competing ones fail.
 
 Passage:
-{original_question from LEET_Arg_Questions_cleaned_and_rationale_by_statement with last sentence, <choices>, removed unless for questions 2021_03, 2021_25, 2022_36, 2023_19, 2024_05, 2024_14, 2024_25, 2025_21}
+{original_question from LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline}
 
 Provide your explanation following the exact headings above and end with:
 Final Answer Option(s): <Label(s) of correct statement(s)/choice(s) as shown in the passage, e.g., (a), (c) or ①, comma-separated if multiple>
