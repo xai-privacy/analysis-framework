@@ -8,7 +8,7 @@
   correct is not enough](https://doi.org/10.1016/j.knosys.2026.116625), upstream repo:
   `lit-ai-lab/leet_arg_dataset_v1`, file: `LEET_Arg_Questions.json`. sha256: `f52a9a8f0405192a53990e56eef04ae0fd0d474f049ac6e721255332f8fc3cea`).
 - `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json` is based on `LEET_Arg_Questions_cleaned.json` with additional breakdowns of rationales for individual statements.
-- `LEET_Arg_Baseline.jsonl` contains 94 baseline records generated from `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`. Each JSONL line contains only `id` and `question`; the question text includes the passage and statements but excludes answer choices and gold rationales.
+- `LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json` contains 94 baseline records generated from `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`. Each JSON object contains only `id` and `question`; gold rationales are excluded. The question retains answer-choice text for 2021_03, 2021_25, 2022_36, 2023_19, 2024_05, 2024_14, 2024_25, and 2025_21.
 - `LEET_Arg_Model_Responses.json` in this directory holds per-model responses keyed by the same
   `id`/`year`/`problem_idx` and is out of scope here.
 
@@ -104,7 +104,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 
 - `MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
 - `MBE-exam-questions_distilled_dataset_cleaned.json` is based on `MBE-exam-questions_distilled_dataset.json` with duplicates removed and other fixes. [Issue 32](https://github.com/xai-privacy/analysis-framework/issues/32) describes details.
-- `MBE-exam-questions-baseline.jsonl` contains 1,280 baseline records generated from `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSONL line contains only `id` and `question`; answer choices, gold answers, and rationales are excluded.
+- `MBE-exam-questions_distilled_cleaned_baseline.json` contains 1,280 records derived from `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSON object contains only `id` and `question`; answer choices, gold answers, and rationales are excluded. It is a reproducible question-only export, not a duplicate of the full source data.
 
 Both baseline files use the same question-only format for inference. Gold answers and rationales stay in the source benchmark files and are used separately for evaluation; they are not part of the baseline inputs.
 
@@ -115,13 +115,19 @@ Both baseline files use the same question-only format for inference. Gold answer
 - `LegalBench_legal_reasoning_causality_test.tsv` and `LegalBench_legal_reasoning_causality_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [legal reasoning causality task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/legal_reasoning_causality).
 - `LegalBench_privacy_policy_entailment_test.tsv` and `LegalBench_privacy_policy_entailment_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [privacy policy entailment task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/privacy_policy_entailment).
 - `LegalBench_legal_reasoning_causality_cleaned.json` and `LegalBench_privacy_policy_entailment_cleaned.json` merge the train and test files of each task into one file, renumber `index` from 0, and clean the text. They are made by `fine_tuning/jun/legalbench/clean_legalbench.py`. See [issue #33](https://github.com/xai-privacy/analysis-framework/issues/33).
+- `LegalBench_legal_reasoning_causality_cleaned_baseline.json` and `LegalBench_privacy_policy_entailment_cleaned_baseline.json` are answer-free baseline inputs derived from the corresponding cleaned files.
 
 ### 3.2 Contents
 
-Each record has the TSV columns in TSV order, with `index` renumbered across the merged file (train rows first), plus `original_split` and `original_index`, which point back to the source row:
+Each cleaned record has the TSV columns in TSV order, with `index` renumbered across the merged file (train rows first), plus `original_split` and `original_index`, which point back to the source row:
 
 - causality: `index`, `answer`, `text`, `original_split`, `original_index`
 - privacy policy entailment: `index`, `text`, `description`, `answer`, `original_split`, `original_index`
+
+The baseline files retain the task inputs and `index`, plus `original_split` for train/test filtering; they omit `answer` and `original_index`:
+
+- causality baseline: `index`, `text`, `original_split`
+- privacy policy entailment baseline: `index`, `text`, `description`, `original_split`
 
 | Benchmark | Train | Test | Merged | After cleaning | Labels |
 |---|---|---|---|---|---|

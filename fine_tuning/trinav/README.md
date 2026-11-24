@@ -41,6 +41,10 @@ Authenticate with Hugging Face before starting if the environment or model
 requires it. The model is downloaded by Transformers when a run starts; no
 model weights need to be copied to the VM.
 
+Skip any setup, upload, or data-preparation step below if its environment or
+output files are already available. Do not overwrite an existing split or
+trained adapter unless you intend to regenerate it.
+
 ### Set up the Chameleon VM
 
 From `analysis-framework/fine_tuning/chameleon` on your local machine, upload
@@ -74,9 +78,9 @@ PY
 hf auth login
 ```
 
-The baseline runners need both source benchmarks on the VM. The LEET-Arg
+The runners need their source and baseline files on the VM. The LEET-Arg
 adapter test also needs its final-test ID list. From the repository root on
-your local machine, copy them once (DO NOT DO THIS IF THE FILES EXIST IN THE VM!!!):
+your local machine, copy them once (skip this if the files are already on the VM):
 
 ```bash
 ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
@@ -85,10 +89,13 @@ scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 scp -i fine_tuning/karimm_lease1.pem \
+	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_choices_removed.json \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	cc@129.114.108.3:~/xai/trinav/benchmarks/
-scp -i fine_tuning/karimm_lease1.pem \
-	benchmarks/LEET_Arg_Baseline.jsonl benchmarks/MBE-exam-questions-baseline.jsonl \
+	benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json \
+	benchmarks/LegalBench_legal_reasoning_causality_cleaned.json \
+	benchmarks/LegalBench_legal_reasoning_causality_cleaned_baseline.json \
+	benchmarks/LegalBench_privacy_policy_entailment_cleaned.json \
+	benchmarks/LegalBench_privacy_policy_entailment_cleaned_baseline.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 scp -i fine_tuning/karimm_lease1.pem \
 	testing/final_testing/test_set/LEET_Arg_Questions_Test_Set.json \
@@ -97,10 +104,10 @@ scp -i fine_tuning/karimm_lease1.pem \
 
 ### 1. Baseline and CoT testing
 
-Baseline inputs use the same JSONL format for both datasets and are stored in
-`benchmarks/`: each line contains only an ID and question text. LEET-Arg
-questions include the situation, question, and statements, but not the
-`<choices>` section. MBE questions omit the answer options. Gold answers and
+Baseline inputs use JSON arrays stored in `benchmarks/`. Each object contains
+only an ID and question text. LEET-Arg questions include the situation,
+question, and statements; answer-choice text is retained for the eight
+documented exceptions. MBE questions omit the answer options. Gold answers and
 rationales remain in the separate source benchmarks used for scoring and are
 not passed to the model.
 
@@ -116,7 +123,7 @@ select the structured reasoning prompt instead:
 
 ```bash
 python run_hf_questions.py \
-	--input benchmarks/LEET_Arg_Baseline.jsonl \
+	--input benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement_choices_removed.json \
 	--gold-data benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
 	--split data/split.json \
 	--all-data \
@@ -132,7 +139,7 @@ The matching system prompt is loaded automatically. The available types are
 `baseline` and `cot`; use `--prompt path/to/file.md` instead if you need a
 custom prompt. `--prompt` and `--prompt-type` cannot be used together.
 
-The evaluator sends only the `question` field from the JSONL file, plus a
+The evaluator sends only the `question` field from the JSON baseline file, plus a
 system prompt selected by `--prompt-type` or supplied with `--prompt`. The
 `--all-data` option is for
 base-model baseline runs only. It requires the complete question file and uses
@@ -319,7 +326,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	cc@129.114.108.3:~/xai/trinav/
 scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
-	benchmarks/MBE-exam-questions-baseline.jsonl \
+	benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json \
 	cc@129.114.108.3:~/xai/trinav/benchmarks/
 ```
 
@@ -335,7 +342,7 @@ python mbe/prepare_mbe_data.py \
 ```
 
 Run the base model on the full MBE dataset before fine-tuning. The baseline
-input at `benchmarks/MBE-exam-questions-baseline.jsonl` contains only IDs and question text,
+input at `benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json` contains only IDs and question text,
 with no system prompt, answer choices, answers, or rationales. The source
 benchmark is read separately for scoring. Supply your own system prompt with
 `--prompt` or select one with `--prompt-type`; no system prompt is added by
@@ -343,7 +350,7 @@ default if neither option is supplied.
 
 ```bash
 python run_hf_mbe.py \
-	--input benchmarks/MBE-exam-questions-baseline.jsonl \
+	--input benchmarks/MBE-exam-questions_distilled_cleaned_baseline.json \
 	--gold-data benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	--split mbe/data/split.json \
 	--all-data \
@@ -431,6 +438,144 @@ under `testing/baseline/huggingface/mbe/<run-name>/`. The evaluator checks that
 the test IDs match `split.json` and refuses to score training or validation
 questions. Use validation results to choose training settings; do not use the
 held-out test results for checkpoint selection.
+
+## LegalBench Baseline, CoT, and Fine-Tuning
+
+The LegalBench workflow supports `legal_reasoning_causality` and
+`privacy_policy_entailment`. The baseline runner evaluates only the official
+test rows, reads the answer key separately for scoring, and can include the
+official train rows as few-shot examples. `--prompt-type cot` selects the
+structured reasoning prompt. The baseline and CoT prompts request short
+explanations, but LegalBench has no gold explanations.
+
+The cleaned and baseline JSON files should be copied to
+`~/xai/trinav/benchmarks/` as described in setup above. If you already copied
+them, skip that step. If you are updating an existing VM with this workflow,
+also copy the new scripts and prompt files:
+
+```bash
+scp -i fine_tuning/karimm_lease1.pem \
+	fine_tuning/trinav/run_hf_legalbench.py \
+	fine_tuning/trinav/prepare_legalbench_data.py \
+	fine_tuning/trinav/chameleon_utils.py \
+	fine_tuning/trinav/prompt_selector.py \
+	fine_tuning/trinav/legalbench-causality-baseline-prompt.md \
+	fine_tuning/trinav/legalbench-causality-cot-prompt.md \
+	fine_tuning/trinav/legalbench-causality-finetune-prompt.md \
+	fine_tuning/trinav/legalbench-privacy-baseline-prompt.md \
+	fine_tuning/trinav/legalbench-privacy-cot-prompt.md \
+	fine_tuning/trinav/legalbench-privacy-finetune-prompt.md \
+	cc@129.114.108.3:~/xai/trinav/
+```
+
+Run baseline and CoT evaluations on the official test rows. The `--few-shot`
+option adds the official training examples to the system prompt, matching
+LegalBench's supplied examples. Omit it for zero-shot runs. Use distinct run
+names so the results are saved separately:
+
+```bash
+python run_hf_legalbench.py \
+	--task legal_reasoning_causality \
+	--prompt-type baseline \
+	--few-shot \
+	--model Qwen/Qwen3-4B \
+	--run-name causality-qwen3-baseline
+
+python run_hf_legalbench.py \
+	--task legal_reasoning_causality \
+	--prompt-type cot \
+	--few-shot \
+	--model Qwen/Qwen3-4B \
+	--run-name causality-qwen3-cot
+
+python run_hf_legalbench.py \
+	--task privacy_policy_entailment \
+	--prompt-type baseline \
+	--few-shot \
+	--model Qwen/Qwen3-4B \
+	--run-name privacy-qwen3-baseline
+
+python run_hf_legalbench.py \
+	--task privacy_policy_entailment \
+	--prompt-type cot \
+	--few-shot \
+	--model Qwen/Qwen3-4B \
+	--run-name privacy-qwen3-cot
+```
+
+Results, including accuracy and answer parse rate, are saved under
+`testing/baseline/huggingface/legalbench/<task>/<run-name>/`. Add
+`--limit N` with a separate `--run-name` for a smoke test before running the
+full privacy-policy test set.
+
+### Prepare and fine-tune on LegalBench
+
+LegalBench has only four official training examples for causality and eight for
+privacy-policy entailment. The preparation script reserves one example from
+each answer class for validation, using only the official training rows. This
+leaves two causality and six privacy-policy examples for training; the official
+test rows are not used in training or validation. The dataset has no gold
+rationales, so the fine-tuning targets contain only the final answer label.
+Treat results from these very small fine-tuning sets as exploratory.
+
+Prepare each task once; skip a preparation command if its generated files
+already exist and you intend to reuse that split:
+
+```bash
+python prepare_legalbench_data.py --task legal_reasoning_causality
+python prepare_legalbench_data.py --task privacy_policy_entailment
+```
+
+Train separate adapters for each task:
+
+```bash
+python train_chameleon.py \
+	--model Qwen/Qwen3-4B \
+	--train-data legalbench/data/legal_reasoning_causality/train.jsonl \
+	--valid-data legalbench/data/legal_reasoning_causality/valid.jsonl \
+	--split legalbench/data/legal_reasoning_causality/split.json \
+	--output-dir legalbench/adapters_causality \
+	--max-steps 20 \
+	--checkpoint-steps 5 \
+	--learning-rate 1e-4 \
+	--max-seq-length 4096
+
+python train_chameleon.py \
+	--model Qwen/Qwen3-4B \
+	--train-data legalbench/data/privacy_policy_entailment/train.jsonl \
+	--valid-data legalbench/data/privacy_policy_entailment/valid.jsonl \
+	--split legalbench/data/privacy_policy_entailment/split.json \
+	--output-dir legalbench/adapters_privacy \
+	--max-steps 20 \
+	--checkpoint-steps 5 \
+	--learning-rate 1e-4 \
+	--max-seq-length 4096
+```
+
+Evaluate an adapter on the official test rows, using the same prompt type and
+few-shot setting as the corresponding base-model run:
+
+```bash
+python run_hf_legalbench.py \
+	--task legal_reasoning_causality \
+	--prompt-type baseline \
+	--few-shot \
+	--model Qwen/Qwen3-4B \
+	--adapter-path legalbench/adapters_causality \
+	--run-name causality-qwen3-finetuned
+
+python run_hf_legalbench.py \
+	--task privacy_policy_entailment \
+	--prompt-type baseline \
+	--few-shot \
+	--model Qwen/Qwen3-4B \
+	--adapter-path legalbench/adapters_privacy \
+	--run-name privacy-qwen3-finetuned
+```
+
+The evaluator rejects training and validation rows and scores only the
+official test split. Do not select training settings or adapters based on
+official test results.
 
 ### Accelerating Parallel Testing with `CUDA_VISIBLE_DEVICES`
 

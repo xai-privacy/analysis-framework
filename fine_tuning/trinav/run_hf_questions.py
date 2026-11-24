@@ -13,10 +13,20 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from .chameleon_utils import HERE, load_cuda_model, parse_verdicts, read_jsonl
+    from .chameleon_utils import (
+        HERE,
+        load_cuda_model,
+        parse_verdicts,
+        read_json_or_jsonl,
+    )
     from .prompt_selector import resolve_prompt
 except ImportError:
-    from chameleon_utils import HERE, load_cuda_model, parse_verdicts, read_jsonl
+    from chameleon_utils import (
+        HERE,
+        load_cuda_model,
+        parse_verdicts,
+        read_json_or_jsonl,
+    )
     from prompt_selector import resolve_prompt
 
 FORMAT_HINT = (
@@ -66,7 +76,7 @@ def load_questions(path: Path) -> list[dict[str, Any]]:
 
 
 def load_baseline_questions(path: Path) -> list[dict[str, str]]:
-    rows = read_jsonl(path)
+    rows = read_json_or_jsonl(path)
     if not rows:
         raise ValueError(f"No baseline questions found in {path}")
     seen = set()

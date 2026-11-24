@@ -15,6 +15,20 @@ PROMPTS = {
         "baseline": HERE / "mbe-baseline-prompt.md",
         "cot": HERE / "mbe-cot-prompt.md",
     },
+    "legalbench_causality": {
+        "baseline": HERE / "legalbench-causality-baseline-prompt.md",
+        "cot": HERE / "legalbench-causality-cot-prompt.md",
+    },
+    "legalbench_privacy": {
+        "baseline": HERE / "legalbench-privacy-baseline-prompt.md",
+        "cot": HERE / "legalbench-privacy-cot-prompt.md",
+    },
+    "legalbench_causality_finetune": {
+        "baseline": HERE / "legalbench-causality-finetune-prompt.md",
+    },
+    "legalbench_privacy_finetune": {
+        "baseline": HERE / "legalbench-privacy-finetune-prompt.md",
+    },
 }
 
 

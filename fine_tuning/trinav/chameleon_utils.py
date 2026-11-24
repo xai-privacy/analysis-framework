@@ -39,6 +39,18 @@ def read_jsonl(path: Path):
     return rows
 
 
+def read_json_or_jsonl(path: Path):
+    if path.suffix == ".jsonl":
+        return read_jsonl(path)
+    if path.suffix != ".json":
+        raise ValueError(f"Expected a .json or .jsonl file: {path}")
+    with path.open("r", encoding="utf-8") as handle:
+        rows = json.load(handle)
+    if not isinstance(rows, list):
+        raise ValueError(f"Expected a JSON array in {path}")
+    return rows
+
+
 def validate_data_split(train_rows, valid_rows, split_path: Path):
     with split_path.open("r", encoding="utf-8") as handle:
         split = json.load(handle)
@@ -88,7 +100,10 @@ def validate_data_split(train_rows, valid_rows, split_path: Path):
             evaluation.get("gold_answer") in {"A", "B", "C", "D"}
             and isinstance(evaluation.get("gold_explanation"), dict)
         )
-        if not (has_leet_labels or has_mbe_labels):
+        has_legalbench_labels = evaluation.get("gold_answer") in {
+            "Yes", "No", "Correct", "Incorrect"
+        }
+        if not (has_leet_labels or has_mbe_labels or has_legalbench_labels):
             raise ValueError(f"{row['id']}: unsupported or incomplete evaluation metadata")
 
     return split
@@ -188,6 +203,7 @@ __all__ = [
     "get_lora_target_modules",
     "load_cuda_model",
     "parse_verdicts",
+    "read_json_or_jsonl",
     "read_jsonl",
     "validate_data_split",
 ]

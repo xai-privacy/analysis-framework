@@ -13,11 +13,11 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from .chameleon_utils import HERE, load_cuda_model, read_jsonl
+    from .chameleon_utils import HERE, load_cuda_model, read_json_or_jsonl
     from .mbe.prepare_mbe_data import question_id, validate_question
     from .prompt_selector import resolve_prompt
 except ImportError:
-    from chameleon_utils import HERE, load_cuda_model, read_jsonl
+    from chameleon_utils import HERE, load_cuda_model, read_json_or_jsonl
     from mbe.prepare_mbe_data import question_id, validate_question
     from prompt_selector import resolve_prompt
 
@@ -45,7 +45,7 @@ def sanitize(value: str) -> str:
 def load_test_data(
     input_path: Path, split_path: Path, all_data: bool = False
 ) -> list[dict[str, Any]]:
-    rows = read_jsonl(input_path)
+    rows = read_json_or_jsonl(input_path)
     if not rows:
         raise ValueError(f"No test examples found in {input_path}")
 

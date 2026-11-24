@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""QLoRA fine-tuning for the Trinav LEET-Arg rationale dataset on Colab CUDA."""
+"""QLoRA fine-tuning for the Trinav chat datasets on Colab CUDA."""
 
 from __future__ import annotations
 
