@@ -4,7 +4,7 @@ Prepared 2026-10-31 · Revised 2026-11-22 (final model set after review feedback
 
 ## 1. Purpose
 
-This report justifies the model set for a taxonomy of reasoning mistakes that open-weight models (small general-purpose, mid-size, domain-adapted legal, and a modern large reasoning model) and a closed frontier model make on two benchmarks, **LEET_Arg** and **MBE**, with LegalBench as a supplementary check. For each model it explains why it fits the available hardware and why it is informative for these benchmarks.
+This report justifies the model set for a taxonomy of reasoning mistakes that open-weight models (small general-purpose, mid-size, domain-adapted legal, and a modern large reasoning model) and a closed frontier model make on two benchmarks, **LEET_Arg** and **MBE**, with **LegalBench** as a supplementary check. For each model it explains why it fits the available hardware and why it is informative for these benchmarks.
 
 **Revision summary.** Following review feedback, the following changes were made to the original set:
 
@@ -14,37 +14,37 @@ This report justifies the model set for a taxonomy of reasoning mistakes that op
 
 **Selected models**
 
-| #   | Model                                   | Organization | Parameters                                   | Role in design                          | Access           | URL |
-| --- | --------------------------------------- | ------------ | -------------------------------------------- | --------------------------------------- | ---------------- | --- |
-| 1   | Qwen3-4B                                | Alibaba      | 4B dense                                     | Small baseline, thinking on/off         | Open weights     | <https://huggingface.co/Qwen/Qwen3-4B> |
-| 2   | Qwen3-8B                                | Alibaba      | 8B dense                                     | Mid-small, thinking on/off              | Open weights     | <https://huggingface.co/Qwen/Qwen3-8B> |
-| 3   | Mistral-Small-24B-Instruct-2501         | Mistral AI   | 24B dense                                    | Mid-size dense generalist, no reasoning mode | Open weights | <https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501> |
-| 4   | SaulLM-54B-Instruct                     | Equall / CentraleSupélec | 54B nominal, Mixtral-derived MoE | Domain-adapted legal LLM                | Open weights (MIT) | <https://huggingface.co/Equall/SaulLM-54B-Instruct> |
-| 5   | DeepSeek-V4-Flash                       | DeepSeek     | 284B MoE, 13B active                         | Modern open-weight reasoner             | Open weights (MIT) | <https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash> |
-| 6   | Claude Sonnet 5.5 (`claude-sonnet-5-5`) | Anthropic    | Not disclosed                                | Closed frontier ceiling                 | Closed, API only | <https://docs.claude.com> |
+| #   | Model                                   | Organization             | Parameters                       | Role in design                               | Access             | URL                                                                |
+| --- | --------------------------------------- | ------------------------ | -------------------------------- | -------------------------------------------- | ------------------ | ------------------------------------------------------------------ |
+| 1   | Qwen3-4B                                | Alibaba                  | 4B dense                         | Small baseline, thinking on/off              | Open weights       | <https://huggingface.co/Qwen/Qwen3-4B>                             |
+| 2   | Qwen3-8B                                | Alibaba                  | 8B dense                         | Mid-small, thinking on/off                   | Open weights       | <https://huggingface.co/Qwen/Qwen3-8B>                             |
+| 3   | Mistral-Small-24B-Instruct-2501         | Mistral AI               | 24B dense                        | Mid-size dense generalist, no reasoning mode | Open weights       | <https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501> |
+| 4   | SaulLM-54B-Instruct                     | Equall / CentraleSupélec | 54B nominal, Mixtral-derived MoE | Domain-adapted legal LLM                     | Open weights (MIT) | <https://huggingface.co/Equall/SaulLM-54B-Instruct>                |
+| 5   | DeepSeek-V4-Flash                       | DeepSeek                 | 284B MoE, 13B active             | Modern open-weight reasoner                  | Open weights (MIT) | <https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash>             |
+| 6   | Claude Sonnet 5.5 (`claude-sonnet-5-5`) | Anthropic                | Not disclosed                    | Closed frontier ceiling                      | Closed, API only   | <https://docs.claude.com>                                          |
 
 ## 2. Hardware fit
 
 ### 2.1 Available flavors
 
-| Flavor                 | GPU memory | Role in this study                                                                                         |
-| ---------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
-| `g1.h100.vgpu.1g.12gb` | 12 GB      | Prompt and parser development, debugging, short-context Qwen3-4B tests                                     |
-| `g1.h100.pci.1`        | 80 GB      | Main evaluation of Qwen3-4B, Qwen3-8B, and Mistral-Small-24B                                               |
-| `g1.h100.pci.4`        | 4 x 80 GB  | Tensor-parallel evaluation of SaulLM-54B and DeepSeek-V4-Flash                                             |
+| Flavor                 | GPU memory | Role in this study                                                     |
+| ---------------------- | ---------- | ---------------------------------------------------------------------- |
+| `g1.h100.vgpu.1g.12gb` | 12 GB      | Prompt and parser development, debugging, short-context Qwen3-4B tests |
+| `g1.h100.pci.1`        | 80 GB      | Main evaluation of Qwen3-4B, Qwen3-8B, and Mistral-Small-24B           |
+| `g1.h100.pci.4`        | 4 x 80 GB  | Tensor-parallel evaluation of SaulLM-54B and DeepSeek-V4-Flash         |
 
 ### 2.2 Memory estimates
 
 Estimates below are weights only, from parameter count times bytes per parameter. KV cache and activations come on top, and thinking-mode generations with long outputs make the KV cache substantial. Confirm actual fit with a smoke test before scheduling full runs.
 
-| Model                           | Precision          | Approx. weight memory | Planned flavor              |
-| ------------------------------- | ------------------ | --------------------- | --------------------------- |
-| Qwen3-4B                        | bf16               | about 8 GB            | `pci.1` (`vgpu` for dev only) |
-| Qwen3-8B                        | bf16               | about 16 GB           | `pci.1`                     |
-| Mistral-Small-24B-Instruct-2501 | bf16               | about 48 GB           | `pci.1`                     |
-| SaulLM-54B-Instruct             | bf16               | about 93 GB or more   | `pci.4`, tensor parallel 2 or 4 |
-| DeepSeek-V4-Flash               | Released mixed FP4/FP8 | roughly 150 GB or more (estimate) | `pci.4`, tensor parallel 4 |
-| Claude Sonnet 5.5               | n/a                | none                  | API                         |
+| Model                           | Precision              | Approx. weight memory             | Planned flavor                  |
+| ------------------------------- | ---------------------- | --------------------------------- | ------------------------------- |
+| Qwen3-4B                        | bf16                   | about 8 GB                        | `pci.1` (`vgpu` for dev only)   |
+| Qwen3-8B                        | bf16                   | about 16 GB                       | `pci.1`                         |
+| Mistral-Small-24B-Instruct-2501 | bf16                   | about 48 GB                       | `pci.1`                         |
+| SaulLM-54B-Instruct             | bf16                   | about 93 GB or more               | `pci.4`, tensor parallel 2 or 4 |
+| DeepSeek-V4-Flash               | Released mixed FP4/FP8 | roughly 150 GB or more (estimate) | `pci.4`, tensor parallel 4      |
+| Claude Sonnet 5.5               | n/a                    | none                              | API                             |
 
 ## 3. Benchmark relevance
 
@@ -119,56 +119,46 @@ LegalBench consists of multiple benchmarks, of which we use the legal reasoning 
 
 ## 5. Axis coverage and confounds
 
-| Axis                    | Coverage                                              | Clean comparison?                                              |
-| ----------------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
-| Scale (dense)           | 4B, 8B, 24B                                           | Partly; Qwen3 4B vs. 8B is within family, 24B is another family |
-| Scale (within family)   | Qwen3-4B to Qwen3-8B                                  | Yes                                                            |
-| Reasoning               | Qwen3 thinking on/off (4B, 8B); DeepSeek-V4 non-think / think-high / think-max | Yes                                          |
-| Domain adaptation       | SaulLM-54B (legal) vs. general models                 | Partly; confounded with MoE architecture, size, and 2024 vintage unless a Mixtral control is added |
-| Family                  | Alibaba, Mistral, Equall, DeepSeek, Anthropic         | Confounded with scale                                          |
-| Open vs. closed         | Claude Sonnet 5.5                                     | Single data point                                              |
-| Total vs. active params | SaulLM and DeepSeek are MoE                           | Treat separately from the dense-model scale curve              |
+| Axis                    | Coverage                                                                       | Clean comparison?                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Scale (dense)           | 4B, 8B, 24B                                                                    | Partly; Qwen3 4B vs. 8B is within family, 24B is another family                                    |
+| Scale (within family)   | Qwen3-4B to Qwen3-8B                                                           | Yes                                                                                                |
+| Reasoning               | Qwen3 thinking on/off (4B, 8B); DeepSeek-V4 non-think / think-high / think-max | Yes                                                                                                |
+| Domain adaptation       | SaulLM-54B (legal) vs. general models                                          | Partly; confounded with MoE architecture, size, and 2024 vintage unless a Mixtral control is added |
+| Family                  | Alibaba, Mistral, Equall, DeepSeek, Anthropic                                  | Confounded with scale                                                                              |
+| Open vs. closed         | Claude Sonnet 5.5                                                              | Single data point                                                                                  |
+| Total vs. active params | SaulLM and DeepSeek are MoE                                                    | Treat separately from the dense-model scale curve                                                  |
 
 ## 6. Suggested evaluation conditions
 
-| Condition                              | Flavor                      | Precision          | Notes                                                                 |
-| -------------------------------------- | --------------------------- | ------------------ | --------------------------------------------------------------------- |
-| Qwen3-4B (thinking)                    | `pci.1`                     | bf16               | Model-card sampling, `max_tokens` cap, presence penalty if loops occur |
-| Qwen3-4B (non-thinking)                | `pci.1`                     | bf16               | Model-card sampling                                                   |
-| Qwen3-8B (thinking)                    | `pci.1`                     | bf16               | Model-card sampling for thinking mode                                 |
-| Qwen3-8B (non-thinking)                | `pci.1`                     | bf16               | Model-card sampling for non-thinking mode                             |
-| Mistral-Small-24B-Instruct-2501        | `pci.1`                     | bf16               | Pin checkpoint                                                        |
-| SaulLM-54B-Instruct                    | `pci.4` (TP 2 or 4)         | bf16               | Flag LegalBench contamination; 2024 vintage                           |
-| DeepSeek-V4-Flash (non-think)          | `pci.4` (TP 4)              | Released FP4/FP8   | Pin checkpoint (April release or 0731); verify vLLM support first     |
-| DeepSeek-V4-Flash (think-high)         | `pci.4` (TP 4)              | Released FP4/FP8   | Large output budget; log truncations                                  |
-| Claude Sonnet 5.5                      | API                         | n/a                | Pin effort level, fixed temperature, logged settings                  |
-| Optional: Mixtral-8x7B-Instruct        | `pci.4` or `pci.1` (quantized) | bf16 or 8-bit   | Control for SaulLM's base architecture; note any precision difference |
-| Optional: DeepSeek-V4-Flash think-max  | `pci.4` (TP 4)              | Released FP4/FP8   | Only if budget allows; very long outputs                              |
+| Condition                             | Flavor                         | Precision        | Notes                                                                  |
+| ------------------------------------- | ------------------------------ | ---------------- | ---------------------------------------------------------------------- |
+| Qwen3-4B (thinking)                   | `pci.1`                        | bf16             | Model-card sampling, `max_tokens` cap, presence penalty if loops occur |
+| Qwen3-4B (non-thinking)               | `pci.1`                        | bf16             | Model-card sampling                                                    |
+| Qwen3-8B (thinking)                   | `pci.1`                        | bf16             | Model-card sampling for thinking mode                                  |
+| Qwen3-8B (non-thinking)               | `pci.1`                        | bf16             | Model-card sampling for non-thinking mode                              |
+| Mistral-Small-24B-Instruct-2501       | `pci.1`                        | bf16             | Pin checkpoint                                                         |
+| SaulLM-54B-Instruct                   | `pci.4` (TP 2 or 4)            | bf16             | Flag LegalBench contamination; 2024 vintage                            |
+| DeepSeek-V4-Flash (non-think)         | `pci.4` (TP 4)                 | Released FP4/FP8 | Pin checkpoint (April release or 0731); verify vLLM support first      |
+| DeepSeek-V4-Flash (think-high)        | `pci.4` (TP 4)                 | Released FP4/FP8 | Large output budget; log truncations                                   |
+| Claude Sonnet 5.5                     | API                            | n/a              | Pin effort level, fixed temperature, logged settings                   |
+| Optional: Mixtral-8x7B-Instruct       | `pci.4` or `pci.1` (quantized) | bf16 or 8-bit    | Control for SaulLM's base architecture; note any precision difference  |
+| Optional: DeepSeek-V4-Flash think-max | `pci.4` (TP 4)                 | Released FP4/FP8 | Only if budget allows; very long outputs                               |
 
-## 7. Protocol recommendations
+## 7. Release dates, training cutoffs, and dataset provenance
 
-1. Give every model the same prompt, with explicit statement counts and labels in the gold format (including ①-⑤ items).
-2. Report parse rate and parsed-only accuracy separately from overall accuracy, and include an always-CORRECT baseline.
-3. Constrain the final verdict where the engine allows it, and strip reasoning traces before parsing while keeping them for annotation.
-4. Pin the vLLM version, `max_model_len`, `max_tokens` caps, sampling parameters, and seeds, and log them with each result file. Pin exact model checkpoints, including the DeepSeek-V4-Flash release and the Claude effort level.
-5. Hand-validate a stratified sample of error labels and report annotator agreement.
-6. Report SaulLM-54B's LegalBench results separately, with the contamination caveat.
-7. Report decoding differences between thinking and non-thinking conditions rather than hiding them.
+### 7.1 Models
 
-## 8. Release dates, training cutoffs, and dataset provenance
+| Model                           | Release date                                                                 | Training-data / knowledge cutoff                  |
+| ------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------- |
+| Qwen3-4B                        | Apr 28, 2025 (Qwen3 family release; verify per-model date on the model page) | **Not recorded.**                                 |
+| Qwen3-8B                        | Apr 28, 2025 (Qwen3 family release; verify per-model date on the model page) | **Not recorded.**                                 |
+| Mistral-Small-24B-Instruct-2501 | Jan 30, 2025                                                                 | Oct 2023                                          |
+| SaulLM-54B-Instruct             | Weights uploaded May 7, 2024; paper Jul 2024                                 | **Not recorded.** (Mixtral-derived; 2024 vintage) |
+| DeepSeek-V4-Flash               | Apr 23-24, 2026 (0731 update: Jul 30, 2026)                                  | **Not recorded.**                                 |
+| Claude Sonnet 5.5               | Sep 28, 2026                                                                 | Jun 2026                                          |
 
-### 8.1 Models
-
-| Model                           | Release date                                   | Training-data / knowledge cutoff |
-| ------------------------------- | ---------------------------------------------- | -------------------------------- |
-| Qwen3-4B                        | Apr 28, 2025 (Qwen3 family release; verify per-model date on the model page) | **Not recorded.** |
-| Qwen3-8B                        | Apr 28, 2025 (Qwen3 family release; verify per-model date on the model page) | **Not recorded.** |
-| Mistral-Small-24B-Instruct-2501 | Jan 30, 2025                                   | Oct 2023                         |
-| SaulLM-54B-Instruct             | Weights uploaded May 7, 2024; paper Jul 2024   | **Not recorded.** (Mixtral-derived; 2024 vintage) |
-| DeepSeek-V4-Flash               | Apr 23-24, 2026 (0731 update: Jul 30, 2026)    | **Not recorded.**                |
-| Claude Sonnet 5.5               | Sep 28, 2026                                   | Jun 2026                         |
-
-### 8.2 Datasets
+### 7.2 Datasets
 
 | Dataset    | Source       | Publication date | Date range of underlying questions |
 | ---------- | ------------ | ---------------- | ---------------------------------- |
@@ -178,7 +168,7 @@ LegalBench consists of multiple benchmarks, of which we use the legal reasoning 
 
 Because several models have cutoffs before or near the dataset dates, record for each benchmark whether its question date range falls after each model's cutoff.
 
-## 9. References
+## 8. References
 
 - Bommarito & Katz (2022). GPT Takes the Bar Exam. arXiv.
 - Katz et al. (2024). GPT-4 passes the bar exam. Philosophical Transactions of the Royal Society A.
