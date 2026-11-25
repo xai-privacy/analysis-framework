@@ -48,7 +48,7 @@ def main() -> int:
     )
     parser.add_argument("--adapter-path", type=Path)
     parser.add_argument("--data", type=Path, default=DATA_DIR / "valid.jsonl")
-    parser.add_argument("--max-tokens", type=int, default=1200)
+    parser.add_argument("--max-tokens", type=int, default=4096)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--format-hint", action="store_true")
     parser.add_argument("--out", type=Path, required=True)

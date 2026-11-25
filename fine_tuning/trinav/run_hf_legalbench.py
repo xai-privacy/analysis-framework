@@ -154,7 +154,7 @@ def main() -> int:
     )
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--run-name")
-    parser.add_argument("--max-tokens", type=int, default=768)
+    parser.add_argument("--max-tokens", type=int, default=4096)
     parser.add_argument("--limit", type=int, help="run only the first N rows")
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()

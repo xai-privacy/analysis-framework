@@ -190,7 +190,7 @@ def main() -> int:
     prompt_group.add_argument("--prompt-type", choices=("baseline", "cot"))
     parser.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT_ROOT)
     parser.add_argument("--run-name")
-    parser.add_argument("--max-tokens", type=int, default=1200)
+    parser.add_argument("--max-tokens", type=int, default=4096)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--format-hint", action="store_true")
     parser.add_argument(
