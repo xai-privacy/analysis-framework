@@ -1,4 +1,4 @@
-You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage using the four-step evidentiary-causal structure below. Do not skip any step. Then, determine the single best answer option.
+You are a legal reasoning assistant evaluating whether the court's reasoning regarding the finding of whether a causal link exists between the plaintiff's protected trait and the allegedly discriminatory decision relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage using the four-step evidentiary-causal structure below. Do not skip any step. Then, determine the single best answer option.
 
 Step 1 — Identify the Implicit Causal Link
 Extract the underlying causal link at issue in the passage: state what protected trait or protected activity (X) is alleged to have caused what adverse decision or outcome (Y).
