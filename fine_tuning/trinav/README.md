@@ -135,8 +135,7 @@ python run_hf_questions.py \
 	--output-root testing/baseline/huggingface
 ```
 
-For a CoT run, replace `--prompt-type baseline` with `--prompt-type cot` and
-change the run name to qwen3-cot to put the results in a separate directory.
+For a CoT run, replace `--prompt-type baseline` with `--prompt-type cot`, output dir to cot, and change the run name to qwen3-cot to put the results in a separate directory.
 The matching full prompt template is loaded and populated automatically. The
 available types are `baseline` and `cot`; use `--prompt path/to/file.md` for a
 custom prompt template. `--prompt` and `--prompt-type` cannot be used together.
@@ -370,8 +369,7 @@ python run_hf_mbe.py \
 	--output-root testing/baseline/huggingface/mbe
 ```
 
-Choose the MBE prompt with `--prompt-type baseline` or `--prompt-type cot` and
-choose a separate run name to add the results in a different directory. The
+Choose the MBE prompt with `--prompt-type baseline` or `--prompt-type cot`, output dir to cot, and choose a separate run name to add the results in a different directory. The
 runner loads the corresponding full prompt template and fills in the
 question and option placeholders automatically. Use `--prompt path/to/file.md`
 for a custom prompt template; do not pass both prompt options. An explicit
@@ -489,24 +487,28 @@ python run_hf_legalbench.py \
 	--prompt-type baseline \
 	--model Qwen/Qwen3-4B \
 	--run-name causality-qwen3-baseline
+	--output-root testing/baseline/huggingface/legalbench
 
 python run_hf_legalbench.py \
 	--task legal_reasoning_causality \
 	--prompt-type cot \
 	--model Qwen/Qwen3-4B \
 	--run-name causality-qwen3-cot
+	--output-root testing/cot/huggingface/legalbench
 
 python run_hf_legalbench.py \
 	--task privacy_policy_entailment \
 	--prompt-type baseline \
 	--model Qwen/Qwen3-4B \
 	--run-name privacy-qwen3-baseline
+	--output-root testing/baseline/huggingface/legalbench
 
 python run_hf_legalbench.py \
 	--task privacy_policy_entailment \
 	--prompt-type cot \
 	--model Qwen/Qwen3-4B \
 	--run-name privacy-qwen3-cot
+	--output-root testing/cot/huggingface/legalbench
 ```
 
 Prompt/response pairs for every input row are saved under
