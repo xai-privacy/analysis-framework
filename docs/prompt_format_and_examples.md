@@ -222,7 +222,7 @@ Prompt format is the same as under 2.1.1.
 
 #### 3.1.1 Prompt Format
 
-You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage, provide an explanation, and determine the single best answer option.
+You are a legal reasoning assistant evaluating whether the court's reasoning regarding the finding of whether a causal link exists between the plaintiff's protected trait and the allegedly discriminatory decision relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage, provide an explanation, and determine the single best answer option.
 
 Passage:
 {text from LegalBench_legal_reasoning_causality_cleaned_baseline}
@@ -237,7 +237,7 @@ Final Answer Option: <Yes, No>
 #### 3.1.2 Prompt Example
 
 ```prompt
-You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage, provide an explanation, and determine the single best answer option.
+You are a legal reasoning assistant evaluating whether the court's reasoning regarding the finding of whether a causal link exists between the plaintiff's protected trait and the allegedly discriminatory decision relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage, provide an explanation, and determine the single best answer option.
 
 Passage:
 In her Opposition Brief, Carman points to statistics of the racial composition of Defendants' employees as evidence of discrimination (see Doc. 66 at 8, 29) (alleging that while Erie County is "made up of approximately 12.2% African American individuals," Defendants only employ 4.5% Africans Americans in their "top paid positions"). However, this statistic is not relevant in evaluating Carman's discrimination claims. For statistics to serve as evidence of discriminatory hiring practices, the Sixth Circuit requires a comparison of "the racial composition of the pool of qualified [assistant prosecutor / DJFS director] candidates in the [Erie County] market." Hopkins v. Canton City Bd. of Educ., 477 F. App'x 349, 358 (6th Cir. 2012). Carman's comparison falls short, failing to meaningfully identify the racial composition of the pool of qualified candidates.
@@ -254,7 +254,7 @@ Final Answer Option: <Yes, No>
 
 #### 3.2.1 Prompt Format
 
-You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage using the four-step evidentiary-causal structure below. Do not skip any step. Then, determine the single best answer option.
+You are a legal reasoning assistant evaluating whether the court's reasoning regarding the finding of whether a causal link exists between the plaintiff's protected trait and the allegedly discriminatory decision relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage using the four-step evidentiary-causal structure below. Do not skip any step. Then, determine the single best answer option.
 
 Step 1 — Identify the Implicit Causal Link
 Extract the underlying causal link at issue in the passage: state what protected trait or protected activity (X) is alleged to have caused what adverse decision or outcome (Y).
@@ -281,7 +281,7 @@ Final Answer Option: <Yes, No>
 #### 3.2.2 Prompt Example
 
 ```prompt
-You are a legal reasoning assistant evaluating whether the causal reasoning in a legal passage relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage using the four-step evidentiary-causal structure below. Do not skip any step. Then, determine the single best answer option.
+You are a legal reasoning assistant evaluating whether the court's reasoning regarding the finding of whether a causal link exists between the plaintiff's protected trait and the allegedly discriminatory decision relies on statistical evidence (as opposed to direct-probative evidence). Analyze the passage using the four-step evidentiary-causal structure below. Do not skip any step. Then, determine the single best answer option.
 
 Step 1 — Identify the Implicit Causal Link
 Extract the underlying causal link at issue in the passage: state what protected trait or protected activity (X) is alleged to have caused what adverse decision or outcome (Y).
