@@ -1,0 +1,13 @@
+{
+ "id": "2025_29",
+ "statements": {
+  "a": true,
+  "b": false,
+  "c": false
+ },
+ "reasons": {
+  "a": "Because female singers in the experimental group worked separately from men while those in the control group worked together with men, higher creativity scores in the experimental group directly support hypothesis ⓐ.",
+  "b": "Comparing the overall score of all female singers to that of all male singers measures a general difference between genders rather than the effect of working separately versus together on women's creativity.",
+  "c": "Female singers scoring higher than male singers in the separated condition compared to the joint condition indicates enhanced creative output when separated, which strengthens rather than weakens hypothesis ⓐ."
+ }
+}

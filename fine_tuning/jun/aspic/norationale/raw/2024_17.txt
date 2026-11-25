@@ -1,0 +1,340 @@
+{
+  "id": "2024_17",
+  "positions": {
+    "Author": {
+      "thesis": "c1",
+      "summary": "Goodness has two dimensions: primary goodness (essential perfection) and secondary goodness (accidental perfection), which is subdivided into two types."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Goodness has two dimensions: primary goodness and secondary goodness.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Primary goodness (ⓐ) refers to the essential perfection that a being possesses, such that lacking it means it can no longer be that being.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Primary goodness (ⓐ) signifies, in an active sense, the negation of privation.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "If a human lacks humanity, they are no longer human.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "As long as a human exists as a human, the assertion that someone is 'more human' than others does not stand.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Secondary goodness refers to the relationship between a subject and its accidental properties, accompanying being rather than constituting it.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Secondary goodness is subdivided into two types: the first type (ⓑ) and the second type (ⓒ).",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "The first type of secondary goodness (ⓑ) refers to the suitability in which a property, in and of itself, contributes to the perfection of the being it belongs to.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Health is not a primary goodness to a human, but a secondary one (ⓑ), because even a sick person is still human.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "If health is good for a human, then health itself is a good property for humans.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "The second type of secondary goodness (ⓒ) refers to the goodness found in a being when a certain property belongs to it.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "In the second type of secondary goodness (ⓒ), it is not the particular property itself that is good, but the overall goodness possessed by the being.",
+      "source": "passage"
+    },
+    "c13": {
+      "text": "A food is delicious because its salinity, acidity, texture, and so on are well-harmonized, not because of one isolated element.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c2",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c11",
+      "by": "Author",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c12",
+      "by": "Author",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Author",
+      "if": [
+        "c2"
+      ],
+      "then": "c3",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Author",
+      "if": [
+        "c2"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Author",
+      "if": [
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Author",
+      "if": [
+        "c2",
+        "c6",
+        "c8"
+      ],
+      "then": "c9",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": "Author",
+      "if": [
+        "c11",
+        "c12"
+      ],
+      "then": "c13",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r6",
+      "by": "Author",
+      "if": [
+        "c2",
+        "c6",
+        "c7"
+      ],
+      "then": "c1",
+      "type": "strict",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h2",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Evil is the privation of goodness.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "Evil is primary goodness (ⓐ).",
+              "source": "statement"
+            },
+            "h3": {
+              "text": "Evil is not primary goodness (ⓐ), because evil is a privation while primary goodness is the negation of privation.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "Author",
+              "if": [
+                "h1"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "statement"
+            },
+            {
+              "id": "ra2",
+              "by": "Author",
+              "if": [
+                "h1",
+                "c3"
+              ],
+              "then": "h3",
+              "type": "strict",
+              "source": "background"
+            }
+          ],
+          "contraries": [
+            [
+              "h2",
+              "h3"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c3",
+              "rule": "ra1"
+            }
+          ]
+        }
+      }
+    },
+    "b": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h5",
+        "add": {
+          "claims": {
+            "h4": {
+              "text": "If an object is beautiful, its beauty is the harmonious totality of size, shape, color, etc. that the object possesses.",
+              "source": "statement"
+            },
+            "h5": {
+              "text": "In the statement, beauty is the second type of secondary goodness (ⓒ).",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "Author",
+              "if": [
+                "h4",
+                "c12"
+              ],
+              "then": "h5",
+              "type": "strict",
+              "source": "statement"
+            }
+          ]
+        }
+      }
+    },
+    "c": {
+      "check": {
+        "op": "holds",
+        "by": "Author",
+        "claim": "h6",
+        "add": {
+          "claims": {
+            "h6": {
+              "text": "If something is always good for someone, then it is primary goodness (ⓐ), and if not, it is secondary goodness (ⓑ or ⓒ).",
+              "source": "statement"
+            },
+            "h7": {
+              "text": "Essential goodness is unconditionally good for everyone, whereas accidental goodness is not.",
+              "source": "background"
+            },
+            "h8": {
+              "text": "The distinction between primary and secondary goodness is essential perfection versus accidental property, not whether something is always good for someone.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h7",
+              "by": "*",
+              "kind": "ordinary"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "Author",
+              "if": [
+                "h7"
+              ],
+              "then": "h6",
+              "type": "defeasible",
+              "source": "background"
+            },
+            {
+              "id": "rc2",
+              "by": "Author",
+              "if": [
+                "c2",
+                "c6",
+                "c9"
+              ],
+              "then": "h8",
+              "type": "strict",
+              "source": "background"
+            }
+          ],
+          "contraries": [
+            [
+              "h6",
+              "h8"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c9",
+              "rule": "rc1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

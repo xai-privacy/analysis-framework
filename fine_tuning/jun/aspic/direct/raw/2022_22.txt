@@ -1,0 +1,13 @@
+{
+ "id": "2022_22",
+ "statements": {
+  "a": false,
+  "b": true,
+  "c": true
+ },
+ "reasons": {
+  "a": "According to Alice, the speaker's identity fills the variable 'x', meaning two distinct individuals who both enjoy gopchang would express different propositions rather than the same one.",
+  "b": "Under Alice's view, Youngho's statement expresses that gopchang is delicious to Youngho (which must be false), whereas under Bob's view, the statement expresses the proposition that gopchang is delicious regardless of who utters it, which can be true independently of Youngho's taste.",
+  "c": "Bob infers that the speakers cannot be having a genuine dispute solely because they are expressing different propositions, thereby assuming that addressing the same proposition is a necessary condition for a genuine dispute."
+ }
+}

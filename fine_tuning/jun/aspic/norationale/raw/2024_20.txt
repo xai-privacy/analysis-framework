@@ -1,0 +1,208 @@
+{
+  "id": "2024_20",
+  "positions": {
+    "Alice": {
+      "thesis": "c4",
+      "summary": "Distinguishing between accurate representation and misrepresentation is important, because accurate perception affects behavior and was important in human evolution."
+    },
+    "Bob": {
+      "thesis": "c7",
+      "summary": "With perception alone, we cannot distinguish between accurate representation and misrepresentation, because visual perception is determined only by retinal information and multiple external objects can produce the same perception."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Humans interact with the world based on perception.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Sometimes humans perceive objects incorrectly.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Some perceptions accurately correspond to external objects.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Distinguishing between accurate representation and misrepresentation is important for human action and evolution.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Visual perception is determined only by the information delivered to the retina.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Multiple different external objects can correspond to the same visual perception.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "With perception alone, we cannot distinguish between accurate representation and misrepresentation.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "A brownish-yellow surface on red and a greenish-yellow surface on green are both perceived as neutral yellow, so we cannot know the actual color from perception alone.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Perceiving in a way that accurately corresponds to the external world was important in human evolution, as it can make a difference in actual behavior.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": [
+        "Alice",
+        "Bob"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Alice",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c1",
+        "c2",
+        "c3",
+        "c9"
+      ],
+      "then": "c4",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c8"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "not",
+        "arg": {
+          "op": "weakens",
+          "claim": "Alice",
+          "add": {
+            "claims": {
+              "h1": {
+                "text": "The perceiver can know which of the multiple objects producing the same perception most likely corresponds accurately to that perception.",
+                "source": "statement"
+              }
+            },
+            "premises": [
+              {
+                "claim": "h1",
+                "by": "*",
+                "kind": "axiom"
+              }
+            ],
+            "contraries": [
+              [
+                "h1",
+                "c7"
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "b": {
+      "check": {
+        "op": "weakens",
+        "claim": "Bob",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "Two circles of different sizes can be perceived as the same size depending on the size of the circles surrounding each.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "c6",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "not",
+            "arg": {
+              "op": "holds",
+              "by": "Alice",
+              "claim": "c3"
+            }
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c3"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+ "id": "2022_39",
+ "statements": {
+  "a": true,
+  "b": false,
+  "c": false
+ },
+ "reasons": {
+  "a": "The discovery of a duodenal substance that diminishes incretin-stimulated insulin secretion directly supports the hypothesis that bypassing the duodenum improves blood sugar control by avoiding an anti-incretin factor.",
+  "b": "Since food still passes through the duodenum when the esophagus is connected directly to it, blood sugar improvement in this scenario contradicts the idea that bypassing the duodenum is what eliminates an anti-incretin effect.",
+  "c": "The loss of blood sugar improvement when food is reintroduced to the duodenum confirms that duodenal contact impairs glucose regulation, which strengthens rather than weakens ⓐ."
+ }
+}

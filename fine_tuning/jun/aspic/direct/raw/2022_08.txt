@@ -1,0 +1,13 @@
+{
+ "id": "2022_08",
+ "statements": {
+  "a": false,
+  "b": false,
+  "c": true
+ },
+ "reasons": {
+  "a": "The finding that minors can also act as guardians undermines Alice's claim that the perpetrators of abuse must be limited strictly to adults on the basis of being guardians.",
+  "b": "The finding that victims and perpetrators cannot be dichotomously separated weakens Bob's framework, which relies on a clear division between perpetrators to be punished and victims to be protected.",
+  "c": "The finding supports Bob by demonstrating the need to punish minors as perpetrators of abuse, and it supports Charlie by showing that sexual abuse causes harm even when it does not induce immediate feelings of shame or humiliation."
+ }
+}

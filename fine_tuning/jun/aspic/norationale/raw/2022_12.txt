@@ -1,0 +1,284 @@
+{
+  "id": "2022_12",
+  "positions": {
+    "Alice": {
+      "thesis": "c3",
+      "summary": "Property under the Criminal Act refers to an object with monetary value, regardless of whether its ownership and transfer are lawful."
+    },
+    "Bob": {
+      "thesis": "c6",
+      "summary": "An object is property under the Criminal Act as long as the owner expresses an intention to possess it, regardless of monetary exchange value or lawful ownership."
+    },
+    "Charlie": {
+      "thesis": "c8",
+      "summary": "Property under the Criminal Act requires both monetary exchange value and lawful ownership and transfer."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Property under the Criminal Act refers to an object with economic value.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Economic value means pure economic value, that is, monetary value.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Under the Criminal Act, property is an object with monetary value, regardless of whether its ownership and transfer are lawful.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Property does not necessarily have to be lawfully owned or lawfully traded.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Economic value, a conceptual element of property, is subjectively attached by the owner.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "As long as the owner's intention to possess is expressed, an object is property under the Criminal Act, regardless of whether there is monetary exchange value.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Monetary exchange value is a necessary, but not sufficient, condition for economic value.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "In order for something to be property under the Criminal Act, it must have monetary exchange value and its ownership and transfer must be lawful.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Narcotics owned by a drug dealer have monetary exchange value.",
+      "source": "background"
+    },
+    "c10": {
+      "text": "The ownership of narcotics by a drug dealer is prohibited by law.",
+      "source": "statement"
+    },
+    "c11": {
+      "text": "A drug dealer expresses an intention to possess the narcotics they own.",
+      "source": "background"
+    },
+    "c12": {
+      "text": "A fan letter cherished by a celebrity is not subject to transaction and lacks monetary exchange value.",
+      "source": "statement"
+    },
+    "c13": {
+      "text": "A celebrity expresses an intention to possess the fan letter they cherish.",
+      "source": "background"
+    },
+    "c14": {
+      "text": "Narcotics illegally owned by a drug dealer are property under the Criminal Act.",
+      "source": "statement"
+    },
+    "c15": {
+      "text": "Narcotics illegally owned by a drug dealer are not property under the Criminal Act.",
+      "source": "background"
+    },
+    "c16": {
+      "text": "A fan letter cherished by a celebrity is property under the Criminal Act.",
+      "source": "statement"
+    },
+    "c17": {
+      "text": "A fan letter cherished by a celebrity is not property under the Criminal Act.",
+      "source": "background"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c7",
+      "by": "Charlie",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c10",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c11",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c12",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c13",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c1",
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c4",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Charlie",
+      "if": [
+        "c7"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Alice",
+      "if": [
+        "c3",
+        "c9"
+      ],
+      "then": "c14",
+      "type": "defeasible",
+      "source": "background"
+    },
+    {
+      "id": "r5",
+      "by": "Bob",
+      "if": [
+        "c6",
+        "c11"
+      ],
+      "then": "c14",
+      "type": "defeasible",
+      "source": "background"
+    },
+    {
+      "id": "r6",
+      "by": "Bob",
+      "if": [
+        "c6",
+        "c13"
+      ],
+      "then": "c16",
+      "type": "defeasible",
+      "source": "background"
+    },
+    {
+      "id": "r7",
+      "by": "Charlie",
+      "if": [
+        "c8",
+        "c10"
+      ],
+      "then": "c15",
+      "type": "defeasible",
+      "source": "background"
+    },
+    {
+      "id": "r8",
+      "by": "Charlie",
+      "if": [
+        "c8",
+        "c12"
+      ],
+      "then": "c17",
+      "type": "defeasible",
+      "source": "background"
+    }
+  ],
+  "contraries": [
+    [
+      "c14",
+      "c15"
+    ],
+    [
+      "c16",
+      "c17"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "Alice",
+        "claim": "c14"
+      }
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c14"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c16"
+          }
+        ]
+      }
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Charlie",
+            "claim": "c16"
+          },
+          {
+            "op": "not",
+            "arg": {
+              "op": "holds",
+              "by": "Charlie",
+              "claim": "c14"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

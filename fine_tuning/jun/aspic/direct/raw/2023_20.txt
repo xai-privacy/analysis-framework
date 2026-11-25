@@ -1,0 +1,13 @@
+{
+ "id": "2023_20",
+ "statements": {
+  "a": true,
+  "b": true,
+  "c": false
+ },
+ "reasons": {
+  "a": "Alice defines a lie as inherently requiring the intent to make another believe a falsehood, while Bob explicitly counters that a lie can be told without any intention to deceive.",
+  "b": "Both Alice and Bob acknowledge that misleading statements—which are inherently true statements—can still be morally blameworthy due to an intent to deceive.",
+  "c": "Alice explicitly states that misleading statements and lies are equally wrong, meaning she does not agree that they differ in their degree of moral wrongness."
+ }
+}

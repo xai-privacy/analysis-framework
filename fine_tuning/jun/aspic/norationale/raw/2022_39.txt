@@ -1,0 +1,224 @@
+{
+  "id": "2022_39",
+  "positions": {
+    "Rubino": {
+      "thesis": "c7",
+      "summary": "ⓐ The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Bariatric surgery creating a bypass from the stomach directly to the small intestine results in weight loss and improved blood sugar control.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Incretin is secreted by the small intestine upon food intake and signals the pancreas to secrete insulin, regulating blood sugar.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Ingested food passes sequentially through the duodenum, jejunum, and ileum.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Rubino performed surgery connecting the stomach directly to the jejunum in mice, bypassing the duodenum.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Bypassing the duodenum resulted in improved blood sugar without reduced body weight or food intake.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "An anti-incretin substance that interferes with the effect of incretin is activated or secreted when food passes through the duodenum.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "ⓐ The improvement in blood sugar regulation after bariatric surgery is due to the existence of a substance in the body that interferes with the effect of incretin.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "Rubino",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Rubino",
+      "if": [
+        "c2",
+        "c5",
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "A substance secreted in the duodenum decreases insulin secretion induced by incretin.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c5"
+              ],
+              "then": "c7",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "A surgery where the stomach is removed and the esophagus is directly connected to the duodenum results in improved blood sugar.",
+              "source": "statement"
+            },
+            "h3": {
+              "text": "When the esophagus is connected directly to the duodenum, ingested food passes through the duodenum without being bypassed.",
+              "source": "background"
+            },
+            "h4": {
+              "text": "The improvement in blood sugar regulation after surgery is not due to avoiding a substance that interferes with incretin.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h2",
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ],
+          "contraries": [
+            [
+              "h4",
+              "c7"
+            ]
+          ]
+        }
+      }
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "After Rubino's bariatric surgery, food passing into the jejunum is rerouted back to the duodenum, and the effect of blood sugar improvement disappears.",
+              "source": "statement"
+            },
+            "h6": {
+              "text": "The disappearance of blood sugar improvement shows that the improvement is not due to avoiding incretin interference.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h5"
+              ],
+              "then": "h6",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ],
+          "contraries": [
+            [
+              "h6",
+              "c7"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c6",
+              "rule": "rc1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

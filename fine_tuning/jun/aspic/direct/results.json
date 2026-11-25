@@ -1,0 +1,508 @@
+{
+ "model": "gemini-flash-3.8-medium",
+ "condition": "direct answer, no solver, no rationale, one try",
+ "scored": "2026-10-29T14:54:29",
+ "records": [
+  {
+   "id": "2022_08",
+   "parsed": true,
+   "valid": true,
+   "pred": 2,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2022_08\",\n \"statements\": {\n  \"a\": false,\n  \"b\": false,\n  \"c\": true\n },\n \"reasons\": {\n  \"a\": \"The finding that minors can also act as guardians undermines Alice's claim that the perpetrators of abuse must be limited strictly to adults on the basis of being guardians.\",\n  \"b\": \"The finding that victims and perpetrators cannot be dichotomously separated weakens Bob's framework, which relies on a clear division between perpetrators to be punished and victims to be protected.\",\n  \"c\": \"The finding supports Bob by demonstrating the need to punish minors as perpetrators of abuse, and it supports Charlie by showing that sexual abuse causes harm even when it does not induce immediate feelings of shame or humiliation.\"\n }\n}"
+  },
+  {
+   "id": "2022_12",
+   "parsed": true,
+   "valid": true,
+   "pred": 3,
+   "gold": 3,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2022_12\",\n \"statements\": {\n  \"a\": true,\n  \"b\": true,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Alice defines property strictly by monetary value regardless of whether ownership or transfer is lawful, so illicit narcotics with monetary value qualify as property under her view.\",\n  \"b\": \"Bob considers an object to be property as long as the owner expresses an intention to possess it regardless of monetary exchange value or legal validity, which applies to both the dealer's narcotics and the celebrity's fan letter.\",\n  \"c\": \"Charlie requires both monetary exchange value and lawful possession/transfer, so he would not view the non-transacted fan letter or the illegal narcotics as property.\"\n }\n}"
+  },
+  {
+   "id": "2022_22",
+   "parsed": true,
+   "valid": true,
+   "pred": 4,
+   "gold": 4,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "c": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2022_22\",\n \"statements\": {\n  \"a\": false,\n  \"b\": true,\n  \"c\": true\n },\n \"reasons\": {\n  \"a\": \"According to Alice, the speaker's identity fills the variable 'x', meaning two distinct individuals who both enjoy gopchang would express different propositions rather than the same one.\",\n  \"b\": \"Under Alice's view, Youngho's statement expresses that gopchang is delicious to Youngho (which must be false), whereas under Bob's view, the statement expresses the proposition that gopchang is delicious regardless of who utters it, which can be true independently of Youngho's taste.\",\n  \"c\": \"Bob infers that the speakers cannot be having a genuine dispute solely because they are expressing different propositions, thereby assuming that addressing the same proposition is a necessary condition for a genuine dispute.\"\n }\n}"
+  },
+  {
+   "id": "2022_36",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "2": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "3": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "4": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "5": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "single",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2022_36\",\n \"answer\": 1,\n \"reason\": \"Empirical observations ⓑ and ⓒ support intermediate conclusion ⓓ, while philosophical premises ⓔ and ⓕ support the application in ⓖ. In turn, ⓓ, ⓖ, and the independent research finding ⓗ converge directly to support the main conclusion ⓐ.\"\n}"
+  },
+  {
+   "id": "2022_39",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2022_39\",\n \"statements\": {\n  \"a\": true,\n  \"b\": false,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"The discovery of a duodenal substance that diminishes incretin-stimulated insulin secretion directly supports the hypothesis that bypassing the duodenum improves blood sugar control by avoiding an anti-incretin factor.\",\n  \"b\": \"Since food still passes through the duodenum when the esophagus is connected directly to it, blood sugar improvement in this scenario contradicts the idea that bypassing the duodenum is what eliminates an anti-incretin effect.\",\n  \"c\": \"The loss of blood sugar improvement when food is reintroduced to the duodenum confirms that duodenal contact impairs glucose regulation, which strengthens rather than weakens ⓐ.\"\n }\n}"
+  },
+  {
+   "id": "2023_20",
+   "parsed": true,
+   "valid": true,
+   "pred": 3,
+   "gold": 3,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2023_20\",\n \"statements\": {\n  \"a\": true,\n  \"b\": true,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Alice defines a lie as inherently requiring the intent to make another believe a falsehood, while Bob explicitly counters that a lie can be told without any intention to deceive.\",\n  \"b\": \"Both Alice and Bob acknowledge that misleading statements—which are inherently true statements—can still be morally blameworthy due to an intent to deceive.\",\n  \"c\": \"Alice explicitly states that misleading statements and lies are equally wrong, meaning she does not agree that they differ in their degree of moral wrongness.\"\n }\n}"
+  },
+  {
+   "id": "2024_05",
+   "parsed": true,
+   "valid": true,
+   "pred": 3,
+   "gold": 3,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "2": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "3": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "4": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "5": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "single",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2024_05\",\n \"answer\": 3,\n \"reason\": \"Under view C, if the absolute value of the cost exceeds that of the utility to the parties, restricting autonomy is permissible only if the difference is compensated by the State, which counts toward increasing the parties' utility. Consequently, whenever autonomy is restricted under C, the sum of the parties' cost (-) and utility (+) can never be negative.\"\n}"
+  },
+  {
+   "id": "2024_14",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "1": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "2": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "3": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "4": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "5": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "mode": "single",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2024_14\",\n \"answer\": 1,\n \"reason\": \"The contrapositive of option ① implies that all cognitive errors are subject to blame, which directly undermines A's argument that Alice's assertion is not blameworthy and thereby weakens ⓐ.\"\n}"
+  },
+  {
+   "id": "2024_17",
+   "parsed": true,
+   "valid": true,
+   "pred": 2,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2024_17\",\n \"statements\": {\n  \"a\": false,\n  \"b\": true,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"According to the passage, ⓐ signifies the negation of privation, so if evil is the privation of goodness, evil is privation itself rather than ⓐ.\",\n  \"b\": \"Beauty understood as a harmonious totality of attributes like size, shape, and color directly exemplifies ⓒ, where goodness is an overall property found in the being rather than in an isolated attribute alone.\",\n  \"c\": \"The passage distinguishes primary goodness from secondary goodness based on essential existence versus accidental accompaniment, not on whether something is always good for someone.\"\n }\n}"
+  },
+  {
+   "id": "2024_20",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2024_20\",\n \"statements\": {\n  \"a\": true,\n  \"b\": false,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Being able to identify which object is most likely to accurately correspond to a perception supports or remains fully consistent with Alice's stance that accurate representation is important for survival and behavior, so her claim is not weakened.\",\n  \"b\": \"The phenomenon of different-sized circles appearing identical due to surrounding contexts directly mirrors Bob's color example and reinforces his argument that identical perceptions can arise from different objects, thereby strengthening rather than weakening his claim.\",\n  \"c\": \"Alice explicitly holds that humans have the ability to accurately perceive external objects and only perceive them incorrectly sometimes, meaning she does agree that some perceptions accurately correspond to external objects.\"\n }\n}"
+  },
+  {
+   "id": "2024_27",
+   "parsed": true,
+   "valid": true,
+   "pred": 2,
+   "gold": 2,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2024_27\",\n \"statements\": {\n  \"a\": false,\n  \"b\": true,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Since the hypothesis predicts that Group 1, which received only evidence that does not explicitly state responsibility, would hesitate more and exhibit a lower plaintiff verdict rate than Group 2, this outcome strengthens the hypothesis rather than weakening it.\",\n  \"b\": \"Because subjective probability is identical in both groups, a larger difference between subjective probability and plaintiff verdict rate in Group 1 means Group 1 has a lower verdict rate than Group 2, which conforms to the hypothesis and strengthens it.\",\n  \"c\": \"Because Group 2 is expected under the hypothesis to start with a higher plaintiff verdict rate, its verdict rate can naturally decrease by a larger amount when decisive direct exonerating testimony is introduced, meaning this outcome does not weaken the hypothesis.\"\n }\n}"
+  },
+  {
+   "id": "2025_02",
+   "parsed": true,
+   "valid": true,
+   "pred": 3,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": false,
+     "pred": true,
+     "ok": false,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": false,
+   "output": "{\n \"id\": \"2025_02\",\n \"statements\": {\n  \"a\": true,\n  \"b\": true,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"The availability of alternative legal remedies to contest other measures ensures parents can still seek redress and express their opinions, thereby mitigating the alleged infringement on their rights ⓐ.\",\n  \"b\": \"If transfer and expulsion inflict uniquely irreversible harm compared to other measures, treating them differently has a rational basis, which weakens the claim of unjust discrimination ⓑ.\",\n  \"c\": \"If schools and society bear a duty to afford all perpetrating students an appeal opportunity, denying that avenue strengthens the claim that rights are infringed, so ⓐ is strengthened rather than weakened.\"\n }\n}"
+  },
+  {
+   "id": "2025_25",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "b": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2025_25\",\n \"statements\": {\n  \"a\": true,\n  \"b\": false,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Alice explicitly states that replacing the fluorescent light, an essential physical attribute of the artwork, causes the work to have only a superficial meaning unlike before.\",\n  \"b\": \"Charlie asserts that the artwork was finalized upon being made public and that any subsequent approval cannot alter its identity, directly contradicting the idea that post-hoc approval has the same effect as the original act of creation.\",\n  \"c\": \"Bob maintains that identity and meaning are anchored in the creator's true intention rather than physical changes, meaning he would not agree that secretly replacing the light alters the artwork's meaning.\"\n }\n}"
+  },
+  {
+   "id": "2025_29",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "b": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2025_29\",\n \"statements\": {\n  \"a\": true,\n  \"b\": false,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Because female singers in the experimental group worked separately from men while those in the control group worked together with men, higher creativity scores in the experimental group directly support hypothesis ⓐ.\",\n  \"b\": \"Comparing the overall score of all female singers to that of all male singers measures a general difference between genders rather than the effect of working separately versus together on women's creativity.\",\n  \"c\": \"Female singers scoring higher than male singers in the separated condition compared to the joint condition indicates enhanced creative output when separated, which strengthens rather than weakens hypothesis ⓐ.\"\n }\n}"
+  },
+  {
+   "id": "2025_40",
+   "parsed": true,
+   "valid": true,
+   "pred": 1,
+   "gold": 1,
+   "statements": {
+    "a": {
+     "gold": true,
+     "pred": true,
+     "ok": true,
+     "type": "structure"
+    },
+    "b": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "weakens/strengthens"
+    },
+    "c": {
+     "gold": false,
+     "pred": false,
+     "ok": true,
+     "type": "structure"
+    }
+   },
+   "error": "",
+   "mode": "combo",
+   "question_ok": true,
+   "output": "{\n \"id\": \"2025_40\",\n \"statements\": {\n  \"a\": true,\n  \"b\": false,\n  \"c\": false\n },\n \"reasons\": {\n  \"a\": \"Because higher polarity prevents cell membrane penetration, Br must be more polar than animal steroid hormones if membrane permeability depends entirely on polarity.\",\n  \"b\": \"The experiment contradicts the hypothesis because exogenous Br restored growth in B but failed to do so in A, indicating that B is defective in Br synthesis and A is defective in the receptor.\",\n  \"c\": \"Upon Br treatment, B exhibits restored growth whereas C remains growth-inhibited due to a nonfunctional downstream signaling protein, resulting in distinct rather than similar phenotypes.\"\n }\n}"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+ "id": "2022_12",
+ "statements": {
+  "a": true,
+  "b": true,
+  "c": false
+ },
+ "reasons": {
+  "a": "Alice defines property strictly by monetary value regardless of whether ownership or transfer is lawful, so illicit narcotics with monetary value qualify as property under her view.",
+  "b": "Bob considers an object to be property as long as the owner expresses an intention to possess it regardless of monetary exchange value or legal validity, which applies to both the dealer's narcotics and the celebrity's fan letter.",
+  "c": "Charlie requires both monetary exchange value and lawful possession/transfer, so he would not view the non-transacted fan letter or the illegal narcotics as property."
+ }
+}

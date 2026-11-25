@@ -1,0 +1,5 @@
+{
+ "id": "2024_05",
+ "answer": 3,
+ "reason": "Under view C, if the absolute value of the cost exceeds that of the utility to the parties, restricting autonomy is permissible only if the difference is compensated by the State, which counts toward increasing the parties' utility. Consequently, whenever autonomy is restricted under C, the sum of the parties' cost (-) and utility (+) can never be negative."
+}

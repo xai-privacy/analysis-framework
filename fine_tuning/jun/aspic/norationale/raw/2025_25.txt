@@ -1,0 +1,289 @@
+{
+  "id": "2025_25",
+  "positions": {
+    "Alice": {
+      "thesis": "c6",
+      "summary": "Replacing the fluorescent light does not alter identity because of the artist's approval, but alters meaning because it changes an essential attribute."
+    },
+    "Bob": {
+      "thesis": "c11",
+      "summary": "Identity lies in the artist's true intention, so the pressured approval and physical change do not alter identity or meaning."
+    },
+    "Charlie": {
+      "thesis": "c13",
+      "summary": "The work was completed when made public, so subsequent acts of approval cannot alter its identity."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "The artist created ⓐ ('Two Types of Permanence') with an artificial flower and a fluorescent light, instructing that the light should not be replaced once its lifespan ended.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "When the fluorescent light ceased to function, the artist reluctantly approved replacing it due to museum pressure.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Replacing the fluorescent light is an alteration of a physical attribute of the work.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Replacing the fluorescent light is based on the artist's approval, so this change does not alter the identity of the work.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Replacing the fluorescent light is a change in an essential attribute of the work.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Because an essential attribute changed, the work now has only a superficial meaning, unlike before.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "A change in some physical attribute of the work can alter its meaning.",
+      "source": "statement"
+    },
+    "c8": {
+      "text": "The artist approved the alteration only due to museum pressure, so the approval does not reflect the artist's true intention.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "The identity of the work lies in the artist's true intention.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Even if the work's physical attribute has changed, its identity remains the same as before.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "The meaning of the work has not changed.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "The work was complete at the moment it was made public.",
+      "source": "passage"
+    },
+    "c13": {
+      "text": "Any subsequent act of approval cannot alter the identity of the work, even if it aligns with the artist's true intentions.",
+      "source": "passage"
+    },
+    "c14": {
+      "text": "The physical act of making the work at the time of creation determined its completion and identity.",
+      "source": "background"
+    },
+    "c15": {
+      "text": "An act of approval by the creator after the fact has the same effect as the physical act of making the work at the time of creation.",
+      "source": "statement"
+    },
+    "c16": {
+      "text": "An act of approval by the creator after the fact does not have the same effect as the physical act of making the work at the time of creation.",
+      "source": "background"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c5",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c9",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c12",
+      "by": "Charlie",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c14",
+      "by": "Charlie",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c3",
+        "c5"
+      ],
+      "then": "c6",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Alice",
+      "if": [
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c8",
+        "c9"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "Bob",
+      "if": [
+        "c10"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r5",
+      "by": "Charlie",
+      "if": [
+        "c12"
+      ],
+      "then": "c13",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r6",
+      "by": "Charlie",
+      "if": [
+        "c13",
+        "c14"
+      ],
+      "then": "c16",
+      "type": "defeasible",
+      "source": "background"
+    }
+  ],
+  "contraries": [
+    [
+      "c6",
+      "c11"
+    ],
+    [
+      "c15",
+      "c16"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "holds",
+        "by": "Alice",
+        "claim": "c7"
+      }
+    },
+    "b": {
+      "check": {
+        "op": "holds",
+        "by": "Charlie",
+        "claim": "c15"
+      }
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "h2",
+            "add": "secret_replacement"
+          },
+          {
+            "op": "holds",
+            "by": "Charlie",
+            "claim": "h2",
+            "add": "secret_replacement"
+          }
+        ]
+      }
+    }
+  },
+  "hypotheticals": {
+    "secret_replacement": {
+      "claims": {
+        "h1": {
+          "text": "The museum secretly replaced the fluorescent light of ⓐ with a new one without the creator's knowledge.",
+          "source": "statement"
+        },
+        "h2": {
+          "text": "The meaning of ⓐ could change.",
+          "source": "statement"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h1",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rc1",
+          "by": "*",
+          "if": [
+            "h1"
+          ],
+          "then": "h2",
+          "type": "defeasible",
+          "source": "background"
+        }
+      ],
+      "contraries": [
+        [
+          "h2",
+          "c11"
+        ]
+      ],
+      "undercuts": [
+        {
+          "claim": "c9",
+          "rule": "rc1"
+        },
+        {
+          "claim": "c12",
+          "rule": "rc1"
+        }
+      ]
+    }
+  }
+}

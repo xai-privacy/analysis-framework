@@ -1,0 +1,190 @@
+{
+  "id": "2023_20",
+  "positions": {
+    "Alice": {
+      "thesis": "c5",
+      "summary": "Misleading statements and lies are equally wrong because both involve the intention to make the listener believe a falsehood."
+    },
+    "Bob": {
+      "thesis": "c6",
+      "summary": "Misleading statements are always wrong because they intend to deceive despite being true, but lies are not always wrong."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "A lie must have the intention to deceive the other person (making them believe a falsehood as true).",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "A misleading statement is a statement that is true but easily misunderstood by the listener.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "A lie can be made even without the intention to deceive the other person.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Both lies and misleading statements involve the intention to make the listener believe a falsehood.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Misleading statements and lies are equally wrong.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Misleading statements are always wrong in that they intend to deceive despite being true, but lies are not always so.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "There can be statements that are true but still morally blameworthy.",
+      "source": "statement"
+    },
+    "c8": {
+      "text": "Misleading statements and lies differ in their degree of moral wrongness.",
+      "source": "statement"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c2",
+      "by": [
+        "Alice",
+        "Bob"
+      ],
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Bob",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Alice",
+      "if": [
+        "c2",
+        "c5"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "background"
+    },
+    {
+      "id": "r3",
+      "by": "Bob",
+      "if": [
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "background"
+    },
+    {
+      "id": "r4",
+      "by": "Bob",
+      "if": [
+        "c6"
+      ],
+      "then": "c8",
+      "type": "defeasible",
+      "source": "background"
+    }
+  ],
+  "contraries": [
+    [
+      "c1",
+      "c3"
+    ],
+    [
+      "c5",
+      "c6"
+    ],
+    [
+      "c5",
+      "c8"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c1"
+          },
+          {
+            "op": "not",
+            "arg": {
+              "op": "holds",
+              "by": "Bob",
+              "claim": "c1"
+            }
+          }
+        ]
+      }
+    },
+    "b": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c7"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c7"
+          }
+        ]
+      }
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "holds",
+            "by": "Alice",
+            "claim": "c8"
+          },
+          {
+            "op": "holds",
+            "by": "Bob",
+            "claim": "c8"
+          }
+        ]
+      }
+    }
+  }
+}

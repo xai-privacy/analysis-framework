@@ -1,0 +1,13 @@
+{
+ "id": "2025_25",
+ "statements": {
+  "a": true,
+  "b": false,
+  "c": false
+ },
+ "reasons": {
+  "a": "Alice explicitly states that replacing the fluorescent light, an essential physical attribute of the artwork, causes the work to have only a superficial meaning unlike before.",
+  "b": "Charlie asserts that the artwork was finalized upon being made public and that any subsequent approval cannot alter its identity, directly contradicting the idea that post-hoc approval has the same effect as the original act of creation.",
+  "c": "Bob maintains that identity and meaning are anchored in the creator's true intention rather than physical changes, meaning he would not agree that secretly replacing the light alters the artwork's meaning."
+ }
+}

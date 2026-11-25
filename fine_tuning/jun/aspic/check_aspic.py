@@ -16,10 +16,19 @@ Usage:
   python check_aspic.py --bench ... gemini_output.json      # a JSON array also works
 
 The format is described in ASPIC_FORMAT.md.
+
+Check semantics (changed Oct 29, 2026; see "Check semantics" in ASPIC_FORMAT.md):
+  defeat-aware (default)  `holds` needs an argument that is not OUT within the
+                          position's own view, and a new argument that is OUT
+                          does not count as `strengthens`
+  legacy                  the checks used for every result before Oct 29, 2026.
+                          Use --legacy-checks here, or ASPIC_CHECKS=legacy for
+                          any script that imports this file
 """
 import argparse
 import itertools
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -35,6 +44,10 @@ CIRCLED = {"①": 1, "②": 2, "③": 3, "④": 4, "⑤": 5}
 RANK = {"IN": 3, "UNDEC": 2, "OUT": 1, "NONE": 0}
 STAR = "*"
 MAX_ARGS = 5000
+CHECK_MODES = ("defeat-aware", "legacy")
+CHECKS = os.environ.get("ASPIC_CHECKS", "defeat-aware")
+if CHECKS not in CHECK_MODES:
+    raise SystemExit(f"ASPIC_CHECKS must be one of {CHECK_MODES}, got {CHECKS!r}")
 
 
 class TranslationError(Exception):
@@ -147,6 +160,25 @@ class Theory:
         contraries = [sorted(p) for p in self.contraries] + list(add.get("contraries") or [])
         undercuts = [{"claim": c, "rule": r} for c, r in self.undercuts] + list(add.get("undercuts") or [])
         return Theory(claims, premises, rules, contraries, undercuts, self.positions)
+
+    def restricted_to(self, pos):
+        """The theory as one position sees it: its own premises and rules plus `*` content.
+
+        Contraries are kept, and undercuts are kept when their rule is kept, so
+        anything the position itself (or shared content) says against an
+        argument still applies. Other positions' premises and rules are left out:
+        "B argues X" must not fail just because A argues against X.
+        """
+        def keep(owners):
+            return owners is None or pos in owners
+        premises = [{"claim": c, "by": sorted(p["owners"]) if p["owners"] else STAR, "kind": p["kind"]}
+                    for c, p in self.premises.items() if keep(p["owners"])]
+        rules = [{"id": rid, "if": r["if"], "then": r["then"], "type": r["type"],
+                  "by": sorted(r["owners"]) if r["owners"] else STAR}
+                 for rid, r in self.rules.items() if keep(r["owners"])]
+        kept = {r["id"] for r in rules}
+        return Theory(self.claims, premises, rules, [sorted(p) for p in self.contraries],
+                      [{"claim": c, "rule": r} for c, r in self.undercuts if r in kept], self.positions)
 
     # -- arguments ----------------------------------------------------------
 
@@ -341,9 +373,16 @@ class Checker:
             pos, c = check["by"], self.resolve(check["claim"], theory)
             if pos not in self.positions:
                 raise TranslationError(f"unknown position {pos!r} in holds")
+            if CHECKS == "legacy":  # an argument can be built, even if the position's own content defeats it
+                return any(
+                    a["concl"] == c and (a["owners"] is None or pos in a["owners"])
+                    for a in theory.arguments().values()
+                )
+            own = theory.restricted_to(pos)
+            lab = own.labels(self.use_pyarg)
             return any(
-                a["concl"] == c and (a["owners"] is None or pos in a["owners"])
-                for a in theory.arguments().values()
+                a["concl"] == c and (a["owners"] is None or pos in a["owners"]) and lab[k] != "OUT"
+                for k, a in own.arguments().items()
             )
         if op == "assumes":
             pos, c = check["by"], self.resolve(check["claim"], theory)
@@ -362,6 +401,9 @@ class Checker:
             before = RANK[self.base.claim_status(c, self.use_pyarg)] if c in self.base.claims else 0
             after_status = theory.claim_status(c, self.use_pyarg)
             after = RANK[after_status]
+            if CHECKS != "legacy" and op == "strengthens" and before == 0 and after_status == "OUT":
+                # a new argument that is defeated right away does not strengthen the claim
+                return False
             old_keys = set(self.base.arguments()) if c in self.base.claims else set()
             lab = theory.labels(self.use_pyarg)
             targets = {k for k, a in theory.arguments().items() if a["concl"] == c}
@@ -531,6 +573,7 @@ def check_translation(t, bench, split, test_ids, use_pyarg):
     elems = list(all_claims(t).values()) + all_rules(t)
     rec["outside_passage"] = sum(e.get("source") in ("rationale", "background") for e in elems)
     rec["elements"] = len(elems)
+    rec["checks"] = CHECKS
 
     try:
         positions = t["positions"]
@@ -586,7 +629,12 @@ def main():
     ap.add_argument("--save-matches", metavar="DIR",
                     help="write every translation that reproduces the gold answer to DIR/<id>.json")
     ap.add_argument("-v", "--verbose", action="store_true", help="print warnings and ops per question")
+    ap.add_argument("--legacy-checks", action="store_true",
+                    help="the check semantics used before Oct 29, 2026 (reproduces old results)")
     args = ap.parse_args()
+    global CHECKS
+    if args.legacy_checks:
+        CHECKS = "legacy"
 
     bench = load_bench(args.bench)
     split = json.load(open(args.split)) if args.split else None
@@ -600,7 +648,8 @@ def main():
             use_pyarg = True
         except ImportError:
             pass
-    print(f"solver: {'PyArg grounded extension (cross-checked with built-in)' if use_pyarg else 'built-in grounded labelling'}")
+    print(f"solver: {'PyArg grounded extension (cross-checked with built-in)' if use_pyarg else 'built-in grounded labelling'}"
+          f"; checks: {CHECKS}")
 
     translations = load_translations(args.paths)
     recs = [check_translation(t, bench, split, test_ids, use_pyarg) for t in translations]

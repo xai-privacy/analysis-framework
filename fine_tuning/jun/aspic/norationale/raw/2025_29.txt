@@ -1,0 +1,197 @@
+{
+  "id": "2025_29",
+  "positions": {
+    "ⓐ": {
+      "thesis": "c2",
+      "summary": "Women will display greater creativity in environments where they work separately from men rather than environments where they work together with men."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "In male-dominated workplaces, women face structural restrictions and lower evaluations, hindering their ability to fully exhibit creativity in team activities.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "ⓐ Women will display greater creativity in environments where they work separately from men rather than environments where they work together with men.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "In the control group, each mixed-gender duet recorded together in the studio with male musicians.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In the experimental group, the male singer recorded with male musicians, while the female singer recorded alone in the studio listening to that recording.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "An expert panel evaluated the creative expression of the male and female singers by scoring them.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Women will not display greater creativity in environments where they work separately from men rather than environments where they work together with men.",
+      "source": "background"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "ⓐ",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "ⓐ",
+      "if": [
+        "c1"
+      ],
+      "then": "c2",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c2",
+      "c6"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "The female singers’ scores were higher in the experimental group than in the control group.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c3",
+                "c4",
+                "c5"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "The total score of all female singers was higher than that of all male singers.",
+              "source": "statement"
+            },
+            "h3": {
+              "text": "Comparing the total scores of all female and male singers aggregates across both conditions and does not compare women working separately versus together.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            },
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h2"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "h3",
+              "rule": "rb1"
+            }
+          ]
+        }
+      }
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "c2",
+        "add": {
+          "claims": {
+            "h4": {
+              "text": "Female singers’ scores in the control group were slightly lower than those of male singers, but in the experimental group female singers’ scores were higher than those of male singers.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "h4",
+                "c3",
+                "c4",
+                "c5"
+              ],
+              "then": "c2",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+ "id": "2024_14",
+ "answer": 1,
+ "reason": "The contrapositive of option ① implies that all cognitive errors are subject to blame, which directly undermines A's argument that Alice's assertion is not blameworthy and thereby weakens ⓐ."
+}

@@ -1,0 +1,13 @@
+{
+ "id": "2025_40",
+ "statements": {
+  "a": true,
+  "b": false,
+  "c": false
+ },
+ "reasons": {
+  "a": "Because higher polarity prevents cell membrane penetration, Br must be more polar than animal steroid hormones if membrane permeability depends entirely on polarity.",
+  "b": "The experiment contradicts the hypothesis because exogenous Br restored growth in B but failed to do so in A, indicating that B is defective in Br synthesis and A is defective in the receptor.",
+  "c": "Upon Br treatment, B exhibits restored growth whereas C remains growth-inhibited due to a nonfunctional downstream signaling protein, resulting in distinct rather than similar phenotypes."
+ }
+}

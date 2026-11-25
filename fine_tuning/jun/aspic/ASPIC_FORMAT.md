@@ -112,11 +112,11 @@ One entry per statement, keyed by its label as printed: `a`, `b`, `c` (or `1` to
 
 | op | fields | true when |
 |---|---|---|
-| `holds` | `by`, `claim`, optional `add` | the position can build an argument for the claim from its own premises and rules plus `*` content |
+| `holds` | `by`, `claim`, optional `add` | the position can build an argument for the claim from its own premises and rules plus `*` content, and that argument is not defeated (OUT) by the position's own content or `*` content |
 | `assumes` | `by`, `claim`, optional `add` | the claim is one of the position's premises |
 | `status` | `claim`, `is` (list of `IN`, `OUT`, `UNDEC`, `NONE`), optional `add` | the claim's status is in the list. "X is denied" = `"is": ["OUT"]` |
 | `weakens` | `claim`, `add` | after adding `add`, the claim's status drops, or stays equal but gains a new attacker that is not OUT |
-| `strengthens` | `claim`, `add` | after adding `add`, the claim's status rises, or stays equal but gains a new argument that is not OUT |
+| `strengthens` | `claim`, `add` | after adding `add`, the claim's status rises, or stays equal but gains a new argument that is not OUT. A claim with no argument (NONE) that only gains an argument that is OUT is not strengthened |
 | `and`, `or` | `args` (list of checks) | all / any are true |
 | `not` | `arg` (one check) | the check is false |
 | `unsupported` | `reason` | the statement cannot be expressed in this format; counted separately |
@@ -158,3 +158,13 @@ Translate the LEET argument passage into ASPIC+ JSON with these fields: position
 ```
 
 User message: the passage, question and statements, without the ① to ⑤ choice list (same as the first fine-tuning run). Assistant message: the translation JSON with `note` fields removed.
+
+## Check semantics (changed Oct 29, 2026)
+
+Until Oct 29, 2026, `holds` was true whenever an argument could be built, even if the position's own content defeated it, and `strengthens` counted a new argument that was OUT as a rise from NONE. Both ignored the reasoning that makes a statement false. For example, in Gemini's translation of 2024_17 (a), the rule “evil is a privation, so evil is ⓐ” was undercut by the author's own claim c3, but `holds` only checked that the rule could fire.
+
+Now `holds` is evaluated in the position's own view (its premises and rules plus `*` content, with contraries and undercuts), and the argument must not be OUT there. Other positions' content is left out, so “B argues X” does not fail because A argues against X.
+
+Effect, all with PyArg: every translation that reproduced the gold answer before still does (73/73 teacher, 5/5 pilot). Among saved model outputs, the only change in `rescore_aspic.py` is one statement of fine-tuned checkpoint iteration 80 (7/51 to 8/51). Gemini without rationale goes from 40/51 to 45/51 statements (9/15 to 13/15 questions); all 5 changes are wrong to right. The new checks were written after seeing those Gemini errors, so the Gemini gain is a diagnosis, not an independent result.
+
+To reproduce results from before the change: `python check_aspic.py --legacy-checks ...`, or `ASPIC_CHECKS=legacy` in front of any other script (for example `ASPIC_CHECKS=legacy python rescore_aspic.py`).

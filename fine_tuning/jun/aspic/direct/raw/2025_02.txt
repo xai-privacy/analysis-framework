@@ -1,0 +1,13 @@
+{
+ "id": "2025_02",
+ "statements": {
+  "a": true,
+  "b": true,
+  "c": false
+ },
+ "reasons": {
+  "a": "The availability of alternative legal remedies to contest other measures ensures parents can still seek redress and express their opinions, thereby mitigating the alleged infringement on their rights ⓐ.",
+  "b": "If transfer and expulsion inflict uniquely irreversible harm compared to other measures, treating them differently has a rational basis, which weakens the claim of unjust discrimination ⓑ.",
+  "c": "If schools and society bear a duty to afford all perpetrating students an appeal opportunity, denying that avenue strengthens the claim that rights are infringed, so ⓐ is strengthened rather than weakened."
+ }
+}

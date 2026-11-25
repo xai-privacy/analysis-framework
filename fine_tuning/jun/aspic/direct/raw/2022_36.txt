@@ -1,0 +1,5 @@
+{
+ "id": "2022_36",
+ "answer": 1,
+ "reason": "Empirical observations ⓑ and ⓒ support intermediate conclusion ⓓ, while philosophical premises ⓔ and ⓕ support the application in ⓖ. In turn, ⓓ, ⓖ, and the independent research finding ⓗ converge directly to support the main conclusion ⓐ."
+}

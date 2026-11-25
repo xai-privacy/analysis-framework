@@ -1,0 +1,293 @@
+{
+  "id": "2022_08",
+  "positions": {
+    "Alice": {
+      "thesis": "c5",
+      "summary": "Child abuse is abuse by a guardian, so children should be excluded as subjects and the subject limited to adult guardians."
+    },
+    "Bob": {
+      "thesis": "c7",
+      "summary": "The subject of child abuse acts in Articles 2 and 3 should remain 'anyone' to thoroughly punish perpetrators and protect children."
+    },
+    "Charlie": {
+      "thesis": "c10",
+      "summary": "The phrase 'causing sexual humiliation' should be deleted from Article 3 because child victims lack sexual self-determination."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Article 1: 'Child' refers to a minor.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Article 2: Anyone who commits physical child abuse by assaulting a child or causing harm to health and development shall be punished.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Article 3: Anyone who commits sexual child abuse causing sexual humiliation to a child shall be punished.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Crimes of child abuse are distinct in that the guardian, who has a duty of care, inflicts harm upon the person to be protected.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Children should be excluded from being the subject of the act in Articles 2 and 3, and the subject should be limited to adult guardians.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "The Regulation aims to thoroughly punish perpetrators of abuse and thereby provide strong protection for children.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The subject of the acts in Articles 2 and 3 should be retained as 'anyone'.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "In relation to sexual acts, child victims cannot be treated in the same way as adult victims who possess sexual self-determination.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Sexual abuse causes severe harm to children even if they lack sexual self-determination or do not feel sexual humiliation.",
+      "source": "background"
+    },
+    "c10": {
+      "text": "The phrase 'causing sexual humiliation' should be deleted from Article 3.",
+      "source": "passage"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c3",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "Alice",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c6",
+      "by": "Bob",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "Charlie",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Alice",
+      "if": [
+        "c4"
+      ],
+      "then": "c5",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "Bob",
+      "if": [
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "Charlie",
+      "if": [
+        "c8"
+      ],
+      "then": "c10",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c5",
+      "c7"
+    ]
+  ],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c5",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "Recently, more minors are entering social relationships in which one minor is the guardian or supervisor of another minor.",
+              "source": "statement"
+            },
+            "h2": {
+              "text": "Minors who are guardians can commit child abuse against protected minors, so minors should not be excluded from being the subject of child abuse.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c4"
+              ],
+              "then": "h2",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ],
+          "contraries": [
+            [
+              "h2",
+              "c5"
+            ]
+          ]
+        }
+      }
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c7",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "A significant number of perpetrators of child abuse were themselves victims of child abuse as children, so it is impossible to dichotomously distinguish between victims and perpetrators of child abuse.",
+              "source": "statement"
+            },
+            "h4": {
+              "text": "The impossibility of dichotomous distinction is only a developmental observation across life stages, so it does not support retaining 'anyone' as the legal subject of child abuse.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "c7",
+              "type": "defeasible",
+              "source": "background"
+            },
+            {
+              "id": "rb2",
+              "by": "*",
+              "if": [
+                "h3"
+              ],
+              "then": "h4",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ],
+          "undercuts": [
+            {
+              "claim": "h4",
+              "rule": "rb1"
+            }
+          ]
+        }
+      }
+    },
+    "c": {
+      "check": {
+        "op": "and",
+        "args": [
+          {
+            "op": "strengthens",
+            "claim": "c7",
+            "add": "finding_c"
+          },
+          {
+            "op": "strengthens",
+            "claim": "c10",
+            "add": "finding_c"
+          }
+        ]
+      }
+    }
+  },
+  "hypotheticals": {
+    "finding_c": {
+      "claims": {
+        "h5": {
+          "text": "Recently, cases where minors make sexual requests to other minors involving filming videos are increasing, and the need to punish sexual requests between minors as acts of abuse is great.",
+          "source": "statement"
+        },
+        "h6": {
+          "text": "Experiences of responding to sexual requests without any sense of shame or discomfort critically influence the later development of negative self-identity or distorted sexual awareness.",
+          "source": "statement"
+        }
+      },
+      "premises": [
+        {
+          "claim": "h5",
+          "by": "*",
+          "kind": "axiom"
+        },
+        {
+          "claim": "h6",
+          "by": "*",
+          "kind": "axiom"
+        }
+      ],
+      "rules": [
+        {
+          "id": "rc1",
+          "by": "*",
+          "if": [
+            "h5"
+          ],
+          "then": "c7",
+          "type": "defeasible",
+          "source": "statement"
+        },
+        {
+          "id": "rc2",
+          "by": "*",
+          "if": [
+            "h6"
+          ],
+          "then": "c10",
+          "type": "defeasible",
+          "source": "statement"
+        }
+      ]
+    }
+  }
+}

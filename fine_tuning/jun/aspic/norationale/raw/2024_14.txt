@@ -1,0 +1,307 @@
+{
+  "id": "2024_14",
+  "positions": {
+    "A": {
+      "thesis": "c3",
+      "summary": "Even when asserting without verification though checking was possible, responsibility does not always lie with the speaker."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "People sometimes claim something as true without verification, even though it is possible to check the authenticity of the information.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "When someone claims something as true without verification though checking was possible, responsibility always lies with the speaker.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "ⓐ Even in cases of claiming something without verification when checking was possible, responsibility does not always lie with the speaker.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "Under normal observation conditions, Alice claimed 'there are many people gathered in the plaza' without checking, even though simple verification was possible.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Alice was so confident in her clear observation that she did not feel the need to verify.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "Alice's assertion is merely a cognitive error.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "Alice's act of claiming is, in itself, not blameworthy.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Responsibility is assigned to the agent only in cases where the act itself is subject to blame.",
+      "source": "passage"
+    },
+    "c9": {
+      "text": "Responsibility is not assigned to Alice.",
+      "source": "passage"
+    },
+    "c10": {
+      "text": "Responsibility is assigned to an agent who has an active attitude of intentionally avoiding or refusing to acquire information.",
+      "source": "passage"
+    },
+    "c11": {
+      "text": "Someone who intentionally refuses simple verification and spreads fake news warrants responsibility.",
+      "source": "passage"
+    },
+    "c12": {
+      "text": "Alice's act of claiming is, in itself, blameworthy.",
+      "source": "background"
+    },
+    "c13": {
+      "text": "Responsibility is assigned to Alice.",
+      "source": "background"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "A",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c8",
+      "by": "A",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c10",
+      "by": "A",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "A",
+      "if": [
+        "c6"
+      ],
+      "then": "c7",
+      "type": "defeasible",
+      "source": "passage"
+    },
+    {
+      "id": "r2",
+      "by": "A",
+      "if": [
+        "c7",
+        "c8"
+      ],
+      "then": "c9",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r3",
+      "by": "A",
+      "if": [
+        "c4",
+        "c9"
+      ],
+      "then": "c3",
+      "type": "strict",
+      "source": "passage"
+    },
+    {
+      "id": "r4",
+      "by": "A",
+      "if": [
+        "c10"
+      ],
+      "then": "c11",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [
+    [
+      "c2",
+      "c3"
+    ],
+    [
+      "c7",
+      "c12"
+    ],
+    [
+      "c9",
+      "c13"
+    ]
+  ],
+  "statements": {
+    "1": {
+      "check": {
+        "op": "weakens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "h1": {
+              "text": "An act that is not, in itself, subject to blame is not a cognitive error.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "h1",
+                "c6"
+              ],
+              "then": "c12",
+              "type": "strict",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    },
+    "2": {
+      "check": {
+        "op": "weakens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "h2": {
+              "text": "Responsibility is not always assigned to someone who believes in and spreads fake news.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h2",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "contraries": [
+            [
+              "h2",
+              "c11"
+            ]
+          ]
+        }
+      }
+    },
+    "3": {
+      "check": {
+        "op": "weakens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "h3": {
+              "text": "There are cases where responsibility is not assigned to the agent of an act that is not, in itself, subject to blame.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h3",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ]
+        }
+      }
+    },
+    "4": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "h4_1": {
+              "text": "All false assertions made under normal observation conditions always stem from an active attitude of intentionally avoiding or refusing to acquire information.",
+              "source": "statement"
+            },
+            "h4_2": {
+              "text": "Alice has an active attitude of intentionally avoiding or refusing to acquire information.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h4_1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rd1",
+              "by": "*",
+              "if": [
+                "h4_1",
+                "c4"
+              ],
+              "then": "h4_2",
+              "type": "strict",
+              "source": "background"
+            },
+            {
+              "id": "rd2",
+              "by": "*",
+              "if": [
+                "h4_2",
+                "c10"
+              ],
+              "then": "c13",
+              "type": "defeasible",
+              "source": "passage"
+            }
+          ]
+        }
+      }
+    },
+    "5": {
+      "check": {
+        "op": "strengthens",
+        "claim": "c3",
+        "add": {
+          "claims": {
+            "h5": {
+              "text": "In situations where it is impossible to check the truth, acts that are merely cognitive errors cannot occur.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "h5",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

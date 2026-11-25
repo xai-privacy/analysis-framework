@@ -1,0 +1,228 @@
+{
+  "id": "2024_27",
+  "positions": {
+    "Hypothesis": {
+      "thesis": "c3",
+      "summary": "Evidence that does not explicitly present who is responsible is evaluated as having low informational value and has less influence on jurors' verdicts."
+    }
+  },
+  "claims": {
+    "c1": {
+      "text": "Even when jurors infer a high probability of defendant responsibility from probabilistic evidence, they tend to hesitate in returning a verdict in favor of the plaintiff.",
+      "source": "passage"
+    },
+    "c2": {
+      "text": "Even if considered valid, evidence that does not explicitly present who is responsible for the event is evaluated as having low informational value.",
+      "source": "passage"
+    },
+    "c3": {
+      "text": "Evidence that does not explicitly present who is responsible has less influence on the verdicts of jurors.",
+      "source": "passage"
+    },
+    "c4": {
+      "text": "In the experiment, Group 1 was presented only with Testimony X, while Group 2 was presented with both Testimonies X and Y.",
+      "source": "passage"
+    },
+    "c5": {
+      "text": "Testimony X provides statistical tire-match data without explicitly naming who is responsible, while Testimony Y explicitly asserts that B's bus hit the dog.",
+      "source": "passage"
+    },
+    "c6": {
+      "text": "The subjective probability that B was responsible was the same in both Group 1 and Group 2.",
+      "source": "passage"
+    },
+    "c7": {
+      "text": "The plaintiff verdict rate was lower than the subjective probability in both groups.",
+      "source": "passage"
+    },
+    "c8": {
+      "text": "Witness testimony that a gray bus hit the dog is itself explicit evidence, and Group 1's verdict rate was already lower due to hesitation.",
+      "source": "background"
+    }
+  },
+  "premises": [
+    {
+      "claim": "c1",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c2",
+      "by": "Hypothesis",
+      "kind": "ordinary"
+    },
+    {
+      "claim": "c4",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c5",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c6",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c7",
+      "by": "*",
+      "kind": "axiom"
+    },
+    {
+      "claim": "c8",
+      "by": "*",
+      "kind": "ordinary"
+    }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "by": "Hypothesis",
+      "if": [
+        "c2"
+      ],
+      "then": "c3",
+      "type": "defeasible",
+      "source": "passage"
+    }
+  ],
+  "contraries": [],
+  "undercuts": [],
+  "statements": {
+    "a": {
+      "check": {
+        "op": "weakens",
+        "claim": "Hypothesis",
+        "add": {
+          "claims": {
+            "ha1": {
+              "text": "The plaintiff verdict rate in Group 1 is significantly lower than that in Group 2.",
+              "source": "statement"
+            }
+          },
+          "premises": [
+            {
+              "claim": "ha1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "ra1",
+              "by": "*",
+              "if": [
+                "ha1",
+                "c5"
+              ],
+              "then": "c3",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    },
+    "b": {
+      "check": {
+        "op": "strengthens",
+        "claim": "Hypothesis",
+        "add": {
+          "claims": {
+            "hb1": {
+              "text": "The difference between subjective probability and plaintiff verdict rate is significantly greater in Group 1 than in Group 2.",
+              "source": "statement"
+            },
+            "hb2": {
+              "text": "The plaintiff verdict rate in Group 1 is significantly lower than that in Group 2.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hb1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rb1",
+              "by": "*",
+              "if": [
+                "hb1",
+                "c6"
+              ],
+              "then": "hb2",
+              "type": "strict",
+              "source": "background"
+            },
+            {
+              "id": "rb2",
+              "by": "*",
+              "if": [
+                "hb2",
+                "c5"
+              ],
+              "then": "c3",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ]
+        }
+      }
+    },
+    "c": {
+      "check": {
+        "op": "weakens",
+        "claim": "Hypothesis",
+        "add": {
+          "claims": {
+            "hc1": {
+              "text": "When testimony from a witness who saw a gray bus hitting Alice's dog is additionally presented to both groups, the plaintiff verdict rate in Group 2 decreases significantly more than in Group 1.",
+              "source": "statement"
+            },
+            "hc2": {
+              "text": "Explicit evidence does not exert greater influence on jurors' verdicts than non-explicit evidence.",
+              "source": "background"
+            }
+          },
+          "premises": [
+            {
+              "claim": "hc1",
+              "by": "*",
+              "kind": "axiom"
+            }
+          ],
+          "rules": [
+            {
+              "id": "rc1",
+              "by": "*",
+              "if": [
+                "hc1"
+              ],
+              "then": "hc2",
+              "type": "defeasible",
+              "source": "background"
+            }
+          ],
+          "contraries": [
+            [
+              "hc2",
+              "c3"
+            ]
+          ],
+          "undercuts": [
+            {
+              "claim": "c8",
+              "rule": "rc1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
