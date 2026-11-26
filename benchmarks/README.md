@@ -164,13 +164,26 @@ Every output record was compared word by word with its source TSV row; the only 
 - **Upstream size.** LegalBench’s task README says 4,385 samples for privacy policy entailment, but the files here have 4,343 rows. These files have not been compared with the current Hugging Face download yet.
 - **Left as in the source:** 7 privacy records (copies of the same Google AdSense clause) write the URL as `http://www.google.com/ privacy_ads.html`, with a space. That is how the policy text was extracted, so it was kept.
 
-## 4. Number of Question Instance and Test/Train Split
+## 4. Number of Question Instance and Train/Test Split
 
-For all experiments we apply a 70%/30%/train test split.
+For all experiments we apply a 70%/30% train/test split with questions randomly selected.
 
 | Benchmark                            | Total Question Instances | Train Question Instances | Test Question Instances |
 | ------------------------------------ | ------------------------ | ------------------------ | ----------------------- |
 | LEET_Arg                             | 94                       | 66                       | 28                      |
 | MBE-exam-questions                   | 1,280                    | 896                      | 384                     |
+| - Civil_procedure                    | 75                       | 52                       | 23                      |
+| - Constitutional_law                 | 213                      | 149                      | 64                      |
+| - Contracts                          | 274                      | 192                      | 82                      |
+| - Criminal_law                       | 222                      | 155                      | 67                      |
+| - Evidence                           | 219                      | 153                      | 66                      |
+| - Property                           | 215                      | 150                      | 65                      |
+| - Torts                              | 62                       | 43                       | 19                      |
 | LegalBench_legal_reasoning_causality | 58                       | 41                       | 17                      |
-| LegalBench_privacy_policy_entailment | 4,341                    | 3,060                    | 1,281                   |
+| LegalBench_privacy_policy_entailment | 4,341 (108 selected)     | 76                       | 32                      |
+
+For the MBE-exam-questions benchmark the split is stratified by question domain (`Civil_procedure` etc.).
+
+For the LegalBench_privacy_policy_entailment benchmark we randomly selected a sample of 108 questions, about 2.5% of the full 4,341 question set, because we estimate such sample size to be sufficient for identifying the different types of legal reasoning errors that could occur.
+
+Our sample of 108 questions is balanced with the same number of `Correct` and `Incorrect` ground truth answers. The full set of questions is skewed heavily with 86% `Correct` (3,743) vs 14% `Incorrect` (598) ground truth answers. We chose to balance the sample because fine-tuning on an 86% `Correct` dataset would teach the model a strong prior bias toward affirming the hypothesis, inflating false positives (i.e., incorrectly labeling `Incorrect` answers as `Correct`). Further, during testing an unstratified 2.5% sample would contain only about 4–5 `Incorrect examples` in the test set, which would be too small to observe and reliably measure how models fail.
