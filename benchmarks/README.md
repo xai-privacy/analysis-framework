@@ -163,3 +163,14 @@ Every output record was compared word by word with its source TSV row; the only 
 - **No instruction field.** The TSVs have no question text, because LegalBench keeps the instruction in `base_prompt.txt`. Our prompt has to supply it (issue #34).
 - **Upstream size.** LegalBench’s task README says 4,385 samples for privacy policy entailment, but the files here have 4,343 rows. These files have not been compared with the current Hugging Face download yet.
 - **Left as in the source:** 7 privacy records (copies of the same Google AdSense clause) write the URL as `http://www.google.com/ privacy_ads.html`, with a space. That is how the policy text was extracted, so it was kept.
+
+## 4. Number of Question Instance and Test/Train Split
+
+For all experiments we apply a 70%/30%/train test split.
+
+| Benchmark                            | Total Question Instances | Train Question Instances | Test Question Instances |
+| ------------------------------------ | ------------------------ | ------------------------ | ----------------------- |
+| LEET_Arg                             | 94                       | 66                       | 28                      |
+| MBE-exam-questions                   | 1,280                    | 896                      | 384                     |
+| LegalBench_legal_reasoning_causality | 58                       | 41                       | 17                      |
+| LegalBench_privacy_policy_entailment | 4,341                    | 3,060                    | 1,281                   |
