@@ -11,6 +11,7 @@
 - `LEET_Arg_Questions_cleaned_and_rationale_by_statement_baseline.json` is based on `LEET_Arg_Questions_cleaned_and_rationale_by_statement.json`. Each JSON object contains only `id` and `original_question` (renamed as `question`). In particular, `original_rationale`s are excluded. For most questions the last sentence with the answer \<choices\> is removed. Only questions 2021_03, 2021_25, 2022_36, 2023_19, 2024_05, 2024_14, 2024_25, and 2025_21 retains the answer \<choices\> sentence.
 - `LEET_Arg_Model_Responses.json` in this directory holds per-model responses keyed by the same
   `id`/`year`/`problem_idx` and is out of scope here.
+- `LEET_Arg_Questions_train_test_split.json` contains the question IDs for the train/test split for the fine-tuning condition. See below for more details.
 
 ### 1.2 Contents
 
@@ -105,6 +106,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 - `MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
 - `MBE-exam-questions_distilled_dataset_cleaned.json` is based on `MBE-exam-questions_distilled_dataset.json` with duplicates removed and other fixes. [Issue 32](https://github.com/xai-privacy/analysis-framework/issues/32) describes details.
 - `MBE-exam-questions_distilled_dataset_cleaned_baseline.json` is based on `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSON object contains `id` (which combines the original `domain` and `question_number` fields), `question`, and the four answer options (`optionA`–`optionD`). The `correct_answer` and `explanation` fields are omitted.
+- `MBE-exam-questions_stratified_train_test_split.json` contains the question IDs for the train/test split for the fine-tuning condition. See below for more details.
 
 ## 3. LegalBench
 
@@ -114,6 +116,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 - `LegalBench_privacy_policy_entailment_test.tsv` and `LegalBench_privacy_policy_entailment_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [privacy policy entailment task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/privacy_policy_entailment).
 - `LegalBench_legal_reasoning_causality_cleaned.json` and `LegalBench_privacy_policy_entailment_cleaned.json` merge the train and test files of each task into one file, renumber `index` from 0, and clean the text. They are made by `fine_tuning/jun/legalbench/clean_legalbench.py`. See [issue #33](https://github.com/xai-privacy/analysis-framework/issues/33).
 - `LegalBench_legal_reasoning_causality_cleaned_baseline.json` and `LegalBench_privacy_policy_entailment_cleaned_baseline.json` are `answer`-free baseline inputs derived from the corresponding cleaned files.
+- `LegalBench_legal_reasoning_causality_train_test_split.json` and `LegalBench_privacy_policy_entailment_balanced_train_test_split.json` contain the question IDs for the train/test split for the fine-tuning condition. See below for more details.
 
 ### 3.2 Contents
 
