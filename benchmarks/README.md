@@ -105,7 +105,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 
 - `MBE-exam-questions_distilled_dataset.json`, `MBE-exam-questions_raw_dataset.json`, and `MBE-Exam-questions_README` are unmodified copies of the respective files in the [MBE-exam-questions](https://huggingface.co/datasets/HolySaint/MBE-exam-questions/tree/main) benchmark repo. See the `MBE-Exam-questions_README` for details on this benchmark.
 - `MBE-exam-questions_distilled_dataset_cleaned.json` is based on `MBE-exam-questions_distilled_dataset.json` with duplicates removed and other fixes. [Issue 32](https://github.com/xai-privacy/analysis-framework/issues/32) describes details.
-- `MBE-exam-questions_distilled_dataset_cleaned_baseline.json` is based on `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSON object contains `id` (which combines the original `domain` and `question_number` fields), `question`, and the four answer options (`optionA`–`optionD`). The `correct_answer` and `explanation` fields are omitted.
+- `MBE-exam-questions_distilled_dataset_cleaned_baseline.json` is based on `MBE-exam-questions_distilled_dataset_cleaned.json`. Each JSON object contains `id` (which combines the original `domain` and `question_number` fields), `question`, and the four answer options (`optionA`–`optionD`). The `correct_answer` and `explanation` fields are omitted. The file contains a sample of 441 out of the total 1,280 benchmark questions, i.e., the complete set of questions for the `Criminal_law` and `Evidence` categories.
 - `MBE-exam-questions_stratified_train_test_split.json` contains the question IDs for the train/test split for the fine-tuning condition. See below for more details.
 
 ## 3. LegalBench
@@ -174,18 +174,13 @@ For all experiments we apply a 70%/30% train/test split with questions randomly 
 | Benchmark                            | Total Question Instances | Train Question Instances | Test Question Instances |
 | ------------------------------------ | ------------------------ | ------------------------ | ----------------------- |
 | LEET_Arg                             | 94                       | 66                       | 28                      |
-| MBE-exam-questions                   | 1,280                    | 896                      | 384                     |
-| - Civil_procedure                    | 75                       | 52                       | 23                      |
-| - Constitutional_law                 | 213                      | 149                      | 64                      |
-| - Contracts                          | 274                      | 192                      | 82                      |
+| MBE-exam-questions                   | 441 (sample of 1,280)    | 308                      | 133                     |
 | - Criminal_law                       | 222                      | 155                      | 67                      |
 | - Evidence                           | 219                      | 153                      | 66                      |
-| - Property                           | 215                      | 150                      | 65                      |
-| - Torts                              | 62                       | 43                       | 19                      |
 | LegalBench_legal_reasoning_causality | 58                       | 41                       | 17                      |
 | LegalBench_privacy_policy_entailment | 108 (sample of 4,341)    | 76                       | 32                      |
 
-For the MBE-exam-questions benchmark the split is stratified by question domain (`Civil_procedure` etc.).
+For the MBE-exam-questions benchmark we randomly selected two domains, `Criminal_law` and `Evidence` (441 of 1,280 total MBE-exam-questions), from all available domains because we believe that two domains are sufficient for identifying the different types of legal reasoning errors that could occur. We are not interested in domain-specific errors. The train/test split is stratified separately for each domain.
 
 For the LegalBench_privacy_policy_entailment benchmark we randomly selected a sample of 108 questions, about 2.5% of the full 4,341 question set, because we estimate such sample size to be sufficient for identifying the different types of legal reasoning errors that could occur.
 
