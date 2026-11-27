@@ -115,7 +115,7 @@ See [issue #17](https://github.com/xai-privacy/analysis-framework/issues/17) for
 - `LegalBench_legal_reasoning_causality_test.tsv` and `LegalBench_legal_reasoning_causality_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [legal reasoning causality task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/legal_reasoning_causality).
 - `LegalBench_privacy_policy_entailment_test.tsv` and `LegalBench_privacy_policy_entailment_train.tsv` are the original `train.tsv` and `test.tsv` files from LegalBench’s [privacy policy entailment task](https://huggingface.co/datasets/nguha/legalbench/tree/main/data/privacy_policy_entailment).
 - `LegalBench_legal_reasoning_causality_cleaned.json` and `LegalBench_privacy_policy_entailment_cleaned.json` merge the train and test files of each task into one file, renumber `index` from 0, and clean the text. They are made by `fine_tuning/jun/legalbench/clean_legalbench.py`. See [issue #33](https://github.com/xai-privacy/analysis-framework/issues/33).
-- `LegalBench_legal_reasoning_causality_cleaned_baseline.json` and `LegalBench_privacy_policy_entailment_cleaned_baseline.json` are `answer`-free baseline inputs derived from the corresponding cleaned files.
+- `LegalBench_legal_reasoning_causality_cleaned_baseline.json` and `LegalBench_privacy_policy_entailment_cleaned_baseline.json` are `answer`-free baseline inputs derived from the corresponding cleaned files. `LegalBench_privacy_policy_entailment_cleaned_baseline.json` contains a random sample of 108 questions from the original 4,341 questions.
 - `LegalBench_legal_reasoning_causality_train_test_split.json` and `LegalBench_privacy_policy_entailment_balanced_train_test_split.json` contain the question IDs for the train/test split for the fine-tuning condition. See below for more details.
 
 ### 3.2 Contents
@@ -183,7 +183,7 @@ For all experiments we apply a 70%/30% train/test split with questions randomly 
 | - Property                           | 215                      | 150                      | 65                      |
 | - Torts                              | 62                       | 43                       | 19                      |
 | LegalBench_legal_reasoning_causality | 58                       | 41                       | 17                      |
-| LegalBench_privacy_policy_entailment | 4,341 (108 selected)     | 76                       | 32                      |
+| LegalBench_privacy_policy_entailment | 108 (sample of 4,341)    | 76                       | 32                      |
 
 For the MBE-exam-questions benchmark the split is stratified by question domain (`Civil_procedure` etc.).
 
