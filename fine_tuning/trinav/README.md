@@ -51,14 +51,14 @@ From `analysis-framework/fine_tuning/chameleon` on your local machine, upload
 the Trinav folder. Replace the key and IP with your own:
 
 ```bash
-ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 'mkdir -p ~/xai'
-scp -i fine_tuning/karimm_lease1.pem -r fine_tuning/trinav/ cc@129.114.108.3:~/xai/
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.191 'mkdir -p ~/xai'
+scp -i fine_tuning/karimm_lease1.pem -r fine_tuning/trinav/ cc@129.114.108.191:~/xai/
 ```
 
 Log in, create the environment, and install the pinned dependencies:
 
 ```bash
-ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.191
 cd ~/xai/trinav
 nvidia-smi
 python3 -m venv --system-site-packages .venv
@@ -83,7 +83,7 @@ adapter test also needs its final-test ID list. From the repository root on
 your local machine, copy them once (skip this if the files are already on the VM):
 
 ```bash
-ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.191 \
 	'mkdir -p ~/xai/trinav/benchmarks'
 scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LEET_Arg_Questions_cleaned_and_rationale_by_statement.json \
@@ -94,7 +94,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/LegalBench_legal_reasoning_causality_cleaned_baseline.json \
 	benchmarks/LegalBench_privacy_policy_entailment_cleaned.json \
 	benchmarks/LegalBench_privacy_policy_entailment_cleaned_baseline.json \
-	cc@129.114.108.3:~/xai/trinav/benchmarks/
+	cc@129.114.108.191:~/xai/trinav/benchmarks/
 ```
 
 ### 1. Baseline and CoT testing
@@ -323,10 +323,10 @@ copy the MBE data, evaluator, shared trainer files, and source benchmark to the
 VM. Replace the key and IP with your own (SKIP IF DONE DURING SETUP):
 
 ```bash
-ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3 \
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.191 \
 	'mkdir -p ~/xai/trinav/benchmarks'
 scp -i fine_tuning/karimm_lease1.pem -r fine_tuning/trinav/mbe \
-	cc@129.114.108.3:~/xai/trinav/
+	cc@129.114.108.191:~/xai/trinav/
 scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/run_hf_mbe.py \
 	fine_tuning/trinav/prompt_selector.py \
@@ -334,17 +334,17 @@ scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/mbe-cot-prompt.md \
 	fine_tuning/trinav/chameleon_utils.py \
 	fine_tuning/trinav/train_chameleon.py \
-	cc@129.114.108.3:~/xai/trinav/
+	cc@129.114.108.191:~/xai/trinav/
 scp -i fine_tuning/karimm_lease1.pem \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned.json \
 	benchmarks/MBE-exam-questions_distilled_dataset_cleaned_baseline.json \
-	cc@129.114.108.3:~/xai/trinav/benchmarks/
+	cc@129.114.108.191:~/xai/trinav/benchmarks/
 ```
 
 Log in to the VM, activate the environment, and prepare the split:
 
 ```bash
-ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.3
+ssh -i fine_tuning/karimm_lease1.pem cc@129.114.108.191
 cd ~/xai/trinav
 source .venv/bin/activate
 python mbe/prepare_mbe_data.py \
@@ -473,7 +473,7 @@ scp -i fine_tuning/karimm_lease1.pem \
 	fine_tuning/trinav/legalbench-causality-cot-prompt.md \
 	fine_tuning/trinav/legalbench-privacy-baseline-prompt.md \
 	fine_tuning/trinav/legalbench-privacy-cot-prompt.md \
-	cc@129.114.108.3:~/xai/trinav/
+	cc@129.114.108.191:~/xai/trinav/
 ```
 
 Run baseline and CoT inference on all rows, in index order starting at question
